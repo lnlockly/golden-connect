@@ -987,7 +987,7 @@ router.post('/video/compose-post', authRequired, async (req, res) => {
 
     // ── Step 4: Создать пост в БД ──
     steps.push('creating_post');
-    const fullMediaUrl = 'https://trendex.biz' + finalVideoUrl;
+    const fullMediaUrl = 'https://golden-connect.to' + finalVideoUrl;
 
     const postResult = db.prepare(`INSERT INTO ad_posts
       (user_id, campaign_id, title, text_original, text_generated, text_final, media_type, media_url, type, status, created_at)

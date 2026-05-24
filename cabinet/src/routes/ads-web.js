@@ -1,4 +1,4 @@
-// Trendex Ads — web cabinet router. Mirrors the bot's ads-module functions
+// Golden Connect Ads — web cabinet router. Mirrors the bot's ads-module functions
 // over REST so users can manage campaigns/balances/claims from the browser.
 // Reuses applySchema + makeStore from src/ads.js (same DB, same logic).
 
@@ -18,11 +18,11 @@ const KARMA_INITIAL = 100;
 // Karma proxy: api /internal/karma/award (fire-and-forget)
 function _karmaAward(webUser, kind, sourceId, memo) {
   if (!webUser) return;
-  const apiBase = process.env.TRENDEX_API_INTERNAL_URL || 'http://trendex-api:4001';
-  const apiSecret = process.env.TRENDEX_API_INTERNAL_SECRET;
+  const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://golden-connect-api:4001';
+  const apiSecret = process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET;
   if (!apiSecret) return;
   const tgId = webUser.telegramUserId || webUser.telegram_user_id;
-  const email = webUser.email || (tgId ? 'tg' + tgId + '@trendex.bot' : null);
+  const email = webUser.email || (tgId ? 'tg' + tgId + '@golden-connect.bot' : null);
   if (!email) return;
   const data = JSON.stringify({ email: email, kind: kind, source_id: sourceId || null, memo: memo || null });
   const httpMod = apiBase.startsWith('https') ? require('https') : require('http');
@@ -35,7 +35,7 @@ function _karmaAward(webUser, kind, sourceId, memo) {
       headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(data),
-        'x-trendex-secret': apiSecret,
+        'x-golden-connect-secret': apiSecret,
       },
       timeout: 5000,
     }, function (res) { res.resume(); });
@@ -181,7 +181,7 @@ function createAdsWebRouter(config, storage, requireAuth, bot) {
       const isAdmin = ['administrator', 'creator'].includes(member.status);
       let invite = chat.username ? 'https://t.me/' + chat.username : null;
       if (!invite && isAdmin) {
-        try { const link = await tgApi('createChatInviteLink', { chat_id: chat.id, name: 'Trendex Ads' }); invite = link.invite_link; }
+        try { const link = await tgApi('createChatInviteLink', { chat_id: chat.id, name: 'Golden Connect Ads' }); invite = link.invite_link; }
         catch (_) {}
       }
       let memberCount = 0;
@@ -324,7 +324,7 @@ function createAdsWebRouter(config, storage, requireAuth, bot) {
       }
       let invite = chat.username ? 'https://t.me/' + chat.username : null;
       if (!invite) {
-        try { const link = await tgApi('createChatInviteLink', { chat_id: chat.id, name: 'Trendex Ads' }); invite = link.invite_link; }
+        try { const link = await tgApi('createChatInviteLink', { chat_id: chat.id, name: 'Golden Connect Ads' }); invite = link.invite_link; }
         catch (_) {}
       }
 

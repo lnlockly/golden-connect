@@ -31,10 +31,10 @@ d('SIWE end-to-end (requires DATABASE_URL + AUTH_JWT_SECRET)', () => {
 
     // 2. Build SIWE message and sign it
     const siwe = new SiweMessage({
-      domain: 'trendex.ai',
+      domain: 'golden-connect.ai',
       address,
-      statement: 'Sign in to TrendeX',
-      uri: 'https://trendex.ai',
+      statement: 'Sign in to Golden Connect',
+      uri: 'https://golden-connect.ai',
       version: '1',
       chainId: Number(process.env.BSC_CHAIN_ID ?? 56),
       nonce: nonceJson.nonce,

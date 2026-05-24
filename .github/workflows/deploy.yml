@@ -1,4 +1,4 @@
-name: Build & Deploy trendex
+name: Build & Deploy golden-connect
 
 on:
   push:
@@ -11,17 +11,17 @@ on:
         default: "false"
 
 concurrency:
-  group: deploy-trendex
+  group: deploy-golden-connect
   cancel-in-progress: false
 
 env:
   REGISTRY: ghcr.io
   OWNER: lnlockly
-  NAMESPACE: trendex
+  NAMESPACE: golden-connect
 
 jobs:
   changes:
-    runs-on: [self-hosted, trendex]
+    runs-on: [self-hosted, golden-connect]
     outputs:
       api: ${{ steps.filter.outputs.api }}
       bot: ${{ steps.filter.outputs.bot }}
@@ -48,7 +48,7 @@ jobs:
 
   build:
     needs: changes
-    runs-on: [self-hosted, trendex]
+    runs-on: [self-hosted, golden-connect]
     permissions:
       contents: read
       packages: write
@@ -58,19 +58,19 @@ jobs:
         include:
           - name: api
             context: ./api
-            image: trendex-api
+            image: golden-connect-api
             changed: ${{ needs.changes.outputs.api }}
           - name: bot
             context: ./bot
-            image: trendex-bot
+            image: golden-connect-bot
             changed: ${{ needs.changes.outputs.bot }}
           - name: landing
             context: ./landing
-            image: trendex-landing
+            image: golden-connect-landing
             changed: ${{ needs.changes.outputs.landing }}
           - name: cabinet
             context: ./cabinet
-            image: trendex-cabinet
+            image: golden-connect-cabinet
             changed: ${{ needs.changes.outputs.cabinet }}
     steps:
       - name: Skip (no changes)
@@ -104,7 +104,7 @@ jobs:
 
   deploy:
     needs: [changes, build]
-    runs-on: [self-hosted, trendex]
+    runs-on: [self-hosted, golden-connect]
     if: always() && needs.build.result != 'failure' && needs.build.result != 'cancelled'
     steps:
       - uses: actions/checkout@v4
@@ -121,8 +121,8 @@ jobs:
 
       - name: Sync manifests
         run: |
-          ssh ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }} "mkdir -p /tmp/trendex-k8s"
-          scp -r deploy/k8s/* ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}:/tmp/trendex-k8s/
+          ssh ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }} "mkdir -p /tmp/golden-connect-k8s"
+          scp -r deploy/k8s/* ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}:/tmp/golden-connect-k8s/
 
       - name: Apply manifests + roll out
         env:
@@ -140,34 +140,34 @@ jobs:
             SHA=${SHA}
 
             # 1. Manifests are idempotent; apply every run so infra changes land.
-            kubectl apply -f /tmp/trendex-k8s/
+            kubectl apply -f /tmp/golden-connect-k8s/
 
             # 2. Pin images to this commit for whichever services changed.
             if [ "${API_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then
-              kubectl -n \$NS set image deploy/trendex-api \
-                trendex-api=\$REG/trendex-api:\$SHA \
+              kubectl -n \$NS set image deploy/golden-connect-api \
+                golden-connect-api=\$REG/golden-connect-api:\$SHA \
                 --record=false
-              kubectl -n \$NS rollout status deploy/trendex-api --timeout=3m
+              kubectl -n \$NS rollout status deploy/golden-connect-api --timeout=3m
             fi
 
             if [ "${BOT_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then
-              kubectl -n \$NS set image deploy/trendex-bot \
-                trendex-bot=\$REG/trendex-bot:\$SHA \
+              kubectl -n \$NS set image deploy/golden-connect-bot \
+                golden-connect-bot=\$REG/golden-connect-bot:\$SHA \
                 --record=false
-              kubectl -n \$NS rollout status deploy/trendex-bot --timeout=3m
+              kubectl -n \$NS rollout status deploy/golden-connect-bot --timeout=3m
             fi
 
             if [ "${LANDING_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then
-              kubectl -n \$NS set image deploy/trendex-landing \
-                trendex-landing=\$REG/trendex-landing:\$SHA \
+              kubectl -n \$NS set image deploy/golden-connect-landing \
+                golden-connect-landing=\$REG/golden-connect-landing:\$SHA \
                 --record=false
-              kubectl -n \$NS rollout status deploy/trendex-landing --timeout=3m
+              kubectl -n \$NS rollout status deploy/golden-connect-landing --timeout=3m
             fi
 
             if [ "${CABINET_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then
-              kubectl -n \$NS set image deploy/trendex-cabinet \
-                trendex-cabinet=\$REG/trendex-cabinet:\$SHA \
+              kubectl -n \$NS set image deploy/golden-connect-cabinet \
+                golden-connect-cabinet=\$REG/golden-connect-cabinet:\$SHA \
                 --record=false
-              kubectl -n \$NS rollout status deploy/trendex-cabinet --timeout=4m
+              kubectl -n \$NS rollout status deploy/golden-connect-cabinet --timeout=4m
             fi
           EOF

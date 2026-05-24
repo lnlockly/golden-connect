@@ -13,7 +13,7 @@ import type { AppContext } from "../middleware.js";
 
 const PAID = new Set(["launch", "boost", "rocket"]);
 const TARIFFS_URL =
-  (process.env.WEBAPP_URL || "https://trendex.biz/cabinet") + "/#/marketing";
+  (process.env.WEBAPP_URL || "https://golden-connect.to/cabinet") + "/#/marketing";
 
 interface BalancesResponse {
   ok: boolean;
@@ -56,14 +56,14 @@ export function requirePaidTariff(handler: CrmHandler): CrmHandler {
       const kb = new InlineKeyboard()
         .webApp("💎 Купить тариф (LAUNCH/BOOST/ROCKET)", TARIFFS_URL)
         .row()
-        .url("📖 Что даёт CRM", "https://trendex.biz/#whats-new");
+        .url("📖 Что даёт CRM", "https://golden-connect.to/#whats-new");
 
       const status = isExpired
         ? `*Подписка истекла:* ${tariff?.toUpperCase()} (${new Date(expiresAt!).toLocaleDateString("ru-RU")})`
         : `*Твой тариф:* ${(tariff || "FREE").toUpperCase()}`;
 
       await ctx.reply(
-        "🔒 *CRM — premium-фича Trendex*\n\n" +
+        "🔒 *CRM — premium-фича Golden Connect*\n\n" +
           "База 7 322 MLM-лидеров, AI-питчи, воронка, задачи, отчёты — " +
           "доступны на платных тарифах:\n\n" +
           "• *LAUNCH* — $45 (одноразово) + $15/мес\n" +

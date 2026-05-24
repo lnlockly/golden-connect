@@ -27,7 +27,7 @@ function fmtUsd(n: number): string {
 
 function formatPanel(m: AdminMetrics): string {
   const lines = [
-    "⚙️ <b>Админ-панель TRENDEX</b>",
+    "⚙️ <b>Админ-панель GOLDEN_CONNECT</b>",
     "─────────────────────",
     "",
     "📊 <b>Платформа:</b>",
@@ -164,7 +164,7 @@ function fmtUserRow(u: { username: string | null; first_name: string | null; tg_
 
 function formatLegacyDashboard(s: import("../../../types.js").DashboardStats): string {
   const lines: string[] = [];
-  lines.push("<b>Админка TRENDEX</b>");
+  lines.push("<b>Админка GOLDEN_CONNECT</b>");
   lines.push("");
   lines.push(`Всего пользователей: <b>${s.total_users}</b>`);
   lines.push(`Новых за 24ч: <b>${s.joined_24h}</b>   за 7д: <b>${s.joined_7d}</b>`);

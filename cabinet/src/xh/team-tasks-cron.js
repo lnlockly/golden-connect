@@ -1,5 +1,5 @@
 const { isSilenced: _gsIsSilenced } = require('./group-silence');
-// Trendex: Morning auto-tasks — creates planner tasks for inviter about their team.
+// Golden Connect: Morning auto-tasks — creates planner tasks for inviter about their team.
 // Runs at 9:00 MSK daily (checks every 10 min, guards by date).
 
 let lastRunDate = null; // YYYY-MM-DD

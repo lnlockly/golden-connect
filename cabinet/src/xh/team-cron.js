@@ -1,4 +1,4 @@
-// Trendex: Team cron — periodic stage recomputation + daily digest.
+// Golden Connect: Team cron — periodic stage recomputation + daily digest.
 // - Every 30 min: iterate all webUsers with referredByUserId, refresh stage, notify inviters on transitions.
 // - Daily 20:00 MSK: send digest to each inviter with activity summary.
 
@@ -57,7 +57,7 @@ async function processDailyDigest(bot, storage) {
         const stats = storage.getTeamStats(inviterId);
         const nextActions = storage.getNextActions(inviterId).slice(0, 3);
         const lines = [
-          '📊 <b>Итоги дня — команда Trendex</b>',
+          '📊 <b>Итоги дня — команда Golden Connect</b>',
           '',
           `Всего рефералов: <b>${stats.total}</b>`,
         ];

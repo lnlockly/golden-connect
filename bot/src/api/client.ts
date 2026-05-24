@@ -1,8 +1,8 @@
 /**
- * Thin HTTP client for the trendex-api `/internal/*` endpoints.
+ * Thin HTTP client for the golden-connect-api `/internal/*` endpoints.
  *
  * All repos in src/db/* delegate to this client. Authentication is the
- * shared `x-trendex-secret` header; `baseUrl` is the trendex-api
+ * shared `x-golden-connect-secret` header; `baseUrl` is the golden-connect-api
  * origin (defaults to http://localhost:4000 for local dev).
  *
  * Every error — network, non-2xx, malformed JSON — is surfaced as an
@@ -98,7 +98,7 @@ export class ApiClient {
         : null;
 
     const headers: Record<string, string> = {
-      "x-trendex-secret": this.secret,
+      "x-golden-connect-secret": this.secret,
       accept: "application/json",
     };
     let payload: string | undefined;
@@ -162,15 +162,15 @@ export class ApiClient {
     last_name?: string | null;
     language_code?: string | null;
   }): Promise<{ ok: true; url: string; expires_at: string } | { ok: false; reason: string }> {
-    const cabinetBase = (process.env.CABINET_BASE_URL || 'https://trendex.biz').replace(/\/+$/, '');
-    const secret = process.env.INTERNAL_API_SECRET || process.env.TRENDEX_API_INTERNAL_SECRET || '';
+    const cabinetBase = (process.env.CABINET_BASE_URL || 'https://golden-connect.to').replace(/\/+$/, '');
+    const secret = process.env.INTERNAL_API_SECRET || process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET || '';
     if (!secret) return { ok: false, reason: 'no_secret' };
     try {
       const r = await fetch(cabinetBase + '/cabinet/api/bot/issue-magic-link', {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
-          'x-trendex-secret': secret,
+          'x-golden-connect-secret': secret,
         },
         body: JSON.stringify(profile),
       });

@@ -42,18 +42,18 @@ function groqRequest(body) {
   });
 }
 
-const SYSTEM_PROMPT = `Ты — наставник новых партнёров Trendex (рекламная экосистема с распределённой прибылью).
+const SYSTEM_PROMPT = `Ты — наставник новых партнёров Golden Connect (рекламная экосистема с распределённой прибылью).
 Твоя задача — на основе ответов анкеты составить ПЕРСОНАЛЬНЫЙ план на 30 дней с конкретными шагами.
 
-ПРО ПЛАТФОРМУ TRENDEX:
+ПРО ПЛАТФОРМУ GOLDEN_CONNECT:
 - Биржа заданий: пользователь смотрит/кликает рекламу, получает $0.05+ за действие, до $20-50/день.
 - Партнёрка: 10 уровней рефералов (L1=10%, L2=7%, ... L10=0.5%) от дохода приглашённых.
 - Тарифы: FREE (старт), LAUNCH \$45 (12 уровней матрицы × \$0.5), BOOST \$90 (14 × \$0.6, 2 места), ROCKET \$135 (17 × \$0.7, 3 места + Matching Bonus).
 - Маркетплейс: можно продавать инфопродукты, 70% продавцу + 30% распределяется по сети.
 - Статус PARTNER: 10 платных рефералов → +10% к ставке заданий пожизненно.
-- Чат проекта: @TRENDEX_AD (туда новички приходят за ответами).
-- Бот: @Trendex_bizbot (команды /jobs, /ref, /tariffs, /campaigns, /bio, /aipost).
-- Личный кабинет: trendex.biz/cabinet
+- Чат проекта: @GOLDEN_CONNECT_AD (туда новички приходят за ответами).
+- Бот: @Golden Connect_bizbot (команды /jobs, /ref, /tariffs, /campaigns, /bio, /aipost).
+- Личный кабинет: golden-connect.to/cabinet
 
 КАК ПИСАТЬ ПЛАН:
 1. Обращайся по имени из ответа №1.
@@ -65,12 +65,12 @@ const SYSTEM_PROMPT = `Ты — наставник новых партнёров
    📅 МЕСЯЦ 1 (выход на доход) — 4-5 шагов + финальный прогноз с цифрами под их желаемый доход
    💡 ГЛАВНОЕ — 2-3 совета именно про их СТРАХ/блок (#9)
    🤝 ТВОЙ СПОНСОР — здесь будет шаблон, его подставит сервер; просто напиши: "Если что-то непонятно — пиши спонсору, он провёл этот путь сам и готов помочь."
-   💬 ЧАТ ПРОЕКТА — упомяни @TRENDEX_AD как место где партнёры обмениваются опытом
+   💬 ЧАТ ПРОЕКТА — упомяни @GOLDEN_CONNECT_AD как место где партнёры обмениваются опытом
    🎁 БОНУС — \$1 на gift-баланс уже зачислен
 
 ТРЕБОВАНИЯ:
 - 350-500 слов на русском.
-- Конкретные команды/ссылки внутри trendex.biz/cabinet и t.me/Trendex_bizbot.
+- Конкретные команды/ссылки внутри golden-connect.to/cabinet и t.me/Golden Connect_bizbot.
 - Никаких БАДов, лекарств, медицинской тематики (это рекламная платформа, не оздоровление).
 - Никаких выдуманных URL.
 - Тон: дружелюбный наставник, без воды.
@@ -94,7 +94,7 @@ function buildUserMessage(answers, sponsorBlock) {
 }
 
 /**
- * Generate a personal Trendex onboarding plan.
+ * Generate a personal Golden Connect onboarding plan.
  *
  * @param {Object} answers — keys '1'..'9' from survey
  * @param {Object} sponsor — { displayName, telegramUsername } or null
@@ -126,12 +126,12 @@ async function generatePersonalPlan(answers, sponsor) {
   // Inject sponsor contacts (replace placeholder section)
   const sponsorLine = sponsor && sponsor.telegramUsername
     ? '🤝 ТВОЙ СПОНСОР: @' + sponsor.telegramUsername + (sponsor.displayName ? ' (' + sponsor.displayName + ')' : '') + ' — пиши ему любые вопросы по старту, он провёл этот путь сам.'
-    : '🤝 ТВОЙ СПОНСОР: пока не назначен. Напиши в чат @TRENDEX_AD — найдём кого закрепить.';
+    : '🤝 ТВОЙ СПОНСОР: пока не назначен. Напиши в чат @GOLDEN_CONNECT_AD — найдём кого закрепить.';
 
-  const chatLine = '💬 ЧАТ ПРОЕКТА: @TRENDEX_AD — здесь партнёры обмениваются опытом, делятся связками, отвечают на вопросы.';
+  const chatLine = '💬 ЧАТ ПРОЕКТА: @GOLDEN_CONNECT_AD — здесь партнёры обмениваются опытом, делятся связками, отвечают на вопросы.';
 
   // Append (or replace) sponsor + chat sections at the end of plan
-  if (!plan.includes('@TRENDEX_AD') && !plan.match(/ЧАТ ПРОЕКТА/i)) {
+  if (!plan.includes('@GOLDEN_CONNECT_AD') && !plan.match(/ЧАТ ПРОЕКТА/i)) {
     plan += '\n\n' + sponsorLine + '\n\n' + chatLine;
   } else {
     // AI mentioned chat already — just inject sponsor line if missing

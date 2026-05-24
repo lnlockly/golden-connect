@@ -126,12 +126,12 @@ export const HeroArea = forwardRef<HeroAreaHandle, Props>(function HeroArea(
         <div className="hero-wave-fade" />
       </div>
 
-      <h1 className="hero-brand" aria-label="TRENDEX">TRENDEX</h1>
+      <h1 className="hero-brand" aria-label="GOLDEN_CONNECT">GOLDEN_CONNECT</h1>
 
       <button
         type="button"
         className="hero-tour-cta"
-        onClick={() => window.dispatchEvent(new Event('trendex:tour-start'))}
+        onClick={() => window.dispatchEvent(new Event('golden-connect:tour-start'))}
         aria-label={t('tour.cta_start')}
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

@@ -1,5 +1,5 @@
 // Drizzle schema for Monar. ALL tables are prefixed `monar_` so they never
-// collide with existing trendex schema. Still NOT exported from
+// collide with existing golden-connect schema. Still NOT exported from
 // `src/db/schema.ts` — activation = adding `export * from '../monar/schema.js'`
 // there + running `npm run generate` to create the migration.
 

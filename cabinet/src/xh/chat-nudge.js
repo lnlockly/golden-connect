@@ -1,12 +1,12 @@
-// Trendex chat-join nudge: периодически зовёт юзеров вступить в @TRENDEX_AD
+// Golden Connect chat-join nudge: периодически зовёт юзеров вступить в @GOLDEN_CONNECT_AD
 // если они там не состоят. Останавливается когда вступили.
 
 const { InlineKeyboard } = require('grammy');
 const { isSilenced: _gsIsSilenced } = require('./group-silence');
 const db = require('../planner/db/database');
 
-// Целевой чат — настраивается через env, по умолчанию @TRENDEX_AD
-const TARGET_CHAT = process.env.TRENDEX_GROUP_CHAT || '@TRENDEX_AD';
+// Целевой чат — настраивается через env, по умолчанию @GOLDEN_CONNECT_AD
+const TARGET_CHAT = process.env.GOLDEN_CONNECT_GROUP_CHAT || '@GOLDEN_CONNECT_AD';
 const TARGET_CHAT_URL = 'https://t.me/' + String(TARGET_CHAT).replace(/^@/, '');
 
 // График эскалации: после регистрации в боте → нудж через
@@ -24,7 +24,7 @@ const NUDGE_TEXTS = {
   1: () => [
     '👋 Привет! Не нашёл тебя в нашем чате.',
     '',
-    'У Trendex есть официальный чат партнёров — <b>' + TARGET_CHAT + '</b>',
+    'У Golden Connect есть официальный чат партнёров — <b>' + TARGET_CHAT + '</b>',
     '',
     'Там:',
     '• 🔴 Анонсы эфиров с разбором кейсов',
@@ -51,7 +51,7 @@ const NUDGE_TEXTS = {
     '',
     'В <b>' + TARGET_CHAT + '</b> сейчас:',
     '• Топ-партнёры делятся работающими тактиками',
-    '• Бот ' + (process.env.BOT_USERNAME ? '@' + process.env.BOT_USERNAME : '@Trendex_bizbot') + ' там тоже работает: /summary, /poll, /remind',
+    '• Бот ' + (process.env.BOT_USERNAME ? '@' + process.env.BOT_USERNAME : '@Golden Connect_bizbot') + ' там тоже работает: /summary, /poll, /remind',
     '• Анонимная поддержка — можно писать от имени группы',
     '',
     'Если не зайдёшь сейчас — буду напоминать раз в 2 недели мягко 😉',
@@ -67,7 +67,7 @@ const NUDGE_TEXTS = {
 
   default: () => [
     '👋 Привет! Если ещё не в чате <b>' + TARGET_CHAT + '</b> — заходи.',
-    'Там всё свежее по Trendex 🚀',
+    'Там всё свежее по Golden Connect 🚀',
   ].join('\n'),
 };
 
@@ -142,7 +142,7 @@ function setupChatNudge(bot) {
     try {
       const chat = ctx.chat;
       const isTarget = chat?.username === String(TARGET_CHAT).replace(/^@/, '') ||
-                       String(chat?.id) === String(process.env.TRENDEX_GROUP_CHAT_ID || '');
+                       String(chat?.id) === String(process.env.GOLDEN_CONNECT_GROUP_CHAT_ID || '');
       if (!isTarget) return;
       const upd = ctx.chatMember || ctx.update?.chat_member;
       if (!upd) return;

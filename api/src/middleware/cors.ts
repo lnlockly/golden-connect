@@ -1,13 +1,13 @@
 import { cors } from 'hono/cors';
 
 /**
- * CORS allowlist: TrendeX landing origins + local dev.
+ * CORS allowlist: Golden Connect landing origins + local dev.
  * Extend via env ALLOWED_ORIGINS (comma-separated).
  */
 const defaultOrigins = [
-  'https://trendex.biz',
-  'https://www.trendex.biz',
-  'https://trendex.ai',
+  'https://golden-connect.to',
+  'https://www.golden-connect.to',
+  'https://golden-connect.ai',
   'https://ai-winlab.com',
   'https://app.ai-winlab.com',
   'http://localhost:5173',
@@ -29,6 +29,6 @@ export const corsMiddleware = cors({
   },
   credentials: true,
   allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowHeaders: ['Content-Type', 'Authorization', 'x-trendex-secret'],
+  allowHeaders: ['Content-Type', 'Authorization', 'x-golden-connect-secret'],
   exposeHeaders: ['Set-Cookie'],
 });

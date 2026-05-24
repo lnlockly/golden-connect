@@ -229,7 +229,7 @@ router.post('/contacts/:username/generate-pitch', authRequired, express.json(), 
   try {
     const c = storage.getContact(req.params.username, ownerId(req));
     if (!c) return res.status(404).json({ ok: false, reason: 'not_found' });
-    const myOffer = String(req.body?.offer || '').slice(0, 2000) || 'Trendex — рекламная платформа с 4 способами заработка (биржа, партнёрка 10 уровней, кампании, маркетплейс) и мгновенными выплатами';
+    const myOffer = String(req.body?.offer || '').slice(0, 2000) || 'Golden Connect — рекламная платформа с 4 способами заработка (биржа, партнёрка 10 уровней, кампании, маркетплейс) и мгновенными выплатами';
     const tone = req.body?.tone || 'warm';
     const lang = req.body?.lang || (c.country && /russi|рф|россия|украин|беларус|казах|молдов/i.test(c.country) ? 'ru' : 'ru');
 
@@ -337,7 +337,7 @@ router.post('/contacts/:username/generate-pitch-ab', authRequired, express.json(
     if (!c) return res.status(404).json({ ok: false, reason: 'not_found' });
     const settings = storage.getSettings(ownerId(req));
     const offer = String(req.body?.offer || settings.defaultOffer || '').slice(0, 2000) ||
-      'Trendex — рекламная платформа: биржа, партнёрка 10 уровней, кампании, маркетплейс, ИИ-рассылки. Мгновенные выплаты в USDT.';
+      'Golden Connect — рекламная платформа: биржа, партнёрка 10 уровней, кампании, маркетплейс, ИИ-рассылки. Мгновенные выплаты в USDT.';
     const groqKeys = getGroqKeys(req.app.locals.config || {});
     if (!groqKeys.length) return res.status(500).json({ ok: false, reason: 'groq_not_configured' });
     const note = c.crm || {};
@@ -418,7 +418,7 @@ router.post('/_internal/business-connection', express.json(), (req, res) => {
   res.json({ ok: true });
 });
 
-// L4 — Send-via-Bot: ask Trendex bot to deliver message from user's account
+// L4 — Send-via-Bot: ask Golden Connect bot to deliver message from user's account
 router.post('/contacts/:username/send-via-bot', express.json(), async (req, res) => {
   const settings = storage.getSettings(ownerId(req));
   const bc = settings.businessConnection;
@@ -429,7 +429,7 @@ router.post('/contacts/:username/send-via-bot', express.json(), async (req, res)
   if (!c?.contacts?.telegram) return res.status(400).json({ ok: false, reason: 'no_telegram_link' });
   // Forward request to bot (internal endpoint)
   try {
-    const r = await fetch('http://trendex-bot:3000/internal/send-business', {
+    const r = await fetch('http://golden-connect-bot:3000/internal/send-business', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'X-Internal-Secret': process.env.INTERNAL_API_SECRET || '' },
       body: JSON.stringify({
@@ -860,7 +860,7 @@ router.post('/bulk-pitch', authRequired, express.json(), async (req, res) => {
   if (!usernames.length) return res.status(400).json({ ok: false, reason: 'no_usernames' });
   const owner = ownerId(req);
   const settings = storage.getSettings(owner);
-  const offer = String(req.body?.offer || settings.defaultOffer || 'Trendex — рекламная платформа').slice(0, 2000);
+  const offer = String(req.body?.offer || settings.defaultOffer || 'Golden Connect — рекламная платформа').slice(0, 2000);
   const tone = req.body?.tone || settings.tone || 'warm';
 
   const groqKeys = getGroqKeys({});

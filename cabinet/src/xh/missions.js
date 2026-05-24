@@ -1,4 +1,4 @@
-// Trendex: Partner missions — 7-day step-by-step program for new partners.
+// Golden Connect: Partner missions — 7-day step-by-step program for new partners.
 // Each day has a concrete task → user marks complete → badge at the end.
 //
 // Command: /missions
@@ -8,7 +8,7 @@ const { InlineKeyboard } = require('grammy');
 
 const MISSIONS = [
   { day: 1, title: 'Скопируй реф-ссылку и пригласи 5 друзей', icon: '🔗', desc: 'Открой /ref — твоя ссылка уже готова. Отправь её 5 знакомым.', action: '/ref' },
-  { day: 2, title: 'Создай рекламный пост через AI', icon: '🤖', desc: '/promo → AI сгенерирует текст про Trendex и оформит для соцсетей.', action: '/promo' },
+  { day: 2, title: 'Создай рекламный пост через AI', icon: '🤖', desc: '/promo → AI сгенерирует текст про Golden Connect и оформит для соцсетей.', action: '/promo' },
   { day: 3, title: 'Возьми первое задание-подписку (биржа)', icon: '💰', desc: 'Reply-кнопка «💰 Задания (заработать)» → выбери канал, подпишись, получи $0.05+', action: '💰 Задания (заработать)' },
   { day: 4, title: 'Запусти первую кампанию (от $5)', icon: '🎯', desc: 'Reply-кнопка «🎯 Разместить рекламу» → выбери тип задания, оплати из gift-баланса.', action: '🎯 Разместить рекламу' },
   { day: 5, title: 'Получи QR-код реф-ссылки', icon: '📱', desc: '/qr — красивый QR. Сохрани для визитки или поста в соцсетях.', action: '/qr' },
@@ -44,7 +44,7 @@ async function sendMissions(ctx, storage) {
   const pct = Math.round((completed / 7) * 100);
 
   const lines = [
-    '🎯 <b>Миссии партнёра Trendex</b>',
+    '🎯 <b>Миссии партнёра Golden Connect</b>',
     '',
     `Прогресс: <b>${completed}/7</b> (${pct}%)`,
     `${'█'.repeat(Math.round(pct / 10))}${'░'.repeat(10 - Math.round(pct / 10))}`,
@@ -60,7 +60,7 @@ async function sendMissions(ctx, storage) {
 
   if (completed === 7) {
     lines.push('🏆 <b>Поздравляем! Все миссии выполнены!</b>');
-    lines.push('Вы прошли программу партнёра Trendex.');
+    lines.push('Вы прошли программу партнёра Golden Connect.');
   } else {
     lines.push('Нажмите кнопку чтобы отметить выполненную миссию:');
   }
@@ -98,7 +98,7 @@ function setupMissions(bot, storage, config) {
     const freshUser = storage.findWebUserById ? storage.findWebUserById(user.id) : user;
     const completed = getCompletedCount(freshUser || user);
     if (completed === 7) {
-      await ctx.reply('🏆 <b>ВСЕ МИССИИ ВЫПОЛНЕНЫ!</b>\n\nВы прошли 7-дневную программу партнёра Trendex. Теперь вы знаете все инструменты.\n\nПродолжайте в том же духе! 💪', { parse_mode: 'HTML' });
+      await ctx.reply('🏆 <b>ВСЕ МИССИИ ВЫПОЛНЕНЫ!</b>\n\nВы прошли 7-дневную программу партнёра Golden Connect. Теперь вы знаете все инструменты.\n\nПродолжайте в том же духе! 💪', { parse_mode: 'HTML' });
     }
     await sendMissions(ctx, storage);
   });

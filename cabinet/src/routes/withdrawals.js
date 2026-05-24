@@ -1,4 +1,4 @@
-// Trendex Withdrawals — earned balance → crypto/card payout via Cryptomus.
+// Golden Connect Withdrawals — earned balance → crypto/card payout via Cryptomus.
 // Flow:
 //   1. User submits POST /api/withdrawals { amount_usd, currency, address }
 //   2. Backend deducts earned_balance immediately (hold) → status='pending'
@@ -198,7 +198,7 @@ function createWithdrawalsRouter(_config, storage, requireAuth, requireAdmin) {
           address: w.address,
           is_subtract: 1,
           network: w.currency === 'USDT' ? 'TRON' : (w.currency === 'USDC' ? 'TRON' : undefined),
-          url_callback: (process.env.PUBLIC_BASE_URL || 'https://trendex.biz/cabinet').replace(/\/$/, '').replace('/cabinet','') + '/cabinet/api/withdrawals/webhook',
+          url_callback: (process.env.PUBLIC_BASE_URL || 'https://golden-connect.to/cabinet').replace(/\/$/, '').replace('/cabinet','') + '/cabinet/api/withdrawals/webhook',
         });
         if (resp.state === 0 && resp.result) {
           rawDb.prepare(`UPDATE withdrawals SET status='paid', cryptomus_uuid=?, tx_hash=?, processed_at=datetime('now'), raw_response=? WHERE id=?`)

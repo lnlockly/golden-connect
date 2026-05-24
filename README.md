@@ -1,17 +1,17 @@
-# Trendex
+# Golden Connect
 
 Рекламная платформа с распределённой прибылью. **4 баланса** на пользователя, **10-уровневая партнёрская программа**, **бинарная матрица** (запускается админом), биржа заданий, маркетплейс цифровых товаров. USD-only, no token.
 
-> Слайды презентации (v2, апрель 2026): тарифы LAUNCH $45 / BOOST $90 / ROCKET $135 — see `Trendex_presentation3.pdf` for full marketing.
+> Слайды презентации (v2, апрель 2026): тарифы LAUNCH $45 / BOOST $90 / ROCKET $135 — see `Golden Connect_presentation3.pdf` for full marketing.
 
 ## Layout
 
 ```
-trendex/
+golden-connect/
 ├── api/       ← Hono + Drizzle + Postgres (Neon). Schema, accruals, balance routes, cron workers.
-├── bot/       ← Grammy Telegram bot @Trendex_bizbot. Thin HTTP client to api over INTERNAL_API_SECRET.
+├── bot/       ← Grammy Telegram bot @Golden Connect_bizbot. Thin HTTP client to api over INTERNAL_API_SECRET.
 ├── cabinet/   ← Express + vanilla JS. Personal cabinet, marketing UI, /finance page, admin Statистика.
-├── landing/   ← Vite + React. Public landing trendex.biz.
+├── landing/   ← Vite + React. Public landing golden-connect.to.
 └── deploy/k8s/  ← Kubernetes manifests applied by GitHub Actions on push to main.
 ```
 
@@ -32,7 +32,7 @@ Each user has **four independent balances**:
 |---|---|---|---|
 | 🟢 **Working** | 80% of all earnings (split via `applyIncomeSplit`) | вывод (мин $3), покупка/апгрейд тарифа, перевод на Subscription | ✅ Yes |
 | 🟣 **Subscription** | 20% of all earnings (capped per-tariff), manual transfers from Working | only tariff (buy / renew / upgrade) | ❌ No |
-| 🟡 **Gift** | bonuses, promo doubling, raffle prizes | only ADX advertising inside Trendex | ❌ No |
+| 🟡 **Gift** | bonuses, promo doubling, raffle prizes | only ADX advertising inside Golden Connect | ❌ No |
 | ⚡ **Karma** | activity rewards (login streak, tasks, refs) | weekly raffle entry | ❌ No (points, not USD) |
 
 ### Subscription caps (auto-stop accumulation)
@@ -122,7 +122,7 @@ Anchor BFS: walk `users.invited_by_user_id` ↑ until matrixed ancestor, then BF
 
 Single source of truth: `notifications_inbox`. Each row visible in BOTH:
 1. **Cabinet bell** — `GET /api/notifications` polled every 60s, dropdown in header
-2. **@Trendex_bizbot** — `inbox-tg-deliver.job` polls `delivered_tg=false` every minute, sends via TG, marks delivered
+2. **@Golden Connect_bizbot** — `inbox-tg-deliver.job` polls `delivered_tg=false` every minute, sends via TG, marks delivered
 
 5 retry attempts on transient errors, 403/blocked-by-user gives up gracefully.
 
@@ -130,7 +130,7 @@ Single source of truth: `notifications_inbox`. Each row visible in BOTH:
 
 | Job | Schedule (cron) | Purpose |
 |---|---|---|
-| `inbox-tg-deliver` | `* * * * *` (every min) | Push inbox notifications to @Trendex_bizbot |
+| `inbox-tg-deliver` | `* * * * *` (every min) | Push inbox notifications to @Golden Connect_bizbot |
 | `tariff-renewal` | `0 6 * * *` (09:00 MSK) | T-3 / T-1 / T-0 / T+1 escalation: reminders, auto-debit, downgrade |
 | `karma-raffle` | `0 17 * * 0` (Sun 20:00 MSK) | Top-10 by week karma, $100 prize distribution |
 | `leader-pool` | `0 9 1,15 * *` (1st & 15th 12:00 MSK) | Distribute 5% partner-fund to top-15 partners |
@@ -155,37 +155,37 @@ Single source of truth: `notifications_inbox`. Each row visible in BOTH:
 - `POST /me/notifications/:id/read`
 - `POST /me/notifications/read-all`
 
-### `/internal/finance/*` and `/internal/admin/*` (`x-trendex-secret` header)
-Cabinet bridge proxies + bot direct calls. All endpoints accept `user_id` or `email` (with `tg<id>@trendex.bot` fallback for TG-only users).
+### `/internal/finance/*` and `/internal/admin/*` (`x-golden-connect-secret` header)
+Cabinet bridge proxies + bot direct calls. All endpoints accept `user_id` or `email` (with `tg<id>@golden-connect.bot` fallback for TG-only users).
 
 ## Deploy flow
 
 GitHub Actions builds + applies on push to `main`:
 1. Build Docker images (api/bot/cabinet/landing) tagged with commit SHA
-2. Push to `ghcr.io/lnlockly/trendex-*`
+2. Push to `ghcr.io/lnlockly/golden-connect-*`
 3. SSH to deploy host (144.217.65.94)
 4. `kubectl apply -f deploy/k8s/` — applies manifests
-5. `kubectl set image deploy/trendex-X X=trendex-X:<SHA>` — bumps image tag
+5. `kubectl set image deploy/golden-connect-X X=golden-connect-X:<SHA>` — bumps image tag
 6. `kubectl rollout status` — wait until ready
 
 **GitOps drift caveats:**
 - `deploy/k8s/cabinet.yaml` has `cpu: 1m` (lowered from default 30m due to CPU-overcommitted node)
-- `deploy/k8s/bot.yaml` has `replicas: 1` (was 0; long-poller for @Trendex_bizbot)
+- `deploy/k8s/bot.yaml` has `replicas: 1` (was 0; long-poller for @Golden Connect_bizbot)
 - `cabinet.yaml` env `CABINET_BOT_POLL_DISABLED=1` to prevent 409 conflict with bot deployment
 
 ## Server access
 
 ```bash
-ssh -i ~/.ssh/trendex_ed25519 ubuntu@144.217.65.94
-cd /home/ubuntu/trendex/
+ssh -i ~/.ssh/golden-connect_ed25519 ubuntu@144.217.65.94
+cd /home/ubuntu/golden-connect/
 
 # Logs
-kubectl logs -n trendex deploy/trendex-api --tail=100
-kubectl logs -n trendex deploy/trendex-bot --tail=50
+kubectl logs -n golden-connect deploy/golden-connect-api --tail=100
+kubectl logs -n golden-connect deploy/golden-connect-bot --tail=50
 
 # DB direct (postgres-js inside api pod)
-APIPOD=$(kubectl get pods -n trendex -l app=trendex-api -o jsonpath='{.items[0].metadata.name}')
-kubectl exec -n trendex $APIPOD -c trendex-api -- node -e '
+APIPOD=$(kubectl get pods -n golden-connect -l app=golden-connect-api -o jsonpath='{.items[0].metadata.name}')
+kubectl exec -n golden-connect $APIPOD -c golden-connect-api -- node -e '
   const p=require("/app/node_modules/postgres");
   const c=p(process.env.DATABASE_URL);
   (async()=>{
@@ -196,10 +196,10 @@ kubectl exec -n trendex $APIPOD -c trendex-api -- node -e '
 '
 
 # Test internal endpoint (admin stats, requires INTERNAL_API_SECRET)
-SECRET=$(kubectl get secret -n trendex trendex-api-env -o jsonpath='{.data.INTERNAL_API_SECRET}' | base64 -d)
-kubectl exec -n trendex $APIPOD -c trendex-api -- node -e '
+SECRET=$(kubectl get secret -n golden-connect golden-connect-api-env -o jsonpath='{.data.INTERNAL_API_SECRET}' | base64 -d)
+kubectl exec -n golden-connect $APIPOD -c golden-connect-api -- node -e '
   const h=require("http");
-  h.get({hostname:"localhost",port:4001,path:"/internal/admin/stats",headers:{"x-trendex-secret":process.env.INTERNAL_API_SECRET}},
+  h.get({hostname:"localhost",port:4001,path:"/internal/admin/stats",headers:{"x-golden-connect-secret":process.env.INTERNAL_API_SECRET}},
     r=>{let b="";r.on("data",c=>b+=c);r.on("end",()=>console.log(r.statusCode, b))});
 '
 ```

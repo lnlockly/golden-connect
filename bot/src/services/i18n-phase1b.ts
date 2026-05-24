@@ -4,16 +4,16 @@
  * Loaded for its side effects from bot/src/index.ts so the NESTED dict
  * is populated before any handler fires.
  *
- * Phase 2B: placeholders replaced with TrendeX tone-of-voice copy.
+ * Phase 2B: placeholders replaced with Golden Connect tone-of-voice copy.
  * Tone refs: bot/src/bot/commands/start.ts, help.ts, presentation.ts
- * (дружелюбный, бизнес, без health/MLM темы). Uses TRENDEX as the
+ * (дружелюбный, бизнес, без health/MLM темы). Uses GOLDEN_CONNECT as the
  * product spelling consistent with the rest of the codebase.
  */
 import { registerStrings } from "./i18n.js";
 
 registerStrings("ru", {
   events: {
-    title_upcoming: "Ближайшие эфиры TRENDEX",
+    title_upcoming: "Ближайшие эфиры GOLDEN_CONNECT",
     section: {
       my: "Ты записан(а) на",
       all: "Все ближайшие эфиры",
@@ -22,7 +22,7 @@ registerStrings("ru", {
     empty:
       "📡 Пока нет запланированных эфиров.\n\n" +
       "Мы публикуем вебинары про запуск рекламы, партнёрский план и обновления платформы. Загляни позже — здесь появятся новые даты.",
-    need_start: "Сначала пройди /start — нужен аккаунт TRENDEX.",
+    need_start: "Сначала пройди /start — нужен аккаунт GOLDEN_CONNECT.",
     not_found: "Эфир не найден или уже завершён.",
     register_failed: "Не получилось записаться, попробуй ещё раз через минуту.",
     registered_ok: "✅ Ты в списке!",
@@ -39,12 +39,12 @@ registerStrings("ru", {
   },
   drip: {
     day_0:
-      "👋 <b>Добро пожаловать в TRENDEX!</b>\n\n" +
+      "👋 <b>Добро пожаловать в GOLDEN_CONNECT!</b>\n\n" +
       "Это рекламная экосистема, где встречаются три роли: <b>бизнес</b> размещает рекламу, <b>пользователи</b> получают доход за активность, <b>партнёры</b> строят сеть и зарабатывают с её оборота.\n\n" +
       "Открой /start — там кабинет, ссылка для друзей и главное меню. Внутри всё настроено, останется только выбрать свою роль.",
     day_1:
       "💼 <b>День 2: тарифы и место в сети</b>\n\n" +
-      "У TRENDEX 8 тарифов — от <b>free</b> до <b>royal</b>. На free ты уже можешь изучить платформу и пригласить первых друзей. Платные тарифы открывают бронирование рекламных мест и повышают долю с оборота сети.\n\n" +
+      "У GOLDEN_CONNECT 8 тарифов — от <b>free</b> до <b>royal</b>. На free ты уже можешь изучить платформу и пригласить первых друзей. Платные тарифы открывают бронирование рекламных мест и повышают долю с оборота сети.\n\n" +
       "Загляни в /start → «Открыть кабинет» и посмотри, какой тариф тебе подходит.",
     day_2:
       "🤝 <b>День 3: реферальная система (5 уровней)</b>\n\n" +
@@ -62,11 +62,11 @@ registerStrings("ru", {
   nudge: {
     stuck_no_action:
       "👋 Привет, давно не виделись!\n\n" +
-      "Ты уже несколько дней в TRENDEX, но пока не сделал(а) ни одного бронирования и не пригласил(а) друзей. Может что-то непонятно или не хватило времени?\n\n" +
+      "Ты уже несколько дней в GOLDEN_CONNECT, но пока не сделал(а) ни одного бронирования и не пригласил(а) друзей. Может что-то непонятно или не хватило времени?\n\n" +
       "Загляни в /start — внутри короткий путь: открыть кабинет, посмотреть тарифы, получить свою ссылку. Если остались вопросы — просто напиши сюда, помогу разобраться.",
   },
   digest: {
-    title: "📊 TRENDEX · Итоги недели",
+    title: "📊 GOLDEN_CONNECT · Итоги недели",
     top_header: "🏆 Топ-3 партнёра недели",
     events_header: "📅 На этой неделе в эфирах",
     platform_header: "✨ Что нового на платформе",
@@ -75,7 +75,7 @@ registerStrings("ru", {
 
 registerStrings("en", {
   events: {
-    title_upcoming: "Upcoming TRENDEX events",
+    title_upcoming: "Upcoming GOLDEN_CONNECT events",
     section: {
       my: "You're registered for",
       all: "All upcoming events",
@@ -84,7 +84,7 @@ registerStrings("en", {
     empty:
       "📡 No events scheduled yet.\n\n" +
       "We run webinars on launching ads, the partner plan and platform updates. Check back soon — new dates appear here first.",
-    need_start: "Run /start first — a TRENDEX account is required.",
+    need_start: "Run /start first — a GOLDEN_CONNECT account is required.",
     not_found: "Event not found or already finished.",
     register_failed: "Couldn't register, try again in a minute.",
     registered_ok: "✅ You're on the list!",
@@ -101,12 +101,12 @@ registerStrings("en", {
   },
   drip: {
     day_0:
-      "👋 <b>Welcome to TRENDEX!</b>\n\n" +
+      "👋 <b>Welcome to GOLDEN_CONNECT!</b>\n\n" +
       "This is an advertising ecosystem where three roles meet: <b>businesses</b> run ads, <b>users</b> earn for activity, and <b>partners</b> grow the network and share its turnover.\n\n" +
       "Open /start — you'll find your cabinet, invite link and the main menu. Everything's set up; you just pick your role.",
     day_1:
       "💼 <b>Day 2: tariffs and your spot in the network</b>\n\n" +
-      "TRENDEX has 8 tariffs — from <b>free</b> to <b>royal</b>. Free already lets you explore the platform and invite first friends. Paid tiers unlock ad-slot booking and bump your share of the network turnover.\n\n" +
+      "GOLDEN_CONNECT has 8 tariffs — from <b>free</b> to <b>royal</b>. Free already lets you explore the platform and invite first friends. Paid tiers unlock ad-slot booking and bump your share of the network turnover.\n\n" +
       "Tap /start → \"Open cabinet\" and see which tariff fits you.",
     day_2:
       "🤝 <b>Day 3: the 5-level referral system</b>\n\n" +
@@ -124,11 +124,11 @@ registerStrings("en", {
   nudge: {
     stuck_no_action:
       "👋 Hey, long time no see!\n\n" +
-      "You've been in TRENDEX for a few days but haven't made a single booking or invited anyone yet. Something unclear, or just busy?\n\n" +
+      "You've been in GOLDEN_CONNECT for a few days but haven't made a single booking or invited anyone yet. Something unclear, or just busy?\n\n" +
       "Open /start — the short path is right there: open the cabinet, check tariffs, grab your link. Got questions? Just drop them here and I'll help.",
   },
   digest: {
-    title: "📊 TRENDEX · Week recap",
+    title: "📊 GOLDEN_CONNECT · Week recap",
     top_header: "🏆 Top-3 partners of the week",
     events_header: "📅 This week's events",
     platform_header: "✨ What's new on the platform",

@@ -1,6 +1,6 @@
-// Minimal fetch wrapper for the trendex-api service. The base URL is
+// Minimal fetch wrapper for the golden-connect-api service. The base URL is
 // read from `VITE_API_URL` at build time; dev defaults to localhost so
-// a local `trendex-api` instance works out of the box. All requests
+// a local `golden-connect-api` instance works out of the box. All requests
 // send cookies (`af_session`) so the JWT middleware on the API can
 // identify the caller.
 

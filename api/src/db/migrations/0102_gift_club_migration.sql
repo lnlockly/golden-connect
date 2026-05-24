@@ -1,6 +1,6 @@
 -- =====================================================================
--- GiftClub → Trendex migration: gift_* schema
--- Target: Trendex Neon Postgres (public schema)
+-- GiftClub → Golden Connect migration: gift_* schema
+-- Target: Golden Connect Neon Postgres (public schema)
 -- Created: 2026-05-19
 -- =====================================================================
 -- Перенос всех бизнес-данных GiftClub (22625 юзеров, ~127k балансов,
@@ -11,7 +11,7 @@
 -- ID-стратегия:
 --   gift_users.id = bigint, генерируется новой sequence
 --   gift_users.gc_user_id = bigint, оригинальный id из MySQL.users
---   gift_users.trendex_user_id = FK→users.id (NULL для не-дублей)
+--   gift_users.golden-connect_user_id = FK→users.id (NULL для не-дублей)
 --   Все FK gift_balances/giver_levels/referals и т.д. идут на gift_users.id
 --
 -- Money cast:
@@ -27,7 +27,7 @@ BEGIN;
 CREATE TABLE gift_users (
     id                       BIGSERIAL PRIMARY KEY,
     gc_user_id               BIGINT NOT NULL UNIQUE,        -- оригинальный id из MySQL.users
-    trendex_user_id          INTEGER REFERENCES users(id) ON DELETE SET NULL, -- линк к Trendex, NULL если дубль не найден
+    golden-connect_user_id          INTEGER REFERENCES users(id) ON DELETE SET NULL, -- линк к Golden Connect, NULL если дубль не найден
     uuid                     UUID NOT NULL UNIQUE,
     role                     VARCHAR(32) NOT NULL DEFAULT 'user',
     ip                       VARCHAR(45),
@@ -74,7 +74,7 @@ CREATE TABLE gift_users (
 );
 
 CREATE INDEX idx_gift_users_gc_id            ON gift_users(gc_user_id);
-CREATE INDEX idx_gift_users_trendex_id       ON gift_users(trendex_user_id) WHERE trendex_user_id IS NOT NULL;
+CREATE INDEX idx_gift_users_golden-connect_id       ON gift_users(golden-connect_user_id) WHERE golden-connect_user_id IS NOT NULL;
 CREATE INDEX idx_gift_users_tg_chat_id       ON gift_users(telegram_chat_id);
 CREATE INDEX idx_gift_users_email            ON gift_users(email);
 CREATE INDEX idx_gift_users_ref_id           ON gift_users(ref_id);
@@ -82,9 +82,9 @@ CREATE INDEX idx_gift_users_main_user_id     ON gift_users(main_user_id);
 CREATE INDEX idx_gift_users_lft_rgt          ON gift_users(lft, rgt);
 CREATE INDEX idx_gift_users_depth            ON gift_users(depth);
 
-COMMENT ON TABLE gift_users IS 'GiftClub юзера импортированы из MySQL.users + 200 Trendex-юзеров с trendex_user_id заполненным. main_user_id для multi-аккаунтов (Vitaliy = id 2 имеет 20+ multi).';
+COMMENT ON TABLE gift_users IS 'GiftClub юзера импортированы из MySQL.users + 200 Golden Connect-юзеров с golden-connect_user_id заполненным. main_user_id для multi-аккаунтов (Vitaliy = id 2 имеет 20+ multi).';
 COMMENT ON COLUMN gift_users.gc_user_id IS 'Оригинальный ID из giftclub.users — используется для миграции связей и сохранения истории';
-COMMENT ON COLUMN gift_users.trendex_user_id IS 'NULL для чистых GiftClub-юзеров; INTEGER для дублей и для новых Trendex-юзеров';
+COMMENT ON COLUMN gift_users.golden-connect_user_id IS 'NULL для чистых GiftClub-юзеров; INTEGER для дублей и для новых Golden Connect-юзеров';
 
 -- ---------------------------------------------------------------------
 -- 2. gift_balance_types — справочник типов балансов

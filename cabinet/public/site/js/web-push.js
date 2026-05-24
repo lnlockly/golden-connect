@@ -1,4 +1,4 @@
-// Trendex Web Push client.
+// Golden Connect Web Push client.
 // Registers service worker, subscribes to push notifications,
 // sends subscription to server API.
 //

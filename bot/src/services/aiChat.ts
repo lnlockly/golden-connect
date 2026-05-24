@@ -84,7 +84,7 @@ export async function askClaude(opts: AiChatOpts): Promise<AiResult> {
     },
     {
       type: "text" as const,
-      text: `${SYSTEM_BASE}\n\nUser language: ${lang}. Min budget: $${opts.minBudget ?? 100}.\n\nYou are embedded inside the TRENDEX Telegram bot. Keep replies SHORT (1–3 sentences), plain text, no markdown glyphs.`,
+      text: `${SYSTEM_BASE}\n\nUser language: ${lang}. Min budget: $${opts.minBudget ?? 100}.\n\nYou are embedded inside the GOLDEN_CONNECT Telegram bot. Keep replies SHORT (1–3 sentences), plain text, no markdown glyphs.`,
     },
   ];
 

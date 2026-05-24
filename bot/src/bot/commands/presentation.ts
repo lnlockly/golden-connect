@@ -27,7 +27,7 @@ const COPY: Record<Lang, {
 }> = {
   en: {
     hero: (n) =>
-      `Hey${n ? ` ${n}` : ""}. TRENDEX is an advertising ecosystem that works for everyone — business, users, partners. Tap below for a 90-second intro, right inside Telegram.`,
+      `Hey${n ? ` ${n}` : ""}. GOLDEN_CONNECT is an advertising ecosystem that works for everyone — business, users, partners. Tap below for a 90-second intro, right inside Telegram.`,
     watch_cta: "▶ Watch the intro",
     skip_cta: "Skip for now",
     followup_title: "You're in.",
@@ -39,7 +39,7 @@ const COPY: Record<Lang, {
   },
   ru: {
     hero: (n) =>
-      `Привет${n ? `, ${n}` : ""}. TRENDEX — реклама, которая работает на всех: бизнес, пользователей и партнёров. Нажми — 90-секундная презентация откроется прямо в Telegram.`,
+      `Привет${n ? `, ${n}` : ""}. GOLDEN_CONNECT — реклама, которая работает на всех: бизнес, пользователей и партнёров. Нажми — 90-секундная презентация откроется прямо в Telegram.`,
     watch_cta: "▶ Смотреть презентацию",
     skip_cta: "Пропустить",
     followup_title: "Ты в деле.",
@@ -51,7 +51,7 @@ const COPY: Record<Lang, {
   },
   zh: {
     hero: (n) =>
-      `嘿${n ? ` ${n}` : ""}。TRENDEX 是一个让所有人都受益的广告生态 —— 商家、用户、合作伙伴。点击下方 —— 90 秒介绍直接在 Telegram 里播放。`,
+      `嘿${n ? ` ${n}` : ""}。GOLDEN_CONNECT 是一个让所有人都受益的广告生态 —— 商家、用户、合作伙伴。点击下方 —— 90 秒介绍直接在 Telegram 里播放。`,
     watch_cta: "▶ 观看介绍",
     skip_cta: "稍后再看",
     followup_title: "欢迎上车。",
@@ -63,7 +63,7 @@ const COPY: Record<Lang, {
   },
   uz: {
     hero: (n) =>
-      `Salom${n ? `, ${n}` : ""}. TRENDEX — barcha uchun ishlaydigan reklama ekotizimi: biznes, foydalanuvchilar va hamkorlar. Pastdagi tugmani bosing — 90 soniyalik tanishuv Telegram ichida ochiladi.`,
+      `Salom${n ? `, ${n}` : ""}. GOLDEN_CONNECT — barcha uchun ishlaydigan reklama ekotizimi: biznes, foydalanuvchilar va hamkorlar. Pastdagi tugmani bosing — 90 soniyalik tanishuv Telegram ichida ochiladi.`,
     watch_cta: "▶ Tanishuvni ko'rish",
     skip_cta: "Hozircha o'tkazib yuborish",
     followup_title: "Siz ro'yxatdasiz.",
@@ -75,7 +75,7 @@ const COPY: Record<Lang, {
   },
   fil: {
     hero: (n) =>
-      `Kumusta${n ? ` ${n}` : ""}. Ang TRENDEX ay advertising ecosystem na gumagana para sa lahat — business, users, partners. Pindutin sa ibaba — 90-segundong intro na mapapanood mismo sa loob ng Telegram.`,
+      `Kumusta${n ? ` ${n}` : ""}. Ang GOLDEN_CONNECT ay advertising ecosystem na gumagana para sa lahat — business, users, partners. Pindutin sa ibaba — 90-segundong intro na mapapanood mismo sa loob ng Telegram.`,
     watch_cta: "▶ Panoorin ang intro",
     skip_cta: "Laktawan muna",
     followup_title: "Pasok ka na.",
@@ -87,7 +87,7 @@ const COPY: Record<Lang, {
   },
   th: {
     hero: (n) =>
-      `สวัสดี${n ? ` ${n}` : ""} TRENDEX คือระบบโฆษณาที่ทำงานให้ทุกคน — ธุรกิจ ผู้ใช้ และพาร์ทเนอร์ กดด้านล่าง — แนะนำ 90 วินาทีเปิดตรงในแอป Telegram`,
+      `สวัสดี${n ? ` ${n}` : ""} GOLDEN_CONNECT คือระบบโฆษณาที่ทำงานให้ทุกคน — ธุรกิจ ผู้ใช้ และพาร์ทเนอร์ กดด้านล่าง — แนะนำ 90 วินาทีเปิดตรงในแอป Telegram`,
     watch_cta: "▶ ดูวิดีโอแนะนำ",
     skip_cta: "ข้ามก่อน",
     followup_title: "คุณเข้าร่วมแล้ว",
@@ -127,7 +127,7 @@ function buildFollowupKb(lang: Lang, miniAppUrl: string | null, shareUrl: string
 /**
  * Short welcome — ONE-liner + a Mini App web_app button. Tap opens the
  * landing inside Telegram with `?autotour=1`, which auto-dispatches
- * `trendex:tour-start`. When the tour finishes the WebApp pushes
+ * `golden-connect:tour-start`. When the tour finishes the WebApp pushes
  * `sendData('tour_done')` back to the bot — handled in
  * `onWebAppDataTourDone` below.
  */

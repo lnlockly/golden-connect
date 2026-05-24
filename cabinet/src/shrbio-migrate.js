@@ -1,4 +1,4 @@
-// Trendex Shortener+Bio schema bootstrap. Idempotent. Inlined.
+// Golden Connect Shortener+Bio schema bootstrap. Idempotent. Inlined.
 const { getDb } = require("./planner/db/database");
 
 const SCHEMA_SQL = `CREATE TABLE IF NOT EXISTS shortener_campaigns (

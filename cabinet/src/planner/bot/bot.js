@@ -153,7 +153,7 @@ function createBot(tokenOrBot, webappUrl) {
       return;
       const _unreached_inlineKb = new InlineKeyboard();
       return ctx.reply(
-        `👋 Привет! Я <b>Trendex Секретарь</b> — AI-помощник для вашей команды.\n` +
+        `👋 Привет! Я <b>Golden Connect Секретарь</b> — AI-помощник для вашей команды.\n` +
         `<i>✦ Будь в тренде! ✦</i>\n\n` +  // [rebrand-slogan-2026-05-15]
         `Помогу организовать работу прямо здесь — задачи, созвоны, напоминания.\n\n` +
         `📋 <b>Задачи</b>\n` +
@@ -193,7 +193,7 @@ function createBot(tokenOrBot, webappUrl) {
         .text('☀️ Итог дня', 'stats_today')
         .text('🤖 AI помощник', 'aitools_menu').row()
         // ── 🌐 ИНСТРУМЕНТЫ ──
-        .text('🔴 Эфиры Trendex', 'xh_events')
+        .text('🔴 Эфиры Golden Connect', 'xh_events')
         .text('📹 Видеозвонки', 'conf_menu').row()
         .text('🌟 Возможности', 'features_menu')
         .text('📖 Инструкции', 'guide_menu').row()
@@ -204,7 +204,7 @@ function createBot(tokenOrBot, webappUrl) {
         `👋 С возвращением, <b>${escapeHtml(ctx.from.first_name)}</b>!\n\n` +
         `Я ${escapeHtml(name)}, твой персональный секретарь.\n` +
         `Просто напиши или отправь голосовое — я всё запишу и напомню.\n\n` +
-        `💡 Попробуй: <i>"завтра в 18:00 эфир Trendex"</i>`,
+        `💡 Попробуй: <i>"завтра в 18:00 эфир Golden Connect"</i>`,
         { parse_mode: 'HTML', reply_markup: getMainKB(getUserLang(ctx)) }
       ).then(() => ctx.reply('Что делаем?', { reply_markup: inlineKb }));
     }
@@ -224,7 +224,7 @@ function createBot(tokenOrBot, webappUrl) {
     // until /start returns for repeat visitors.
     await ctx.reply(
       `👋 Привет, <b>${escapeHtml(ctx.from.first_name)}</b>!\n\n` +
-      `Я <b>${escapeHtml(DEFAULT_NAME)}</b> — твой AI-помощник по платформе Trendex.\n` +
+      `Я <b>${escapeHtml(DEFAULT_NAME)}</b> — твой AI-помощник по платформе Golden Connect.\n` +
       `<i>✦ Будь в тренде! ✦</i>\n` +  // [rebrand-slogan-2026-05-15]
       `Стиль общения: <b>${SECRETARY_STYLES[DEFAULT_STYLE].name}</b>.`,
       {
@@ -234,7 +234,7 @@ function createBot(tokenOrBot, webappUrl) {
     );
     await ctx.reply(
       `Расскажи немного о себе, чтобы я лучше подстроился под твои задачи:\n\n` +
-      `<i>Например: "Я предприниматель, работаю с 9 до 18, важны звонки клиентам и реклама в Trendex"</i>\n\n` +
+      `<i>Например: "Я предприниматель, работаю с 9 до 18, важны звонки клиентам и реклама в Golden Connect"</i>\n\n` +
       `Или нажми кнопку, чтобы пропустить:`,
       {
         parse_mode: 'HTML',
@@ -424,7 +424,7 @@ function createBot(tokenOrBot, webappUrl) {
     if (webappUrl) kb.url('📖 Полное руководство', `${webappUrl}/guide`);
 
     await ctx.reply(
-      `🌟 <b>Trendex Секретарь — все возможности</b>\n\n` +
+      `🌟 <b>Golden Connect Секретарь — все возможности</b>\n\n` +
       `🧠 AI-секретарь — умный помощник на базе AI\n` +
       `🤖 AI инструменты — картинки, озвучка, видео, анализ фото\n` +
       `📋 Задачи — планирование с приоритетами\n` +
@@ -693,7 +693,7 @@ function createBot(tokenOrBot, webappUrl) {
       `Нажми /start → выбери имя секретаря → стиль общения → расскажи о себе.\n\n` +
       `<b>Шаг 2. Создай первую задачу</b>\n` +
       `Просто напиши боту:\n` +
-      `<i>"Завтра в 18:00 эфир Trendex"</i>\n` +
+      `<i>"Завтра в 18:00 эфир Golden Connect"</i>\n` +
       `Секретарь создаст задачу и поставит напоминание.\n\n` +
       `<b>Шаг 3. Голосовые</b>\n` +
       `Отправь голосовое — бот распознает и создаст задачу.\n\n` +
@@ -713,7 +713,7 @@ function createBot(tokenOrBot, webappUrl) {
       `📋 <b>Работа с задачами</b>\n\n` +
       `<b>Создание (3 способа):</b>\n\n` +
       `1️⃣ <b>Текстом напрямую:</b>\n` +
-      `<code>написать 3 друзьям про Trendex</code> → задача на сегодня\n` +
+      `<code>написать 3 друзьям про Golden Connect</code> → задача на сегодня\n` +
       `<code>завтра эфир в 18:00</code> → задача с датой\n` +
       `<code>25.03 отчёт !1</code> → дата + приоритет 1\n\n` +
       `2️⃣ <b>Через AI-диалог:</b>\n` +
@@ -1255,8 +1255,8 @@ function createBot(tokenOrBot, webappUrl) {
     await ctx.answerCallbackQuery();
     await ctx.reply(
       `💡 <b>Примеры — просто напиши:</b>\n\n` +
-      `• <code>Эфир Trendex завтра в 18:00</code>\n` +
-      `• <code>Написать 3 друзьям про Trendex сегодня</code>\n` +
+      `• <code>Эфир Golden Connect завтра в 18:00</code>\n` +
+      `• <code>Написать 3 друзьям про Golden Connect сегодня</code>\n` +
       `• <code>Посмотреть эфир 20.04 в 18:00 !1</code>\n` +
       `• <code>Сдать отчёт до пятницы !2</code>\n\n` +
       `Или голосом — просто наговори задачу! 🎤`,
@@ -1688,7 +1688,7 @@ function createBot(tokenOrBot, webappUrl) {
         `🔑 ID: <code>${roomId}</code>\n` +
         `👥 Участники (${count}): ${names.join(', ')}\n\n` +
         `🌐 ${webappUrl}/?conf=${roomId}\n` +
-        `📱 https://t.me/${ctx.me?.username || 'Trendex_bizbot'}?start=conf_${roomId}`,
+        `📱 https://t.me/${ctx.me?.username || 'Golden Connect_bizbot'}?start=conf_${roomId}`,
         { parse_mode: 'HTML', reply_markup: kb }
       );
     } catch {}
@@ -1781,7 +1781,7 @@ function createBot(tokenOrBot, webappUrl) {
 
       if (cmd === 'start' || cmd === 'help') {
         return ctx.reply(
-          `👋 Привет! Я <b>Trendex Секретарь</b> — AI-помощник для вашей команды.\n\n` +
+          `👋 Привет! Я <b>Golden Connect Секретарь</b> — AI-помощник для вашей команды.\n\n` +
           `Помогу организовать работу прямо здесь — задачи, созвоны, напоминания.\n\n` +
           `📋 <b>Задачи</b>\n` +
           `/task запустить кампанию подписки — <i>создать задачу для группы</i>\n` +
@@ -1796,7 +1796,7 @@ function createBot(tokenOrBot, webappUrl) {
           `/meet 15:00 Планёрка — <i>запланировать на время</i>\n\n` +
           `⚙️ /gs_settings — <i>настройки чата</i>\n\n` +
           `💡 <b>Совет:</b> напишите мне в личку — там личные задачи, привычки и AI-секретарь. Личное и групповое не смешивается!`,
-          { parse_mode: 'HTML', reply_markup: new InlineKeyboard().url('💬 Написать в личку', 'https://t.me/Trendex_bizbot') }
+          { parse_mode: 'HTML', reply_markup: new InlineKeyboard().url('💬 Написать в личку', 'https://t.me/Golden Connect_bizbot') }
         );
       }
 

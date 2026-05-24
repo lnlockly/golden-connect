@@ -1,4 +1,4 @@
-/* Trendex Cabinet — Admin «Статистика Trendex» + withdrawals queue + matrix launch */
+/* Golden Connect Cabinet — Admin «Статистика Golden Connect» + withdrawals queue + matrix launch */
 (function () {
   'use strict';
   const $ = (id) => document.getElementById(id);
@@ -44,7 +44,7 @@
     const u = s.users;
     const b = s.balances_total;
     return '<div style="max-width:1200px;margin:0 auto;padding:24px 16px">' +
-      '<h2 style="color:#f5f5fa;margin:0 0 18px">📊 Статистика Trendex</h2>' +
+      '<h2 style="color:#f5f5fa;margin:0 0 18px">📊 Статистика Golden Connect</h2>' +
 
       '<h3 style="color:#94a3b8;font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin:18px 0 10px">Пользователи</h3>' +
       '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:16px">' +

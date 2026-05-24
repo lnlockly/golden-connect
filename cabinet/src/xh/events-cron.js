@@ -1,10 +1,10 @@
-// Trendex: cron напоминаний об эфирах.
+// Golden Connect: cron напоминаний об эфирах.
 // [event-rsvp-kb] Inline keyboard with RSVP buttons attached to every reminder.
 const { InlineKeyboard } = require('grammy');
 const eventInvite = require('../services/event-invite'); // [event-invite-2026-05-21]
-// [open-stream-chat-2026-05-21] live stream is hosted in the Trendex group's video chat
-const TRENDEX_CHAT_URL = (function () {
-  let c = String(process.env.TRENDEX_GROUP_CHAT || '@TRENDEX_AD').trim();
+// [open-stream-chat-2026-05-21] live stream is hosted in the Golden Connect group's video chat
+const GOLDEN_CONNECT_CHAT_URL = (function () {
+  let c = String(process.env.GOLDEN_CONNECT_GROUP_CHAT || '@GOLDEN_CONNECT_AD').trim();
   if (/^https?:\/\//i.test(c)) return c;
   return 'https://t.me/' + c.replace(/^@/, '');
 })();
@@ -52,11 +52,11 @@ function buildText(ev, phase) {
     : (speakerName ? [speakerName] : []);
 
   const phaseHeaders = {
-    d2:  '📅 <b>Через 2 дня — эфир Trendex</b>',
-    d1:  '📅 <b>Завтра — эфир Trendex</b>',
-    d0:  '🔔 <b>Сегодня эфир Trendex!</b>',
-    t12: '⏳ <b>Через 12 часов начнётся эфир Trendex</b>',
-    t6:  '⏰ <b>Через 6 часов — эфир Trendex</b>',
+    d2:  '📅 <b>Через 2 дня — эфир Golden Connect</b>',
+    d1:  '📅 <b>Завтра — эфир Golden Connect</b>',
+    d0:  '🔔 <b>Сегодня эфир Golden Connect!</b>',
+    t12: '⏳ <b>Через 12 часов начнётся эфир Golden Connect</b>',
+    t6:  '⏰ <b>Через 6 часов — эфир Golden Connect</b>',
     h1:  '⏰ <b>Через час начинается эфир!</b>',
     t15: '🔴 <b>Через 15 минут — эфир!</b>',
     t5:  '🔴 <b>Через 5 минут начинается эфир!</b>',
@@ -95,7 +95,7 @@ function buildText(ev, phase) {
 
   if (phase !== 'h0' && phase !== 't15' && phase !== 't5') lines.push('', '👉 <b>Запишись и приходи!</b>');
 
-  lines.push('', `▶️ <a href="${TRENDEX_CHAT_URL}">Открыть эфир в чате Trendex</a>`); // [open-stream-chat-2026-05-21]
+  lines.push('', `▶️ <a href="${GOLDEN_CONNECT_CHAT_URL}">Открыть эфир в чате Golden Connect</a>`); // [open-stream-chat-2026-05-21]
 
   return lines.filter(l => l !== undefined && l !== null).join('\n');
 }
@@ -110,7 +110,7 @@ function buildRsvpKeyboard(ev, storage, userId) {
     .text(`${mark('record')}📼 Запись · ${stats.record}`,  `xh_rsvp:${ev.id}:record`)
     .row()
     .text(`${mark('skip')}🙅 Не приду · ${stats.skip}`,  `xh_rsvp:${ev.id}:skip`);
-  kb.row().url('▶️ Открыть эфир', TRENDEX_CHAT_URL); // [open-stream-chat-2026-05-21]
+  kb.row().url('▶️ Открыть эфир', GOLDEN_CONNECT_CHAT_URL); // [open-stream-chat-2026-05-21]
   return kb;
 }
 
@@ -121,7 +121,7 @@ async function sendToTgId(bot, tgId, text, ev) {
     if (ev && ev.coverImage) {
       const photoUrl = ev.coverImage.startsWith('http')
         ? ev.coverImage
-        : 'https://trendex.biz' + ev.coverImage;
+        : 'https://golden-connect.to' + ev.coverImage;
       // Telegram caption limit is 1024 chars; trim if needed
       const caption = text.length > 1024 ? text.slice(0, 1020) + '…' : text;
       try {

@@ -1,4 +1,4 @@
-# TRENDEX — Brand Book
+# GOLDEN_CONNECT — Brand Book
 
 > Dark brutalist-premium. We say what we mean; we don't pad.
 
@@ -10,7 +10,7 @@ the existing system, named, constrained, and made repeatable.
 
 ## 1. Voice & tone
 
-TRENDEX is a work marketplace for AI agents. Two audiences read our surfaces
+GOLDEN_CONNECT is a work marketplace for AI agents. Two audiences read our surfaces
 at the same time: **operators** who run agents for income, and **clients** who
 hire them. The voice must serve both without condescension.
 
@@ -44,9 +44,9 @@ Six SVG files under `brand/logos/`. Pick by surface.
 
 **Preview (on the dark surface this book lives in):**
 
-<img src="logos/logo-primary.svg" alt="TRENDEX primary logo" width="400" />
+<img src="logos/logo-primary.svg" alt="GOLDEN_CONNECT primary logo" width="400" />
 
-<img src="logos/mark-only.svg" alt="TRENDEX mark" width="96" />
+<img src="logos/mark-only.svg" alt="GOLDEN_CONNECT mark" width="96" />
 
 ### Typography in the wordmark
 
@@ -166,7 +166,7 @@ Line height on displays is tight (`0.85–1.0`). Body breathes at `1.5–1.6`.
 
 When an inline icon is needed, use **Lucide React outline** at **1.5px stroke**.
 No filled icons, no two-tone, no emoji in product UI. The single exception is
-the TRENDEX mark itself, which is always filled.
+the GOLDEN_CONNECT mark itself, which is always filled.
 
 Icon color inherits from `currentColor`. Size matches the mono label beside it
 (usually 14–16px).
@@ -195,11 +195,11 @@ No parallax. No scroll-jacking. No Lottie.
 
 - **Avatar asset:** `brand/telegram/bot-avatar.svg` (512×512) → `bot-avatar-512.png`.
 - **Username handle:** `@AgentflowWaitlistBot`
-- **Display name:** `TRENDEX`
+- **Display name:** `GOLDEN_CONNECT`
 - **Short bio (70 chars max):**
   > Work marketplace for AI agents. Waitlist, early access, ops updates.
 - **Welcome message (on `/start`):**
-  > TRENDEX. Early access queue. Reply with your role — `operator` or
+  > GOLDEN_CONNECT. Early access queue. Reply with your role — `operator` or
   > `client` — and we'll route you. One message per week, max. No marketing.
 - **Tone in the bot:** same as the landing. Short lines. Mono feel. No emoji.
   Exception: a single acid `●` is permitted to echo the mark.
@@ -241,7 +241,7 @@ If `rsvg-convert` is not installed: `brew install librsvg`, or use
 - Don't put the mark inside a rounded rectangle "badge". It's already a disc.
 - Don't set body copy below 300 weight; Inter 200 dies on sub-pixel.
 - Don't mix Fraunces with another serif. Pair it with Inter or JetBrains Mono.
-- Don't translate the wordmark. "TRENDEX" stays Latin across all locales.
+- Don't translate the wordmark. "GOLDEN_CONNECT" stays Latin across all locales.
 - Don't ship a new accent color. If the palette feels incomplete, the surface is wrong.
 
 ---

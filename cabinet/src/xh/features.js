@@ -1,4 +1,4 @@
-// Trendex: Sprint B+C+D features bundle.
+// Golden Connect: Sprint B+C+D features bundle.
 // All additional engagement features in one module for efficiency.
 //
 // Features:
@@ -28,7 +28,7 @@ function trunc(s, n) {
 // ═══════════════════════════════════════
 
 async function sendReviews(ctx, query) {
-  // Trendex partner testimonials (curated examples until DB-backed reviews are wired).
+  // Golden Connect partner testimonials (curated examples until DB-backed reviews are wired).
   const TESTIMONIALS = [
     { name: 'Анастасия К.', role: 'PARTNER', text: 'Окупила тариф LAUNCH за 4 дня — с двух прямых рефералов уже 6$ линейных. Теперь подключаюсь к биржу и зарабатываю на чужих заданиях параллельно.' },
     { name: 'Сергей О.', role: 'ROCKET', text: 'Купил ROCKET, через неделю Matching Bonus уже отбил половину тарифа. Видеозадания — мой любимый формат, AI всё проверяет за меня.' },
@@ -36,7 +36,7 @@ async function sendReviews(ctx, query) {
     { name: 'Марина Р.', role: 'FREE', text: 'Пока без тарифа, на одних подписках в биржу выходит $30-50 в неделю. Карма 1850 — рекламодатели берут меня в первую очередь.' },
     { name: 'Дмитрий Т.', role: 'PARTNER', text: 'Делаю кастомные задания на отзывы под мои каналы — приходит реальная аудитория. AI-чекер реально снимает 90% работы по приёму отчётов.' },
   ];
-  const lines = ['⭐ <b>Отзывы партнёров Trendex</b>', ''];
+  const lines = ['⭐ <b>Отзывы партнёров Golden Connect</b>', ''];
   TESTIMONIALS.slice(0, 4).forEach((t, i) => {
     lines.push(`${i + 1}. <b>${escapeHtml(t.name)}</b> · <i>${t.role}</i>`);
     lines.push(`   <i>${escapeHtml(t.text)}</i>`);
@@ -80,7 +80,7 @@ async function sendLeaderboard(ctx, storage) {
   const myPos = webUser ? sorted.findIndex(c => c.user.id === webUser.id) + 1 : 0;
 
   const medals = ['🥇', '🥈', '🥉'];
-  const lines = ['🏆 <b>Лидерборд Trendex — топ партнёры</b>', ''];
+  const lines = ['🏆 <b>Лидерборд Golden Connect — топ партнёры</b>', ''];
   sorted.slice(0, 15).forEach((c, i) => {
     const medal = medals[i] || `${i + 1}.`;
     const name = c.user.displayName || c.user.email || `User${c.user.id}`;
@@ -102,9 +102,9 @@ async function sendLeaderboard(ctx, storage) {
 // ═══════════════════════════════════════
 
 async function sendCalc(ctx) {
-  // Trendex matrix + linear referral calculator.
+  // Golden Connect matrix + linear referral calculator.
   const lines = [
-    '💰 <b>Калькулятор дохода Trendex</b>',
+    '💰 <b>Калькулятор дохода Golden Connect</b>',
     '',
     '<b>Линейная партнёрка (10 уровней)</b> — % с тарифа партнёра:',
     'L1: 10%  · L2: 7%  · L3: 5%  · L4: 2%',
@@ -137,7 +137,7 @@ async function sendCalc(ctx) {
 
 const FAQ_DATA = [
   { cat: '🚀 Платформа', items: [
-    { q: 'Что такое Trendex?', a: 'Рекламная платформа с распределённой прибылью: рекламодатели платят напрямую тем, кто смотрит и взаимодействует с рекламой. 4 способа заработка.' },
+    { q: 'Что такое Golden Connect?', a: 'Рекламная платформа с распределённой прибылью: рекламодатели платят напрямую тем, кто смотрит и взаимодействует с рекламой. 4 способа заработка.' },
     { q: 'Как начать зарабатывать?', a: 'Зарегистрируйся бесплатно, пройди стартовую анкету (/start_quiz) — получишь  на старт + персональный план на 30 дней.' },
     { q: 'Сколько можно заработать в день?', a: 'До 0 в день только за активность в сервисе (просмотры, клики, задания) без приглашений и продаж.' },
   ]},
@@ -161,7 +161,7 @@ const FAQ_DATA = [
   ]},
   { cat: '⚙️ Бот и сайт', items: [
     { q: 'Как войти на сайт?', a: '/cabinet — одна кнопка, авто-логин без пароля.' },
-    { q: 'Как запустить старт в Trendex?', a: '/start_quiz — стартовая анкета 10 вопросов + AI-план +  бонус.' },
+    { q: 'Как запустить старт в Golden Connect?', a: '/start_quiz — стартовая анкета 10 вопросов + AI-план +  бонус.' },
     { q: 'Как привязать Telegram?', a: 'На сайте: Профиль → Привязать Telegram. После этого все уведомления приходят и в бот, и в кабинет.' },
   ]},
 ];
@@ -193,7 +193,7 @@ async function sendFaqCategory(ctx, catIndex) {
 // ═══════════════════════════════════════
 
 async function sendCompare(ctx, query) {
-  // Compare Trendex tariffs.
+  // Compare Golden Connect tariffs.
   const TARIFFS = {
     launch: { name: 'LAUNCH', entry: 45, monthly: 15, seats: 1, depth: 12, rate: 0.50, cycle: 4095, levels: 'all 10', matching: false, badge: '🚀' },
     boost:  { name: 'BOOST',  entry: 90, monthly: 30, seats: 2, depth: 14, rate: 0.60, cycle: 19660, levels: 'all 10', matching: false, badge: '⚡' },
@@ -214,7 +214,7 @@ async function sendCompare(ctx, query) {
   ].join('\n');
 
   const lines = [
-    '⚖️ <b>Сравнение тарифов Trendex</b>',
+    '⚖️ <b>Сравнение тарифов Golden Connect</b>',
     '',
     fmt(a),
     '',
@@ -273,7 +273,7 @@ async function processWeeklyDigest(bot, storage) {
         : '👥 Команда: пригласите первого через /ref';
 
       // Health info
-      let healthLine = '💊 старт в Trendex: /health чтобы начать';
+      let healthLine = '💊 старт в Golden Connect: /health чтобы начать';
       try {
         const db = require('../planner/db/database');
         const pu = db.getUserByTgId ? db.getUserByTgId(user.telegramUserId) : null;
@@ -295,7 +295,7 @@ async function processWeeklyDigest(bot, storage) {
         : '📡 Следите за анонсами эфиров в /events';
 
       const text = [
-        '📊 <b>Итог недели — Trendex</b>',
+        '📊 <b>Итог недели — Golden Connect</b>',
         '',
         healthLine,
         teamLine,
@@ -306,7 +306,7 @@ async function processWeeklyDigest(bot, storage) {
 
       try {
         const kb = new InlineKeyboard()
-          .text('💊 Trendex', 'xh_health')
+          .text('💊 Golden Connect', 'xh_health')
           .text('📡 Эфиры', 'xh_events').row()
           .text('🔗 Реф-ссылка', 'xh_ref');
         await bot.api.sendMessage(user.telegramUserId, text, { parse_mode: 'HTML', reply_markup: kb });

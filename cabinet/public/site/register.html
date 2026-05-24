@@ -11,21 +11,21 @@ ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBo
 <!-- /Yandex.Metrika counter -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="Бесплатная регистрация в Trendex — 25 натуральных продуктов, AI-помощник, эфиры с профессорами и партнёрская программа.">
+  <meta name="description" content="Бесплатная регистрация в Golden Connect — 25 натуральных продуктов, AI-помощник, эфиры с профессорами и партнёрская программа.">
   <meta name="theme-color" content="#080a0f" id="meta-theme-color">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Trendex">
-  <meta property="og:title" content="Присоединяйтесь к Trendex — Бесплатная регистрация">
+  <meta property="og:site_name" content="Golden Connect">
+  <meta property="og:title" content="Присоединяйтесь к Golden Connect — Бесплатная регистрация">
   <meta property="og:description" content="Получите доступ к 25 натуральным продуктам, AI-помощнику, эфирам с профессорами и готовой системе продвижения. Регистрация бесплатна.">
-  <meta property="og:image" content="https://trendex.biz/media/uploads/og-image.jpg">
+  <meta property="og:image" content="https://golden-connect.to/media/uploads/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:url" content="https://trendex.biz/register">
+  <meta property="og:url" content="https://golden-connect.to/register">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Trendex — Бесплатная регистрация">
+  <meta name="twitter:title" content="Golden Connect — Бесплатная регистрация">
   <meta name="twitter:description" content="25 продуктов, AI-помощник, эфиры с профессорами. Присоединяйтесь бесплатно!">
-  <meta name="twitter:image" content="https://trendex.biz/media/uploads/og-image.jpg">
-  <title data-i18n="auth_signup_title">Регистрация — Trendex</title>
+  <meta name="twitter:image" content="https://golden-connect.to/media/uploads/og-image.jpg">
+  <title data-i18n="auth_signup_title">Регистрация — Golden Connect</title>
   <link rel="icon" href="/cabinet/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/cabinet/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -43,9 +43,9 @@ ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBo
     })();
   </script>
   <link rel="stylesheet" href="styles.css?v=5.6">
-<script src="/cabinet/js/bot-link.js?v=1"></script><script src="js/i18n.js?v=trendex-1" defer></script>
-<title>Trendex — Бесплатная регистрация</title>
-<link rel="canonical" href="https://trendex.biz/register">
+<script src="/cabinet/js/bot-link.js?v=1"></script><script src="js/i18n.js?v=golden-connect-1" defer></script>
+<title>Golden Connect — Бесплатная регистрация</title>
+<link rel="canonical" href="https://golden-connect.to/register">
   <!-- [mobile-auth-fix-2026-05] -->
 <style>
 @media (max-width: 640px) {
@@ -68,6 +68,7 @@ ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBo
   }
 }
 </style>
+<link rel="stylesheet" href="/_golden-theme.css">
 </head>
 <body>
   <div class="aurora">
@@ -80,7 +81,7 @@ ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBo
     <div class="wrap">
       <a class="nav-logo" href="/">
         <div class="nav-logo-icon">✦</div>
-        TRENDEX
+        GOLDEN_CONNECT
       </a>
       <div class="nav-actions" style="margin-left:auto">
         <a href="/cabinet/login" class="btn btn--outline btn--nav">Войти</a>
@@ -190,13 +191,13 @@ ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBo
         const m = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'));
         return m ? decodeURIComponent(m[1]) : '';
       }
-      const ref = params.get('ref') || localStorage.getItem('trendex_invited_by') || localStorage.getItem('xh-ref') || _getCookie('trendex_ref') || '';
+      const ref = params.get('ref') || localStorage.getItem('golden-connect_invited_by') || localStorage.getItem('xh-ref') || _getCookie('golden-connect_ref') || '';
       if (ref) {
         const refInput = form.querySelector('input[name="referralCode"]');
         if (refInput) refInput.value = ref;
         refBanner.textContent = 'Вы приглашены по реферальной ссылке: ' + ref;
         refBanner.classList.remove('hidden');
-        localStorage.setItem('xh-ref', ref); localStorage.setItem('trendex_invited_by', ref);
+        localStorage.setItem('xh-ref', ref); localStorage.setItem('golden-connect_invited_by', ref);
       }
 
       // Visitor ID

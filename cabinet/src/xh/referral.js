@@ -1,4 +1,4 @@
-// Trendex: реферальная система в боте.
+// Golden Connect: реферальная система в боте.
 // Команды: /ref, /top
 // Callback: xh_ref
 
@@ -9,12 +9,12 @@ function escapeHtml(s) {
 }
 
 function buildRefLink(botUsername, refCode) {
-  const base = `https://t.me/${botUsername || 'Trendex_bizbot'}`;
+  const base = `https://t.me/${botUsername || 'Golden Connect_bizbot'}`;
   return refCode ? `${base}?start=ref_${refCode}` : base;
 }
 
 function buildSiteLink(refCode) {
-  const base = 'https://trendex.biz/';
+  const base = 'https://golden-connect.to/';
   return refCode ? `${base}?ref=${encodeURIComponent(refCode)}` : base;
 }
 
@@ -22,7 +22,7 @@ function getReferralInfo(ctx, storage) {
   let webUser = null;
   try { webUser = storage.ensureWebUserFromTelegram(ctx.from); }
   catch (e) { console.error('[xh_ref_ensure]', e && e.message); }
-  const botUsername = (ctx.me && ctx.me.username) || 'Trendex_bizbot';
+  const botUsername = (ctx.me && ctx.me.username) || 'Golden Connect_bizbot';
   const refCode = (webUser && webUser.referralCode) || '';
   const refLink = buildRefLink(botUsername, refCode);
   const siteLink = buildSiteLink(refCode);
@@ -52,7 +52,7 @@ async function sendRefCard(ctx, storage) {
   lines.push('');
   lines.push('<i>Приглашайте друзей и получайте бонусы!</i>');
 
-  const shareText = encodeURIComponent('Присоединяйтесь к Trendex — эфиры с профессорами и натуральные рекламная платформа Trendex!');
+  const shareText = encodeURIComponent('Присоединяйтесь к Golden Connect — эфиры с профессорами и натуральные рекламная платформа Golden Connect!');
   const shareBotUrl = `https://t.me/share/url?url=${encodeURIComponent(info.refLink)}&text=${shareText}`;
   const shareSiteUrl = `https://t.me/share/url?url=${encodeURIComponent(info.siteLink)}&text=${shareText}`;
 
@@ -85,7 +85,7 @@ async function sendTop(ctx, storage) {
   if (!users.length) {
     return ctx.reply('📊 <b>Топ рефереров</b>\n\nДанные пока недоступны. Пригласите друга чтобы стать первым!', { parse_mode: 'HTML' });
   }
-  const lines = ['🏆 <b>Топ рефереров Trendex</b>', ''];
+  const lines = ['🏆 <b>Топ рефереров Golden Connect</b>', ''];
   users.forEach((item, i) => {
     const name = escapeHtml(item.user.displayName || item.user.email || `User${item.user.id}`);
     const medal = ['🥇', '🥈', '🥉'][i] || `${i + 1}.`;

@@ -51,7 +51,7 @@ export function InvestorCapsule({ onOrder }: { onOrder: () => void }) {
             {t('inv.cta_talk')}
             <span className="btn-caret">→</span>
           </button>
-          <a className="btn-ghost outline" href="mailto:partners@trendex.website">
+          <a className="btn-ghost outline" href="mailto:partners@golden-connect.website">
             {t('inv.cta_deck')}
           </a>
         </div>

@@ -4,7 +4,7 @@ import { cashLedger, matrixAccruals, matrixPositions } from '../db/schema.js';
 import { applyIncomeSplit } from './income-split.js';
 
 /**
- * Global 2-wide (binary) matrix — the heart of TrendeX matrix payouts.
+ * Global 2-wide (binary) matrix — the heart of Golden Connect matrix payouts.
  *
  * Topology (matches matrix-launch.ts):
  *   • position 0 = company root (admin user)

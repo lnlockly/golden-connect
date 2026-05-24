@@ -1,8 +1,8 @@
 {
-  "name": "trendex-api",
+  "name": "golden-connect-api",
   "version": "0.1.0",
   "private": true,
-  "description": "TrendeX backend — hono + Drizzle + Postgres",
+  "description": "Golden Connect backend — hono + Drizzle + Postgres",
   "type": "module",
   "main": "dist/server.js",
   "engines": {

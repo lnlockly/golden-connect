@@ -29,7 +29,7 @@ interface OnboardingResp {
 // Placeholder channel list — owner (Артём) provides final URLs later.
 // Until then we show what's planned and let user skip.
 const CHANNELS: { url: string; label: string; note?: string }[] = [
-  { url: '#', label: 'Канал Trendex (новости)', note: 'ссылка появится после запуска' },
+  { url: '#', label: 'Канал Golden Connect (новости)', note: 'ссылка появится после запуска' },
   { url: '#', label: 'Чат сообщества', note: 'ссылка появится после запуска' },
 ];
 
@@ -122,7 +122,7 @@ export function OnboardingPanel() {
             </div>
           </a>
           <p style={subStyle}>
-            {allDone ? 'Все шаги пройдены — добро пожаловать в Trendex!' : `Пройдено ${data.steps_done} из ${data.steps_total} шагов`}
+            {allDone ? 'Все шаги пройдены — добро пожаловать в Golden Connect!' : `Пройдено ${data.steps_done} из ${data.steps_total} шагов`}
           </p>
         </div>
         <div style={progressRingStyle(data.steps_done, data.steps_total)}>

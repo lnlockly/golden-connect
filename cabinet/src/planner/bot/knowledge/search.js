@@ -148,7 +148,7 @@ function formatContext(chunks, opts = {}) {
     totalChars += block.length;
   }
   if (!blocks.length) return '';
-  return '\n\n=== ДОПОЛНИТЕЛЬНЫЙ КОНТЕКСТ (из базы знаний Trendex) ===\n\n' +
+  return '\n\n=== ДОПОЛНИТЕЛЬНЫЙ КОНТЕКСТ (из базы знаний Golden Connect) ===\n\n' +
     blocks.join('\n\n---\n\n');
 }
 

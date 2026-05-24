@@ -58,11 +58,11 @@ export function NavBar() {
       className={`nav-bar${scrolled ? ' scrolled' : ''}${hidden ? ' hidden' : ''}`}
     >
       <div className="nav-left">
-        <a href="/" className="nav-logo" aria-label="TRENDEX">
+        <a href="/" className="nav-logo" aria-label="GOLDEN_CONNECT">
           <span className="nav-logo-wave" aria-hidden="true">
             <span /><span /><span /><span /><span />
           </span>
-          <span className="nav-logo-text">TRENDEX</span>
+          <span className="nav-logo-text">GOLDEN_CONNECT</span>
         </a>
 
         {isDeepPage && (

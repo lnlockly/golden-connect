@@ -1,4 +1,4 @@
-/* Trendex Shortener UI */
+/* Golden Connect Shortener UI */
 #shortenerPageContent { max-width: 1100px; margin: 0 auto; }
 
 .shr-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; margin-bottom: 18px; padding: 22px; background: linear-gradient(135deg, rgba(0,212,255,.08), rgba(177,74,237,.08)); border: 1px solid rgba(0,212,255,.25); border-radius: 16px; }

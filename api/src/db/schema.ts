@@ -189,7 +189,7 @@ export const agents = pgTable('agents', {
 });
 
 /**
- * Legacy agentflow-api money log. Lives on the shared Neon DB; TrendeX
+ * Legacy agentflow-api money log. Lives on the shared Neon DB; Golden Connect
  * does not write here — it keeps its own `cash_ledger` below.
  */
 export const flowLedger = pgTable(
@@ -211,7 +211,7 @@ export const flowLedger = pgTable(
 );
 
 /**
- * TrendeX money log — separate from `flow_ledger` (which belongs to
+ * Golden Connect money log — separate from `flow_ledger` (which belongs to
  * agentflow-api on the same shared Neon). One row per credit or debit.
  * Kinds:
  *   entry_fee      — user paid a tariff entry (negative amount)

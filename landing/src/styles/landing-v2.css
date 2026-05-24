@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   TRENDEX — Landing v2
+   GOLDEN_CONNECT — Landing v2
    Product-first layout + AI chat + order modal.
    Loaded AFTER globals.css so newer rules win on conflict.
 ═══════════════════════════════════════════════════════════ */
@@ -217,7 +217,7 @@ main {
   position: relative;
   overflow: hidden;
 }
-/* Massive TRENDEX wordmark — dead center, only element on first screen */
+/* Massive GOLDEN_CONNECT wordmark — dead center, only element on first screen */
 .hero-brand {
   font-family: var(--f-display);
   font-weight: 900;

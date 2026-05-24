@@ -1,14 +1,14 @@
 {
-  "name": "trendex-cabinet",
+  "name": "golden-connect-cabinet",
   "version": "2.0.0",
   "private": true,
-  "description": "Trendex Telegram bot — full planner + AI + events + ads",
+  "description": "Golden Connect Telegram bot — full planner + AI + events + ads",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
     "web:check": "node --check src/storage.js && node --check src/web-routes.js",
     "build:knowledge": "node scripts/build-knowledge-index.js",
-    "build:products-library": "node scripts/build-trendex-product-library.js"
+    "build:products-library": "node scripts/build-golden-connect-product-library.js"
   },
   "dependencies": {
     "better-sqlite3": "^12.9.0",

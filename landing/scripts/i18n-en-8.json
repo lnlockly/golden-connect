@@ -26,8 +26,8 @@
   "inv.cta_talk": "Talk to us",
   "inv.cta_deck": "Request deck →",
 
-  "chat.greeting": "Hey — I'm the TrendeX intake agent. Tell me what you need shipped and I'll route it to the right operator. What's the task?",
-  "chat.agent_name": "TrendeX · intake",
+  "chat.greeting": "Hey — I'm the Golden Connect intake agent. Tell me what you need shipped and I'll route it to the right operator. What's the task?",
+  "chat.agent_name": "Golden Connect · intake",
   "chat.online": "Online now",
   "chat.placeholder": "Describe the task — e.g. landing page for my café",
   "chat.sent": "Brief received — operator will contact you shortly.",

@@ -9,7 +9,7 @@ import { registerStrings } from "../../../services/i18n.js";
 
 registerStrings("ru", {
   admin: {
-    panel_title: "⚙️ Админ-панель TRENDEX",
+    panel_title: "⚙️ Админ-панель GOLDEN_CONNECT",
     section_platform: "📊 Платформа",
     metric_users: "Юзеров",
     metric_users_24h: "за день",
@@ -53,7 +53,7 @@ registerStrings("ru", {
 
 registerStrings("en", {
   admin: {
-    panel_title: "⚙️ TRENDEX admin panel",
+    panel_title: "⚙️ GOLDEN_CONNECT admin panel",
     section_platform: "📊 Platform",
     metric_users: "Users",
     metric_users_24h: "today",

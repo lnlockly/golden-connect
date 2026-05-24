@@ -1,5 +1,5 @@
 /**
- * Trendex Admin Panel — backend.
+ * Golden Connect Admin Panel — backend.
  *
  * Routes:
  *   POST /admin/api/login       — password → OTP sent via bot DM
@@ -21,8 +21,8 @@
  *   ADMIN_PASSWORD              — login password
  *   ADMIN_JWT_SECRET            — JWT signing secret
  *   ADMIN_TG_USER_ID            — admin's TG numeric id (for OTP delivery)
- *   TRENDEX_API_INTERNAL_URL    — api Postgres bridge
- *   TRENDEX_API_INTERNAL_SECRET
+ *   GOLDEN_CONNECT_API_INTERNAL_URL    — api Postgres bridge
+ *   GOLDEN_CONNECT_API_INTERNAL_SECRET
  */
 
 function _timingSafeStrEq(a, b) {
@@ -46,7 +46,7 @@ const ADMIN_TG_USER_ID = String(process.env.ADMIN_TG_USER_ID || '');
 
 // Math captcha (HMAC-signed, stateless) — mirrored from web-routes.js
 function _captchaSecret() {
-  return String(process.env.CAPTCHA_SECRET || process.env.SESSION_SECRET || process.env.PUBLIC_BASE_URL || 'trendex-captcha-secret');
+  return String(process.env.CAPTCHA_SECRET || process.env.SESSION_SECRET || process.env.PUBLIC_BASE_URL || 'golden-connect-captcha-secret');
 }
 function makeCaptcha() {
   const ops = ['+', '-', '×'];
@@ -89,7 +89,7 @@ function sendOtpViaBot(tgUserId, otp) {
     if (!token) return resolve(false);
     const data = JSON.stringify({
       chat_id: Number(tgUserId),
-      text: '🔐 <b>Trendex Admin OTP</b>\n\nКод: <code>' + otp + '</code>\n\nДействителен 10 минут. Никому не передавай.',
+      text: '🔐 <b>Golden Connect Admin OTP</b>\n\nКод: <code>' + otp + '</code>\n\nДействителен 10 минут. Никому не передавай.',
       parse_mode: 'HTML',
     });
     const req = require('https').request({
@@ -106,13 +106,13 @@ function sendOtpViaBot(tgUserId, otp) {
 
 function callApi(path, payload, method = 'POST') {
   return new Promise((resolve) => {
-    const apiBase = process.env.TRENDEX_API_INTERNAL_URL || 'http://trendex-api:4001';
-    const secret = process.env.TRENDEX_API_INTERNAL_SECRET;
+    const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://golden-connect-api:4001';
+    const secret = process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET;
     if (!secret) return resolve({ ok: false, error: 'no_secret' });
     const data = method === 'GET' ? null : JSON.stringify(payload || {});
     const url = new URL(apiBase + path);
     const httpMod = apiBase.startsWith('https') ? require('https') : require('http');
-    const headers = { 'x-trendex-secret': secret };
+    const headers = { 'x-golden-connect-secret': secret };
     if (data) {
       headers['Content-Type'] = 'application/json';
       headers['Content-Length'] = Buffer.byteLength(data);

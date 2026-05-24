@@ -2,7 +2,7 @@
  * Phase 1C — gamification i18n strings (Phase 2 content pass).
  *
  * Final copy for quests / missions / quizzes / streaks / badges / levels /
- * leaderboard, tuned to TrendeX tone (friendly, motivating, no health topics).
+ * leaderboard, tuned to Golden Connect tone (friendly, motivating, no health topics).
  * Namespace keys are load-bearing — only the *values* changed in this pass.
  *
  * Side-effect module: importing it once at boot registers every namespace.
@@ -12,7 +12,7 @@ import { registerStrings } from "./i18n.js";
 
 registerStrings("en", {
   quests: {
-    title: "🏆 Your TRENDEX quests",
+    title: "🏆 Your GOLDEN_CONNECT quests",
     empty: "No active quests yet — open /start and take the first step.",
     in_progress: "In progress",
     completed: "Done",
@@ -60,7 +60,7 @@ registerStrings("en", {
     level_up: "🎉 Level up! You reached level {level}.",
   },
   leaderboard: {
-    title: "👑 TRENDEX leaderboard",
+    title: "👑 GOLDEN_CONNECT leaderboard",
     empty: "No results yet — be the first on the board.",
     row: "{rank}. user#{user_id} — {xp} XP (lvl {level})",
     period_day: "Today",
@@ -74,7 +74,7 @@ registerStrings("en", {
 
 registerStrings("ru", {
   quests: {
-    title: "🏆 Твои квесты TRENDEX",
+    title: "🏆 Твои квесты GOLDEN_CONNECT",
     empty: "Пока нет активных квестов — открой /start и сделай первый шаг.",
     in_progress: "В процессе",
     completed: "Готово",
@@ -122,7 +122,7 @@ registerStrings("ru", {
     level_up: "🎉 Новый уровень: {level}!",
   },
   leaderboard: {
-    title: "👑 Лидерборд TRENDEX",
+    title: "👑 Лидерборд GOLDEN_CONNECT",
     empty: "Пока пусто — стань первым в таблице.",
     row: "{rank}. user#{user_id} — {xp} XP (ур. {level})",
     period_day: "Сегодня",

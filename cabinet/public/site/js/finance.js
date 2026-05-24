@@ -1,4 +1,4 @@
-/* Trendex Cabinet — Finance page (4 balances + topup/transfer/withdraw + history)
+/* Golden Connect Cabinet — Finance page (4 balances + topup/transfer/withdraw + history)
    Talks to /cabinet/api/finance/* and /cabinet/api/notifications/*. */
 (function () {
   'use strict';

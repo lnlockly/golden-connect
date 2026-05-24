@@ -106,7 +106,7 @@ function renderDigest(
   const isRu = (lang ?? '').toLowerCase().startsWith('ru') || !lang;
   const lines: string[] = [];
   if (isRu) {
-    lines.push('📊 <b>TRENDEX · Итоги недели</b>');
+    lines.push('📊 <b>GOLDEN_CONNECT · Итоги недели</b>');
     lines.push('');
     if (top.length) {
       lines.push('<b>🏆 Топ-3 партнёра недели</b>');
@@ -129,7 +129,7 @@ function renderDigest(
     lines.push('');
     lines.push('Открой /start → «Моя команда», чтобы посмотреть свой прогресс, или /events — все ближайшие эфиры.');
   } else {
-    lines.push('📊 <b>TRENDEX · Week recap</b>');
+    lines.push('📊 <b>GOLDEN_CONNECT · Week recap</b>');
     lines.push('');
     if (top.length) {
       lines.push('<b>🏆 Top-3 partners of the week</b>');

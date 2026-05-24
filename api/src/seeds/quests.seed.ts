@@ -2,13 +2,13 @@
  * Base quest seed. 12 quests across 4 chapters:
  *   onboarding (4), referral (3), booking (2), engagement (3).
  *
- * Final Phase 2 TrendeX copy. IDs are frozen — DO NOT rename once deployed
+ * Final Phase 2 Golden Connect copy. IDs are frozen — DO NOT rename once deployed
  * (the user_quest_progress FK cascades on rename but completed-quest history
  * gets confusing for analytics). Criteria / xp / orderIdx are logic and stay
  * untouched by the content pass; only title + description evolve.
  *
  * Text format: `title` is short ("Заполни профиль"); `description` is one to
- * two sentences on what to do and why it matters on TrendeX. Both fields are
+ * two sentences on what to do and why it matters on Golden Connect. Both fields are
  * stored as a single "RU · EN" string — the UI does not yet select by locale
  * (Phase 3 will), so shipping both languages keeps copy consistent across
  * any /me/quests renderer.
@@ -22,7 +22,7 @@ export const QUESTS: NewQuest[] = [
     chapter: 'onboarding',
     title: 'Заполни профиль · Set up your profile',
     description:
-      'Укажи имя, выбери язык и добавь аватарку — так команда узнает тебя в сети TRENDEX. · Add your name, pick a language and set a photo so your team can recognise you.',
+      'Укажи имя, выбери язык и добавь аватарку — так команда узнает тебя в сети GOLDEN_CONNECT. · Add your name, pick a language and set a photo so your team can recognise you.',
     xp: 20,
     criteria: { type: 'profile_filled', fields: ['first_name'] },
     orderIdx: 1,
@@ -33,7 +33,7 @@ export const QUESTS: NewQuest[] = [
     chapter: 'onboarding',
     title: 'Пройди квиз ролей · Take the role quiz',
     description:
-      'Короткий тест из 5 вопросов покажет, какая роль подходит тебе на TRENDEX — бизнес, пользователь или партнёр. · A 5-question quiz that points you to your best fit: business, user or partner.',
+      'Короткий тест из 5 вопросов покажет, какая роль подходит тебе на GOLDEN_CONNECT — бизнес, пользователь или партнёр. · A 5-question quiz that points you to your best fit: business, user or partner.',
     xp: 25,
     criteria: { type: 'quiz_completed', quiz_id: 'onboarding_role' },
     orderIdx: 2,
@@ -68,7 +68,7 @@ export const QUESTS: NewQuest[] = [
     chapter: 'referral',
     title: 'Первый реферал · First referral',
     description:
-      'Пригласи одного человека по своей реф-ссылке — сеть TRENDEX начинается с первого шага. · Bring one person in through your link — every TRENDEX team starts here.',
+      'Пригласи одного человека по своей реф-ссылке — сеть GOLDEN_CONNECT начинается с первого шага. · Bring one person in through your link — every GOLDEN_CONNECT team starts here.',
     xp: 50,
     criteria: { type: 'referral_count', threshold: 1 },
     orderIdx: 1,
@@ -127,7 +127,7 @@ export const QUESTS: NewQuest[] = [
     chapter: 'engagement',
     title: 'Стрик 3 дня · 3-day streak',
     description:
-      'Заходи в TRENDEX три дня подряд — первая искра привычки и первый бейдж. · Show up three days in a row — the first spark of the habit and your first streak badge.',
+      'Заходи в GOLDEN_CONNECT три дня подряд — первая искра привычки и первый бейдж. · Show up three days in a row — the first spark of the habit and your first streak badge.',
     xp: 25,
     criteria: { type: 'streak_days', threshold: 3 },
     orderIdx: 1,
@@ -149,7 +149,7 @@ export const QUESTS: NewQuest[] = [
     chapter: 'engagement',
     title: 'Стрик 90 дней · 90-day streak',
     description:
-      'Девяносто дней подряд — уровень легенды TRENDEX и заметное место в лидерборде. · Ninety days in a row — TRENDEX legend tier and a visible spot on the leaderboard.',
+      'Девяносто дней подряд — уровень легенды GOLDEN_CONNECT и заметное место в лидерборде. · Ninety days in a row — GOLDEN_CONNECT legend tier and a visible spot on the leaderboard.',
     xp: 500,
     criteria: { type: 'streak_days', threshold: 90 },
     orderIdx: 3,

@@ -87,7 +87,7 @@ app.post('/me/book', async (c) => {
         asset: 'USDT',
         amount: amountUsd.toFixed(2),
         payload,
-        description: `TrendeX — ${tariff.name} место до запуска`,
+        description: `Golden Connect — ${tariff.name} место до запуска`,
       });
       return c.json({
         ok: true,
@@ -113,7 +113,7 @@ app.post('/me/book', async (c) => {
     const invoice = await plategaCreateInvoice({
       orderId,
       amountUsd,
-      description: `TrendeX — ${tariff.name} место до запуска`,
+      description: `Golden Connect — ${tariff.name} место до запуска`,
     });
     // Persist the provider invoice id on the booking so the webhook can
     // look the row up by plategaOrderId.

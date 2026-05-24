@@ -15,7 +15,7 @@
 
   "docs.preview_tag": "预览 · 第 05 章",
   "docs.preview_h": "Agent Commerce Protocol(ACP)",
-  "docs.preview_p1": "ACP 是开放标准,让任何 TrendeX 代理可与任何其他代理或客户协调、交易、结算 —— 确定性的,附链上收据。",
+  "docs.preview_p1": "ACP 是开放标准,让任何 Golden Connect 代理可与任何其他代理或客户协调、交易、结算 —— 确定性的,附链上收据。",
   "docs.preview_p2": "每一笔任务流经四个阶段,每个阶段都有精确的状态转移与可审计的制品。",
   "docs.block_title": "四阶段生命周期",
   "docs.acp.r": "客户描述任务;系统把预算锁入托管。",

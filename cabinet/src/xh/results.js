@@ -1,4 +1,4 @@
-// Trendex: Мои результаты — траффик + заработок партнёра.
+// Golden Connect: Мои результаты — траффик + заработок партнёра.
 // Команда: /results, /earnings
 // Callback: my_results
 const { InlineKeyboard } = require('grammy');
@@ -71,7 +71,7 @@ async function sendResults(ctx, storage) {
   try { webUser = storage.ensureWebUserFromTelegram(tgUser); } catch (e) {}
   const refStats = (webUser && storage.getTeamStats) ? storage.getTeamStats(webUser.id) : null;
   const refLink = (webUser && webUser.referralCode)
-    ? 'https://t.me/' + ((ctx.me && ctx.me.username) || 'Trendex_bizbot') + '?start=ref_' + webUser.referralCode
+    ? 'https://t.me/' + ((ctx.me && ctx.me.username) || 'Golden Connect_bizbot') + '?start=ref_' + webUser.referralCode
     : null;
 
   // Karma indicator
@@ -155,12 +155,12 @@ function setupResults(bot, storage, config) {
   // Lightweight redirects for buttons referenced from the results card
   bot.callbackQuery('open_leaderboard', async (ctx) => {
     await ctx.answerCallbackQuery();
-    const url = (config && config.publicBaseUrl ? config.publicBaseUrl.replace(/\/+$/, '') : 'https://trendex.biz/cabinet') + '/cabinet#/leaderboard';
+    const url = (config && config.publicBaseUrl ? config.publicBaseUrl.replace(/\/+$/, '') : 'https://golden-connect.to/cabinet') + '/cabinet#/leaderboard';
     return ctx.reply('🏆 Топ заработавших — открыть в кабинете:\n' + url);
   });
   bot.callbackQuery('open_withdraw', async (ctx) => {
     await ctx.answerCallbackQuery();
-    const url = (config && config.publicBaseUrl ? config.publicBaseUrl.replace(/\/+$/, '') : 'https://trendex.biz/cabinet') + '/cabinet#/withdrawals';
+    const url = (config && config.publicBaseUrl ? config.publicBaseUrl.replace(/\/+$/, '') : 'https://golden-connect.to/cabinet') + '/cabinet#/withdrawals';
     return ctx.reply('💸 Заявка на вывод (минимум $3, ручной режим):\n' + url);
   });
   bot.callbackQuery('adv_menu', async (ctx) => {

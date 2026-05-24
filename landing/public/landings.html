@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Витрина лендингов Trendex: готовые страницы для рекламы, трафика и партнёрских запусков.">
+  <meta name="description" content="Витрина лендингов Golden Connect: готовые страницы для рекламы, трафика и партнёрских запусков.">
   <meta name="theme-color" content="#0a0c12">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Trendex">
-  <meta property="og:title" content="Лендинги Trendex">
-  <meta property="og:description" content="Готовые рекламные лендинги Trendex с live-preview, ссылками, hook-текстами и быстрым копированием.">
-  <meta property="og:url" content="https://trendex.biz/landings">
-  <meta property="og:image" content="https://trendex.biz/media/brand-og.jpg">
-  <title>Лендинги Trendex</title>
+  <meta property="og:site_name" content="Golden Connect">
+  <meta property="og:title" content="Лендинги Golden Connect">
+  <meta property="og:description" content="Готовые рекламные лендинги Golden Connect с live-preview, ссылками, hook-текстами и быстрым копированием.">
+  <meta property="og:url" content="https://golden-connect.to/landings">
+  <meta property="og:image" content="https://golden-connect.to/media/brand-og.jpg">
+  <title>Лендинги Golden Connect</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -254,13 +254,14 @@
       .hero-card, .summary-card { padding: 22px; }
     }
   </style>
+<link rel="stylesheet" href="/_golden-theme.css">
 </head>
 <body>
   <nav class="nav">
     <div class="wrap nav-inner">
       <a href="/" class="brand">
         <span class="brand-badge">TX</span>
-        <span>Trendex</span>
+        <span>Golden Connect</span>
       </a>
       <div class="nav-links">
         <a href="/">Главная</a>
@@ -275,7 +276,7 @@
       <div class="hero-grid">
         <section class="hero-card">
           <div class="eyebrow">Витрина лендингов</div>
-          <h1>Лендинги Trendex для рекламы, трафика и масштабирования</h1>
+          <h1>Лендинги Golden Connect для рекламы, трафика и масштабирования</h1>
           <p>Здесь собраны активные лендинги, которые можно сразу запускать в рекламу, в Telegram, в Reels и в прогретые воронки. Все карточки подтягиваются из общего реестра — добавили лендинг один раз, он появился и здесь, и в кабинете.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="/cabinet/register" id="hero-register">Открыть регистрацию</a>
@@ -310,7 +311,7 @@
       </section>
 
       <section class="grid" id="landing-grid"></section>
-      <div class="footer">© 2026 Trendex · Витрина лендингов обновляется автоматически из общего реестра.</div>
+      <div class="footer">© 2026 Golden Connect · Витрина лендингов обновляется автоматически из общего реестра.</div>
     </div>
   </main>
 
@@ -319,14 +320,14 @@
       const state = { items: [], filter: 'all', query: '' };
 
       const params = new URLSearchParams(location.search);
-      const ref = (params.get('ref') || localStorage.getItem('trendex_invited_by') || '').trim();
+      const ref = (params.get('ref') || localStorage.getItem('golden-connect_invited_by') || '').trim();
       const registerUrl = '/cabinet/register' + (ref ? ('?ref=' + encodeURIComponent(ref)) : '');
 
       document.getElementById('nav-register').href = registerUrl;
       document.getElementById('hero-register').href = registerUrl;
 
       if (ref) {
-        try { localStorage.setItem('trendex_invited_by', ref); } catch (_) {}
+        try { localStorage.setItem('golden-connect_invited_by', ref); } catch (_) {}
         const refBar = document.getElementById('ref-bar');
         refBar.style.display = 'block';
         refBar.textContent = '🎯 Активен реферальный код: ' + ref;

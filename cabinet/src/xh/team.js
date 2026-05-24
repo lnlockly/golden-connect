@@ -1,4 +1,4 @@
-// Trendex: Team CRM module.
+// Golden Connect: Team CRM module.
 // Commands: /team
 // Reply button: "👥 Команда"
 // Callbacks: xh_team, team_list, team_card:<id>, team_note:<id>, team_snooze:<id>:<days>, team_contacted:<id>,
@@ -72,10 +72,10 @@ async function sendTeamOverview(ctx, storage) {
   const nextActions = storage.getNextActions(inviter.id).slice(0, 3);
   const { newBadges } = storage.syncBadges(inviter.id);
 
-  const botUsername = (ctx.me && ctx.me.username) || 'Trendex_bizbot';
+  const botUsername = (ctx.me && ctx.me.username) || 'Golden Connect_bizbot';
   const refLink = `https://t.me/${botUsername}?start=ref_${inviter.referralCode || ''}`;
 
-  const lines = ['👥 <b>Моя команда Trendex</b>', ''];
+  const lines = ['👥 <b>Моя команда Golden Connect</b>', ''];
   if (stats.total === 0) {
     lines.push('🎯 У вас пока 0 рефералов — самое время пригласить первых!');
     lines.push('');
@@ -84,7 +84,7 @@ async function sendTeamOverview(ctx, storage) {
     lines.push('');
     lines.push('Отправьте её друзьям — они перейдут в бот, и вы сразу получите уведомление!');
     const kb = new InlineKeyboard()
-      .url('📤 Поделиться ссылкой', `https://t.me/share/url?url=${encodeURIComponent(refLink)}&text=${encodeURIComponent('Присоединяйтесь к Trendex!')}`).row()
+      .url('📤 Поделиться ссылкой', `https://t.me/share/url?url=${encodeURIComponent(refLink)}&text=${encodeURIComponent('Присоединяйтесь к Golden Connect!')}`).row()
       .text('💡 Совет дня', 'team_tip');
     return ctx.reply(lines.join('\n'), { parse_mode: 'HTML', reply_markup: kb, disable_web_page_preview: true });
   }
@@ -292,7 +292,7 @@ async function sendReferralCard(ctx, storage, refId) {
   } else if (ref.referralStage === 'dormant') {
     lines.push('⚠️ Тишина. Попробуйте вернуть через ценный контент.');
   } else {
-    lines.push('Поздоровайтесь и расскажите про Trendex.');
+    lines.push('Поздоровайтесь и расскажите про Golden Connect.');
   }
 
   if (note) {
@@ -428,7 +428,7 @@ async function sendWriteOptions(ctx, storage, refId) {
     '',
     '1️⃣ <b>Через Telegram</b> — откроется профиль реф, отправите сообщение лично',
     '',
-    '2️⃣ <b>Через нашего бота</b> — ваше сообщение будет доставлено реф через Trendex Секретаря с пометкой "от вашего инвайтера"',
+    '2️⃣ <b>Через нашего бота</b> — ваше сообщение будет доставлено реф через Golden Connect Секретаря с пометкой "от вашего инвайтера"',
   ];
   const kb = new InlineKeyboard();
   const tgUser = ref.telegramUsername;
@@ -524,7 +524,7 @@ function setupTeam(bot, storage, config) {
     const ref = storage.getReferralCard(inviter.id, refId);
     await ctx.reply(
       `💬 Напишите сообщение для <b>${escapeHtml(displayName(ref))}</b>.\n\n` +
-      `Оно будет доставлено через Trendex Секретаря с пометкой "от @${ctx.from.username || inviter.displayName || 'инвайтера'}".\n\n` +
+      `Оно будет доставлено через Golden Connect Секретаря с пометкой "от @${ctx.from.username || inviter.displayName || 'инвайтера'}".\n\n` +
       `Для отмены напишите /cancel`,
       { parse_mode: 'HTML' }
     );
@@ -594,7 +594,7 @@ function setupTeam(bot, storage, config) {
       const senderName = ctx.from.username ? '@' + ctx.from.username : (inviter.displayName || 'Инвайтер');
       try {
         await bot.api.sendMessage(ref.telegramUserId,
-          `💌 <b>Сообщение от ${escapeHtml(senderName)}</b>\n\n${escapeHtml(text)}\n\n<i>— через Trendex Секретаря</i>`,
+          `💌 <b>Сообщение от ${escapeHtml(senderName)}</b>\n\n${escapeHtml(text)}\n\n<i>— через Golden Connect Секретаря</i>`,
           { parse_mode: 'HTML' }
         );
         storage.markInviterContacted(inviter.id, p.refId);

@@ -1,4 +1,4 @@
-// Trendex: Gamification — streak rewards + social proof activity feed.
+// Golden Connect: Gamification — streak rewards + social proof activity feed.
 //
 // Streak rewards: when user hits N consecutive days → badge + celebration message.
 // Activity feed: /activity → shows recent team + personal achievements.
@@ -12,8 +12,8 @@ const STREAK_REWARDS = [
   { days: 7,  icon: '🥉', title: 'Бронза',          desc: '7 дней подряд — привычка формируется!' },
   { days: 14, icon: '🌟', title: 'Серебро',         desc: '2 недели! Вы на правильном пути.' },
   { days: 30, icon: '🥇', title: 'Золото',          desc: 'Месяц без пропусков — вы молодец!' },
-  { days: 60, icon: '💎', title: 'Бриллиант',       desc: '60 дней! Trendex стало привычкой.' },
-  { days: 90, icon: '🏆', title: 'Зал славы',       desc: '90 дней подряд — вы в топе Trendex!' },
+  { days: 60, icon: '💎', title: 'Бриллиант',       desc: '60 дней! Golden Connect стало привычкой.' },
+  { days: 90, icon: '🏆', title: 'Зал славы',       desc: '90 дней подряд — вы в топе Golden Connect!' },
 ];
 
 function escapeHtml(s) {
@@ -65,7 +65,7 @@ async function sendStreaks(ctx, storage) {
   } catch (e) {}
 
   if (!plannerUserId) {
-    return ctx.reply('Запустите курс Trendex (/health) чтобы начать отслеживать стрики.');
+    return ctx.reply('Запустите курс Golden Connect (/health) чтобы начать отслеживать стрики.');
   }
 
   const streak = getStreak(plannerUserId);
@@ -93,7 +93,7 @@ async function sendStreaks(ctx, storage) {
     lines.push(`🎯 Следующая награда: <b>${next.icon} ${next.title}</b> через ${next.days - streak} ${pluralDays(next.days - streak)}`);
   } else {
     lines.push('');
-    lines.push('🏆 <b>Все награды получены! Вы — легенда Trendex!</b>');
+    lines.push('🏆 <b>Все награды получены! Вы — легенда Golden Connect!</b>');
   }
 
   await ctx.reply(lines.join('\n'), { parse_mode: 'HTML' });
@@ -134,7 +134,7 @@ async function sendActivityFeed(ctx, storage) {
   const user = ensureUser(ctx, storage);
   if (!user) return ctx.reply('Не удалось загрузить профиль.');
 
-  const lines = ['📰 <b>Лента активности Trendex</b>', ''];
+  const lines = ['📰 <b>Лента активности Golden Connect</b>', ''];
 
   // Recent team events (from all webUsers)
   const allUsers = storage.listAllWebUsers ? storage.listAllWebUsers() : [];
@@ -146,7 +146,7 @@ async function sendActivityFeed(ctx, storage) {
     if (u.createdAt && (Date.now() - Date.parse(u.createdAt)) < 7 * 86400000) {
       events.push({
         at: u.createdAt,
-        text: `👋 <b>${escapeHtml(u.displayName || 'Новый участник')}</b> присоединился к Trendex`,
+        text: `👋 <b>${escapeHtml(u.displayName || 'Новый участник')}</b> присоединился к Golden Connect`,
       });
     }
     // Stage transitions (last 7 days)

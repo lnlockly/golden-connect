@@ -149,7 +149,7 @@ function setupGroupHandlers(bot, groqConfig) {
     db.addWorkspaceMember(ws.id, user.id, 'owner');
 
     await ctx.api.sendMessage(chat.id,
-      `👋 Привет! Я <b>Trendex Секретарь</b> — AI-помощник для вашей команды.\n\n` +
+      `👋 Привет! Я <b>Golden Connect Секретарь</b> — AI-помощник для вашей команды.\n\n` +
       `Помогу организовать работу прямо здесь — задачи, созвоны, напоминания.\n\n` +
       `📋 <b>Задачи</b>\n` +
       `/task запустить кампанию подписки — <i>создать задачу для группы</i>\n` +
@@ -164,7 +164,7 @@ function setupGroupHandlers(bot, groqConfig) {
       `/meet 15:00 Планёрка — <i>запланировать на время</i>\n\n` +
       `⚙️ /gs_settings — <i>настройки чата</i>\n\n` +
       `💡 <b>Совет:</b> напишите мне в личку — там личные задачи, привычки и AI-секретарь. Личное и групповое не смешивается!`,
-      { parse_mode: 'HTML', reply_markup: new InlineKeyboard().url('💬 Написать мне в личку', 'https://t.me/Trendex_bizbot') }
+      { parse_mode: 'HTML', reply_markup: new InlineKeyboard().url('💬 Написать мне в личку', 'https://t.me/Golden Connect_bizbot') }
     );
   });
 

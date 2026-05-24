@@ -65,7 +65,7 @@ async function createInvoice(args) {
     paymentMethod: args.paymentMethod || PAYMENT_METHODS.SBP,
     id: (typeof crypto.randomUUID === "function" ? crypto.randomUUID() : require("crypto").randomBytes(16).toString("hex").replace(/^(.{8})(.{4})(.{4})(.{4})/, "$1-$2-4$3-$4-")),
     paymentDetails: { amount: amountRub, currency: 'RUB' },
-    description: args.description || 'Trendex',
+    description: args.description || 'Golden Connect',
     return: args.returnUrl || '',
     failedUrl: args.failedUrl || args.returnUrl || '',
     payload: args.payload || args.orderId,

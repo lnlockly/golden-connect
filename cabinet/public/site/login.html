@@ -12,9 +12,9 @@ ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBo
 <!-- /Yandex.Metrika counter -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="Вход в личный кабинет Trendex">
+  <meta name="description" content="Вход в личный кабинет Golden Connect">
   <meta name="theme-color" content="#080a0f" id="meta-theme-color">
-  <title data-i18n="auth_signin_title">Вход — Trendex</title>
+  <title data-i18n="auth_signin_title">Вход — Golden Connect</title>
   <link rel="icon" href="/cabinet/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="/cabinet/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -32,13 +32,13 @@ ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBo
     })();
   </script>
   <link rel="stylesheet" href="styles.css?v=5.6">
-<script src="/cabinet/js/bot-link.js?v=1"></script><script src="js/i18n.js?v=trendex-1" defer></script>
-<title>Trendex — Вход в кабинет</title>
-<link rel="canonical" href="https://trendex.biz/login">
+<script src="/cabinet/js/bot-link.js?v=1"></script><script src="js/i18n.js?v=golden-connect-1" defer></script>
+<title>Golden Connect — Вход в кабинет</title>
+<link rel="canonical" href="https://golden-connect.to/login">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Trendex — Вход в кабинет">
-  <meta name="twitter:description" content="Войди в личный кабинет Trendex.">
-  <meta name="twitter:image" content="https://trendex.biz/media/brand-og.jpg">
+  <meta name="twitter:title" content="Golden Connect — Вход в кабинет">
+  <meta name="twitter:description" content="Войди в личный кабинет Golden Connect.">
+  <meta name="twitter:image" content="https://golden-connect.to/media/brand-og.jpg">
   <!-- [mobile-auth-fix-2026-05] -->
 <style>
 @media (max-width: 640px) {
@@ -61,6 +61,7 @@ ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBo
   }
 }
 </style>
+<link rel="stylesheet" href="/_golden-theme.css">
 </head>
 <body>
   <div class="aurora">
@@ -73,7 +74,7 @@ ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBo
     <div class="wrap">
       <a class="nav-logo" href="/">
         <div class="nav-logo-icon">✦</div>
-        TRENDEX
+        GOLDEN_CONNECT
       </a>
       <div class="nav-actions" style="margin-left:auto">
         <a href="/cabinet/register" class="btn btn--primary btn--nav">Регистрация</a>
@@ -126,7 +127,7 @@ ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBo
         <!-- [register-cta] Заметный блок приглашения к регистрации -->
         <div style="margin-top:24px;padding:20px;border-radius:14px;background:linear-gradient(135deg,rgba(177,74,237,0.12),rgba(0,212,255,0.10));border:1px solid rgba(177,74,237,0.35);text-align:center">
           <div style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px">🚀 Ещё не с нами?</div>
-          <p style="color:var(--text-muted);font-size:var(--fs-sm);margin:0 0 14px">Создай аккаунт за 30 секунд и получи доступ к рекламной экосистеме Trendex.</p>
+          <p style="color:var(--text-muted);font-size:var(--fs-sm);margin:0 0 14px">Создай аккаунт за 30 секунд и получи доступ к рекламной экосистеме Golden Connect.</p>
           <a href="/cabinet/register" class="btn btn--primary" style="display:inline-block;width:100%;padding:12px 20px;font-weight:700;text-decoration:none">Зарегистрироваться бесплатно →</a>
           <p style="margin:10px 0 0;font-size:var(--fs-xs);color:var(--text-faint)">Уже зарегистрирован? Войди выше ↑</p>
         </div>
@@ -283,12 +284,12 @@ ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBo
   try {
     var tg = window.Telegram && window.Telegram.WebApp;
     if (!tg || !tg.initData) return;             // not in TG WebApp
-    if (document.cookie.indexOf('trendex_cabinet_session=') !== -1) return;  // already authed
+    if (document.cookie.indexOf('golden-connect_cabinet_session=') !== -1) return;  // already authed
     tg.expand && tg.expand();                    // fullscreen
     tg.ready && tg.ready();
     var btn = document.createElement('div');
     btn.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#0c111a;border:1px solid #00D4FF;color:#fff;padding:20px 30px;border-radius:14px;font-family:sans-serif;z-index:99999;text-align:center;box-shadow:0 12px 40px rgba(0,212,255,.3)';
-    btn.innerHTML = '<div style="font-size:32px;margin-bottom:10px">🚀</div><div style="font-size:16px;font-weight:700;margin-bottom:6px">Trendex</div><div style="font-size:13px;color:#9ca3af">Авторизация через Telegram...</div>';
+    btn.innerHTML = '<div style="font-size:32px;margin-bottom:10px">🚀</div><div style="font-size:16px;font-weight:700;margin-bottom:6px">Golden Connect</div><div style="font-size:13px;color:#9ca3af">Авторизация через Telegram...</div>';
     document.body.appendChild(btn);
     fetch('/cabinet/api/auth/tg-webapp', {
       method: 'POST', credentials: 'same-origin',

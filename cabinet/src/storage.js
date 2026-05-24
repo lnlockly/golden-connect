@@ -7,11 +7,11 @@ function createStorage(config = {}) {
   const statePath = path.join(dataDir, 'state.json');
 
   // Strip /cabinet from publicBaseUrl so referral links land on the
-  // marketing landing (https://trendex.biz/?ref=X) rather than the
+  // marketing landing (https://golden-connect.to/?ref=X) rather than the
   // cabinet login page.
   function landingBaseUrl() {
     const raw = String(config.publicBaseUrl || '').replace(/\/+$/, '');
-    return raw.replace(/\/cabinet$/, '') || 'https://trendex.biz';
+    return raw.replace(/\/cabinet$/, '') || 'https://golden-connect.to';
   }
 
   function nowIso() {
@@ -518,7 +518,7 @@ function createStorage(config = {}) {
       timezone: normalizeShortText(profileSource.timezone, 80),
       birthDate: normalizeDateOnly(profileSource.birthDate),
       notes: normalizeLongText(profileSource.notes, 800),
-      // Trendex extended onboarding fields
+      // Golden Connect extended onboarding fields
       niche: normalizeShortText(profileSource.niche, 80),
       trafficSource: normalizeShortText(profileSource.trafficSource, 80),
       monthlyBudget: normalizeShortText(profileSource.monthlyBudget, 40),
@@ -600,7 +600,7 @@ function createStorage(config = {}) {
 
 
   // ===== Username utilities (Phase A+B) =====
-  const RESERVED_USERNAMES = new Set(['admin','support','bot','trendex','system','official','help','me','user','root','volga9000']);
+  const RESERVED_USERNAMES = new Set(['admin','support','bot','golden-connect','system','official','help','me','user','root','volga9000']);
   function sanitizeUsername(raw) {
     if (!raw) return '';
     return String(raw).toLowerCase()
@@ -675,9 +675,9 @@ function createStorage(config = {}) {
       updatedAt: row.updatedAt || null,
       lastLoginAt: row.lastLoginAt || null,
       status: row.status || 'active',
-      trendexRefLink: row.trendexRefLink || null,
+      golden-connectRefLink: row.golden-connectRefLink || null,
       // Team/CRM fields
-      trendexRefLinkSetAt: row.trendexRefLinkSetAt || null,
+      golden-connectRefLinkSetAt: row.golden-connectRefLinkSetAt || null,
       lastActivityAt: row.lastActivityAt || null,
       lastAction: row.lastAction || null,
       activityLog: Array.isArray(row.activityLog) ? row.activityLog.slice(-30) : [],
@@ -1373,12 +1373,12 @@ function createStorage(config = {}) {
         {
           id: 'invite_catalog',
           title: 'Приглашение в каталог',
-          text: `${displayName}, посмотри удобный кабинет Trendex: каталог, AI-консультант и материалы в одном месте. Моя ссылка: ${referralLink || config.publicBaseUrl || ''}`.trim(),
+          text: `${displayName}, посмотри удобный кабинет Golden Connect: каталог, AI-консультант и материалы в одном месте. Моя ссылка: ${referralLink || config.publicBaseUrl || ''}`.trim(),
         },
         {
           id: 'invite_partner',
           title: 'Приглашение в партнёрку',
-          text: `Я собрал(а) удобный вход в Trendex: продукты, кабинет, AI и партнерская система. Если хочешь посмотреть, как устроены материалы, ссылки и возможности роста, заходи по ссылке: ${referralLink || config.publicBaseUrl || ''}`.trim(),
+          text: `Я собрал(а) удобный вход в Golden Connect: продукты, кабинет, AI и партнерская система. Если хочешь посмотреть, как устроены материалы, ссылки и возможности роста, заходи по ссылке: ${referralLink || config.publicBaseUrl || ''}`.trim(),
         },
         {
           id: 'invite_ai',
@@ -2042,7 +2042,7 @@ function createStorage(config = {}) {
   function computeReferralStage(user) {
     if (!user) return TEAM_STAGES.INVITED;
     // CONVERTED: company link set
-    if (user.trendexRefLink && String(user.trendexRefLink).trim()) {
+    if (user.golden-connectRefLink && String(user.golden-connectRefLink).trim()) {
       return TEAM_STAGES.CONVERTED;
     }
     // If no telegram and no activity — invited (not yet interacted)
@@ -2092,8 +2092,8 @@ function createStorage(config = {}) {
     if (!Array.isArray(user.referralStageHistory)) user.referralStageHistory = [];
     user.referralStageHistory.push({ stage: newStage, at: nowIso(), from: oldStage });
     if (user.referralStageHistory.length > 50) user.referralStageHistory = user.referralStageHistory.slice(-50);
-    if (newStage === TEAM_STAGES.CONVERTED && !user.trendexRefLinkSetAt) {
-      user.trendexRefLinkSetAt = nowIso();
+    if (newStage === TEAM_STAGES.CONVERTED && !user.golden-connectRefLinkSetAt) {
+      user.golden-connectRefLinkSetAt = nowIso();
     }
     user.updatedAt = nowIso();
     writeState(state);
@@ -3006,7 +3006,7 @@ function createStorage(config = {}) {
     row.savedProductIds = nextMeta.savedProductIds;
     row.savedContentIds = nextMeta.savedContentIds;
     row.notificationSettings = nextMeta.notificationSettings;
-    if (data.trendexRefLink !== undefined) row.trendexRefLink = String(data.trendexRefLink || '').trim() || null;
+    if (data.golden-connectRefLink !== undefined) row.golden-connectRefLink = String(data.golden-connectRefLink || '').trim() || null;
     row.profile = nextMeta.profile;
     row.preferences = nextMeta.preferences;
     row.onboarding = {

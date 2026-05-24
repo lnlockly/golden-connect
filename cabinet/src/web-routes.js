@@ -6,7 +6,7 @@ const path = require('path');
 const QRCode = require('qrcode');
 const { buildSiteContent } = require('./site-content');
 const { getBalance } = require('./services/balance-bridge');
-const { createTrendexVideoLibrary } = require('./video-library');
+const { createGolden ConnectVideoLibrary } = require('./video-library');
 const { createRateLimiter } = require('./rate-limit');
 const { hasGroqKeys, requestGroqChatCompletion } = require('./utils/groq-rotator');
 const { createAdxRouter } = require('./routes/adx');
@@ -89,7 +89,7 @@ function buildAdminEventAiMessages(body) {
     {
       role: 'system',
       content:
-        'Ты маркетинговый AI-редактор проекта Trendex. Помогаешь администратору быстро готовить продающие, аккуратные и понятные анонсы эфиров, встреч и конференций. ' +
+        'Ты маркетинговый AI-редактор проекта Golden Connect. Помогаешь администратору быстро готовить продающие, аккуратные и понятные анонсы эфиров, встреч и конференций. ' +
         'Пиши только по-русски. Стиль: уверенный, живой, тёплый, профессиональный. ' +
         'Не пиши медицинских диагнозов, не обещай гарантированного излечения, не используй агрессивный кликбейт. ' +
         'Нужен не сухой справочник, а продающая и удобная для публикации подача. ' +
@@ -142,7 +142,7 @@ function createWebRouter(config, storage, bot) {
   try { applyPlategaSchema(); } catch (e) { console.error('[platega-migrate_failed]', e && e.message); }
   try { adcTick.start(); } catch (e) { console.error('[adc-tick_failed]', e && e.message); }
   try { applyShrBioSchema(); } catch (e) { console.error('[shrbio-migrate_failed]', e && e.message); }
-  const trendexVideoLibrary = createTrendexVideoLibrary(config);
+  const golden-connectVideoLibrary = createGolden ConnectVideoLibrary(config);
   const protocolTemplates = Array.isArray(siteContent.memberPortal && siteContent.memberPortal.protocolTemplates)
     ? siteContent.memberPortal.protocolTemplates
     : Array.isArray(siteContent.protocols)
@@ -154,7 +154,7 @@ function createWebRouter(config, storage, bot) {
   const supportCategories = Array.isArray(siteContent.memberPortal && siteContent.memberPortal.supportCategories)
     ? siteContent.memberPortal.supportCategories
     : [];
-  const cookieName = String(config.sessionCookieName || 'trendex_site_session').trim();
+  const cookieName = String(config.sessionCookieName || 'golden-connect_site_session').trim();
   const sessionTtlDays = Math.max(1, Math.min(180, Number(config.sessionTtlDays || 30)));
   const secureCookies = /^https:\/\//i.test(String(config.publicBaseUrl || ''));
   const contentAdminEmails = new Set(
@@ -230,7 +230,7 @@ function createWebRouter(config, storage, bot) {
   }
 
   function serializeCookie(name, value, options = {}) {
-    // [sso-cookie] domain option lets session cookie span trendex.biz subdomains
+    // [sso-cookie] domain option lets session cookie span golden-connect.to subdomains
     const parts = [`${encodeURIComponent(name)}=${encodeURIComponent(value)}`];
     parts.push(`Max-Age=${Math.max(0, Number(options.maxAge || 0))}`);
     parts.push(`Path=${options.path || '/'}`);
@@ -495,7 +495,7 @@ function createWebRouter(config, storage, bot) {
     const manualItems = typeof storage.listMediaLibraryEntries === 'function'
       ? storage.listMediaLibraryEntries(safeLimit)
       : [];
-    const videoItems = trendexVideoLibrary.listVideoItems(safeLimit);
+    const videoItems = golden-connectVideoLibrary.listVideoItems(safeLimit);
     const combined = videoItems.concat(manualItems);
     const seen = new Set();
     const deduped = [];
@@ -545,7 +545,7 @@ function createWebRouter(config, storage, bot) {
   // Proxies to api /internal/admin/metrics-summary, no auth required.
   router.get('/api/public/stats', async (req, res) => {
     try {
-      const data = await callTrendexApi('/internal/admin/metrics-summary');
+      const data = await callGolden ConnectApi('/internal/admin/metrics-summary');
       const m = (data && data.metrics) || {};
       res.json({
         ok: true,
@@ -561,7 +561,7 @@ function createWebRouter(config, storage, bot) {
   router.get('/api/public/media-library', (req, res) => {
     const rawId = String((req.query && (req.query.video || req.query.id)) || '').trim();
     if (rawId) {
-      const item = trendexVideoLibrary.getVideoItemById(rawId);
+      const item = golden-connectVideoLibrary.getVideoItemById(rawId);
       if (!item) {
         return res.status(404).json({ ok: false, reason: 'not_found' });
       }
@@ -569,7 +569,7 @@ function createWebRouter(config, storage, bot) {
       return res.json({ ok: true, item: compactPublicMediaItem(item, { includeTranscript }) });
     }
     const safeLimit = parseLimit(req.query && req.query.limit, 200, 600);
-    const items = trendexVideoLibrary.listVideoItems(safeLimit).map(compactPublicMediaItem);
+    const items = golden-connectVideoLibrary.listVideoItems(safeLimit).map(compactPublicMediaItem);
     return res.json({
       ok: true,
       items,
@@ -584,9 +584,9 @@ function createWebRouter(config, storage, bot) {
       const u = req.webUser || (req.session && storage.findWebUserById(req.session.userId));
       if (!u) return res.status(401).json({ ok: false });
       const tgId = u.telegramUserId || u.telegram_user_id;
-      const email = u.email || (tgId ? 'tg' + tgId + '@trendex.bot' : null);
+      const email = u.email || (tgId ? 'tg' + tgId + '@golden-connect.bot' : null);
       if (!email) return res.status(400).json({ ok: false, reason: 'no_email' });
-      const data = await callTrendexApi('/internal/bonus-matrix/me', { email: email });
+      const data = await callGolden ConnectApi('/internal/bonus-matrix/me', { email: email });
       res.json(data);
     } catch (e) { res.status(502).json({ ok: false, reason: e.message }); }
   });
@@ -596,7 +596,7 @@ function createWebRouter(config, storage, bot) {
       const u = req.webUser || (req.session && storage.findWebUserById(req.session.userId));
       if (!u) return res.status(401).json({ ok: false });
       const tgId = u.telegramUserId || u.telegram_user_id;
-      const email = u.email || (tgId ? 'tg' + tgId + '@trendex.bot' : null);
+      const email = u.email || (tgId ? 'tg' + tgId + '@golden-connect.bot' : null);
       if (!email) return res.status(400).json({ ok: false, reason: 'no_email' });
       const depth = Math.min(parseInt(req.query.depth, 10) || 4, 6);
       const focusUserId = parseInt(req.query.focus_user_id, 10);
@@ -606,7 +606,7 @@ function createWebRouter(config, storage, bot) {
       } else {
         path += '&email=' + encodeURIComponent(email);
       }
-      const data = await callTrendexApi(path);
+      const data = await callGolden ConnectApi(path);
       res.json(data);
     } catch (e) { res.status(502).json({ ok: false, reason: e.message }); }
   });
@@ -616,7 +616,7 @@ function createWebRouter(config, storage, bot) {
       const u = req.webUser || (req.session && storage.findWebUserById(req.session.userId));
       if (!u) return res.status(401).json({ ok: false });
       const tgId = u.telegramUserId || u.telegram_user_id;
-      const email = u.email || (tgId ? 'tg' + tgId + '@trendex.bot' : null);
+      const email = u.email || (tgId ? 'tg' + tgId + '@golden-connect.bot' : null);
       if (!email) return res.status(400).json({ ok: false, reason: 'no_email' });
       const userIdParam = parseInt(req.query.user_id, 10);
       const height = Math.min(parseInt(req.query.height, 10) || 10, 30);
@@ -626,7 +626,7 @@ function createWebRouter(config, storage, bot) {
       } else {
         path += '&email=' + encodeURIComponent(email);
       }
-      const data = await callTrendexApi(path);
+      const data = await callGolden ConnectApi(path);
       res.json(data);
     } catch (e) { res.status(502).json({ ok: false, reason: e.message }); }
   });
@@ -634,7 +634,7 @@ function createWebRouter(config, storage, bot) {
   router.get('/api/bonus-matrix/global', publicLimiter, async (req, res) => {
     try {
       const limit = Math.min(parseInt(req.query.limit, 10) || 50, 200);
-      const data = await callTrendexApi('/internal/bonus-matrix/global?limit=' + limit);
+      const data = await callGolden ConnectApi('/internal/bonus-matrix/global?limit=' + limit);
       res.json(data);
     } catch (e) { res.status(502).json({ ok: false, reason: e.message }); }
   });
@@ -642,7 +642,7 @@ function createWebRouter(config, storage, bot) {
   router.get('/api/karma/leaderboard', publicLimiter, async (req, res) => {
     try {
       const limit = Math.min(parseInt(req.query.limit, 10) || 50, 200);
-      const data = await callTrendexApi('/internal/karma/leaderboard?limit=' + limit);
+      const data = await callGolden ConnectApi('/internal/karma/leaderboard?limit=' + limit);
       res.json(data);
     } catch (e) { res.status(502).json({ ok: false, reason: e.message }); }
   });
@@ -652,9 +652,9 @@ function createWebRouter(config, storage, bot) {
       const u = req.webUser || (req.session && storage.findWebUserById(req.session.userId));
       if (!u) return res.status(401).json({ ok: false });
       const tgId = u.telegramUserId || u.telegram_user_id;
-      const email = u.email || (tgId ? 'tg' + tgId + '@trendex.bot' : null);
+      const email = u.email || (tgId ? 'tg' + tgId + '@golden-connect.bot' : null);
       if (!email) return res.status(400).json({ ok: false, reason: 'no_email' });
-      const data = await callTrendexApi('/internal/karma/me', { email: email });
+      const data = await callGolden ConnectApi('/internal/karma/me', { email: email });
       res.json(data);
     } catch (e) { res.status(502).json({ ok: false, reason: e.message }); }
   });
@@ -698,7 +698,7 @@ function createWebRouter(config, storage, bot) {
         utilities: [
           { id: 'exchange', title: 'Биржа TRDX', description: 'После запуска — продажа TRDX за USD на внутренней бирже.' },
           { id: 'services', title: 'Оплата AI-сервисов', description: 'Оплата AI-рассылок, генераций, премиум-сервисов кабинета через TRDX.' },
-          { id: 'dividends', title: 'Ежеквартальные дивиденды', description: 'Держателям TRDX — % от дохода Trendex каждые 3 месяца в долларах.' },
+          { id: 'dividends', title: 'Ежеквартальные дивиденды', description: 'Держателям TRDX — % от дохода Golden Connect каждые 3 месяца в долларах.' },
           { id: 'lottery', title: 'Розыгрыши призов', description: 'Чем больше TRDX — тем больше билетов в розыгрыше ценных призов.' },
         ],
       },
@@ -707,7 +707,7 @@ function createWebRouter(config, storage, bot) {
 
     router.get('/api/karma/rules', publicLimiter, async (req, res) => {
     try {
-      const data = await callTrendexApi('/internal/karma/rules');
+      const data = await callGolden ConnectApi('/internal/karma/rules');
       res.json(data);
     } catch (e) { res.status(502).json({ ok: false, reason: e.message }); }
   });
@@ -739,9 +739,9 @@ function createWebRouter(config, storage, bot) {
       if (tg) return tg.startsWith('@') ? tg : `@${tg}`;
       return '';
     })();
-    const name = (publicUser && (publicUser.displayName || publicUser.email)) || 'Команда Trendex';
+    const name = (publicUser && (publicUser.displayName || publicUser.email)) || 'Команда Golden Connect';
     const email = (publicUser && publicUser.email) || '';
-    const companyLink = (publicUser && publicUser.trendexRefLink)
+    const companyLink = (publicUser && publicUser.golden-connectRefLink)
       || buildBotReferralUrl(publicUser)
       || buildBotReferralUrl('xh160f8');
     return res.json({
@@ -765,9 +765,9 @@ function createWebRouter(config, storage, bot) {
       if (tg) return tg.startsWith('@') ? tg : `@${tg}`;
       return '';
     })();
-    const name = (publicInviter && (publicInviter.displayName || publicInviter.email)) || 'Команда Trendex';
+    const name = (publicInviter && (publicInviter.displayName || publicInviter.email)) || 'Команда Golden Connect';
     const email = (publicInviter && publicInviter.email) || '';
-    const companyLink = (publicInviter && publicInviter.trendexRefLink)
+    const companyLink = (publicInviter && publicInviter.golden-connectRefLink)
       || buildBotReferralUrl(publicInviter || inviter || 'xh160f8');
 
     return res.json({
@@ -866,9 +866,9 @@ function createWebRouter(config, storage, bot) {
   }
 
   function getBotUsername() {
-    return String(config.botUsername || siteContent.brand.botUsername || 'Trendex_bizbot')
+    return String(config.botUsername || siteContent.brand.botUsername || 'Golden Connect_bizbot')
       .trim()
-      .replace(/^@+/, '') || 'Trendex_bizbot';
+      .replace(/^@+/, '') || 'Golden Connect_bizbot';
   }
 
   function buildBotReferralUrl(userOrCode) {
@@ -911,7 +911,7 @@ function createWebRouter(config, storage, bot) {
       return `https://vk.com/share.php?url=${encodeURIComponent(safeUrl)}`;
     }
     if (channel === 'email') {
-      return `mailto:?subject=${encodeURIComponent('Trendex')}&body=${encodeURIComponent(`${safeText}\n${safeUrl}`.trim())}`;
+      return `mailto:?subject=${encodeURIComponent('Golden Connect')}&body=${encodeURIComponent(`${safeText}\n${safeUrl}`.trim())}`;
     }
     if (channel === 'linkedin') {
       return `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(safeUrl)}`;
@@ -957,12 +957,12 @@ function createWebRouter(config, storage, bot) {
       officialCompanyLink: String(siteContent.links.companyMain || siteContent.links.officialSite || '').trim(),
       catalogLink: String(siteContent.links.payment || siteContent.links.shop || '').trim(),
       shareLinks: {
-        telegram: buildShareLink('telegram', siteReferralLink, 'Посмотри мой кабинет Trendex'),
-        whatsapp: buildShareLink('whatsapp', siteReferralLink, 'Посмотри мой кабинет Trendex'),
-        vk: buildShareLink('vk', siteReferralLink, 'Посмотри мой кабинет Trendex'),
-        email: buildShareLink('email', siteReferralLink, 'Посмотри мой кабинет Trendex'),
-        linkedin: buildShareLink('linkedin', siteReferralLink, 'Посмотри мой кабинет Trendex'),
-        x: buildShareLink('x', siteReferralLink, 'Посмотри мой кабинет Trendex'),
+        telegram: buildShareLink('telegram', siteReferralLink, 'Посмотри мой кабинет Golden Connect'),
+        whatsapp: buildShareLink('whatsapp', siteReferralLink, 'Посмотри мой кабинет Golden Connect'),
+        vk: buildShareLink('vk', siteReferralLink, 'Посмотри мой кабинет Golden Connect'),
+        email: buildShareLink('email', siteReferralLink, 'Посмотри мой кабинет Golden Connect'),
+        linkedin: buildShareLink('linkedin', siteReferralLink, 'Посмотри мой кабинет Golden Connect'),
+        x: buildShareLink('x', siteReferralLink, 'Посмотри мой кабинет Golden Connect'),
       },
       landingLinks,
     };
@@ -982,7 +982,7 @@ function createWebRouter(config, storage, bot) {
 
   function requestArsenalJson(targetPath, payload) {
     return new Promise((resolve, reject) => {
-      const baseUrl = new URL(String(config.arsenal && config.arsenal.apiBaseUrl || 'https://trendex.biz'));
+      const baseUrl = new URL(String(config.arsenal && config.arsenal.apiBaseUrl || 'https://golden-connect.to'));
       const body = JSON.stringify(payload || {});
       const req = https.request({
         protocol: baseUrl.protocol,
@@ -993,7 +993,7 @@ function createWebRouter(config, storage, bot) {
         headers: {
           'Content-Type': 'application/json',
           'Content-Length': Buffer.byteLength(body),
-          'User-Agent': 'trendex-cabinet/1.0',
+          'User-Agent': 'golden-connect-cabinet/1.0',
           ...(config.arsenal && config.arsenal.apiKey ? { Authorization: `Bearer ${config.arsenal.apiKey}` } : {}),
         },
       }, (proxyRes) => {
@@ -1027,7 +1027,7 @@ function createWebRouter(config, storage, bot) {
       .slice(0, 12);
     const base = words.map((item) => `#${item}`);
     const presets = [
-      '#trendex',
+      '#golden-connect',
       '#натуральныепродукты',
       '#здоровье',
       '#партнерство',
@@ -1044,10 +1044,10 @@ function createWebRouter(config, storage, bot) {
     const style = String(tone || 'helpful').trim();
     return [
       {
-        caption: `Собрал(а) удобный вход в Trendex: материалы, AI и партнёрский кабинет в одном месте. Тема: ${text}. Формат для ${platform}, тон ${style}.`,
+        caption: `Собрал(а) удобный вход в Golden Connect: материалы, AI и партнёрский кабинет в одном месте. Тема: ${text}. Формат для ${platform}, тон ${style}.`,
       },
       {
-        caption: `Если хотите спокойно разобраться в компании, продуктах и возможностях партнёра, начните с кабинета Trendex. Тема: ${text}.`,
+        caption: `Если хотите спокойно разобраться в компании, продуктах и возможностях партнёра, начните с кабинета Golden Connect. Тема: ${text}.`,
       },
       {
         caption: `Удобнее всего стартовать через сайт: там уже есть ссылки, обучение, материалы и следующий шаг в официальный контур компании. Тема: ${text}.`,
@@ -1145,8 +1145,8 @@ function createWebRouter(config, storage, bot) {
       return {
         role: 'assistant',
         content: paymentUrl
-          ? `Начни с раздела продуктов: там уже собран публичный каталог Trendex с карточками, сценариями применения и быстрым переходом к витрине. Текущая точка входа в оплату: ${paymentUrl}`
-          : 'Начни с раздела продуктов в кабинете. Там уже собран каталог Trendex с краткими описаниями, сценариями применения и следующим шагом.',
+          ? `Начни с раздела продуктов: там уже собран публичный каталог Golden Connect с карточками, сценариями применения и быстрым переходом к витрине. Текущая точка входа в оплату: ${paymentUrl}`
+          : 'Начни с раздела продуктов в кабинете. Там уже собран каталог Golden Connect с краткими описаниями, сценариями применения и следующим шагом.',
       };
     }
 
@@ -1168,7 +1168,7 @@ function createWebRouter(config, storage, bot) {
       return {
         role: 'assistant',
         content: officialSiteUrl
-          ? `Смотри блок «О компании» и раздел Content Hub. Мы уже перенесли ключевые публичные материалы Trendex на сайт, а официальный источник лежит здесь: ${officialSiteUrl}`
+          ? `Смотри блок «О компании» и раздел Content Hub. Мы уже перенесли ключевые публичные материалы Golden Connect на сайт, а официальный источник лежит здесь: ${officialSiteUrl}`
           : 'Смотри блок «О компании» и раздел Content Hub. Там собраны эксперты, признание продукции, инструкции и партнерские материалы.',
       };
     }
@@ -1522,8 +1522,8 @@ function createWebRouter(config, storage, bot) {
 
   // ── Magic-link issuance (called by bot via shared INTERNAL_API_SECRET)
   router.post('/api/bot/issue-magic-link', (req, res) => {
-    const expected = String(config.trendexApiInternalSecret || '').trim();
-    const got = String(req.headers['x-trendex-secret'] || '').trim();
+    const expected = String(config.golden-connectApiInternalSecret || '').trim();
+    const got = String(req.headers['x-golden-connect-secret'] || '').trim();
     if (!expected || got !== expected) {
       return res.status(401).json({ ok: false, reason: 'unauthorized' });
     }
@@ -1539,8 +1539,8 @@ function createWebRouter(config, storage, bot) {
       last_name: body.last_name || null,
       language_code: body.language_code || null,
     });
-    // publicBaseUrl env may already include /cabinet (e.g. https://trendex.biz/cabinet/) — strip it so we add the canonical /cabinet/auth/magic path exactly once.
-    const rawBase = (config.publicBaseUrl || 'https://trendex.biz').replace(/\/+$/, '').replace(/\/cabinet$/, '');
+    // publicBaseUrl env may already include /cabinet (e.g. https://golden-connect.to/cabinet/) — strip it so we add the canonical /cabinet/auth/magic path exactly once.
+    const rawBase = (config.publicBaseUrl || 'https://golden-connect.to').replace(/\/+$/, '').replace(/\/cabinet$/, '');
     return res.json({
       ok: true,
       token: link.token,
@@ -1636,7 +1636,7 @@ function createWebRouter(config, storage, bot) {
   // ─── Math captcha (HMAC-signed, stateless) ────────────────────
   // Format: id = base64(JSON{n1,n2,op,exp,nonce}) + "." + base64(HMAC256)
   function _captchaSecret() {
-    return String(config.sessionSecret || config.publicBaseUrl || 'trendex-captcha-secret');
+    return String(config.sessionSecret || config.publicBaseUrl || 'golden-connect-captcha-secret');
   }
   function makeCaptcha() {
     const ops = ['+', '-', '×'];
@@ -1854,7 +1854,7 @@ function createWebRouter(config, storage, bot) {
         ok: true,
         new_password: newPassword,
         login: me.email || me.username,
-        cabinet_url: (process.env.PUBLIC_BASE_URL || 'https://trendex.biz') + '/cabinet'
+        cabinet_url: (process.env.PUBLIC_BASE_URL || 'https://golden-connect.to') + '/cabinet'
       });
     } catch (e) {
       return res.status(500).json({ ok: false, reason: 'recovery_failed', detail: e?.message });
@@ -1862,7 +1862,7 @@ function createWebRouter(config, storage, bot) {
   });
 
     router.get('/api/profile', requireAuth, (req, res) => {
-    try { awardKarmaTrendex(req, 'login', null, new Date().toISOString().slice(0, 10)); } catch (_) {}
+    try { awardKarmaGolden Connect(req, 'login', null, new Date().toISOString().slice(0, 10)); } catch (_) {}
     return res.json({
       ok: true,
       user: storage.getPublicWebUserById(req.webUser.id),
@@ -2556,7 +2556,7 @@ function createWebRouter(config, storage, bot) {
         items: storage.getShortLinks(req.webUser.id, 100),
       });
       // Karma: tool_use + link_create (capped server-side)
-      try { awardKarmaTrendex(req, 'tool_use', null, 'shortener'); awardKarmaTrendex(req, 'link_create', null, link && link.code); } catch (_) {}
+      try { awardKarmaGolden Connect(req, 'tool_use', null, 'shortener'); awardKarmaGolden Connect(req, 'link_create', null, link && link.code); } catch (_) {}
     } catch (error) {
       const message = String(error && error.message ? error.message : error);
       if (message === 'Invalid short link url') {
@@ -2588,7 +2588,7 @@ function createWebRouter(config, storage, bot) {
             || ''
           ).trim();
           if (dataUrl) {
-            return (function(){ try { awardKarmaTrendex(req, 'tool_use', null, 'qr'); } catch (_) {} })(); res.json({
+            return (function(){ try { awardKarmaGolden Connect(req, 'tool_use', null, 'qr'); } catch (_) {} })(); res.json({
               ok: true,
               qr: {
                 url,
@@ -2646,7 +2646,7 @@ function createWebRouter(config, storage, bot) {
             .map((item) => (typeof item === 'string' ? item : item && item.tag ? item.tag : ''))
             .filter(Boolean);
           if (hashtags.length) {
-            return (function(){ try { awardKarmaTrendex(req, 'tool_use', null, 'hashtags'); } catch (_) {} })(); res.json({
+            return (function(){ try { awardKarmaGolden Connect(req, 'tool_use', null, 'hashtags'); } catch (_) {} })(); res.json({
               ok: true,
               provider: 'arsenal',
               hashtags,
@@ -2694,7 +2694,7 @@ function createWebRouter(config, storage, bot) {
             return { caption: String(item && (item.caption || item.text || item.value) || '').trim() };
           }).filter((item) => item.caption);
           if (items.length) {
-            return (function(){ try { awardKarmaTrendex(req, 'tool_use', null, 'caption'); } catch (_) {} })(); res.json({
+            return (function(){ try { awardKarmaGolden Connect(req, 'tool_use', null, 'caption'); } catch (_) {} })(); res.json({
               ok: true,
               provider: 'arsenal',
               items,
@@ -3101,10 +3101,10 @@ function createWebRouter(config, storage, bot) {
           "description": String(p.description || "").slice(0, 500),
           "image": ogImg,
           "sku": String(p.id),
-          "brand": { "@type": "Brand", "name": "Trendex Marketplace" },
+          "brand": { "@type": "Brand", "name": "Golden Connect Marketplace" },
           "offers": {
             "@type": "Offer",
-            "url": "https://trendex.biz/p/" + req.params.slugId,
+            "url": "https://golden-connect.to/p/" + req.params.slugId,
             "priceCurrency": "USD",
             "price": String(price),
             "availability": "https://schema.org/InStock",
@@ -3180,7 +3180,7 @@ function createWebRouter(config, storage, bot) {
         });
         bodyHtml += '</div>';
       }
-      bodyHtml += '<footer>Магазин на <a href="/cabinet/">Trendex Marketplace</a> · Создай свой за 60 секунд</footer></body></html>';
+      bodyHtml += '<footer>Магазин на <a href="/cabinet/">Golden Connect Marketplace</a> · Создай свой за 60 секунд</footer></body></html>';
       res.type('html').send(bodyHtml);
     } catch (e) {
       res.status(500).type('html').send('<h1>500 ' + e.message + '</h1>');
@@ -3215,9 +3215,9 @@ function createWebRouter(config, storage, bot) {
       const sorts = [['popular', '🔥 Популярные'], ['rating', '⭐ Рейтинг'], ['max_network', '🤝 Макс. в сеть'], ['newest', '🆕 Новые'], ['price_low', '💰 Дешевле'], ['price_high', '💎 Дороже']];
       let html = '<!doctype html><html lang="ru"><head>' +
         '<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
-        '<title>Trendex Marketplace — Товары от пользователей</title>' +
+        '<title>Golden Connect Marketplace — Товары от пользователей</title>' +
         '<meta name="description" content="Курсы, шаблоны, цифровые товары от создателей по всему миру. С отзывами и реферальной программой.">' +
-        '<meta property="og:title" content="Trendex Marketplace">' +
+        '<meta property="og:title" content="Golden Connect Marketplace">' +
         '<meta property="og:image" content="/cabinet/img/og-default.png">' +
         '<style>' +
           'body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#070b14;color:#e8edf5;line-height:1.5}' +
@@ -3242,7 +3242,7 @@ function createWebRouter(config, storage, bot) {
           '.empty{text-align:center;padding:60px 20px;color:#9ca3af}' +
           'footer{padding:24px;text-align:center;color:#6b7280;font-size:12px}' +
         '</style></head><body>' +
-      '<header><h1>🛍 Trendex Marketplace</h1><div><a href="/cabinet/">← В кабинет</a></div></header>' +
+      '<header><h1>🛍 Golden Connect Marketplace</h1><div><a href="/cabinet/">← В кабинет</a></div></header>' +
       '<div class="toolbar">' +
         '<form method="GET" style="flex:1;display:flex;gap:8px"><input class="search" name="q" placeholder="🔍 Поиск товара..." value="' + escAttr(search) + '"><input type="hidden" name="cat" value="' + escAttr(cat) + '"><input type="hidden" name="sort" value="' + escAttr(sort) + '"></form>' +
         '<div class="chips">';
@@ -3281,7 +3281,7 @@ function createWebRouter(config, storage, bot) {
         });
         html += '</div>';
       }
-      html += '<footer>Trendex Marketplace · <a href="/cabinet/" style="color:#9ca3af">Хочешь продавать тут? Зарегистрируйся в кабинете</a></footer></body></html>';
+      html += '<footer>Golden Connect Marketplace · <a href="/cabinet/" style="color:#9ca3af">Хочешь продавать тут? Зарегистрируйся в кабинете</a></footer></body></html>';
       res.type('html').send(html);
     } catch (e) {
       res.status(500).type('html').send('<h1>500 ' + e.message + '</h1>');
@@ -3384,7 +3384,7 @@ function createWebRouter(config, storage, bot) {
       const stars = '★★★★★'.slice(0, Math.round(p.avg_rating || 0)) + '☆☆☆☆☆'.slice(0, 5 - Math.round(p.avg_rating || 0));
       const html = '<!doctype html><html lang="ru"><head>' +
         '<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
-        '<title>' + escAttr(title) + ' — Trendex Marketplace</title>' +
+        '<title>' + escAttr(title) + ' — Golden Connect Marketplace</title>' +
         '<meta name="description" content="' + escAttr(desc) + '">' +
         '<meta property="og:type" content="product">' +
         '<meta property="og:title" content="' + escAttr(title) + '">' +
@@ -3420,7 +3420,7 @@ function createWebRouter(config, storage, bot) {
           'footer{padding:30px 18px;text-align:center;color:#6b7280;font-size:12px}' +
         '</style>' +
       '</head><body>' +
-      '<header><a href="/marketplace">← Trendex Marketplace</a></header>' +
+      '<header><a href="/marketplace">← Golden Connect Marketplace</a></header>' +
       '<div class="hero">' +
         '<div>' +
           '<div class="gal"><img id="hero-img" src="' + escAttr(heroImg) + '" alt="' + escAttr(title) + '">' +
@@ -3458,7 +3458,7 @@ function createWebRouter(config, storage, bot) {
         '</div>' +
         '<script src="/cabinet/js/product-reviews.js?pid=' + id + '"></script>' +
       '</div>' +
-      '<footer>Trendex Marketplace · <a href="https://trendex.biz" style="color:#9ca3af">trendex.biz</a></footer>' +
+      '<footer>Golden Connect Marketplace · <a href="https://golden-connect.to" style="color:#9ca3af">golden-connect.to</a></footer>' +
       '</body></html>';
       res.type('html').send(html);
     } catch (e) {
@@ -3466,7 +3466,7 @@ function createWebRouter(config, storage, bot) {
     }
   });
 
-  // ── Admin: marketing activation (proxies to trendex-api) ─────────
+  // ── Admin: marketing activation (proxies to golden-connect-api) ─────────
   function _isCabinetAdmin(req) {
     const u = req.webUser || {};
     const adminEmails = ['volga9000@gmail.com'];
@@ -3479,7 +3479,7 @@ function createWebRouter(config, storage, bot) {
     return null;
   }
   async function _adminApiProxy(method, path, body) {
-    const apiBase = (process.env.TRENDEX_API_URL || 'http://trendex-api.trendex.svc.cluster.local').replace(/\/$/, '');
+    const apiBase = (process.env.GOLDEN_CONNECT_API_URL || 'http://golden-connect-api.golden-connect.svc.cluster.local').replace(/\/$/, '');
     const adminTgId = '424077439'; // hard-coded primary admin tg_id, since cabinet→api needs ANY admin tg_id
     return new Promise((resolve) => {
       const url = new URL(apiBase + path);
@@ -3578,8 +3578,8 @@ function createWebRouter(config, storage, bot) {
         pub.experienceLevel, pub.goalsSummary,
         prof.phone, prof.city, prof.country, prof.birthDate,
         onboarding.primaryGoal, (onboarding.focusAreas && onboarding.focusAreas.length ? '1' : ''),
-        pub.trendexRefLink,
-        // Extended Trendex fields (stored in profile.notes JSON or separate)
+        pub.golden-connectRefLink,
+        // Extended Golden Connect fields (stored in profile.notes JSON or separate)
         prof.niche, prof.trafficSource, prof.monthlyBudget, prof.workSchedule,
         prof.socialTelegram, prof.socialInstagram, prof.socialYoutube, prof.socialTiktok,
       ];
@@ -3627,7 +3627,7 @@ function createWebRouter(config, storage, bot) {
 
       let assistantMessage;
       try {
-        // Trendex unified brain: same system prompt as Telegram bot.
+        // Golden Connect unified brain: same system prompt as Telegram bot.
         const dbModule = require('./planner/db/database');
         const { getSystemPrompt } = require('./planner/bot/ai-assistant');
         const { hasGroqKeys: _h, requestGroqChatCompletion } = require('./utils/groq-rotator');
@@ -3636,7 +3636,7 @@ function createWebRouter(config, storage, bot) {
         const u = req.webUser;
         const synthUser = {
           tg_first_name: u.displayName || (u.email || '').split('@')[0],
-          secretary_name: 'Trendex AI',
+          secretary_name: 'Golden Connect AI',
           secretary_style: 'business',
           user_notes: '',
           timezone: 'Europe/Moscow',
@@ -4107,7 +4107,7 @@ function createWebRouter(config, storage, bot) {
       const userId = Number(body.user_id || 0);
       if (!userId) return res.status(400).json({ ok: false, reason: 'user_id required' });
       const payload = {
-        title: body.title || 'Trendex CRM',
+        title: body.title || 'Golden Connect CRM',
         body: body.body || '',
         url: body.url || '/cabinet/crm-app.html',
         icon: body.icon || '/cabinet/favicon-32x32.png',
@@ -4127,7 +4127,7 @@ function createWebRouter(config, storage, bot) {
       if (!webPushModule) return res.status(503).json({ ok: false, reason: 'push_not_available' });
       const body = req.body || {};
       const payload = {
-        title: body.title || 'Trendex',
+        title: body.title || 'Golden Connect',
         body: body.body || 'Новое уведомление',
         url: body.url || '/cabinet',
         icon: body.icon || '/favicon.ico',
@@ -4147,7 +4147,7 @@ function createWebRouter(config, storage, bot) {
     try {
       const result = storage.createTelegramLinkToken(req.webUser.id);
       if (!result) return res.status(500).json({ ok: false, reason: 'token_failed' });
-      const botUsername = String(config.botUsername || 'Trendex_bizbot').trim();
+      const botUsername = String(config.botUsername || 'Golden Connect_bizbot').trim();
       const botLink = `https://t.me/${botUsername}?start=link_${result.token}`;
       return res.json({ ok: true, token: result.token, botLink, expiresAt: result.expiresAt });
     } catch (e) {
@@ -4195,7 +4195,7 @@ function createWebRouter(config, storage, bot) {
         lastAction: r.lastAction,
         createdAt: r.createdAt,
         onboardingCompletedAt: r.onboardingCompletedAt,
-        trendexRefLink: r.trendexRefLink,
+        golden-connectRefLink: r.golden-connectRefLink,
         note: (r.inviterNotes && r.inviterNotes[String(req.webUser.id)]) || '',
         snoozedUntil: (r.inviterSnoozeUntil && r.inviterSnoozeUntil[String(req.webUser.id)]) || null,
         contactedAt: (r.inviterContactedAt && r.inviterContactedAt[String(req.webUser.id)]) || null,
@@ -4206,9 +4206,9 @@ function createWebRouter(config, storage, bot) {
       try {
         const u = req.webUser;
         const tgId = u.telegramUserId || u.telegram_user_id;
-        const email = u.email || (tgId ? 'tg' + tgId + '@trendex.bot' : null);
+        const email = u.email || (tgId ? 'tg' + tgId + '@golden-connect.bot' : null);
         if (email) {
-          const apiRes = await callTrendexApi('/internal/team/by-email/referrals', { email });
+          const apiRes = await callGolden ConnectApi('/internal/team/by-email/referrals', { email });
           if (apiRes && Array.isArray(apiRes.rows)) {
             apiRefs = apiRes.rows.map((r) => ({
               id: r.invitee_id,
@@ -4222,7 +4222,7 @@ function createWebRouter(config, storage, bot) {
               lastAction: r.source ? ('source: ' + r.source) : '',
               createdAt: r.created_at,
               onboardingCompletedAt: null,
-              trendexRefLink: null,
+              golden-connectRefLink: null,
               note: '',
               snoozedUntil: null,
               contactedAt: r.last_contact_at,
@@ -4479,16 +4479,16 @@ function createWebRouter(config, storage, bot) {
   });
 
 
-  // ───────── Payment bridge → trendex-api (Hono) ─────────
+  // ───────── Payment bridge → golden-connect-api (Hono) ─────────
   // The cabinet keeps users in its own SQLite. Payment infra (CryptoBot +
-  // Platega + bookings ledger) lives in the legacy trendex-api service;
+  // Platega + bookings ledger) lives in the legacy golden-connect-api service;
   // this section proxies cabinet → /internal/pay/* on that service using
   // the shared INTERNAL_API_SECRET.
-  const PAY_API_BASE = String(config.trendexApiBaseUrl || '').replace(/\/+$/, '');
-  const PAY_INTERNAL_SECRET = String(config.trendexApiInternalSecret || '');
+  const PAY_API_BASE = String(config.golden-connectApiBaseUrl || '').replace(/\/+$/, '');
+  const PAY_INTERNAL_SECRET = String(config.golden-connectApiInternalSecret || '');
 
-  async function callTrendexApi(path, body) {
-    // [calltrendexapi-retry-2026-05-21] timeout + retry for transient ingress/rollout failures
+  async function callGolden ConnectApi(path, body) {
+    // [callgolden-connectapi-retry-2026-05-21] timeout + retry for transient ingress/rollout failures
     if (!PAY_INTERNAL_SECRET) {
       const err = new Error('pay_bridge_not_configured');
       err.status = 503;
@@ -4508,7 +4508,7 @@ function createWebRouter(config, storage, bot) {
           signal: ctrl.signal,
           headers: {
             'Content-Type': 'application/json',
-            'x-trendex-secret': PAY_INTERNAL_SECRET,
+            'x-golden-connect-secret': PAY_INTERNAL_SECRET,
           },
           body: body ? JSON.stringify(body) : undefined,
         });
@@ -4540,14 +4540,14 @@ function createWebRouter(config, storage, bot) {
   }
 
   // Award karma via api proxy (fire-and-forget).
-  function awardKarmaTrendex(req, kind, sourceId, memo) {
+  function awardKarmaGolden Connect(req, kind, sourceId, memo) {
     try {
       const u = req.webUser || (req.session && storage.findWebUserById(req.session.userId));
       if (!u) return;
       const tgId = u.telegramUserId || u.telegram_user_id;
-      const email = u.email || (tgId ? 'tg' + tgId + '@trendex.bot' : null);
+      const email = u.email || (tgId ? 'tg' + tgId + '@golden-connect.bot' : null);
       if (!email) return;
-      callTrendexApi('/internal/karma/award', {
+      callGolden ConnectApi('/internal/karma/award', {
         email: email, kind: kind,
         source_id: sourceId || null, memo: memo || null,
       }).catch(function () {});
@@ -4556,14 +4556,14 @@ function createWebRouter(config, storage, bot) {
 
 /**
  * Patch: append cabinet → api proxy routes for /api/finance/* and /api/notifications/*
- * Mounted in cabinet/src/web-routes.js right after callTrendexApi definition.
+ * Mounted in cabinet/src/web-routes.js right after callGolden ConnectApi definition.
  *
  * Each route resolves the cabinet user's email → api-side user_id, then
  * proxies through INTERNAL_API_SECRET to /internal/finance/* or /internal/notifications/*.
  */
 
-  // ───────── GiftClub bridge → trendex-api /internal/gift/* ───────────
-  // Mirrors the finance bridge: cabinet session → email → trendex-api with secret.
+  // ───────── GiftClub bridge → golden-connect-api /internal/gift/* ───────────
+  // Mirrors the finance bridge: cabinet session → email → golden-connect-api with secret.
   // Read-only views over imported gift_* tables. See migration 0102.
   function _giftIdentity(req) {
     const u = (req.webUser || storage.findWebUserById(req.session && req.session.userId));
@@ -4583,7 +4583,7 @@ function createWebRouter(config, storage, bot) {
         ['level','account_id','parent_gift_id','search','page','sort','status'].forEach(function(k){
           if (req.query[k] !== undefined && req.query[k] !== '') qs.set(k, String(req.query[k]));
         });
-        const data = await callTrendexApi('/internal/gift/' + path + '?' + qs.toString());
+        const data = await callGolden ConnectApi('/internal/gift/' + path + '?' + qs.toString());
         res.json(data);
       } catch (e) {
         // Gracefully degrade: if user has no gift link, return empty success
@@ -4616,7 +4616,7 @@ function createWebRouter(config, storage, bot) {
         const qs = new URLSearchParams();
         if (ident.email) qs.set('email', ident.email);
         if (ident.tgId) qs.set('tg_id', String(ident.tgId));
-        const data = await callTrendexApi('/internal/gift/' + path + '?' + qs.toString(), req.body || {});
+        const data = await callGolden ConnectApi('/internal/gift/' + path + '?' + qs.toString(), req.body || {});
         res.json(data);
       } catch (e) {
         res.status((e && e.status) || 502).json({ ok: false, reason: (e && (e.data && e.data.reason)) || (e && e.message) || 'gift_bridge_error' });
@@ -4632,14 +4632,14 @@ function createWebRouter(config, storage, bot) {
       const ident = _giftIdentity(req);
       if (!ident || (!ident.email && !ident.tgId)) return res.status(400).json({ ok: false, reason: 'no_identity' });
       const body = Object.assign({}, ident.email ? { email: ident.email } : {}, ident.tgId ? { tg_id: ident.tgId } : {}, req.body || {});
-      const data = await callTrendexApi('/internal/gift/switch-account', { method: 'POST', body });
+      const data = await callGolden ConnectApi('/internal/gift/switch-account', { method: 'POST', body });
       res.json(data);
     } catch (e) {
       res.status((e && e.status) || 502).json({ ok: false, reason: (e && e.message) || 'gift_switch_error' });
     }
   });
 
-  // ───────── Finance bridge → trendex-api /internal/finance/* ─────────
+  // ───────── Finance bridge → golden-connect-api /internal/finance/* ─────────
 
   // Helper: resolve cabinet session → api user identifier (email is canonical
   // bridge; api side does findOrCreateUserByEmail).
@@ -4648,7 +4648,7 @@ function createWebRouter(config, storage, bot) {
     if (!u) return null;
     const tgId = u.telegramUserId || u.telegram_user_id;
     let email = String(u.email || '').trim().toLowerCase();
-    if (!email && tgId) email = 'tg' + String(tgId) + '@trendex.bot';
+    if (!email && tgId) email = 'tg' + String(tgId) + '@golden-connect.bot';
     if (!email) return null;
     return Object.assign({ email }, body || {});
   }
@@ -4659,10 +4659,10 @@ function createWebRouter(config, storage, bot) {
       if (!u) return res.status(401).json({ ok: false, reason: 'not_authenticated' });
       const tgId = u.telegramUserId || u.telegram_user_id;
       let email = String(u.email || '').trim().toLowerCase();
-      if (!email && tgId) email = 'tg' + String(tgId) + '@trendex.bot';
+      if (!email && tgId) email = 'tg' + String(tgId) + '@golden-connect.bot';
       if (!email) return res.status(400).json({ ok: false, reason: 'no_email' });
       try {
-        const data = await callTrendexApi('/internal/finance/balances?email=' + encodeURIComponent(email));
+        const data = await callGolden ConnectApi('/internal/finance/balances?email=' + encodeURIComponent(email));
         res.json(data);
       } catch (apiErr) {
         // 404 from api side = api-side user does not exist yet (cabinet email
@@ -4696,10 +4696,10 @@ function createWebRouter(config, storage, bot) {
       if (!u) return res.status(401).json({ ok: false });
       let email = String(u.email || '').trim().toLowerCase();
       const tgId = u.telegramUserId || u.telegram_user_id;
-      if (!email && tgId) email = 'tg' + tgId + '@trendex.bot';
+      if (!email && tgId) email = 'tg' + tgId + '@golden-connect.bot';
       if (!email) return res.status(400).json({ ok: false, reason: 'no_email' });
       try {
-        const data = await callTrendexApi('/internal/finance/tariff-options?email=' + encodeURIComponent(email));
+        const data = await callGolden ConnectApi('/internal/finance/tariff-options?email=' + encodeURIComponent(email));
         res.json(data);
       } catch (apiErr) {
         // [tariff-opts-404] cabinet user has no api account yet (email-only, no TG link).
@@ -4710,7 +4710,7 @@ function createWebRouter(config, storage, bot) {
             ok: true,
             options: [],
             user_state: 'no_api_account',
-            hint: 'Привяжи Telegram через /start у @Trendex_bizbot чтобы открыть кошелёк и тарифы.',
+            hint: 'Привяжи Telegram через /start у @Golden Connect_bizbot чтобы открыть кошелёк и тарифы.',
             _bridge: 'pending_api_user',
           });
         }
@@ -4728,7 +4728,7 @@ function createWebRouter(config, storage, bot) {
         source_policy: String((req.body && req.body.source_policy) || 'subscription_first'),
       });
       if (!payload) return res.status(401).json({ ok: false, reason: 'no_email' });
-      const data = await callTrendexApi('/internal/finance/buy-tariff', payload);
+      const data = await callGolden ConnectApi('/internal/finance/buy-tariff', payload);
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message, details: e.data });
@@ -4742,7 +4742,7 @@ function createWebRouter(config, storage, bot) {
         source_policy: String((req.body && req.body.source_policy) || 'subscription_first'),
       });
       if (!payload) return res.status(401).json({ ok: false, reason: 'no_email' });
-      const data = await callTrendexApi('/internal/finance/upgrade-tariff', payload);
+      const data = await callGolden ConnectApi('/internal/finance/upgrade-tariff', payload);
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message, details: e.data });
@@ -4757,7 +4757,7 @@ function createWebRouter(config, storage, bot) {
         amount_micro: Number((req.body && req.body.amount_micro) || 0),
       });
       if (!payload) return res.status(401).json({ ok: false });
-      const data = await callTrendexApi('/internal/finance/transfer', payload);
+      const data = await callGolden ConnectApi('/internal/finance/transfer', payload);
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -4770,7 +4770,7 @@ function createWebRouter(config, storage, bot) {
       if (!u) return res.status(401).json({ ok: false, reason: 'not_authenticated' });
       const tgId = u.telegramUserId || u.telegram_user_id;
       let email = String(u.email || '').trim().toLowerCase();
-      if (!email && tgId) email = 'tg' + String(tgId) + '@trendex.bot';
+      if (!email && tgId) email = 'tg' + String(tgId) + '@golden-connect.bot';
       if (!email) return res.status(400).json({ ok: false, reason: 'no_email' });
 
       const body = req.body && typeof req.body === 'object' ? req.body : {};
@@ -4802,7 +4802,7 @@ function createWebRouter(config, storage, bot) {
       } catch (e) { /* non-fatal */ }
 
       const displayName = [u.firstName, u.lastName].filter(Boolean).join(' ').trim() || u.displayName || u.name || null;
-      const data = await callTrendexApi('/internal/pay/create-topup-invoice', {
+      const data = await callGolden ConnectApi('/internal/pay/create-topup-invoice', {
         email,
         amount_usd: amountUsd,
         method,
@@ -4825,7 +4825,7 @@ function createWebRouter(config, storage, bot) {
         address: String((req.body && req.body.address) || ''),
       });
       if (!payload) return res.status(401).json({ ok: false });
-      const data = await callTrendexApi('/internal/finance/withdraw', payload);
+      const data = await callGolden ConnectApi('/internal/finance/withdraw', payload);
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -4838,9 +4838,9 @@ function createWebRouter(config, storage, bot) {
       if (!u) return res.status(401).json({ ok: false });
       let email = String(u.email || '').trim().toLowerCase();
       const tgId = u.telegramUserId || u.telegram_user_id;
-      if (!email && tgId) email = 'tg' + tgId + '@trendex.bot';
+      if (!email && tgId) email = 'tg' + tgId + '@golden-connect.bot';
       const limit = Math.min(parseInt(req.query.limit, 10) || 50, 200);
-      const data = await callTrendexApi('/internal/finance/transactions?email='
+      const data = await callGolden ConnectApi('/internal/finance/transactions?email='
         + encodeURIComponent(email) + '&limit=' + limit);
       res.json(data);
     } catch (e) {
@@ -4854,10 +4854,10 @@ function createWebRouter(config, storage, bot) {
       if (!u) return res.status(401).json({ ok: false });
       let email = String(u.email || '').trim().toLowerCase();
       const tgId = u.telegramUserId || u.telegram_user_id;
-      if (!email && tgId) email = 'tg' + tgId + '@trendex.bot';
+      if (!email && tgId) email = 'tg' + tgId + '@golden-connect.bot';
       const limit = Math.min(parseInt(req.query.limit, 10) || 50, 200);
       const unread = req.query.unread === '1' ? '&unread=1' : '';
-      const data = await callTrendexApi('/internal/notifications?email='
+      const data = await callGolden ConnectApi('/internal/notifications?email='
         + encodeURIComponent(email) + '&limit=' + limit + unread);
       res.json(data);
     } catch (e) {
@@ -4872,9 +4872,9 @@ function createWebRouter(config, storage, bot) {
       if (!u) return res.status(401).json({ ok: false, reason: 'not_authenticated' });
       const tgId = u.telegramUserId || u.telegram_user_id;
       let email = String(u.email || '').trim().toLowerCase();
-      if (!email && tgId) email = 'tg' + String(tgId) + '@trendex.bot';
+      if (!email && tgId) email = 'tg' + String(tgId) + '@golden-connect.bot';
       if (!email) return res.status(400).json({ ok: false, reason: 'no_email' });
-      const data = await callTrendexApi('/internal/finance/test-placement?email=' + encodeURIComponent(email));
+      const data = await callGolden ConnectApi('/internal/finance/test-placement?email=' + encodeURIComponent(email));
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -4887,8 +4887,8 @@ function createWebRouter(config, storage, bot) {
       if (!u) return res.status(401).json({ ok: false });
       let email = String(u.email || '').trim().toLowerCase();
       const tgId = u.telegramUserId || u.telegram_user_id;
-      if (!email && tgId) email = 'tg' + tgId + '@trendex.bot';
-      const data = await callTrendexApi('/internal/finance/karma?email=' + encodeURIComponent(email));
+      if (!email && tgId) email = 'tg' + tgId + '@golden-connect.bot';
+      const data = await callGolden ConnectApi('/internal/finance/karma?email=' + encodeURIComponent(email));
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -4900,8 +4900,8 @@ function createWebRouter(config, storage, bot) {
       if (!u) return res.status(401).json({ ok: false });
       let email = String(u.email || '').trim().toLowerCase();
       const tgId = u.telegramUserId || u.telegram_user_id;
-      if (!email && tgId) email = 'tg' + tgId + '@trendex.bot';
-      const data = await callTrendexApi('/internal/notifications/unread-count?email='
+      if (!email && tgId) email = 'tg' + tgId + '@golden-connect.bot';
+      const data = await callGolden ConnectApi('/internal/notifications/unread-count?email='
         + encodeURIComponent(email));
       res.json(data);
     } catch (e) {
@@ -4913,7 +4913,7 @@ function createWebRouter(config, storage, bot) {
     try {
       const payload = _financeBuildPayload(req, {});
       if (!payload) return res.status(401).json({ ok: false });
-      const data = await callTrendexApi('/internal/notifications/'
+      const data = await callGolden ConnectApi('/internal/notifications/'
         + encodeURIComponent(req.params.id) + '/read', payload);
       res.json(data);
     } catch (e) {
@@ -4925,7 +4925,7 @@ function createWebRouter(config, storage, bot) {
     try {
       const payload = _financeBuildPayload(req, {});
       if (!payload) return res.status(401).json({ ok: false });
-      const data = await callTrendexApi('/internal/notifications/read-all', payload);
+      const data = await callGolden ConnectApi('/internal/notifications/read-all', payload);
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -4933,7 +4933,7 @@ function createWebRouter(config, storage, bot) {
   });
 
 
-  // Static tariff list (matches what trendex-api has active as of 2026-04).
+  // Static tariff list (matches what golden-connect-api has active as of 2026-04).
 
 
 /**
@@ -4941,7 +4941,7 @@ function createWebRouter(config, storage, bot) {
  * Auth: requires session.user.email in ADMIN_EMAILS env (or users.is_admin=true via api).
  */
 
-  // ───────── Admin bridge → trendex-api /internal/admin/* ─────────
+  // ───────── Admin bridge → golden-connect-api /internal/admin/* ─────────
 
   function _adminCheckSession(req) {
     const u = (req.webUser || storage.findWebUserById(req.session && req.session.userId));
@@ -4953,7 +4953,7 @@ function createWebRouter(config, storage, bot) {
   router.get('/api/admin/stats', requireAuth, async (req, res) => {
     if (!_adminCheckSession(req)) return res.status(403).json({ ok: false, reason: 'not_admin' });
     try {
-      const data = await callTrendexApi('/internal/admin/stats');
+      const data = await callGolden ConnectApi('/internal/admin/stats');
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -4964,7 +4964,7 @@ function createWebRouter(config, storage, bot) {
     if (!_adminCheckSession(req)) return res.status(403).json({ ok: false });
     try {
       const status = String(req.query.status || 'pending');
-      const data = await callTrendexApi('/internal/admin/withdrawals?status=' + encodeURIComponent(status));
+      const data = await callGolden ConnectApi('/internal/admin/withdrawals?status=' + encodeURIComponent(status));
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -4974,7 +4974,7 @@ function createWebRouter(config, storage, bot) {
   router.post('/api/admin/withdrawals/:id/approve', requireAuth, async (req, res) => {
     if (!_adminCheckSession(req)) return res.status(403).json({ ok: false });
     try {
-      const data = await callTrendexApi('/internal/admin/withdrawals/'
+      const data = await callGolden ConnectApi('/internal/admin/withdrawals/'
         + encodeURIComponent(req.params.id) + '/approve', {});
       res.json(data);
     } catch (e) {
@@ -4985,7 +4985,7 @@ function createWebRouter(config, storage, bot) {
   router.post('/api/admin/withdrawals/:id/reject', requireAuth, async (req, res) => {
     if (!_adminCheckSession(req)) return res.status(403).json({ ok: false });
     try {
-      const data = await callTrendexApi('/internal/admin/withdrawals/'
+      const data = await callGolden ConnectApi('/internal/admin/withdrawals/'
         + encodeURIComponent(req.params.id) + '/reject',
         { reason: String((req.body && req.body.reason) || '') });
       res.json(data);
@@ -4997,7 +4997,7 @@ function createWebRouter(config, storage, bot) {
   router.post('/api/admin/matrix/launch', requireAuth, async (req, res) => {
     if (!_adminCheckSession(req)) return res.status(403).json({ ok: false });
     try {
-      const data = await callTrendexApi('/internal/admin/matrix/launch', { confirm: true });
+      const data = await callGolden ConnectApi('/internal/admin/matrix/launch', { confirm: true });
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -5031,7 +5031,7 @@ function createWebRouter(config, storage, bot) {
         || ('Звонок ' + new Date().toLocaleString('ru-RU', { dateStyle: 'short', timeStyle: 'short' }));
       const room = plannerDb.createConfRoom(name, plannerUser.id, null);
 
-      const base = (config.publicBaseUrl || 'https://cabinet.trendex.biz').replace(/\/+$/, '');
+      const base = (config.publicBaseUrl || 'https://cabinet.golden-connect.to').replace(/\/+$/, '');
       const url = base + '/meet?conf=' + room.id;
       return res.json({ ok: true, url, room_id: room.id, room_name: room.name });
     } catch (e) {
@@ -5116,7 +5116,7 @@ function createWebRouter(config, storage, bot) {
         username: user.telegramUsername || null,
       });
       const rooms = plannerDb.getUserConfRooms(plannerUser.id) || [];
-      const base = (config.publicBaseUrl || 'https://cabinet.trendex.biz').replace(/\/+$/, '');
+      const base = (config.publicBaseUrl || 'https://cabinet.golden-connect.to').replace(/\/+$/, '');
       const out = rooms.map((r) => ({
         id: r.id, name: r.name, member_count: r.member_count || 0,
         url: base + '/meet?conf=' + r.id,
@@ -5152,10 +5152,10 @@ function createWebRouter(config, storage, bot) {
         body: JSON.stringify({
           asset: 'USDT',
           amount: amount.toFixed(2),
-          description: 'Trendex Ads Gift top-up',
+          description: 'Golden Connect Ads Gift top-up',
           payload,
           paid_btn_name: 'openBot',
-          paid_btn_url: 'https://t.me/Trendex_bizbot',
+          paid_btn_url: 'https://t.me/Golden Connect_bizbot',
           allow_anonymous: false,
         }),
       };
@@ -5267,7 +5267,7 @@ function createWebRouter(config, storage, bot) {
           headers: { 'Crypto-Pay-API-Token': cbToken, 'Content-Type': 'application/json' },
           body: JSON.stringify({
             asset: 'USDT', amount: priceUsd.toFixed(2),
-            description: 'Trendex: ' + (product.title || 'товар'),
+            description: 'Golden Connect: ' + (product.title || 'товар'),
             payload, allow_anonymous: false,
           }),
         });
@@ -5293,14 +5293,14 @@ function createWebRouter(config, storage, bot) {
         const usdRate = Number(process.env.PLATEGA_USD_RATE || 90);
         const rub = Math.round(priceUsd * usdRate * 100) / 100;
         const orderUuid = require('crypto').randomUUID();
-        const cbBase = String(process.env.PUBLIC_BASE_URL || 'https://trendex.biz/cabinet').replace(/\/+$/, '').replace('/cabinet','');
+        const cbBase = String(process.env.PUBLIC_BASE_URL || 'https://golden-connect.to/cabinet').replace(/\/+$/, '').replace('/cabinet','');
         const callbackUrl = cbBase + '/cabinet/api/platega/webhook';
         const r = await fetch(baseUrl + '/transaction/process', {
           method: 'POST',
           headers: { 'X-MerchantId': merchantId, 'X-Secret': apiSecret, 'Content-Type': 'application/json' },
           body: JSON.stringify({
             id: orderUuid, paymentMethod: 2, amount: rub, currency: 'RUB',
-            description: 'Trendex: ' + (product.title || 'товар'),
+            description: 'Golden Connect: ' + (product.title || 'товар'),
             payload: 'product:' + purchaseId,
             return: cbBase + '/cabinet#/marketplace',
             callback_url: callbackUrl,
@@ -5372,7 +5372,7 @@ function createWebRouter(config, storage, bot) {
       let email = String(user.email || '').trim().toLowerCase();
       if (!email) {
         const tgId = user.telegramUserId || user.telegram_user_id;
-        if (tgId) email = 'tg' + String(tgId) + '@trendex.bot';
+        if (tgId) email = 'tg' + String(tgId) + '@golden-connect.bot';
       }
       if (!email) return res.status(400).json({ ok: false, reason: 'email_missing' });
 
@@ -5386,7 +5386,7 @@ function createWebRouter(config, storage, bot) {
           if (inviter && inviter.referralCode) inviterRefCode = inviter.referralCode;
         }
       } catch (e) {}
-      const data = await callTrendexApi('/internal/pay/create-invoice', {
+      const data = await callGolden ConnectApi('/internal/pay/create-invoice', {
         email,
         tariff_code: 'launch',
         method,
@@ -5433,7 +5433,7 @@ function createWebRouter(config, storage, bot) {
       // TG-WebApp users have no email — synthesize a deterministic one so
       // the api-side findOrCreateUserByEmail() can still bridge to a row.
       const tgId = user.telegramUserId || user.telegram_user_id;
-      if (tgId) email = 'tg' + String(tgId) + '@trendex.bot';
+      if (tgId) email = 'tg' + String(tgId) + '@golden-connect.bot';
     }
     if (!email) return res.status(400).json({ ok: false, reason: 'email_missing' });
     const displayName = [user.firstName, user.lastName].filter(Boolean).join(' ').trim() || user.name || user.displayName || null;
@@ -5453,7 +5453,7 @@ function createWebRouter(config, storage, bot) {
       } catch (e) {
         console.error('[pay] inviter lookup failed', e && e.message);
       }
-      const data = await callTrendexApi('/internal/pay/create-invoice', {
+      const data = await callGolden ConnectApi('/internal/pay/create-invoice', {
         email,
         tariff_code,
         method,
@@ -5478,11 +5478,11 @@ function createWebRouter(config, storage, bot) {
     let email = String(user.email || '').trim().toLowerCase();
     if (!email) {
       const tgId = user.telegramUserId || user.telegram_user_id;
-      if (tgId) email = 'tg' + String(tgId) + '@trendex.bot';
+      if (tgId) email = 'tg' + String(tgId) + '@golden-connect.bot';
     }
     if (!email) return res.json({ ok: true, bookings: [] });
     try {
-      const data = await callTrendexApi('/internal/pay/bookings?email=' + encodeURIComponent(email));
+      const data = await callGolden ConnectApi('/internal/pay/bookings?email=' + encodeURIComponent(email));
       res.json(data);
     } catch (e) {
       console.error('[pay] bookings bridge failed', e && e.message);
@@ -5623,7 +5623,7 @@ function createWebRouter(config, storage, bot) {
       try {
         const email = String(u.email || '').trim().toLowerCase();
         if (email) {
-          const apiRes = await callTrendexApi('/internal/team/by-email/referrals', { email });
+          const apiRes = await callGolden ConnectApi('/internal/team/by-email/referrals', { email });
           const list = (apiRes && Array.isArray(apiRes.referrals)) ? apiRes.referrals : null;
           if (list) {
             const root = { id: u.id, ref_code: u.referralCode || '' };
@@ -5722,7 +5722,7 @@ function createWebRouter(config, storage, bot) {
       if (!stats.total) plan.push('🌱 Начни с малого: возьми первое задание на бирже (открой /jobs в боте)');
       plan.push('🔗 Скопируй реф-ссылку из /ref в боте и отправь 5 знакомым');
       plan.push('🚀 Изучи тарифы /tariffs — без них доступна только 1 уровень партнёрки');
-      plan.push('💬 Зайди в чат партнёров @TRENDEX_AD — там обсуждают актуальное');
+      plan.push('💬 Зайди в чат партнёров @GOLDEN_CONNECT_AD — там обсуждают актуальное');
       plan.push('🎯 Создай первую рекламную кампанию (/campaigns) — даже на $5 даст 50+ подписчиков');
       return res.json({ ok: true, plan });
     } catch (e) { res.status(500).json({ ok: false }); }
@@ -5735,7 +5735,7 @@ function createWebRouter(config, storage, bot) {
       const checker = require('./services/ai-task-checker');
       // Use checkTextReport as a generic Groq call
       const r = await checker.checkTextReport({
-        criteria: 'Ответь кратко (2-4 предложения) как AI-помощник партнёра рекламной платформы Trendex (LAUNCH/BOOST/ROCKET тарифы, биржа заданий, 10-уровневая партнёрка, маркетплейс).',
+        criteria: 'Ответь кратко (2-4 предложения) как AI-помощник партнёра рекламной платформы Golden Connect (LAUNCH/BOOST/ROCKET тарифы, биржа заданий, 10-уровневая партнёрка, маркетплейс).',
         reportText: q, taskDescription: 'Вопрос партнёра',
       });
       res.json({ ok: true, answer: r.reasoning || 'Уточни вопрос — попробую помочь.' });
@@ -5744,7 +5744,7 @@ function createWebRouter(config, storage, bot) {
 
   router.get('/api/group-chat/stats', requireAuth, (req, res) => {
     try {
-      const targetChat = process.env.TRENDEX_GROUP_CHAT || '@TRENDEX_AD';
+      const targetChat = process.env.GOLDEN_CONNECT_GROUP_CHAT || '@GOLDEN_CONNECT_AD';
       const pdb = require('./planner/db/database').getDb();
       const stats = pdb.prepare(
         "SELECT COUNT(*) AS total, SUM(CASE WHEN status IN ('member','administrator','creator') THEN 1 ELSE 0 END) AS active, SUM(CASE WHEN status IN ('left','kicked') THEN 1 ELSE 0 END) AS gone FROM group_members"
@@ -5837,7 +5837,7 @@ function createWebRouter(config, storage, bot) {
     lines.push('• /tariffs — выбери тариф (FREE для начала ок)');
     lines.push('• /ref — скопируй реф-ссылку и отправь 5-10 знакомым');
     lines.push('• /jobs — сделай 3 задания, поймёшь как платят');
-    lines.push('• Зайди в @TRENDEX_AD — представься партнёрам');
+    lines.push('• Зайди в @GOLDEN_CONNECT_AD — представься партнёрам');
     lines.push('');
     lines.push('📅 НЕДЕЛЯ 1 (первый доход):');
     lines.push('• 5 заданий в день = $0.25-0.50/день');
@@ -6181,13 +6181,13 @@ function createWebRouter(config, storage, bot) {
   // [trdx-exchange-2026-05-14] mount the P2P TRDX/USD exchange sub-router
   try {
     const dbModule = require('./planner/db/database');
-    const trdxRouter = createTrdxExchangeRoutes({ storage, callTrendexApi, requireAuth, dbModule });
+    const trdxRouter = createTrdxExchangeRoutes({ storage, callGolden ConnectApi, requireAuth, dbModule });
     router.use(trdxRouter);
   } catch (e) { console.error('[trdx-exchange-mount]', e && e.message); }
 
-  // [partners-2026-05-16] mount /api/partners proxy → trendex-api internal endpoints
+  // [partners-2026-05-16] mount /api/partners proxy → golden-connect-api internal endpoints
   try {
-    const partnersRouter = createPartnersRouter({ storage, callTrendexApi, requireAuth });
+    const partnersRouter = createPartnersRouter({ storage, callGolden ConnectApi, requireAuth });
     router.use(partnersRouter);
   } catch (e) { console.error('[partners-mount]', e && e.message); }
 

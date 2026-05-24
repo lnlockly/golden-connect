@@ -1,6 +1,6 @@
 // TRDX P2P Exchange v2 — corrects balance semantics:
 //   TRDX  = storage.getTrxBalance(userId) — cabinet-local trxBalance per user
-//   USD   = trendex-api /internal/finance/balances → working.usd (main withdrawal)
+//   USD   = golden-connect-api /internal/finance/balances → working.usd (main withdrawal)
 //   gift  = NOT used here — user explicitly said exchange uses main USD balance
 //
 // Listing create: debits TRDX from seller into escrow (recorded as negative
@@ -8,12 +8,12 @@
 // Buy: credits TRDX to buyer (storage.awardTrx); USD split is recorded in
 // trdx_trade_splits as a payout ledger (like marketplace shop-split).
 // Actual USD transfer to seller's working balance happens via separate
-// settlement (cron/admin) since trendex-api side payout endpoint TBD.
+// settlement (cron/admin) since golden-connect-api side payout endpoint TBD.
 
 const express = require('express');
 
 function createTrdxExchangeRoutes(deps) {
-  const { storage, callTrendexApi, requireAuth, dbModule } = deps;
+  const { storage, callGolden ConnectApi, requireAuth, dbModule } = deps;
   const router = express.Router();
   const db = dbModule.getDb();
 
@@ -139,14 +139,14 @@ function createTrdxExchangeRoutes(deps) {
     if (!u) return null;
     let email = String(u.email || '').trim().toLowerCase();
     const tgId = u.telegramUserId || u.telegram_user_id;
-    if (!email && tgId) email = 'tg' + tgId + '@trendex.bot';
+    if (!email && tgId) email = 'tg' + tgId + '@golden-connect.bot';
     return email || null;
   }
 
   async function getUsdWorking(email) {
     if (!email) return 0;
     try {
-      const d = await callTrendexApi('/internal/finance/balances?email=' + encodeURIComponent(email));
+      const d = await callGolden ConnectApi('/internal/finance/balances?email=' + encodeURIComponent(email));
       return Number((d && d.balances && d.balances.working && d.balances.working.usd) || 0);
     } catch (_) { return 0; }
   }
@@ -250,7 +250,7 @@ function createTrdxExchangeRoutes(deps) {
   });
 
   // POST buy — credit TRDX to buyer; USD split recorded as ledger
-  // (actual USD movement on trendex-api side is TBD via settlement job).
+  // (actual USD movement on golden-connect-api side is TBD via settlement job).
   router.post('/api/trdx-exchange/listings/:id/buy', requireAuth, async (req, res) => {
     try {
       const id = Number(req.params.id);
@@ -309,21 +309,21 @@ function createTrdxExchangeRoutes(deps) {
       // Credit TRDX to buyer (cabinet-local)
       storage.awardTrx(req.webUser.id, amount, 'p2p_buy_trdx', lst.seller_user_id);
 
-      // USD-side moves go through trendex-api settlement
+      // USD-side moves go through golden-connect-api settlement
       // (debit buyer's working, credit seller's working with 70%, distribute
       // commission to upline/project/pool). Pending until api endpoint exists.
-      // [settle-real-api-2026-05-14] settle USD on trendex-api atomically.
+      // [settle-real-api-2026-05-14] settle USD on golden-connect-api atomically.
       // Resolve seller's email from cabinet storage; api uses email→user_id
       // mapping. Amounts converted to micro (1 USD = 1_000_000 micro).
       const sellerObj = storage.findWebUserById(lst.seller_user_id);
       let sellerEmail = sellerObj ? String(sellerObj.email || '').trim().toLowerCase() : '';
       if (!sellerEmail && sellerObj) {
         const tgId = sellerObj.telegramUserId || sellerObj.telegram_user_id;
-        if (tgId) sellerEmail = 'tg' + tgId + '@trendex.bot';
+        if (tgId) sellerEmail = 'tg' + tgId + '@golden-connect.bot';
       }
 
       try {
-        const apiRes = await callTrendexApi('/internal/finance/exchange-execute', {
+        const apiRes = await callGolden ConnectApi('/internal/finance/exchange-execute', {
           buyer_email: buyerEmail,
           seller_email: sellerEmail,
           total_micro: Math.round(totalUsd * 1_000_000),

@@ -10,7 +10,7 @@
 import { InlineKeyboard } from "grammy";
 import type { AppContext } from "../middleware.js";
 
-const COPY_RU = `<b>💎 Тарифы Trendex</b>
+const COPY_RU = `<b>💎 Тарифы Golden Connect</b>
 
 🆓 <b>FREE</b> — $0
    • Заработок до $50/день за активность
@@ -40,7 +40,7 @@ const COPY_RU = `<b>💎 Тарифы Trendex</b>
 👑 Leader Pool каждый месяц для топ-15 партнёров.
 🎰 Karma-розыгрыш $100 каждое воскресенье в 20:00 МСК.`;
 
-const COPY_EN = `<b>💎 Trendex Tariffs</b>
+const COPY_EN = `<b>💎 Golden Connect Tariffs</b>
 
 🆓 <b>FREE</b> — $0
    • Up to $50/day for activity
@@ -75,10 +75,10 @@ export async function onTariffs(ctx: AppContext): Promise<void> {
   const text = lang === 'ru' ? COPY_RU : COPY_EN;
   const kb = new InlineKeyboard()
     .url(lang === 'ru' ? "🚀 Активировать в кабинете" : "🚀 Activate in cabinet",
-         "https://trendex.biz/cabinet#/marketing")
+         "https://golden-connect.to/cabinet#/marketing")
     .row()
     .url(lang === 'ru' ? "📺 Посмотреть презентацию" : "📺 View presentation",
-         "https://trendex.biz/presentation");
+         "https://golden-connect.to/presentation");
   await ctx.reply(text, {
     parse_mode: "HTML",
     reply_markup: kb,

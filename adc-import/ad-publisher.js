@@ -9,7 +9,7 @@ const path = require('path');
 const FormData = require('form-data');
 const { getDb } = require('../database');
 
-const BOT_TOKEN = process.env.TG_BOT_TOKEN || '8729355580:AAFY1MIHc3SDmMtjXnlzGBfUihTFVljoS2A';
+const BOT_TOKEN = process.env.TG_BOT_TOKEN || '8926574454:AAGqFfourxakY5dmaJm1Wiaxu5zYQ4HCKPE';
 const TG_API = `https://api.telegram.org/bot${BOT_TOKEN}`;
 
 // ── file_id cache (in-memory + DB) ──

@@ -18,11 +18,11 @@ import { generateRefCode } from '../services/users.js';
 import { env } from '../services/env.js';
 
 /**
- * Cross-service payment bridge for the new Trendex Cabinet (Express + SQLite).
+ * Cross-service payment bridge for the new Golden Connect Cabinet (Express + SQLite).
  *
  * The cabinet service runs under a different stack and has its own user pool;
  * however, payment infra (CryptoBot + Platega + BSC + bookings ledger) lives
- * here in the trendex-api Hono service and must stay the single source of
+ * here in the golden-connect-api Hono service and must stay the single source of
  * truth for money movements.
  *
  * This endpoint lets the cabinet create an invoice on behalf of a user by
@@ -32,7 +32,7 @@ import { env } from '../services/env.js';
  *      /me/book.
  *   3. Returns the pay_url for the cabinet to surface to the browser.
  *
- * Auth: x-trendex-secret header (same INTERNAL_API_SECRET as all /internal/*).
+ * Auth: x-golden-connect-secret header (same INTERNAL_API_SECRET as all /internal/*).
  */
 
 const app = new Hono();
@@ -227,7 +227,7 @@ app.post('/internal/pay/create-invoice', async (c) => {
         asset: 'USDT',
         amount: amountUsd.toFixed(2),
         payload,
-        description: `TrendeX — ${tariff.name}`,
+        description: `Golden Connect — ${tariff.name}`,
       });
       return c.json({
         ok: true,
@@ -251,7 +251,7 @@ app.post('/internal/pay/create-invoice', async (c) => {
     const invoice = await plategaCreateInvoice({
       orderId: payload,
       amountUsd,
-      description: `TrendeX — ${tariff.name}`,
+      description: `Golden Connect — ${tariff.name}`,
     });
     return c.json({
       ok: true,
@@ -362,7 +362,7 @@ app.post('/internal/pay/create-topup-invoice', async (c) => {
         asset: 'USDT',
         amount: amountUsd.toFixed(2),
         payload,
-        description: `Trendex topup $${amountUsd.toFixed(2)}`,
+        description: `Golden Connect topup $${amountUsd.toFixed(2)}`,
       });
       return c.json({
         ok: true,
@@ -398,7 +398,7 @@ app.post('/internal/pay/create-topup-invoice', async (c) => {
     const invoice = await plategaCreateInvoice({
       amountUsd,
       orderId: payload,
-      description: `Trendex topup $${amountUsd.toFixed(2)}`,
+      description: `Golden Connect topup $${amountUsd.toFixed(2)}`,
       paymentMethod,
       returnUrl: `${env.appPublicUrl}/pay/thanks`,
       failedUrl: `${env.appPublicUrl}/pay/failed`,

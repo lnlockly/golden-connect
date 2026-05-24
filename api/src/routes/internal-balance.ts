@@ -48,7 +48,7 @@ async function resolveUserId(body: any): Promise<number | null> {
   }
   if (body.email) {
     const email = String(body.email).toLowerCase().trim();
-    const m = email.match(/^tg(\d+)@trendex\.bot$/);
+    const m = email.match(/^tg(\d+)@golden-connect\.bot$/);
     if (m) {
       const tgId = Number(m[1]);
       const r = (await db.execute(sql`SELECT id FROM users WHERE tg_id = ${tgId} LIMIT 1`)) as any[];

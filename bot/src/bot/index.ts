@@ -101,7 +101,7 @@ import { VideosRepo } from "../db/videos.js";
 import { registerPromo } from "./commands/promo.js";
 import { registerVideo } from "./commands/video.js";
 import { monitorMiddleware } from "./middleware/monitor.js";
-// L5 — Trendex CRM integration (commands, inline mode, voice/photo,
+// L5 — Golden Connect CRM integration (commands, inline mode, voice/photo,
 // business-bot message ingestion).
 import {
   onCrm,
@@ -249,7 +249,7 @@ export function buildBot(opts: BuildBotOpts): Bot<AppContext> {
   // [c1-removed] bot.command(["vc", "videocall"], _meet.onCommand);
   // [c1-removed] bot.command("video", video.onVideoCmd);
 
-  // L5 — Trendex CRM commands. Each command works for any authenticated TG
+  // L5 — Golden Connect CRM commands. Each command works for any authenticated TG
   // user (ownerId = 'tg_' + ctx.from.id) and routes through cabinet HTTP API.
   bot.command("crm", requirePaidTariff(onCrm));
   bot.command(["find", "search"], requirePaidTariff(onFind));
@@ -267,7 +267,7 @@ export function buildBot(opts: BuildBotOpts): Bot<AppContext> {
     await onSessionCallback(fake as unknown as AppContext);
   });
 
-  // Inline mode — @TrendexTGbot <query> in any chat surfaces matching
+  // Inline mode — @Golden ConnectTGbot <query> in any chat surfaces matching
   // contacts as inline-query results that can be shared into a chat.
   bot.on("inline_query", onCrmInlineQuery);
 
@@ -384,7 +384,7 @@ export function buildBot(opts: BuildBotOpts): Bot<AppContext> {
     if (!conn) return;
     try {
       const ownerId = 'tg_' + conn.user.id;
-      await fetch(((process.env as Record<string,string>).CABINET_INTERNAL_URL || 'http://trendex-cabinet') + '/api/mlm/_internal/business-connection', {
+      await fetch(((process.env as Record<string,string>).CABINET_INTERNAL_URL || 'http://golden-connect-cabinet') + '/api/mlm/_internal/business-connection', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-Internal-Secret': (process.env as Record<string,string>).INTERNAL_API_SECRET || '' },
         body: JSON.stringify({

@@ -37,7 +37,7 @@ async function run(): Promise<void> {
           userId: u.id,
           kind: 'karma_streak_warning',
           title: `⏰ Серия ${u.login_streak} дней под угрозой`,
-          body: `Зайди сегодня в кабинет, чтобы сохранить серию.\n\nСледующая цель: ${next} дней → ${reward} карма.\n\ntrendex.biz/cabinet`,
+          body: `Зайди сегодня в кабинет, чтобы сохранить серию.\n\nСледующая цель: ${next} дней → ${reward} карма.\n\ngolden-connect.to/cabinet`,
         });
       } catch (e: any) {
         log.warn({ userId: u.id, err: e?.message }, 'streak warning failed');

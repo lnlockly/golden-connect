@@ -34,7 +34,7 @@ const TIMEOUT_MS = 12_000;
 // остальное все можно". We approve everything except NSFW / sexual content
 // (and CSAM / illegal — those are universal hard-blocks regardless).
 const PROMPT = `You are an ad-platform content moderator. The image is a banner ad
-submitted by a user on Trendex. The platform is permissive: business offers, MLM,
+submitted by a user on Golden Connect. The platform is permissive: business offers, MLM,
 crypto, betting, financial services, dropshipping, lead-gen — all welcome.
 
 The ONLY content we hard-block is:

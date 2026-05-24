@@ -1,4 +1,4 @@
-// Trendex products catalog with health metadata + 8 ready protocols.
+// Golden Connect products catalog with health metadata + 8 ready protocols.
 // Используется модулем health.js для создания курсов.
 
 const PRODUCTS = {

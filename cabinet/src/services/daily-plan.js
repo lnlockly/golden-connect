@@ -13,7 +13,7 @@ function _key() {
   return k;
 }
 
-const SYSTEM = `Ты — профессиональный growth-coach для русскоязычных партнёров платформы Trendex (рекламная экосистема + 10-уровневая партнёрская сеть, основная аудитория в Telegram CIS).
+const SYSTEM = `Ты — профессиональный growth-coach для русскоязычных партнёров платформы Golden Connect (рекламная экосистема + 10-уровневая партнёрская сеть, основная аудитория в Telegram CIS).
 
 ТВОЯ РАБОТА: составить пользователю 5 микро-задач на СЕГОДНЯ — конкретных, с цифрами, привязанных ко времени, основанных на его этапе и реальных best-practice.
 
@@ -38,7 +38,7 @@ const SYSTEM = `Ты — профессиональный growth-coach для р
 ═══ ПРАВИЛА ЗАДАЧ ═══
 1. ВРЕМЯ-БОКС: каждая задача 5-30 минут (не больше).
 2. ЦИФРЫ: всегда конкретное число ("10 DM", "5 комментариев в @nichechannel", "3 поста").
-3. ИНСТРУМЕНТЫ ПО ИМЕНИ: TGStat, Telemetr, Combot, Telega.in, Trendex /jobs /promo /ref /tariffs.
+3. ИНСТРУМЕНТЫ ПО ИМЕНИ: TGStat, Telemetr, Combot, Telega.in, Golden Connect /jobs /promo /ref /tariffs.
 4. ВРЕМЯ ДНЯ: используй пики MSK — утро 9:00-10:30, обед 13:00-13:30, вечер 19:00-22:00.
 5. ПОЧЕМУ: каждая задача должна иметь "description" с обоснованием (повышает compliance +40%).
 6. ЭКОЛОГИЧНОСТЬ: НЕ давать спам-DM "регистрируйся", давай скрипты "тестирую X, нужно мнение".
@@ -110,10 +110,10 @@ async function generateDailyPlan({ profile, answers, day }) {
 
 Сегодня: ${today} (${ctx.day_name}, ${ctx.is_weekend ? 'выходной' : 'будний день'}).
 
-Контекст Trendex:
+Контекст Golden Connect:
 - Команды бота: /jobs (биржа подписок/задач/видео), /ref (реф-ссылка x2), /promo (готовые посты + AI), /tariffs, /balance, /coach
 - Тарифы: FREE / LAUNCH $45 (1 место, 12 уровней) / BOOST $90 (2 места) / ROCKET $135 (3 места + Matching Bonus)
-- Реф-ссылка на сайт: https://trendex.biz/?ref=КОД, на бот: https://t.me/Trendex_bizbot?start=ref_КОД
+- Реф-ссылка на сайт: https://golden-connect.to/?ref=КОД, на бот: https://t.me/Golden Connect_bizbot?start=ref_КОД
 
 Сгенерируй план на сегодня по правилам выше.`;
 
@@ -171,11 +171,11 @@ function _staticPlan(answers, profile) {
   const stage = _stage(answers, profile);
   if (stage === 'newbie') {
     return [
-      { title: 'Изучить главное меню бота за 10 мин', description: 'Открой @Trendex_bizbot → попробуй /tariffs, /jobs, /ref, /promo. Записывай что не понятно — спрошу AI-куратор. ПОЧЕМУ: ты должен знать инструменты прежде чем продавать.', time_min: 10, category: 'learning', priority: 1, suggested_time: '09:30' },
+      { title: 'Изучить главное меню бота за 10 мин', description: 'Открой @Golden Connect_bizbot → попробуй /tariffs, /jobs, /ref, /promo. Записывай что не понятно — спрошу AI-куратор. ПОЧЕМУ: ты должен знать инструменты прежде чем продавать.', time_min: 10, category: 'learning', priority: 1, suggested_time: '09:30' },
       { title: 'Сделать 1 задание на бирже', description: '/jobs → "Подписки на каналы" → возьми любое задание $0.05. Поймёшь как платят и как работает биржа. ПОЧЕМУ: первый дофамин = первая мотивация.', time_min: 10, category: 'growth', priority: 1, suggested_time: '11:00' },
-      { title: 'Скопировать 2 реф-ссылки', description: '/ref → сохрани обе: на сайт (https://trendex.biz/?ref=КОД) и на бота. На сайт лучше для тёплых, на бот — для холодных. ПОЧЕМУ: разные аудитории заходят разными путями.', time_min: 5, category: 'outreach', priority: 1, suggested_time: '13:00' },
+      { title: 'Скопировать 2 реф-ссылки', description: '/ref → сохрани обе: на сайт (https://golden-connect.to/?ref=КОД) и на бота. На сайт лучше для тёплых, на бот — для холодных. ПОЧЕМУ: разные аудитории заходят разными путями.', time_min: 5, category: 'outreach', priority: 1, suggested_time: '13:00' },
       { title: 'DM 5 знакомым: "тестирую сервис, нужно мнение"', description: 'Личное сообщение 5 друзьям/коллегам. НЕ "регистрируйся", а "тестирую X, мне интересно твоё мнение, посмотришь?" ПОЧЕМУ: фрейм просьбы вместо продажи даёт x5 конверсию.', time_min: 25, category: 'outreach', priority: 2, suggested_time: '14:00' },
-      { title: 'Проверить кабинет Команда', description: 'trendex.biz/cabinet → Команда. Посмотри сколько подключилось из 5 DM. ПОЧЕМУ: метрики = понимание что работает.', time_min: 5, category: 'learning', priority: 3, suggested_time: '21:00' },
+      { title: 'Проверить кабинет Команда', description: 'golden-connect.to/cabinet → Команда. Посмотри сколько подключилось из 5 DM. ПОЧЕМУ: метрики = понимание что работает.', time_min: 5, category: 'learning', priority: 3, suggested_time: '21:00' },
     ];
   }
   if (stage === 'compounding') {

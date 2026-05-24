@@ -376,7 +376,7 @@ app.get('/admin/events/:id/registrations', async (c) => {
 
 // --- Internal (bot-side) wrappers -----------------------------------------
 // The bot is stateless and can't hold a user session cookie — it calls
-// /internal/* with the shared x-trendex-secret. These endpoints mirror the
+// /internal/* with the shared x-golden-connect-secret. These endpoints mirror the
 // public ones but key on user_id from the path.
 
 const internal = new Hono();
@@ -509,7 +509,7 @@ internal.get('/internal/me/:userId/events/upcoming', async (c) => {
 
 // Admin-create shortcut used by the bot wizard. The bot already
 // validates that the caller is in ADMIN_TG_IDS before calling this, and
-// the shared `x-trendex-secret` header proves the request came from our
+// the shared `x-golden-connect-secret` header proves the request came from our
 // bot pod. Intentionally NOT exposed without the secret, so there's no
 // direct-from-web abuse vector.
 const botAdminCreateSchema = z.object({

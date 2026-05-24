@@ -1,4 +1,4 @@
-// Trendex marketplace product-reviews widget. Reads pid from script src ?pid=N.
+// Golden Connect marketplace product-reviews widget. Reads pid from script src ?pid=N.
 (function () {
   const src = (document.currentScript && document.currentScript.src) || '';
   const m = src.match(/[?&]pid=(\d+)/);

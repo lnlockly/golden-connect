@@ -17,7 +17,7 @@
  * user's `languageCode` (fallback to RU). Templates are intentionally
  * duplicated from bot/src/services/i18n-phase1b.ts so the cron pod is
  * self-contained (no cross-pod template fetch). Phase 2B rewrote both
- * copies to final TrendeX tone-of-voice in sync.
+ * copies to final Golden Connect tone-of-voice in sync.
  */
 import { and, eq, isNull, lte, or, sql } from 'drizzle-orm';
 import { db } from '../db/client.js';
@@ -29,7 +29,7 @@ import { registerJob } from './scheduler.js';
 const TOTAL_STEPS = 5;
 const STEP_DELAYS_HOURS = [0, 24, 48, 72, 96] as const;
 
-// TrendeX welcome drip — 5 short, action-oriented messages over days 0–4.
+// Golden Connect welcome drip — 5 short, action-oriented messages over days 0–4.
 // Each ends with a concrete next step (/start, /events, etc.). Tone mirrors
 // bot/src/bot/commands/start.ts (friendly, business, no MLM/health angles).
 interface DripMsg {
@@ -39,14 +39,14 @@ interface DripMsg {
 const DRIP_RU: readonly DripMsg[] = [
   {
     text:
-      '👋 <b>Добро пожаловать в TRENDEX!</b>\n\n' +
+      '👋 <b>Добро пожаловать в GOLDEN_CONNECT!</b>\n\n' +
       'Это рекламная экосистема, где встречаются три роли: <b>бизнес</b> размещает рекламу, <b>пользователи</b> получают доход за активность, <b>партнёры</b> строят сеть и зарабатывают с её оборота.\n\n' +
       'Открой /start — там кабинет, ссылка для друзей и главное меню. Внутри всё настроено, останется только выбрать свою роль.',
   },
   {
     text:
       '💼 <b>День 2: тарифы и место в сети</b>\n\n' +
-      'У TRENDEX 8 тарифов — от <b>free</b> до <b>royal</b>. На free ты уже можешь изучить платформу и пригласить первых друзей. Платные тарифы открывают бронирование рекламных мест и повышают долю с оборота сети.\n\n' +
+      'У GOLDEN_CONNECT 8 тарифов — от <b>free</b> до <b>royal</b>. На free ты уже можешь изучить платформу и пригласить первых друзей. Платные тарифы открывают бронирование рекламных мест и повышают долю с оборота сети.\n\n' +
       'Загляни в /start → «Открыть кабинет» и посмотри, какой тариф тебе подходит.',
   },
   {
@@ -72,14 +72,14 @@ const DRIP_RU: readonly DripMsg[] = [
 const DRIP_EN: readonly DripMsg[] = [
   {
     text:
-      '👋 <b>Welcome to TRENDEX!</b>\n\n' +
+      '👋 <b>Welcome to GOLDEN_CONNECT!</b>\n\n' +
       'This is an advertising ecosystem where three roles meet: <b>businesses</b> run ads, <b>users</b> earn for activity, and <b>partners</b> grow the network and share its turnover.\n\n' +
       "Open /start — you'll find your cabinet, invite link and the main menu. Everything's set up; you just pick your role.",
   },
   {
     text:
       '💼 <b>Day 2: tariffs and your spot in the network</b>\n\n' +
-      'TRENDEX has 8 tariffs — from <b>free</b> to <b>royal</b>. Free already lets you explore the platform and invite first friends. Paid tiers unlock ad-slot booking and bump your share of the network turnover.\n\n' +
+      'GOLDEN_CONNECT has 8 tariffs — from <b>free</b> to <b>royal</b>. Free already lets you explore the platform and invite first friends. Paid tiers unlock ad-slot booking and bump your share of the network turnover.\n\n' +
       'Tap /start → "Open cabinet" and see which tariff fits you.',
   },
   {

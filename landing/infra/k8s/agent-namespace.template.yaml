@@ -1,4 +1,4 @@
-# TrendeX — per-agent k3s namespace template.
+# Golden Connect — per-agent k3s namespace template.
 #
 # Rendered by scripts/deploy-agent.sh. Placeholders:
 #   {{SLUG}}       — DNS-1123 label, e.g. "ada-lovelace"
@@ -18,8 +18,8 @@ kind: Namespace
 metadata:
   name: agent-{{SLUG}}
   labels:
-    trendex.io/slug: "{{SLUG}}"
-    trendex.io/managed-by: deploy-agent.sh
+    golden-connect.io/slug: "{{SLUG}}"
+    golden-connect.io/managed-by: deploy-agent.sh
 ---
 # Default-deny ingress; egress scoped to DNS + HTTPS.
 # For MVP we allow all HTTPS egress because plugins call out to
@@ -40,7 +40,7 @@ spec:
     - from:
         - namespaceSelector:
             matchLabels:
-              trendex.io/role: ingress
+              golden-connect.io/role: ingress
       ports:
         - protocol: TCP
           port: 3000
@@ -71,7 +71,7 @@ metadata:
   namespace: agent-{{SLUG}}
   labels:
     app: agent
-    trendex.io/slug: "{{SLUG}}"
+    golden-connect.io/slug: "{{SLUG}}"
 spec:
   replicas: {{REPLICAS}}
   selector:
@@ -83,12 +83,12 @@ spec:
     metadata:
       labels:
         app: agent
-        trendex.io/slug: "{{SLUG}}"
+        golden-connect.io/slug: "{{SLUG}}"
     spec:
       automountServiceAccountToken: false
       containers:
         - name: agent
-          image: ghcr.io/lnlockly/trendex-agent:{{IMAGE_TAG}}
+          image: ghcr.io/lnlockly/golden-connect-agent:{{IMAGE_TAG}}
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -99,7 +99,7 @@ spec:
           env:
             - name: NODE_ENV
               value: production
-            - name: TRENDEX_SLUG
+            - name: GOLDEN_CONNECT_SLUG
               value: "{{SLUG}}"
           resources:
             requests:
@@ -156,10 +156,10 @@ spec:
   ingressClassName: traefik
   tls:
     - hosts:
-        - agent-{{SLUG}}.trendex.xyz
+        - agent-{{SLUG}}.golden-connect.xyz
       secretName: agent-{{SLUG}}-tls
   rules:
-    - host: agent-{{SLUG}}.trendex.xyz
+    - host: agent-{{SLUG}}.golden-connect.xyz
       http:
         paths:
           - path: /

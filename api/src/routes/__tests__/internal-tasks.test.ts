@@ -34,7 +34,7 @@ describe('POST /internal/tasks/complete (auth + validation)', () => {
     const app = await buildApp();
     const res = await app.request('/internal/tasks/complete', {
       method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-trendex-secret': SECRET },
+      headers: { 'content-type': 'application/json', 'x-golden-connect-secret': SECRET },
       body: JSON.stringify({ user_id: 1, task_kind: 'banana' }),
     });
     expect(res.status).toBe(400);
@@ -44,7 +44,7 @@ describe('POST /internal/tasks/complete (auth + validation)', () => {
     const app = await buildApp();
     const res = await app.request('/internal/tasks/complete', {
       method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-trendex-secret': SECRET },
+      headers: { 'content-type': 'application/json', 'x-golden-connect-secret': SECRET },
       body: JSON.stringify({ user_id: 1, task_kind: 'brief', proof_url: 'not-a-url' }),
     });
     expect(res.status).toBe(400);
@@ -97,7 +97,7 @@ describe.skipIf(!TEST_URL)('POST /internal/tasks/complete (integration)', () => 
     const app = await buildApp();
     const res = await app.request('/internal/tasks/complete', {
       method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-trendex-secret': SECRET },
+      headers: { 'content-type': 'application/json', 'x-golden-connect-secret': SECRET },
       body: JSON.stringify({
         user_id: user!.id,
         task_kind: 'brief',
@@ -120,7 +120,7 @@ describe.skipIf(!TEST_URL)('POST /internal/tasks/complete (integration)', () => 
     const app = await buildApp();
     const res = await app.request('/internal/tasks/complete', {
       method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-trendex-secret': SECRET },
+      headers: { 'content-type': 'application/json', 'x-golden-connect-secret': SECRET },
       body: JSON.stringify({
         user_id: user!.id,
         task_kind: 'brief',

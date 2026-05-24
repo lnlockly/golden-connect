@@ -1,4 +1,4 @@
-// Trendex group bot extras: /summary, /poll, /note, /search, /remind.
+// Golden Connect group bot extras: /summary, /poll, /note, /search, /remind.
 // Layered on top of the existing planner/bot/group.js (which has /task,
 // /assign, /list, /board, /mytasks, /done, /stats, /gs_admin, /gs_settings).
 //

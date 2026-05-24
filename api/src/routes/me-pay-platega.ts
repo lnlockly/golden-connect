@@ -48,7 +48,7 @@ app.post('/me/pay/platega', async (c) => {
     const inv = await createInvoice({
       amountUsd,
       orderId,
-      description: `Trendex tariff: ${tariff.name}`,
+      description: `Golden Connect tariff: ${tariff.name}`,
     });
     return c.json({
       ok: true,

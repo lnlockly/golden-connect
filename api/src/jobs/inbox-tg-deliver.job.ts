@@ -2,7 +2,7 @@
  * Inbox → Telegram delivery worker.
  *
  * Polls notifications_inbox for rows where delivered_tg=false and pushes
- * them to the user's Telegram via @Trendex_bizbot. After successful send
+ * them to the user's Telegram via @Golden Connect_bizbot. After successful send
  * (or blocked-by-user), marks delivered_tg=true so we don't resend.
  *
  * Runs every minute. Batches 50 rows per tick to keep the worker bounded.
@@ -58,7 +58,7 @@ function buildReplyMarkup(row: InboxRow) {
   if (!row.url) return undefined;
   const fullUrl = row.url.startsWith('http')
     ? row.url
-    : `https://trendex.biz${row.url.startsWith('/') ? '' : '/'}${row.url}`;
+    : `https://golden-connect.to${row.url.startsWith('/') ? '' : '/'}${row.url}`;
   return { inline_keyboard: [[{ text: 'Открыть в кабинете →', url: fullUrl }]] };
 }
 

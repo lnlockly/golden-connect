@@ -1,5 +1,5 @@
 -- ─────────────────────────────────────────────────────────────────
--- Trendex Partners ("Наши партнёры") — projects with referral-walk
+-- Golden Connect Partners ("Наши партнёры") — projects with referral-walk
 -- algorithm ported from Business Network. Admin curates the catalog,
 -- users add their own ref-link per partner, system walks the upline
 -- to find the nearest sponsor who participates in the same partner.
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS projects (
   business_sphere TEXT NOT NULL,
   status TEXT NOT NULL DEFAULT 'ACTIVE',
   -- ACTIVE | PENDING | REJECTED — admin moderation gate.
-  -- For Trendex MVP we auto-set ACTIVE since only admin can create.
+  -- For Golden Connect MVP we auto-set ACTIVE since only admin can create.
   stages TEXT[],
   is_referral BOOLEAN NOT NULL DEFAULT TRUE,
   website TEXT,

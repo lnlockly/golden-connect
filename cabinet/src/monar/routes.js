@@ -38,7 +38,7 @@ router.get('/admin/simulate', async (_req, res) => {
   res.type('html').send(render('Симуляция Monar', '<p>UI симуляции появится после активации.</p>'));
 });
 
-// Sanity ping that uses the api-client. Returns whatever trendex-api says.
+// Sanity ping that uses the api-client. Returns whatever golden-connect-api says.
 // Until /api/monar/* is mounted there, this will 404 — that is expected.
 router.get('/health', async (_req, res) => {
   try {

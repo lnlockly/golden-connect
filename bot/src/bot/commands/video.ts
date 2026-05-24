@@ -21,9 +21,9 @@ const EMOJI_REACTIONS = ['👍', '❤️', '🔥', '😂', '👏'] as const;
 
 registerStrings({
   'video.list_title': {
-    ru: '🎥 Видео TrendeX',
-    en: '🎥 TrendeX videos',
-    zh: '🎥 TrendeX 视频',
+    ru: '🎥 Видео Golden Connect',
+    en: '🎥 Golden Connect videos',
+    zh: '🎥 Golden Connect 视频',
   },
   'video.list_hint': {
     ru: 'Обучение, разборы тарифов, партнёрский план — выбери видео ниже.',

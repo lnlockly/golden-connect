@@ -1,12 +1,12 @@
 
 /* ════════════════ ONBOARDING WIZARD — 10 шагов, $1 reward ════════════════ */
 (function() {
-  if (window._trendexOnbWired) return;
-  window._trendexOnbWired = true;
+  if (window._golden-connectOnbWired) return;
+  window._golden-connectOnbWired = true;
 
   const QUESTIONS = [
     { n: 1, key: 'name', text: 'Как тебя называть?', sub: 'Просто имя — будем обращаться лично', type: 'text', icon: '👋' },
-    { n: 2, key: 'goal', text: 'Зачем ты пришёл в Trendex?', sub: 'Поможет составить точный план', type: 'choice', icon: '🎯',
+    { n: 2, key: 'goal', text: 'Зачем ты пришёл в Golden Connect?', sub: 'Поможет составить точный план', type: 'choice', icon: '🎯',
       options: [
         ['💵', 'Зарабатывать на партнёрке', 'income_partner'],
         ['📋', 'Зарабатывать на бирже заданий', 'income_jobs'],
@@ -31,7 +31,7 @@
     { n: 10, key: 'bonus', text: 'Получить бонус $1 + персональный план?', sub: '', type: 'choice', icon: '🎁',
       options: [['🚀','Получить план и $1','yes'],['🤔','Пока без плана','no_plan']] },
   ];
-  const ONB_KEY = 'trendex_onb_seen';
+  const ONB_KEY = 'golden-connect_onb_seen';
 
   function api(method, url, body) {
     return fetch(url, {
@@ -187,7 +187,7 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', maybeAuto);
   else maybeAuto();
-  window.showTrendexOnboarding = function () { return show({ force: true }); };
+  window.showGolden ConnectOnboarding = function () { return show({ force: true }); };
 
   /* ─── #/my_plan page (modernized: adaptive paths + optional AI plan) ─── */
   function _esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c]; }); }
@@ -216,7 +216,7 @@
     // Hero
     html += '<div class="cab-card" style="background:linear-gradient(135deg,rgba(0,212,255,0.08),rgba(177,74,237,0.08));border:1px solid rgba(0,212,255,0.25);text-align:center;padding:24px;margin-bottom:18px">';
     html += '<div style="font-size:42px;margin-bottom:8px">🎯</div>';
-    html += '<h2 style="margin:0 0 8px;color:#fff">Мой план в Trendex</h2>';
+    html += '<h2 style="margin:0 0 8px;color:#fff">Мой план в Golden Connect</h2>';
     html += '<p style="margin:0 auto 8px;color:#cbd5e1;font-size:14px;line-height:1.6;max-width:640px">Адаптивные пути на основе твоего профиля. Выбери что ближе и поехали.</p>';
     html += '</div>';
 
@@ -267,14 +267,14 @@
         (ai.completed_at ? 'Создан ' + new Date(ai.completed_at).toLocaleDateString() : '') +
         (ai.reward_paid ? ' · 🎁 $1 зачислено' : '') + '</div>';
       html += '<div style="color:#e2e8f0;font-size:14px;line-height:1.7">' + aiHtml + '</div>';
-      html += '<button class="cab-btn cab-btn-sm" style="margin-top:14px" onclick="window.showTrendexOnboarding && window.showTrendexOnboarding()">↻ Перепройти AI-анкету</button>';
+      html += '<button class="cab-btn cab-btn-sm" style="margin-top:14px" onclick="window.showGolden ConnectOnboarding && window.showGolden ConnectOnboarding()">↻ Перепройти AI-анкету</button>';
       html += '</div>';
     } else {
       html += '<div class="cab-card" style="margin-top:18px;text-align:center;padding:24px;background:rgba(177,74,237,0.06)">';
       html += '<div style="font-size:32px">🤖</div>';
       html += '<h3 style="color:#fff;margin:8px 0 6px">Хочешь больше детального AI-плана?</h3>';
       html += '<p style="color:#cbd5e1;font-size:13px;margin:0 auto 12px;max-width:420px">Пройди расширенную анкету (10 вопросов · 3 минуты): получишь AI-план на 30 дней + <b>$1 на gift-баланс</b>.</p>';
-      html += '<button class="cab-btn cab-btn-primary" onclick="window.showTrendexOnboarding && window.showTrendexOnboarding()">🚀 Пройти AI-анкету</button>';
+      html += '<button class="cab-btn cab-btn-primary" onclick="window.showGolden ConnectOnboarding && window.showGolden ConnectOnboarding()">🚀 Пройти AI-анкету</button>';
       html += '</div>';
     }
 

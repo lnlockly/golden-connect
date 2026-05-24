@@ -6,4 +6,4 @@ Disallow: /register
 Disallow: /api/
 Disallow: /admin/
 
-Sitemap: https://trendex.biz/sitemap.xml
+Sitemap: https://golden-connect.to/sitemap.xml

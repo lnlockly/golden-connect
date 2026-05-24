@@ -3,14 +3,14 @@
 <head>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
-/* Trendex cabinet HTML version self-check.
+/* Golden Connect cabinet HTML version self-check.
    When the deployed cabinet.html bumps this string, browsers with a stale
    tab open will hard-reload the next time they navigate. Bump on every
    commit that changes inline JS routing. */
 (function () {
   try {
     var V = 'cab_VERSION_PLACEHOLDER';
-    window.TRENDEX_CAB_VERSION = V;
+    window.GOLDEN_CONNECT_CAB_VERSION = V;
     var prev = localStorage.getItem('cabinet_version');
     if (prev && prev !== V) {
       localStorage.setItem('cabinet_version', V);
@@ -26,7 +26,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <meta id="meta-theme-color" name="theme-color" content="#080a0f">
-<title data-i18n="sb_cabinet_title">Trendex — Личный кабинет</title>
+<title data-i18n="sb_cabinet_title">Golden Connect — Личный кабинет</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
@@ -87,7 +87,7 @@ body.ui-v3 .v3-hero {
 <link rel="stylesheet" href="css/shortener-bio-arsenal.css?v=cab_20260519_screen444_fix">
 <link rel="stylesheet" href="css/ad-center.css?v=cab_20260519_screen444_fix">
 <link rel="stylesheet" href="styles.css?v=cab_20260519_screen444_fix">
-<link rel="stylesheet" href="trendex-ai-chat.css?v=cab_20260519_screen444_fix">
+<link rel="stylesheet" href="golden-connect-ai-chat.css?v=cab_20260519_screen444_fix">
 <link rel="stylesheet" href="/cabinet/css/broadcasts-block.css?v=cab_20260519_screen444_fix">
 <link rel="stylesheet" href="/cabinet/css/onboarding.css?v=cab_20260519_screen444_fix">
 <link rel="stylesheet" href="/cabinet/css/finance.css?v=cab_20260519_screen444_fix">
@@ -96,7 +96,7 @@ body.ui-v3 .v3-hero {
 
 <script>
 (function(){
-  // Trendex: ensure Arsenal i18n picks Russian (cabinetLang already set by our i18n.js)
+  // Golden Connect: ensure Arsenal i18n picks Russian (cabinetLang already set by our i18n.js)
   try {
     var lang = localStorage.getItem("cabinetLang") || localStorage.getItem("lang") || "ru";
     localStorage.setItem("lang", lang);
@@ -957,6 +957,7 @@ body.cabinet-body { overflow-x: hidden; }
   .media-thumb-play { width: 46px; height: 46px; }
 }
 </style>
+<link rel="stylesheet" href="/_golden-theme.css">
 </head>
 <body class="cabinet-body ui-v3">
 
@@ -973,15 +974,15 @@ body.cabinet-body { overflow-x: hidden; }
     <button id="burger-btn" onclick="toggleSidebar()">&#9776;</button>
     <a href="/" class="nav-logo cab-nav-logo">
       <span class="nav-logo-icon">T</span>
-      <span class="cab-nav-logo-full">TRENDEX</span>
+      <span class="cab-nav-logo-full">GOLDEN_CONNECT</span>
       <span class="cab-nav-logo-short" aria-hidden="true">TX</span>
     </a>
     <span class="cab-nav-title">Личный кабинет</span>
     <span class="cab-nav-spacer"></span>
     <button class="nav-theme-btn cab-nav-theme" onclick="toggleTheme()" title="Сменить тему"><span id="theme-icon">&#9788;</span></button>
     
-<div class="trendex-lang-switch" style="display:flex;align-items:center;gap:6px;margin:0 12px">
-  <select id="trendex-lang-select" aria-label="Language" style="padding:6px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13px;cursor:pointer">
+<div class="golden-connect-lang-switch" style="display:flex;align-items:center;gap:6px;margin:0 12px">
+  <select id="golden-connect-lang-select" aria-label="Language" style="padding:6px 10px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:13px;cursor:pointer">
     <option value="ru">🇷🇺 RU</option>
     <option value="en">🇬🇧 EN</option>
     <option value="es">🇪🇸 ES</option>
@@ -997,14 +998,14 @@ body.cabinet-body { overflow-x: hidden; }
 </div>
 <script>
 (function(){
-  var sel = document.getElementById('trendex-lang-select');
-  if (!sel || !window.TrendexI18n) { document.addEventListener('DOMContentLoaded', function(){init();}); }
+  var sel = document.getElementById('golden-connect-lang-select');
+  if (!sel || !window.Golden ConnectI18n) { document.addEventListener('DOMContentLoaded', function(){init();}); }
   else init();
   function init(){
-    var s = document.getElementById('trendex-lang-select');
-    if (!s || !window.TrendexI18n) return;
-    s.value = window.TrendexI18n.getLang();
-    s.addEventListener('change', function(){ window.TrendexI18n.setLang(s.value); });
+    var s = document.getElementById('golden-connect-lang-select');
+    if (!s || !window.Golden ConnectI18n) return;
+    s.value = window.Golden ConnectI18n.getLang();
+    s.addEventListener('change', function(){ window.Golden ConnectI18n.setLang(s.value); });
     window.addEventListener('cabinet-lang-changed', function(e){ if (e.detail && e.detail.lang) s.value = e.detail.lang; });
   }
 })();
@@ -1019,7 +1020,7 @@ body.cabinet-body { overflow-x: hidden; }
 <!-- Sidebar -->
 <aside id="sidebar">
   <!-- [rebrand-slogan-2026-05-15] -->
-  <div class="sb-logo" data-i18n="sb_cabinet_title" style="line-height:1.15">TRENDEX КАБИНЕТ<div style="font-size:.55rem;letter-spacing:.18em;color:var(--text-muted);margin-top:3px;text-transform:none;font-weight:400">Будь в тренде</div></div>
+  <div class="sb-logo" data-i18n="sb_cabinet_title" style="line-height:1.15">GOLDEN_CONNECT КАБИНЕТ<div style="font-size:.55rem;letter-spacing:.18em;color:var(--text-muted);margin-top:3px;text-transform:none;font-weight:400">Будь в тренде</div></div>
   <div class="sb-user" id="sb-user" role="button" tabindex="0" onclick="goPage('profile')" onkeypress="if(event.key==='Enter')goPage('profile')" title="Открыть профиль">
     <div class="sb-avatar" id="sb-avatar">?</div>
     <div class="sb-uname" id="sb-uname">Загрузка...</div>
@@ -1056,7 +1057,7 @@ body.cabinet-body { overflow-x: hidden; }
   <button class="sb-btn" data-page="tools" onclick="goPage('tools')"><span class="sb-icon">🛠</span> Инструменты</button>
 
   <div class="sb-section"><div class="sb-label">CRM</div></div>
-  <button class="sb-btn" data-page="crm" onclick="window.open('https://crm.trendex.biz/cabinet/crm-app.html','_blank')"><span class="sb-icon">📋</span> CRM партнёра</button>
+  <button class="sb-btn" data-page="crm" onclick="window.open('https://crm.golden-connect.to/cabinet/crm-app.html','_blank')"><span class="sb-icon">📋</span> CRM партнёра</button>
   <button class="sb-btn" data-page="roboai-earn" onclick="goPage('roboai-earn')"><span class="sb-icon">🤖</span> TG Neuro AI</button>
 
   <div class="sb-section"><div class="sb-label">TRDX И ТАРИФ</div></div>
@@ -1070,7 +1071,7 @@ body.cabinet-body { overflow-x: hidden; }
   <button class="sb-btn" data-page="faq" onclick="goPage('faq')"><span class="sb-icon">❓</span> FAQ</button>
 
   <div class="sb-section admin-only" style="display:none"><div class="sb-label">АДМИНИСТРАТИВНОЕ</div></div>
-  <button class="sb-btn admin-only" style="display:none" data-page="admin_stats" onclick="goPage('admin_stats')"><span class="sb-icon">📊</span> Статистика Trendex</button>
+  <button class="sb-btn admin-only" style="display:none" data-page="admin_stats" onclick="goPage('admin_stats')"><span class="sb-icon">📊</span> Статистика Golden Connect</button>
   <button class="sb-btn admin-only" style="display:none" data-page="ads-moderation" onclick="goPage('ads-moderation')"><span class="sb-icon">🛡</span> Модерация рекламы</button>
   <button class="sb-btn admin-only" style="display:none" data-page="roboai-moderation" onclick="goPage('roboai-moderation')"><span class="sb-icon">🛡</span> Модерация AI-рассылок</button>
   <button class="sb-btn admin-only" style="display:none" data-page="admin-events" onclick="goPage('admin-events')"><span class="sb-icon">⚙</span> Управление эфирами</button>
@@ -1207,7 +1208,7 @@ body.cabinet-body { overflow-x: hidden; }
         </div>
         <div class="form-row">
           <label class="form-label">Спикер(ы)</label>
-          <input class="cab-input" id="aev-speakers" placeholder="Иван Петров, Команда Trendex (через запятую)">
+          <input class="cab-input" id="aev-speakers" placeholder="Иван Петров, Команда Golden Connect (через запятую)">
         </div>
         <div class="form-row">
           <label class="form-label">Обложка эфира</label>
@@ -1320,17 +1321,17 @@ body.cabinet-body { overflow-x: hidden; }
 
   <!-- Materials -->
   <div class="page" id="page-materials">
-    <!-- Static documents block — official Trendex PDFs always at top. -->
+    <!-- Static documents block — official Golden Connect PDFs always at top. -->
     <section class="cab-card" style="margin-bottom:18px">
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
         <span style="font-size:24px">📑</span>
         <h2 class="cab-card-title" style="margin:0" data-i18n="heading_documents">Официальные документы</h2>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
-        <a href="/cabinet/docs/Trendex_presentation.pdf" target="_blank" rel="noopener" class="cab-doc-card" style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:12px;background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(177,74,237,.08));border:1px solid var(--border);text-decoration:none;color:var(--text);transition:transform .15s,border-color .15s">
+        <a href="/cabinet/docs/Golden Connect_presentation.pdf" target="_blank" rel="noopener" class="cab-doc-card" style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-radius:12px;background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(177,74,237,.08));border:1px solid var(--border);text-decoration:none;color:var(--text);transition:transform .15s,border-color .15s">
           <div style="display:flex;align-items:center;gap:10px">
             <span style="font-size:28px">📄</span>
-            <strong style="flex:1;font-size:15px" data-i18n="presentation_title">Презентация Trendex</strong>
+            <strong style="flex:1;font-size:15px" data-i18n="presentation_title">Презентация Golden Connect</strong>
             <span style="font-size:11px;padding:2px 8px;border-radius:6px;background:var(--accent-soft);color:var(--accent);font-weight:700">PDF · 14 стр</span>
           </div>
           <p style="margin:0;font-size:13px;color:var(--text-secondary);line-height:1.5" data-i18n="presentation_desc">Полное представление платформы: матрица, тарифы LAUNCH/BOOST/ROCKET, бизнес-места, 10-уровневая партнёрская программа, Matching Bonus, Лидерский пул, Gift-счёт.</p>
@@ -1382,7 +1383,7 @@ body.cabinet-body { overflow-x: hidden; }
 
   <!-- AI -->
   <div class="page" id="page-ai">
-    <!-- mounted by trendex-ai-chat.js -->
+    <!-- mounted by golden-connect-ai-chat.js -->
   </div>
 
   <!-- Onboarding recommendation -->
@@ -1534,10 +1535,10 @@ body.cabinet-body { overflow-x: hidden; }
   var withdrawals = [];
   var orders = [];
 
-  var COMPANY_LINK = 'https://my.winwinbot.com/bot/1/trendex_bot?REFID=10117721';
+  var COMPANY_LINK = 'https://my.winwinbot.com/bot/1/golden-connect_bot?REFID=10117721';
   var DEFAULT_REF_CODE = 'xh160f8';
-  var DEFAULT_REF_LINK = 'https://trendex.biz/?ref=' + DEFAULT_REF_CODE;
-  var DEFAULT_BOT_REF_LINK = 'https://t.me/Trendex_bizbot?start=ref_' + DEFAULT_REF_CODE;
+  var DEFAULT_REF_LINK = 'https://golden-connect.to/?ref=' + DEFAULT_REF_CODE;
+  var DEFAULT_BOT_REF_LINK = 'https://t.me/Golden Connect_bizbot?start=ref_' + DEFAULT_REF_CODE;
 
   var PAGE_TITLES = {
     // [hub-alias-routing-2026-05-13] hub-alias keys so normalizePageName()
@@ -1594,7 +1595,7 @@ body.cabinet-body { overflow-x: hidden; }
     topup: 'Пополнить',
     transfer: 'Перевести',
     my_plan: 'Мой план',
-    admin_stats: 'Статистика Trendex',
+    admin_stats: 'Статистика Golden Connect',
     'ads-site': 'Реклама на сайте',
     'ads-moderation': '🛡 Модерация рекламы',
     trdx: 'Genesis TRDX — пресейл-токен',
@@ -1641,7 +1642,7 @@ body.cabinet-body { overflow-x: hidden; }
       cover: '/media/brand-og.jpg',
       posts: [
         { title: 'Что такое Genesis TRDX', image: '/media/brand-og.jpg',
-          text: '💎 Trendex запустил Genesis TRDX — пресейл-токен платформы. Зарегаться сейчас → +100 TRDX мгновенно. После старта будет внутренняя биржа, ежеквартальные дивиденды от прибыли Trendex и розыгрыши призов. Чем раньше начнёшь копить — тем больше доля.\n\nРегистрация: {link}' },
+          text: '💎 Golden Connect запустил Genesis TRDX — пресейл-токен платформы. Зарегаться сейчас → +100 TRDX мгновенно. После старта будет внутренняя биржа, ежеквартальные дивиденды от прибыли Golden Connect и розыгрыши призов. Чем раньше начнёшь копить — тем больше доля.\n\nРегистрация: {link}' },
         { title: 'Сколько TRDX можно накопить', image: '/media/awards-overview.jpg',
           text: '🚀 Награды Genesis TRDX:\n• Регистрация: +100 TRDX\n• Бесплатный реферал: +50\n• Реферал на LAUNCH ($45): +1 000\n• На BOOST ($90): +2 500\n• На ROCKET ($135): +7 500\n\nПриглашаешь 10 на ROCKET → 75 000 TRDX. После запуска биржи это реальные деньги. Подробности: {link}' },
         { title: 'Зачем нужен TRDX', image: '/media/partner-system.jpg',
@@ -1656,7 +1657,7 @@ body.cabinet-body { overflow-x: hidden; }
       cover: '/media/partner-system.jpg',
       posts: [
         { title: 'Заработок на заданиях', image: '/media/partner-system.jpg',
-          text: '💼 На бирже Trendex короткие задания (5-15 мин), за каждое — $0.05+ на баланс. Подписки, видеопросмотры, кастомные отчёты. Карма, рейтинг, мгновенные выплаты. Старт без вложений: {link}' },
+          text: '💼 На бирже Golden Connect короткие задания (5-15 мин), за каждое — $0.05+ на баланс. Подписки, видеопросмотры, кастомные отчёты. Карма, рейтинг, мгновенные выплаты. Старт без вложений: {link}' },
         { title: 'Как работает', image: '/media/instructions-og.jpg',
           text: '✅ Берёшь задание → выполняешь → присылаешь отчёт (текст/фото) → получаешь деньги. AI проверяет автоматически, человек — спорные. Минимум для вывода: $3. Без подписок и скрытых комиссий: {link}' },
       ]
@@ -1669,7 +1670,7 @@ body.cabinet-body { overflow-x: hidden; }
       cover: '/media/partner-system.jpg',
       posts: [
         { title: 'Партнёрка 10 уровней', image: '/media/partner-system.jpg',
-          text: '🌳 Trendex — партнёрка с матрицей до 17 уровней вглубь. Каждый приглашённый строит твою сеть. Доход с L1: 10%, до L10: 0.5%. Тариф ROCKET добавляет +10% Matching Bonus с активных рефералов. Без вложений можно начать: {link}' },
+          text: '🌳 Golden Connect — партнёрка с матрицей до 17 уровней вглубь. Каждый приглашённый строит твою сеть. Доход с L1: 10%, до L10: 0.5%. Тариф ROCKET добавляет +10% Matching Bonus с активных рефералов. Без вложений можно начать: {link}' },
         { title: 'Matching Bonus', image: '/media/awards-overview.jpg',
           text: '🔥 Matching Bonus (только ROCKET): +10% от партнёрских начислений твоих рефералов до L3. Если у твоего реферала 5 человек, ты получаешь не только с него, но и с его команды. Удваивает доход: {link}' },
         { title: 'Лидерский пул', image: '/media/partner-system.jpg',
@@ -1680,11 +1681,11 @@ body.cabinet-body { overflow-x: hidden; }
       id: 'banner_ad',
       icon: '📐',
       title: 'Баннерная реклама',
-      desc: 'Свой баннер на сайте Trendex',
+      desc: 'Свой баннер на сайте Golden Connect',
       cover: '/media/awards-overview.jpg',
       posts: [
         { title: 'Запусти свой баннер', image: '/media/awards-overview.jpg',
-          text: '📐 На Trendex запустил баннерную рекламу: твой баннер показывается на партнёрских страницах сайта. Оплата за реальные показы во внутренней TRDX-валюте — 0.05 TRDX за просмотр. 5 форматов: 728×90, 300×250, 160×600, 320×50, sticky-bottom. Создай за 1 минуту: {link}' },
+          text: '📐 На Golden Connect запустил баннерную рекламу: твой баннер показывается на партнёрских страницах сайта. Оплата за реальные показы во внутренней TRDX-валюте — 0.05 TRDX за просмотр. 5 форматов: 728×90, 300×250, 160×600, 320×50, sticky-bottom. Создай за 1 минуту: {link}' },
         { title: 'Авто-подгонка картинки', image: '/media/instructions-og.jpg',
           text: '🎨 Загружаешь любую картинку — система сама подгонит под формат. Если пропорции близки → smart crop. Если сильно разные → исходник в полный размер по центру + размытый фон (как у YouTube). Никакой работы с дизайном: {link}' },
       ]
@@ -1694,10 +1695,10 @@ body.cabinet-body { overflow-x: hidden; }
       icon: '🎬',
       title: 'Видео-реклама',
       desc: 'Гарантированные просмотры',
-      cover: '/media/trendex-hero.jpg',
+      cover: '/media/golden-connect-hero.jpg',
       posts: [
-        { title: 'Видео для всех посетителей', image: '/media/trendex-hero.jpg',
-          text: '🎬 Заливаешь видео до 5 минут — оно показывается всем посетителям сайта Trendex. 0.10 TRDX за зачтённый просмотр (≥10 сек). Точная статистика кликов. Доступ только тарифам LAUNCH/BOOST/ROCKET. Подробности: {link}' },
+        { title: 'Видео для всех посетителей', image: '/media/golden-connect-hero.jpg',
+          text: '🎬 Заливаешь видео до 5 минут — оно показывается всем посетителям сайта Golden Connect. 0.10 TRDX за зачтённый просмотр (≥10 сек). Точная статистика кликов. Доступ только тарифам LAUNCH/BOOST/ROCKET. Подробности: {link}' },
       ]
     },
     {
@@ -1708,7 +1709,7 @@ body.cabinet-body { overflow-x: hidden; }
       cover: '/media/reviews-showcase.jpg',
       posts: [
         { title: 'ADX биржа каналов', image: '/media/reviews-showcase.jpg',
-          text: '📡 На ADX-бирже Trendex размещаешь рекламные посты в любых TG-каналах партнёров. Каталог с фильтром по нише, цене, аудитории. Escrow + автопубликация ботом + рейтинги. Или продавай рекламу в своём канале — 90% оставляешь себе: {link}' },
+          text: '📡 На ADX-бирже Golden Connect размещаешь рекламные посты в любых TG-каналах партнёров. Каталог с фильтром по нише, цене, аудитории. Escrow + автопубликация ботом + рейтинги. Или продавай рекламу в своём канале — 90% оставляешь себе: {link}' },
       ]
     },
     {
@@ -1731,8 +1732,8 @@ body.cabinet-body { overflow-x: hidden; }
       desc: 'LAUNCH / BOOST / ROCKET',
       cover: '/media/awards-overview.jpg',
       posts: [
-        { title: 'Тарифы Trendex', image: '/media/awards-overview.jpg',
-          text: '🚀 Тарифы Trendex с матрицей переливов:\n🚀 LAUNCH $45 — 1 место, 12 уровней, цикл $4 095\n⚡ BOOST $90 — 2 места, 14 уровней, цикл $19 660\n🔥 ROCKET $135 — 3 места, 17 уровней + Matching Bonus, цикл $183 499\n\nПодробное сравнение: {link}' },
+        { title: 'Тарифы Golden Connect', image: '/media/awards-overview.jpg',
+          text: '🚀 Тарифы Golden Connect с матрицей переливов:\n🚀 LAUNCH $45 — 1 место, 12 уровней, цикл $4 095\n⚡ BOOST $90 — 2 места, 14 уровней, цикл $19 660\n🔥 ROCKET $135 — 3 места, 17 уровней + Matching Bonus, цикл $183 499\n\nПодробное сравнение: {link}' },
         { title: 'Окупаемость', image: '/media/science-overview.jpg',
           text: '💰 Пример: 10 прямых рефералов покупают LAUNCH ($30 партнёрки сразу). За год средний партнёр выходит на $300-500/мес пассивно. С ROCKET и Matching Bonus — х3-х5. Старт здесь: {link}' },
       ]
@@ -1745,15 +1746,15 @@ body.cabinet-body { overflow-x: hidden; }
       cover: '/media/science-overview.jpg',
       posts: [
         { title: 'AI-Mentor', image: '/media/science-overview.jpg',
-          text: '🤖 AI-Mentor Trendex — персональный наставник на базе LLM. Подскажет следующий шаг, разберёт твой кейс, подберёт тариф под цели. Бесплатно, без лимитов в личке бота: {link}' },
+          text: '🤖 AI-Mentor Golden Connect — персональный наставник на базе LLM. Подскажет следующий шаг, разберёт твой кейс, подберёт тариф под цели. Бесплатно, без лимитов в личке бота: {link}' },
         { title: 'Авто-постинг и генерация', image: '/media/instructions-og.jpg',
-          text: '⚡ Подключаешь свои TG-каналы — Trendex автоматически публикует контент по расписанию. Плюс AI-генератор постов, баннеров, видео-промо. Всё в одном кабинете: {link}' },
+          text: '⚡ Подключаешь свои TG-каналы — Golden Connect автоматически публикует контент по расписанию. Плюс AI-генератор постов, баннеров, видео-промо. Всё в одном кабинете: {link}' },
       ]
     },
   ];
 
   var FAQ_LIST = [
-    { q: 'Что такое Trendex?', a: 'Trendex \u2014 рекламная платформа нового поколения с распределённой прибылью. Внимание аудитории напрямую оплачивается: до 20$ в день за просмотры, клики и задания. Доля от оборота платформы \u2014 без потолка.' },
+    { q: 'Что такое Golden Connect?', a: 'Golden Connect \u2014 рекламная платформа нового поколения с распределённой прибылью. Внимание аудитории напрямую оплачивается: до 20$ в день за просмотры, клики и задания. Доля от оборота платформы \u2014 без потолка.' },
     { q: 'Какие тарифы есть?', a: 'Четыре: FREE (бесплатный, до 20$/день за активность), LAUNCH (45$, 1 бизнес-место, матрица 12 уровней), BOOST (90$, 2 места, 14 уровней), ROCKET (135$, 3 места, 17 уровней + Matching Bonus).' },
     { q: 'Как стать партнёром?', a: 'Приведите 10 человек на любой тариф \u2014 включая FREE \u2014 и получите статус Partner. +10% к ставке за каждое действие, применяется автоматически.' },
     { q: 'Как работает 10-уровневая партнёрская программа?', a: 'L1 10%, L2 7%, L3 5%, L4 2%, L5 1.5%, L6 1.3%, L7 1.2%, L8 1%, L9 0.9%, L10 0.5% от дохода приглашённых. FREE/PARTNER \u2014 только L1; платный тариф \u2014 все 10 линий.' },
@@ -1761,9 +1762,9 @@ body.cabinet-body { overflow-x: hidden; }
     { q: 'Что такое Лидерский пул?', a: 'Доход трёх верхних админ-аккаунтов идёт в фонд. Раз в две недели (1 и 15 числа) распределяется среди топ-15 партнёров по обороту: 1 место \u2014 30%, 2 \u2014 20%, 3 \u2014 10% и т.д.' },
     { q: 'Что такое Gift-счёт?', a: 'Рекламный бюджет: $5 после запуска и $10 до запуска за каждое активированное бизнес-место. Расходуется на баннерную и контекстную рекламу внутри платформы.' },
     { q: 'Как работают встроенные инструменты?', a: 'В кабинете доступны: лендинги, конструктор ботов, AI-ассистенты, Premium-сократитель ссылок, Bio-страницы, генератор видео-баннеров. Без подписок на сторонние сервисы.' },
-    { q: 'Что такое цикл?', a: 'Цикл — это 30 дней с момента регистрации в Trendex, по сути календарный месяц. Все цифры дохода (LAUNCH $4 095, BOOST $19 660, ROCKET $183 499) — это потенциал за один такой цикл при заполненной матрице переливов. После окончания цикла начинается новый — так непрерывно, пока ты участник.' },
+    { q: 'Что такое цикл?', a: 'Цикл — это 30 дней с момента регистрации в Golden Connect, по сути календарный месяц. Все цифры дохода (LAUNCH $4 095, BOOST $19 660, ROCKET $183 499) — это потенциал за один такой цикл при заполненной матрице переливов. После окончания цикла начинается новый — так непрерывно, пока ты участник.' },
     { q: 'Когда запуск платформы?', a: 'Дата запуска объявляется отдельно. До запуска бонус по Gift-счёту удвоен ($10 вместо $5) \u2014 ранние участники получают преимущество на весь жизненный цикл (цикл партнёра = 30 дней с регистрации).' },
-    { q: 'Как связаться с поддержкой?', a: 'Через раздел \u00abПоддержка\u00bb в кабинете или напрямую в Telegram-бот @Trendex_bizbot. Время ответа \u2014 до 24 часов.' }
+    { q: 'Как связаться с поддержкой?', a: 'Через раздел \u00abПоддержка\u00bb в кабинете или напрямую в Telegram-бот @Golden Connect_bizbot. Время ответа \u2014 до 24 часов.' }
   ];
 
   var LEARNING_DATA = [
@@ -1772,7 +1773,7 @@ body.cabinet-body { overflow-x: hidden; }
       lessons: [
         { title: 'Быстрый старт кабинета', desc: 'Как быстро понять логику кабинета и не потерять фокус на первых шагах. Командный центр, главная ссылка, первые действия.' },
         { title: 'Моя первая ссылка', desc: 'Получаем реферальную ссылку, настраиваем UTM-метки и отправляем первое приглашение.' },
-        { title: 'Знакомство с продуктами', desc: 'Обзор платформы Trendex: AdCenter, Маркетплейс, Bio-страницы, AI-инструменты и партнёрская программа.' },
+        { title: 'Знакомство с продуктами', desc: 'Обзор платформы Golden Connect: AdCenter, Маркетплейс, Bio-страницы, AI-инструменты и партнёрская программа.' },
         { title: 'Telegram-бот партнёра', desc: 'Как подключить бот, получать уведомления и использовать команды для быстрого доступа к ссылкам.' }
       ]
     },
@@ -1838,7 +1839,7 @@ body.cabinet-body { overflow-x: hidden; }
     else if (channel === 'wa') href = 'https://wa.me/?text=' + encodeURIComponent((text || '') + ' ' + (url || ''));
     else if (channel === 'vk') href = 'https://vk.com/share.php?url=' + u;
     else if (channel === 'x') href = 'https://twitter.com/intent/tweet?url=' + u + '&text=' + t;
-    else if (channel === 'email') href = 'mailto:?subject=Trendex&body=' + encodeURIComponent((text || '') + '\n' + (url || ''));
+    else if (channel === 'email') href = 'mailto:?subject=Golden Connect&body=' + encodeURIComponent((text || '') + '\n' + (url || ''));
     if (href) window.open(href, '_blank');
   }
 
@@ -1982,7 +1983,7 @@ body.cabinet-body { overflow-x: hidden; }
     shop: [
       { hash: 'marketplace',  label: '🌐 Маркетплейс' },
       { hash: 'myshop',       label: '🏪 Мой магазин' },
-      { hash: 'products',     label: '📦 Продукты Trendex' },
+      { hash: 'products',     label: '📦 Продукты Golden Connect' },
     ],
     materials: [
       { hash: 'materials',    label: '📷 Промо-материалы' },
@@ -2146,7 +2147,7 @@ body.cabinet-body { overflow-x: hidden; }
 
   function loadPage(name) {
     // [hub-highlight-2026-05-12] hub aliases now resolved in goPage() — only crm external remains here
-    if (name === 'crm')         { window.open('https://crm.trendex.biz/cabinet/crm-app.html', '_blank'); return; }
+    if (name === 'crm')         { window.open('https://crm.golden-connect.to/cabinet/crm-app.html', '_blank'); return; }
 
     if (name === 'dashboard') loadDashboard();
     else if (name === 'broadcasts') loadBroadcasts();
@@ -2249,7 +2250,7 @@ body.cabinet-body { overflow-x: hidden; }
     { page:'broadcasts', icon:'&#128225;', name:'Эфиры', desc:'Трансляции с профессорами' },
     { page:'meet', icon:'&#128249;', name:'Видеозвонки', desc:'Jitsi Meet звонки' },
     { page:'links', icon:'&#128279;', name:'Ссылки', desc:'Реферальные и промо' },
-    { page:'products', icon:'&#128230;', name:'Продукты', desc:'Каталог Trendex' },
+    { page:'products', icon:'&#128230;', name:'Продукты', desc:'Каталог Golden Connect' },
     { page:'landings', icon:'&#127760;', name:'Лендинги', desc:'Страницы для продвижения' },
     { page:'materials', icon:'&#128196;', name:'Материалы', desc:'Тексты и промо' },
     { page:'media', icon:'&#128247;', name:'Медиацентр', desc:'Фото и видео' },
@@ -2491,7 +2492,7 @@ body.cabinet-body { overflow-x: hidden; }
     if (!$('dash-partner')) return;
     var isPartner = isPartnerRole();
     var link = getInviterCompanyLink();
-    var hasLink = !!(me && me.trendexRefLink);
+    var hasLink = !!(me && me.golden-connectRefLink);
     var steps = [
       { title: 'Стать партнёром', desc: 'Оформите партнёрский статус в компании', done: isPartner },
       { title: 'Настроить профиль', desc: 'Добавьте вашу партнёрскую ссылку в профиле', done: hasLink },
@@ -2549,7 +2550,7 @@ body.cabinet-body { overflow-x: hidden; }
         (dirs ? '<div class="bc-dash-dirs">' + dirs + '</div>' : '') +
         '<div class="bc-dash-actions">' +
         '<a href="#/broadcasts" class="bc-act-remind" onclick="goPage(\'broadcasts\')">&#128225; Открыть эфиры</a>' +
-        '<a href="https://t.me/Trendex_bizbot?start=' + (refCode ? 'remind_' + ev.id + '_ref_' + encodeURIComponent(refCode) : 'remind_' + ev.id) + '" target="_blank" class="bc-act-sub">&#128276; Напомнить через бот</a>' +
+        '<a href="https://t.me/Golden Connect_bizbot?start=' + (refCode ? 'remind_' + ev.id + '_ref_' + encodeURIComponent(refCode) : 'remind_' + ev.id) + '" target="_blank" class="bc-act-sub">&#128276; Напомнить через бот</a>' +
         '</div></div>';
     } catch(e) {
       $('dash-broadcasts').innerHTML = '';
@@ -2651,7 +2652,7 @@ body.cabinet-body { overflow-x: hidden; }
     $('bc-actions').innerHTML =
       '<div class="cab-card"><h3>Пригласить на эфир</h3>' +
       '<p style="margin-bottom:10px;font-size:var(--fs-sm);color:var(--text-secondary)">Поделитесь ссылкой с потенциальными партнёрами и клиентами</p>' +
-      shareButtons(refLink, 'Присоединяйся к эфиру Trendex!') +
+      shareButtons(refLink, 'Присоединяйся к эфиру Golden Connect!') +
       '</div>';
   }
 
@@ -3224,16 +3225,16 @@ body.cabinet-body { overflow-x: hidden; }
      PAGE: LINKS
      ══════════════════════════════════════════════════════════════ */
   var PROMO_POSTS = [
-    { img: '/cabinet/img/trendex-logo.jpg', title: 'Trendex — рекламная платформа нового поколения', text: 'Хочешь зарабатывать на рекламе? Trendex — экосистема с распределённой прибылью. До $50/день за активность + 10-уровневая партнёрка. Регистрация бесплатна, выплаты с первого дня: {link}', tags: ['#Trendex', '#Реклама', '#Заработок'] },
-    { img: '/cabinet/img/trendex-logo.jpg', title: 'До $50 в день за активность — без продаж и звонков', text: 'Просмотры, клики, простые задания — Trendex платит за внимание. Регистрация за 1 минуту, начни зарабатывать сегодня: {link}', tags: ['#Trendex', '#Заработок', '#Дополнительныйдоход'] },
-    { img: '/cabinet/img/trendex-logo.jpg', title: 'Статус PARTNER = +10% к каждой выплате', text: 'Приведи 10 человек — получишь статус PARTNER и +10% ко всем начислениям пожизненно. Можно даже на бесплатном тарифе. Старт здесь: {link}', tags: ['#Trendex', '#PARTNER', '#Реферальная'] },
-    { img: '/cabinet/img/trendex-logo.jpg', title: 'LAUNCH $45 — твой вход в матрицу Trendex', text: 'Активация $45 + $15/мес. 1 бизнес-место, 12 уровней матрицы × $0.50, все 10 уровней партнёрки. Полный цикл (30 дней) — $4 095. Pre-launch + x2 Gift: {link}', tags: ['#LAUNCH', '#Trendex', '#PreLaunch'] },
-    { img: '/cabinet/img/trendex-logo.jpg', title: 'BOOST $90 — удвоенный доход с той же сети', text: '2 бизнес-места, 12 уровней × $0.60, партнёрка L1-L5 (10/5/5/3/3%). Цикл — $7 370. Доход в 3.6× больше LAUNCH при той же сети: {link}', tags: ['#BOOST', '#Trendex', '#Тариф'] },
-    { img: '/cabinet/img/trendex-logo.jpg', title: 'ROCKET $135 — Matching Bonus + максимум', text: '3 места, 15 уровней × $0.70, все 10 линий партнёрки (33%), Matching Bonus +10% от L1-L3, доступ к Лидерскому пулу. Цикл — $91 748: {link}', tags: ['#ROCKET', '#MatchingBonus', '#Trendex'] },
-    { img: '/cabinet/img/trendex-logo.jpg', title: '🛒 Маркетплейс Trendex — твои товары, твоя прибыль', text: 'Продавай курсы, e-books, шаблоны и любые цифровые товары. Сплит 70% тебе / 30% в сеть (или больше — настраивается). QR-код и короткая ссылка автоматически. Магазин = твой лендинг: {link}', tags: ['#Маркетплейс', '#Trendex', '#ЦифровыеТовары'] },
-    { img: '/cabinet/img/trendex-logo.jpg', title: '📡 AdCenter — TG-автопостинг с AI-рерайтом', text: 'Подключи свои Telegram-каналы → бот сам рассылает посты. Расписание, AI-рерайт каждой публикации (Groq Llama), мониторы YouTube/TikTok, Smart-очередь по лучшим часам. Внутри Trendex: {link}', tags: ['#AdCenter', '#Telegram', '#Автопостинг'] },
-    { img: '/cabinet/img/trendex-logo.jpg', title: '🌐 Bio-страница Trendex — Linktree с витриной', text: 'Одна ссылка — все твои каналы + товары + соцсети. Конструктор блоков, Shop Widget с твоими товарами, A/B тесты, кастомный домен. Зарегистрируйся и сделай свою за 5 минут: {link}', tags: ['#Bio', '#Trendex', '#Linktree'] },
-    { img: '/cabinet/img/trendex-logo.jpg', title: '✨ AI-инструменты Trendex — копирайтер, captions, транскрибация', text: 'AI-копирайтер (5 тонов × 3 длины), AI Captions для постов, транскрибация YouTube/TikTok видео, генератор хэштегов, QR, сократитель ссылок. Всё внутри кабинета без подписок на сторонние сервисы: {link}', tags: ['#AI', '#Trendex', '#Инструменты'] }
+    { img: '/cabinet/img/golden-connect-logo.jpg', title: 'Golden Connect — рекламная платформа нового поколения', text: 'Хочешь зарабатывать на рекламе? Golden Connect — экосистема с распределённой прибылью. До $50/день за активность + 10-уровневая партнёрка. Регистрация бесплатна, выплаты с первого дня: {link}', tags: ['#Golden Connect', '#Реклама', '#Заработок'] },
+    { img: '/cabinet/img/golden-connect-logo.jpg', title: 'До $50 в день за активность — без продаж и звонков', text: 'Просмотры, клики, простые задания — Golden Connect платит за внимание. Регистрация за 1 минуту, начни зарабатывать сегодня: {link}', tags: ['#Golden Connect', '#Заработок', '#Дополнительныйдоход'] },
+    { img: '/cabinet/img/golden-connect-logo.jpg', title: 'Статус PARTNER = +10% к каждой выплате', text: 'Приведи 10 человек — получишь статус PARTNER и +10% ко всем начислениям пожизненно. Можно даже на бесплатном тарифе. Старт здесь: {link}', tags: ['#Golden Connect', '#PARTNER', '#Реферальная'] },
+    { img: '/cabinet/img/golden-connect-logo.jpg', title: 'LAUNCH $45 — твой вход в матрицу Golden Connect', text: 'Активация $45 + $15/мес. 1 бизнес-место, 12 уровней матрицы × $0.50, все 10 уровней партнёрки. Полный цикл (30 дней) — $4 095. Pre-launch + x2 Gift: {link}', tags: ['#LAUNCH', '#Golden Connect', '#PreLaunch'] },
+    { img: '/cabinet/img/golden-connect-logo.jpg', title: 'BOOST $90 — удвоенный доход с той же сети', text: '2 бизнес-места, 12 уровней × $0.60, партнёрка L1-L5 (10/5/5/3/3%). Цикл — $7 370. Доход в 3.6× больше LAUNCH при той же сети: {link}', tags: ['#BOOST', '#Golden Connect', '#Тариф'] },
+    { img: '/cabinet/img/golden-connect-logo.jpg', title: 'ROCKET $135 — Matching Bonus + максимум', text: '3 места, 15 уровней × $0.70, все 10 линий партнёрки (33%), Matching Bonus +10% от L1-L3, доступ к Лидерскому пулу. Цикл — $91 748: {link}', tags: ['#ROCKET', '#MatchingBonus', '#Golden Connect'] },
+    { img: '/cabinet/img/golden-connect-logo.jpg', title: '🛒 Маркетплейс Golden Connect — твои товары, твоя прибыль', text: 'Продавай курсы, e-books, шаблоны и любые цифровые товары. Сплит 70% тебе / 30% в сеть (или больше — настраивается). QR-код и короткая ссылка автоматически. Магазин = твой лендинг: {link}', tags: ['#Маркетплейс', '#Golden Connect', '#ЦифровыеТовары'] },
+    { img: '/cabinet/img/golden-connect-logo.jpg', title: '📡 AdCenter — TG-автопостинг с AI-рерайтом', text: 'Подключи свои Telegram-каналы → бот сам рассылает посты. Расписание, AI-рерайт каждой публикации (Groq Llama), мониторы YouTube/TikTok, Smart-очередь по лучшим часам. Внутри Golden Connect: {link}', tags: ['#AdCenter', '#Telegram', '#Автопостинг'] },
+    { img: '/cabinet/img/golden-connect-logo.jpg', title: '🌐 Bio-страница Golden Connect — Linktree с витриной', text: 'Одна ссылка — все твои каналы + товары + соцсети. Конструктор блоков, Shop Widget с твоими товарами, A/B тесты, кастомный домен. Зарегистрируйся и сделай свою за 5 минут: {link}', tags: ['#Bio', '#Golden Connect', '#Linktree'] },
+    { img: '/cabinet/img/golden-connect-logo.jpg', title: '✨ AI-инструменты Golden Connect — копирайтер, captions, транскрибация', text: 'AI-копирайтер (5 тонов × 3 длины), AI Captions для постов, транскрибация YouTube/TikTok видео, генератор хэштегов, QR, сократитель ссылок. Всё внутри кабинета без подписок на сторонние сервисы: {link}', tags: ['#AI', '#Golden Connect', '#Инструменты'] }
   ];
 
   async function loadLinks() {
@@ -3247,14 +3248,14 @@ body.cabinet-body { overflow-x: hidden; }
     html += '<div class="cab-card"><h3>&#129302; ' + '\u0421\u0441\u044b\u043b\u043a\u0430 \u043d\u0430 Telegram-\u0431\u043e\u0442\u0430' + '</h3>';
     html += '<p style="font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:8px;">' + '\u041b\u0438\u0447\u043d\u0430\u044f \u0441\u0441\u044b\u043b\u043a\u0430 \u043d\u0430 \u0431\u043e\u0442\u0430 \u0441 \u0432\u0430\u0448\u0438\u043c \u043a\u043e\u0434\u043e\u043c \u043f\u0440\u0438\u0433\u043b\u0430\u0448\u0435\u043d\u0438\u044f' + '</p>';
     html += copyRow('bot-link-input', botLink);
-    html += shareButtons(botLink, '\u041e\u0442\u043a\u0440\u043e\u0439 Telegram-\u0431\u043e\u0442 Trendex \u043f\u043e \u043c\u043e\u0435\u0439 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u043e\u0439 \u0441\u0441\u044b\u043b\u043a\u0435');
+    html += shareButtons(botLink, '\u041e\u0442\u043a\u0440\u043e\u0439 Telegram-\u0431\u043e\u0442 Golden Connect \u043f\u043e \u043c\u043e\u0435\u0439 \u043f\u0435\u0440\u0441\u043e\u043d\u0430\u043b\u044c\u043d\u043e\u0439 \u0441\u0441\u044b\u043b\u043a\u0435');
     html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><a class="cab-btn cab-btn-primary cab-btn-sm" href="' + escapeHtml(botLink) + '" target="_blank" rel="noopener">' + '\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u0431\u043e\u0442\u0430' + '</a></div>';
     html += '</div>';
 
     // === LINKS SECTION ===
     html += '<div class="cab-card"><h3>&#128279; Реферальная ссылка</h3>';
     html += copyRow('ref-link-input', refLink);
-    html += shareButtons(refLink, 'Присоединяйся к Trendex!');
+    html += shareButtons(refLink, 'Присоединяйся к Golden Connect!');
     html += '</div>';
 
     html += '<div class="cab-card"><h3>&#128100; Ссылка на регистрацию</h3>';
@@ -3263,9 +3264,9 @@ body.cabinet-body { overflow-x: hidden; }
     html += '</div>';
 
     html += '<div class="cab-card"><h3>&#127970; Ссылка на компанию</h3>';
-    var userCompanyLink = (me && me.trendexRefLink) || '';
+    var userCompanyLink = (me && me.golden-connectRefLink) || '';
     if (userCompanyLink) {
-      html += '<p style="font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:8px;">Ваша персональная ссылка в компании Trendex</p>';
+      html += '<p style="font-size:var(--fs-xs);color:var(--text-muted);margin-bottom:8px;">Ваша персональная ссылка в компании Golden Connect</p>';
       html += copyRow('company-link-input', userCompanyLink);
       html += '<div style="margin-top:6px;font-size:12px"><span style="color:var(--accent)">&#10004; Привязана в профиле</span> &middot; <a href="#" onclick="goPage(\'profile\');return false" style="color:var(--accent)">Изменить</a></div>';
     } else {
@@ -3344,7 +3345,7 @@ body.cabinet-body { overflow-x: hidden; }
      ══════════════════════════════════════════════════════════════ */
   function landShareBtns(url, title) {
     var eu = encodeURIComponent(url);
-    var et = encodeURIComponent(title + ' | Trendex');
+    var et = encodeURIComponent(title + ' | Golden Connect');
     return '<div class="land-share">' +
       '<a href="https://t.me/share/url?url=' + eu + '&text=' + et + '" target="_blank" class="sh-tg" title="Telegram">&#9992;</a>' +
       '<a href="https://api.whatsapp.com/send?text=' + et + '%20' + eu + '" target="_blank" class="sh-wa" title="WhatsApp">&#128172;</a>' +
@@ -3400,8 +3401,8 @@ body.cabinet-body { overflow-x: hidden; }
         cta: '&#128065; Открыть CRM PRO'
       },
       {
-        id: 'main-trendex', icon: '&#127775;',
-        title: 'Главная — Trendex.biz',
+        id: 'main-golden-connect', icon: '&#127775;',
+        title: 'Главная — Golden Connect.biz',
         desc: 'Основной лендинг проекта. Полное описание экосистемы: 4 способа заработка, тарифы LAUNCH/BOOST/ROCKET, партнёрка 10 уровней, Matching Bonus, Лидерский пул.',
         url: base + '/?ref=' + refCode,
         badge: 'ОФИЦИАЛЬНЫЙ', color: '#B14AED', skipLang: true,
@@ -3538,7 +3539,7 @@ body.cabinet-body { overflow-x: hidden; }
     });
 
     var html = '<div class="v2-dash-hero">' +
-      '<div class="v2-hero-title">🛍 Услуги Trendex</div>' +
+      '<div class="v2-hero-title">🛍 Услуги Golden Connect</div>' +
       '<div class="v2-hero-sub">Закажи рекламу или используй встроенные инструменты — всё внутри платформы</div>' +
     '</div>';
 
@@ -3834,7 +3835,7 @@ body.cabinet-body { overflow-x: hidden; }
   }
 
   function getInviterProfile() {
-    var name = (me && (me.displayName || me.email)) || 'Команда Trendex';
+    var name = (me && (me.displayName || me.email)) || 'Команда Golden Connect';
     var contact = (me && me.preferredContact) || '';
     var email = (me && me.email) || '';
     return { name: name, contact: contact, email: email };
@@ -3860,7 +3861,7 @@ body.cabinet-body { overflow-x: hidden; }
   function buildBotRefLink(refCode) {
     var clean = String(refCode || '').trim();
     if (!clean) return DEFAULT_BOT_REF_LINK;
-    return 'https://t.me/Trendex_bizbot?start=ref_' + encodeURIComponent(clean);
+    return 'https://t.me/Golden Connect_bizbot?start=ref_' + encodeURIComponent(clean);
   }
 
   function getBotRefLink() {
@@ -3870,7 +3871,7 @@ body.cabinet-body { overflow-x: hidden; }
 
   function getInviterCompanyLink() {
     if (workspace && workspace.companyReferralLink) return workspace.companyReferralLink;
-    if (me && me.trendexRefLink) return me.trendexRefLink;
+    if (me && me.golden-connectRefLink) return me.golden-connectRefLink;
     return getBotRefLink();
   }
 
@@ -3916,27 +3917,27 @@ body.cabinet-body { overflow-x: hidden; }
 
   var VIDEO_SEO_TEMPLATES = {
     broadcasts: {
-      headline: 'Эфир Trendex: {title}',
-      audience: 'тем, кто хочет разобраться в платформе Trendex и задать вопросы команде',
+      headline: 'Эфир Golden Connect: {title}',
+      audience: 'тем, кто хочет разобраться в платформе Golden Connect и задать вопросы команде',
       cta: 'Хотите разобраться глубже и получить рекомендации?'
     },
     products: {
-      headline: 'Презентация продукта Trendex: {title}',
+      headline: 'Презентация продукта Golden Connect: {title}',
       audience: 'тем, кто выбирает продукт под свою задачу',
       cta: 'Посмотрите и получите персональные рекомендации.'
     },
     reviews: {
-      headline: 'Отзывы и опыт Trendex: {title}',
+      headline: 'Отзывы и опыт Golden Connect: {title}',
       audience: 'тем, кто хочет увидеть реальные кейсы',
       cta: 'Хотите получить подбор под себя?'
     },
     company: {
-      headline: 'О компании и экспертах Trendex: {title}',
+      headline: 'О компании и экспертах Golden Connect: {title}',
       audience: 'тем, кто знакомится с брендом и командой',
       cta: 'Узнать подробнее о компании и направлениях.'
     },
     science: {
-      headline: 'Технологии и наука Trendex: {title}',
+      headline: 'Технологии и наука Golden Connect: {title}',
       audience: 'тем, кому важна научная база и подход',
       cta: 'Смотрите и задавайте вопросы по технологиям.'
     },
@@ -3946,12 +3947,12 @@ body.cabinet-body { overflow-x: hidden; }
       cta: 'Узнать детали применения и получить поддержку.'
     },
     business: {
-      headline: 'Бизнес и партнёрство Trendex: {title}',
+      headline: 'Бизнес и партнёрство Golden Connect: {title}',
       audience: 'тем, кто рассматривает партнёрский запуск',
       cta: 'Получить условия и стартовый маршрут.'
     },
     other: {
-      headline: 'Видео Trendex: {title}',
+      headline: 'Видео Golden Connect: {title}',
       audience: 'тем, кто ищет понятное объяснение по теме',
       cta: 'Посмотрите и переходите к подробностям.'
     }
@@ -3991,7 +3992,7 @@ body.cabinet-body { overflow-x: hidden; }
     var referralUrl = buildVideoReferralUrl(item);
     var companyLink = getInviterCompanyLink();
     var profile = getInviterProfile();
-    var title = normalizeText(item && item.title || 'Видео Trendex');
+    var title = normalizeText(item && item.title || 'Видео Golden Connect');
     var category = normalizeText(item && item.categoryLabel || '');
     var summary = normalizeText(item && (item.summary || item.text || item.transcriptPreview) || '');
     summary = clipText(summary, maxSummary);
@@ -4001,9 +4002,9 @@ body.cabinet-body { overflow-x: hidden; }
     var template = pickVideoTemplate(item);
 
     var lines = [];
-    var headline = (template.headline || 'Видео Trendex: {title}').replace('{title}', title);
+    var headline = (template.headline || 'Видео Golden Connect: {title}').replace('{title}', title);
     lines.push(headline);
-    if (mode === 'story') lines.push('История и практический опыт от Trendex:');
+    if (mode === 'story') lines.push('История и практический опыт от Golden Connect:');
     if (summary) lines.push(summary);
     if (mode === 'business') lines.push('Формат: деловая презентация для клиентов и партнёров.');
     if (category && mode !== 'short') lines.push('Категория: ' + category);
@@ -4033,7 +4034,7 @@ body.cabinet-body { overflow-x: hidden; }
     if (item && String(item.kind || '').trim().toLowerCase() === 'video') {
       return buildVideoSeoPost(item, { includeLink: false, maxPoints: 2, maxSummary: 220, mode: 'short' });
     }
-    return item && (item.shareText || item.title) || 'Trendex';
+    return item && (item.shareText || item.title) || 'Golden Connect';
   }
 
   function buildVideoTranscriptText(item) {
@@ -4049,7 +4050,7 @@ body.cabinet-body { overflow-x: hidden; }
   }
 
   function buildVideoDownloadText(item) {
-    var title = normalizeText(item && item.title || 'Видео Trendex');
+    var title = normalizeText(item && item.title || 'Видео Golden Connect');
     var referralUrl = buildVideoReferralUrl(item);
     var companyLink = getInviterCompanyLink();
     var seoPost = buildVideoSeoPost(item, { includeLink: true });
@@ -4110,7 +4111,7 @@ body.cabinet-body { overflow-x: hidden; }
     var html = '';
     html += '<div class="media-hero-head">';
     html += '<div class="media-hero-copy">';
-    html += '<h3>Видео Trendex, которые можно сразу смотреть, пересылать и использовать в работе</h3>';
+    html += '<h3>Видео Golden Connect, которые можно сразу смотреть, пересылать и использовать в работе</h3>';
     html += '<p>Здесь собрана единая медиатека эфиров, презентаций продуктов, отзывов и экспертных материалов. У каждой карточки есть короткое описание, подробности, готовый текст для поста и быстрые кнопки поделиться.</p>';
     html += '</div>';
     html += '<div class="media-hero-stats">';
@@ -4149,7 +4150,7 @@ body.cabinet-body { overflow-x: hidden; }
     var html = '';
     html += '<article class="media-item media-video' + (isFeatured ? ' media-featured-card' : '') + '">';
     html += '<div class="media-thumb">';
-    if (item.imageUrl) html += '<img src="' + escapeHtml(item.imageUrl) + '" alt="' + escapeHtml(item.title || 'Видео Trendex') + '" loading="lazy">';
+    if (item.imageUrl) html += '<img src="' + escapeHtml(item.imageUrl) + '" alt="' + escapeHtml(item.title || 'Видео Golden Connect') + '" loading="lazy">';
     html += '<button class="media-thumb-play" type="button" onclick="openMediaDetails(\'' + escAttr(item.id) + '\')">&#9658;</button>';
     html += '<div class="media-thumb-badges">';
     html += '<span class="media-badge">' + escapeHtml(item.categoryLabel || 'Видео') + '</span>';
@@ -4160,7 +4161,7 @@ body.cabinet-body { overflow-x: hidden; }
     html += '<span class="media-kind">' + escapeHtml(item.categoryIcon || 'VIDEO') + ' / ' + escapeHtml(item.categoryLabel || 'Видео') + '</span>';
     if (item.speaker) html += '<span class="media-speaker">' + escapeHtml(item.speaker) + '</span>';
     html += '</div>';
-    html += '<h4 class="media-title">' + escapeHtml(item.title || 'Видео Trendex') + '</h4>';
+    html += '<h4 class="media-title">' + escapeHtml(item.title || 'Видео Golden Connect') + '</h4>';
     if (summary) html += '<p class="media-summary">' + escapeHtml(summary) + '</p>';
     if (points.length) {
       html += '<div class="media-keypoints">';
@@ -4191,7 +4192,7 @@ body.cabinet-body { overflow-x: hidden; }
     html += '<span class="media-kind">' + escapeHtml(mediaKindLabel(item.kind || item.type || 'material')) + '</span>';
     if (item.channel) html += '<span class="media-speaker">' + escapeHtml(item.channel) + '</span>';
     html += '</div>';
-    html += '<h4 class="media-title">' + escapeHtml(item.title || 'Материал Trendex') + '</h4>';
+    html += '<h4 class="media-title">' + escapeHtml(item.title || 'Материал Golden Connect') + '</h4>';
     if (summary) html += '<p class="media-summary">' + escapeHtml(summary) + '</p>';
     if (Array.isArray(item.tags) && item.tags.length) {
       html += '<div class="media-tags">';
@@ -4349,7 +4350,7 @@ body.cabinet-body { overflow-x: hidden; }
       mediaPlayer = new Plyr(host, options);
       mediaPlayer.source = {
         type: 'video',
-        title: item.title || 'Trendex',
+        title: item.title || 'Golden Connect',
         poster: item.imageUrl || '',
         sources: [{ src: playableSource.src, type: playableSource.type }]
       };
@@ -4361,7 +4362,7 @@ body.cabinet-body { overflow-x: hidden; }
       mediaPlayer = new Plyr(host, options);
       mediaPlayer.source = {
         type: 'video',
-        title: item.title || 'Trendex',
+        title: item.title || 'Golden Connect',
         sources: [{ src: youtubeId, provider: 'youtube' }]
       };
     }
@@ -4378,13 +4379,13 @@ body.cabinet-body { overflow-x: hidden; }
     } else if (youtubeId) {
       preview = '<div class="media-dialog-player-wrap"><div id="media-player-host" data-plyr-provider="youtube" data-plyr-embed-id="' + escapeHtml(youtubeId) + '"></div></div>';
     } else if (item.imageUrl) {
-      preview = '<div class="media-dialog-preview"><img src="' + escapeHtml(item.imageUrl) + '" alt="' + escapeHtml(item.title || 'Видео Trendex') + '"></div>';
+      preview = '<div class="media-dialog-preview"><img src="' + escapeHtml(item.imageUrl) + '" alt="' + escapeHtml(item.title || 'Видео Golden Connect') + '"></div>';
     }
 
     var html = '<div class="media-dialog-content">';
     html += preview;
     html += '<div class="media-dialog-heading"><div>';
-    html += '<h3>' + escapeHtml(item.title || 'Материал Trendex') + '</h3>';
+    html += '<h3>' + escapeHtml(item.title || 'Материал Golden Connect') + '</h3>';
     html += '<div class="media-dialog-meta">';
     if (item.categoryLabel) html += '<span class="media-badge">' + escapeHtml(item.categoryLabel) + '</span>';
     if (item.speaker) html += '<span class="media-tag">' + escapeHtml(item.speaker) + '</span>';
@@ -4536,7 +4537,7 @@ body.cabinet-body { overflow-x: hidden; }
     if (!item) return;
     var text = buildVideoDownloadText(item);
     var safeId = String(item.id || 'video').replace(/[^a-zA-Z0-9_-]+/g, '_');
-    downloadTextFile('trendex-video-' + safeId + '.txt', text);
+    downloadTextFile('golden-connect-video-' + safeId + '.txt', text);
   };
 
   function loadMediaQr(item) {
@@ -4550,7 +4551,7 @@ body.cabinet-body { overflow-x: hidden; }
         var btn = $('media-qr-download');
         if (btn) {
           btn.href = res.qr.dataUrl;
-          btn.setAttribute('download', 'trendex-video-qr.png');
+          btn.setAttribute('download', 'golden-connect-video-qr.png');
         }
       } else {
         box.innerHTML = '<p style="color:var(--text-muted)">QR недоступен</p>';
@@ -4572,7 +4573,7 @@ body.cabinet-body { overflow-x: hidden; }
       { id: 'adcenter', icon: '\uD83D\uDCE1', title: 'TG-автопостинг', desc: 'Рассылка постов в свои каналы + расписание + AI-рерайт' },
       { id: 'tgchannels', icon: '\uD83D\uDCFA', title: 'Мои TG-каналы', desc: 'Все подключённые Telegram-каналы в одном месте' },
       { id: 'bio', icon: '\uD83C\uDF10', title: 'Bio-страница', desc: 'Своя ссылочная страница как Linktree, бесплатно' },
-      { id: 'arsenal', icon: '\uD83D\uDE80', title: 'Trendex', desc: 'Полный набор: баннеры, PDF, OG-изображения' }
+      { id: 'arsenal', icon: '\uD83D\uDE80', title: 'Golden Connect', desc: 'Полный набор: баннеры, PDF, OG-изображения' }
     ];
 
     // [tools-flex-force-2026-05-19] INLINE-STYLE flex layout — overrides any CSS that might be
@@ -4682,11 +4683,11 @@ body.cabinet-body { overflow-x: hidden; }
       goPage('bio');
       return;
     } else if (id === 'arsenal') {
-      var arsenalUrl = (site && site.links && site.links.arsenalApp) || 'https://trendex.biz';
+      var arsenalUrl = (site && site.links && site.links.arsenalApp) || 'https://golden-connect.to';
       panel.innerHTML =
-        '<div class="cab-card"><h3>Trendex</h3>' +
+        '<div class="cab-card"><h3>Golden Connect</h3>' +
         '<p style="margin-bottom:12px;font-size:var(--fs-sm);color:var(--text-secondary);">Полная платформа маркетинговых инструментов: генерация баннеров, OG-изображений, обработка PDF, удаление фона и многое другое.</p>' +
-        '<a href="' + escapeHtml(arsenalUrl) + '" target="_blank" class="cab-btn cab-btn-primary">Открыть Trendex</a></div>';
+        '<a href="' + escapeHtml(arsenalUrl) + '" target="_blank" class="cab-btn cab-btn-primary">Открыть Golden Connect</a></div>';
     }
   };
 
@@ -4846,12 +4847,12 @@ body.cabinet-body { overflow-x: hidden; }
       host.id = 'tasks-hero';
       anchor.parentNode.insertBefore(host, anchor);
     }
-    // [tasks-hero-trendex-2026-05-13] redesigned hero — Trendex-specific paths
+    // [tasks-hero-golden-connect-2026-05-13] redesigned hero — Golden Connect-specific paths
     // 5 entry points instead of 3 generic ones, more aligned with the platform value props.
     host.innerHTML =
       '<div class="cab-card" style="background:linear-gradient(135deg,rgba(177,74,255,.10),rgba(0,224,255,.10));border:1px solid rgba(177,74,255,.30);margin-bottom:14px;padding:20px">' +
         '<h2 style="margin:0 0 6px;color:#fff;font-size:22px;letter-spacing:-0.01em">💎 Заработай TRDX</h2>' +
-        '<p style="color:#a4a7b8;margin:0 0 16px;font-size:14px;line-height:1.5">Пять способов на Trendex — от выполнения мини-задач за минуты до построения партнёрской структуры.</p>' +
+        '<p style="color:#a4a7b8;margin:0 0 16px;font-size:14px;line-height:1.5">Пять способов на Golden Connect — от выполнения мини-задач за минуты до построения партнёрской структуры.</p>' +
         '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px">' +
           '<a href="#/earn" onclick="goPage(\'earn\');return false" class="earn-card" style="display:block;padding:14px;background:rgba(0,224,255,.06);border:1px solid rgba(0,224,255,.30);border-radius:12px;text-decoration:none;color:#fff;transition:all .2s">' +
             '<div style="font-size:24px">💵</div>' +
@@ -5496,7 +5497,7 @@ body.cabinet-body { overflow-x: hidden; }
       var refLink = getRefLink();
       sideHtml += '<div class="cab-card"><h3>🔗 Ваша ссылка для приглашения</h3>';
       sideHtml += copyRow('team-ref-link', refLink);
-      sideHtml += shareButtons(refLink, 'Присоединяйся к Trendex!');
+      sideHtml += shareButtons(refLink, 'Присоединяйся к Golden Connect!');
       sideHtml += '</div>';
     } catch(e) {
       console.error('loadTeam', e);
@@ -5606,7 +5607,7 @@ body.cabinet-body { overflow-x: hidden; }
   };
 
   /* ══════════════════════════════════════════════════════════════
-     PAGE: HEALTH (Trendex course planner)
+     PAGE: HEALTH (Golden Connect course planner)
      ══════════════════════════════════════════════════════════════ */
   async function loadHealth() {
     $('health-content').innerHTML = '<div class="cab-card"><p>Загрузка...</p></div>';
@@ -5623,8 +5624,8 @@ body.cabinet-body { overflow-x: hidden; }
 
       if (coursesRes && coursesRes.note) {
         var refCode = (me && me.referralCode) || '';
-        var botLink = 'https://t.me/Trendex_bizbot' + (refCode ? '?start=ref_' + encodeURIComponent(refCode) : '');
-        $('health-content').innerHTML = '<div class="cab-card"><h3>💊 Раздел недоступен</h3><p style="color:#f59e0b">' + escapeHtml(coursesRes.note) + '</p><p>Откройте бот <a href="' + botLink + '" target="_blank">@Trendex_bizbot</a> и пройдите /start, затем нажмите "🚀 Trendex".</p></div>';
+        var botLink = 'https://t.me/Golden Connect_bizbot' + (refCode ? '?start=ref_' + encodeURIComponent(refCode) : '');
+        $('health-content').innerHTML = '<div class="cab-card"><h3>💊 Раздел недоступен</h3><p style="color:#f59e0b">' + escapeHtml(coursesRes.note) + '</p><p>Откройте бот <a href="' + botLink + '" target="_blank">@Golden Connect_bizbot</a> и пройдите /start, затем нажмите "🚀 Golden Connect".</p></div>';
         return;
       }
 
@@ -5690,7 +5691,7 @@ body.cabinet-body { overflow-x: hidden; }
 
       // AI Symptom checker
       html += '<div class="cab-card"><h3>🌿 AI: подбор по симптомам</h3>';
-      html += '<p style="color:var(--text-muted);font-size:13px">Опишите симптомы или цель — AI предложит продукты Trendex</p>';
+      html += '<p style="color:var(--text-muted);font-size:13px">Опишите симптомы или цель — AI предложит продукты Golden Connect</p>';
       html += '<textarea id="health-symptoms-input" class="cab-input" style="width:100%;min-height:70px;margin-top:8px" placeholder="Например: болит горло, нужна энергия, проблемы со сном"></textarea>';
       html += '<button class="cab-btn cab-btn-primary" style="margin-top:8px" onclick="healthAskAI()">Получить совет</button>';
       html += '<div id="health-ai-result" style="margin-top:14px"></div></div>';
@@ -5964,7 +5965,7 @@ body.cabinet-body { overflow-x: hidden; }
       // Status indicators
       h += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">';
       h += '<span style="padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;' + (u.telegramLinked ? 'background:rgba(16,185,129,.1);color:var(--accent)' : 'background:rgba(239,68,68,.1);color:#ef4444') + '">Бот ' + (u.telegramLinked ? '&#10004;' : '&#10008;') + '</span>';
-      h += '<span style="padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;' + (u.trendexRefLink ? 'background:rgba(16,185,129,.1);color:var(--accent)' : 'background:rgba(239,68,68,.1);color:#ef4444') + '">Ссылка компании ' + (u.trendexRefLink ? '&#10004;' : '&#10008;') + '</span>';
+      h += '<span style="padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;' + (u.golden-connectRefLink ? 'background:rgba(16,185,129,.1);color:var(--accent)' : 'background:rgba(239,68,68,.1);color:#ef4444') + '">Ссылка компании ' + (u.golden-connectRefLink ? '&#10004;' : '&#10008;') + '</span>';
       h += '<span style="padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;' + (u.onboardingCompletedAt ? 'background:rgba(16,185,129,.1);color:var(--accent)' : 'background:rgba(239,68,68,.1);color:#ef4444') + '">Онбординг ' + (u.onboardingCompletedAt ? '&#10004;' : '&#10008;') + '</span>';
       h += '<span style="padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(16,185,129,.05);color:var(--text-muted)">Последний визит: ' + (u.lastLoginAt ? fmtDate(u.lastLoginAt) : '\u2014') + '</span>';
       h += '</div>';
@@ -6026,7 +6027,7 @@ body.cabinet-body { overflow-x: hidden; }
         h += '<a href="' + escapeHtml(res.url) + '" target="_blank" class="cab-btn cab-btn-primary">&#128249; Открыть звонок</a>';
         h += '<button class="cab-btn" onclick="copyText(\'' + escAttr(res.url) + '\')">&#128203; Копировать ссылку</button>';
         h += '</div>';
-        h += shareButtons(res.url, 'Присоединяйтесь к видеозвонку Trendex!');
+        h += shareButtons(res.url, 'Присоединяйтесь к видеозвонку Golden Connect!');
         h += '<div style="margin-top:8px;font-size:12px;color:var(--text-muted);word-break:break-all;padding:8px;background:rgba(255,255,255,.03);border-radius:6px">' + escapeHtml(res.url) + '</div>';
         h += '</div>';
         $('meet-result').innerHTML = h;
@@ -6222,7 +6223,7 @@ body.cabinet-body { overflow-x: hidden; }
      PAGE: TELEGRAM BOT <!-- [bot-help-v2] -->
      ══════════════════════════════════════════════════════════════ */
   function loadTgBot() {
-    var botLink = 'https://t.me/Trendex_bizbot';
+    var botLink = 'https://t.me/Golden Connect_bizbot';
     var refCode = (me && me.referralCode) || DEFAULT_REF_CODE;
     var botRefLink = botLink + '?start=ref_' + refCode;
     var isLinked = me && me.telegramLinked;
@@ -6233,8 +6234,8 @@ body.cabinet-body { overflow-x: hidden; }
     h += '<div class="cab-card" style="background:linear-gradient(135deg,#0088cc 0%,#005f99 100%);color:#fff;padding:28px;border-radius:16px;margin-bottom:20px">';
     h += '<div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">';
     h += '<div style="font-size:3rem">&#128640;</div>';
-    h += '<div><h3 style="margin:0;font-size:1.4rem;color:#fff">Телеграм бот Trendex</h3>';
-    h += '<div style="opacity:.85;font-size:.9rem;margin-top:4px">@Trendex_bizbot — ваш личный AI-помощник по платформе Trendex</div></div></div>';
+    h += '<div><h3 style="margin:0;font-size:1.4rem;color:#fff">Телеграм бот Golden Connect</h3>';
+    h += '<div style="opacity:.85;font-size:.9rem;margin-top:4px">@Golden Connect_bizbot — ваш личный AI-помощник по платформе Golden Connect</div></div></div>';
     if (isLinked) {
       h += '<div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);padding:8px 16px;border-radius:10px;font-weight:600">';
       h += '<span>&#9989;</span> Telegram привязан';
@@ -6248,7 +6249,7 @@ body.cabinet-body { overflow-x: hidden; }
 
     // Capabilities grid
     var features = [
-      { icon:'&#129302;', title:'AI-помощник', desc:'Спросите о любом продукте Trendex — бот ответит с опорой на базу из 3000+ фактов: состав, дозировки, противопоказания, протоколы.' },
+      { icon:'&#129302;', title:'AI-помощник', desc:'Спросите о любом продукте Golden Connect — бот ответит с опорой на базу из 3000+ фактов: состав, дозировки, противопоказания, протоколы.' },
       { icon:'&#128138;', title:'Курсы маркетинга', desc:'Курсы по маркетингу, продвижению и работе с партнёрской программой. Ежедневные практики и напоминания.' },
       { icon:'&#128225;', title:'Эфиры и конференции', desc:'Расписание онлайн-эфиров с профессорами. Уведомления за 15 мин до нача��а. Видеозвонки прямо в боте.' },
       { icon:'&#128218;', title:'База знаний', desc:'Полная история чата компании, отзывы, инструкции, научные факты — всё проиндексировано и доступно по запросу.' },
@@ -6296,7 +6297,7 @@ body.cabinet-body { overflow-x: hidden; }
     // [bot-help-v2] Group-mode section
     h += '<div class="cab-card" style="margin-top:16px;border:1px solid rgba(0,212,255,.25);background:linear-gradient(135deg,rgba(0,212,255,.04),rgba(177,74,237,.04))">';
     h += '<h3>👥 Бот в твоей группе</h3>';
-    h += '<p style="font-size:var(--fs-sm);color:var(--text-secondary);margin:0 0 12px;line-height:1.55">Добавь @Trendex_bizbot в свою Telegram-группу — он будет отслеживать кто пришёл/ушёл, кто молчит, кто самый активный. Это удобно для команд и партнёрских чатов.</p>';
+    h += '<p style="font-size:var(--fs-sm);color:var(--text-secondary);margin:0 0 12px;line-height:1.55">Добавь @Golden Connect_bizbot в свою Telegram-группу — он будет отслеживать кто пришёл/ушёл, кто молчит, кто самый активный. Это удобно для команд и партнёрских чатов.</p>';
     h += '<p style="font-size:var(--fs-sm);color:var(--text);margin:0 0 8px"><b>🤫 По умолчанию бот в тихом режиме</b> — только трекер. Никакого автопромо в чужих группах.</p>';
 
     h += '<h4 style="margin:14px 0 8px;font-size:.95rem">Команды в группе:</h4>';
@@ -6308,9 +6309,9 @@ body.cabinet-body { overflow-x: hidden; }
       { cmd:'/today_active', desc:'Кто писал сегодня' },
       { cmd:'/who @username', desc:'Карточка участника группы' },
       { cmd:'/sync', desc:'Синхронизировать список (для админа)' },
-      { cmd:'/trendex_active', desc:'🔊 Включить анонсы Trendex (для админа)' },
-      { cmd:'/trendex_silent', desc:'🤫 Вернуть тихий режим (для админа)' },
-      { cmd:'/trendex_status', desc:'Узнать текущий режим' },
+      { cmd:'/golden-connect_active', desc:'🔊 Включить анонсы Golden Connect (для админа)' },
+      { cmd:'/golden-connect_silent', desc:'🤫 Вернуть тихий режим (для админа)' },
+      { cmd:'/golden-connect_status', desc:'Узнать текущий режим' },
     ];
     groupCmds.forEach(function(c){
       h += '<div style="display:flex;gap:8px;align-items:baseline;padding:6px 10px;background:rgba(255,255,255,.03);border-radius:8px">';
@@ -6321,14 +6322,14 @@ body.cabinet-body { overflow-x: hidden; }
 
     h += '<div style="margin-top:14px;padding:10px 14px;background:rgba(177,74,237,.08);border:1px solid rgba(177,74,237,.25);border-radius:10px;font-size:13px;color:var(--text-secondary);line-height:1.5">';
     h += '<b style="color:var(--text)">Как добавить:</b><br>',
-    h += 'В Telegram открой свою группу → Настройки → Администраторы → Добавить → найди <code>@Trendex_bizbot</code> и дай права читать сообщения. После добавления бот сам пришлёт приветствие со списком команд.';
+    h += 'В Telegram открой свою группу → Настройки → Администраторы → Добавить → найди <code>@Golden Connect_bizbot</code> и дай права читать сообщения. После добавления бот сам пришлёт приветствие со списком команд.';
     h += '</div>';
     h += '</div>';
 
     // CTA
     h += '<div style="text-align:center;padding:24px">';
     h += '<a href="' + botRefLink + '" target="_blank" class="cab-btn cab-btn-primary" style="font-size:1.1rem;padding:14px 32px;border-radius:14px;text-decoration:none;display:inline-block">';
-    h += '&#128640; Открыть бота @Trendex_bizbot</a>';
+    h += '&#128640; Открыть бота @Golden Connect_bizbot</a>';
     h += '<p style="font-size:var(--fs-sm);color:var(--text-muted);margin-top:10px">Нажмите кнопку — бот авто��атически привяжется к вашему кабинету</p>';
     h += '</div>';
 
@@ -6425,10 +6426,10 @@ body.cabinet-body { overflow-x: hidden; }
 
     html += '<div>';
     html += '<div class="cab-card"><h3>Цели и приоритеты</h3>';
-    html += '<div class="form-row"><textarea class="cab-input cab-textarea" id="prof-goals" placeholder="Мои цели в Trendex...">' + escapeHtml(user.goalsSummary || '') + '</textarea></div>';
+    html += '<div class="form-row"><textarea class="cab-input cab-textarea" id="prof-goals" placeholder="Мои цели в Golden Connect...">' + escapeHtml(user.goalsSummary || '') + '</textarea></div>';
     html += '</div>';
 
-    // Trendex extended onboarding survey
+    // Golden Connect extended onboarding survey
     html += '<div class="cab-card"><h3>🎯 Анкета партнёра <span style="font-size:11px;color:var(--text-muted);font-weight:400">(заполни — это поможет нам подбирать тебе задания)</span></h3>';
     html += '<div class="form-row"><label class="cab-label">Ниша / тематика</label>';
     html += '<input class="cab-input" id="prof-niche" value="' + escapeHtml(prof.niche || '') + '" placeholder="Например: финансы, фитнес, IT, бьюти"></div>';
@@ -6523,7 +6524,7 @@ body.cabinet-body { overflow-x: hidden; }
     modal.style.cssText = 'position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;padding:20px';
     modal.innerHTML = '<div style="width:min(900px,95vw);max-height:90vh;position:relative">' +
       '<button onclick="this.closest(\'div[style]\').remove()" style="position:absolute;top:-40px;right:0;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;z-index:2">&times;</button>' +
-      '<div style="font-weight:700;color:#fff;margin-bottom:12px;font-size:16px">' + escapeHtml(title || 'Видео Trendex') + '</div>' +
+      '<div style="font-weight:700;color:#fff;margin-bottom:12px;font-size:16px">' + escapeHtml(title || 'Видео Golden Connect') + '</div>' +
       '<video controls autoplay playsinline style="width:100%;border-radius:16px;background:#000" src="' + escapeHtml(url) + '"></video>' +
       '</div>';
     modal.addEventListener('click', function(e) { if (e.target === modal) modal.remove(); });
@@ -6587,7 +6588,7 @@ body.cabinet-body { overflow-x: hidden; }
       block.innerHTML =
         '<div style="padding:14px;border-radius:10px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2)">' +
         '<p style="margin-bottom:10px"><b>Шаг 1:</b> Откройте бот по ссылке ниже</p>' +
-        '<a href="' + escapeHtml(res.botLink) + '" target="_blank" class="cab-btn cab-btn-primary" style="display:inline-block;text-decoration:none;margin-bottom:10px">📱 Открыть @Trendex_bizbot</a>' +
+        '<a href="' + escapeHtml(res.botLink) + '" target="_blank" class="cab-btn cab-btn-primary" style="display:inline-block;text-decoration:none;margin-bottom:10px">📱 Открыть @Golden Connect_bizbot</a>' +
         '<p style="font-size:var(--fs-xs);color:var(--text-muted)"><b>Шаг 2:</b> Нажмите "Запустить" в боте — он привяжет Telegram автоматически</p>' +
         '<p style="font-size:var(--fs-xs);color:var(--text-muted)">Ссылка действует 15 минут</p>' +
         '<div id="tg-link-status" style="margin-top:12px"></div>' +
@@ -6651,7 +6652,7 @@ body.cabinet-body { overflow-x: hidden; }
 
   window.saveCompanyLinkValue = async function(link) {
     try {
-      var res = await api('PATCH', '/cabinet/api/profile', { trendexRefLink: link || '' });
+      var res = await api('PATCH', '/cabinet/api/profile', { golden-connectRefLink: link || '' });
       if (res.ok && res.user) {
         me = res.user;
         toast(link ? 'Ссылка компании сохранена' : 'Ссылка удалена', 'success');
@@ -6762,7 +6763,7 @@ body.cabinet-body { overflow-x: hidden; }
 })();
 </script>
 <script src="js/global-starfield.js?v=stf-2026-05-13" defer></script>
-<script src="trendex-ai-chat.js?v=cab_20260519_screen444_fix" defer></script>
+<script src="golden-connect-ai-chat.js?v=cab_20260519_screen444_fix" defer></script>
 <script src="js/adx.js?v=cab_20260519_screen444_fix" defer></script>
 <script src="js/ads-web.js?v=cab_20260516_160608" defer></script>
 <script src="js/arsenal-i18n.js?v=cab_20260519_screen444_fix" defer></script>
@@ -6843,12 +6844,12 @@ body.cabinet-body { overflow-x: hidden; }
   try {
     var tg = window.Telegram && window.Telegram.WebApp;
     if (!tg || !tg.initData) return;             // not in TG WebApp
-    if (document.cookie.indexOf('trendex_cabinet_session=') !== -1) return;  // already authed
+    if (document.cookie.indexOf('golden-connect_cabinet_session=') !== -1) return;  // already authed
     tg.expand && tg.expand();                    // fullscreen
     tg.ready && tg.ready();
     var btn = document.createElement('div');
     btn.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#0c111a;border:1px solid #00D4FF;color:#fff;padding:20px 30px;border-radius:14px;font-family:sans-serif;z-index:99999;text-align:center;box-shadow:0 12px 40px rgba(0,212,255,.3)';
-    btn.innerHTML = '<div style="font-size:32px;margin-bottom:10px">🚀</div><div style="font-size:16px;font-weight:700;margin-bottom:6px">Trendex</div><div style="font-size:13px;color:#9ca3af">Авторизация через Telegram...</div>';
+    btn.innerHTML = '<div style="font-size:32px;margin-bottom:10px">🚀</div><div style="font-size:16px;font-weight:700;margin-bottom:6px">Golden Connect</div><div style="font-size:13px;color:#9ca3af">Авторизация через Telegram...</div>';
     document.body.appendChild(btn);
     fetch('/cabinet/api/auth/tg-webapp', {
       method: 'POST', credentials: 'same-origin',

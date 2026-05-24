@@ -15,7 +15,7 @@ import {
  */
 
 describe('income-split constants', () => {
-  it('SPLIT_PCT_DEFAULT is 20% (per Trendex marketing v2 spec)', () => {
+  it('SPLIT_PCT_DEFAULT is 20% (per Golden Connect marketing v2 spec)', () => {
     expect(SPLIT_PCT_DEFAULT).toBe(20n);
   });
 

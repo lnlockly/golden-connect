@@ -12,7 +12,7 @@ async function checkAndAlert(bot) {
       const now = Date.now();
       if (now - _lastAlertAt < DEBOUNCE_MS) return;
       _lastAlertAt = now;
-      const msg = '🚨 <b>Trendex cabinet ALERT</b>\n\n' +
+      const msg = '🚨 <b>Golden Connect cabinet ALERT</b>\n\n' +
         'db_ok: ' + d.db_ok + '\n' +
         'bot_running: ' + d.bot_running + '\n' +
         'uptimeSec: ' + d.uptimeSec + '\n' +

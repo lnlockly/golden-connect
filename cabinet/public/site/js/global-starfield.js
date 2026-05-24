@@ -1,4 +1,4 @@
-/* Trendex cabinet — global starfield background
+/* Golden Connect cabinet — global starfield background
  * Injects a fixed <canvas> behind all content and runs a lightweight particle
  * network. Visible on every page, not just dashboard hero.
  *

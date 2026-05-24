@@ -1,4 +1,4 @@
-# deploy/ — trendex.biz on k3s
+# deploy/ — golden-connect.to on k3s
 
 Everything infra lives here. Service code is untouched.
 
@@ -50,11 +50,11 @@ Point the domain at the k3s node. Add all three at your DNS provider:
 
 | Type | Host             | Value             | TTL |
 |------|------------------|-------------------|-----|
-| A    | `trendex.biz`    | `144.217.65.94`   | 300 |
-| A    | `www.trendex.biz`| `144.217.65.94`   | 300 |
-| A    | `api.trendex.biz`| `144.217.65.94`   | 300 |
+| A    | `golden-connect.to`    | `144.217.65.94`   | 300 |
+| A    | `www.golden-connect.to`| `144.217.65.94`   | 300 |
+| A    | `api.golden-connect.to`| `144.217.65.94`   | 300 |
 
-Verify with `dig +short trendex.biz` before the first deploy — Let's Encrypt
+Verify with `dig +short golden-connect.to` before the first deploy — Let's Encrypt
 won't issue a cert until the A records resolve.
 
 ## 2 · GitHub repo settings
@@ -75,7 +75,7 @@ The CI workflow (`.github/workflows/deploy.yml`) needs:
 | `DEPLOY_SSH_KEY` | Private SSH key (contents of `~/.ssh/id_ed25519`) paired with the public key already in `ubuntu@144.217.65.94:~/.ssh/authorized_keys` |
 
 `GITHUB_TOKEN` is supplied automatically and has `packages:write` for
-`ghcr.io/lnlockly/trendex-{api,bot,landing}`.
+`ghcr.io/lnlockly/golden-connect-{api,bot,landing}`.
 
 ## 3 · Server-side one-shot bootstrap
 
@@ -83,8 +83,8 @@ SSH to the node, clone the repo (or just `scp deploy/` over), then:
 
 ```bash
 ssh ubuntu@144.217.65.94
-git clone https://github.com/lnlockly/trendex.git
-cd trendex/deploy
+git clone https://github.com/lnlockly/golden-connect.git
+cd golden-connect/deploy
 
 # 3.1 fill in prod env files
 cp prod.api.env.example prod.api.env && $EDITOR prod.api.env
@@ -99,13 +99,13 @@ export GHCR_EMAIL=you@example.com
 ./bootstrap.sh
 ```
 
-After this, the cluster has: namespace `trendex`, `ghcr-pull` secret,
-`trendex-api-env` + `trendex-bot-env` secrets, and all three deployments.
+After this, the cluster has: namespace `golden-connect`, `ghcr-pull` secret,
+`golden-connect-api-env` + `golden-connect-bot-env` secrets, and all three deployments.
 
 Cert-manager will fetch TLS certs on first ingress apply (~30–90s). Watch:
 
 ```bash
-kubectl -n trendex get certificate -w
+kubectl -n golden-connect get certificate -w
 ```
 
 ## 4 · First push to main
@@ -114,28 +114,28 @@ From your dev machine:
 
 ```bash
 git add deploy/ .github/ api/Dockerfile landing/Dockerfile landing/nginx.conf
-git commit -m "infra: k8s + CI/CD for trendex.biz"
+git commit -m "infra: k8s + CI/CD for golden-connect.to"
 git push origin main
 ```
 
 GitHub Actions then:
-1. builds & pushes `ghcr.io/lnlockly/trendex-{api,bot,landing}:<sha>` + `:latest`
+1. builds & pushes `ghcr.io/lnlockly/golden-connect-{api,bot,landing}:<sha>` + `:latest`
 2. SSHes to `ubuntu@144.217.65.94`
 3. `kubectl apply -f deploy/k8s/` (ensures manifests stay in sync)
-4. `kubectl -n trendex set image deploy/trendex-<x> trendex-<x>=...:<sha>`
+4. `kubectl -n golden-connect set image deploy/golden-connect-<x> golden-connect-<x>=...:<sha>`
 5. `kubectl rollout status` (3 min timeout each)
 
 ## Verify
 
 ```bash
 # from anywhere:
-curl -sS https://api.trendex.biz/health | jq
-curl -sS -o /dev/null -w '%{http_code}\n' https://trendex.biz         # → 200
-curl -sS -o /dev/null -w '%{http_code}\n' https://www.trendex.biz     # → 308 to apex
+curl -sS https://api.golden-connect.to/health | jq
+curl -sS -o /dev/null -w '%{http_code}\n' https://golden-connect.to         # → 200
+curl -sS -o /dev/null -w '%{http_code}\n' https://www.golden-connect.to     # → 308 to apex
 
 # on the node:
-kubectl -n trendex get pods,svc,ingress,certificate
-kubectl -n trendex logs deploy/trendex-api --tail=50
+kubectl -n golden-connect get pods,svc,ingress,certificate
+kubectl -n golden-connect logs deploy/golden-connect-api --tail=50
 ```
 
 ## Database notes
@@ -150,11 +150,11 @@ production, update `prod.api.env.DATABASE_URL`, re-run `bootstrap.sh` (it
 rewrites the secret), and trigger a rollout restart:
 
 ```bash
-kubectl -n trendex rollout restart deploy/trendex-api
+kubectl -n golden-connect rollout restart deploy/golden-connect-api
 ```
 
 ## Rotating the bot token
 
 1. Update `deploy/prod.bot.env` on the server.
-2. `./bootstrap.sh` — rewrites the `trendex-bot-env` secret.
-3. `kubectl -n trendex rollout restart deploy/trendex-bot`.
+2. `./bootstrap.sh` — rewrites the `golden-connect-bot-env` secret.
+3. `kubectl -n golden-connect rollout restart deploy/golden-connect-bot`.

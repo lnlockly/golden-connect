@@ -27,7 +27,7 @@ const app = new Hono();
 app.use('/internal/admin/*', requireInternalSecret);
 
 // ════════════════════════════════════════════════════════
-// AGGREGATE STATISTICS — Trendex dashboard
+// AGGREGATE STATISTICS — Golden Connect dashboard
 // ════════════════════════════════════════════════════════
 
 app.get('/internal/admin/stats', async (c) => {

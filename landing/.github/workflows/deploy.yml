@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  IMAGE: ghcr.io/${{ github.repository_owner }}/trendex-landing
+  IMAGE: ghcr.io/${{ github.repository_owner }}/golden-connect-landing
 
 jobs:
   build-deploy:
@@ -53,7 +53,7 @@ jobs:
         run: |
           ssh ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }} "
             set -e
-            kubectl -n franchise-factory set image deploy/trendex-landing \
-              trendex-landing=${{ env.IMAGE }}:${SHA}
-            kubectl -n franchise-factory rollout status deploy/trendex-landing --timeout=3m
+            kubectl -n franchise-factory set image deploy/golden-connect-landing \
+              golden-connect-landing=${{ env.IMAGE }}:${SHA}
+            kubectl -n franchise-factory rollout status deploy/golden-connect-landing --timeout=3m
           "

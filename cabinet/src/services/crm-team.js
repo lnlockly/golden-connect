@@ -1,6 +1,6 @@
 // Work-team collaboration for the CRM (NOT the MLM downline).
 //
-// Owner creates a team, invites Trendex users by login/username/email,
+// Owner creates a team, invites Golden Connect users by login/username/email,
 // assigns roles, and the team shares a task board + activity feed. Lead
 // reservations become team-scoped so members don't double-message a lead.
 //
@@ -188,7 +188,7 @@ function invite(teamId, byUserId, login, role) {
       .run(teamId, inviteeId, rl, byUserId, _now());
     _logActivity(teamId, byUserId, 'member_added', { user: inviteeId, role: rl });
     // best-effort push notify
-    try { _notifyUser(inviteeId, '👥 Тебя добавили в команду «' + (getTeam(teamId)?.name || '') + '» в Trendex CRM'); } catch (_) {}
+    try { _notifyUser(inviteeId, '👥 Тебя добавили в команду «' + (getTeam(teamId)?.name || '') + '» в Golden Connect CRM'); } catch (_) {}
     return { ok: true, added: true, user_id: inviteeId };
   }
   // Unknown login → store pending invite by login (claimed on their next access)

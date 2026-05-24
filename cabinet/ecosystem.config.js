@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'trendex-cabinet',
+      name: 'golden-connect-cabinet',
       cwd: __dirname,
       script: 'src/server.js',
       env: {

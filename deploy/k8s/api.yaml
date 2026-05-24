@@ -2,10 +2,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: trendex-api
-  namespace: trendex
+  name: golden-connect-api
+  namespace: golden-connect
   labels:
-    app: trendex-api
+    app: golden-connect-api
 spec:
   replicas: 1
   strategy:
@@ -15,11 +15,11 @@ spec:
       maxSurge: 1
   selector:
     matchLabels:
-      app: trendex-api
+      app: golden-connect-api
   template:
     metadata:
       labels:
-        app: trendex-api
+        app: golden-connect-api
     spec:
       imagePullSecrets:
         - name: ghcr-pull
@@ -27,22 +27,22 @@ spec:
         # Apply Drizzle migrations before the app starts. Safe to re-run;
         # drizzle-kit skips migrations already recorded in `__drizzle_migrations`.
         - name: drizzle-migrate
-          image: ghcr.io/lnlockly/trendex-api:latest
+          image: ghcr.io/lnlockly/golden-connect-api:latest
           imagePullPolicy: Always
           command: ["npx", "drizzle-kit", "migrate"]
           envFrom:
             - secretRef:
-                name: trendex-api-env
+                name: golden-connect-api-env
       containers:
-        - name: trendex-api
-          image: ghcr.io/lnlockly/trendex-api:latest
+        - name: golden-connect-api
+          image: ghcr.io/lnlockly/golden-connect-api:latest
           imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 4001
           envFrom:
             - secretRef:
-                name: trendex-api-env
+                name: golden-connect-api-env
           env:
             - name: PORT
               value: "4001"
@@ -71,11 +71,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: trendex-api
-  namespace: trendex
+  name: golden-connect-api
+  namespace: golden-connect
 spec:
   selector:
-    app: trendex-api
+    app: golden-connect-api
   ports:
     - name: http
       port: 4001
@@ -84,8 +84,8 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: trendex-api
-  namespace: trendex
+  name: golden-connect-api
+  namespace: golden-connect
   annotations:
     # TLS terminated at Cloudflare edge (orange-cloud proxy). Origin is HTTP.
     # Set Cloudflare SSL/TLS mode to "Flexible" for this to work end-to-end.
@@ -93,13 +93,13 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: api.trendex.biz
+    - host: api.golden-connect.to
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: trendex-api
+                name: golden-connect-api
                 port:
                   number: 4001

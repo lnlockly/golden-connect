@@ -1,4 +1,4 @@
-// Trendex Ads-Site (banner + video) schema bootstrap. Idempotent.
+// Golden Connect Ads-Site (banner + video) schema bootstrap. Idempotent.
 const { getDb } = require('./planner/db/database');
 
 const SCHEMA_SQL = `

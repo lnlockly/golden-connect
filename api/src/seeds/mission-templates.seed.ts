@@ -1,7 +1,7 @@
 /**
  * Mission template seed. One template — `partner_7day_onboarding` — a seven-
- * day ramp that walks a new TRENDEX partner from "profile" to "first referral
- * paid". Phase 2 TrendeX copy.
+ * day ramp that walks a new GOLDEN_CONNECT partner from "profile" to "first referral
+ * paid". Phase 2 Golden Connect copy.
  *
  * Text format: bilingual "RU · EN" in a single string (see quests.seed.ts for
  * the same convention). `day` / `key` are load-bearing and NOT changed by
@@ -22,7 +22,7 @@ export const PARTNER_7DAY_STEPS: MissionStep[] = [
     key: 'set_name',
     title: 'Заполни профиль · Set up your profile',
     description:
-      'Укажи имя и добавь аватарку — тебя начнут узнавать в сети TRENDEX. · Add your name and a photo so people recognise you across the TRENDEX network.',
+      'Укажи имя и добавь аватарку — тебя начнут узнавать в сети GOLDEN_CONNECT. · Add your name and a photo so people recognise you across the GOLDEN_CONNECT network.',
   },
   {
     day: 1,
@@ -64,7 +64,7 @@ export const PARTNER_7DAY_STEPS: MissionStep[] = [
     key: 'graduate',
     title: 'Выпуск · Graduation',
     description:
-      'Поздравляем — ты прошёл онбординг и открыл главное меню партнёра TRENDEX. · Congrats — onboarding done and the full TRENDEX partner menu is now unlocked.',
+      'Поздравляем — ты прошёл онбординг и открыл главное меню партнёра GOLDEN_CONNECT. · Congrats — onboarding done and the full GOLDEN_CONNECT partner menu is now unlocked.',
   },
 ];
 
@@ -73,7 +73,7 @@ export const MISSION_TEMPLATES: NewMissionTemplate[] = [
     id: 'partner_7day_onboarding',
     title: 'Партнёрский онбординг · Partner onboarding',
     description:
-      '7-дневная программа для нового партнёра TRENDEX: по одному шагу в день от профиля до первого реферала. · The 7-day ramp for new TRENDEX partners — one step a day from profile to first referral.',
+      '7-дневная программа для нового партнёра GOLDEN_CONNECT: по одному шагу в день от профиля до первого реферала. · The 7-day ramp for new GOLDEN_CONNECT partners — one step a day from profile to first referral.',
     steps: PARTNER_7DAY_STEPS,
     policy: { pause_after_days: 3, reset_after_days: 14 },
     active: true,

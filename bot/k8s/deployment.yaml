@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: trendex-bot-data
+  name: golden-connect-bot-data
   namespace: franchise-factory
 spec:
   accessModes: [ReadWriteOnce]
@@ -9,14 +9,14 @@ spec:
     requests:
       storage: 1Gi
 ---
-# The Secret `trendex-bot-env` is managed out-of-band, NOT by this manifest,
+# The Secret `golden-connect-bot-env` is managed out-of-band, NOT by this manifest,
 # so that a `kubectl apply` from CI doesn't overwrite a real BOT_TOKEN with a
 # placeholder. Create/update it once per environment:
-#   kubectl -n franchise-factory create secret generic trendex-bot-env \
+#   kubectl -n franchise-factory create secret generic golden-connect-bot-env \
 #     --from-literal=BOT_TOKEN='...' \
 #     --from-literal=ADMIN_TG_ID='1361064246' \
-#     --from-literal=BOT_USERNAME='AITrendeX_bot' \
-#     --from-literal=DATABASE_PATH='/data/trendex.db' \
+#     --from-literal=BOT_USERNAME='AIGolden Connect_bot' \
+#     --from-literal=DATABASE_PATH='/data/golden-connect.db' \
 #     --from-literal=NODE_ENV='production' \
 #     --from-literal=LOG_LEVEL='info' \
 #     --dry-run=client -o yaml | kubectl apply -f -
@@ -24,7 +24,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: trendex-bot
+  name: golden-connect-bot
   namespace: franchise-factory
 spec:
   replicas: 1
@@ -32,22 +32,22 @@ spec:
     type: Recreate  # SQLite — single writer
   selector:
     matchLabels:
-      app: trendex-bot
+      app: golden-connect-bot
   template:
     metadata:
       labels:
-        app: trendex-bot
+        app: golden-connect-bot
     spec:
       containers:
-        - name: trendex-bot
-          image: ghcr.io/lnlockly/trendex-bot:latest
+        - name: golden-connect-bot
+          image: ghcr.io/lnlockly/golden-connect-bot:latest
           imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 8080
           envFrom:
             - secretRef:
-                name: trendex-bot-env
+                name: golden-connect-bot-env
           readinessProbe:
             httpGet:
               path: /api/health
@@ -67,16 +67,16 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: trendex-bot-data
+            claimName: golden-connect-bot-data
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: trendex-bot
+  name: golden-connect-bot
   namespace: franchise-factory
 spec:
   selector:
-    app: trendex-bot
+    app: golden-connect-bot
   ports:
     - name: http
       port: 8080

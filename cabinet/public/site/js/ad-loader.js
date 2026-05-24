@@ -1,4 +1,4 @@
-// Trendex banner ad-loader.
+// Golden Connect banner ad-loader.
 // Usage in any page: <div data-ad-slot="cab-top" data-ad-format="728x90"></div>
 // Then: <script src="/cabinet/js/ad-loader.js?v=1" defer></script>
 //

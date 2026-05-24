@@ -148,7 +148,7 @@ async function sendDailyDigest() {
     const salesSum = db.prepare("SELECT COALESCE(SUM(amount_usd),0) AS s FROM product_purchases WHERE payment_status='paid' AND created_at >= datetime('now','-1 day')").get().s || 0;
     const totalUsers = db.prepare("SELECT COUNT(*) AS n FROM users").get().n || 0;
 
-    const text = '📊 <b>Trendex Daily Digest</b>\n' +
+    const text = '📊 <b>Golden Connect Daily Digest</b>\n' +
       '<i>За последние 24 часа:</i>\n\n' +
       '👥 Новых регистраций: <b>' + newUsers + '</b>\n' +
       '💰 Пополнений: <b>' + topupsCnt + '</b> на сумму <b>$' + Number(topupsSum).toFixed(2) + '</b>\n' +

@@ -2,7 +2,7 @@
 
 ## Why this exists
 
-On 2026-05-20 the Trendex DB moved Neon → self-hosted `trendex-postgres`. The move
+On 2026-05-20 the Golden Connect DB moved Neon → self-hosted `golden-connect-postgres`. The move
 replayed only **committed** prisma migrations (newest `20260512300000_account_spambot`).
 Everything added later via `prisma db push` / raw SQL — never committed — was lost:
 
@@ -11,7 +11,7 @@ Everything added later via `prisma db push` / raw SQL — never committed — wa
 - `Campaign.maxNewDialogsPerAccountPerDay`, `Dialog.adCampaignId/firstMessageSentAt`
 - tables `CampaignBilling`, `MlmPayout`
 
-Symptoms: `crm.trendex.biz` → HTTP 500 (`42P01 relation "roboai.CrmConversation" does not exist`),
+Symptoms: `crm.golden-connect.to` → HTTP 500 (`42P01 relation "roboai.CrmConversation" does not exist`),
 BillingCron/AdCampaignDispatcher crashing (`42703 column "balanceCents" does not exist`).
 
 > Root fragility: the roboai-engine **source** for the CRM service/cron/folders and the
@@ -39,22 +39,22 @@ full CRM/billing schema; on the existing DB it is a no-op.
 
 ```bash
 # 1. ConfigMap (holds the SQL)
-kubectl create configmap roboai-schema-recover -n trendex \
+kubectl create configmap roboai-schema-recover -n golden-connect \
   --from-file=recover.sql=deploy/k8s/roboai-recover/roboai-schema-recover.sql \
   --dry-run=client -o yaml | kubectl apply -f -
 
 # 2. Patch the engine deploy to mount it + run on boot
-kubectl patch deploy roboai-engine -n trendex \
+kubectl patch deploy roboai-engine -n golden-connect \
   --patch-file deploy/k8s/roboai-recover/roboai-engine-selfheal.patch.yaml
 
 # 3. (one-off, optional) apply straight to the DB without waiting for a restart
-PGPOD=$(kubectl get pods -n trendex -l app=trendex-postgres -o jsonpath='{.items[0].metadata.name}')
-kubectl cp deploy/k8s/roboai-recover/roboai-schema-recover.sql trendex/$PGPOD:/tmp/r.sql
-kubectl exec -n trendex $PGPOD -- psql -U trendex_owner -d trendex -f /tmp/r.sql
+PGPOD=$(kubectl get pods -n golden-connect -l app=golden-connect-postgres -o jsonpath='{.items[0].metadata.name}')
+kubectl cp deploy/k8s/roboai-recover/roboai-schema-recover.sql golden-connect/$PGPOD:/tmp/r.sql
+kubectl exec -n golden-connect $PGPOD -- psql -U golden_connect_owner -d golden-connect -f /tmp/r.sql
 ```
 
 ## Durability
 
-- `trendex-postgres.yaml` — self-hosted PG, PVC `trendex-postgres-data` (20Gi, local-path).
-- `trendex-postgres-backup.yaml` — CronJob every 6h: `pg_dump` all schemas (incl. `roboai`)
-  → gzip → Telegram channel via @Trendex_bizbot, keeps last 12. Restores include CRM/billing.
+- `golden-connect-postgres.yaml` — self-hosted PG, PVC `golden-connect-postgres-data` (20Gi, local-path).
+- `golden-connect-postgres-backup.yaml` — CronJob every 6h: `pg_dump` all schemas (incl. `roboai`)
+  → gzip → Telegram channel via @Golden Connect_bizbot, keeps last 12. Restores include CRM/billing.

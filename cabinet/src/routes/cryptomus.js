@@ -1,5 +1,5 @@
 const { invalidatePlan: _invPlan } = require('../helpers/usage-limits');
-// Trendex Cryptomus integration — top-up gift balance with crypto.
+// Golden Connect Cryptomus integration — top-up gift balance with crypto.
 // Docs: https://doc.cryptomus.com/payments/creating-invoice
 //
 // Flow:
@@ -129,7 +129,7 @@ function createCryptomusRouter(_config, _storage, requireAuth) {
       }
       const orderId = 'topup-' + Date.now() + '-' + crypto.randomBytes(4).toString('hex');
       const amountCents = Math.round(amountUsd * CENTS);
-      const baseUrl = (process.env.PUBLIC_BASE_URL || 'https://trendex.biz/cabinet').replace(/\/$/, '');
+      const baseUrl = (process.env.PUBLIC_BASE_URL || 'https://golden-connect.to/cabinet').replace(/\/$/, '');
       const apiBase = baseUrl.replace('/cabinet', '');
       const payload = {
         amount: amountUsd.toFixed(2),

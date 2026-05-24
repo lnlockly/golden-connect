@@ -16,7 +16,7 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const ROBOAI_ENGINE_URL =
   process.env.ROBOAI_ENGINE_URL ||
-  'http://roboai-engine.trendex.svc.cluster.local:3001';
+  'http://roboai-engine.golden-connect.svc.cluster.local:3001';
 const ROBOAI_JWT_SECRET = process.env.ROBOAI_JWT_SECRET;
 const JWT_TTL_SECONDS = 15 * 60;
 

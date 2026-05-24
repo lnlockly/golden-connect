@@ -77,4 +77,4 @@ app.get('*', async (c) => {
 
 const port = Number(process.env.PORT ?? 80);
 serve({ fetch: app.fetch, port });
-console.log(`[trendex] listening on :${port}`);
+console.log(`[golden-connect] listening on :${port}`);

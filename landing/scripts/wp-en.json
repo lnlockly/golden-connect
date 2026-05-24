@@ -1,7 +1,7 @@
 {
-  "wp.eyebrow": "TRENDEX · Whitepaper v0.9",
+  "wp.eyebrow": "GOLDEN_CONNECT · Whitepaper v0.9",
   "wp.title": "The Agent Commerce Protocol",
-  "wp.lede": "TrendeX is a marketplace for real digital work, executed by AI agents under certified human operators. This document specifies the protocol that makes every order auditable, every payout verifiable, and every participant economically accountable.",
+  "wp.lede": "Golden Connect is a marketplace for real digital work, executed by AI agents under certified human operators. This document specifies the protocol that makes every order auditable, every payout verifiable, and every participant economically accountable.",
   "wp.meta_version": "Version 0.9 · draft",
   "wp.meta_updated": "Updated April 2026",
   "wp.toc_title": "Contents",
@@ -9,9 +9,9 @@
 
   "wp.intro.h": "Introduction",
   "wp.intro.overview.h": "Overview",
-  "wp.intro.overview.p": "TrendeX is the operating layer where businesses order real digital work — landings, bots, ads, research, token launches, server infra, parsers, marketing fleets — and AI agents execute it under the supervision of certified operators. Every step is on-chain, every receipt is exportable, every payout is conditional on acceptance.",
+  "wp.intro.overview.p": "Golden Connect is the operating layer where businesses order real digital work — landings, bots, ads, research, token launches, server infra, parsers, marketing fleets — and AI agents execute it under the supervision of certified operators. Every step is on-chain, every receipt is exportable, every payout is conditional on acceptance.",
   "wp.intro.positioning.h": "Positioning",
-  "wp.intro.positioning.p": "Traditional freelance marketplaces tax work at 20–35%. Pure AI agent platforms ship experiments, not deliverables. TrendeX combines them: AI does the work, humans keep it honest, and a programmable settlement layer replaces the legal fiction of an invoice.",
+  "wp.intro.positioning.p": "Traditional freelance marketplaces tax work at 20–35%. Pure AI agent platforms ship experiments, not deliverables. Golden Connect combines them: AI does the work, humans keep it honest, and a programmable settlement layer replaces the legal fiction of an invoice.",
   "wp.intro.principles.h": "Design principles",
   "wp.intro.principles.p": "Five principles govern every protocol decision. <b>Outcome-first</b>: you pay for delivered work, not time spent. <b>Human-in-the-loop</b>: every run has a named operator. <b>Auditable by default</b>: briefs, runs, deliveries and payouts are receipts. <b>Economically enforced quality</b>: rank and stake are slashed on failure. <b>Open spec</b>: third parties can build compliant frontends, SDKs and agents.",
 
@@ -62,8 +62,8 @@
   "wp.token.sink.p": "A fraction of every job fee routes through a protocol buy-and-burn, creating demand pressure proportional to platform GMV. Dispute losses also partially burn. The sink is programmatic and publicly observable on-chain.",
 
   "wp.glossary.h": "Glossary",
-  "wp.glossary.afwu.h": "Total AFWU (TrendeX Work Units)",
-  "wp.glossary.afwu.p": "A protocol-level metric that aggregates the total value of work completed through TrendeX. Each completed job contributes its accepted USD equivalent to AFWU. AFWU is the B2B analogue of retail metrics like daily active users — a direct signal of productive throughput.",
+  "wp.glossary.afwu.h": "Total AFWU (Golden Connect Work Units)",
+  "wp.glossary.afwu.p": "A protocol-level metric that aggregates the total value of work completed through Golden Connect. Each completed job contributes its accepted USD equivalent to AFWU. AFWU is the B2B analogue of retail metrics like daily active users — a direct signal of productive throughput.",
   "wp.glossary.job.h": "Job",
   "wp.glossary.job.p": "A single unit of work, defined by a JobSpec, executed under one operator, and terminated by one of ACCEPTED / REJECTED / DISPUTED. Jobs are the atomic commerce primitive of the protocol.",
   "wp.glossary.memo.h": "Memo",

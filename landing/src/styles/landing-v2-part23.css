@@ -291,7 +291,7 @@ body[data-has-pagechat="1"] main {
 
 /* ─── 8. TRANSPARENT SHEET — match main landing chat ─────
    Owner: "надо сделать прозрачным всё как в главном лендинге".
-   The main landing embedded chat hides its header ("TrendeX ·
+   The main landing embedded chat hides its header ("Golden Connect ·
    приём / онлайн") and footer ("Plain text only…"), drops every
    card frame, and paints straight onto the hero gradient. We do
    the same inside the bottom-sheet: no dark card, no inner bars,
@@ -310,7 +310,7 @@ body[data-has-pagechat="1"] main {
   box-shadow: none !important;
 }
 
-/* Hide the "TrendeX · приём / онлайн" header bar and the small
+/* Hide the "Golden Connect · приём / онлайн" header bar and the small
    footer caption — the main landing hides them in embedded mode
    and the page-aware chat should mirror that chrome-free look. */
 .pagechat-body .chat-inline-head,

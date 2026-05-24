@@ -59,7 +59,7 @@ export function KbArticle() {
   }, [slug, lang]);
 
   useHead({
-    title: meta?.title ? `${meta.title} — TrendeX` : t('kb.title'),
+    title: meta?.title ? `${meta.title} — Golden Connect` : t('kb.title'),
     description: meta?.summary || t('kb.search_placeholder'),
     path: `/kb/${slug}`,
     lang,

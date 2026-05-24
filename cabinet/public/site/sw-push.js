@@ -1,10 +1,10 @@
 /* ═════════════════════════════════════════════════════════════════════════
-   Trendex Cabinet — Service Worker for Web Push
+   Golden Connect Cabinet — Service Worker for Web Push
    Scope: /cabinet/
    Handles: push, notificationclick, notificationclose, install, activate.
    ═════════════════════════════════════════════════════════════════════════ */
 
-const SW_VERSION = 'trendex-cabinet-sw-v1';
+const SW_VERSION = 'golden-connect-cabinet-sw-v1';
 
 // ── Lifecycle: activate immediately, skip waiting ────────────────────────
 self.addEventListener('install', (event) => {
@@ -26,16 +26,16 @@ self.addEventListener('push', (event) => {
     data = event.data ? event.data.json() : {};
   } catch (e) {
     // Plain text fallback
-    try { data = { title: 'Trendex', body: event.data ? event.data.text() : '' }; } catch (_) {}
+    try { data = { title: 'Golden Connect', body: event.data ? event.data.text() : '' }; } catch (_) {}
   }
 
-  const title = data.title || 'Trendex';
+  const title = data.title || 'Golden Connect';
   const options = {
     body: data.body || '',
     icon: data.icon || '/cabinet/favicon-32x32.png',
     badge: data.badge || '/cabinet/favicon-32x32.png',
     image: data.image || undefined,
-    tag: data.tag || 'trendex-push',
+    tag: data.tag || 'golden-connect-push',
     renotify: true,
     requireInteraction: !!data.requireInteraction,
     timestamp: Date.now(),

@@ -1,9 +1,9 @@
-// Trendex: Bot ↔ Site link module.
+// Golden Connect: Bot ↔ Site link module.
 //
 // 1. /cabinet command + "🌐 Кабинет" reply button → magic auto-login link
 // 2. /start link_TOKEN → complete TG link from site
 //
-// Deep link format: t.me/Trendex_bizbot?start=link_<TOKEN>
+// Deep link format: t.me/Golden Connect_bizbot?start=link_<TOKEN>
 
 const { InlineKeyboard } = require('grammy');
 
@@ -12,7 +12,7 @@ function escapeHtml(s) {
 }
 
 function setupSiteLink(bot, storage, config) {
-  const siteBase = String(config.publicBaseUrl || 'https://trendex.biz/cabinet').replace(/\/$/, '');
+  const siteBase = String(config.publicBaseUrl || 'https://golden-connect.to/cabinet').replace(/\/$/, '');
 
   // /cabinet command — generate magic login link
   bot.command('cabinet', async (ctx) => {
@@ -75,7 +75,7 @@ async function sendMagicLink(ctx, storage, siteBase) {
   // in-app one). The .url button still works for one-tap open.
   function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   await ctx.reply(
-    '🌐 <b>Ваш персональный кабинет Trendex</b>\n\n' +
+    '🌐 <b>Ваш персональный кабинет Golden Connect</b>\n\n' +
     'Выбери способ открыть кабинет:\n\n' +
     '📱 <b>В Telegram</b> — мини-приложение прямо в чате\n' +
     '🌐 <b>На сайте</b> — в браузере, авто-вход по защищённой ссылке\n\n' +

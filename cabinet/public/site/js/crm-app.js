@@ -1,6 +1,6 @@
 // CRM-APP-VERSION: no-email-2026-05-12-v10 — see console.log on init
 console.log('%c[crm-app]%c v=no-email-2026-05-12-v10', 'background:#b14aed;color:#fff;padding:2px 6px;border-radius:3px', 'color:#9ba1ad', 'default view = В работе 00b7 lazy + auto-retry + tg-gate');
-// crm-app.js — frontend SPA for Trendex CRM (MLM база).
+// crm-app.js — frontend SPA for Golden Connect CRM (MLM база).
 // Talks to /api/mlm/*. Single-page, no framework.
 
 const STATE = {
@@ -175,7 +175,7 @@ function buildGreetingFor(c) {
 }
 
 // ─── Telegram WebApp integration ──────────────────────────────
-// When CRM is opened from @TrendexTGbot menu button, TG injects
+// When CRM is opened from @Golden ConnectTGbot menu button, TG injects
 // `window.Telegram.WebApp` with `initData` (signed payload). We attach it
 // to every API request so the cabinet middleware can authenticate the
 // user without cookies — the same TG account always gets the same ownerId.
@@ -743,7 +743,7 @@ async function addHistory(username) {
 
 async function generatePitch(username) {
   const offer = prompt('Что ты предлагаешь? (одно предложение или абзац — будет использовано в генерации)',
-    'Trendex — рекламная платформа: биржа исполнителей, партнёрка 10 уровней, кампании, маркетплейс, ИИ-рассылки и инвайтинг. Мгновенные выплаты в USDT.');
+    'Golden Connect — рекламная платформа: биржа исполнителей, партнёрка 10 уровней, кампании, маркетплейс, ИИ-рассылки и инвайтинг. Мгновенные выплаты в USDT.');
   if (!offer) return;
   const box = document.getElementById('pitchBox');
   box.innerHTML = '<div class="pitch-box">⏳ Генерирую…</div>';
@@ -1258,7 +1258,7 @@ window.openMsgr = function(kind, username) {
 
 // ─── Native "Share to TG chat" — uses Telegram inline-mode picker ────────
 // Inside the Telegram WebApp, this opens the chat list to pick recipients,
-// pre-filling the inline query so @TrendexTGbot returns the matching
+// pre-filling the inline query so @Golden ConnectTGbot returns the matching
 // contact card. Outside TG, falls back to the legacy t.me/share URL.
 window.tgShareContact = function(username) {
   const c = STATE.loadedItems.find(x => x.username === username) || window._lastContact;
@@ -1272,7 +1272,7 @@ window.tgShareContact = function(username) {
     } catch (_) {}
   }
   const text = buildGreetingFor(c);
-  const url = 'https://t.me/share/url?url=' + encodeURIComponent('https://trendex.biz') + '&text=' + encodeURIComponent(text);
+  const url = 'https://t.me/share/url?url=' + encodeURIComponent('https://golden-connect.to') + '&text=' + encodeURIComponent(text);
   window.open(url, '_blank');
 };
 

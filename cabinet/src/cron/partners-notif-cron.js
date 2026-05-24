@@ -1,4 +1,4 @@
-// Partner-notifications worker — polls trendex-api for undelivered rows in
+// Partner-notifications worker — polls golden-connect-api for undelivered rows in
 // project_notifications_log, dispatches them to Telegram via the live bot
 // instance, then marks them delivered. Runs every 30s.
 //
@@ -7,7 +7,7 @@
 //   - new_participant:    sponsor in chain WITH a link (their refferal arrived)
 //   - author_new:         project author got a new participant (any depth)
 //
-// Templates ported from BN with light touch-ups for Trendex tone.
+// Templates ported from BN with light touch-ups for Golden Connect tone.
 
 const { InlineKeyboard } = require('grammy');
 
@@ -65,15 +65,15 @@ function buildButtons(payload, baseUrl) {
   return new InlineKeyboard().url('🤝 Открыть партнёра', detailUrl);
 }
 
-function startPartnersNotifCron({ bot, config, callTrendexApi }) {
-  const baseUrl = config.publicBaseUrl || 'https://trendex.biz';
+function startPartnersNotifCron({ bot, config, callGolden ConnectApi }) {
+  const baseUrl = config.publicBaseUrl || 'https://golden-connect.to';
   let running = false;
 
   async function tick() {
     if (running) return;
     running = true;
     try {
-      const data = await callTrendexApi(
+      const data = await callGolden ConnectApi(
         `/internal/partners/pending-notifications?limit=${BATCH_LIMIT}`,
       );
       const items = (data && data.notifications) || [];
@@ -115,7 +115,7 @@ function startPartnersNotifCron({ bot, config, callTrendexApi }) {
 
       if (delivered.length) {
         try {
-          await callTrendexApi('/internal/partners/mark-delivered', { ids: delivered });
+          await callGolden ConnectApi('/internal/partners/mark-delivered', { ids: delivered });
         } catch (err) {
           console.error('[partners-notif] mark-delivered failed:', err && err.message);
         }

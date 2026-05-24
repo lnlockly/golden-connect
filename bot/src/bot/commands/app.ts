@@ -10,12 +10,12 @@ import type { Lang } from "../../types.js";
  * web_app button if magic-link issuance fails.
  */
 const COPY: Record<Lang, { cta: string; body: string; err: string }> = {
-  en: { cta: "🚀 Open cabinet", body: "Tap to open your TrendeX cabinet — you'\''ll be signed in automatically.", err: "Could not generate sign-in link, try again in a moment." },
-  ru: { cta: "🚀 Открыть кабинет", body: "Нажми, чтобы открыть свой кабинет TrendeX — ты войдёшь автоматически.", err: "Не удалось сгенерировать ссылку входа, попробуй ещё раз через минуту." },
-  zh: { cta: "🚀 打开账户", body: "点击打开你的 TrendeX 账户 —— 自动登录。", err: "暂时无法生成登录链接，请稍后再试。" },
-  uz: { cta: "🚀 Kabinetni ochish", body: "TrendeX kabinetingizni ochish uchun bosing — avtomatik tizimga kirasiz.", err: "Kirish havolasini yaratib bo'\''lmadi, biroz keyin qayta urinib ko'\''ring." },
-  fil: { cta: "🚀 Buksan ang cabinet", body: "I-tap upang buksan ang iyong TrendeX cabinet — awtomatikong maka-sign in ka.", err: "Hindi makagawa ng sign-in link, subukan muli mamaya." },
-  th: { cta: "🚀 เปิดบัญชี", body: "แตะเพื่อเปิดบัญชี TrendeX ของคุณ — เข้าสู่ระบบอัตโนมัติ", err: "ไม่สามารถสร้างลิงก์เข้าสู่ระบบได้ โปรดลองอีกครั้งในภายหลัง" },
+  en: { cta: "🚀 Open cabinet", body: "Tap to open your Golden Connect cabinet — you'\''ll be signed in automatically.", err: "Could not generate sign-in link, try again in a moment." },
+  ru: { cta: "🚀 Открыть кабинет", body: "Нажми, чтобы открыть свой кабинет Golden Connect — ты войдёшь автоматически.", err: "Не удалось сгенерировать ссылку входа, попробуй ещё раз через минуту." },
+  zh: { cta: "🚀 打开账户", body: "点击打开你的 Golden Connect 账户 —— 自动登录。", err: "暂时无法生成登录链接，请稍后再试。" },
+  uz: { cta: "🚀 Kabinetni ochish", body: "Golden Connect kabinetingizni ochish uchun bosing — avtomatik tizimga kirasiz.", err: "Kirish havolasini yaratib bo'\''lmadi, biroz keyin qayta urinib ko'\''ring." },
+  fil: { cta: "🚀 Buksan ang cabinet", body: "I-tap upang buksan ang iyong Golden Connect cabinet — awtomatikong maka-sign in ka.", err: "Hindi makagawa ng sign-in link, subukan muli mamaya." },
+  th: { cta: "🚀 เปิดบัญชี", body: "แตะเพื่อเปิดบัญชี Golden Connect ของคุณ — เข้าสู่ระบบอัตโนมัติ", err: "ไม่สามารถสร้างลิงก์เข้าสู่ระบบได้ โปรดลองอีกครั้งในภายหลัง" },
 };
 
 export async function onApp(ctx: AppContext): Promise<void> {

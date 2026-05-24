@@ -4,10 +4,10 @@
  * current Postgres schema (Neon). Run AFTER you've pulled a `.backup`
  * dump from the prod pod:
  *
- *   POD=$(kubectl -n franchise-factory get pods -l app=trendex-bot \
+ *   POD=$(kubectl -n franchise-factory get pods -l app=golden-connect-bot \
  *     -o jsonpath='{.items[0].metadata.name}')
  *   kubectl -n franchise-factory exec $POD -- \
- *     sqlite3 /data/trendex.db ".backup /tmp/backup.db"
+ *     sqlite3 /data/golden-connect.db ".backup /tmp/backup.db"
  *   kubectl -n franchise-factory cp $POD:/tmp/backup.db ./prod.db
  *
  * Then:

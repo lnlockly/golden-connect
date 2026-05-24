@@ -1,13 +1,13 @@
 /**
- * /api/roboai/* — bridge from Trendex cabinet to roboai-engine.
+ * /api/roboai/* — bridge from Golden Connect cabinet to roboai-engine.
  *
  * - Issues short-lived JWTs signed with ROBOAI_JWT_SECRET (shared via k8s
  *   secret with roboai-engine, where TenantJwtGuard validates them).
  * - Proxies all sub-paths to ROBOAI_ENGINE_URL (defaults to in-cluster service).
  * - JWT payload: { sub: webUser.id, scope: 'roboai',
  *                  email: webUser.email, tg_id: webUser.telegramUserId }
- *   roboai-engine resolves trendex-api users.id from email or tg_id (uses the
- *   same resolveUserId pattern as trendex-api/internal-finance.ts).
+ *   roboai-engine resolves golden-connect-api users.id from email or tg_id (uses the
+ *   same resolveUserId pattern as golden-connect-api/internal-finance.ts).
  */
 const express = require('express');
 const _tgMw = require('../middleware/tg-initdata');
@@ -15,7 +15,7 @@ const jwt = require('jsonwebtoken');
 
 const ROBOAI_ENGINE_URL =
   process.env.ROBOAI_ENGINE_URL ||
-  'http://roboai-engine.trendex.svc.cluster.local:3001';
+  'http://roboai-engine.golden-connect.svc.cluster.local:3001';
 const ROBOAI_JWT_SECRET = process.env.ROBOAI_JWT_SECRET;
 const JWT_TTL_SECONDS = 15 * 60; // 15 min
 
@@ -127,7 +127,7 @@ function createRoboaiRouter(_config, _storage, requireAuth) {
   });
 
   // Accept TG WebApp initData OR internal impersonation BEFORE requireAuth, so users
-  // opening cabinet from @TrendexCRMBot don't need a cabinet session cookie.
+  // opening cabinet from @Golden ConnectCRMBot don't need a cabinet session cookie.
   router.use(_tgMw.tgInitData);
   router.use(_tgMw.internalImpersonate);
   // All /api/roboai/* requests require cabinet session OR TG initData OR internal secret.

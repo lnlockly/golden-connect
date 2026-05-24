@@ -28,13 +28,13 @@ async function sendVerifyEmail(to: string, link: string): Promise<boolean> {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: env.emailFrom || 'Trendex <no-reply@trendex.biz>',
+        from: env.emailFrom || 'Golden Connect <no-reply@golden-connect.to>',
         to: [to],
-        subject: 'Подтверждение email — Trendex',
+        subject: 'Подтверждение email — Golden Connect',
         html:
           '<div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:24px;background:#0A0E27;color:#fff;border-radius:12px">' +
           '<h2 style="color:#00D4FF;margin:0 0 16px">Подтверждение email</h2>' +
-          '<p>Привет! Вы указали этот адрес при регистрации на Trendex.</p>' +
+          '<p>Привет! Вы указали этот адрес при регистрации на Golden Connect.</p>' +
           '<p>Чтобы подтвердить — нажмите кнопку ниже:</p>' +
           '<p style="margin:24px 0"><a href="' + link + '" style="background:#00D4FF;color:#0A0E27;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700">Подтвердить email</a></p>' +
           '<p style="color:#A0A8D0;font-size:12px">Или перейдите по ссылке: <code style="color:#00D4FF">' + link + '</code></p>' +
@@ -69,7 +69,7 @@ app.post('/auth/send-verify', requireAuth, verifyLimiter, async (c) => {
     .set({ emailVerifyToken: token, emailVerifySentAt: new Date() })
     .where(eq(credentials.userId, session.id));
 
-  const base = env.appPublicUrl || 'https://api.trendex.biz';
+  const base = env.appPublicUrl || 'https://api.golden-connect.to';
   const link = base + '/auth/verify?token=' + encodeURIComponent(token);
   const sent = await sendVerifyEmail(cred.email, link);
 
@@ -99,7 +99,7 @@ app.get('/auth/verify', async (c) => {
     .set({ emailVerified: true, emailVerifiedAt: new Date(), emailVerifyToken: null })
     .where(eq(credentials.id, cred.id));
 
-  const landingOrigin = (env.allowedOrigins?.split(',')[0] || 'https://trendex.biz').trim();
+  const landingOrigin = (env.allowedOrigins?.split(',')[0] || 'https://golden-connect.to').trim();
   return c.redirect(landingOrigin + '/cabinet?verified=1', 302);
 });
 

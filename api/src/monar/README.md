@@ -1,7 +1,7 @@
 # Monar (real implementation)
 
 Money-model for Monar / Golden Connect, ported from the 13-series source
-of truth (`agentflow/ops/trendex-migration/monar-13-series-source.md`).
+of truth (`agentflow/ops/golden-connect-migration/monar-13-series-source.md`).
 
 **Status: pure logic live, DB writes still stubbed.**
 
@@ -83,6 +83,6 @@ All pure functions are covered by unit tests in `__tests__/`.
 
 ## Source of truth
 
-- Marketing text: `agentflow/ops/trendex-migration/monar-13-series-source.md`
-- Visual schema: `agentflow/ops/trendex-migration/monar-golden-connect-admin-map.html`
-- Live preview: <https://trendex.biz/p/monar-admin-map.html>
+- Marketing text: `agentflow/ops/golden-connect-migration/monar-13-series-source.md`
+- Visual schema: `agentflow/ops/golden-connect-migration/monar-golden-connect-admin-map.html`
+- Live preview: <https://golden-connect.to/p/monar-admin-map.html>

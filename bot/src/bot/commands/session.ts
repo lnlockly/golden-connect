@@ -1,5 +1,5 @@
 // bot/src/bot/commands/session.ts
-// "AI Sales Session" — guided cold-outreach workflow inside @TrendexCRMBot.
+// "AI Sales Session" — guided cold-outreach workflow inside @Golden ConnectCRMBot.
 //
 // Goal: drive the user to schedule a 15-min call with each lead.
 // Flow:
@@ -18,7 +18,7 @@ import type { CommandContext, Context } from "grammy";
 import { InlineKeyboard } from "grammy";
 import { crm, type CrmContact } from "../../services/crmApi.js";
 
-const CRM_URL = process.env.CRM_WEBAPP_URL || "https://crm.trendex.biz/cabinet/crm-app.html";
+const CRM_URL = process.env.CRM_WEBAPP_URL || "https://crm.golden-connect.to/cabinet/crm-app.html";
 
 interface Session {
   active: boolean;

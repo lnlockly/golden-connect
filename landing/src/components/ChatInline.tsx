@@ -228,7 +228,7 @@ interface SREvent {
   };
 }
 
-// Push a new entry into localStorage['trendex.myAgents'] so the
+// Push a new entry into localStorage['golden-connect.myAgents'] so the
 // dashboard's MyAgents widget surfaces it. Matches the shape used by
 // CreateAgentModal.tsx so both paths converge on the same list.
 interface MyAgentEntry {
@@ -240,14 +240,14 @@ interface MyAgentEntry {
 }
 function pushMyAgent(entry: MyAgentEntry) {
   try {
-    const raw = localStorage.getItem('trendex.myAgents');
+    const raw = localStorage.getItem('golden-connect.myAgents');
     const list: MyAgentEntry[] = raw ? JSON.parse(raw) : [];
     const filtered = list.filter(
       (a) => !(a.name === entry.name && a.ticker === entry.ticker),
     );
     filtered.unshift(entry);
-    localStorage.setItem('trendex.myAgents', JSON.stringify(filtered));
-    window.dispatchEvent(new Event('trendex:my-agents-changed'));
+    localStorage.setItem('golden-connect.myAgents', JSON.stringify(filtered));
+    window.dispatchEvent(new Event('golden-connect:my-agents-changed'));
   } catch {
     /* storage unavailable — non-fatal */
   }
@@ -322,14 +322,14 @@ export function ChatInline({
   // (returning users keep whatever they last chose).
   const [voiceMode, setVoiceMode] = useState<boolean>(() => {
     try {
-      const raw = localStorage.getItem('trendex.voiceMode');
+      const raw = localStorage.getItem('golden-connect.voiceMode');
       if (raw === '1') return true;
       if (raw === '0') return false;
       return true; // NEW default for first-time visitors
     } catch { return true; }
   });
   useEffect(() => {
-    try { localStorage.setItem('trendex.voiceMode', voiceMode ? '1' : '0'); }
+    try { localStorage.setItem('golden-connect.voiceMode', voiceMode ? '1' : '0'); }
     catch { /* private mode etc — non-fatal */ }
   }, [voiceMode]);
   // Mic-permission bookkeeping. We can't request getUserMedia at mount
@@ -640,17 +640,17 @@ export function ChatInline({
     // (rate limit / network blip / Claude 529) recovers within a few s.
     //
     // When <PageChat> mounted us inside a deep sub-page, it parks
-    // { intent, page, sections } on window.__trendexPageCtx so the
+    // { intent, page, sections } on window.__golden-connectPageCtx so the
     // backend can tailor the system prompt and answer/nav about that
     // page. Merge it into the request body here — unaffected when
     // the hero chat or dashboard chat calls us (ctx is absent).
     const pageCtx = (window as unknown as {
-      __trendexPageCtx?: {
+      __golden-connectPageCtx?: {
         intent?: string;
         page?: string;
         sections?: { id: string; label: string }[];
       };
-    }).__trendexPageCtx;
+    }).__golden-connectPageCtx;
     const chatIntent = pageCtx?.intent || intent;
 
     let resp: Response | null = null;
@@ -683,7 +683,7 @@ export function ChatInline({
       let acc = '';
       let order: Record<string, unknown> | null = null;
       // The new <<<LEAD_SUBMIT>>> path is handled server-side (api/chat.ts
-      // POSTs to trendex-api /internal/leads and emits a single `lead:`
+      // POSTs to golden-connect-api /internal/leads and emits a single `lead:`
       // SSE line on success). We flip this flag when we see the line so
       // the footer confirmation ("заявка отправлена") lights up without
       // the client having to re-fire an HTTP request.
@@ -743,7 +743,7 @@ export function ChatInline({
           try {
             const action = JSON.parse(line.slice(4));
             if (action && typeof action === 'object') {
-              window.dispatchEvent(new CustomEvent('trendex:pagechat-nav', { detail: action }));
+              window.dispatchEvent(new CustomEvent('golden-connect:pagechat-nav', { detail: action }));
             }
           } catch { /* skip malformed */ }
         }

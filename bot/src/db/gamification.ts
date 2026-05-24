@@ -1,6 +1,6 @@
 /**
  * HTTP-backed repo for Phase 1C gamification. The bot is stateless — it only
- * translates grammy commands into trendex-api calls. Because the bot has no
+ * translates grammy commands into golden-connect-api calls. Because the bot has no
  * per-user JWT it calls the `/internal/gamification/*` variants (secret-gated)
  * passing `user_id` explicitly.
  */

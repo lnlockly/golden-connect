@@ -1,6 +1,6 @@
-# trendex-api
+# golden-connect-api
 
-Backend for TrendeX — Node 22 + hono + Drizzle ORM on Postgres.
+Backend for Golden Connect — Node 22 + hono + Drizzle ORM on Postgres.
 
 ## Phase A scope
 
@@ -63,11 +63,11 @@ npm test
 ## Docker
 
 ```bash
-docker build -t trendex-api .
+docker build -t golden-connect-api .
 docker run --rm -p 4000:4000 \
   -e DATABASE_URL=... \
   -e AUTH_JWT_SECRET=... \
-  trendex-api
+  golden-connect-api
 ```
 
 ## Structure

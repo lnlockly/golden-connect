@@ -1,4 +1,4 @@
-// Trendex: Referral challenges with time limits.
+// Golden Connect: Referral challenges with time limits.
 // "Пригласи 3 за неделю = 10% бонус" → countdown + progress + auto-reward.
 //
 // Command: /challenge

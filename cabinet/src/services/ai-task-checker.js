@@ -1,4 +1,4 @@
-// Trendex AI task checker — Groq LLM + Vision для проверки отчётов исполнителей.
+// Golden Connect AI task checker — Groq LLM + Vision для проверки отчётов исполнителей.
 // Возвращает { score: 0-100, verdict: 'approve'|'reject'|'unclear', reasoning: '...' }
 // Не принимает решение само — рекомендует. Финальное слово за рекламодателем.
 
@@ -60,7 +60,7 @@ function parseVerdict(raw) {
   }
 }
 
-const SYSTEM_PROMPT = `Ты — модератор рекламной платформы Trendex. Проверяешь отчёты исполнителей о выполненных рекламных заданиях.
+const SYSTEM_PROMPT = `Ты — модератор рекламной платформы Golden Connect. Проверяешь отчёты исполнителей о выполненных рекламных заданиях.
 Анализируй ОТЧЁТ против КРИТЕРИЕВ от рекламодателя.
 Верни СТРОГО JSON: {"score": <0-100>, "verdict": "approve"|"reject"|"rework"|"unclear", "reasoning": "<кратко на русском почему>"}
 - score 70-100 + verdict approve = задание выполнено корректно

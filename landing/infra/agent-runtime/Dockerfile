@@ -1,4 +1,4 @@
-# TrendeX hosted ElizaOS runtime.
+# Golden Connect hosted ElizaOS runtime.
 #
 # Thin wrapper around the upstream ElizaOS CLI. One image per hosted
 # agent (built by the deploy pipeline with the right character.json

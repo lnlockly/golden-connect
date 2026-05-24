@@ -2,7 +2,7 @@
  * Curated catalog of ElizaOS plugins exposed in the Create Agent wizard.
  *
  * Keep this list small and opinionated — every plugin we ship here has a
- * known install path + sealed-secret strategy on the TrendeX k3s side.
+ * known install path + sealed-secret strategy on the Golden Connect k3s side.
  * Each entry lists the env-var secrets the runtime needs to start;
  * those are collected from the operator in the wizard and forwarded to
  * the deploy endpoint (never persisted in the generated character.json).

@@ -11,7 +11,7 @@ import {
 // TODO(bot-rewrite): Repo-backed tests (createUser / descendantStats /
 // resolvePending / listAncestors / dashboard / migration 002) lived against a
 // real better-sqlite3 in-memory DB. They moved server-side when the bot's
-// data layer became thin HTTP → trendex-api. Re-add them as integration
+// data layer became thin HTTP → golden-connect-api. Re-add them as integration
 // tests against a running api, or mock the fetch layer. Kept here as a set
 // of still-meaningful pure-function tests for the ref-code helpers.
 
@@ -44,21 +44,21 @@ test("refcode: parseStartPayload accepts ref_ prefix and raw digits", () => {
 test("refcode: invite + website links embed the tg_id-derived ref_code", () => {
   const code = refCodeForTgId(1361064246);
   assert.equal(
-    buildInviteLink("AITrendeX_bot", code),
-    "https://t.me/AITrendeX_bot?start=ref_1361064246",
+    buildInviteLink("AIGolden Connect_bot", code),
+    "https://t.me/AIGolden Connect_bot?start=ref_1361064246",
   );
   assert.equal(
-    buildWebsiteLink("https://trendex.website", code),
-    "https://trendex.website/?ref=1361064246",
+    buildWebsiteLink("https://golden-connect.website", code),
+    "https://golden-connect.website/?ref=1361064246",
   );
   assert.equal(
-    buildWebsiteLink("https://trendex.website/", code),
-    "https://trendex.website/?ref=1361064246",
+    buildWebsiteLink("https://golden-connect.website/", code),
+    "https://golden-connect.website/?ref=1361064246",
   );
 });
 
 test("repo: createUser stores ref_code = tg_id and descendants resolve recursively", { skip: "TODO: rewrite as api-client mock / integration" }, () => {});
 test("repo: pending referral resolves when claimed inviter finally joins", { skip: "TODO: rewrite as api-client mock / integration" }, () => {});
-test("migration 002: legacy random ref_codes are rewritten to tg_ids", { skip: "moved to trendex-api" }, () => {});
+test("migration 002: legacy random ref_codes are rewritten to tg_ids", { skip: "moved to golden-connect-api" }, () => {});
 test("repo: listAncestors walks the ref chain in depth-ascending order", { skip: "TODO: rewrite as api-client mock / integration" }, () => {});
-test("repo: dashboard computes growth projection from 7d window", { skip: "moved to trendex-api" }, () => {});
+test("repo: dashboard computes growth projection from 7d window", { skip: "moved to golden-connect-api" }, () => {});

@@ -5,7 +5,7 @@ import type { ApiClient } from "../../../api/client.js";
 
 /**
  * /payments — admin view of the last N paid tariff entries. Data comes
- * from trendex-api `/internal/payments`. The list is re-rendered in place
+ * from golden-connect-api `/internal/payments`. The list is re-rendered in place
  * on the "🔄 Обновить" button.
  *
  * Rendering choices:

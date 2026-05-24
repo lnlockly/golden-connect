@@ -1,4 +1,4 @@
-// Trendex business-side bot commands: tariffs, balance, jobs, campaigns,
+// Golden Connect business-side bot commands: tariffs, balance, jobs, campaigns,
 // withdraw, topup. Replaces a chunk of the legacy x-health surface.
 
 const { InlineKeyboard } = require('grammy');
@@ -18,7 +18,7 @@ function escapeHtml(s) {
 function fmtUsd(cents) { return '$' + (Number(cents || 0) / 100).toFixed(2); }
 
 function buildCabUrl(config, path) {
-  const base = (config && config.publicBaseUrl ? config.publicBaseUrl : 'https://trendex.biz/cabinet').replace(/\/+$/, '');
+  const base = (config && config.publicBaseUrl ? config.publicBaseUrl : 'https://golden-connect.to/cabinet').replace(/\/+$/, '');
   return base + path;
 }
 
@@ -41,7 +41,7 @@ function setupBusinessCmds(bot, storage, config) {
   // ── /tariffs — list of all tariffs with prices and CTA to cabinet ──
   async function sendTariffsCard(ctx) {
     if (ctx.chat && ctx.chat.type !== 'private') return;
-    const lines = ['🚀 <b>Тарифы Trendex</b>', ''];
+    const lines = ['🚀 <b>Тарифы Golden Connect</b>', ''];
     TARIFFS.forEach((t) => {
       lines.push(`${t.badge} <b>${t.name}</b>${t.entry === 0 ? ' (бесплатно)' : ` — $${t.entry} + $${t.monthly}/мес`}`);
       if (t.seats === 0) {

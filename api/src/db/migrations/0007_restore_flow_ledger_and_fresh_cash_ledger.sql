@@ -1,7 +1,7 @@
 -- Reverts 0006 and splits into two separate tables on the shared Neon DB:
 -- the renamed table (currently `cash_ledger`, holding agentflow-api's data)
 -- is renamed back to `flow_ledger`, and a new empty `cash_ledger` is created
--- for TrendeX. FKs on matrix_accruals/referral_accruals/task_completions/
+-- for Golden Connect. FKs on matrix_accruals/referral_accruals/task_completions/
 -- ad_impressions are rebound from the old (soon-to-be-renamed) cash_ledger
 -- to the new cash_ledger.
 
@@ -21,7 +21,7 @@ ALTER TABLE "flow_ledger" ADD CONSTRAINT "flow_ledger_user_id_users_id_fk" FOREI
 ALTER TABLE "flow_ledger" ADD CONSTRAINT "flow_ledger_related_lead_id_leads_id_fk" FOREIGN KEY ("related_lead_id") REFERENCES "public"."leads"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "flow_ledger" ADD CONSTRAINT "flow_ledger_related_user_id_users_id_fk" FOREIGN KEY ("related_user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 
--- 3. Create a fresh, empty cash_ledger for TrendeX.
+-- 3. Create a fresh, empty cash_ledger for Golden Connect.
 CREATE TABLE "cash_ledger" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"user_id" integer NOT NULL,

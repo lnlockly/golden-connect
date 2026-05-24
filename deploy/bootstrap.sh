@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# One-shot server-side bootstrap for trendex.biz.
+# One-shot server-side bootstrap for golden-connect.to.
 #
 # Run ONCE on the k3s host after filling in:
 #   deploy/prod.api.env    (see prod.api.env.example)
@@ -10,7 +10,7 @@
 # Idempotent: every step uses `kubectl apply` so re-running is safe.
 set -euo pipefail
 
-NS=trendex
+NS=golden-connect
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 need() {
@@ -38,13 +38,13 @@ kubectl -n "$NS" create secret docker-registry ghcr-pull \
   --docker-email="$GHCR_EMAIL" \
   --dry-run=client -o yaml | kubectl apply -f -
 
-echo "==> trendex-api-env"
-kubectl -n "$NS" create secret generic trendex-api-env \
+echo "==> golden-connect-api-env"
+kubectl -n "$NS" create secret generic golden-connect-api-env \
   --from-env-file="$HERE/prod.api.env" \
   --dry-run=client -o yaml | kubectl apply -f -
 
-echo "==> trendex-bot-env"
-kubectl -n "$NS" create secret generic trendex-bot-env \
+echo "==> golden-connect-bot-env"
+kubectl -n "$NS" create secret generic golden-connect-bot-env \
   --from-env-file="$HERE/prod.bot.env" \
   --dry-run=client -o yaml | kubectl apply -f -
 
@@ -52,12 +52,12 @@ echo "==> applying manifests"
 kubectl apply -f "$HERE/k8s/"
 
 echo "==> waiting for rollouts"
-kubectl -n "$NS" rollout status deploy/trendex-api     --timeout=5m || true
-kubectl -n "$NS" rollout status deploy/trendex-bot     --timeout=5m || true
-kubectl -n "$NS" rollout status deploy/trendex-landing --timeout=5m || true
+kubectl -n "$NS" rollout status deploy/golden-connect-api     --timeout=5m || true
+kubectl -n "$NS" rollout status deploy/golden-connect-bot     --timeout=5m || true
+kubectl -n "$NS" rollout status deploy/golden-connect-landing --timeout=5m || true
 
 echo
 echo "done. Verify:"
-echo "  curl -sS https://api.trendex.biz/health | jq"
-echo "  curl -sS -o /dev/null -w '%{http_code}\n' https://trendex.biz"
+echo "  curl -sS https://api.golden-connect.to/health | jq"
+echo "  curl -sS -o /dev/null -w '%{http_code}\n' https://golden-connect.to"
 echo "  kubectl -n $NS get pods,ingress,certificate"

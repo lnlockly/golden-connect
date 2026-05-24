@@ -283,7 +283,7 @@ function createTelegramMonitor({ bot, storage, config }) {
 
     return trimText(
       [
-        '<b>Сводка Telegram Trendex за 24 часа</b>',
+        '<b>Сводка Telegram Golden Connect за 24 часа</b>',
         '',
         `Период: ${escapeHtml(formatDateTimeRu(periodStartAt))} - ${escapeHtml(formatDateTimeRu(periodEndAt))}`,
         `Сообщений: <b>${stats.totalEvents}</b>`,
@@ -315,7 +315,7 @@ function createTelegramMonitor({ bot, storage, config }) {
     }));
 
     const systemPrompt = [
-      'Ты аналитик Telegram-контуров Trendex.',
+      'Ты аналитик Telegram-контуров Golden Connect.',
       'Тебе нужно сделать короткую, конкретную и полезную сводку для администратора.',
       'Пиши по-русски.',
       'Нужны 4 блока:',
@@ -372,7 +372,7 @@ function createTelegramMonitor({ bot, storage, config }) {
 
     const aiDigest = await requestAIDigest(events, stats, periodStartAt, periodEndAt);
     return {
-      title: options.chatId ? `Сводка по чату ${options.chatId}` : 'Сводка Telegram Trendex',
+      title: options.chatId ? `Сводка по чату ${options.chatId}` : 'Сводка Telegram Golden Connect',
       summary: aiDigest && aiDigest.summary ? aiDigest.summary : buildFallbackDigest(events, stats, periodStartAt, periodEndAt),
       model: aiDigest && aiDigest.model ? aiDigest.model : 'fallback',
       stats,
@@ -449,7 +449,7 @@ function createTelegramMonitor({ bot, storage, config }) {
       '',
       'Сейчас бот может быть ограничен privacy mode. Для полноценного чтения всех сообщений в группе лучше отключить privacy через BotFather:',
       '1. Открыть BotFather',
-      '2. Выбрать @Trendex_bizbot',
+      '2. Выбрать @Golden Connect_bizbot',
       '3. Команда /setprivacy',
       '4. Выключить privacy mode',
       '',

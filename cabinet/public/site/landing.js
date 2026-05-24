@@ -1,4 +1,4 @@
-/* Trendex landing router */
+/* Golden Connect landing router */
 (function () {
   'use strict';
 
@@ -6,26 +6,26 @@
   const EXPERT_IMAGES = { Чернин: 'media/experts/chernin.jpg', Пашнюк: 'media/experts/pashnyuk.jpg', Ведов: 'media/experts/vedov.jpg', Тарасова: 'media/experts/tarasova.jpg', Аванесов: 'media/experts/avanesov.jpg', Румянцев: 'media/experts/rumyancev.jpg', Варламов: 'media/experts/varlamov.jpg', Провоторов: 'media/experts/provotorov.jpg', Нефедов: 'media/experts/nefedov.jpg', Евгений: 'media/experts/evgeny.png' };
   const HERO_MEDIA = {
     health: [
-      { src: 'media/uploads/water-9.jpg', alt: 'Живая вода Trendex', caption: 'Живая вода и ежедневная база', large: true },
+      { src: 'media/uploads/water-9.jpg', alt: 'Живая вода Golden Connect', caption: 'Живая вода и ежедневная база', large: true },
       { src: 'media/experts/chernin.jpg', alt: 'Чернин Владимир Вячеславович', caption: 'Эфиры и научная база' },
-      { src: 'media/uploads/awards2.png', alt: 'Награды Trendex', caption: 'Признание и доверие' },
+      { src: 'media/uploads/awards2.png', alt: 'Награды Golden Connect', caption: 'Признание и доверие' },
     ],
     business: [
       { src: 'media/experts/evgeny.png', alt: 'Евгений Кузнецов', caption: 'Компания и система', large: true },
-      { src: 'media/uploads/reviews-wheel.png', alt: 'Отзывы Trendex', caption: 'Социальное доказательство' },
+      { src: 'media/uploads/reviews-wheel.png', alt: 'Отзывы Golden Connect', caption: 'Социальное доказательство' },
       { src: 'media/experts/pashnyuk.jpg', alt: 'Пашнюк Денис Александрович', caption: 'Производственная база' },
     ],
     hybrid: [
-      { src: 'media/uploads/water-video-1.webp', alt: 'Направления Trendex', caption: 'Здоровье, продукт и движение', large: true },
+      { src: 'media/uploads/water-video-1.webp', alt: 'Направления Golden Connect', caption: 'Здоровье, продукт и движение', large: true },
       { src: 'media/experts/tarasova.jpg', alt: 'Тарасова Лариса Николаевна', caption: 'Эксперты и авторы линий' },
-      { src: 'media/uploads/awards2.png', alt: 'Награды Trendex', caption: 'Официальный контур компании' },
+      { src: 'media/uploads/awards2.png', alt: 'Награды Golden Connect', caption: 'Официальный контур компании' },
     ],
   };
   const COMPANY_MEDIA = [
-    { src: 'media/uploads/awards2.png', alt: 'Награды Trendex', caption: 'Официальное признание и сильный визуальный proof', tall: true },
+    { src: 'media/uploads/awards2.png', alt: 'Награды Golden Connect', caption: 'Официальное признание и сильный визуальный proof', tall: true },
     { src: 'media/experts/evgeny.png', alt: 'Евгений Кузнецов', caption: 'Руководство и сооснователи компании' },
     { src: 'media/experts/chernin.jpg', alt: 'Чернин Владимир Вячеславович', caption: 'Наука, эфиры и продуктовая экспертиза' },
-    { src: 'media/uploads/water-video-1.webp', alt: 'Живая вода Trendex', caption: 'Сильные продуктовые направления и материалы' },
+    { src: 'media/uploads/water-video-1.webp', alt: 'Живая вода Golden Connect', caption: 'Сильные продуктовые направления и материалы' },
   ];
   const FEATURED_PRODUCTS = { health: 'live-water', business: 'alfa-nektar', hybrid: 'tempulis' };
   const PRODUCT_DIRECTIONS = [
@@ -40,7 +40,7 @@
     { id: 'live-water', title: 'Старт через воду и качество жизни', text: 'Один из лучших входов в диалог: легко объяснить пользу, визуально показать продукт и перевести человека в тему ежедневной поддержки.' },
     { id: 'tempulis', title: 'Иммунитет и восстановление', text: 'Сильный продукт для сценариев, где человеку нужен не "каталог", а понятная тема поддержки и следующий шаг в эфиры и материалы.' },
     { id: 'h538', title: 'Beauty-направление с экспертом', text: 'Хорошо работает в связке с людьми, anti-age направлением и карточками автора продуктовой линии.' },
-    { id: 'provitera', title: 'Серебряные технологии и защита', text: 'Подходит для подчеркивания технологичности, экспертности и отдельного продуктового контура внутри Trendex.' },
+    { id: 'provitera', title: 'Серебряные технологии и защита', text: 'Подходит для подчеркивания технологичности, экспертности и отдельного продуктового контура внутри Golden Connect.' },
   ];
   const PRODUCT_PACKS = [
     { title: 'База на каждый день', text: 'Связка для мягкого старта и ежедневной поддержки: сначала польза и комфорт, потом уже более глубокое знакомство с системой.', ids: ['live-water', 'dihydroquercetin', 'omega-3'] },
@@ -164,28 +164,28 @@
 
   const BASE = {
     nav: { company: 'Company', products: 'Products', partner: 'Partners', content: 'Materials', cabinet: 'Workspace', login: 'Login', register: 'Create account' },
-    badge: 'Trendex partner ecosystem',
-    titles: { pillars: 'Value, trust and a clear next step', products: 'Trendex products', partner: 'Partner system and growth path', materials: 'Materials and ready resources', results: 'Results and social proof', ai: 'Ask AI about product and launch', cta: 'Open your personal Trendex workspace' },
+    badge: 'Golden Connect partner ecosystem',
+    titles: { pillars: 'Value, trust and a clear next step', products: 'Golden Connect products', partner: 'Partner system and growth path', materials: 'Materials and ready resources', results: 'Results and social proof', ai: 'Ask AI about product and launch', cta: 'Open your personal Golden Connect workspace' },
     labels: { directions: 'Directions', about: 'About', experts: 'Experts', awards: 'Recognition', results: 'Results', catalog: 'Catalog', partnership: 'Partners', levels: 'Levels', materials: 'Materials', ai: 'AI assistant', start: 'Start' },
     notes: { ref: 'This page is personalized by invitation code: {{ref}}', base: 'Study the scenario, then register and open your personal links and materials.', results: 'Real stories, trust signals and prepared proof blocks help move a person from interest to the next step.' },
     ctas: { health: 'Explore products', business: 'Partner model', hybrid: 'See the system' },
     next: { health: 'Lead with product value, then move people into your workspace.', business: 'Show the system, duplication and ready tools for a faster start.', hybrid: 'Combine health, business and growth in one clear story.' },
     buttons: { more: 'Learn more', source: 'Source', open: 'Open' },
     growth: { current: 'Current mode', language: 'Language', referral: 'Invitation code', next: 'Next step', switch: 'Switch scenario' },
-    footer: { desc: 'Trendex platform for products, partner growth and launch support in one space.', nav: 'Navigation', contacts: 'Contacts', copy: '© 2026 Trendex. All rights reserved.' },
+    footer: { desc: 'Golden Connect platform for products, partner growth and launch support in one space.', nav: 'Navigation', contacts: 'Contacts', copy: '© 2026 Golden Connect. All rights reserved.' },
     aiPlaceholder: 'Ask about products, partner flow or launch...',
-    prompts: { health: ['Какие продукты подходят для начала?', 'How do I present Trendex softly?', 'Когда следующий эфир с профессором?'], business: ['How do I explain the partner system simply?', 'What should a beginner show first?', 'How do I invite someone into the business scenario?'], hybrid: ['How do I combine product value and business opportunity?', 'How do I guide a client who may become a partner?', 'How do I present health, business and growth together?'] },
+    prompts: { health: ['Какие продукты подходят для начала?', 'How do I present Golden Connect softly?', 'Когда следующий эфир с профессором?'], business: ['How do I explain the partner system simply?', 'What should a beginner show first?', 'How do I invite someone into the business scenario?'], hybrid: ['How do I combine product value and business opportunity?', 'How do I guide a client who may become a partner?', 'How do I present health, business and growth together?'] },
   };
   const I18N = {
-    ru: { nav: { company: 'О компании', products: 'Продукты', partner: 'Партнёрам', content: 'Материалы', cabinet: 'Кабинет', login: 'Войти', register: 'Создать аккаунт' }, badge: 'Партнёрская экосистема Trendex', titles: { pillars: 'Возможности для здоровья, эфиры и поддержка', products: 'Продукты Trendex', partner: 'Партнёрская система и путь к росту', materials: 'Материалы и готовые ресурсы', results: 'Отзывы, истории и социальное доказательство', ai: 'Спросите AI о продукте и запуске', cta: 'Откройте свой личный кабинет Trendex' }, labels: { directions: 'Направления', about: 'О компании', experts: 'Эксперты', awards: 'Признание', results: 'Отзывы', catalog: 'Каталог', partnership: 'Партнёрам', levels: 'Уровни', materials: 'Материалы', ai: 'AI-помощник', start: 'Старт' }, notes: { ref: 'Страница открыта по коду приглашения: {{ref}}', base: 'Изучите сценарий, затем зарегистрируйтесь и откройте свои ссылки и материалы.', results: 'Отзывы, награды и реальные сценарии помогают объяснить проект мягко и убедительно.' }, ctas: { health: 'Смотреть продукты', business: 'Партнёрская модель', hybrid: 'Вся система' }, next: { health: 'Сначала даём пользу через продукт, потом переводим человека в кабинет.', business: 'Показываем систему, дубликацию и готовые инструменты для старта.', hybrid: 'Соединяем здоровье, бизнес и путь роста в одном сценарии.' }, buttons: { more: 'Подробнее', source: 'Источник', open: 'Открыть' }, growth: { current: 'Текущий сценарий', language: 'Язык', referral: 'Код приглашения', next: 'Следующий шаг', switch: 'Переключить сценарий' }, footer: { desc: 'Платформа Trendex для продукта, партнёрского роста и запуска в одном пространстве.', nav: 'Навигация', contacts: 'Контакты', copy: '© 2026 Trendex. Все права защищены.' }, aiPlaceholder: 'Спросите о продуктах, запуске или партнёрской системе...' },
-    es: { nav: { company: 'Empresa', products: 'Productos', partner: 'Socios', content: 'Materiales', cabinet: 'Cabina', login: 'Entrar', register: 'Crear cuenta' }, badge: 'Ecosistema de socios Trendex', buttons: { more: 'Ver mas', source: 'Fuente', open: 'Abrir' }, ctas: { health: 'Ver productos', business: 'Modelo de negocio', hybrid: 'Ver sistema' } },
-    de: { nav: { company: 'Unternehmen', products: 'Produkte', partner: 'Partner', content: 'Materialien', cabinet: 'Workspace', login: 'Login', register: 'Konto erstellen' }, badge: 'Trendex Partner-Okosystem', buttons: { more: 'Mehr erfahren', source: 'Quelle', open: 'Offnen' } },
-    fr: { nav: { company: 'Societe', products: 'Produits', partner: 'Partenaires', content: 'Materiaux', cabinet: 'Espace', login: 'Connexion', register: 'Creer un compte' }, badge: 'Ecosysteme partenaire Trendex', buttons: { more: 'Voir plus', source: 'Source', open: 'Ouvrir' } },
-    it: { nav: { company: 'Azienda', products: 'Prodotti', partner: 'Partner', content: 'Materiali', cabinet: 'Area', login: 'Accedi', register: 'Crea account' }, badge: 'Ecosistema partner Trendex', buttons: { more: 'Scopri di piu', source: 'Fonte', open: 'Apri' } },
-    pt: { nav: { company: 'Empresa', products: 'Produtos', partner: 'Parceiros', content: 'Materiais', cabinet: 'Workspace', login: 'Entrar', register: 'Criar conta' }, badge: 'Ecossistema parceiro Trendex', buttons: { more: 'Saiba mais', source: 'Fonte', open: 'Abrir' } },
-    tr: { nav: { company: 'Sirket', products: 'Urunler', partner: 'Partnerler', content: 'Materyaller', cabinet: 'Panel', login: 'Giris', register: 'Hesap olustur' }, badge: 'Trendex partner ekosistemi', buttons: { more: 'Detay', source: 'Kaynak', open: 'Ac' } },
-    ar: { nav: { company: 'الشركة', products: 'المنتجات', partner: 'الشركاء', content: 'المواد', cabinet: 'المنصة', login: 'دخول', register: 'إنشاء حساب' }, badge: 'منظومة الشراكة Trendex' },
-    zh: { nav: { company: '公司', products: '产品', partner: '伙伴', content: '资料', cabinet: '工作台', login: '登录', register: '创建账户' }, badge: 'Trendex合作伙伴生态', buttons: { more: '了解更多', source: '来源', open: '打开' } },
+    ru: { nav: { company: 'О компании', products: 'Продукты', partner: 'Партнёрам', content: 'Материалы', cabinet: 'Кабинет', login: 'Войти', register: 'Создать аккаунт' }, badge: 'Партнёрская экосистема Golden Connect', titles: { pillars: 'Возможности для здоровья, эфиры и поддержка', products: 'Продукты Golden Connect', partner: 'Партнёрская система и путь к росту', materials: 'Материалы и готовые ресурсы', results: 'Отзывы, истории и социальное доказательство', ai: 'Спросите AI о продукте и запуске', cta: 'Откройте свой личный кабинет Golden Connect' }, labels: { directions: 'Направления', about: 'О компании', experts: 'Эксперты', awards: 'Признание', results: 'Отзывы', catalog: 'Каталог', partnership: 'Партнёрам', levels: 'Уровни', materials: 'Материалы', ai: 'AI-помощник', start: 'Старт' }, notes: { ref: 'Страница открыта по коду приглашения: {{ref}}', base: 'Изучите сценарий, затем зарегистрируйтесь и откройте свои ссылки и материалы.', results: 'Отзывы, награды и реальные сценарии помогают объяснить проект мягко и убедительно.' }, ctas: { health: 'Смотреть продукты', business: 'Партнёрская модель', hybrid: 'Вся система' }, next: { health: 'Сначала даём пользу через продукт, потом переводим человека в кабинет.', business: 'Показываем систему, дубликацию и готовые инструменты для старта.', hybrid: 'Соединяем здоровье, бизнес и путь роста в одном сценарии.' }, buttons: { more: 'Подробнее', source: 'Источник', open: 'Открыть' }, growth: { current: 'Текущий сценарий', language: 'Язык', referral: 'Код приглашения', next: 'Следующий шаг', switch: 'Переключить сценарий' }, footer: { desc: 'Платформа Golden Connect для продукта, партнёрского роста и запуска в одном пространстве.', nav: 'Навигация', contacts: 'Контакты', copy: '© 2026 Golden Connect. Все права защищены.' }, aiPlaceholder: 'Спросите о продуктах, запуске или партнёрской системе...' },
+    es: { nav: { company: 'Empresa', products: 'Productos', partner: 'Socios', content: 'Materiales', cabinet: 'Cabina', login: 'Entrar', register: 'Crear cuenta' }, badge: 'Ecosistema de socios Golden Connect', buttons: { more: 'Ver mas', source: 'Fuente', open: 'Abrir' }, ctas: { health: 'Ver productos', business: 'Modelo de negocio', hybrid: 'Ver sistema' } },
+    de: { nav: { company: 'Unternehmen', products: 'Produkte', partner: 'Partner', content: 'Materialien', cabinet: 'Workspace', login: 'Login', register: 'Konto erstellen' }, badge: 'Golden Connect Partner-Okosystem', buttons: { more: 'Mehr erfahren', source: 'Quelle', open: 'Offnen' } },
+    fr: { nav: { company: 'Societe', products: 'Produits', partner: 'Partenaires', content: 'Materiaux', cabinet: 'Espace', login: 'Connexion', register: 'Creer un compte' }, badge: 'Ecosysteme partenaire Golden Connect', buttons: { more: 'Voir plus', source: 'Source', open: 'Ouvrir' } },
+    it: { nav: { company: 'Azienda', products: 'Prodotti', partner: 'Partner', content: 'Materiali', cabinet: 'Area', login: 'Accedi', register: 'Crea account' }, badge: 'Ecosistema partner Golden Connect', buttons: { more: 'Scopri di piu', source: 'Fonte', open: 'Apri' } },
+    pt: { nav: { company: 'Empresa', products: 'Produtos', partner: 'Parceiros', content: 'Materiais', cabinet: 'Workspace', login: 'Entrar', register: 'Criar conta' }, badge: 'Ecossistema parceiro Golden Connect', buttons: { more: 'Saiba mais', source: 'Fonte', open: 'Abrir' } },
+    tr: { nav: { company: 'Sirket', products: 'Urunler', partner: 'Partnerler', content: 'Materyaller', cabinet: 'Panel', login: 'Giris', register: 'Hesap olustur' }, badge: 'Golden Connect partner ekosistemi', buttons: { more: 'Detay', source: 'Kaynak', open: 'Ac' } },
+    ar: { nav: { company: 'الشركة', products: 'المنتجات', partner: 'الشركاء', content: 'المواد', cabinet: 'المنصة', login: 'دخول', register: 'إنشاء حساب' }, badge: 'منظومة الشراكة Golden Connect' },
+    zh: { nav: { company: '公司', products: '产品', partner: '伙伴', content: '资料', cabinet: '工作台', login: '登录', register: '创建账户' }, badge: 'Golden Connect合作伙伴生态', buttons: { more: '了解更多', source: '来源', open: '打开' } },
   };
 
   const state = { site: null, products: [], library: null, lang: 'ru', landing: 'health', ref: '', productFilter: 'all' };
@@ -237,7 +237,7 @@
     const el = $('#hero-media-grid');
     const media = HERO_MEDIA[state.landing] || HERO_MEDIA.health;
     if (!el) return;
-    el.innerHTML = arr(media).map((item) => '<div class="hero-card-media-tile' + (item.large ? ' hero-card-media-tile--large' : '') + '">' + '<img src="' + esc(item.src) + '" alt="' + esc(item.alt || 'Trendex') + '" loading="eager">' + (item.caption ? '<div class="hero-card-media-caption">' + esc(item.caption) + '</div>' : '') + '</div>').join('');
+    el.innerHTML = arr(media).map((item) => '<div class="hero-card-media-tile' + (item.large ? ' hero-card-media-tile--large' : '') + '">' + '<img src="' + esc(item.src) + '" alt="' + esc(item.alt || 'Golden Connect') + '" loading="eager">' + (item.caption ? '<div class="hero-card-media-caption">' + esc(item.caption) + '</div>' : '') + '</div>').join('');
   }
   function renderPillars(items) { const el = $('#pillars-grid'); if (el) el.innerHTML = arr(items).map((p) => '<article class="pillar-card"><div class="pillar-card-icon">' + esc(p.icon || '✦') + '</div><h3 class="pillar-card-title">' + esc(p.title) + '</h3><p class="pillar-card-text">' + esc(p.text) + '</p></article>').join(''); }
   function renderCompany(company) {
@@ -256,7 +256,7 @@
 
     const highlights = $('#company-highlights');
     if (highlights) {
-      highlights.innerHTML = arr(company.highlights).map((item) => '<article class="card"><div class="card-eyebrow">Trendex</div><h3 class="card-title">' + esc(item.title) + '</h3><p class="card-text">' + esc(item.text) + '</p></article>').join('');
+      highlights.innerHTML = arr(company.highlights).map((item) => '<article class="card"><div class="card-eyebrow">Golden Connect</div><h3 class="card-title">' + esc(item.title) + '</h3><p class="card-text">' + esc(item.text) + '</p></article>').join('');
     }
 
     const facts = $('#company-facts');
@@ -281,7 +281,7 @@
 
     const collage = $('#company-media-collage');
     if (collage) {
-      collage.innerHTML = COMPANY_MEDIA.map((item) => '<article class="company-media-item' + (item.tall ? ' company-media-item--tall' : '') + '">' + '<img src="' + esc(item.src) + '" alt="' + esc(item.alt || 'Trendex') + '" loading="lazy">' + '<div class="company-media-caption">' + esc(item.caption) + '</div></article>').join('');
+      collage.innerHTML = COMPANY_MEDIA.map((item) => '<article class="company-media-item' + (item.tall ? ' company-media-item--tall' : '') + '">' + '<img src="' + esc(item.src) + '" alt="' + esc(item.alt || 'Golden Connect') + '" loading="lazy">' + '<div class="company-media-caption">' + esc(item.caption) + '</div></article>').join('');
     }
 
     const leadership = $('#company-leadership-grid');
@@ -321,7 +321,7 @@
       return '<article class="direction-story-card">' +
         '<div class="direction-story-card__media">' +
         '<img src="' + esc(story.image) + '" alt="' + esc(story.title) + '" loading="lazy">' +
-        '<div class="direction-story-card__badge">Trendex</div>' +
+        '<div class="direction-story-card__badge">Golden Connect</div>' +
         '</div>' +
         '<div class="direction-story-card__body">' +
         '<div class="direction-story-card__eyebrow">' + esc(state.lang === 'ru' ? story.eyebrow : (story.eyebrowEn || story.eyebrow)) + '</div>' +
@@ -365,7 +365,7 @@
     if (featured) {
       if (heroImage) {
         heroImage.src = imgForProduct(featured) || 'media/brand-og.jpg';
-        heroImage.alt = featured.title || 'Trendex';
+        heroImage.alt = featured.title || 'Golden Connect';
       }
       if (heroEyebrow) heroEyebrow.textContent = state.lang === 'ru' ? 'Ключевое направление' : 'Featured direction';
       if (heroTitle) heroTitle.textContent = featured.title || '';
@@ -449,8 +449,8 @@
     if (summary) {
       if (activeFilter.id === 'all') {
         summary.textContent = state.lang === 'ru'
-          ? 'Показываем полный каталог Trendex: выбирайте фильтр, чтобы быстро перейти к своему сценарию.'
-          : 'Showing the full Trendex catalog. Use a filter to jump straight to your scenario.';
+          ? 'Показываем полный каталог Golden Connect: выбирайте фильтр, чтобы быстро перейти к своему сценарию.'
+          : 'Showing the full Golden Connect catalog. Use a filter to jump straight to your scenario.';
       } else {
         const label = state.lang === 'ru' ? activeFilter.title : (activeFilter.titleEn || activeFilter.title);
         summary.textContent = state.lang === 'ru'
@@ -526,10 +526,10 @@
   function aiAnswer(q, c) { const txt = String(q || '').toLowerCase(); if (txt.indexOf('продукт') !== -1 || txt.indexOf('product') !== -1) return c.next[state.landing] + ' ' + rel('/cabinet/register'); if (txt.indexOf('парт') !== -1 || txt.indexOf('business') !== -1 || txt.indexOf('partner') !== -1) return c.next.business + ' ' + rel('/cabinet/register'); return c.next[state.landing] + ' ' + rel('/cabinet/register'); }
   function canonicalUrl() { const defaultLang = String((state.library && state.library.defaultLanguage) || 'ru').toLowerCase(); const url = new URL('/', window.location.origin); if (state.landing !== 'health') url.searchParams.set('landing', state.landing); if (state.lang !== defaultLang) url.searchParams.set('lang', state.lang); return url.toString(); }
   function absoluteAsset(path) { const raw = String(path || '').trim(); if (!raw) return new URL('/cabinet/media/brand-og.jpg', window.location.origin).toString(); if (/^https?:\/\//i.test(raw)) return raw; return new URL(raw.startsWith('/') ? raw : `/${raw}`, window.location.origin).toString(); }
-  function buildStructuredData(title, description, image) { return [{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'Trendex', url: `${window.location.origin}/`, inLanguage: state.lang }, { '@context': 'https://schema.org', '@type': 'WebPage', name: title, description, url: canonicalUrl(), inLanguage: state.lang, primaryImageOfPage: image }]; }
-  function updateHead(title, description) { const seo = (state.site && state.site.seo) || {}; const image = absoluteAsset((seo.landingImages && seo.landingImages[state.landing]) || seo.defaultImage || 'media/brand-og.jpg'); const canonical = canonicalUrl(); const fullTitle = title.toLowerCase().includes('trendex') ? title : `${title} | Trendex`; document.title = fullTitle; if ($('#meta-description')) $('#meta-description').setAttribute('content', description); if ($('#meta-canonical')) $('#meta-canonical').setAttribute('href', canonical); if ($('#meta-og-title')) $('#meta-og-title').setAttribute('content', fullTitle); if ($('#meta-og-description')) $('#meta-og-description').setAttribute('content', description); if ($('#meta-og-url')) $('#meta-og-url').setAttribute('content', canonical); if ($('#meta-og-image')) $('#meta-og-image').setAttribute('content', image); if ($('#meta-og-image-alt')) $('#meta-og-image-alt').setAttribute('content', `${title} — Trendex`); if ($('#meta-twitter-title')) $('#meta-twitter-title').setAttribute('content', fullTitle); if ($('#meta-twitter-description')) $('#meta-twitter-description').setAttribute('content', description); if ($('#meta-twitter-image')) $('#meta-twitter-image').setAttribute('content', image); const structuredData = $('#structured-data'); if (structuredData) structuredData.textContent = JSON.stringify(buildStructuredData(title, description, image)).replace(/</g, '\\u003c'); }
+  function buildStructuredData(title, description, image) { return [{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'Golden Connect', url: `${window.location.origin}/`, inLanguage: state.lang }, { '@context': 'https://schema.org', '@type': 'WebPage', name: title, description, url: canonicalUrl(), inLanguage: state.lang, primaryImageOfPage: image }]; }
+  function updateHead(title, description) { const seo = (state.site && state.site.seo) || {}; const image = absoluteAsset((seo.landingImages && seo.landingImages[state.landing]) || seo.defaultImage || 'media/brand-og.jpg'); const canonical = canonicalUrl(); const fullTitle = title.toLowerCase().includes('golden-connect') ? title : `${title} | Golden Connect`; document.title = fullTitle; if ($('#meta-description')) $('#meta-description').setAttribute('content', description); if ($('#meta-canonical')) $('#meta-canonical').setAttribute('href', canonical); if ($('#meta-og-title')) $('#meta-og-title').setAttribute('content', fullTitle); if ($('#meta-og-description')) $('#meta-og-description').setAttribute('content', description); if ($('#meta-og-url')) $('#meta-og-url').setAttribute('content', canonical); if ($('#meta-og-image')) $('#meta-og-image').setAttribute('content', image); if ($('#meta-og-image-alt')) $('#meta-og-image-alt').setAttribute('content', `${title} — Golden Connect`); if ($('#meta-twitter-title')) $('#meta-twitter-title').setAttribute('content', fullTitle); if ($('#meta-twitter-description')) $('#meta-twitter-description').setAttribute('content', description); if ($('#meta-twitter-image')) $('#meta-twitter-image').setAttribute('content', image); const structuredData = $('#structured-data'); if (structuredData) structuredData.textContent = JSON.stringify(buildStructuredData(title, description, image)).replace(/</g, '\\u003c'); }
   function apply() {
-    const c = copy(); const landing = landingDef(); const lang = langDef(); const heroTitle = l(landing && landing.heroTitle, 'Trendex'); const heroText = l(landing && landing.heroText, ''); const meta = l(landing && landing.descriptions, heroText); const showcase = state.site && state.site.resultsShowcase; const ch = $all('#company-section .section-header'); const ph = $all('#partner-section .section-header'); const aiSection = $('#ai-prompt-row') ? $('#ai-prompt-row').closest('section') : null;
+    const c = copy(); const landing = landingDef(); const lang = langDef(); const heroTitle = l(landing && landing.heroTitle, 'Golden Connect'); const heroText = l(landing && landing.heroText, ''); const meta = l(landing && landing.descriptions, heroText); const showcase = state.site && state.site.resultsShowcase; const ch = $all('#company-section .section-header'); const ph = $all('#partner-section .section-header'); const aiSection = $('#ai-prompt-row') ? $('#ai-prompt-row').closest('section') : null;
     syncUrl(); orderSections(); document.documentElement.lang = state.lang; document.documentElement.dir = state.lang === 'ar' ? 'rtl' : 'ltr'; updateHead(heroTitle, meta);
     const selector = $('#lang-selector'); if (selector) { selector.innerHTML = arr(state.library && state.library.languages).map((x) => '<option value="' + esc(x.id) + '">' + esc(x.id.toUpperCase()) + '</option>').join(''); selector.value = state.lang; }
     [['company', c.nav.company], ['products', c.nav.products], ['partner', c.nav.partner], ['content', c.nav.content], ['cabinet', c.nav.cabinet]].forEach((x) => $all('[data-nav-link="' + x[0] + '"],[data-footer-link="' + x[0] + '"]').forEach((n) => { n.textContent = x[1]; }));
@@ -539,7 +539,7 @@
     if ($('#hero-secondary-btn')) { $('#hero-secondary-btn').textContent = c.ctas[state.landing] || c.ctas.health; $('#hero-secondary-btn').href = state.landing === 'business' ? '#partner-section' : (state.landing === 'hybrid' ? '#company-section' : '#products-section'); }
     if ($('#cta-register-btn')) { $('#cta-register-btn').textContent = c.nav.register; $('#cta-register-btn').href = rel('/cabinet/register'); }
     if ($('#cta-login-btn')) { $('#cta-login-btn').textContent = c.nav.login; $('#cta-login-btn').href = rel('/cabinet/login'); }
-    setText('#hero-badge-text', c.badge); setText('#hero-title', heroTitle); setText('#hero-text', heroText); setText('#hero-marketing-note', fill(state.ref ? c.notes.ref : c.notes.base, { ref: state.ref })); setText('#pillars-section .s-eyebrow', c.labels.directions); setText('#pillars-section .s-title', c.titles.pillars); setText('#pillars-section .s-subtitle', heroText); if (ch[0]) setText('.s-eyebrow', c.labels.about, ch[0]); if (ch[1]) { setText('.s-eyebrow', c.labels.experts, ch[1]); setText('.s-title', state.lang === 'ru' ? 'Команда и производственная база' : 'Team and production base', ch[1]); } if (ch[2]) { setText('.s-eyebrow', c.labels.awards, ch[2]); setText('.s-title', state.lang === 'ru' ? 'Награды и достижения' : 'Awards and achievements', ch[2]); } setText('#results-eyebrow', c.labels.results); setText('#results-title', c.titles.results); setText('#results-intro', (showcase && showcase.intro) || c.notes.results); setText('#direction-stories-eyebrow', state.lang === 'ru' ? 'Сценарии' : 'Scenarios'); setText('#direction-stories-title', state.lang === 'ru' ? 'Как мы продаём через направления, а не через случайный каталог' : 'How we sell through directions, not a random catalog'); setText('#direction-stories-intro', state.lang === 'ru' ? 'Каждое сильное направление Trendex можно упаковать через пользу, конкретного человека, понятные продукты и готовый следующий шаг.' : 'Each strong Trendex direction can be packaged through value, a real person, a clear product set and the next step.');
+    setText('#hero-badge-text', c.badge); setText('#hero-title', heroTitle); setText('#hero-text', heroText); setText('#hero-marketing-note', fill(state.ref ? c.notes.ref : c.notes.base, { ref: state.ref })); setText('#pillars-section .s-eyebrow', c.labels.directions); setText('#pillars-section .s-title', c.titles.pillars); setText('#pillars-section .s-subtitle', heroText); if (ch[0]) setText('.s-eyebrow', c.labels.about, ch[0]); if (ch[1]) { setText('.s-eyebrow', c.labels.experts, ch[1]); setText('.s-title', state.lang === 'ru' ? 'Команда и производственная база' : 'Team and production base', ch[1]); } if (ch[2]) { setText('.s-eyebrow', c.labels.awards, ch[2]); setText('.s-title', state.lang === 'ru' ? 'Награды и достижения' : 'Awards and achievements', ch[2]); } setText('#results-eyebrow', c.labels.results); setText('#results-title', c.titles.results); setText('#results-intro', (showcase && showcase.intro) || c.notes.results); setText('#direction-stories-eyebrow', state.lang === 'ru' ? 'Сценарии' : 'Scenarios'); setText('#direction-stories-title', state.lang === 'ru' ? 'Как мы продаём через направления, а не через случайный каталог' : 'How we sell through directions, not a random catalog'); setText('#direction-stories-intro', state.lang === 'ru' ? 'Каждое сильное направление Golden Connect можно упаковать через пользу, конкретного человека, понятные продукты и готовый следующий шаг.' : 'Each strong Golden Connect direction can be packaged through value, a real person, a clear product set and the next step.');
     setText('#products-section .s-eyebrow', c.labels.catalog); setText('#products-section .s-title', c.titles.products); setText('#products-section .s-subtitle', meta); if (ph[0]) { setText('.s-eyebrow', c.labels.partnership, ph[0]); setText('.s-title', c.titles.partner, ph[0]); setText('.s-subtitle', c.next[state.landing] || c.next.health, ph[0]); } if (ph[1]) { setText('.s-eyebrow', c.labels.levels, ph[1]); setText('.s-title', state.lang === 'ru' ? 'Маркетинг-план' : 'Marketing plan', ph[1]); } setText('#content-section .s-eyebrow', c.labels.materials); setText('#content-section .s-title', c.titles.materials); setText('#content-section .s-subtitle', c.next[state.landing] || c.next.health); if (aiSection) { setText('.s-eyebrow', c.labels.ai, aiSection); setText('.s-title', c.titles.ai, aiSection); setText('.s-subtitle', c.next[state.landing] || c.next.health, aiSection); } setText('.cta-section .s-eyebrow', c.labels.start); setText('.cta-title', c.titles.cta); setText('.cta-text', c.notes.base); if ($('#ai-preview-input')) $('#ai-preview-input').placeholder = c.aiPlaceholder;
     const fTitles = $all('.footer-col-title'); if (fTitles[0]) fTitles[0].textContent = c.footer.nav; if (fTitles[1]) fTitles[1].textContent = c.footer.contacts; setText('.footer-desc', c.footer.desc); setText('.footer-copy', c.footer.copy);
     $all('.hero-stat').forEach((card, i) => { const s = stats(c)[i]; if (!s) return; setText('.hero-stat-num', s.v, card); setText('.hero-stat-label', s.l, card); });
@@ -556,7 +556,7 @@
 
   Promise.all([fetch('/cabinet/api/site/config', { credentials: 'same-origin' }).then((r) => r.json()).catch(() => ({})), fetch('/cabinet/api/products', { credentials: 'same-origin' }).then((r) => r.json()).catch(() => ({}))]).then((res) => {
     const sitePayload = res[0] || {}; const productsPayload = res[1] || {};
-    state.site = sitePayload.site || sitePayload || {}; state.products = productsPayload.items || productsPayload || []; state.library = state.site.landingLibrary || { defaultLanguage: 'ru', languages: [{ id: 'ru', label: 'Русский', nativeLabel: 'Русский' }], types: [{ id: 'health', labels: { ru: 'Здоровье' }, titles: { ru: 'Здоровье' }, descriptions: { ru: '' }, heroTitle: { ru: 'Trendex' }, heroText: { ru: '' } }] };
+    state.site = sitePayload.site || sitePayload || {}; state.products = productsPayload.items || productsPayload || []; state.library = state.site.landingLibrary || { defaultLanguage: 'ru', languages: [{ id: 'ru', label: 'Русский', nativeLabel: 'Русский' }], types: [{ id: 'health', labels: { ru: 'Здоровье' }, titles: { ru: 'Здоровье' }, descriptions: { ru: '' }, heroTitle: { ru: 'Golden Connect' }, heroText: { ru: '' } }] };
     syncFromUrl(); renderCompany(state.site.company); renderPartner(state.site.partner);
     renderBroadcastSection(state.site); renderTeachersSection(state.site); renderReviewsSection(state.site); renderOfficesSection(state.site); renderSupportLinks(state.site); renderShortReviews(state.site);
     loadCompanyLinkForButtons();
@@ -567,9 +567,9 @@
   function loadCompanyLinkForButtons() {
     var ref = state.ref || '';
     fetch('/cabinet/api/company-link' + (ref ? '?ref=' + ref : '')).then(function(r) { return r.json(); }).then(function(data) {
-      var link = data.companyLink || 'https://trendex.biz/';
-      // Replace all trendex.biz links (except /faq and /instructions) with company referral link
-      document.querySelectorAll('a[href*="trendex.biz"]').forEach(function(a) {
+      var link = data.companyLink || 'https://golden-connect.to/';
+      // Replace all golden-connect.to links (except /faq and /instructions) with company referral link
+      document.querySelectorAll('a[href*="golden-connect.to"]').forEach(function(a) {
         if (!a.href.includes('/instructions') && !a.href.includes('/faq')) a.href = link;
       });
       // Also find "Официальный сайт" buttons in company-sources
@@ -760,7 +760,7 @@
     var cards = [
       { title: 'Основной Telegram-чат', text: 'Когда нужен живой контакт, быстрый ответ и сопровождение по продуктам.', icon: '💬', url: links.mainChat || '' },
       { title: 'Результаты и кейсы', text: 'Открыть social proof, отзывы и истории, которые помогают перевести интерес в действие.', icon: '⭐', url: links.results || '' },
-      { title: 'Официальный контур', text: 'Перейти на официальный сайт Trendex и посмотреть компанию, каталог и направления.', icon: '🌐', url: links.companyMain || links.officialSite || '' },
+      { title: 'Официальный контур', text: 'Перейти на официальный сайт Golden Connect и посмотреть компанию, каталог и направления.', icon: '🌐', url: links.companyMain || links.officialSite || '' },
       { title: 'Открыть кабинет', text: 'Создать аккаунт и получить личные ссылки, материалы и следующий шаг для запуска.', icon: '🚀', url: rel('/cabinet/register') },
     ].filter(function(item) { return item.url; });
     el.innerHTML = cards.map(function(item) {

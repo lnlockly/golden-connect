@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import { TgLoginButton } from '../components/cabinet/TgLoginButton';
 
-const REF_STORAGE_KEY = 'trendex_invited_by';
+const REF_STORAGE_KEY = 'golden-connect_invited_by';
 
 type Tab = 'tg' | 'email';
 
@@ -124,7 +124,7 @@ export default function Signup() {
   return (
     <div style={shellStyle}>
       <div style={cardStyle}>
-        <h1 style={titleStyle}>Регистрация в Trendex</h1>
+        <h1 style={titleStyle}>Регистрация в Golden Connect</h1>
         <p style={subtitleStyle}>
           Создайте аккаунт, чтобы начать зарабатывать на рекламной платформе.
         </p>
@@ -164,7 +164,7 @@ export default function Signup() {
               <TgLoginButton label="Войти через Telegram" />
             </div>
             <p style={{ margin: '16px 0 0', color: '#6E7BAF', fontSize: 12, textAlign: 'center' }}>
-              После нажатия откроется бот @Trendex_bizbot
+              После нажатия откроется бот @Golden Connect_bizbot
             </p>
           </div>
         ) : (

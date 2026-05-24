@@ -1,11 +1,11 @@
-# Trendex Cabinet (cabinet pod)
+# Golden Connect Cabinet (cabinet pod)
 
 Express + grammY + better-sqlite3 monolith hosting:
 - Personal cabinet UI (`/cabinet/cabinet` → `public/site/cabinet.html`)
 - Bio Hub (`/cabinet/#/bio` → `shortener-bio-arsenal.js`)
 - Marketplace (`/cabinet/#/marketplace`)
 - AdCenter / TG autoposting
-- Telegram bot `@Trendex_bizbot` (long-polling)
+- Telegram bot `@Golden Connect_bizbot` (long-polling)
 - Public bio pages `/bio/<username>`
 - Public landing showcase `/landings`
 
@@ -17,7 +17,7 @@ Express + grammY + better-sqlite3 monolith hosting:
 - ffmpeg + yt-dlp (video pipeline for video-promo)
 - Chromium + Puppeteer (banner generation, optional)
 - web-push (browser push notifications)
-- Backend API proxy → `api.trendex.biz` (Hono + Postgres)
+- Backend API proxy → `api.golden-connect.to` (Hono + Postgres)
 
 ## Local dev
 ```bash
@@ -28,7 +28,7 @@ DATA_DIR=./data BASE_PATH=/cabinet PORT=3810 node src/server.js
 
 Required env (see `src/config.js`):
 - `BOT_TOKEN`, `BOT_USERNAME`
-- `TRENDEX_API_BASE_URL`, `TRENDEX_API_INTERNAL_SECRET`
+- `GOLDEN_CONNECT_API_BASE_URL`, `GOLDEN_CONNECT_API_INTERNAL_SECRET`
 - `SESSION_COOKIE_NAME`, `PUBLIC_BASE_URL`
 - `GROQ_KEYS` (comma-separated)
 - `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_EMAIL`
@@ -37,14 +37,14 @@ Required env (see `src/config.js`):
 
 ## Deploy
 
-Cabinet runs as k8s deployment in `trendex` namespace. Build:
+Cabinet runs as k8s deployment in `golden-connect` namespace. Build:
 ```bash
 cd cabinet
 docker buildx build --platform linux/amd64 --push \
-  -t ghcr.io/lnlockly/trendex-cabinet:$(git rev-parse --short=10 HEAD) \
-  -t ghcr.io/lnlockly/trendex-cabinet:latest .
-kubectl -n trendex set image deployment/trendex-cabinet trendex-cabinet=ghcr.io/lnlockly/trendex-cabinet:$(git rev-parse --short=10 HEAD)
-kubectl -n trendex rollout status deployment/trendex-cabinet --timeout=200s
+  -t ghcr.io/lnlockly/golden-connect-cabinet:$(git rev-parse --short=10 HEAD) \
+  -t ghcr.io/lnlockly/golden-connect-cabinet:latest .
+kubectl -n golden-connect set image deployment/golden-connect-cabinet golden-connect-cabinet=ghcr.io/lnlockly/golden-connect-cabinet:$(git rev-parse --short=10 HEAD)
+kubectl -n golden-connect rollout status deployment/golden-connect-cabinet --timeout=200s
 ```
 
 Dockerfile auto-stamps `cab_VERSION_PLACEHOLDER` in cabinet.html with `cab_YYYYMMDD_HHMMSS` and bumps all `?v=...` query strings on every build → invalidates browser/CF cache.
@@ -63,7 +63,7 @@ This routes `/cabinet, /bio, /s, /hub, /sitemap-bio.xml, /auth/magic` to cabinet
 ```json
 {
   "ok": true,
-  "service": "trendex-cabinet",
+  "service": "golden-connect-cabinet",
   "db_ok": true,
   "bot_running": true,
   "uptimeSec": 123,
@@ -101,7 +101,7 @@ Tariff is fetched from api Postgres via `/internal/finance/balances` with 5-min 
 - `/banner` — personal QR banner (PNG)
 - `/vp` (`/video_promo`) — video-promo assignments
 - `/promo`, `/post`, `/qr`, `/short`, `/hashtags`, `/aipost` — promo tools
-- In groups: `/members`, `/quiet`, `/active7d`, `/today_active`, `/who`, `/sync`, `/trendex_active` (admin), `/trendex_silent` (admin)
+- In groups: `/members`, `/quiet`, `/active7d`, `/today_active`, `/who`, `/sync`, `/golden-connect_active` (admin), `/golden-connect_silent` (admin)
 
 ## SEO
 
@@ -113,10 +113,10 @@ Tariff is fetched from api Postgres via `/internal/finance/balances` with 5-min 
 
 ## Architecture notes
 
-- **State**: planner.db (SQLite, persistent on PVC `/data`) is the source of truth for sessions, bio-pages, planner tasks, ad-claims, ad-campaigns, group-tracking. `api.trendex.biz` Postgres holds balance + tariff (single source of truth for money).
+- **State**: planner.db (SQLite, persistent on PVC `/data`) is the source of truth for sessions, bio-pages, planner tasks, ad-claims, ad-campaigns, group-tracking. `api.golden-connect.to` Postgres holds balance + tariff (single source of truth for money).
 - **Cache**: tariff per-user cached 5 min in memory + planner.db (`users.tariff_cached_*`). Invalidate via `invalidatePlan(userId)` after payment success.
 - **Bot polling vs webhook**: bot uses long-polling (no webhook URL). To temporarily disable bot polling on this pod, set `CABINET_BOT_POLL_DISABLED=1`.
-- **Group silence**: bot is silent by default in 3rd-party groups (only tracker). Admin uses `/trendex_active` to enable announcements.
+- **Group silence**: bot is silent by default in 3rd-party groups (only tracker). Admin uses `/golden-connect_active` to enable announcements.
 - **Karma raffle**: weekly Sun 20:00 MSK cron creates `pending_admin` raffle and notifies admins via TG. Admin clicks `🎲 Разыграть` or `⏭ Перенести` → API /internal/karma-raffle/run|skip/:id.
 
 ## Key files
@@ -138,7 +138,7 @@ Tariff is fetched from api Postgres via `/internal/finance/balances` with 5-min 
 - `public/site/js/shortener-bio-arsenal.js` — bio + marketplace UI (4500 lines)
 - `public/site/js/ad-center.js` — adcenter UI
 - `public/site/js/ads-web.js` — ads-web UI
-- `public/site/trendex-ai-chat.js` — AI chat widget (FAB + panel)
+- `public/site/golden-connect-ai-chat.js` — AI chat widget (FAB + panel)
 
 ## Adding a new cabinet page
 

@@ -34,6 +34,7 @@ import './styles/landing-v2-part25.css';
 import './styles/account.css';
 import './styles/kb.css';
 import './styles/trandx-matrix.css';
+import './styles/_golden-theme.css';
 
 const ComingSoon = lazy(() => import('./pages/ComingSoon'));
 const Login = lazy(() => import('./pages/Login'));

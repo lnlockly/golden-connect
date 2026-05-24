@@ -41,7 +41,7 @@ function renderNudge(lang: string | null | undefined): string {
     return [
       '👋 Привет, давно не виделись!',
       '',
-      'Ты уже несколько дней в TRENDEX, но пока не сделал(а) ни одного бронирования и не пригласил(а) друзей. Может что-то непонятно или не хватило времени?',
+      'Ты уже несколько дней в GOLDEN_CONNECT, но пока не сделал(а) ни одного бронирования и не пригласил(а) друзей. Может что-то непонятно или не хватило времени?',
       '',
       'Загляни в /start — внутри короткий путь: открыть кабинет, посмотреть тарифы, получить свою ссылку. Если остались вопросы — просто напиши сюда, помогу разобраться.',
     ].join('\n');
@@ -49,7 +49,7 @@ function renderNudge(lang: string | null | undefined): string {
   return [
     '👋 Hey, long time no see!',
     '',
-    "You've been in TRENDEX for a few days but haven't made a single booking or invited anyone yet. Something unclear, or just busy?",
+    "You've been in GOLDEN_CONNECT for a few days but haven't made a single booking or invited anyone yet. Something unclear, or just busy?",
     '',
     "Open /start — the short path is right there: open the cabinet, check tariffs, grab your link. Got questions? Just drop them here and I'll help.",
   ].join('\n');

@@ -5,7 +5,7 @@
 --   на (user, type) — топап/перевод/вывод работают по единственной строке.
 -- - gift_withdrawals: прямые заявки на выплату с Текущего баланса (тип 5).
 -- - gift_money_log: аудит топапов/переводов/выводов.
--- Масштаб gift_balances = 1e8 (micro-USDT). Trendex working = 1e6.
+-- Масштаб gift_balances = 1e8 (micro-USDT). Golden Connect working = 1e6.
 -- =====================================================================
 
 -- 1) консолидация дублей типов 5/6 → в строку с минимальным id
@@ -37,7 +37,7 @@ WHERE gb.user_id = d.user_id
 CREATE TABLE IF NOT EXISTS gift_withdrawals (
   id              SERIAL PRIMARY KEY,
   gift_user_id    BIGINT  NOT NULL REFERENCES gift_users(id) ON DELETE CASCADE,
-  trendex_user_id INTEGER,
+  golden-connect_user_id INTEGER,
   amount_micro    BIGINT  NOT NULL,               -- 1e8 scale
   address         TEXT    NOT NULL,
   network         TEXT    NOT NULL DEFAULT 'TRC20',
@@ -54,7 +54,7 @@ CREATE INDEX IF NOT EXISTS idx_gift_withdrawals_status ON gift_withdrawals(statu
 CREATE TABLE IF NOT EXISTS gift_money_log (
   id              SERIAL PRIMARY KEY,
   gift_user_id    BIGINT  NOT NULL,
-  trendex_user_id INTEGER,
+  golden-connect_user_id INTEGER,
   kind            TEXT    NOT NULL,   -- topup | transfer | withdraw_hold | withdraw_refund
   from_type       INTEGER,
   to_type         INTEGER,

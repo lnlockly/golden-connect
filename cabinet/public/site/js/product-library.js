@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var DATA_URL = '/cabinet/data/trendex-product-library.json';
+  var DATA_URL = '/cabinet/data/golden-connect-product-library.json';
   var state = {
     data: null,
     search: '',
@@ -206,7 +206,7 @@
   function renderSummary() {
     if (!state.data) return;
     dom.summaryStrip.innerHTML = createSummaryTiles();
-    if (dom.chatTitle) dom.chatTitle.textContent = state.data.chat && state.data.chat.title || 'Telegram-чат Trendex';
+    if (dom.chatTitle) dom.chatTitle.textContent = state.data.chat && state.data.chat.title || 'Telegram-чат Golden Connect';
     if (dom.chatSourceNote) {
       var note = [];
       if (state.data.chat && state.data.chat.historyCount) note.push('История: ' + state.data.chat.historyCount + ' сообщений');
@@ -367,7 +367,7 @@
     var bullets = [];
     var useCases = Array.isArray(product.useCases) ? product.useCases.slice(0, 3) : [];
     if (useCases.length) {
-      bullets.push('В подаче Trendex этот продукт связывают с акцентами на ' + humanList(useCases) + '.');
+      bullets.push('В подаче Golden Connect этот продукт связывают с акцентами на ' + humanList(useCases) + '.');
     }
     if (product.stats && Number(product.stats.instructions || 0) > 0) {
       bullets.push('По продукту уже есть живые вопросы и обсуждения применения, а значит человеку проще двигаться дальше осознанно.');
@@ -387,7 +387,7 @@
       return teacher.name;
     }).filter(Boolean);
     if (product.stats && Number(product.stats.reviews || 0) > 0) {
-      bullets.push('В открытом чате Trendex найдено ' + product.stats.reviews + ' сообщений с отзывами, личным опытом и наблюдениями по этому продукту.');
+      bullets.push('В открытом чате Golden Connect найдено ' + product.stats.reviews + ' сообщений с отзывами, личным опытом и наблюдениями по этому продукту.');
     }
     if (product.stats && Number(product.stats.instructions || 0) > 0) {
       bullets.push('Помимо отзывов по продукту есть ' + product.stats.instructions + ' обсуждений применения и пользовательских вопросов.');
@@ -396,7 +396,7 @@
       bullets.push('С этим направлением связаны ' + humanList(teacherNames.slice(0, 3)) + ', что усиливает доверие к продуктовой линии.');
     }
     if (product.sourceUrl) {
-      bullets.push('Продукт присутствует в публичной витрине Trendex и встроен в общий каталог компании.');
+      bullets.push('Продукт присутствует в публичной витрине Golden Connect и встроен в общий каталог компании.');
     }
     return uniqueStrings(bullets).slice(0, 3);
   }
@@ -428,7 +428,7 @@
         '<div class="review-panel-head">' +
           '<div>' +
             '<div class="card-eyebrow">Реальные отзывы</div>' +
-            '<div class="card-title">Что пишут о продукте в живом чате Trendex</div>' +
+            '<div class="card-title">Что пишут о продукте в живом чате Golden Connect</div>' +
             '<p class="sales-lead">Ниже собраны реальные сообщения из открытого Telegram-чата компании. По кнопке можно перейти прямо к исходному сообщению.</p>' +
           '</div>' +
           '<div class="section-note">' + escapeHtml(product.stats.reviews) + ' отзывов в базе</div>' +
@@ -476,7 +476,7 @@
         '<div class="card">' +
           '<div class="card-eyebrow">Люди и авторы направления</div>' +
           '<div class="card-title">Экспертная связь уточняется</div>' +
-          '<p class="card-text">В текущей публичной базе не найдено отдельной карточки эксперта, жёстко привязанной к этому продукту, но продукт остаётся в каталоге и общей продуктовой системе Trendex.</p>' +
+          '<p class="card-text">В текущей публичной базе не найдено отдельной карточки эксперта, жёстко привязанной к этому продукту, но продукт остаётся в каталоге и общей продуктовой системе Golden Connect.</p>' +
         '</div>'
       );
 
@@ -488,7 +488,7 @@
             '<div class="poster-content">' +
               '<div class="poster-badges">' +
                 '<span class="poster-badge poster-badge--accent">' + escapeHtml(product.category || 'Категория') + '</span>' +
-                '<span class="poster-badge">' + escapeHtml(product.family || 'Линия Trendex') + '</span>' +
+                '<span class="poster-badge">' + escapeHtml(product.family || 'Линия Golden Connect') + '</span>' +
               '</div>' +
               '<div>' +
                 '<div class="poster-title">' + escapeHtml(product.title) + '</div>' +

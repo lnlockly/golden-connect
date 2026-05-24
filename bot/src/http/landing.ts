@@ -1,7 +1,7 @@
 /**
  * Landing → bot webhook.
  *
- * The trendex.website landing POSTs three kinds of form submissions
+ * The golden-connect.website landing POSTs three kinds of form submissions
  * (order / operator / learner) to `POST /api/landing` on this host. This
  * module validates the request, rate-limits per contact, saves a lead
  * row, and posts a formatted HTML card into the right forum topic.
@@ -20,7 +20,7 @@ const RATE_LIMIT_MS = 60_000;      // one submission per contact per minute
 const MAX_BODY_BYTES = 64 * 1024;  // 64 KB cap on incoming JSON
 
 export interface LandingConfig {
-  secret: string;                  // if set, required as x-trendex-secret
+  secret: string;                  // if set, required as x-golden-connect-secret
   chatId: number | null;
   topicOrder: number | null;
   topicOperator: number | null;
@@ -175,7 +175,7 @@ export async function handleLandingWebhook(
 
   res.setHeader("access-control-allow-origin", "*");
   res.setHeader("access-control-allow-methods", "POST, OPTIONS");
-  res.setHeader("access-control-allow-headers", "content-type, x-trendex-secret");
+  res.setHeader("access-control-allow-headers", "content-type, x-golden-connect-secret");
 
   if (req.method === "OPTIONS") {
     res.writeHead(204);
@@ -187,7 +187,7 @@ export async function handleLandingWebhook(
     return;
   }
 
-  const secretHeader = req.headers["x-trendex-secret"];
+  const secretHeader = req.headers["x-golden-connect-secret"];
   const provided = Array.isArray(secretHeader) ? secretHeader[0] : secretHeader;
   if (!checkSecret(provided, config.secret)) {
     logger.warn({ hasHeader: !!provided }, "landing webhook secret mismatch");

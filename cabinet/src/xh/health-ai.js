@@ -1,7 +1,7 @@
-// Trendex Marketing Coach (reуses /symptoms + /health_ai endpoints for continuity).
+// Golden Connect Marketing Coach (reуses /symptoms + /health_ai endpoints for continuity).
 //
 // The x-health "AI symptom checker" is gone. These commands now run a dedicated
-// Trendex partnership / invitation coach — quick personalised tactical advice
+// Golden Connect partnership / invitation coach — quick personalised tactical advice
 // without the long main-chat context.
 
 const { buildCorePrompt } = require('../planner/bot/knowledge/core');
@@ -25,9 +25,9 @@ async function callGroq(messages, opts = {}) {
   ));
 }
 
-// Takes a user question (ANY topic around Trendex growth) and returns
+// Takes a user question (ANY topic around Golden Connect growth) and returns
 // tactical advice — which commands to run, what to say, how to handle it.
-async function trendexAdvice(question, config) {
+async function golden-connectAdvice(question, config) {
   const groqKeys = getGroqKeys(config);
   if (!groqKeys.length) {
     return 'AI временно недоступен. Пока — открой /promo или /ref и сделай первые действия вручную.';
@@ -40,10 +40,10 @@ async function trendexAdvice(question, config) {
   } catch (e) {}
 
   const systemPrompt = [
-    'Ты — AI-коуч партнёра Trendex. Отвечаешь коротко, конкретно и тактически — как ментор.',
+    'Ты — AI-коуч партнёра Golden Connect. Отвечаешь коротко, конкретно и тактически — как ментор.',
     '',
     'ТЕМЫ которые ты покрываешь:',
-    '- Как пригласить друга/коллегу/подписчика в Trendex',
+    '- Как пригласить друга/коллегу/подписчика в Golden Connect',
     '- Что ответить на возражения ("пирамида?", "нет времени", "не умею продавать")',
     '- Какой тариф посоветовать (FREE → LAUNCH → BOOST → ROCKET)',
     '- Как работать с реф-ссылкой, лендингами, Gift-счётом',
@@ -52,7 +52,7 @@ async function trendexAdvice(question, config) {
     '- Как провести /meet с 5-10 рефералами',
     '- Какие команды бота использовать под задачу (/ref, /promo, /aipost, /post, /qr, /short, /team, /events)',
     '',
-    'ТЕМЫ которые ты НЕ покрываешь (мягко отказывай и возвращай к Trendex):',
+    'ТЕМЫ которые ты НЕ покрываешь (мягко отказывай и возвращай к Golden Connect):',
     '- Здоровье, медицина, БАДы, симптомы, диагностика, лечение',
     '- Юридические вопросы, налоги',
     '- Общие бытовые темы',
@@ -82,44 +82,44 @@ async function trendexAdvice(question, config) {
 }
 
 function setupHealthAI(bot, storage, config) {
-  // /advice — новое основное имя команды (коуч по Trendex)
+  // /advice — новое основное имя команды (коуч по Golden Connect)
   bot.command(['advice', 'coach'], async (ctx) => {
     if (ctx.chat && ctx.chat.type !== 'private') return;
     const text = String(ctx.match || '').trim();
     if (!text) {
       return ctx.reply(
-        '🎯 <b>Trendex-коуч</b>\n\n' +
-        'Спроси всё что связано с привлечением и заработком на Trendex — дам тактический совет.\n\n' +
+        '🎯 <b>Golden Connect-коуч</b>\n\n' +
+        'Спроси всё что связано с привлечением и заработком на Golden Connect — дам тактический совет.\n\n' +
         'Примеры:\n' +
         '<code>/advice как пригласить друга который скептик</code>\n' +
         '<code>/advice какой тариф посоветовать новичку без денег</code>\n' +
         '<code>/advice мой реферал молчит 2 недели что делать</code>\n' +
-        '<code>/advice как запустить канал под Trendex</code>',
+        '<code>/advice как запустить канал под Golden Connect</code>',
         { parse_mode: 'HTML' }
       );
     }
     try { await ctx.replyWithChatAction('typing'); } catch (e) {}
-    const advice = await trendexAdvice(text, config);
+    const advice = await golden-connectAdvice(text, config);
     await ctx.reply(escapeHtml(advice), { disable_web_page_preview: true });
   });
 
   // /symptoms и /health_ai — старые команды, теперь редиректят на /advice
-  // и больше НЕ консультируют по здоровью (просто отдают Trendex-совет, если задан вопрос).
+  // и больше НЕ консультируют по здоровью (просто отдают Golden Connect-совет, если задан вопрос).
   bot.command(['symptoms', 'health_ai'], async (ctx) => {
     if (ctx.chat && ctx.chat.type !== 'private') return;
     const text = String(ctx.match || '').trim();
     if (!text) {
       return ctx.reply(
         '🎯 <b>Эта команда переехала</b>\n\n' +
-        'Используй <code>/advice</code> — коуч по Trendex (приглашения, тарифы, инструменты, возражения).\n\n' +
+        'Используй <code>/advice</code> — коуч по Golden Connect (приглашения, тарифы, инструменты, возражения).\n\n' +
         'По здоровью мы больше не консультируем — это не наша сфера.',
         { parse_mode: 'HTML' }
       );
     }
     try { await ctx.replyWithChatAction('typing'); } catch (e) {}
-    const advice = await trendexAdvice(text, config);
+    const advice = await golden-connectAdvice(text, config);
     await ctx.reply(escapeHtml(advice), { disable_web_page_preview: true });
   });
 }
 
-module.exports = { setupHealthAI, trendexAdvice };
+module.exports = { setupHealthAI, golden-connectAdvice };

@@ -185,7 +185,7 @@ app.post('/me/promo/ai-post', async (c) => {
   }
 
   const systemPrompt =
-    'Ты — маркетолог TrendeX. TrendeX — это рекламная экосистема с тремя ролями: ' +
+    'Ты — маркетолог Golden Connect. Golden Connect — это рекламная экосистема с тремя ролями: ' +
     'бизнес запускает рекламу, пользователи зарабатывают выполнением задач и ' +
     'просмотром рекламы, партнёры приглашают через 5-уровневую реф-систему и ' +
     'получают % с оплат команды. В платформе 8 тарифов (от free до royal).\n\n' +
@@ -196,7 +196,7 @@ app.post('/me/promo/ai-post', async (c) => {
     '- Живой, дружелюбный тон\n' +
     '- Призыв к действию с реф-ссылкой (используй плейсхолдер {link} — его ' +
     'подставит кабинет)\n' +
-    '- 2-3 релевантных хэштега в конце (например #trendex #заработок #реклама)\n' +
+    '- 2-3 релевантных хэштега в конце (например #golden-connect #заработок #реклама)\n' +
     '- На русском языке, если пользователь не указал иначе\n\n' +
     'Запрещено: темы здоровья, wellness, БАДов, медицины, обещания доходов в ' +
     'процентах/суммах, «гарантированный заработок», финансовые прогнозы. ' +
@@ -225,7 +225,7 @@ app.post('/me/promo/ai-post', async (c) => {
             role: 'user',
             content:
               userPrompt ||
-              'Сгенерируй универсальный промо-пост про TrendeX для партнёра, ' +
+              'Сгенерируй универсальный промо-пост про Golden Connect для партнёра, ' +
                 'который хочет пригласить людей по своей реф-ссылке.',
           },
         ],
@@ -330,7 +330,7 @@ app.get('/admin/promo/templates', async (c) => {
 /* -------------------- internal admin shortcuts (bot wizards) --------------------
  *
  * The bot has no user JWT — it authenticates with the shared
- * `x-trendex-secret` header. The bot side already verifies the caller is
+ * `x-golden-connect-secret` header. The bot side already verifies the caller is
  * in `ADMIN_TG_IDS` before invoking these, so the secret-only guard is
  * sufficient: there's no public surface for these routes.
  */

@@ -16,7 +16,7 @@ export function HeroV2() {
         <div className="hero-wave-fade" />
       </div>
 
-      <h1 className="hero-brand" aria-label="TRENDEX">TRENDEX</h1>
+      <h1 className="hero-brand" aria-label="GOLDEN_CONNECT">GOLDEN_CONNECT</h1>
     </section>
   );
 }

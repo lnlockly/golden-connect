@@ -2,34 +2,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: trendex-bot
-  namespace: trendex
+  name: golden-connect-bot
+  namespace: golden-connect
   labels:
-    app: trendex-bot
+    app: golden-connect-bot
 spec:
   replicas: 1
   strategy:
     type: Recreate  # long-poller — only one process should own the update stream
   selector:
     matchLabels:
-      app: trendex-bot
+      app: golden-connect-bot
   template:
     metadata:
       labels:
-        app: trendex-bot
+        app: golden-connect-bot
     spec:
       imagePullSecrets:
         - name: ghcr-pull
       containers:
-        - name: trendex-bot
-          image: ghcr.io/lnlockly/trendex-bot:latest
+        - name: golden-connect-bot
+          image: ghcr.io/lnlockly/golden-connect-bot:latest
           imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 8080
           envFrom:
             - secretRef:
-                name: trendex-bot-env
+                name: golden-connect-bot-env
           readinessProbe:
             httpGet:
               path: /api/health
@@ -55,11 +55,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: trendex-bot
-  namespace: trendex
+  name: golden-connect-bot
+  namespace: golden-connect
 spec:
   selector:
-    app: trendex-bot
+    app: golden-connect-bot
   ports:
     - name: http
       port: 8080

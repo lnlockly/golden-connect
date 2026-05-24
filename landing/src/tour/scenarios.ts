@@ -46,8 +46,8 @@ const HOME_STEPS: TourStep[] = [
     scrollTo: '#top',
     voice: {
       ru: 'Привет. Мир меняется быстрее, чем кажется. Мы — АгентФлоу. Наша задача — чтобы ИИ работал на людей, а не против них. Покажу за пару минут.',
-      en: 'Hi. The world is shifting faster than it looks. We are TrendeX. Our mission — make AI work for people, not against them. Two minutes, I will show you how.',
-      zh: '你好。世界变化比想象中更快。我们是 TrendeX。我们的使命 — 让 AI 为人服务,而不是相反。两分钟带你看懂。',
+      en: 'Hi. The world is shifting faster than it looks. We are Golden Connect. Our mission — make AI work for people, not against them. Two minutes, I will show you how.',
+      zh: '你好。世界变化比想象中更快。我们是 Golden Connect。我们的使命 — 让 AI 为人服务,而不是相反。两分钟带你看懂。',
     },
     spotlight: ['.hero-chat-card', '.nav-logo'],
     pointer: '.hero-chat-card',

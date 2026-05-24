@@ -1,7 +1,7 @@
 /**
  * /internal/finance/roboai-charge — atomic per-message billing for roboai-engine.
  *
- * Auth: header `x-trendex-secret: <INTERNAL_API_SECRET>`.
+ * Auth: header `x-golden-connect-secret: <INTERNAL_API_SECRET>`.
  *
  * Single transaction does:
  *   1. Debit advertiser.gift_balance_micro by total_micro (fail if insufficient).

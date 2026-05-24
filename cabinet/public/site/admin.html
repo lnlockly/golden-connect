@@ -11,7 +11,7 @@ ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBo
 <!-- /Yandex.Metrika counter -->
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="robots" content="noindex,nofollow">
-<title>Админка — Trendex</title>
+<title>Админка — Golden Connect</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -42,12 +42,13 @@ input,select,textarea{padding:8px 12px;border-radius:8px;border:1px solid #1e294
 .tab{padding:8px 16px;border-radius:8px;border:1px solid #1e2940;background:none;color:#6b7280;cursor:pointer;font-size:13px}
 .tab.active{background:#10b981;color:#000;border-color:#10b981}
 </style>
+<link rel="stylesheet" href="/_golden-theme.css">
 </head>
 <body>
 <div class="wrap">
   <!-- Login -->
   <div id="admin-login" class="login-box">
-    <h1>Trendex Admin</h1>
+    <h1>Golden Connect Admin</h1>
     <div class="card">
       <p style="margin-bottom:12px;color:#6b7280">Введите пароль администратора</p>
       <input id="admin-pass" type="password" placeholder="Пароль" style="margin-bottom:10px">
@@ -59,7 +60,7 @@ input,select,textarea{padding:8px 12px;border-radius:8px;border:1px solid #1e294
   <!-- Admin panel -->
   <div id="admin-app">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
-      <h1>Trendex Admin Panel</h1>
+      <h1>Golden Connect Admin Panel</h1>
       <button class="btn-outline" onclick="adminLogout()">Выйти</button>
     </div>
 
@@ -91,7 +92,7 @@ input,select,textarea{padding:8px 12px;border-radius:8px;border:1px solid #1e294
 
 <script>
 var adminToken = localStorage.getItem('xh-admin-token') || '';
-var ADMIN_PASS = 'trendex2026admin';
+var ADMIN_PASS = 'golden-connect2026admin';
 
 function adminLogin() {
   var pass = document.getElementById('admin-pass').value;
@@ -177,7 +178,7 @@ function loadAdminConferences() {
 
     // Add form (hidden)
     html += '<div id="conf-form" style="display:none" class="card"><h3>Новая конференция</h3>';
-    html += '<div style="margin:10px 0"><label style="font-size:12px;color:#6b7280">Название</label><input id="cf-title" style="margin-top:4px" placeholder="Здоровье и долголетие с Trendex"></div>';
+    html += '<div style="margin:10px 0"><label style="font-size:12px;color:#6b7280">Название</label><input id="cf-title" style="margin-top:4px" placeholder="Здоровье и долголетие с Golden Connect"></div>';
     html += '<div style="margin:10px 0"><label style="font-size:12px;color:#6b7280">Спикер</label><input id="cf-speaker" style="margin-top:4px" placeholder="Николай Румянцев"></div>';
     html += '<div style="margin:10px 0"><label style="font-size:12px;color:#6b7280">Роль спикера</label><input id="cf-role" style="margin-top:4px" placeholder="Врач-хирург, физиотерапевт"></div>';
     html += '<div style="margin:10px 0"><label style="font-size:12px;color:#6b7280">Фото спикера (URL)</label><input id="cf-image" style="margin-top:4px" placeholder="/cabinet/media/uploads/rumyancev.jpg"></div>';
@@ -263,7 +264,7 @@ function loadAdminBroadcasts() { loadAdminConferences(); }
 function _oldLoadAdminBroadcasts() {
   document.getElementById('admin-broadcasts').innerHTML = '<div class="card"><h3>Управление эфирами</h3>' +
     '<p style="color:#6b7280;font-size:13px;margin-bottom:12px">Настройка ближайшего эфира. Изменения применяются после перезапуска сервера.</p>' +
-    '<div style="margin-bottom:10px"><label style="font-size:12px;color:#6b7280">Название эфира</label><input id="bc-title" value="Здоровье и долголетие с Trendex" style="margin-top:4px"></div>' +
+    '<div style="margin-bottom:10px"><label style="font-size:12px;color:#6b7280">Название эфира</label><input id="bc-title" value="Здоровье и долголетие с Golden Connect" style="margin-top:4px"></div>' +
     '<div style="margin-bottom:10px"><label style="font-size:12px;color:#6b7280">Спикер</label><input id="bc-speaker" value="Николай Румянцев" style="margin-top:4px"></div>' +
     '<div style="margin-bottom:10px"><label style="font-size:12px;color:#6b7280">Дата (ISO)</label><input id="bc-date" value="2026-04-15T18:00:00+03:00" style="margin-top:4px"></div>' +
     '<div style="margin-bottom:10px"><label style="font-size:12px;color:#6b7280">Описание</label><textarea id="bc-desc" rows="3" style="margin-top:4px">Прямой эфир с профессором о натуральных методах здоровья</textarea></div>' +
@@ -286,10 +287,10 @@ function loadAdminSystem() {
   document.getElementById('admin-system').innerHTML = '<div class="card"><h3>Система</h3>' +
     '<div style="font-size:13px;color:#6b7280;line-height:2">' +
     '<div><strong>Сервер:</strong> 81.91.177.204</div>' +
-    '<div><strong>PM2:</strong> trendex-cabinet</div>' +
+    '<div><strong>PM2:</strong> golden-connect-cabinet</div>' +
     '<div><strong>Порт:</strong> 3810</div>' +
-    '<div><strong>Домен:</strong> trendex.biz</div>' +
-    '<div><strong>Бот:</strong> @Trendex_bizbot</div>' +
+    '<div><strong>Домен:</strong> golden-connect.to</div>' +
+    '<div><strong>Бот:</strong> @Golden Connect_bizbot</div>' +
     '<div><strong>Node:</strong> v20</div>' +
     '<div><strong>Storage:</strong> JSON (state.json)</div>' +
     '</div></div>' +

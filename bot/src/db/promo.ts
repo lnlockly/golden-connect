@@ -20,7 +20,7 @@ export interface QrCodeRow {
 }
 
 /**
- * HTTP client for the promo sub-system in trendex-api. The bot never talks
+ * HTTP client for the promo sub-system in golden-connect-api. The bot never talks
  * to the DB directly — all reads/writes go through the `/internal` or
  * public endpoints depending on the auth story.
  *

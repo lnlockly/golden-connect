@@ -1,4 +1,4 @@
-// Trendex: Health course planner.
+// Golden Connect: Health course planner.
 // Commands: /health, /courses, /addcourse, /protocols, /checkin, /symptoms
 // Reply button: 💊 Здоровье
 // Callbacks: xh_health, hc_today, hc_courses, hc_add, hc_protocols,
@@ -141,7 +141,7 @@ async function sendHealthMain(ctx) {
   const courses = getActiveCourses(user.id);
   const streak = getStreak(user.id);
 
-  const lines = ['💊 <b>Мой курс здоровья Trendex</b>', ''];
+  const lines = ['💊 <b>Мой курс здоровья Golden Connect</b>', ''];
 
   if (todayEntries.length > 0) {
     lines.push(`📅 <b>Сегодня (${todayEntries.length} приёмов):</b>`);
@@ -193,7 +193,7 @@ async function sendHealthMain(ctx) {
 
 async function sendProtocolsList(ctx) {
   const protocols = listProtocols();
-  const lines = ['🎯 <b>Готовые протоколы Trendex</b>', '', 'Выберите цель — и я создам комплексный курс из 2-3 продуктов.', ''];
+  const lines = ['🎯 <b>Готовые протоколы Golden Connect</b>', '', 'Выберите цель — и я создам комплексный курс из 2-3 продуктов.', ''];
   for (const p of protocols) {
     const productsList = p.products.map(slug => {
       const prod = getProduct(slug);
@@ -269,7 +269,7 @@ function startProtocol(userId, protocolId) {
 
 async function sendProductCatalog(ctx) {
   const products = listProducts();
-  const lines = ['💊 <b>Каталог продуктов Trendex</b>', '', 'Выберите продукт для добавления в курс:', ''];
+  const lines = ['💊 <b>Каталог продуктов Golden Connect</b>', '', 'Выберите продукт для добавления в курс:', ''];
   const kb = new InlineKeyboard();
   for (const p of products) {
     kb.text(`${p.emoji} ${p.name}`, `hc_addproduct:${p.slug}`).row();
@@ -582,7 +582,7 @@ function setupHealth(bot, storage, config) {
   bot.callbackQuery('hc_ai', async (ctx) => {
     try { await ctx.answerCallbackQuery(); } catch (e) {}
     await ctx.reply(
-      '💡 <b>AI-консультант Trendex</b>\n\n' +
+      '💡 <b>AI-консультант Golden Connect</b>\n\n' +
       'Опишите ваши симптомы или цели — и я предложу подходящие продукты.\n\n' +
       'Пример: <i>"Болит горло уже второй день"</i>\n' +
       'Или: <i>"Хочу больше энергии"</i>\n\n' +

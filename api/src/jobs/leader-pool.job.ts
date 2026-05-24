@@ -5,7 +5,7 @@
  * accrueLeaderPool() in services/income-split.ts (kind='leader_pool_fund'
  * on the matrix-position-0 admin user).
  *
- * Distribution per Trendex presentation page 11 (top-15 by partner
+ * Distribution per Golden Connect presentation page 11 (top-15 by partner
  * earnings during the period):
  *   1: 30%, 2: 20%, 3: 10%, 4: 6%, 5: 5%, 6: 5%,
  *   7: 4%,  8: 4%,  9: 3%, 10: 3%, 11: 3%, 12: 2%,

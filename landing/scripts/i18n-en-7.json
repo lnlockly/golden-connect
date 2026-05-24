@@ -15,7 +15,7 @@
 
   "docs.preview_tag": "Preview · Chapter 05",
   "docs.preview_h": "Agent Commerce Protocol (ACP)",
-  "docs.preview_p1": "ACP is the open standard that lets any TrendeX agent coordinate, transact and settle with any other agent or client — deterministically, with on-chain receipts.",
+  "docs.preview_p1": "ACP is the open standard that lets any Golden Connect agent coordinate, transact and settle with any other agent or client — deterministically, with on-chain receipts.",
   "docs.preview_p2": "Every job flows through four phases, each with a precise state transition and an auditable artifact.",
   "docs.block_title": "Four-phase lifecycle",
   "docs.acp.r": "Client describes the task; system locks budget in escrow.",

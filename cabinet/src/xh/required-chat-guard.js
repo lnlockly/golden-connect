@@ -37,7 +37,7 @@ function buildKeyboard(config) {
 }
 
 function buildReminderText(config) {
-  const title = escapeHtml(config.requiredChatTitle || 'чат Trendex');
+  const title = escapeHtml(config.requiredChatTitle || 'чат Golden Connect');
   return [
     '⚠️ <b>Для продолжения работы бота нужно вступить в наш чат.</b>',
     '',
@@ -50,7 +50,7 @@ function buildReminderText(config) {
 }
 
 function buildSuccessText(config) {
-  const title = escapeHtml(config.requiredChatTitle || 'чат Trendex');
+  const title = escapeHtml(config.requiredChatTitle || 'чат Golden Connect');
   return [
     '✅ <b>Проверка пройдена.</b>',
     '',
@@ -60,7 +60,7 @@ function buildSuccessText(config) {
 }
 
 function buildStillMissingText(config) {
-  const title = escapeHtml(config.requiredChatTitle || 'чат Trendex');
+  const title = escapeHtml(config.requiredChatTitle || 'чат Golden Connect');
   return [
     '⚠️ <b>Пока не вижу вас в чате.</b>',
     '',
@@ -164,7 +164,7 @@ function setupRequiredChatGuard(bot, storage, config) {
     };
   }
 
-  const chatTitle = config.requiredChatTitle || 'чат Trendex';
+  const chatTitle = config.requiredChatTitle || 'чат Golden Connect';
 
   bot.callbackQuery('xh_reqchat_check', async (ctx) => {
     try { await ctx.answerCallbackQuery({ text: 'Проверяю участие в чате...' }); } catch (error) {}

@@ -1,4 +1,4 @@
-/* Trendex Ad Center UI */
+/* Golden Connect Ad Center UI */
 #adCenterContent { max-width: 1400px; margin: 0 auto; }
 
 .adc-hero { display: flex; justify-content: space-between; gap: 18px; padding: 22px; margin-bottom: 18px; background: linear-gradient(135deg, rgba(0,212,255,.08), rgba(177,74,237,.08)); border: 1px solid rgba(0,212,255,.25); border-radius: 16px; flex-wrap: wrap; }

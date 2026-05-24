@@ -38,7 +38,7 @@ export default function Cabinet() {
   }, [isLoading, isAuthenticated, navigate]);
 
   useEffect(() => {
-    document.title = 'TrendeX · Кабинет';
+    document.title = 'Golden Connect · Кабинет';
     let el = document.head.querySelector<HTMLMetaElement>('meta[name="robots"]');
     if (!el) {
       el = document.createElement('meta');
@@ -69,7 +69,7 @@ export default function Cabinet() {
     <div className="tx-cab">
       <header className="tx-cab-header">
         <Link to="/" className="tx-cab-brand">
-          <span className="tx-cab-brand-name">TrendeX</span>
+          <span className="tx-cab-brand-name">Golden Connect</span>
           <span className="tx-cab-brand-sub">Кабинет</span>
         </Link>
         <div className="tx-cab-header-right">

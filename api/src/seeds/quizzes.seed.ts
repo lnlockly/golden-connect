@@ -3,7 +3,7 @@
  *   onboarding_role  — 5 questions → business / user / partner bucket
  *   tariff_picker    — 4 questions → free / basic / pro / elite slug
  *
- * Phase 2 TrendeX copy. Bucket keys (`business`, `user`, `partner`, `free`,
+ * Phase 2 Golden Connect copy. Bucket keys (`business`, `user`, `partner`, `free`,
  * `basic`, `pro`, `elite`) are load-bearing and MUST NOT change once the
  * quiz id is in production — the quiz id is referenced by quests and by the
  * bot's checkQuestProgress flow.
@@ -31,7 +31,7 @@ interface QuizQuestion {
 const ROLE_QS: QuizQuestion[] = [
   {
     key: 'motivation',
-    q: 'Что тебя привело на TRENDEX? · What brought you to TRENDEX?',
+    q: 'Что тебя привело на GOLDEN_CONNECT? · What brought you to GOLDEN_CONNECT?',
     options: [
       {
         label: 'Хочу продвигать свой продукт · I want to promote my product',
@@ -205,11 +205,11 @@ export const QUIZZES: NewQuiz[] = [
     id: 'onboarding_role',
     title: 'Квиз ролей · Role quiz',
     description:
-      '5 вопросов, чтобы понять твою роль на TRENDEX: бизнес, пользователь или партнёр. · 5 questions to pinpoint your role on TRENDEX: business, user or partner.',
+      '5 вопросов, чтобы понять твою роль на GOLDEN_CONNECT: бизнес, пользователь или партнёр. · 5 questions to pinpoint your role on GOLDEN_CONNECT: business, user or partner.',
     questions: ROLE_QS,
     resultMap: {
       business:
-        'Ты — БИЗНЕС. Закупай рекламные слоты, получай x2 бюджет в раннем доступе и выводи продукт на целевую аудиторию TRENDEX. · You are a BUSINESS. Book ad slots, grab the x2 early-access budget and put your product in front of the TRENDEX audience.',
+        'Ты — БИЗНЕС. Закупай рекламные слоты, получай x2 бюджет в раннем доступе и выводи продукт на целевую аудиторию GOLDEN_CONNECT. · You are a BUSINESS. Book ad slots, grab the x2 early-access budget and put your product in front of the GOLDEN_CONNECT audience.',
       user:
         'Ты — ПОЛЬЗОВАТЕЛЬ. Зарабатывай на задачах и активности, проходи квесты и копи XP — без обязательств по команде. · You are a USER. Earn on tasks and activity, complete quests and stack XP — no team commitment required.',
       partner:
@@ -225,13 +225,13 @@ export const QUIZZES: NewQuiz[] = [
     questions: TARIFF_QS,
     resultMap: {
       free:
-        'Рекомендуем тариф FREE — попробуй TRENDEX без взноса, пройди квесты и разберись в платформе перед апгрейдом. · We recommend the FREE tariff — try TRENDEX with no entry fee, run through the quests and feel the platform out before you upgrade.',
+        'Рекомендуем тариф FREE — попробуй GOLDEN_CONNECT без взноса, пройди квесты и разберись в платформе перед апгрейдом. · We recommend the FREE tariff — try GOLDEN_CONNECT with no entry fee, run through the quests and feel the platform out before you upgrade.',
       basic:
         'Рекомендуем тариф BASIC — оптимальный старт с небольшим бюджетом и доступом к основным доходным слотам. · We recommend the BASIC tariff — the best start on a light budget, with access to the core earning slots.',
       pro:
         'Рекомендуем тариф PRO — подходит, если готов вкладывать время и строить команду: выше лимиты и крупнее доля от оборота. · We recommend the PRO tariff — a fit if you are ready to invest time and build a team: higher caps and a bigger network share.',
       elite:
-        'Рекомендуем тариф ELITE — максимум лимитов, приоритетные слоты и самая высокая доля с оборота сети TRENDEX. · We recommend the ELITE tariff — top caps, priority slots and the largest share of TRENDEX network turnover.',
+        'Рекомендуем тариф ELITE — максимум лимитов, приоритетные слоты и самая высокая доля с оборота сети GOLDEN_CONNECT. · We recommend the ELITE tariff — top caps, priority slots and the largest share of GOLDEN_CONNECT network turnover.',
     },
     active: true,
   },

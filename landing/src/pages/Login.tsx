@@ -34,7 +34,7 @@ export default function Login() {
   return (
     <div style={shellStyle}>
       <div style={cardStyle}>
-        <h1 style={titleStyle}>Вход в TrendeX</h1>
+        <h1 style={titleStyle}>Вход в Golden Connect</h1>
         <p style={subtitleStyle}>
           Войдите, чтобы забронировать место до запуска.
         </p>

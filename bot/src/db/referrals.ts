@@ -2,7 +2,7 @@
  * Bot-side HTTP client for Phase 1A referral endpoints. Mirrors the
  * UsersRepo pattern — every call goes through ApiClient (internal
  * secret). The bot always acts on behalf of a specific user so methods
- * take `userId` (the trendex-side id resolved from users repo).
+ * take `userId` (the golden-connect-side id resolved from users repo).
  */
 import type { ApiClient } from "../api/client.js";
 

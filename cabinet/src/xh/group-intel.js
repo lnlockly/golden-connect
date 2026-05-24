@@ -1,4 +1,4 @@
-// Trendex Group Intelligence — умный бот в групповом чате @TRENDEX_AD.
+// Golden Connect Group Intelligence — умный бот в групповом чате @GOLDEN_CONNECT_AD.
 //
 // Покрывает фазы:
 //   А — Membership tracking (join/leave/welcome)
@@ -16,8 +16,8 @@ const { getBalance } = require('../services/balance-bridge');
 const https = require('https');
 // ---- Karma proxy: api /internal/karma/award (fire-and-forget) ----
 function awardKarmaApi(plannerUserId, kind, sourceId, memo) {
-  const apiBase = process.env.TRENDEX_API_INTERNAL_URL || 'http://trendex-api:4001';
-  const apiSecret = process.env.TRENDEX_API_INTERNAL_SECRET;
+  const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://golden-connect-api:4001';
+  const apiSecret = process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET;
   if (!apiSecret || !plannerUserId) return;
   const rawDb = require('../planner/db/database').getDb();
   let tgId = null;
@@ -26,7 +26,7 @@ function awardKarmaApi(plannerUserId, kind, sourceId, memo) {
     if (u && u.tg_id) tgId = u.tg_id;
   } catch (_) {}
   if (!tgId) return;
-  const email = 'tg' + Math.abs(tgId) + '@trendex.bot';
+  const email = 'tg' + Math.abs(tgId) + '@golden-connect.bot';
   const data = JSON.stringify({ email: email, kind: kind, source_id: sourceId || null, memo: memo || null });
   const httpMod = apiBase.startsWith('https') ? require('https') : require('http');
   try {
@@ -38,7 +38,7 @@ function awardKarmaApi(plannerUserId, kind, sourceId, memo) {
       headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(data),
-        'x-trendex-secret': apiSecret,
+        'x-golden-connect-secret': apiSecret,
       },
       timeout: 5000,
     }, function (res) { res.resume(); });
@@ -84,7 +84,7 @@ function ensureSchema() {
       invited_by_tg_id INTEGER,
       web_user_id INTEGER,           -- link to cabinet webUsers
       tariff_code TEXT,
-      trendex_status TEXT,
+      golden-connect_status TEXT,
       first_seen_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       UNIQUE(chat_id, tg_user_id)
     );
@@ -411,7 +411,7 @@ function getSub(chatId) {
 async function onMemberJoined(ctx, user, storage, config, wuData, platform) {
   const sub = getSub(ctx.chat.id);
   if (!sub?.welcome_enabled && !sub) {
-    // Auto-enable welcome on first join after bot subscribed (or always for trendex chat)
+    // Auto-enable welcome on first join after bot subscribed (or always for golden-connect chat)
   }
   const name = (user.first_name || 'Гость') + (user.username ? ' @' + user.username : '');
 
@@ -435,7 +435,7 @@ async function onMemberJoined(ctx, user, storage, config, wuData, platform) {
     const refsLine = stats?.total ? `· ${stats.total} рефералов` : '';
     lines = [
       `👋 <b>${escapeHtml(name)}</b>, добро пожаловать!`,
-      `Уже знаком с Trendex — статус: <b>${escapeHtml(wu.partner_status || 'PARTNER')}</b> ${refsLine} ${tariffLine}`,
+      `Уже знаком с Golden Connect — статус: <b>${escapeHtml(wu.partner_status || 'PARTNER')}</b> ${refsLine} ${tariffLine}`,
       ``,
       `🎯 В чате обсуждаем рекламу, заработок и новости платформы.`,
     ];
@@ -443,7 +443,7 @@ async function onMemberJoined(ctx, user, storage, config, wuData, platform) {
     lines = [
       `👋 Привет, <b>${escapeHtml(name)}</b>!`,
       ``,
-      `Это чат партнёров Trendex — рекламной платформы с распределённой прибылью.`,
+      `Это чат партнёров Golden Connect — рекламной платформы с распределённой прибылью.`,
       `4 способа заработка: биржа заданий, реф-сеть, кампании, маркетплейс.`,
       ``,
       `🚀 Открой бота в личке — там познакомлю с системой за 2 минуты:`,
@@ -462,7 +462,7 @@ async function onMemberJoined(ctx, user, storage, config, wuData, platform) {
     if (invitedBy.telegramUserId) {
       try {
         await ctx.api.sendMessage(invitedBy.telegramUserId,
-          `🎉 <b>Твой реферал ${escapeHtml(name)}</b> только что зашёл в чат @TRENDEX_AD!\n\n` +
+          `🎉 <b>Твой реферал ${escapeHtml(name)}</b> только что зашёл в чат @GOLDEN_CONNECT_AD!\n\n` +
           `💡 Поприветствуй его публично — это удерживает 30% новичков. Затем напиши в личку — у меня в кабинете найдёшь шаблоны.`,
           { parse_mode: 'HTML' });
       } catch (e) {}
@@ -471,14 +471,14 @@ async function onMemberJoined(ctx, user, storage, config, wuData, platform) {
 
   const kb = new InlineKeyboard();
   if (!wuData?.wu) {
-    kb.url('🚀 Открыть бота в личке', `https://t.me/${ctx.me?.username || 'Trendex_bizbot'}?start=hi_from_group`).row();
+    kb.url('🚀 Открыть бота в личке', `https://t.me/${ctx.me?.username || 'Golden Connect_bizbot'}?start=hi_from_group`).row();
   }
   kb.text('💡 Что делать?', 'gi_help_new');
 
   // [ai-welcome-public] AI-generated welcome posted PUBLICLY in the group.
   // Each new member triggers a fresh Groq call → different services + different angle every time.
   // Visible to all chat members (including old ones) so each greeting is interesting.
-  // Skip if the chat is silenced via /trendex_silent.
+  // Skip if the chat is silenced via /golden-connect_silent.
   try {
     if (!_gsIsSilenced(ctx.chat.id)) {
       const { generateWelcome } = require('../services/ai-welcome');
@@ -490,7 +490,7 @@ async function onMemberJoined(ctx, user, storage, config, wuData, platform) {
       if (welcomeText) {
         // [ai-welcome-public-kb] Inline URL-buttons that deep-link to bot functions.
         // Same buttons for everyone — taps open private chat with the right /start payload.
-        const _u = (ctx.me && ctx.me.username) || 'Trendex_bizbot';
+        const _u = (ctx.me && ctx.me.username) || 'Golden Connect_bizbot';
         const kb = new InlineKeyboard()
           .url('🚀 Открыть бота', `https://t.me/${_u}?start=hi`).row()
           .url('💰 Биржа заданий', `https://t.me/${_u}?start=jobs`)
@@ -523,7 +523,7 @@ async function onMemberLeft(ctx, user) {
 // ============================================================================
 const { buildCorePrompt } = require('../planner/bot/knowledge/core');
 
-const SYS_GROUP_AI_INTRO = `Ты — Trendex AI ассистент @TRENDEX_AD в групповом чате партнёров.
+const SYS_GROUP_AI_INTRO = `Ты — Golden Connect AI ассистент @GOLDEN_CONNECT_AD в групповом чате партнёров.
 
 ПРАВИЛА ОТВЕТА В ГРУППЕ:
 - КРАТКО: 1-3 предложения, не больше 500 символов. Это групповой чат, длинные простыни никто не читает.
@@ -651,7 +651,7 @@ function registerCommands(bot, storage, config) {
       `📅 Зашли сегодня: <b>${today}</b>\n` +
       `🚪 Покинули чат: <b>${stats.gone || 0}</b>\n` +
       `💚 Онлайн (30 мин): <b>${onlineCnt}</b>\n` +
-      `🔗 Связано с Trendex: <b>${stats.linked || 0}</b>\n\n` +
+      `🔗 Связано с Golden Connect: <b>${stats.linked || 0}</b>\n\n` +
       `Команды: /joined_today /silent /active /who @user`,
       { parse_mode: 'HTML' }
     );
@@ -784,7 +784,7 @@ function registerCommands(bot, storage, config) {
   // ── /events in group / subscribe ──
   bot.command('events', async (ctx) => {
     if (isGroup(ctx)) return ctx.reply('🔴 Список эфиров — открой в личке у бота: /events', {
-      reply_markup: new InlineKeyboard().url('Открыть', `https://t.me/${ctx.me?.username || 'Trendex_bizbot'}?start=events`)
+      reply_markup: new InlineKeyboard().url('Открыть', `https://t.me/${ctx.me?.username || 'Golden Connect_bizbot'}?start=events`)
     });
   });
 
@@ -798,7 +798,7 @@ function registerCommands(bot, storage, config) {
       ON CONFLICT(chat_id) DO UPDATE SET subscribed_at = datetime('now')
     `).run(ctx.chat.id, ctx.from.id);
     await ctx.reply(
-      `✅ <b>Чат подписан на события Trendex</b>\n\n` +
+      `✅ <b>Чат подписан на события Golden Connect</b>\n\n` +
       `Уведомления:\n` +
       `   ✅ За 24 часа до эфира\n` +
       `   ✅ За 1 час до эфира\n` +
@@ -949,11 +949,11 @@ function registerCommands(bot, storage, config) {
 
   // Inline callback for help-new — silent in groups (bot is invisible there) /* [no-gi-help-new] */
   // [admin-help] Admin-only command list reveal in group
-  bot.command('trendex_help', async (ctx) => {
+  bot.command('golden-connect_help', async (ctx) => {
     if (!ctx.chat || ctx.chat.type === 'private') return; // private uses bot menu
     if (!await isChatAdmin(ctx)) return; // silent for non-admins
     const lines = [
-      '🛠 <b>Команды бота Trendex</b> (только админ может видеть)',
+      '🛠 <b>Команды бота Golden Connect</b> (только админ может видеть)',
       '',
       '<b>В личке</b>:',
       '• /tariffs — тарифы LAUNCH/BOOST/ROCKET',
@@ -965,10 +965,10 @@ function registerCommands(bot, storage, config) {
       '• /menu — главное меню',
       '',
       '<b>В группе (для админов)</b>:',
-      '• /trendex_active — включить полный режим',
-      '• /trendex_silent — тихий режим (трекер + анонсы)',
-      '• /trendex_status — текущий режим',
-      '• /trendex_help — этот справочник',
+      '• /golden-connect_active — включить полный режим',
+      '• /golden-connect_silent — тихий режим (трекер + анонсы)',
+      '• /golden-connect_status — текущий режим',
+      '• /golden-connect_help — этот справочник',
       '• /members /quiet /active7d /who @user — статистика',
     ];
     return ctx.reply(lines.join('\n'), { parse_mode: 'HTML' });
@@ -978,7 +978,7 @@ function registerCommands(bot, storage, config) {
     try { await ctx.answerCallbackQuery(); } catch {}
     // Send DM-only deep-link via answerCallbackQuery url? grammY does not support url here for callback.
     // Instead just answer with a toast and do nothing public.
-    try { await ctx.answerCallbackQuery({ text: 'Открой бота в личке: t.me/' + (ctx.me?.username || 'Trendex_bizbot'), show_alert: false }); } catch {}
+    try { await ctx.answerCallbackQuery({ text: 'Открой бота в личке: t.me/' + (ctx.me?.username || 'Golden Connect_bizbot'), show_alert: false }); } catch {}
   });
 }
 
@@ -1076,7 +1076,7 @@ function formatUserCard(card, chatId) {
 
   if (wu) {
     lines.push('');
-    lines.push(`📡 <b>Trendex профиль</b>`);
+    lines.push(`📡 <b>Golden Connect профиль</b>`);
     lines.push(`   💎 Статус: ${escapeHtml(wu.partner_status || 'FREE')}`);
     if (ts) {
       lines.push(`   👥 Рефералов: <b>${ts.total || 0}</b>${ts.engaged ? ` · 🔥 активных ${ts.engaged}` : ''}`);
@@ -1172,14 +1172,14 @@ function startGroupIntelCrons(bot, storage, config) {
 // ── EVENTS broadcast to groups ──
 async function broadcastEventsToGroups(bot, config) {
   // Fetch upcoming events from API postgres via internal call
-  const apiBase = String(config?.trendexApiBaseUrl || 'https://api.trendex.biz').replace(/\/+$/, '');
-  const secret = String(config?.trendexApiInternalSecret || '');
+  const apiBase = String(config?.golden-connectApiBaseUrl || 'https://api.golden-connect.to').replace(/\/+$/, '');
+  const secret = String(config?.golden-connectApiInternalSecret || '');
   if (!secret) return;
 
   let events = [];
   try {
     const r = await fetch(apiBase + '/internal/events/upcoming?within_hours=48', {
-      headers: { 'x-trendex-secret': secret }
+      headers: { 'x-golden-connect-secret': secret }
     });
     if (r.ok) events = (await r.json()).events || [];
   } catch (e) {
@@ -1304,18 +1304,18 @@ async function runCrossContextDrip(bot) {
   // Multiple variants per step; pick by user_id hash so same user sees consistent thread.
   const _DRIP_TEXTS = {
     1: [
-      '👋 Привет! Видел тебя в чате @TRENDEX_AD.\n\nЕсли коротко — Trendex это экосистема: биржа заданий с микро-выплатами, маркетплейс цифровых товаров, реферальная сеть на 10 уровней и пресейл-токен платформы. Приходи в кабинет, там удобно всё попробовать.',
-      '👋 Привет от Trendex!\n\nУ нас можно зарабатывать на коротких заданиях, продавать свои продукты в маркетплейсе и строить партнёрскую сеть. Плюс копится Genesis TRDX — токен платформы. Загляни в кабинет — там пригодится.',
-      '👋 Рад приветствовать в Trendex!\n\nКоротко: бирижа заданий ($0.05+ за 5 минут), bio-страница для соцсетей, шортер ссылок и накопление пресейл-токена TRDX. Открой меня — расскажу подробнее.',
+      '👋 Привет! Видел тебя в чате @GOLDEN_CONNECT_AD.\n\nЕсли коротко — Golden Connect это экосистема: биржа заданий с микро-выплатами, маркетплейс цифровых товаров, реферальная сеть на 10 уровней и пресейл-токен платформы. Приходи в кабинет, там удобно всё попробовать.',
+      '👋 Привет от Golden Connect!\n\nУ нас можно зарабатывать на коротких заданиях, продавать свои продукты в маркетплейсе и строить партнёрскую сеть. Плюс копится Genesis TRDX — токен платформы. Загляни в кабинет — там пригодится.',
+      '👋 Рад приветствовать в Golden Connect!\n\nКоротко: бирижа заданий ($0.05+ за 5 минут), bio-страница для соцсетей, шортер ссылок и накопление пресейл-токена TRDX. Открой меня — расскажу подробнее.',
     ],
     2: [
-      '💡 День 2 в Trendex.\n\nСамое время освоить кабинет: глянь Bio-страницу, попробуй шортер ссылок и QR-карточки, посмотри маркетплейс. Если планируешь приглашать партнёров — реферальная программа платит до 10 уровней вглубь.',
+      '💡 День 2 в Golden Connect.\n\nСамое время освоить кабинет: глянь Bio-страницу, попробуй шортер ссылок и QR-карточки, посмотри маркетплейс. Если планируешь приглашать партнёров — реферальная программа платит до 10 уровней вглубь.',
       '💡 Совет на день 2.\n\nЕсли цель — пассивный доход, обрати внимание на пресейл Genesis TRDX (копится за активность и рефералов) и партнёрские тарифы с матрицей. Если активный заработок — биржа заданий уже работает.',
       '💡 День 2.\n\nДля рекламодателей: у нас есть баннерная реклама на сайте и видео-реклама с гарантированными показами — оплата во внутренней TRDX-валюте. Для партнёров: реф-сеть и Matching Bonus +10%. Выбери своё.',
     ],
     3: [
       '🚀 День 3 — пора решить будешь ли ты партнёром.\n\nБез тарифа доступна L1 партнёрка (10% с прямой линии). С тарифом — матрица 12-17 уровней + Matching Bonus. Окупается обычно на 5-10 рефералах. Загляни в кабинет → раздел Маркетинг.',
-      '🚀 День 3.\n\nЕсли уже что-то делаешь — посмотри AI-Mentor, он подскажет следующий шаг. Если ещё ищешь — попробуй Trendex Meet (видеозвонки) или ADX (биржа TG-каналов). Площадка даёт много форматов под разные сценарии.',
+      '🚀 День 3.\n\nЕсли уже что-то делаешь — посмотри AI-Mentor, он подскажет следующий шаг. Если ещё ищешь — попробуй Golden Connect Meet (видеозвонки) или ADX (биржа TG-каналов). Площадка даёт много форматов под разные сценарии.',
       '🚀 День 3 — закрепляем результат.\n\nЛучшие партнёры на этом шаге: 1) активируют тариф, 2) подключают Bio + шортер для соцсетей, 3) начинают копить TRDX через рефералов. Любая комбинация работает — главное начать.',
     ],
   };

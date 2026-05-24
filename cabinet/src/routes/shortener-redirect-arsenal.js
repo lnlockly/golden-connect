@@ -257,10 +257,10 @@ function evaluateRules(db, link, parsedUA, language) {
 // ---------------------------------------------------------------------------
 function errorPage(title, message) {
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${title} - Trendex</title><style>*{margin:0;padding:0;box-sizing:border-box}body{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f5f5f5}
+<title>${title} - Golden Connect</title><style>*{margin:0;padding:0;box-sizing:border-box}body{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f5f5f5}
 .card{background:#fff;border-radius:12px;padding:40px;max-width:420px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.08)}.accent{height:4px;border-radius:2px;background:linear-gradient(90deg,#7c3aed,#3b82f6);margin-bottom:24px}
 h1{font-size:20px;color:#1f2937;margin-bottom:12px}p{color:#6b7280;margin-bottom:24px;line-height:1.5}a{color:#7c3aed;text-decoration:none;font-weight:500}a:hover{text-decoration:underline}</style></head>
-<body><div class="card"><div class="accent"></div><h1>${title}</h1><p>${message}</p><a href="https://trendex.biz">&larr; Trendex</a></div></body></html>`;
+<body><div class="card"><div class="accent"></div><h1>${title}</h1><p>${message}</p><a href="https://golden-connect.to">&larr; Golden Connect</a></div></body></html>`;
 }
 
 function passwordPage(code, errorMsg) {
@@ -268,7 +268,7 @@ function passwordPage(code, errorMsg) {
     ? `<div class="error">${errorMsg}</div>`
     : '';
   return `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Password Required - Trendex</title>
+<title>Password Required - Golden Connect</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f5f5f5}
@@ -296,7 +296,7 @@ button:hover{opacity:.9}
     <input type="password" name="password" placeholder="Enter password" required autofocus autocomplete="off">
     <button type="submit">Unlock &amp; Continue</button>
   </form>
-  <a class="back" href="https://trendex.biz">&larr; Trendex</a>
+  <a class="back" href="https://golden-connect.to">&larr; Golden Connect</a>
 </div></body></html>`;
 }
 
@@ -318,7 +318,7 @@ function escapeHtml(value) {
 }
 
 function buildShortRequestUrl(req, code) {
-  const host = (req.get('x-forwarded-host') || req.get('host') || 'trendex.biz').replace(/\/+$/, '');
+  const host = (req.get('x-forwarded-host') || req.get('host') || 'golden-connect.to').replace(/\/+$/, '');
   const forwardedProto = (req.get('x-forwarded-proto') || '').split(',')[0].trim().toLowerCase();
   const protocol = forwardedProto || (req.secure ? 'https' : 'http');
   return `${protocol}://${host}/s/${encodeURIComponent(String(code || ''))}`;
@@ -346,7 +346,7 @@ ${image ? `<meta property="og:image" content="${image}">` : ''}
 ${image ? `<meta property="og:image:secure_url" content="${image}">` : ''}
 <meta property="og:url" content="${safeShortUrl}">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Trendex">
+<meta property="og:site_name" content="Golden Connect">
 <meta name="twitter:card" content="${image ? 'summary_large_image' : 'summary'}">
 <meta name="twitter:title" content="${title}">
 <meta name="twitter:description" content="${desc}">
@@ -465,7 +465,7 @@ router.get('/:code', (req, res) => {
     performRedirect(req, res, link);
   } catch (error) {
     console.error('Shortener redirect error:', error);
-    res.redirect(302, 'https://trendex.biz');
+    res.redirect(302, 'https://golden-connect.to');
   }
 });
 
@@ -523,7 +523,7 @@ router.post('/:code/verify', express.urlencoded({ extended: false }), (req, res)
     performRedirect(req, res, link);
   } catch (error) {
     console.error('Password verify error:', error);
-    res.redirect(302, 'https://trendex.biz');
+    res.redirect(302, 'https://golden-connect.to');
   }
 });
 

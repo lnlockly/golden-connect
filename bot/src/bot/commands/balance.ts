@@ -73,7 +73,7 @@ export async function onBalance(ctx: AppContext): Promise<void> {
   }
 
   const lines = [
-    `💰 <b>Твои балансы Trendex</b>`,
+    `💰 <b>Твои балансы Golden Connect</b>`,
     ``,
     `🟢 <b>Основной</b>: ${fmtUsd(b.working.usd)}  <i>(на вывод и тариф)</i>`,
     `🟣 <b>Автоподписка</b>: ${fmtUsd(b.subscription.usd)} / ${fmtUsd(b.subscription.cap_usd)} <i>(${sp}%)</i>`,

@@ -1,4 +1,4 @@
-/* Trendex Cabinet — Маркетинг и тарифы */
+/* Golden Connect Cabinet — Маркетинг и тарифы */
 (function () {
   'use strict';
   const $ = (id) => document.getElementById(id);
@@ -11,7 +11,7 @@
     setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity .4s'; setTimeout(() => t.remove(), 400); }, 3000);
   }
 
-  // Per official Trendex presentation (14 pages, April 2026).
+  // Per official Golden Connect presentation (14 pages, April 2026).
   const TARIFFS = [
     {
       code: 'free', name: 'FREE', total: 0, entry: 0, monthly: 0, seats: 0,
@@ -166,7 +166,7 @@
     // Hero
     html += '<div class="cab-card" style="background:linear-gradient(135deg,rgba(255,46,151,.08),rgba(177,74,237,.08));border:1px solid rgba(255,46,151,.25);margin-bottom:18px;text-align:center">' +
       '<div style="font-size:48px;margin-bottom:8px">🚀</div>' +
-      '<h2 style="margin:0 0 8px;color:#fff;font-size:24px">Маркетинг Trendex 2026</h2>' +
+      '<h2 style="margin:0 0 8px;color:#fff;font-size:24px">Маркетинг Golden Connect 2026</h2>' +
       '<p style="margin:0 auto 14px;color:#cbd5e1;font-size:14px;line-height:1.6;max-width:680px">Партнёрская программа на 10 уровней + матрица переливов. Рефералка из 30% от каждой покупки распределяется на твою линейку — зарабатывай на чужой активности.</p>' +
     '</div>';
 
@@ -181,7 +181,7 @@
     // Pre-launch banner ($10 vs $5 gift)
     html += '<div class="cab-card" style="background:linear-gradient(135deg,rgba(251,191,36,.1),rgba(255,46,151,.1));border:1px solid rgba(251,191,36,.4);margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">' +
       '<div><div style="color:#fbbf24;font-weight:800;font-size:18px;margin-bottom:4px">🎁 Условия до запуска: x2 Gift</div>' +
-      '<div style="font-size:13px;color:#cbd5e1;line-height:1.6">До официального старта Trendex удваивает Gift-баланс: <strong style="color:#fbbf24">$10</strong> на каждое бизнес-место (после запуска — $5). Средства расходуются на баннерную/контекстную рекламу внутри платформы.</div></div>' +
+      '<div style="font-size:13px;color:#cbd5e1;line-height:1.6">До официального старта Golden Connect удваивает Gift-баланс: <strong style="color:#fbbf24">$10</strong> на каждое бизнес-место (после запуска — $5). Средства расходуются на баннерную/контекстную рекламу внутри платформы.</div></div>' +
       '<div style="font-size:42px">⏰</div>' +
     '</div>';
 
@@ -259,7 +259,7 @@
     '</div>';
     html += '<div class="cab-card" style="background:linear-gradient(135deg,rgba(251,191,36,.05),rgba(255,46,151,.05));border:1px solid rgba(251,191,36,.25)">' +
       '<h3 style="margin:0 0 12px;color:#fbbf24">👑 Leader Pool</h3>' +
-      '<div style="font-size:13px;color:#cbd5e1;line-height:1.7;margin-bottom:10px">Доход с 3 верхних админ-аккаунтов Trendex → пул топ-15 партнёров. Распределение <strong>1 и 15 числа</strong> каждого месяца по обороту/активности.</div>' +
+      '<div style="font-size:13px;color:#cbd5e1;line-height:1.7;margin-bottom:10px">Доход с 3 верхних админ-аккаунтов Golden Connect → пул топ-15 партнёров. Распределение <strong>1 и 15 числа</strong> каждого месяца по обороту/активности.</div>' +
       '<div style="font-size:11px;color:#9ca3af">Топ-3: 30% / 20% / 10%. Остальные 12 мест: 6/5/5/4/4/3/3/3/2/2/2/1%</div>' +
     '</div>';
     html += '</div>';
@@ -322,7 +322,7 @@
       // [tariff-opts-no-tg] User registered email-only, no Telegram link → no api account yet.
       // Show a friendly prompt instead of trying to render an empty options grid.
       if (opts.user_state === 'no_api_account') {
-        toast(opts.hint || 'Привяжи Telegram чтобы открыть кошелёк и тарифы — /start у @Trendex_bizbot', true);
+        toast(opts.hint || 'Привяжи Telegram чтобы открыть кошелёк и тарифы — /start у @Golden Connect_bizbot', true);
         return;
       }
     } catch (e) {

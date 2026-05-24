@@ -108,7 +108,7 @@ function computeRecommendations(user) {
       id: 'team-cm',
       priority: 5,
       title: '👥 Командный путь — фокус на CRM команды',
-      reason: 'У тебя цель растить команду. Используй встроенный CRM Trendex.',
+      reason: 'У тебя цель растить команду. Используй встроенный CRM Golden Connect.',
       tariff: budget >= 135 ? 'rocket' : 'boost',
       steps: [
         'Активируй BOOST/ROCKET в зависимости от бюджета',

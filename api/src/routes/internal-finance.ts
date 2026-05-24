@@ -2,7 +2,7 @@
  * /internal/finance/* — secret-protected proxy endpoints used by the cabinet
  * service to perform balance + tariff operations on behalf of a user.
  *
- * Auth: requires header `x-trendex-secret: <INTERNAL_API_SECRET>`.
+ * Auth: requires header `x-golden-connect-secret: <INTERNAL_API_SECRET>`.
  * User identity passed in body or query as `user_id` (api-side users.id) OR
  * `email` (lookup → users.id). Fails 404 if the user can't be found.
  *
@@ -42,13 +42,13 @@ async function resolveUserId(c: any): Promise<number | null> {
     const r = (await db.execute(sql`SELECT id FROM users WHERE id = ${userId}`)) as any[];
     if (r[0]?.id) return Number(r[0].id);
     // [user_id-fallthrough-2026-05-17] When user_id is the cabinet's SQLite id
-    // (not trendex-api's Postgres id), fall through to email/tgId lookup instead
+    // (not golden-connect-api's Postgres id), fall through to email/tgId lookup instead
     // of returning null. Fixes engine billing seeing $0 when cabinet shows $801.
   }
-  // Fallback: parse synthetic email tg<id>@trendex.bot (used by cabinet bridge for TG-only users)
+  // Fallback: parse synthetic email tg<id>@golden-connect.bot (used by cabinet bridge for TG-only users)
   const email = String(body.email || queryParams.email || '').trim().toLowerCase();
   if (!email) return null;
-  const m = email.match(/^tg(\d+)@trendex\.bot$/);
+  const m = email.match(/^tg(\d+)@golden-connect\.bot$/);
   if (m) {
     const tgId = Number(m[1]);
     const r = (await db.execute(sql`SELECT id FROM users WHERE tg_id = ${tgId} LIMIT 1`)) as any[];
@@ -605,18 +605,18 @@ app.post('/internal/finance/exchange-execute', async (c) => {
 
   if (buyerEmail) {
     // Same parsing as resolveUserId
-    const m = buyerEmail.match(/^tg(\d+)@trendex\.bot$/);
+    const m = buyerEmail.match(/^tg(\d+)@golden-connect\.bot$/);
     if (m) {
       const r = (await db.execute(sql`SELECT id FROM users WHERE tg_id = ${Number(m[1])} LIMIT 1`)) as any[];
       if (r[0]?.id) buyerId = Number(r[0].id);
     } else {
-      // Generic email lookup (if Trendex stores plain email anywhere — for now stub)
+      // Generic email lookup (if Golden Connect stores plain email anywhere — for now stub)
       const r = (await db.execute(sql`SELECT id FROM users WHERE LOWER(tg_username) = ${buyerEmail.split('@')[0]} LIMIT 1`)) as any[];
       if (r[0]?.id) buyerId = Number(r[0].id);
     }
   }
   if (!sellerId && sellerEmail) {
-    const m = sellerEmail.match(/^tg(\d+)@trendex\.bot$/);
+    const m = sellerEmail.match(/^tg(\d+)@golden-connect\.bot$/);
     if (m) {
       const r = (await db.execute(sql`SELECT id FROM users WHERE tg_id = ${Number(m[1])} LIMIT 1`)) as any[];
       if (r[0]?.id) sellerId = Number(r[0].id);

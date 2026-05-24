@@ -93,7 +93,7 @@ export async function createInvoice(
     paymentMethod: args.paymentMethod ?? PAYMENT_METHODS.SBP,
     id: txId,
     paymentDetails: { amount: amountRubInt, currency: 'RUB' },
-    description: args.description ?? 'Trendex',
+    description: args.description ?? 'Golden Connect',
     return: args.returnUrl ?? `${env.appPublicUrl}/pay/thanks`,
     failedUrl: args.failedUrl ?? args.returnUrl ?? `${env.appPublicUrl}/pay/failed`,
     payload: args.orderId,

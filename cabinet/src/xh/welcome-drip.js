@@ -1,4 +1,4 @@
-// Trendex: Welcome drip series — 5 auto-messages over 5 days for new users.
+// Golden Connect: Welcome drip series — 5 auto-messages over 5 days for new users.
 //
 // Triggered when a user first does /start (ensureWebUserFromTelegram creates the user).
 // Schedule stored in state.json webUser.dripSchedule = { day0: sentAt, day1: sentAt, ... }
@@ -17,9 +17,9 @@ const DRIP_MESSAGES = [
     day: 0,
     delay: 60 * 1000, // 1 min after /start
     text: () => [
-      '👋 <b>Привет! Я Trendex AI Секретарь</b>',
+      '👋 <b>Привет! Я Golden Connect AI Секретарь</b>',
       '',
-      'Trendex — рекламная платформа с распределённой прибылью. Ты можешь зарабатывать <b>4 способами</b>:',
+      'Golden Connect — рекламная платформа с распределённой прибылью. Ты можешь зарабатывать <b>4 способами</b>:',
       '',
       '1️⃣ <b>Биржа заданий</b> — подписки, отчёты, видео ($0.05–$1 за каждое)',
       '2️⃣ <b>Партнёрка</b> — 10 уровней, мгновенные выплаты при покупке партнёра ниже',

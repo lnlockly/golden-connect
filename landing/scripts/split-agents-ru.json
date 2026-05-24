@@ -1,6 +1,6 @@
 {
-  "split.leader.agent_name": "TrendeX · приём операторов",
+  "split.leader.agent_name": "Golden Connect · приём операторов",
   "split.leader.greeting": "Привет. Операторский трек. Коротко: как тебя зовут, на чём шипишь и где можно посмотреть твою работу — GitHub, задеплоенный продукт, Twitter?",
-  "split.learner.agent_name": "TrendeX · приём на обучение",
+  "split.learner.agent_name": "Golden Connect · приём на обучение",
   "split.learner.greeting": "Привет. Трек обучения. Скажи, как тебя зовут и что хочешь освоить — навык, профессию, проект, который хочешь сдать. Отсюда соберу тебе первый модуль."
 }

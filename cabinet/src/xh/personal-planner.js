@@ -1,4 +1,4 @@
-// Trendex personal planner extras (private chat only):
+// Golden Connect personal planner extras (private chat only):
 //   /focus 25       — Pomodoro / focus timer
 //   /goals          — set & track personal goals
 //   /journal text   — quick personal note (text or voice via existing handler)

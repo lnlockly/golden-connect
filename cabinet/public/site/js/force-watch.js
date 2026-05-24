@@ -1,4 +1,4 @@
-// Trendex force-watch video player.
+// Golden Connect force-watch video player.
 // On every cabinet page load (and SPA hash change), asks /api/ads-site/video/should-show.
 // If show=true — opens a fullscreen modal with the video, blocks UI for 10 seconds,
 // then allows skip. CTA buttons before & after description.

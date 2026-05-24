@@ -1,4 +1,4 @@
-// Trendex-specific i18n overrides for keys missing in arsenal-i18n.js
+// Golden Connect-specific i18n overrides for keys missing in arsenal-i18n.js
 (function () {
   if (!window.i18n || !window.i18n.translations) return;
   const T = window.i18n.translations;

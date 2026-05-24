@@ -1,7 +1,7 @@
-// trendex-cabinet: тонкая обёртка. Создаёт Bot grammy, подключает:
-//   1) Trendex handlers (events, referral, promo) — ДО alpha onboarding
+// golden-connect-cabinet: тонкая обёртка. Создаёт Bot grammy, подключает:
+//   1) Golden Connect handlers (events, referral, promo) — ДО alpha onboarding
 //   2) Alpha-planner createBot(bot, webappUrl) — регистрирует онбординг, planner, AI, voice, dreams, meet
-//   3) Trendex cron напоминаний об эфирах + alpha cron
+//   3) Golden Connect cron напоминаний об эфирах + alpha cron
 // Экспорт совместим с существующим server.js: { bot, startCron, notifyWebUser }.
 
 const { Bot } = require('grammy');
@@ -18,8 +18,8 @@ const { startAlertCron, setupAlertCallbacks, startMeetCron } = require('./planne
 const { startPlannerCron } = require('./planner/bot/planner');
 const { startDreamCoachCron } = require('./planner/bot/dreams');
 
-// Trendex specific modules
-const { setupTrendexEvents } = require('./xh/events');
+// Golden Connect specific modules
+const { setupGolden ConnectEvents } = require('./xh/events');
 const { setupReferral } = require('./xh/referral');
 const { setupPromo } = require('./xh/promo');
 const { startEventRemindersCron } = require('./xh/events-cron');
@@ -37,11 +37,11 @@ const { setupCoachMode } = require('./xh/coach');
 const { setupChatNudge, startChatNudgeCron } = require('./xh/chat-nudge');
 const { startTeamStageCron } = require('./xh/team-cron');
 const { startTeamTasksCron } = require('./xh/team-tasks-cron');
-// [trendex-rebrand] disabled: const { setupHealth } = require('./xh/health');
-// [trendex-rebrand] disabled: const { setupHealthAI } = require('./xh/health-ai');
-// [trendex-rebrand] disabled: const { startHealthCron } = require('./xh/health-cron');
+// [golden-connect-rebrand] disabled: const { setupHealth } = require('./xh/health');
+// [golden-connect-rebrand] disabled: const { setupHealthAI } = require('./xh/health-ai');
+// [golden-connect-rebrand] disabled: const { startHealthCron } = require('./xh/health-cron');
 const { setupSiteLink } = require('./xh/site-link');
-// [trendex-rebrand] disabled: const { setupHealthQuiz } = require('./xh/health-quiz');
+// [golden-connect-rebrand] disabled: const { setupHealthQuiz } = require('./xh/health-quiz');
 const { setupFeatures, startWeeklyDigestCron } = require('./xh/features');
 const { startDripCron } = require('./xh/welcome-drip');
 const { startNudgeCron } = require('./xh/auto-nudge');
@@ -110,8 +110,8 @@ function createBot(config, storage) {
     console.error('[required_chat_guard_setup]', e && e.message);
   }
 
-  // ===== Trendex handlers FIRST (intercept deep links before alpha /start) =====
-  try { setupTrendexEvents(bot, storage, config); } catch (e) { console.error('[xh_events_setup]', e && e.message); }
+  // ===== Golden Connect handlers FIRST (intercept deep links before alpha /start) =====
+  try { setupGolden ConnectEvents(bot, storage, config); } catch (e) { console.error('[xh_events_setup]', e && e.message); }
   try { setupReferral(bot, storage, config); } catch (e) { console.error('[xh_referral_setup]', e && e.message); }
   try { setupPromo(bot, storage, config); } catch (e) { console.error('[xh_promo_setup]', e && e.message); }
   try { setupTeam(bot, storage, config); } catch (e) { console.error('[xh_team_setup]', e && e.message); }
@@ -119,7 +119,7 @@ function createBot(config, storage) {
   try { setupBirthdays(bot, birthdayStorage, config); } catch (e) { console.error('[xh_birthdays_setup]', e && e.message); }
   try { setupResults(bot, storage, config); } catch (e) { console.error('[xh_results_setup]', e && e.message); }
   // [silence-gate-early] Install group-silence middleware BEFORE any chat handlers.
-  // In groups not in tg_group_active, all messages are dropped except /trendex_active|silent|status.
+  // In groups not in tg_group_active, all messages are dropped except /golden-connect_active|silent|status.
   try {
     const { setupSilenceGate } = require('./xh/group-silence');
     setupSilenceGate(bot);
@@ -132,7 +132,7 @@ function createBot(config, storage) {
   try { setupGroupIntel(bot, storage, config); } catch (e) { console.error('[xh_group_intel_setup]', e && e.message); }
   try { setupCoachMode(bot, storage); } catch (e) { console.error('[coach_setup]', e && e.message); }
   try { setupChatNudge(bot); } catch (e) { console.error('[xh_chat_nudge_setup]', e && e.message); }
-  // [x-health legacy] removed — handled by Trendex modules
+  // [x-health legacy] removed — handled by Golden Connect modules
   // [x-health AI legacy] removed
   try { setupSiteLink(bot, storage, config); } catch (e) { console.error('[xh_site_link_setup]', e && e.message); }
   // [x-health quiz legacy] removed
@@ -143,7 +143,7 @@ function createBot(config, storage) {
 
   // ===== Alpha-planner bot (onboarding, planner, dreams, meet, admin-panel) =====
   try {
-    setupAlphaBot(bot, config.publicBaseUrl || 'https://trendex.biz/cabinet');
+    setupAlphaBot(bot, config.publicBaseUrl || 'https://golden-connect.to/cabinet');
   } catch (e) {
     console.error('[alpha_setup]', e && e.message);
   }
@@ -223,7 +223,7 @@ function createBot(config, storage) {
           const banner_path = await generateBanner({
             userId: u.id,
             refCode: u.ref_code,
-            displayName: u.tg_username ? '@' + u.tg_username : (u.tg_first_name || 'Партнёр Trendex'),
+            displayName: u.tg_username ? '@' + u.tg_username : (u.tg_first_name || 'Партнёр Golden Connect'),
           });
           rawDb.prepare(
             "UPDATE users SET video_banner_path=?, video_banner_status='ready', video_banner_generated_at=datetime('now') WHERE id=?"
@@ -232,9 +232,9 @@ function createBot(config, storage) {
           try {
             const { InputFile } = require('grammy');
             const fileObj = new InputFile(banner_path.path || banner_path);
-            const caption = '🎬 <b>Твой персональный баннер Trendex готов!</b>\n\n' +
+            const caption = '🎬 <b>Твой персональный баннер Golden Connect готов!</b>\n\n' +
                             '📱 QR ведёт на твою реф-ссылку — делись в соцсетях, чате, оффлайн.\n\n' +
-                            'Скачать в кабинете: trendex.biz/cabinet → Промо-материалы.';
+                            'Скачать в кабинете: golden-connect.to/cabinet → Промо-материалы.';
             if (banner_path && banner_path.isVideo) {
               await bot.api.sendVideo(u.tg_id, fileObj, { caption, parse_mode: 'HTML' });
             } else {
@@ -251,7 +251,7 @@ function createBot(config, storage) {
       console.error('[banner-cron] tick error', e && e.message);
     }
   }, 5 * 60 * 1000); // every 5 min
-  console.log('[banner-cron] started — generates personal Trendex banners');
+  console.log('[banner-cron] started — generates personal Golden Connect banners');
 
   // Phase S.5: rolling video-promo distribution (every 5 min, ceil(N/288) per tick)
   // [phase-s5-distrib]
@@ -299,12 +299,12 @@ function createBot(config, storage) {
     }
     try { await ctx.answerCallbackQuery({ text: action === 'run' ? 'Zapuskaem rozygrysh...' : 'Perenosim...', show_alert: false }); } catch (_) {}
     try {
-      const apiBase = (config && config.trendexApiBaseUrl) || 'https://api.trendex.biz';
-      const secret  = (config && config.trendexApiInternalSecret) || '';
+      const apiBase = (config && config.golden-connectApiBaseUrl) || 'https://api.golden-connect.to';
+      const secret  = (config && config.golden-connectApiInternalSecret) || '';
       const url = apiBase.replace(/\/+\$/, '') + '/internal/karma-raffle/' + action + '/' + raffleId;
       const res = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'x-trendex-secret': secret },
+        headers: { 'Content-Type': 'application/json', 'x-golden-connect-secret': secret },
       });
       const data = await res.json().catch(() => ({}));
       const DOLLAR = String.fromCharCode(36);
@@ -332,7 +332,7 @@ function createBot(config, storage) {
   // [trdx-cmd] Genesis TRDX — balance, utilities, recent ledger
   bot.command('trdx', async (ctx) => {
     if (ctx.chat?.type !== 'private') {
-      const u = ctx.me?.username || 'Trendex_bizbot';
+      const u = ctx.me?.username || 'Golden Connect_bizbot';
       try { await ctx.reply('💎 TRDX — открой бота в личке: https://t.me/' + u + '?start=trdx', { parse_mode: 'HTML' }); } catch (_) {}
       return;
     }
@@ -367,10 +367,10 @@ function createBot(config, storage) {
         '<b>Что даст TRDX после старта:</b>',
         '1️⃣ Биржа — продажа TRDX за USD',
         '2️⃣ Оплата AI-сервисов и рассылок',
-        '3️⃣ Ежеквартальный % от дохода Trendex',
+        '3️⃣ Ежеквартальный % от дохода Golden Connect',
         '4️⃣ Розыгрыши призов (чем больше TRDX — тем больше шанс)',
         '',
-        '🔗 Подробнее: https://trendex.biz/trdx',
+        '🔗 Подробнее: https://golden-connect.to/trdx',
       ];
       if (recent.length > 0) {
         lines.push('');
@@ -384,8 +384,8 @@ function createBot(config, storage) {
       }
       const { InlineKeyboard } = require('grammy');
       const kb = new InlineKeyboard()
-        .url('🔗 Моя реф-ссылка', 'https://trendex.biz/?ref=' + (wu?.referralCode || '')).row()
-        .url('🌐 Подробно на сайте', 'https://trendex.biz/trdx').row()
+        .url('🔗 Моя реф-ссылка', 'https://golden-connect.to/?ref=' + (wu?.referralCode || '')).row()
+        .url('🌐 Подробно на сайте', 'https://golden-connect.to/trdx').row()
         .text('🏆 Топ-100', 'trdx_top');
       await ctx.reply(lines.join('\n'), { parse_mode: 'HTML', reply_markup: kb, disable_web_page_preview: true });
     } catch (e) {
@@ -419,11 +419,11 @@ function createBot(config, storage) {
       // Balances + karma — try api proxy via internal helper
       let earned = 0, gift = 0, karma = 100, tariff = 'free';
       try {
-        const apiBase = (config.trendexApiBaseUrl || 'https://api.trendex.biz').replace(/\/+$/, '');
-        const sec = config.trendexApiInternalSecret || '';
-        const email = u.email || ('tg' + u.tg_id + '@trendex.bot');
+        const apiBase = (config.golden-connectApiBaseUrl || 'https://api.golden-connect.to').replace(/\/+$/, '');
+        const sec = config.golden-connectApiInternalSecret || '';
+        const email = u.email || ('tg' + u.tg_id + '@golden-connect.bot');
         const r = await fetch(apiBase + '/internal/finance/balances?email=' + encodeURIComponent(email), {
-          headers: { 'x-trendex-secret': sec },
+          headers: { 'x-golden-connect-secret': sec },
         });
         if (r.ok) {
           const d = await r.json();
@@ -444,9 +444,9 @@ function createBot(config, storage) {
         activeClaims = rawDb.prepare("SELECT COUNT(*) AS c FROM ad_claims WHERE executor_user_id=? AND status IN ('claimed', 'submitted', 'rework')").get(u.id)?.c || 0;
       } catch (_) {}
       const tariffEmoji = { free: '🟢', launch: '🚀', boost: '⚡', rocket: '💎' }[tariff] || '🟢';
-      const refUrl = 'https://trendex.biz/?ref=' + (u.ref_code || '');
+      const refUrl = 'https://golden-connect.to/?ref=' + (u.ref_code || '');
       const txt =
-        '📊 <b>Твоя сводка Trendex</b>\n\n' +
+        '📊 <b>Твоя сводка Golden Connect</b>\n\n' +
         '💵 Earned: <b>$' + earned.toFixed(2) + '</b>\n' +
         '🎁 Gift: <b>$' + gift.toFixed(2) + '</b>\n' +
         '⚡ Карма: <b>' + karma + '</b>\n' +
@@ -480,7 +480,7 @@ function createBot(config, storage) {
     try { await ctx.answerCallbackQuery(); } catch (_) {}
     try {
       const { sendMagicLink } = require('./xh/site-link');
-      const siteBase = String(config.publicBaseUrl || 'https://trendex.biz/cabinet').replace(/\/+$/, '');
+      const siteBase = String(config.publicBaseUrl || 'https://golden-connect.to/cabinet').replace(/\/+$/, '');
       await sendMagicLink(ctx, storage, siteBase);
     } catch (e) { console.warn('[open_cabinet]', e && e.message); }
   });
@@ -500,7 +500,7 @@ function createBot(config, storage) {
   // ────────── /withdraw — request payout ──────────
   bot.command('withdraw', async (ctx) => {
     if (ctx.chat?.type !== 'private') return;
-    const url = 'https://trendex.biz/cabinet#/finance';
+    const url = 'https://golden-connect.to/cabinet#/finance';
     await ctx.reply(
       '💸 <b>Вывод средств</b>\n\n' +
       'Минимум: <b>$5</b>\n' +
@@ -527,7 +527,7 @@ function createBot(config, storage) {
         .text('🧠 TG Neuro AI').text('💸 Вывести').text('🆘 Помощь')
         .resized().persistent();
       await ctx.reply(
-        '📋 <b>Главное меню Trendex</b>\n\n' +
+        '📋 <b>Главное меню Golden Connect</b>\n\n' +
         '<b>Что умею:</b>\n' +
         '• 🎙 <b>Голосовые</b> — присылай голосовое, я расшифрую через Whisper и отвечу через AI\n' +
         '• 💬 <b>Текст</b> — пиши вопросы по платформе, я отвечу как AI-секретарь\n' +
@@ -578,7 +578,7 @@ function createBot(config, storage) {
           inline_keyboard: [
             [{ text: '💸 Зарабатывать (подключить аккаунты)', callback_data: 'roboai_earn' }],
             [{ text: '🎯 Заказать рассылку', callback_data: 'roboai_order' }],
-            [{ text: '🧠 Самостоятельная рассылка (Premium)', url: 'https://t.me/TrendexTGbot' }],
+            [{ text: '🧠 Самостоятельная рассылка (Premium)', url: 'https://t.me/Golden ConnectTGbot' }],
             [{ text: '📚 Что это? (FAQ)', callback_data: 'roboai_faq' }],
           ],
         },
@@ -590,7 +590,7 @@ function createBot(config, storage) {
     return ctx.reply(
       '🎯 <b>Заказать рассылку</b>\n\n' +
       'Открой кабинет — конструктор кампании, AI-промт из URL, выбор аудитории, оплата с баланса:\n\n' +
-      'https://trendex.biz/cabinet#/roboai-order',
+      'https://golden-connect.to/cabinet#/roboai-order',
       { parse_mode: 'HTML', disable_web_page_preview: true }
     );
   });
@@ -599,8 +599,8 @@ function createBot(config, storage) {
     return ctx.reply(
       '💸 <b>Зарабатывать на аккаунтах</b>\n\n' +
       'Подключи свои Telegram-аккаунты на сайте — мы прогреем и подключим к рекламным кампаниям.\n' +
-      '50% с каждого сообщения. MLM 10 уровней по партнёрке Trendex.\n\n' +
-      'https://trendex.biz/cabinet#/roboai-earn',
+      '50% с каждого сообщения. MLM 10 уровней по партнёрке Golden Connect.\n\n' +
+      'https://golden-connect.to/cabinet#/roboai-earn',
       { parse_mode: 'HTML', disable_web_page_preview: true }
     );
   });
@@ -610,7 +610,7 @@ function createBot(config, storage) {
       '📚 <b>TG Neuro AI — три режима</b>\n\n' +
       '<b>1) Зарабатывать</b> — отдай нам свои TG-аккаунты, мы прогреваем и используем в рекламных кампаниях. 50% с каждого сообщения. Сам ничем не управляешь, только смотришь статистику.\n\n' +
       '<b>2) Заказать рассылку</b> — закажи рекламу через сайт, AI напишет промт из URL, мы рассылаем через прогретые аккаунты. От $0.05 за сообщение.\n\n' +
-      '<b>3) Premium-режим в @TrendexTGbot</b> — самостоятельная рассылка через бот (только на тарифах LAUNCH/BOOST/ROCKET). Полный контроль над кампаниями, аккаунтами и аудиторией.\n\n' +
+      '<b>3) Premium-режим в @Golden ConnectTGbot</b> — самостоятельная рассылка через бот (только на тарифах LAUNCH/BOOST/ROCKET). Полный контроль над кампаниями, аккаунтами и аудиторией.\n\n' +
       'Прокси покупаются автоматически (резидент). Один на каждый аккаунт.',
       { parse_mode: 'HTML' }
     );
@@ -627,7 +627,7 @@ function createBot(config, storage) {
       // Skip if a session is active (handled by ads.js)
       const groqKeysList = (process.env.GROQ_KEYS || process.env.GROQ_API_KEY || '').split(',').map(s => s.trim()).filter(Boolean);
       if (!groqKeysList.length) return next();
-      const sysPrompt = 'Ты AI-помощник Trendex. Отвечай кратко (2-5 предложений), на русском, на основе вопроса юзера. Контекст: Trendex — рекламная платформа с тарифами LAUNCH/BOOST/ROCKET, партнёрской программой 10 уровней, биржей заданий. Если вопрос не про Trendex — отвечай кратко общим знанием.';
+      const sysPrompt = 'Ты AI-помощник Golden Connect. Отвечай кратко (2-5 предложений), на русском, на основе вопроса юзера. Контекст: Golden Connect — рекламная платформа с тарифами LAUNCH/BOOST/ROCKET, партнёрской программой 10 уровней, биржей заданий. Если вопрос не про Golden Connect — отвечай кратко общим знанием.';
       const ctxQuoted = reply.text ? ('\nКонтекст (на что отвечаю): ' + String(reply.text).slice(0, 400)) : '';
       try {
         const k = groqKeysList[Math.floor(Math.random() * groqKeysList.length)];
@@ -712,7 +712,7 @@ function createBot(config, storage) {
     try { setupAlertCallbacks(bot); } catch (e) { console.error('[cron_alerts_cb]', e && e.message); }
     try { startPlannerCron(bot); } catch (e) { console.error('[cron_planner]', e && e.message); }
     try { startDreamCoachCron(bot, groqKeys); } catch (e) { console.error('[cron_dreams]', e && e.message); }
-    try { startMeetCron(bot, config.publicBaseUrl || 'https://trendex.biz/cabinet'); } catch (e) { console.error('[cron_meet]', e && e.message); }
+    try { startMeetCron(bot, config.publicBaseUrl || 'https://golden-connect.to/cabinet'); } catch (e) { console.error('[cron_meet]', e && e.message); }
     try { startEventRemindersCron(bot, storage); } catch (e) { console.error('[cron_xh_events]', e && e.message); }
     try { startTeamStageCron(bot, storage); } catch (e) { console.error('[cron_team_stage]', e && e.message); }
     try { startTeamTasksCron(bot, storage); } catch (e) { console.error('[cron_team_tasks]', e && e.message); }
@@ -730,20 +730,20 @@ function createBot(config, storage) {
     try { require('./services/trx').startTrxScanCron(storage, config); require('./services/trx').runRegistrationBackfill(storage); /* [trx-cron] */ } catch (e) { console.error('[trx]', e && e.message); }
     try {
     const { startPartnersNotifCron } = require('./cron/partners-notif-cron');
-    // Use the same callTrendexApi from web-routes (closure-bound to config)
+    // Use the same callGolden ConnectApi from web-routes (closure-bound to config)
     const helpers = require('./web-routes');
     const apiFn = (path, body) => {
       const fetch = require('node-fetch') || global.fetch;
-      const base = (process.env.TRENDEX_API_BASE_URL || process.env.TRENDEX_API_BASE || config.trendexApiBaseUrl || 'https://api.trendex.biz').replace(/\/$/, '');
+      const base = (process.env.GOLDEN_CONNECT_API_BASE_URL || process.env.GOLDEN_CONNECT_API_BASE || config.golden-connectApiBaseUrl || 'https://api.golden-connect.to').replace(/\/$/, '');
       const secret = process.env.INTERNAL_API_SECRET;
       const url = base + path;
       const method = body ? 'POST' : 'GET';
-      const headers = { 'x-trendex-secret': secret, 'content-type': 'application/json' };
+      const headers = { 'x-golden-connect-secret': secret, 'content-type': 'application/json' };
       const init = { method, headers, signal: AbortSignal.timeout(5000) };
       if (body) init.body = JSON.stringify(body);
       return fetch(url, init).then(r => r.json());
     };
-    startPartnersNotifCron({ bot, config, callTrendexApi: apiFn });
+    startPartnersNotifCron({ bot, config, callGolden ConnectApi: apiFn });
   } catch (e) { console.error('[partners-notif-cron]', e && e.message); }
 
   console.log('[bot] All crons: reminders, alerts, planner, dreams, meet, events, team, health, drip, nudge, weekly');
@@ -760,7 +760,7 @@ function createBot(config, storage) {
       if (!wu || !wu.email) {
         return ctx.reply(
           '⚠️ У тебя нет привязанного аккаунта на сайте.\n\n' +
-          'Чтобы привязать — зарегистрируйся на https://trendex.biz и войди тем же Telegram.',
+          'Чтобы привязать — зарегистрируйся на https://golden-connect.to и войди тем же Telegram.',
           { parse_mode: 'HTML', disable_web_page_preview: true },
         );
       }
@@ -806,7 +806,7 @@ function createBot(config, storage) {
         '🔑 <b>Новый пароль</b>\n\n' +
         '<code>' + newPw + '</code>\n\n' +
         '<i>Нажми на пароль выше — скопируется.</i>\n\n' +
-        '🔗 Войти: https://trendex.biz/cabinet/login\n' +
+        '🔗 Войти: https://golden-connect.to/cabinet/login\n' +
         'Email: <code>' + String(wu.email).replace(/[<>&]/g, '') + '</code>\n\n' +
         '⚠️ После входа смени пароль на свой в Профиле.',
         { parse_mode: 'HTML', disable_web_page_preview: true },
@@ -817,7 +817,7 @@ function createBot(config, storage) {
     }
   });
 
-  // Set bot commands menu (replace old Trendex menu entirely)
+  // Set bot commands menu (replace old Golden Connect menu entirely)
   bot.api.setMyCommands([
     { command: 'start', description: '🏠 Главное меню' },
     { command: 'me', description: '📊 Моя сводка (баланс, карма, рефералы)' },
@@ -861,7 +861,7 @@ function createBot(config, storage) {
     { command: 'streaks', description: '🔥 Стрики и достижения' },
     { command: 'activity', description: '📰 Лента активности' },
     { command: 'challenge', description: '🏁 Реферальный челлендж' },
-    { command: 'events', description: '🔴 Эфиры Trendex' },
+    { command: 'events', description: '🔴 Эфиры Golden Connect' },
     { command: 'team', description: '👥 Моя команда' },
     { command: 'promo', description: '🎯 Рекламные материалы' },
     { command: 'ref', description: '🔗 Реферальная ссылка' },

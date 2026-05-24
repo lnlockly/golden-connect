@@ -1,4 +1,4 @@
-/* Trendex Cabinet — Мой магазин (shop builder + products) */
+/* Golden Connect Cabinet — Мой магазин (shop builder + products) */
 (function () {
   'use strict';
   const ROOT = '/cabinet/api';

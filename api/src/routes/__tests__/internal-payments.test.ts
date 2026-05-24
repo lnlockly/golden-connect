@@ -39,7 +39,7 @@ describe('GET /internal/payments (auth)', () => {
   it('rejects with 401 when the secret header is wrong', async () => {
     const app = await buildApp();
     const res = await app.request('/internal/payments', {
-      headers: { 'x-trendex-secret': 'nope' },
+      headers: { 'x-golden-connect-secret': 'nope' },
     });
     expect(res.status).toBe(401);
   });
@@ -108,7 +108,7 @@ describe.skipIf(!TEST_URL)('GET /internal/payments (integration)', () => {
 
     const app = await buildApp();
     const res = await app.request('/internal/payments?limit=5', {
-      headers: { 'x-trendex-secret': SECRET },
+      headers: { 'x-golden-connect-secret': SECRET },
     });
     expect(res.status).toBe(200);
     const json = (await res.json()) as {

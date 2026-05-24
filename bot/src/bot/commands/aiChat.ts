@@ -19,9 +19,9 @@ const MAX_HISTORY = 20;
 const MAX_INPUT_LEN = 2000;
 
 const OVER_QUOTA_TEXT: Record<string, string> = {
-  ru: "Лимит диалога на сегодня исчерпан. Оператор подхватит разговор лично — напиши @trendex_founder или жми /start.",
+  ru: "Лимит диалога на сегодня исчерпан. Оператор подхватит разговор лично — напиши @golden-connect_founder или жми /start.",
   en: "Daily chat limit reached. Reach out to @mlm808 or tap /start to continue.",
-  zh: "今日对话额度已用完。人工运营会接手 — 联系 @trendex_founder 或点 /start。",
+  zh: "今日对话额度已用完。人工运营会接手 — 联系 @golden-connect_founder 或点 /start。",
 };
 
 const UPSTREAM_FAIL_TEXT: Record<string, string> = {

@@ -1,6 +1,6 @@
 /**
  * Personal video-banner generator (S.1 video).
- * Wraps services/video-banner.js → trendex-promo template → mp4.
+ * Wraps services/video-banner.js → golden-connect-promo template → mp4.
  * Falls back to static PNG via sharp+qrcode if puppeteer/chromium unavailable.
  */
 const fs = require('fs');
@@ -9,7 +9,7 @@ const QRCode = require('qrcode');
 const sharp = require('sharp');
 
 const BANNER_DIR = '/data/banners';
-const SITE_BASE = 'https://trendex.biz';
+const SITE_BASE = 'https://golden-connect.to';
 
 function ensureDir() {
   try { fs.mkdirSync(BANNER_DIR, { recursive: true }); } catch (_) {}
@@ -22,7 +22,7 @@ function ensureDir() {
 async function generateBanner({ userId, refCode, displayName }) {
   ensureDir();
   const refUrl = SITE_BASE + '/?ref=' + encodeURIComponent(refCode || '');
-  const name = String(displayName || 'Партнёр Trendex').slice(0, 40);
+  const name = String(displayName || 'Партнёр Golden Connect').slice(0, 40);
   const videoOut = path.join(BANNER_DIR, String(userId) + '.mp4');
   const pngOut   = path.join(BANNER_DIR, String(userId) + '.png');
 
@@ -45,12 +45,12 @@ async function generateBanner({ userId, refCode, displayName }) {
     </linearGradient>
   </defs>
   <rect width="${SIZE}" height="${SIZE}" fill="url(#bg)"/>
-  <text x="${SIZE/2}" y="220" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="900" font-size="160" fill="#ffffff" letter-spacing="20">TRENDEX</text>
+  <text x="${SIZE/2}" y="220" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="900" font-size="160" fill="#ffffff" letter-spacing="20">GOLDEN_CONNECT</text>
   <text x="${SIZE/2}" y="320" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="600" font-size="60" fill="#ffffff" opacity="0.85">Зарабатывай на AI и партнёрке</text>
   <rect x="${(SIZE-1280)/2}" y="450" width="1280" height="1280" rx="60" fill="#ffffff"/>
   <text x="${SIZE/2}" y="1900" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="72" fill="#ffffff">${escSvg(name)}</text>
   <text x="${SIZE/2}" y="2000" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="600" font-size="56" fill="#ffffff">📱 Сканируй QR — стартовый бонус $1</text>
-  <text x="${SIZE/2}" y="2080" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="500" font-size="42" fill="#ffffff" opacity="0.75">trendex.biz/?ref=${escSvg(refCode || '')}</text>
+  <text x="${SIZE/2}" y="2080" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="500" font-size="42" fill="#ffffff" opacity="0.75">golden-connect.to/?ref=${escSvg(refCode || '')}</text>
 </svg>`;
   await sharp(Buffer.from(bgSvg))
     .composite([{ input: qrBuf, left: Math.floor((SIZE - 1100) / 2), top: 540 }])

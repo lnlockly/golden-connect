@@ -14,7 +14,7 @@ import { registerStrings } from "../../services/i18n.js";
 
 registerStrings("ru", {
   menu: {
-    main_title: "🏠 Главное меню TRENDEX",
+    main_title: "🏠 Главное меню GOLDEN_CONNECT",
     main_subtitle:
       "Выбирай раздел — все инструменты партнёра в одном месте.",
     btn_cabinet: "🚀 Открыть кабинет",
@@ -77,7 +77,7 @@ registerStrings("ru", {
 
 registerStrings("en", {
   menu: {
-    main_title: "🏠 TRENDEX main menu",
+    main_title: "🏠 GOLDEN_CONNECT main menu",
     main_subtitle: "Pick a section — all partner tools in one place.",
     btn_cabinet: "🚀 Open cabinet",
     btn_ref: "🔗 Ref link",
@@ -133,7 +133,7 @@ registerStrings("en", {
 
 registerStrings("zh", {
   menu: {
-    main_title: "🏠 TRENDEX 主菜单",
+    main_title: "🏠 GOLDEN_CONNECT 主菜单",
     main_subtitle: "选择栏目 —— 所有合作伙伴工具在一处。",
     btn_cabinet: "🚀 打开账户",
     btn_ref: "🔗 推荐链接",
@@ -189,7 +189,7 @@ registerStrings("zh", {
 
 registerStrings("uz", {
   menu: {
-    main_title: "🏠 TRENDEX bosh menyu",
+    main_title: "🏠 GOLDEN_CONNECT bosh menyu",
     main_subtitle: "Bo'limni tanlang — barcha hamkor vositalari bir joyda.",
     btn_cabinet: "🚀 Kabinetni ochish",
     btn_ref: "🔗 Ref havola",
@@ -245,7 +245,7 @@ registerStrings("uz", {
 
 registerStrings("fil", {
   menu: {
-    main_title: "🏠 TRENDEX main menu",
+    main_title: "🏠 GOLDEN_CONNECT main menu",
     main_subtitle: "Pumili ng seksyon — lahat ng partner tools sa isang lugar.",
     btn_cabinet: "🚀 Buksan ang kabinet",
     btn_ref: "🔗 Ref link",
@@ -301,7 +301,7 @@ registerStrings("fil", {
 
 registerStrings("th", {
   menu: {
-    main_title: "🏠 เมนูหลัก TRENDEX",
+    main_title: "🏠 เมนูหลัก GOLDEN_CONNECT",
     main_subtitle: "เลือกหมวด — เครื่องมือพาร์ทเนอร์ทั้งหมดในที่เดียว",
     btn_cabinet: "🚀 เปิดบัญชี",
     btn_ref: "🔗 ลิงก์แนะนำ",

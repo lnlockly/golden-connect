@@ -70,12 +70,12 @@ function canvasScript(bg, color) {
 
 // ===================== ROUTE =====================
 
-// Trendex: if request comes via a verified custom domain, look up the
+// Golden Connect: if request comes via a verified custom domain, look up the
 // bio_custom_domains table by Host header and resolve the bio profile from there.
 router.get('/', (req, res, next) => {
   try {
     const host = String(req.hostname || '').toLowerCase();
-    if (!host || host === 'trendex.biz' || host === 'localhost' || host.endsWith('.trendex.biz')) return next();
+    if (!host || host === 'golden-connect.to' || host === 'localhost' || host.endsWith('.golden-connect.to')) return next();
     const db = getDb();
     const cd = db.prepare("SELECT bio_id FROM bio_custom_domains WHERE LOWER(domain) = ? AND dns_status = 'verified'").get(host);
     if (!cd) return next();
@@ -158,14 +158,14 @@ router.get('/:username', (req, res) => {
     const displayName = profile.display_name || profile.username;
     const bioText = profile.bio || '';
     const avatarUrl = profile.avatar_url || '';
-    const baseUrl = 'https://trendex.biz';
+    const baseUrl = 'https://golden-connect.to';
     // Get owner's referral code for footer link
     let refCode = '';
     try {
       const owner = db.prepare('SELECT ref_code FROM users WHERE id = ?').get(profile.user_id);
       if (owner && owner.ref_code) refCode = owner.ref_code;
     } catch(e) {}
-    const footerUrl = refCode ? ('https://trendex.biz/?ref=' + refCode) : baseUrl;
+    const footerUrl = refCode ? ('https://golden-connect.to/?ref=' + refCode) : baseUrl;
 
     const html = `<!DOCTYPE html>
 <html lang="en">
@@ -319,7 +319,7 @@ router.get('/:username', (req, res) => {
       }).join('')}
     </div>` : ''}
 
-    <div class="bio-footer">\n      <a href="${footerUrl}" target="_blank" rel="noopener">Создано с Trendex</a>
+    <div class="bio-footer">\n      <a href="${footerUrl}" target="_blank" rel="noopener">Создано с Golden Connect</a>
     </div>
   </div>
 
@@ -363,7 +363,7 @@ var _abTestId=${abTestId||'null'},_abVariant='${abVariant}';
       });
     });
   </script>
-<script src="https://trendex.biz/cabinet/js/ad-loader.js?v=1" defer></script>
+<script src="https://golden-connect.to/cabinet/js/ad-loader.js?v=1" defer></script>
 </body>
 </html>`;
 

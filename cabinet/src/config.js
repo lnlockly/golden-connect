@@ -48,16 +48,16 @@ module.exports = {
   botUsername: asOptionalText(process.env.BOT_USERNAME),
   port: asInt(process.env.PORT, 3810),
   dataDir: path.resolve(process.cwd(), dataDir),
-  trendexVideoDbPath: path.resolve(process.cwd(), asText(process.env.TRENDEX_VIDEO_DB_PATH, '../data/tiktok-publisher.db')),
-  trendexVideoMetadataPath: path.resolve(process.cwd(), asText(process.env.TRENDEX_VIDEO_METADATA_PATH, './data/trendex-video-library.jsonl')),
-  trendexVideoDir: path.resolve(process.cwd(), asText(process.env.TRENDEX_VIDEO_DIR, '../trendex-videos')),
-  trendexVideoPublicPath: asText(process.env.TRENDEX_VIDEO_PUBLIC_PATH, '/video-library'),
+  golden-connectVideoDbPath: path.resolve(process.cwd(), asText(process.env.GOLDEN_CONNECT_VIDEO_DB_PATH, '../data/tiktok-publisher.db')),
+  golden-connectVideoMetadataPath: path.resolve(process.cwd(), asText(process.env.GOLDEN_CONNECT_VIDEO_METADATA_PATH, './data/golden-connect-video-library.jsonl')),
+  golden-connectVideoDir: path.resolve(process.cwd(), asText(process.env.GOLDEN_CONNECT_VIDEO_DIR, '../golden-connect-videos')),
+  golden-connectVideoPublicPath: asText(process.env.GOLDEN_CONNECT_VIDEO_PUBLIC_PATH, '/video-library'),
   pointsPerReferral: asInt(process.env.POINTS_PER_REFERRAL, 100),
   publicBaseUrl: asOptionalText(process.env.PUBLIC_BASE_URL),
-  // [sso] Cross-subdomain cookie scope. Set to ".trendex.biz" so the
-  // session cookie issued at app.trendex.biz is also sent to crm.trendex.biz.
+  // [sso] Cross-subdomain cookie scope. Set to ".golden-connect.to" so the
+  // session cookie issued at app.golden-connect.to is also sent to crm.golden-connect.to.
   cookieDomain: asOptionalText(process.env.COOKIE_DOMAIN),
-  sessionCookieName: asText(process.env.SESSION_COOKIE_NAME, 'trendex_site_session'),
+  sessionCookieName: asText(process.env.SESSION_COOKIE_NAME, 'golden-connect_site_session'),
   sessionTtlDays: asInt(process.env.SESSION_TTL_DAYS, 30),
   links: {
     mainChat: asOptionalText(process.env.WELCOME_MAIN_CHAT_URL),
@@ -105,7 +105,7 @@ module.exports = {
   groqKeys,
   vapidPublicKey: asOptionalText(process.env.VAPID_PUBLIC_KEY),
   vapidPrivateKey: asOptionalText(process.env.VAPID_PRIVATE_KEY),
-  vapidEmail: asOptionalText(process.env.VAPID_EMAIL || 'mailto:admin@cabinet.trendex.biz'),
+  vapidEmail: asOptionalText(process.env.VAPID_EMAIL || 'mailto:admin@cabinet.golden-connect.to'),
   requiredChatEnabled: String(process.env.REQUIRED_CHAT_ENABLED || (process.env.REQUIRED_CHAT_ID ? '1' : '0')).trim() !== '0',
   requiredChatId: asOptionalText(process.env.REQUIRED_CHAT_ID),
   requiredChatTitle: asOptionalText(process.env.REQUIRED_CHAT_TITLE),
@@ -120,9 +120,9 @@ module.exports = {
   tgMonitorAiMaxItems: asInt(process.env.TG_MONITOR_AI_MAX_ITEMS, 80),
   tgMonitorDailyHourMsk: asInt(process.env.TG_MONITOR_DAILY_HOUR_MSK, 21),
   tgMonitorDailyMinuteMsk: asInt(process.env.TG_MONITOR_DAILY_MINUTE_MSK, 0),
-  // Bridge to legacy trendex-api (Hono + Postgres) that owns CryptoBot +
+  // Bridge to legacy golden-connect-api (Hono + Postgres) that owns CryptoBot +
   // Platega + bookings ledger. Cabinet proxies /api/pay/* calls there via
-  // x-trendex-secret to avoid duplicating payment infra.
-  trendexApiBaseUrl: asOptionalText(process.env.TRENDEX_API_BASE_URL, 'https://api.trendex.biz'),
-  trendexApiInternalSecret: asOptionalText(process.env.TRENDEX_API_INTERNAL_SECRET)
+  // x-golden-connect-secret to avoid duplicating payment infra.
+  golden-connectApiBaseUrl: asOptionalText(process.env.GOLDEN_CONNECT_API_BASE_URL, 'https://api.golden-connect.to'),
+  golden-connectApiInternalSecret: asOptionalText(process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET)
 };

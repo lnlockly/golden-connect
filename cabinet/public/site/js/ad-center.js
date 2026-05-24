@@ -1,4 +1,4 @@
-/* Trendex Cabinet — Ad Center (TG Autoposting) Phase A+B UI */
+/* Golden Connect Cabinet — Ad Center (TG Autoposting) Phase A+B UI */
 (function () {
   'use strict';
   const ROOT = '/cabinet/api/ad-center';
@@ -40,7 +40,7 @@
       '<div class="adc-hero">' +
         '<div class="adc-hero-text">' +
           '<h2>📡 TG-автопостинг</h2>' +
-          '<p>Подключи свои Telegram-каналы — отправляй посты в один или несколько каналов одной кнопкой. Расписание, AI-рерайт, шаблоны, аналитика. Все возможности Arsenal Profi внутри Trendex.</p>' +
+          '<p>Подключи свои Telegram-каналы — отправляй посты в один или несколько каналов одной кнопкой. Расписание, AI-рерайт, шаблоны, аналитика. Все возможности Arsenal Profi внутри Golden Connect.</p>' +
         '</div>' +
         '<div class="adc-hero-actions">' +
           '<button class="adc-btn adc-btn-primary" onclick="window.AdC.openAddSource()">+ Добавить канал</button>' +
@@ -87,7 +87,7 @@
       body.innerHTML = '<div class="adc-empty">' +
         '<div style="font-size:48px">📺</div>' +
         '<h3>Нет подключённых каналов</h3>' +
-        '<p>Сначала подключи хотя бы один Telegram-канал — добавь @Trendex_bizbot админом и нажми «+ Добавить канал».</p>' +
+        '<p>Сначала подключи хотя бы один Telegram-канал — добавь @Golden Connect_bizbot админом и нажми «+ Добавить канал».</p>' +
         '<button class="adc-btn adc-btn-primary" onclick="window.AdC.openAddSource()">+ Добавить канал</button>' +
       '</div>';
       return;
@@ -106,7 +106,7 @@
         '</div>' +
         '<div class="adc-field">' +
           '<label>Кнопки (опционально, по 1 на строку, формат: <code>Текст | https://url</code>)</label>' +
-          '<textarea id="adcInstantButtons" rows="2" placeholder="Купить | https://trendex.biz/?ref=ABC&#10;Подробнее | https://t.me/example"></textarea>' +
+          '<textarea id="adcInstantButtons" rows="2" placeholder="Купить | https://golden-connect.to/?ref=ABC&#10;Подробнее | https://t.me/example"></textarea>' +
         '</div>' +
         '<div class="adc-field">' +
           '<label>Каналы получатели</label>' +
@@ -309,8 +309,8 @@ window.AdC.showLimitUpgrade = function (opts) {
   window.AdC.testChannel = async function (id) {
     try {
       await api('POST', '/posts', {
-        title: 'Тест Trendex',
-        text: '🧪 Тестовый пост из Trendex AdCenter — если видишь это, всё работает ✅',
+        title: 'Тест Golden Connect',
+        text: '🧪 Тестовый пост из Golden Connect AdCenter — если видишь это, всё работает ✅',
         source_ids: [id], send_now: true,
       });
       toast('✅ Тест отправлен');
@@ -337,7 +337,7 @@ window.AdC.showLimitUpgrade = function (opts) {
           '<div style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);padding:14px;border-radius:10px;margin-bottom:14px;font-size:13px;line-height:1.6">' +
             '<b>3 шага:</b><br>' +
             '1. Открой свой TG-канал → Управление → Администраторы<br>' +
-            '2. Добавь <b>@Trendex_bizbot</b> с правами «Публикация сообщений»<br>' +
+            '2. Добавь <b>@Golden Connect_bizbot</b> с правами «Публикация сообщений»<br>' +
             '3. Введи @username канала ниже и нажми «Подключить»' +
           '</div>' +
           '<div class="adc-field">' +

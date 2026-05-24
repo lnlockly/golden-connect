@@ -2,7 +2,7 @@
 -- 0106: Seed/curate GIFT CLUB project catalog (3 categories)
 -- =====================================================================
 -- 🔵 services : рекламные сервисы компаний-партнёров
---               (TrendexBiz, Traffic2Gift, Gift Club, AgentFlow)
+--               (Golden ConnectBiz, Traffic2Gift, Gift Club, AgentFlow)
 -- 🟢 mlm      : продуктовые МЛМ компании (X-Health & Beauty)
 -- 🔴 startups : стартапы (пока пусто — наполняется из админки)
 -- Idempotent: вставляем партнёров только если их ещё нет по title.
@@ -11,7 +11,7 @@
 
 -- иконки + сортировка для уже существующих сервисов
 UPDATE projects SET icon = '🚀', sort_order = 10, category = 'services'
-  WHERE title = 'Trendex — реклама, заработок, инструменты';
+  WHERE title = 'Golden Connect — реклама, заработок, инструменты';
 UPDATE projects SET icon = '🤖', sort_order = 40, category = 'services'
   WHERE title = 'AgentFlow — AI-агенты для бизнеса';
 

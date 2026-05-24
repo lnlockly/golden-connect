@@ -5,7 +5,7 @@ import './TariffCard.css';
 /**
  * Tariff card — shows the user's current plan, today's earning cap
  * progress, and next renewal date. Clicking "change tariff" opens a
- * modal with all 8 TrendeX tariffs and an Activate CTA. Backend for
+ * modal with all 8 Golden Connect tariffs and an Activate CTA. Backend for
  * plan change isn't wired yet, so Activate currently toasts a
  * placeholder and closes.
  *
@@ -18,7 +18,7 @@ export interface Tariff {
   dailyCapUsd: number;
 }
 
-export const TRENDEX_TARIFFS: Tariff[] = [
+export const GOLDEN_CONNECT_TARIFFS: Tariff[] = [
   { id: 'free',  entryUsd: 0,    dailyCapUsd: 3   },
   { id: 'start', entryUsd: 30,   dailyCapUsd: 10  },
   { id: 'basic', entryUsd: 60,   dailyCapUsd: 20  },
@@ -39,7 +39,7 @@ export function TariffCard() {
   const [pickerOpen, setPickerOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
-  const current = TRENDEX_TARIFFS.find((x) => x.id === MOCK_USER_TARIFF) ?? TRENDEX_TARIFFS[0];
+  const current = GOLDEN_CONNECT_TARIFFS.find((x) => x.id === MOCK_USER_TARIFF) ?? GOLDEN_CONNECT_TARIFFS[0];
   const earnedToday = MOCK_EARNED_TODAY_USD;
   const cap = current.dailyCapUsd;
   const pct = Math.min(100, Math.round((earnedToday / cap) * 100));
@@ -176,7 +176,7 @@ function TariffPickerModal({
         </div>
         <div className="af-tariff-modal-sub">{t('dash.picker_sub')}</div>
         <div className="af-tariff-modal-body">
-          {TRENDEX_TARIFFS.map((tar) => {
+          {GOLDEN_CONNECT_TARIFFS.map((tar) => {
             const isCurrent = tar.id === currentId;
             return (
               <div

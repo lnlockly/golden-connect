@@ -28,7 +28,7 @@ export interface InternalAlertsDeps {
 const ROBOAI_BASE =
 	process.env.ROBOAI_INTERNAL_URL ||
 	process.env.ROBOAI_ENGINE_URL ||
-	"http://roboai-engine.trendex.svc.cluster.local:3001"
+	"http://roboai-engine.golden-connect.svc.cluster.local:3001"
 
 function escapeHtml(s: string): string {
 	return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
@@ -109,7 +109,7 @@ export async function handleModerationAlert(
 		.text("✅ Одобрить", `modapprove:${campaignId}`)
 		.text("❌ Отклонить", `modreject:${campaignId}`)
 		.row()
-		.url("📋 Открыть в CRM", `https://crm.trendex.biz/cabinet/crm-app.html#/moderation/${campaignId}`)
+		.url("📋 Открыть в CRM", `https://crm.golden-connect.to/cabinet/crm-app.html#/moderation/${campaignId}`)
 
 	const tgts = new Set<number>()
 	tgts.add(deps.adminTgId)
@@ -144,13 +144,13 @@ export async function handleBillingAlert(
 
 	if (!userId) return err(res, 400, "userId required")
 
-	// Resolve user's TG chat_id via trendex-api internal.
+	// Resolve user's TG chat_id via golden-connect-api internal.
 	let chatId: number | null = null
 	try {
-		const apiBase = (process.env.TRENDEX_API_INTERNAL_URL || "https://api.trendex.biz/internal").replace(/\/internal\/?$/, "")
+		const apiBase = (process.env.GOLDEN_CONNECT_API_INTERNAL_URL || "https://api.golden-connect.to/internal").replace(/\/internal\/?$/, "")
 		const r = await fetch(
 			apiBase + `/internal/users/by-id/${userId}`,
-			{ headers: { "x-trendex-secret": deps.internalSecret } }
+			{ headers: { "x-golden-connect-secret": deps.internalSecret } }
 		)
 		if (r.ok) {
 			const j: any = await r.json()
@@ -175,7 +175,7 @@ export async function handleBillingAlert(
 /**
  * POST /internal/notify/crm-inbound — called by roboai-engine CrmInboundCron
  * when a lead replies in a CRM manual-send conversation. DMs the operator
- * (conversation owner) via @TrendexCRMBot with preview + Open-in-CRM button.
+ * (conversation owner) via @Golden ConnectCRMBot with preview + Open-in-CRM button.
  */
 export async function handleCrmInbound(
 	req: IncomingMessage,
@@ -198,10 +198,10 @@ export async function handleCrmInbound(
 
 	let chatId: number | null = null
 	try {
-		const apiBase = (process.env.TRENDEX_API_INTERNAL_URL || "https://api.trendex.biz/internal").replace(/\/internal\/?$/, "")
+		const apiBase = (process.env.GOLDEN_CONNECT_API_INTERNAL_URL || "https://api.golden-connect.to/internal").replace(/\/internal\/?$/, "")
 		const r = await fetch(
 			apiBase + `/internal/users/by-id/${ownerUserId}`,
-			{ headers: { "x-trendex-secret": deps.internalSecret } }
+			{ headers: { "x-golden-connect-secret": deps.internalSecret } }
 		)
 		if (r.ok) {
 			const j: any = await r.json()
@@ -216,8 +216,8 @@ export async function handleCrmInbound(
 	const html =
 		`💬 <b>${escapeHtml(leadLabel)}</b> ответил${messageCount > 1 ? `и ${messageCount} раз` : ""} в CRM\n\n` +
 		(preview ? `<i>${escapeHtml(preview)}</i>\n\n` : "") +
-		`<a href="https://trendex.biz/cabinet/crm-app.html">→ Открыть в CRM</a>`
-	const kb = new InlineKeyboard().url("📂 Открыть чат в CRM", "https://trendex.biz/cabinet/crm-app.html")
+		`<a href="https://golden-connect.to/cabinet/crm-app.html">→ Открыть в CRM</a>`
+	const kb = new InlineKeyboard().url("📂 Открыть чат в CRM", "https://golden-connect.to/cabinet/crm-app.html")
 	try {
 		await deps.bot.api.sendMessage(chatId, html, { parse_mode: "HTML", reply_markup: kb })
 	} catch (e) {

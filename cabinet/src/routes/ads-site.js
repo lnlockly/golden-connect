@@ -1,4 +1,4 @@
-// Trendex Ads-Site router — banner advertising (Phase 2). Video coming in Phase 3.
+// Golden Connect Ads-Site router — banner advertising (Phase 2). Video coming in Phase 3.
 //
 // Routes (all under /api/ads-site, mounted from web-routes.js):
 //   POST   /banner/create               — multipart upload, auth required

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Build knowledge index from telegram exports.
-// Reads: data/telegram-exports/trendex_and_beauty/text-knowledge/*.md
+// Reads: data/telegram-exports/golden-connect_and_beauty/text-knowledge/*.md
 // Writes: src/planner/bot/knowledge/chunks.json
 //
 // Usage: npm run build:knowledge
@@ -14,7 +14,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const KNOWLEDGE_DIR = path.join(__dirname, '..', 'data', 'telegram-exports', 'trendex_and_beauty', 'text-knowledge');
+const KNOWLEDGE_DIR = path.join(__dirname, '..', 'data', 'telegram-exports', 'golden-connect_and_beauty', 'text-knowledge');
 const OUTPUT_DIR = path.join(__dirname, '..', 'src', 'planner', 'bot', 'knowledge');
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'chunks.json');
 
@@ -63,7 +63,7 @@ const PRODUCTS = [
   { key: 'б кондиционер', name: 'Б-Кондиционер', slug: 'b-conditioner' },
   { key: 'океан биотик', name: 'Океан Биотик', slug: 'ocean-biotic' },
   { key: 'активатор 19', name: 'Активатор 19л', slug: 'aktivator-19l' },
-  { key: 'шампунь', name: 'Шампунь Trendex', slug: 'shampun' },
+  { key: 'шампунь', name: 'Шампунь Golden Connect', slug: 'shampun' },
   { key: 'энинохром', name: 'Энинохром', slug: 'eninohrom' },
   { key: 'скорая помощь', name: 'Скорая помощь', slug: 'skoraya-pomosh' },
   { key: 'гель ведова', name: 'Гель Ведова', slug: 'gel-vedova' },

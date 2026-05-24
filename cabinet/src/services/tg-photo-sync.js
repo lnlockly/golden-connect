@@ -81,8 +81,8 @@ async function fetchTgUserInfo(tgUserId) {
  * Sync TG profile to api Postgres via internal endpoint.
  */
 async function syncToApi(tgUserId, avatarUrl, info) {
-  const apiBase = process.env.TRENDEX_API_INTERNAL_URL || 'http://trendex-api:4001';
-  const apiSecret = process.env.TRENDEX_API_INTERNAL_SECRET;
+  const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://golden-connect-api:4001';
+  const apiSecret = process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET;
   if (!apiSecret) return;
   const httpMod = apiBase.startsWith('https') ? require('https') : require('http');
   const data = JSON.stringify({
@@ -102,7 +102,7 @@ async function syncToApi(tgUserId, avatarUrl, info) {
         headers: {
           'Content-Type': 'application/json',
           'Content-Length': Buffer.byteLength(data),
-          'x-trendex-secret': apiSecret,
+          'x-golden-connect-secret': apiSecret,
         }, timeout: 5000,
       }, (r) => { r.resume(); resolve(r.statusCode); });
       req.on('error', () => resolve(0));

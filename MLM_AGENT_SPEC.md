@@ -1,19 +1,19 @@
 # MLM_AGENT_SPEC — спецификация для внешнего TG-агента
 
-Документ для нейросети/сервиса который автоматически обрабатывает контакты MLM-CRM Trendex и отправляет сообщения через Telegram-аккаунт владельца.
+Документ для нейросети/сервиса который автоматически обрабатывает контакты MLM-CRM Golden Connect и отправляет сообщения через Telegram-аккаунт владельца.
 
 ## Поток на верхнем уровне
 
 ```
 ┌──────────────────────┐    JSON-pack          ┌──────────────────────┐
-│ Trendex CRM          │ ────────────────────► │ External TG-agent    │
-│ crm.trendex.biz      │                       │ (Telethon/GramJS)    │
+│ Golden Connect CRM          │ ────────────────────► │ External TG-agent    │
+│ crm.golden-connect.to      │                       │ (Telethon/GramJS)    │
 │                      │ ◄──── status ──────── │                      │
 └──────────────────────┘                       └──────────────────────┘
    операторский UI                                рассылка в TG
 ```
 
-1. Оператор открывает контакт в `crm.trendex.biz`
+1. Оператор открывает контакт в `crm.golden-connect.to`
 2. Жмёт **«📤 Pack для агента»** → бот отдаёт JSON через `GET /api/mlm/contacts/:username/agent-pack`
 3. Этот JSON копируется/передаётся внешнему агенту
 4. Агент пишет в Telegram сам (используя авторизованную сессию владельца)
@@ -73,7 +73,7 @@
 - Если контакта нет в TG → fallback: `whatsapp` → `phone`
 
 ### Шаг 3 — Подготовка сообщения
-- В большинстве случаев текст уже сгенерирован Trendex'ом и лежит в `pack.crm.history[-1].msg`
+- В большинстве случаев текст уже сгенерирован Golden Connect'ом и лежит в `pack.crm.history[-1].msg`
 - Если нужно сгенерировать заново — использовать локально через тот же промпт что в `cabinet/src/routes/mlm-crm.js` (раздел `generate-pitch`)
 
 ### Шаг 4 — Безопасная отправка
@@ -84,12 +84,12 @@
 - При получении `FloodWaitError` от Telegram — соблюдать timeout, не повторять
 - Не отправлять более 3 сообщений подряд если нет ответа
 
-### Шаг 5 — Возврат статуса в Trendex (опционально)
+### Шаг 5 — Возврат статуса в Golden Connect (опционально)
 После отправки агент может вернуть статус:
 
 ```http
 POST /cabinet/api/mlm/contacts/{username}/history
-Cookie: trendex_session=...   (или Bearer JWT)
+Cookie: golden-connect_session=...   (или Bearer JWT)
 Content-Type: application/json
 
 {
@@ -126,7 +126,7 @@ API_ID = ...        # с my.telegram.org
 API_HASH = '...'
 SESSION = 'my_session'   # файл сессии
 
-async def process_pack(pack, trendex_token):
+async def process_pack(pack, golden-connect_token):
     contact = pack['contact']
     text = pack['crm']['history'][-1]['msg'] if pack['crm']['history'] else None
     if not text:
@@ -147,11 +147,11 @@ async def process_pack(pack, trendex_token):
     # Random delay before next contact
     await asyncio.sleep(random.uniform(*pack['handoff']['randomize_delay_seconds']))
 
-    # Report back to Trendex
+    # Report back to Golden Connect
     requests.post(
-        f"https://crm.trendex.biz/api/mlm/contacts/{contact['username']}/history",
+        f"https://crm.golden-connect.to/api/mlm/contacts/{contact['username']}/history",
         json={'msg': text, 'direction': 'out'},
-        headers={'Authorization': f'Bearer {trendex_token}'},
+        headers={'Authorization': f'Bearer {golden-connect_token}'},
     )
     return {'ok': True}
 ```

@@ -1,4 +1,4 @@
-# Отчет по проекту Trendex Bot
+# Отчет по проекту Golden Connect Bot
 Дата: 2026-04-10 (обновлено 2026-04-12: Sprint 1 stability)
 
 ---
@@ -105,7 +105,7 @@
 ```json
 {
   "ok": true,
-  "service": "trendex-cabinet",
+  "service": "golden-connect-cabinet",
   "uptimeSec": 12345,
   "pid": 42,
   "node": "v20.x",
@@ -146,14 +146,14 @@ ADMIN_TOKEN=                 # для /admin/backup/run
 ---
 
 ## Исходный отчёт (медиатека, 2026-04-10)
-Репозиторий: https://github.com/alphaleaders/trendex-cabinet
-Сайт: https://trendex.biz/cabinet/
+Репозиторий: https://github.com/alphaleaders/golden-connect-cabinet
+Сайт: https://golden-connect.to/cabinet/
 
 ---
 
 ## 1. Общая концепция проекта
 
-**Цель:** Воронка привлечения людей на живые эфиры с профессорами Trendex & Beauty.
+**Цель:** Воронка привлечения людей на живые эфиры с профессорами Golden Connect & Beauty.
 ```
 Лендинг → Регистрация → Welcome-анкета → Кабинет партнёра
   → Telegram-бот → Эфир → Продукты/Партнёрство (winwinbot)
@@ -163,8 +163,8 @@ ADMIN_TOKEN=                 # для /admin/backup/run
 - Backend: Node.js / Express, grammY (Telegram)
 - Хранилище: state.json (JSON-файл), SQLite отдельно для планировщика
 - Frontend: ванильный JS, без фреймворков
-- Деплой: сервер 81.91.177.204, PM2 (`trendex-cabinet`), порт 3810
-- Путь: `/opt/trendex-cabinet`
+- Деплой: сервер 81.91.177.204, PM2 (`golden-connect-cabinet`), порт 3810
+- Путь: `/opt/golden-connect-cabinet`
 
 ---
 
@@ -252,7 +252,7 @@ live-water, dihydroquercetin, oligochit-iod-53, oligochit-osteo, oligochit-zoo, 
 - Уведомления в бот за 24ч и 1ч
 
 ### 3.7 Публичная медиатека (последние изменения)
-**URL:** https://trendex.biz/cabinet/media/
+**URL:** https://golden-connect.to/cabinet/media/
 
 Реализовано:
 - Страница `media-public.html` — поиск, фильтры по категориям, карточки видео, Plyr-плеер
@@ -269,9 +269,9 @@ broadcasts (Эфиры), products (Продукты), reviews (Отзывы), co
 
 **Формат тестовых ссылок:**
 ```
-https://trendex.biz/cabinet/media/
-https://trendex.biz/cabinet/media/?ref=xh2c241&src=video&video=xvideo_2GhfwDXeiMY
-https://trendex.biz/cabinet/media/?ref=xh2c241&src=video&video=xvideo__8futNhyvUw
+https://golden-connect.to/cabinet/media/
+https://golden-connect.to/cabinet/media/?ref=xh2c241&src=video&video=xvideo_2GhfwDXeiMY
+https://golden-connect.to/cabinet/media/?ref=xh2c241&src=video&video=xvideo__8futNhyvUw
 ```
 
 ### 3.8 Кабинет — панели (20+)
@@ -296,10 +296,10 @@ https://trendex.biz/cabinet/media/?ref=xh2c241&src=video&video=xvideo__8futNhyvU
 **Шеринг:** кнопки TG, WA, VK, X (Twitter) + копировать ссылку
 **QR-коды:** на видео, на реферальные ссылки, на лендинги
 
-### 3.9 Telegram-бот (@Trendex_bizbot)
+### 3.9 Telegram-бот (@Golden Connect_bizbot)
 **Привязка:**
 1. Кабинет → Профиль → "Привязать Telegram" → генерируется token
-2. Открывается `t.me/Trendex_bizbot?start=link_TOKEN`
+2. Открывается `t.me/Golden Connect_bizbot?start=link_TOKEN`
 3. Бот привязывает tg_chat_id к userId
 
 **Команды:** /start, /cancel, /support, /ref + глубокие ссылки
@@ -348,14 +348,14 @@ https://trendex.biz/cabinet/media/?ref=xh2c241&src=video&video=xvideo__8futNhyvU
 ## 4. Переменные окружения (ключевые)
 
 ```env
-BOT_TOKEN=           # токен @Trendex_bizbot
-PUBLIC_BASE_URL=https://trendex.biz/cabinet
+BOT_TOKEN=           # токен @Golden Connect_bizbot
+PUBLIC_BASE_URL=https://golden-connect.to/cabinet
 DATA_DIR=./data      # state.json
 PORT=3810
-TRENDEX_VIDEO_DB_PATH=../data/tiktok-publisher.db
-TRENDEX_VIDEO_DIR=../trendex-videos
-TRENDEX_VIDEO_PUBLIC_PATH=/video-library
-COMPANY_REGISTRATION_URL_TEMPLATE=https://my.winwinbot.com/bot/1/trendex_bot?REFID={ref}
+GOLDEN_CONNECT_VIDEO_DB_PATH=../data/tiktok-publisher.db
+GOLDEN_CONNECT_VIDEO_DIR=../golden-connect-videos
+GOLDEN_CONNECT_VIDEO_PUBLIC_PATH=/video-library
+COMPANY_REGISTRATION_URL_TEMPLATE=https://my.winwinbot.com/bot/1/golden-connect_bot?REFID={ref}
 ARSENAL_API_BASE_URL=https://app.arsenalprofi.com
 ```
 
@@ -369,11 +369,11 @@ scp /c/tmp/patch.js root@81.91.177.204:/tmp/
 ssh root@81.91.177.204 "node /tmp/patch.js"
 
 # Обновить файл напрямую:
-scp file.js root@81.91.177.204:/opt/trendex-cabinet/src/
-ssh root@81.91.177.204 "pm2 restart trendex-cabinet"
+scp file.js root@81.91.177.204:/opt/golden-connect-cabinet/src/
+ssh root@81.91.177.204 "pm2 restart golden-connect-cabinet"
 
 # Логи:
-ssh root@81.91.177.204 "pm2 logs trendex-cabinet --lines 50"
+ssh root@81.91.177.204 "pm2 logs golden-connect-cabinet --lines 50"
 ```
 
 ---
@@ -411,7 +411,7 @@ ssh root@81.91.177.204 "pm2 logs trendex-cabinet --lines 50"
 | Медленная загрузка медиатеки | Большой JSON с видео — используется lazy load |
 | Ссылка company не подставляется | Проверить COMPANY_REGISTRATION_URL_TEMPLATE в .env |
 | Бот не отправляет уведомления | Проверить tg_chat_id привязку пользователя |
-| pm2 не рестартует | `pm2 status`, проверить лог `pm2 logs trendex-cabinet` |
+| pm2 не рестартует | `pm2 status`, проверить лог `pm2 logs golden-connect-cabinet` |
 
 ---
 

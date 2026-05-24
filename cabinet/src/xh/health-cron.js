@@ -1,4 +1,4 @@
-// Trendex Health Cron — generates daily log entries + dispatches reminders.
+// Golden Connect Health Cron — generates daily log entries + dispatches reminders.
 //
 // Two cycles:
 //   1. Daily morning generation (6:00 UTC = 9:00 MSK):

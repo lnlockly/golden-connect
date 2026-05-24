@@ -22,7 +22,7 @@ import { crm } from "./crmApi.js";
 
 const INTERVAL_MS = Number(process.env.CRM_PUSH_INTERVAL_MS) || 5 * 60_000;
 const CRM_URL =
-  process.env.CRM_WEBAPP_URL || "https://trendex.biz/cabinet/crm-app.html";
+  process.env.CRM_WEBAPP_URL || "https://golden-connect.to/cabinet/crm-app.html";
 
 const lastDigest = new Map<string, string>();
 

@@ -16,7 +16,7 @@ COPY --from=builder --chown=app:app /app/node_modules ./node_modules
 COPY --from=builder --chown=app:app /app/dist ./dist
 COPY --from=builder --chown=app:app /app/package.json ./package.json
 ENV NODE_ENV=production \
-    DATABASE_PATH=/data/trendex.db
+    DATABASE_PATH=/data/golden-connect.db
 USER app
 VOLUME ["/data"]
 ENTRYPOINT ["/sbin/tini", "--"]

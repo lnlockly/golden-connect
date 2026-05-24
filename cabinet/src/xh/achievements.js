@@ -1,4 +1,4 @@
-// Trendex achievements — badges + daily challenge.
+// Golden Connect achievements — badges + daily challenge.
 //
 // Badges fire once per user when criteria met.
 // Daily challenge: bot picks one challenge per day, user accepts → trackable.
@@ -54,7 +54,7 @@ function ensureSchema() {
 }
 
 // [tariff-wire] now async; populates tariff_active + tariff_days_remaining
-// via tariff-gate.js which hits trendex-api /internal/finance/balances (1-min cache).
+// via tariff-gate.js which hits golden-connect-api /internal/finance/balances (1-min cache).
 async function getUserMetrics(userId, opts = {}) {
   const rawDb = db.getDb();
   const adStats = rawDb.prepare(`

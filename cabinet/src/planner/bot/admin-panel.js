@@ -1,4 +1,4 @@
-// Admin Panel for Trendex Секретарь Bot
+// Admin Panel for Golden Connect Секретарь Bot
 const { InlineKeyboard } = require('grammy');
 const db = require('../db/database');
 const { escapeHtml } = require('../utils/helpers');

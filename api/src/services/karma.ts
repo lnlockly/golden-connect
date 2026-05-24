@@ -24,7 +24,7 @@ export const KARMA_RULES: Record<string, bigint> = {
   login_streak_14: 500n,     // milestone bonus when streak hits 14
   login_streak_30: 1500n,    // milestone bonus when streak hits 30
   login_streak_30_plus: 50n, // daily bonus while streak >= 30
-  chat_message: 1n,          // verified by bot in @TRENDEX_AD
+  chat_message: 1n,          // verified by bot in @GOLDEN_CONNECT_AD
   chat_reaction: 0n,         // disabled per user 2026-04-29
 
   // Onboarding / profile (one-shot)

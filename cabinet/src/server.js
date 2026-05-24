@@ -33,7 +33,7 @@ app.use((req, res, next) => {
     const raw = String((req.query && req.query.ref) || '').trim().toLowerCase();
     if (raw && /^xh[a-z0-9]{1,32}$/.test(raw)) {
       const cookieDomain = process.env.COOKIE_DOMAIN || undefined;
-      res.cookie('trendex_ref', raw, {
+      res.cookie('golden-connect_ref', raw, {
         path: '/',
         domain: cookieDomain,
         maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -95,16 +95,16 @@ app.locals.config = config;
 
 // === Subpath mount ====================================================
 // When BASE_PATH is set (e.g. "/cabinet"), the cabinet is reachable at
-//   trendex.biz/cabinet/...   instead of  cabinet.trendex.biz/...
+//   golden-connect.to/cabinet/...   instead of  cabinet.golden-connect.to/...
 // We strip the prefix from incoming req.url so existing handlers (which
 // are all written as if the app lived at root) continue to work, and we
 // wrap res.redirect so that absolute-path redirects keep the prefix on
 // the way back out to the browser. Cookies are scoped to BASE_PATH so
-// session cookies don't leak to the rest of trendex.biz.
+// session cookies don't leak to the rest of golden-connect.to.
 // [trailing-slash-fix] Force trailing slash on BASE_PATH bare URL.
 // When BASE_PATH=/cabinet and external URL = /cabinet (no slash), browser
 // treats 'cabinet' as a file and resolves relative paths against /,
-// landing in trendex-landing pod and getting HTML back for js/css → 'Unexpected token <'.
+// landing in golden-connect-landing pod and getting HTML back for js/css → 'Unexpected token <'.
 const _RAW_BASE_PATH = (process.env.BASE_PATH || '').replace(/\/+$/, '');
 if (_RAW_BASE_PATH) {
   app.use((req, res, next) => {
@@ -222,10 +222,10 @@ function buildLandingMeta(req) {
   const lang = languages.some((item) => item.id === requestedLang) ? requestedLang : defaultLanguage;
   const landingId = types.some((item) => item.id === requestedLanding) ? requestedLanding : 'health';
   const landing = types.find((item) => item.id === landingId) || {};
-  const defaultTitle = pickLocalizedValue(siteContent.landing && siteContent.landing.heroTitle, lang, 'Trendex');
-  const defaultDescription = pickLocalizedValue(siteContent.landing && siteContent.landing.heroText, lang, 'Каталог, лендинги, рекламные материалы и кабинет партнёра Trendex.');
+  const defaultTitle = pickLocalizedValue(siteContent.landing && siteContent.landing.heroTitle, lang, 'Golden Connect');
+  const defaultDescription = pickLocalizedValue(siteContent.landing && siteContent.landing.heroText, lang, 'Каталог, лендинги, рекламные материалы и кабинет партнёра Golden Connect.');
   const rawTitle = pickLocalizedValue(landing.heroTitle, lang, defaultTitle) || defaultTitle;
-  const title = rawTitle.toLowerCase().includes('trendex') ? rawTitle : `${rawTitle} | Trendex`;
+  const title = rawTitle.toLowerCase().includes('golden-connect') ? rawTitle : `${rawTitle} | Golden Connect`;
   const description = pickLocalizedValue(landing.descriptions, lang, defaultDescription) || defaultDescription;
   const canonical = new URL('/', origin);
   if (landingId !== 'health') canonical.searchParams.set('landing', landingId);
@@ -234,7 +234,7 @@ function buildLandingMeta(req) {
   const seo = siteContent.seo || {};
   const imagePath = (seo.landingImages && seo.landingImages[landingId]) || seo.defaultImage || '/media/brand-og.jpg';
   const image = buildAbsoluteUrl(origin, imagePath);
-  const imageAlt = `${rawTitle} — Trendex`;
+  const imageAlt = `${rawTitle} — Golden Connect`;
   const dir = lang === 'ar' ? 'rtl' : 'ltr';
   const alternateLinks = languages.map((item) => {
     const href = new URL('/', origin);
@@ -263,7 +263,7 @@ function buildLandingMeta(req) {
     siteContent.links && siteContent.links.mainChat,
   ].filter(isValidUrl);
   const uniqueSameAs = Array.from(new Set(sameAs));
-  const orgName = (siteContent.brand && siteContent.brand.name) || 'Trendex';
+  const orgName = (siteContent.brand && siteContent.brand.name) || 'Golden Connect';
   const orgLogo = buildAbsoluteUrl(origin, (seo.logo || seo.defaultImage || '/media/brand-og.jpg'));
   const structuredData = [
     {
@@ -277,7 +277,7 @@ function buildLandingMeta(req) {
     {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: 'Trendex',
+      name: 'Golden Connect',
       url: `${origin}/`,
       inLanguage: lang,
     },
@@ -344,13 +344,13 @@ function renderBioHubPage(req, res) {
   const landingId = types.some((item) => item.id === requestedLanding) ? requestedLanding : 'health';
   const landing = types.find((item) => item.id === landingId) || {};
   const language = languages.find((item) => item.id === lang) || {};
-  const displayName = String(user.displayName || user.email || 'Trendex Partner').trim();
+  const displayName = String(user.displayName || user.email || 'Golden Connect Partner').trim();
   const headline = String(req.query.headline || '').trim().slice(0, 120)
-    || `${displayName} · Trendex`;
+    || `${displayName} · Golden Connect`;
   const summary = String(req.query.summary || '').trim().slice(0, 220)
-    || pickLocalizedValue(landing.descriptions, lang, pickLocalizedValue(siteContent.landing && siteContent.landing.heroText, lang, 'Каталог, лендинги, рекламные материалы и быстрый вход в Trendex.'));
+    || pickLocalizedValue(landing.descriptions, lang, pickLocalizedValue(siteContent.landing && siteContent.landing.heroText, lang, 'Каталог, лендинги, рекламные материалы и быстрый вход в Golden Connect.'));
 
-  const landingTitle = pickLocalizedValue(landing.titles, lang, landing.title || 'Trendex');
+  const landingTitle = pickLocalizedValue(landing.titles, lang, landing.title || 'Golden Connect');
   const landingUrl = new URL('/', origin);
   landingUrl.searchParams.set('ref', code);
   landingUrl.searchParams.set('landing', landingId);
@@ -394,7 +394,7 @@ function renderBioHubPage(req, res) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>${escapeHtml(headline)} | Trendex Bio Hub</title>
+  <title>${escapeHtml(headline)} | Golden Connect Bio Hub</title>
   <meta name="description" content="${escapeHtml(summary)}">
   <meta property="og:title" content="${escapeHtml(headline)}">
   <meta property="og:description" content="${escapeHtml(summary)}">
@@ -426,7 +426,7 @@ function renderBioHubPage(req, res) {
       <section class="hero">
         <div class="hero-grid">
           <div>
-            <span class="eyebrow">Trendex Bio Hub</span>
+            <span class="eyebrow">Golden Connect Bio Hub</span>
             <h1>${escapeHtml(headline)}</h1>
             <p class="lead">${escapeHtml(summary)}</p>
             <div class="meta">
@@ -456,7 +456,7 @@ function renderBioHubPage(req, res) {
         `).join('')}
       </section>
       <div class="footer">
-        <span>Официальный маршрут Trendex: лендинг, кабинет, каталог и компания в одной ссылочной схеме.</span>
+        <span>Официальный маршрут Golden Connect: лендинг, кабинет, каталог и компания в одной ссылочной схеме.</span>
         ${officialUrl ? `<a href="${escapeHtml(officialUrl)}">Официальный сайт компании</a>` : ''}
       </div>
     </div>
@@ -486,7 +486,7 @@ app.get('/robots.txt', (req, res) => {
     'Disallow: /api/',
     'Disallow: /webhooks/',
     '',
-    'Sitemap: https://trendex.biz/sitemap.xml',
+    'Sitemap: https://golden-connect.to/sitemap.xml',
     ''
   ].join('\n'));
 });
@@ -499,7 +499,7 @@ app.get('/sitemap-bio.xml', (req, res) => {
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
     rows.forEach(function (r) {
       const lastmod = r.created_at ? String(r.updated_at).slice(0, 10) : new Date().toISOString().slice(0, 10);
-      xml += '<url><loc>https://trendex.biz/bio/' + encodeURIComponent(r.username) + '</loc><lastmod>' + lastmod + '</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>\n';
+      xml += '<url><loc>https://golden-connect.to/bio/' + encodeURIComponent(r.username) + '</loc><lastmod>' + lastmod + '</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>\n';
     });
     xml += '</urlset>';
     res.type('application/xml').send(xml);
@@ -508,7 +508,7 @@ app.get('/sitemap-bio.xml', (req, res) => {
 app.get('/sitemap.xml', (req, res) => {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-  xml += '<sitemap><loc>https://trendex.biz/sitemap-bio.xml</loc></sitemap>\n';
+  xml += '<sitemap><loc>https://golden-connect.to/sitemap-bio.xml</loc></sitemap>\n';
   xml += '</sitemapindex>';
   res.type('application/xml').send(xml);
 });
@@ -516,9 +516,9 @@ app.get('/sitemap.xml', (req, res) => {
 app.get('/cabinet/*', (req, res) => res.redirect(301, '/'));  // external /cabinet/cabinet/* → /cabinet
 /* [ads-site-server-wire] */
 const _webRouter = createWebRouter(config, storage, bot);
-// crm.trendex.biz — root → crm-app.html
+// crm.golden-connect.to — root → crm-app.html
 app.use((req, res, next) => {
-  if (req.hostname === 'crm.trendex.biz' && (req.path === '/' || req.path === '')) {
+  if (req.hostname === 'crm.golden-connect.to' && (req.path === '/' || req.path === '')) {
     return res.redirect(302, '/crm-app.html');
   }
   next();
@@ -543,7 +543,7 @@ app.get('/r/banner/:id', (req, res) => {
   } catch (e) { console.error('[r/banner]', e && e.message); return res.status(500).send('err'); }
 });
 
-// ────────── Trendex Admin Panel ──────────
+// ────────── Golden Connect Admin Panel ──────────
 try {
   const adminRouter = setupAdminRoutes(storage, config);
   app.use('/admin', adminRouter);
@@ -555,7 +555,7 @@ app.use('/s', require('./routes/shrbio').createPublicRedirectRouter());
 app.use('/bio', require('./routes/bio-public-arsenal'));
 app.use('/cabinet/bio', require('./routes/bio-public-arsenal'));
 
-// Trendex custom-domain bio root: any request with Host header NOT in our
+// Golden Connect custom-domain bio root: any request with Host header NOT in our
 // own domains is delegated to the bio renderer (which looks up bio_custom_domains).
 // Whitelist by lookup: only delegate to bio router if Host is a VERIFIED
 // custom domain in bio_custom_domains. Otherwise pass through (k8s probes,
@@ -564,7 +564,7 @@ const _bioDomainCache = new Map();
 const _bioDomainCacheTtl = 60 * 1000;
 app.use((req, res, next) => {
   const host = String(req.hostname || '').toLowerCase();
-  if (!host || host === 'trendex.biz' || host.endsWith('.trendex.biz')) return next();
+  if (!host || host === 'golden-connect.to' || host.endsWith('.golden-connect.to')) return next();
   // Skip API/static/cabinet/etc. paths even if Host is custom
   const p = req.path || '';
   if (p.startsWith('/api') || p.startsWith('/cabinet') || p.startsWith('/s/') ||
@@ -604,8 +604,8 @@ try {
   console.error('[http] webapp attach failed', err && err.message);
 }
 
-if (config.trendexVideoDir && fs.existsSync(config.trendexVideoDir)) {
-  app.use(config.trendexVideoPublicPath, express.static(config.trendexVideoDir, {
+if (config.golden-connectVideoDir && fs.existsSync(config.golden-connectVideoDir)) {
+  app.use(config.golden-connectVideoPublicPath, express.static(config.golden-connectVideoDir, {
     maxAge: '7d',
     index: false,
     fallthrough: true,
@@ -649,7 +649,7 @@ app.get('/health', (req, res) => {
   const tgMonitorEvents = storage.listTelegramMonitorEvents ? storage.listTelegramMonitorEvents({ limit: 10 }) : [];
   res.json({
     ok: true,
-    service: 'trendex-cabinet',
+    service: 'golden-connect-cabinet',
     db_ok,
     bot_running,
     uptimeSec: Math.floor((Date.now() - startedAt) / 1000),
@@ -693,11 +693,11 @@ app.get('/register', (req, res) => sendNoStoreFile(res, path.join(siteRoot, 'reg
 app.get('/auth/magic', (req, res) => {
   const token = String(req.query.token || '').trim();
   if (!token) {
-    return res.status(400).type('html').send('<!doctype html><title>Ошибка</title><body style="background:#080a0f;color:#e8eaed;font-family:sans-serif;text-align:center;padding:60px"><h1>Ссылка недействительна</h1><p>Откройте бот <a href="https://t.me/Trendex_bizbot" style="color:#10b981">@Trendex_bizbot</a> и нажмите "🌐 Кабинет".</p></body>');
+    return res.status(400).type('html').send('<!doctype html><title>Ошибка</title><body style="background:#080a0f;color:#e8eaed;font-family:sans-serif;text-align:center;padding:60px"><h1>Ссылка недействительна</h1><p>Откройте бот <a href="https://t.me/Golden Connect_bizbot" style="color:#10b981">@Golden Connect_bizbot</a> и нажмите "🌐 Кабинет".</p></body>');
   }
   const user = storage.verifyMagicLoginToken(token);
   if (!user) {
-    return res.status(401).type('html').send('<!doctype html><title>Ссылка истекла</title><body style="background:#080a0f;color:#e8eaed;font-family:sans-serif;text-align:center;padding:60px"><h1>Ссылка истекла или уже использована</h1><p>Откройте бот <a href="https://t.me/Trendex_bizbot" style="color:#10b981">@Trendex_bizbot</a> и нажмите "🌐 Кабинет" для новой ссылки.</p></body>');
+    return res.status(401).type('html').send('<!doctype html><title>Ссылка истекла</title><body style="background:#080a0f;color:#e8eaed;font-family:sans-serif;text-align:center;padding:60px"><h1>Ссылка истекла или уже использована</h1><p>Откройте бот <a href="https://t.me/Golden Connect_bizbot" style="color:#10b981">@Golden Connect_bizbot</a> и нажмите "🌐 Кабинет" для новой ссылки.</p></body>');
   }
   // Create session
   const rawToken = require('crypto').randomBytes(32).toString('base64url');
@@ -710,7 +710,7 @@ app.get('/auth/magic', (req, res) => {
     userAgent: req.headers['user-agent'] || '',
   });
   const secureCookies = /^https:\/\//i.test(String(config.publicBaseUrl || ''));
-  const cookieName = String(config.sessionCookieName || 'trendex_site_session').trim();
+  const cookieName = String(config.sessionCookieName || 'golden-connect_site_session').trim();
   const parts = [`${encodeURIComponent(cookieName)}=${encodeURIComponent(rawToken)}`];
   parts.push(`Max-Age=${sessionTtlDays * 24 * 60 * 60}`);
   parts.push('Path=/');
@@ -808,7 +808,7 @@ const server = httpServer.listen(config.port, () => {
 });
 
 async function start() {
-  // When trendex-bot deployment owns the long-poller (per Trendex k8s split,
+  // When golden-connect-bot deployment owns the long-poller (per Golden Connect k8s split,
   // commit 4be2fcb), cabinet should skip bot.start() to avoid 409 Conflict
   // with the bot deployment polling the same token. We still need cron jobs
   // + backup + monitoring to run, so they fire regardless.
@@ -858,7 +858,7 @@ start().catch((error) => {
   console.error('[bot_startup_failed_nonfatal]', error && error.stack ? error.stack : error);
 });
 
-// Trendex: poll cert-manager status for bio custom domains every 60s.
+// Golden Connect: poll cert-manager status for bio custom domains every 60s.
 function _bioDomainSslCron() {
   try {
     const k8s = require('./k8s-client');

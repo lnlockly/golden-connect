@@ -1,5 +1,5 @@
-/* Trendex Cabinet — GiftClub pages (5 sub-views).
-   Reads from /cabinet/api/me/gift/* (which proxies to trendex-api /me/gift/*).
+/* Golden Connect Cabinet — GiftClub pages (5 sub-views).
+   Reads from /cabinet/api/me/gift/* (which proxies to golden-connect-api /me/gift/*).
    Imported via migration from GiftClub MySQL — see gift_* tables in Neon. */
 (function () {
   'use strict';
@@ -86,7 +86,7 @@
       </div>
       <div class="gift-info">
         <h4>ℹ О GiftClub</h4>
-        <p>GiftClub — это маркетинг и реферальная программа от giftclub.online, объединённая с Trendex. Ваши накопленные балансы и статусы перенесены и доступны только для просмотра. Балансы можно вывести через стандартный Trendex-флоу.</p>
+        <p>GiftClub — это маркетинг и реферальная программа от giftclub.online, объединённая с Golden Connect. Ваши накопленные балансы и статусы перенесены и доступны только для просмотра. Балансы можно вывести через стандартный Golden Connect-флоу.</p>
       </div>
     `;
     root.innerHTML = html;
@@ -225,9 +225,9 @@
       setTimeout(() => { window.loadGiftBalancesPage(); }, 1200);
     } else {
       const map = {
-        insufficient_working: 'Недостаточно средств на личном кошельке Trendex',
+        insufficient_working: 'Недостаточно средств на личном кошельке Golden Connect',
         insufficient_balance: 'Недостаточно средств на балансе',
-        not_linked_to_trendex: 'Ваш GIFT-аккаунт не связан с кошельком Trendex',
+        not_linked_to_golden-connect: 'Ваш GIFT-аккаунт не связан с кошельком Golden Connect',
         min_10_usdt: 'Минимальная сумма вывода — 10 USDT',
         address_required: 'Укажите адрес кошелька',
         bad_amount: 'Некорректная сумма',
@@ -324,7 +324,7 @@
       <div class="gd-section">
         <h3>💰 Балансы</h3>
         <ul>
-          <li><b>Основной</b> — пополняется с вашего личного кошелька Trendex 1:1. С него покупаются статусы Дарителя.</li>
+          <li><b>Основной</b> — пополняется с вашего личного кошелька Golden Connect 1:1. С него покупаются статусы Дарителя.</li>
           <li><b>Текущий</b> — сюда поступает заработок и кешбэк. Можно вывести (заявка от 10 USDT) или перевести на Основной.</li>
           <li>Перевод между балансами — мгновенный, без комиссии.</li>
         </ul>

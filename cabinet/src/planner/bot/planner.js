@@ -84,7 +84,7 @@ function setupPlannerHandlers(bot) {
   bot.callbackQuery('dr_add', async (ctx) => {
     await ctx.answerCallbackQuery();
     ctx.session.step = 'dr_add_title';
-    await ctx.reply('✏️ Напишите название ежедневного дела:\n\n<i>Пример: Зарядка, Принять Живую воду, Прочесть про Trendex</i>', { parse_mode: 'HTML' });
+    await ctx.reply('✏️ Напишите название ежедневного дела:\n\n<i>Пример: Зарядка, Принять Живую воду, Прочесть про Golden Connect</i>', { parse_mode: 'HTML' });
   });
 
   // Manage routines list

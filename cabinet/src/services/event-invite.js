@@ -22,7 +22,7 @@ function _key() { return GROQ_KEYS.length ? GROQ_KEYS[_gi++ % GROQ_KEYS.length] 
 
 // ── Theme pool — each = an angle + features + a gradient ──
 const THEMES = [
-  { id: 'ai-tools',  title: 'AI-инструменты Trendex', tone: 'польза', grad: ['#7C3AED','#00D4FF'],
+  { id: 'ai-tools',  title: 'AI-инструменты Golden Connect', tone: 'польза', grad: ['#7C3AED','#00D4FF'],
     features: ['AI-рассылки в Telegram с авто-вариациями', 'CRM с авто-разведкой лидов', 'AI-копирайтер и хэштеги', 'транскрибация видео'] },
   { id: 'tg-rent',   title: 'Аренда TG-аккаунтов', tone: 'возможности', grad: ['#0ea5e9','#2563eb'],
     features: ['аренда прогретых TG-аккаунтов', 'массовые рассылки без банов', 'антибан и прокси из коробки', 'свои аккаунты через TDATA'] },
@@ -56,7 +56,7 @@ function _pickTheme(recent) {
 
 async function _genText(theme) {
   if (!GROQ_KEYS.length) return null;
-  const prompt = `Напиши тело приглашения на живой эфир платформы Trendex.
+  const prompt = `Напиши тело приглашения на живой эфир платформы Golden Connect.
 Тема дня: «${theme.title}».
 Подсветь эти возможности (выбери 3-4, своими словами): ${theme.features.join('; ')}.
 Тон: ${TONES[theme.tone] || ''}
@@ -125,11 +125,11 @@ async function _genImage(theme, dateStr) {
   </defs>
   <rect width="${W}" height="${H}" fill="url(#bg)"/>
   <rect width="${W}" height="${H}" fill="url(#glow)"/>
-  <text x="90" y="130" font-family="Helvetica,Arial,sans-serif" font-weight="900" font-size="56" fill="#ffffff" letter-spacing="6">TRENDEX</text>
+  <text x="90" y="130" font-family="Helvetica,Arial,sans-serif" font-weight="900" font-size="56" fill="#ffffff" letter-spacing="6">GOLDEN_CONNECT</text>
   <text x="90" y="180" font-family="Helvetica,Arial,sans-serif" font-weight="700" font-size="26" fill="#ffffff" opacity="0.85">🔴 ЖИВОЙ ЭФИР · БУДЬ В ТРЕНДЕ</text>
   <text x="90" y="285" font-family="Helvetica,Arial,sans-serif" font-weight="800" font-size="52" fill="#ffffff">${_escSvg(theme.title)}</text>
   ${featSvg}
-  <text x="90" y="${H - 50}" font-family="Helvetica,Arial,sans-serif" font-weight="600" font-size="30" fill="#ffffff" opacity="0.9">trendex.biz · регистрация бесплатно</text>
+  <text x="90" y="${H - 50}" font-family="Helvetica,Arial,sans-serif" font-weight="600" font-size="30" fill="#ffffff" opacity="0.9">golden-connect.to · регистрация бесплатно</text>
 </svg>`;
   await sharp(Buffer.from(svg)).png({ compressionLevel: 8 }).toFile(out);
   return '/cabinet/ads-asset/event-invite/' + dateStr + '.png';

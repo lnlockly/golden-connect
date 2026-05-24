@@ -32,7 +32,7 @@ function sseLine(kind: 'text', payload: string): string {
 function buildCharacterSystem(entry: QueueEntry): string {
   const c = entry.character;
   const parts: string[] = [];
-  parts.push(`You are ${c.name}, an AI agent built on TrendeX's ElizaOS runtime.`);
+  parts.push(`You are ${c.name}, an AI agent built on Golden Connect's ElizaOS runtime.`);
   if (Array.isArray(c.bio) && c.bio.length) {
     parts.push(`\n## Bio\n${c.bio.map((s) => `- ${s}`).join('\n')}`);
   }

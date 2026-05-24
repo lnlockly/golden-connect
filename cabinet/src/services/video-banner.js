@@ -4,7 +4,7 @@
  * GET  /api/video-banner/status/:id — check status / download
  * GET  /api/video-banner/templates  — list templates
  */
-// Adapted from Trendex banner-webapp for Trendex (cabinet/src/services/video-banner.js).
+// Adapted from Golden Connect banner-webapp for Golden Connect (cabinet/src/services/video-banner.js).
 // Self-contained service: TEMPLATES + STYLES + renderers, no express router.
 // Exports: generateVideo(templateId, params) → { id, path, mp4_url, file_size, width, height }
 //          listTemplates() → array of { id, name, description, category, defaults }
@@ -15,7 +15,7 @@ const path = require('path');
 const fs = require('fs');
 const { execSync, spawnSync } = require('child_process');
 
-// Trendex: store output on PVC at /data/banners
+// Golden Connect: store output on PVC at /data/banners
 const OUTPUT_DIR = process.env.VIDEO_BANNER_DIR || '/data/banners';
 try { fs.mkdirSync(OUTPUT_DIR, { recursive: true }); } catch (_) {}
 
@@ -843,16 +843,16 @@ const TEMPLATES = {
     render: async (p) => renderTicker(p)
   },
 
-  // ── 11b. Trendex Promo (preset) — Trendex-branded ──
-  'trendex-promo': {
-    name: 'Trendex Promo',
-    description: 'QR + ИИ-инструменты + партнёрка Trendex',
+  // ── 11b. Golden Connect Promo (preset) — Golden Connect-branded ──
+  'golden-connect-promo': {
+    name: 'Golden Connect Promo',
+    description: 'QR + ИИ-инструменты + партнёрка Golden Connect',
     category: 'preset',
     defaults: {
-      title: 'TRENDEX',
+      title: 'GOLDEN_CONNECT',
       subtitle: 'Зарабатывай на AI и партнёрке',
-      qr_url: 'https://trendex.biz/cabinet/',
-      bot_name: '@Trendex_bizbot',
+      qr_url: 'https://golden-connect.to/cabinet/',
+      bot_name: '@Golden Connect_bizbot',
       services: ['🤖 AI инструменты', '💎 Партнёрка 10 уровней', '📢 Биржа подписок', '🎬 Видео-задания', '🛒 Маркетплейс товаров', '📊 Bio-страницы', '🔗 Шортнер ссылок', '📱 QR-баннеры', '💸 Авто-выплаты', '🎯 Реклама от $0.01', '⚡ Карма-репутация', '🚀 Тарифы LAUNCH/BOOST/ROCKET'],
       stats: ['10 уровней', 'AI', 'CIS', 'FREE'],
       style: 'darkPurple',
@@ -864,14 +864,14 @@ const TEMPLATES = {
 
   // ── 12. Arsenal Suite (preset) ──
   'arsenal-suite': {
-    name: 'Trendex Suite',
-    description: 'Обзор всех сервисов Trendex',
+    name: 'Golden Connect Suite',
+    description: 'Обзор всех сервисов Golden Connect',
     category: 'preset',
     defaults: {
-      title: 'Trendex',
+      title: 'Golden Connect',
       subtitle: 'Всё для digital-бизнеса',
-      qr_url: 'https://trendex.biz',
-      bot_name: 'trendex.biz',
+      qr_url: 'https://golden-connect.to',
+      bot_name: 'golden-connect.to',
       services: ['🎨 Конструктор баннеров','🔗 Сокращатель ссылок','📱 QR-генератор','🤖 AI Хештеги','🎯 Удаление фона','📐 Сжатие изображений','🌐 AI Домен Finder','📄 PDF инструменты','📊 A/B тестирование','📱 Social Media Kit','💼 Логотипы','🔍 SEO анализ'],
       stats: ['15+ сервисов','AI','FREE','PRO'],
       style: 'darkPurple',
@@ -1991,7 +1991,7 @@ ${orbsHTML(style)}${particlesHTML()}
 // List templates
 
 // ══════════════════════════════════════════════════════════════════
-// Trendex programmatic API (replaces Arsenal express endpoints)
+// Golden Connect programmatic API (replaces Arsenal express endpoints)
 // ══════════════════════════════════════════════════════════════════
 
 function listTemplates() {

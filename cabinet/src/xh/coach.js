@@ -1,4 +1,4 @@
-// Trendex Coach Mode — еженедельный персональный коуч в личке после welcome-drip.
+// Golden Connect Coach Mode — еженедельный персональный коуч в личке после welcome-drip.
 //
 // Cron: Mon + Thu at 9:00 MSK (06:00 UTC).
 // Для каждого user с TG-ботом и завершившим welcome-drip (день 4):
@@ -81,7 +81,7 @@ function pickAdvice(state) {
       text: [
         '👋 Давно не виделись!',
         '',
-        'За время твоего отсутствия в Trendex:',
+        'За время твоего отсутствия в Golden Connect:',
         '• Запущены новые рекламные слоты — больше дохода в ленте',
         '• Маркетплейс оживился — продают курсы и боты',
         '• Свежие промо-материалы в кабинете',
@@ -89,7 +89,7 @@ function pickAdvice(state) {
         'Загляни в /cabinet — посмотришь что нового. На FREE доход <b>до $25/день</b>.',
       ].join('\n'),
       kb: new InlineKeyboard()
-        .url('🚀 Открыть кабинет', 'https://t.me/Trendex_bizbot?start=cab').row()
+        .url('🚀 Открыть кабинет', 'https://t.me/Golden Connect_bizbot?start=cab').row()
         .text('✅ Сделал', 'coach_done').text('⏸ Пауза 30д', 'coach_pause'),
     };
   }
@@ -106,7 +106,7 @@ function pickAdvice(state) {
         'Что сделать сегодня:',
         '1. Открой /ref — твоя реф-ссылка',
         '2. Отправь её 3 близким контактам с фразой:',
-        '<i>«Тестирую Trendex — рекламная платформа, платит за внимание. Зацени.»</i>',
+        '<i>«Тестирую Golden Connect — рекламная платформа, платит за внимание. Зацени.»</i>',
         '3. Один из 3 обычно регистрируется → начнётся партнёрка',
         '',
         '💡 Не продавай — просто покажи. Платформа сама объяснит.',
@@ -160,7 +160,7 @@ function pickAdvice(state) {
         '💡 Если хоть 1 из твоих 5 рефералов купит LAUNCH тоже — ты сразу +$4.5 на L1.',
       ].join('\n'),
       kb: new InlineKeyboard()
-        .url('💎 Активировать LAUNCH', 'https://trendex.biz/cabinet#/marketing').row()
+        .url('💎 Активировать LAUNCH', 'https://golden-connect.to/cabinet#/marketing').row()
         .text('🤔 Подумаю', 'coach_skip').text('⏸ Пауза', 'coach_pause'),
     };
   }
@@ -209,7 +209,7 @@ function pickAdvice(state) {
         '💡 Чтобы попасть в топ-15: 5+ рефералов в неделю на платных тарифах. Считается оборот = их активация + месячная.',
       ].join('\n'),
       kb: new InlineKeyboard()
-        .url('🏆 Лидерский пул', 'https://trendex.biz/cabinet#/finance').row()
+        .url('🏆 Лидерский пул', 'https://golden-connect.to/cabinet#/finance').row()
         .text('✅ Понял', 'coach_done').text('⏭ Пропустить', 'coach_skip'),
     };
   }

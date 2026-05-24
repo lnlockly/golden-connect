@@ -1,4 +1,4 @@
-/* Trendex — Наши партнёры (Partners catalog + my participations)
+/* Golden Connect — Наши партнёры (Partners catalog + my participations)
  *   Read pattern from trdx-exchange.js. Pure vanilla, IIFE.
  *   Routes:
  *     #/partners              → catalog
@@ -136,7 +136,7 @@
     if (!host) { console.error('[partners] #partners-content not found'); return; }
     host.innerHTML = shell(
       '<h2 style="margin:0 0 4px;font-size:26px;letter-spacing:-0.02em;color:#fff;font-family:Geist,Inter,sans-serif">🤝 Наши партнёры</h2>'
-      + '<p style="color:#9ca3af;margin:0 0 22px;font-size:14px;max-width:760px;line-height:1.55">Партнёрские проекты Trendex. Добавь свою реф-ссылку из любого партнёра — мы найдём твоих рефералов и начислим <strong style="color:#00ff94">+10 TRDX</strong> за каждого приглашённого тобой человека в этом проекте.</p>'
+      + '<p style="color:#9ca3af;margin:0 0 22px;font-size:14px;max-width:760px;line-height:1.55">Партнёрские проекты Golden Connect. Добавь свою реф-ссылку из любого партнёра — мы найдём твоих рефералов и начислим <strong style="color:#00ff94">+10 TRDX</strong> за каждого приглашённого тобой человека в этом проекте.</p>'
       + '<div id="prtnr-filter-bar"></div>'
       + '<div id="prtnr-search-bar" style="margin:0 0 16px"><input id="prtnr-search" type="search" placeholder="🔍 Поиск по названию, описанию, тегам…" class="cab-input" style="width:100%;max-width:520px;padding:10px 14px;font-size:14px;background:rgba(20,22,38,0.72);border:1px solid rgba(255,255,255,.08);border-radius:10px;color:#fff;outline:none" oninput="window.trdxPartnersFilter()" /></div>'
       + '<div id="prtnr-grid">' + loadingBlock('Загружаем партнёров…') + '</div>'
@@ -309,7 +309,7 @@
         +     '<input id="prtnr-input-link" type="url" class="cab-input" placeholder="https://..." style="width:100%;padding:10px 12px;background:rgba(0,0,0,.30);border:1px solid rgba(255,255,255,.10);border-radius:8px;color:#fff;font-size:13px;font-family:monospace;box-sizing:border-box" />'
         +   '</label>'
         +   '<label style="display:block;margin-bottom:14px"><div style="font-size:10.5px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-weight:700">Username в проекте (необязательно)</div>'
-        +     '<input id="prtnr-input-uname" type="text" class="cab-input" placeholder="например trendexpro" maxlength="64" style="width:100%;padding:10px 12px;background:rgba(0,0,0,.30);border:1px solid rgba(255,255,255,.10);border-radius:8px;color:#fff;font-size:13px;box-sizing:border-box" />'
+        +     '<input id="prtnr-input-uname" type="text" class="cab-input" placeholder="например golden-connectpro" maxlength="64" style="width:100%;padding:10px 12px;background:rgba(0,0,0,.30);border:1px solid rgba(255,255,255,.10);border-radius:8px;color:#fff;font-size:13px;box-sizing:border-box" />'
         +   '</label>'
         +   '<button id="prtnr-submit-btn" onclick="window.trdxPartnersSubmit(\'' + esc(id) + '\')" style="padding:12px 24px;background:linear-gradient(135deg,#b14aff 0%,#00e0ff 100%);color:#0a0a1a;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer">Добавить и получить инвайтера →</button>'
         + '</div>';

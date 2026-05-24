@@ -17,7 +17,7 @@ export const env = {
   cookieDomain: optional('AUTH_COOKIE_DOMAIN'),
   bscChainId: Number(process.env.BSC_CHAIN_ID ?? 56),
   leadsWebhookSecret: optional('LEADS_WEBHOOK_SECRET'),
-  // Shared secret for /internal/* endpoints, sent as `x-trendex-secret` by
+  // Shared secret for /internal/* endpoints, sent as `x-golden-connect-secret` by
   // the bot. Required at startup — a misconfigured deploy should refuse to
   // boot rather than silently serve internal APIs with no auth.
   internalSecret: process.env.INTERNAL_API_SECRET ?? '',
@@ -40,7 +40,7 @@ export const env = {
   plategaUsdRate: Number(process.env.PLATEGA_USD_RATE ?? 95),
   // Public origin used to build `callback_url` / `return_url` sent to the
   // payment provider. Must match the TLS cert + CORS allow-list.
-  appPublicUrl: optional('APP_PUBLIC_URL', 'https://api.trendex.biz'),
+  appPublicUrl: optional('APP_PUBLIC_URL', 'https://api.golden-connect.to'),
   // BEP-20 USDT intake. Receive address has a hardcoded fallback so we
   // never accidentally generate an invoice against an empty wallet.
   bscReceiveAddress: optional(
@@ -76,7 +76,7 @@ export const env = {
   // Resend — transactional email for /auth/send-verify. Blank = dev mode:
   // link is returned in the API response and logged to stdout, never sent.
   resendApiKey: process.env.RESEND_API_KEY ?? "",
-  emailFrom: process.env.EMAIL_FROM ?? "Trendex <no-reply@trendex.biz>",
+  emailFrom: process.env.EMAIL_FROM ?? "Golden Connect <no-reply@golden-connect.to>",
   // Comma-separated origins from ALLOWED_ORIGINS — used by the email verify
   // redirect to pick a safe landing host.
   allowedOrigins: process.env.ALLOWED_ORIGINS ?? "",

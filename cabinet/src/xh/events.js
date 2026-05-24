@@ -1,4 +1,4 @@
-// Trendex: команды эфиров + deep-link handlers.
+// Golden Connect: команды эфиров + deep-link handlers.
 // Регистрируется ДО alpha bot setup, чтобы перехватить /start перед onboarding.
 
 const { InlineKeyboard } = require('grammy');
@@ -118,7 +118,7 @@ async function safeSend(ctx, text, opts) {
   }
 }
 
-function setupTrendexEvents(bot, storage, config) {
+function setupGolden ConnectEvents(bot, storage, config) {
   // Intercept /start with payload BEFORE alpha's /start handler.
   // We use bot.use() middleware that checks /start message, and if it's our payload, handles it
   // and stops propagation. Otherwise calls next().
@@ -143,7 +143,7 @@ function setupTrendexEvents(bot, storage, config) {
       // [magic-cab] /start cab → sendMagicLink (dual-option hub: WebApp + magic URL)
       try {
         const { sendMagicLink } = require('./site-link');
-        const siteBase = String(config.publicBaseUrl || 'https://trendex.biz/cabinet').replace(/\/+$/, '');
+        const siteBase = String(config.publicBaseUrl || 'https://golden-connect.to/cabinet').replace(/\/+$/, '');
         await sendMagicLink(ctx, storage, siteBase);
       } catch (e) { console.warn('[magic-cab]', e && e.message); }
       return;
@@ -162,11 +162,11 @@ function setupTrendexEvents(bot, storage, config) {
     const events = storage.listUpcomingEvents(10);
     if (!events.length) {
       return safeSend(ctx,
-        '📡 Пока нет запланированных эфиров Trendex.\n\nСледите за анонсами в этом боте.',
+        '📡 Пока нет запланированных эфиров Golden Connect.\n\nСледите за анонсами в этом боте.',
         { parse_mode: 'HTML' }
       );
     }
-    const lines = ['📡 <b>Предстоящие эфиры Trendex</b>', ''];
+    const lines = ['📡 <b>Предстоящие эфиры Golden Connect</b>', ''];
     events.forEach((ev, i) => {
       const dt = ev.startsAt
         ? new Date(ev.startsAt).toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' })
@@ -197,9 +197,9 @@ function setupTrendexEvents(bot, storage, config) {
     try { await ctx.answerCallbackQuery(); } catch (e) {}
     const events = storage.listUpcomingEvents(10);
     if (!events.length) {
-      return ctx.reply('📡 Пока нет запланированных эфиров Trendex.');
+      return ctx.reply('📡 Пока нет запланированных эфиров Golden Connect.');
     }
-    const lines = ['📡 <b>Предстоящие эфиры Trendex</b>', ''];
+    const lines = ['📡 <b>Предстоящие эфиры Golden Connect</b>', ''];
     events.forEach((ev, i) => {
       const dt = ev.startsAt
         ? new Date(ev.startsAt).toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' })
@@ -309,8 +309,8 @@ function setupTrendexEvents(bot, storage, config) {
   bot.hears('🔴 Эфиры', async (ctx) => {
     if (ctx.chat?.type !== 'private') return;
     const events = storage.listUpcomingEvents(10);
-    if (!events.length) return ctx.reply('📡 Пока нет запланированных эфиров Trendex.');
-    const lines = ['📡 <b>Предстоящие эфиры Trendex</b>', ''];
+    if (!events.length) return ctx.reply('📡 Пока нет запланированных эфиров Golden Connect.');
+    const lines = ['📡 <b>Предстоящие эфиры Golden Connect</b>', ''];
     events.forEach((ev, i) => {
       const dt = ev.startsAt
         ? new Date(ev.startsAt).toLocaleString('ru-RU', { timeZone: 'Europe/Moscow', day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' })
@@ -332,7 +332,7 @@ async function sendEventCard(ctx, ev, storage) {
   const text = formatEventCard(ev);
   const kb = new InlineKeyboard().text('🔔 Записаться на эфир', `xh_subscribe:${ev.id}`).row();
   if (ev.joinUrl) kb.url('▶️ Открыть эфир', ev.joinUrl).row();
-  kb.url('🌐 Сайт Trendex', 'https://cabinet.trendex.biz/');
+  kb.url('🌐 Сайт Golden Connect', 'https://cabinet.golden-connect.to/');
   await ctx.reply(text, { parse_mode: 'HTML', reply_markup: kb, disable_web_page_preview: true });
 }
 
@@ -340,7 +340,7 @@ async function handleEventDeepLink(ctx, parsed, storage, config) {
   const eventId = parsed.eventId;
   const ev = storage.getEvent(eventId);
   if (!ev) {
-    return ctx.reply('Эфир не найден или уже прошёл. Откройте сайт: https://cabinet.trendex.biz/');
+    return ctx.reply('Эфир не найден или уже прошёл. Откройте сайт: https://cabinet.golden-connect.to/');
   }
   let webUser = null;
   try { webUser = storage.ensureWebUserFromTelegram(ctx.from); }
@@ -375,7 +375,7 @@ async function handleEventDeepLink(ctx, parsed, storage, config) {
     kb.text('🔔 Записаться на эфир', `xh_subscribe:${eventId}`).row();
   }
   if (ev.joinUrl) kb.url('▶️ Открыть эфир', ev.joinUrl).row();
-  kb.url('🌐 Сайт Trendex', 'https://cabinet.trendex.biz/').row();
+  kb.url('🌐 Сайт Golden Connect', 'https://cabinet.golden-connect.to/').row();
   await ctx.reply(text, {
     parse_mode: 'HTML',
     reply_markup: kb,
@@ -401,4 +401,4 @@ async function maybeAttributeReferral(ctx, refCode, storage, bot) {
   } catch (e) {}
 }
 
-module.exports = { setupTrendexEvents, parseStartPayload };
+module.exports = { setupGolden ConnectEvents, parseStartPayload };

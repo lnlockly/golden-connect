@@ -2,7 +2,7 @@ import { useT } from '../../i18n/LangContext';
 import type { AuthUser } from '../../lib/auth';
 
 /**
- * Three-step onboarding for TrendeX:
+ * Three-step onboarding for Golden Connect:
  *  1. Выбрать тариф
  *  2. Оплатить вход
  *  3. Сделать первое задание

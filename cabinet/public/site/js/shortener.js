@@ -1,4 +1,4 @@
-/* Trendex Cabinet — Sokrater (URL Shortener UI). Phase B-C minimal.
+/* Golden Connect Cabinet — Sokrater (URL Shortener UI). Phase B-C minimal.
    Talks to /cabinet/api/shortener/* endpoints (full Arsenal port behind).
 */
 (function () {

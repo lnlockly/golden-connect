@@ -1,6 +1,6 @@
 {
-  "split.leader.agent_name": "TrendeX · operator intake",
+  "split.leader.agent_name": "Golden Connect · operator intake",
   "split.leader.greeting": "Hi. Operator track. Quick call: what's your name, what do you ship, and where can I see your work (GitHub / deployed app / Twitter)?",
-  "split.learner.agent_name": "TrendeX · curriculum intake",
+  "split.learner.agent_name": "Golden Connect · curriculum intake",
   "split.learner.greeting": "Hi. Learner track. Tell me your name and what you want to learn — a skill, a job title, a project you'd like to ship. I'll pick your first module from there."
 }

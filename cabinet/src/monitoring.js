@@ -46,7 +46,7 @@ function createMonitoring({ config, bot, storage, startedAt, getBackupStatus }) 
     } catch (error) {
       alertOnce(
         'bot_unreachable',
-        `🚨 trendex-cabinet: Telegram API недоступен\n${(error && error.message) || error}`
+        `🚨 golden-connect-cabinet: Telegram API недоступен\n${(error && error.message) || error}`
       );
     }
   }
@@ -57,7 +57,7 @@ function createMonitoring({ config, bot, storage, startedAt, getBackupStatus }) 
     if (rssMb > memoryThresholdMb) {
       alertOnce(
         'memory_high',
-        `⚠️ trendex-cabinet: высокое потребление памяти\nRSS: ${rssMb} MB (порог ${memoryThresholdMb} MB)`
+        `⚠️ golden-connect-cabinet: высокое потребление памяти\nRSS: ${rssMb} MB (порог ${memoryThresholdMb} MB)`
       );
     } else if (rssMb < memoryThresholdMb * 0.8) {
       clearAlert('memory_high');
@@ -72,7 +72,7 @@ function createMonitoring({ config, bot, storage, startedAt, getBackupStatus }) 
     if (status.lastBackupError) {
       alertOnce(
         'backup_failed',
-        `🚨 trendex-cabinet: ошибка бэкапа\n${status.lastBackupError}`
+        `🚨 golden-connect-cabinet: ошибка бэкапа\n${status.lastBackupError}`
       );
       return;
     }
@@ -82,7 +82,7 @@ function createMonitoring({ config, bot, storage, startedAt, getBackupStatus }) 
     if (ageHours > backupStaleHours) {
       alertOnce(
         'backup_stale',
-        `⚠️ trendex-cabinet: последний бэкап ${ageHours.toFixed(1)}ч назад (порог ${backupStaleHours}ч)`
+        `⚠️ golden-connect-cabinet: последний бэкап ${ageHours.toFixed(1)}ч назад (порог ${backupStaleHours}ч)`
       );
     } else {
       clearAlert('backup_stale');
@@ -106,7 +106,7 @@ function createMonitoring({ config, bot, storage, startedAt, getBackupStatus }) 
     const node = process.version;
     const mem = Math.round(process.memoryUsage().rss / MB);
     await notifyAdmin(
-      `✅ trendex-cabinet запущен\nhost: ${host}\nnode: ${node}\nRSS: ${mem} MB\npid: ${process.pid}`
+      `✅ golden-connect-cabinet запущен\nhost: ${host}\nnode: ${node}\nRSS: ${mem} MB\npid: ${process.pid}`
     );
   }
 

@@ -2,7 +2,7 @@ import { useT } from '../../i18n/LangContext';
 import './MatrixSlice.css';
 
 /**
- * MatrixSlice — shows the user's position in the global TrendeX matrix.
+ * MatrixSlice — shows the user's position in the global Golden Connect matrix.
  * Three "above" nodes (who get paid when you activate), downstream
  * counter. All mock data for now.
  */

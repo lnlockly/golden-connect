@@ -1,5 +1,5 @@
 /**
- * Trendex Ads module — advertiser + executor flows (v2).
+ * Golden Connect Ads module — advertiser + executor flows (v2).
  *
  * v2 changelog:
  *   • Sessions persist to ad_sessions (survive bot restart).
@@ -16,17 +16,17 @@
 
 const { InlineKeyboard } = require('grammy');
 // ── api Postgres balance bridge ──
-// Fetch real Trendex platform balances (working, gift, subscription) by tg_id.
+// Fetch real Golden Connect platform balances (working, gift, subscription) by tg_id.
 // Returns { gift, earned, karma } in cents to maintain compatibility with planner shape.
 const _http = require('http');
 async function fetchApiBalances(plannerUser) {
   // plannerUser has tg_id from planner SQLite
   const tgId = Number(plannerUser?.tg_id || 0);
   if (!tgId) return null;
-  const apiBase = process.env.TRENDEX_API_INTERNAL_URL || 'http://trendex-api:4001';
-  const secret = process.env.TRENDEX_API_INTERNAL_SECRET;
+  const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://golden-connect-api:4001';
+  const secret = process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET;
   if (!secret) return null;
-  const email = 'tg' + tgId + '@trendex.bot';
+  const email = 'tg' + tgId + '@golden-connect.bot';
   return new Promise((resolve) => {
     try {
       const url = new URL(apiBase + '/internal/finance/balances?email=' + encodeURIComponent(email));
@@ -35,7 +35,7 @@ async function fetchApiBalances(plannerUser) {
         hostname: url.hostname,
         port: url.port || 80,
         path: url.pathname + url.search,
-        headers: { 'x-trendex-secret': secret },
+        headers: { 'x-golden-connect-secret': secret },
         timeout: 4000,
       }, (r) => {
         let buf = '';
@@ -86,8 +86,8 @@ const QUICK_LEAVE_SECONDS = 60;    // leaving within 60s → instant retract
 
 // Karma proxy for milestone awards (fire-and-forget)
 function _karmaAwardAds(plannerUserId, kind, sourceId, memo) {
-  const apiBase = process.env.TRENDEX_API_INTERNAL_URL || 'http://trendex-api:4001';
-  const apiSecret = process.env.TRENDEX_API_INTERNAL_SECRET;
+  const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://golden-connect-api:4001';
+  const apiSecret = process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET;
   if (!apiSecret || !plannerUserId) return;
   // Resolve api email via tg_id
   let tgId = null;
@@ -97,7 +97,7 @@ function _karmaAwardAds(plannerUserId, kind, sourceId, memo) {
     if (u && u.tg_id) tgId = u.tg_id;
   } catch (_) {}
   if (!tgId) return;
-  const email = 'tg' + Math.abs(tgId) + '@trendex.bot';
+  const email = 'tg' + Math.abs(tgId) + '@golden-connect.bot';
   const data = JSON.stringify({ email: email, kind: kind, source_id: sourceId || null, memo: memo || null });
   const httpMod = apiBase.startsWith('https') ? require('https') : require('http');
   try {
@@ -109,7 +109,7 @@ function _karmaAwardAds(plannerUserId, kind, sourceId, memo) {
       headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(data),
-        'x-trendex-secret': apiSecret,
+        'x-golden-connect-secret': apiSecret,
       },
       timeout: 5000,
     }, function (res) { res.resume(); });
@@ -792,7 +792,7 @@ function setupAds(bot, deps) {
     await ctx.reply(
       `📝 <b>Новая кампания: задание с отчётом</b>\n\n` +
       `Шаг 1/6 — Опиши <b>что нужно сделать</b> исполнителю:\n\n` +
-      `<i>Например: «Оставь комментарий под нашим постом про здоровье в @TrendexNews и поставь 🔥»</i>`,
+      `<i>Например: «Оставь комментарий под нашим постом про здоровье в @Golden ConnectNews и поставь 🔥»</i>`,
       { parse_mode: 'HTML', reply_markup: new InlineKeyboard().text('❌ Отмена', 'adv_sub_cancel') }
     );
   });
@@ -894,7 +894,7 @@ function setupAds(bot, deps) {
 
   bot.callbackQuery('adv_topup', async (ctx) => {
     await ctx.answerCallbackQuery();
-    const siteBase = String(process.env.PUBLIC_BASE_URL || 'https://trendex.biz/cabinet').replace(/\/$/, '');
+    const siteBase = String(process.env.PUBLIC_BASE_URL || 'https://golden-connect.to/cabinet').replace(/\/$/, '');
     let magicUrl = siteBase + '/cabinet#/finance';
     try {
       storage.ensureWebUserFromTelegram(ctx.from);
@@ -965,7 +965,7 @@ function setupAds(bot, deps) {
 
       let inviteLink = chat.username ? `https://t.me/${chat.username}` : null;
       if (!inviteLink) {
-        try { inviteLink = await ctx.api.createChatInviteLink(chat.id, { name: 'Trendex Ads' }).then((r) => r.invite_link); } catch (_) {}
+        try { inviteLink = await ctx.api.createChatInviteLink(chat.id, { name: 'Golden Connect Ads' }).then((r) => r.invite_link); } catch (_) {}
       }
 
       store.put.setSession(ctx.from.id, {
@@ -1611,7 +1611,7 @@ function setupAds(bot, deps) {
     }
   });
 
-  // Phase S.1: "Мой баннер" — DM the user their personal Trendex banner
+  // Phase S.1: "Мой баннер" — DM the user their personal Golden Connect banner
   bot.command(['banner', 'mybanner'], async (ctx) => {
     if (ctx.chat?.type !== 'private') return;
     const u = db.ensureUser(ctx.from);
@@ -1624,7 +1624,7 @@ function setupAds(bot, deps) {
     } else {
       try {
         const { generateBanner } = require('./services/personal-banner');
-        const dn = u.tg_username ? '@' + u.tg_username : (u.tg_first_name || 'Партнёр Trendex');
+        const dn = u.tg_username ? '@' + u.tg_username : (u.tg_first_name || 'Партнёр Golden Connect');
         bannerInfo = await generateBanner({ userId: u.id, refCode: row.ref_code, displayName: dn });
         rawDb.prepare("UPDATE users SET video_banner_path=?, video_banner_status='ready', video_banner_generated_at=datetime('now') WHERE id=?").run(bannerInfo.path, u.id);
       } catch (e) { return ctx.reply('❌ Не удалось сгенерировать: ' + (e && e.message || 'unknown')); }
@@ -1632,7 +1632,7 @@ function setupAds(bot, deps) {
     try {
       const { InputFile } = require('grammy');
       const fileObj = new InputFile(bannerInfo.path);
-      const caption = '🎨 <b>Твой персональный баннер Trendex</b>\n\n📱 QR-код ведёт на твою реф-ссылку.\nДелись в Telegram / Instagram / любых чатах.';
+      const caption = '🎨 <b>Твой персональный баннер Golden Connect</b>\n\n📱 QR-код ведёт на твою реф-ссылку.\nДелись в Telegram / Instagram / любых чатах.';
       if (bannerInfo.isVideo) {
         await ctx.replyWithVideo(fileObj, { caption, parse_mode: 'HTML' });
       } else {
@@ -1937,7 +1937,7 @@ function setupAds(bot, deps) {
     if (sess.data.ai_check_enabled) {
       sess.step = 'ai_criteria';
       store.put.setSession(ctx.from.id, sess);
-      await ctx.reply(`📝 <b>Что AI должен проверить?</b> Пиши критерии для нейросети.\n\n<i>Например: «На фото — скриншот опубликованного комментария с упоминанием Trendex»</i>`, { parse_mode: 'HTML' });
+      await ctx.reply(`📝 <b>Что AI должен проверить?</b> Пиши критерии для нейросети.\n\n<i>Например: «На фото — скриншот опубликованного комментария с упоминанием Golden Connect»</i>`, { parse_mode: 'HTML' });
     } else {
       sess.data.ai_check_criteria = '';
       sess.step = 'reward';

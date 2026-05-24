@@ -1,8 +1,8 @@
 'use strict';
 
 // ============================================================
-//  Trendex Quest System — 60 заданий в 6 главах
-//  Полностью переработано под Trendex (2026-05-13)
+//  Golden Connect Quest System — 60 заданий в 6 главах
+//  Полностью переработано под Golden Connect (2026-05-13)
 //  Тематика: онбординг → заработок → реклама → CRM → партнёрка → лидерство
 //
 //  type: 'manual'  — пользователь нажимает "Выполнено"
@@ -31,9 +31,9 @@ const QUESTS = [
   { id: 'q02', chapter: 1, order: 2, icon: '🤖', title: 'Привяжи Telegram-бот', description: 'Профиль → Привязать Telegram. Вход без пароля + уведомления', xp: 20, trdx: 2, type: 'auto', trigger: 'telegram_linked', repeatType: 'once', action: { panel: 'profile', label: 'Привязать TG' } },
   { id: 'q03', chapter: 1, order: 3, icon: '🔗', title: 'Получи свою реф-ссылку', description: 'Ссылки и Bio → Промо-ссылки. Твоя ссылка уже готова', xp: 10, trdx: 1, type: 'manual', trigger: null, repeatType: 'once', action: { panel: 'links', label: 'Мои ссылки' } },
   { id: 'q04', chapter: 1, order: 4, icon: '🔔', title: 'Включи push-уведомления', description: 'Кликни "Включить" на баннере. Будешь знать о новых эфирах и заявках', xp: 10, trdx: 1, type: 'manual', trigger: null, repeatType: 'once' },
-  { id: 'q05', chapter: 1, order: 5, icon: '📡', title: 'Подпишись на канал @TRENDEX_AD', description: 'Главный анонс-канал Trendex — там все эфиры и новости', xp: 15, trdx: 2, type: 'manual', trigger: null, repeatType: 'once' },
-  { id: 'q06', chapter: 1, order: 6, icon: '🎬', title: 'Посмотри приветственный эфир', description: 'Эфиры → последний эфир-обзор платформы Trendex', xp: 20, trdx: 3, type: 'manual', trigger: null, repeatType: 'once', action: { panel: 'broadcasts', label: 'Эфиры' } },
-  { id: 'q07', chapter: 1, order: 7, icon: '🧠', title: 'Спроси AI-помощника', description: 'AI-помощник → задай вопрос про Trendex. AI знает всё о тарифах и матрице', xp: 10, trdx: 1, type: 'manual', trigger: null, repeatType: 'once', action: { panel: 'ai', label: 'AI-помощник' } },
+  { id: 'q05', chapter: 1, order: 5, icon: '📡', title: 'Подпишись на канал @GOLDEN_CONNECT_AD', description: 'Главный анонс-канал Golden Connect — там все эфиры и новости', xp: 15, trdx: 2, type: 'manual', trigger: null, repeatType: 'once' },
+  { id: 'q06', chapter: 1, order: 6, icon: '🎬', title: 'Посмотри приветственный эфир', description: 'Эфиры → последний эфир-обзор платформы Golden Connect', xp: 20, trdx: 3, type: 'manual', trigger: null, repeatType: 'once', action: { panel: 'broadcasts', label: 'Эфиры' } },
+  { id: 'q07', chapter: 1, order: 7, icon: '🧠', title: 'Спроси AI-помощника', description: 'AI-помощник → задай вопрос про Golden Connect. AI знает всё о тарифах и матрице', xp: 10, trdx: 1, type: 'manual', trigger: null, repeatType: 'once', action: { panel: 'ai', label: 'AI-помощник' } },
   { id: 'q08', chapter: 1, order: 8, icon: '❓', title: 'Прочитай FAQ', description: 'FAQ → ответы на топ-15 вопросов о платформе', xp: 5, trdx: 0, type: 'manual', trigger: null, repeatType: 'once', action: { panel: 'faq', label: 'Открыть FAQ' } },
   { id: 'q09', chapter: 1, order: 9, icon: '📋', title: 'Изучи CRM партнёра', description: 'CRM партнёра → 7322 лида, фильтры, диалоги. Открой и посмотри', xp: 15, trdx: 2, type: 'manual', trigger: null, repeatType: 'once', action: { panel: 'crm', label: 'CRM' } },
   { id: 'q10', chapter: 1, order: 10, icon: '🔥', title: '3 дня подряд в кабинете', description: 'Заходи каждый день. Streak даёт ×1.5 бонус к XP', xp: 60, trdx: 12, type: 'auto', trigger: 'login_streak', triggerValue: 3, repeatType: 'once' },
@@ -102,11 +102,11 @@ const QUESTS = [
   { id: 'q53', chapter: 6, order: 3, icon: '⚡', title: 'Активируй BOOST', description: 'Тариф BOOST $90+30 TRDX. Ускоряет матрицу и Karma в 2x', xp: 100, trdx: 0, type: 'auto', trigger: 'tariff_activated', triggerValue: 'boost', repeatType: 'once', action: { panel: 'trdx', label: 'BOOST' } },
   { id: 'q54', chapter: 6, order: 4, icon: '🔥', title: 'Активируй ROCKET', description: 'Тариф ROCKET $135+45 TRDX. Максимум бонусов + личный куратор', xp: 200, trdx: 0, type: 'auto', trigger: 'tariff_activated', triggerValue: 'rocket', repeatType: 'once', action: { panel: 'trdx', label: 'ROCKET' } },
   { id: 'q55', chapter: 6, order: 5, icon: '👥', title: '25 партнёров — лидер', description: '25 рефералов в структуре. Доступ к лидерскому пулу', xp: 0, trdx: 100, type: 'auto', trigger: 'referral_count', triggerValue: 25, repeatType: 'once' },
-  { id: 'q56', chapter: 6, order: 6, icon: '🎤', title: 'Проведи свой эфир', description: 'Партнёры могут делать эфиры в @TRENDEX_AD. Запросить через support', xp: 50, trdx: 10, type: 'manual', trigger: null, repeatType: 'once' },
+  { id: 'q56', chapter: 6, order: 6, icon: '🎤', title: 'Проведи свой эфир', description: 'Партнёры могут делать эфиры в @GOLDEN_CONNECT_AD. Запросить через support', xp: 50, trdx: 10, type: 'manual', trigger: null, repeatType: 'once' },
   { id: 'q57', chapter: 6, order: 7, icon: '🏆', title: 'Топ-10 заработавших', description: 'Войди в top-10 по любому метрику (TRDX, XP, рефералы)', xp: 100, trdx: 50, type: 'auto', trigger: 'leaderboard_rank', triggerValue: 10, repeatType: 'once' },
   { id: 'q58', chapter: 6, order: 8, icon: '🎓', title: '5 рефералов с активным тарифом', description: '5 человек в структуре купили LAUNCH/BOOST/ROCKET', xp: 0, trdx: 70, type: 'auto', trigger: 'active_tariff_refs', triggerValue: 5, repeatType: 'once' },
   { id: 'q59', chapter: 6, order: 9, icon: '👑', title: 'ТОП-1 — Король холма', description: 'Возглавь leaderboard. На вершине — слава', xp: 0, trdx: 0, type: 'auto', trigger: 'leaderboard_rank', triggerValue: 1, repeatType: 'once' },
-  { id: 'q60', chapter: 6, order: 10, icon: '🌟', title: '1000 TRDX заработано', description: 'Финальная цель. Ты в элите Trendex', xp: 55, trdx: 0, type: 'auto', trigger: 'trdx_earned', triggerValue: 1000, repeatType: 'once' },
+  { id: 'q60', chapter: 6, order: 10, icon: '🌟', title: '1000 TRDX заработано', description: 'Финальная цель. Ты в элите Golden Connect', xp: 55, trdx: 0, type: 'auto', trigger: 'trdx_earned', triggerValue: 1000, repeatType: 'once' },
 ];
 
 // Daily quests pool — sampled randomly each day

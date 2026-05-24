@@ -3,7 +3,7 @@
 // by the shrbio outer wrapper. /api/mlm/* mounts directly, with no such
 // injection, so every protected mlm endpoint returned 401 auth_required even
 // for logged-in cabinet users. Fix: fall back to resolving the
-// trendex_cabinet_session cookie via storage.
+// golden-connect_cabinet_session cookie via storage.
 
 function parseCookies(raw) {
   const out = {};
@@ -24,7 +24,7 @@ function resolveCabinetSession(req) {
     const storage = req.app && req.app.locals && req.app.locals.storage;
     if (!storage) return null;
     const cookies = parseCookies(req.headers.cookie);
-    const token = cookies['trendex_cabinet_session'];
+    const token = cookies['golden-connect_cabinet_session'];
     if (!token) return null;
     const tokenHash = storage.hashSha256 ? storage.hashSha256(token) : null;
     if (!tokenHash) return null;

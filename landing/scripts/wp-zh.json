@@ -1,7 +1,7 @@
 {
-  "wp.eyebrow": "TRENDEX · 白皮书 v0.9",
+  "wp.eyebrow": "GOLDEN_CONNECT · 白皮书 v0.9",
   "wp.title": "Agent Commerce Protocol",
-  "wp.lede": "TrendeX 是面向真实数字工作的市场,由 AI 智能体在认证人类运营者监督下执行交付。本文档规范了该协议,使每一笔订单可审计、每一次结算可验证、每一位参与者承担经济责任。",
+  "wp.lede": "Golden Connect 是面向真实数字工作的市场,由 AI 智能体在认证人类运营者监督下执行交付。本文档规范了该协议,使每一笔订单可审计、每一次结算可验证、每一位参与者承担经济责任。",
   "wp.meta_version": "版本 0.9 · 草案",
   "wp.meta_updated": "更新于 2026 年 4 月",
   "wp.toc_title": "目录",
@@ -9,9 +9,9 @@
 
   "wp.intro.h": "引言",
   "wp.intro.overview.h": "概览",
-  "wp.intro.overview.p": "TrendeX 是企业下单真实数字工作的运行层 —— 落地页、机器人、广告、研究、代币发行、服务器基础设施、解析器、营销矩阵 —— 由 AI 智能体在认证运营者的监督下执行。每一步均在链上,每一张凭证皆可导出,每一笔结算以验收为前提。",
+  "wp.intro.overview.p": "Golden Connect 是企业下单真实数字工作的运行层 —— 落地页、机器人、广告、研究、代币发行、服务器基础设施、解析器、营销矩阵 —— 由 AI 智能体在认证运营者的监督下执行。每一步均在链上,每一张凭证皆可导出,每一笔结算以验收为前提。",
   "wp.intro.positioning.h": "定位",
-  "wp.intro.positioning.p": "传统自由职业市场抽取 20–35% 的佣金。纯 AI 智能体平台只产出试验,而非可交付成果。TrendeX 将两者结合:AI 执行工作,人类守住质量,可编程结算层取代发票这一法律虚构物。",
+  "wp.intro.positioning.p": "传统自由职业市场抽取 20–35% 的佣金。纯 AI 智能体平台只产出试验,而非可交付成果。Golden Connect 将两者结合:AI 执行工作,人类守住质量,可编程结算层取代发票这一法律虚构物。",
   "wp.intro.principles.h": "设计原则",
   "wp.intro.principles.p": "五条原则贯穿协议的每一项决策。<b>以成果为先</b>:为交付物付费,而非为耗时付费。<b>HITL</b>:每一次运行都有具名运营者。<b>默认可审计</b>:需求、运行、交付与结算皆为凭证。<b>以经济约束质量</b>:失败即扣减排名与质押。<b>开放规范</b>:第三方可构建合规的前端、SDK 与智能体。",
 
@@ -62,8 +62,8 @@
   "wp.token.sink.p": "每笔工作费用的一部分通过协议层的回购销毁路径流转,带来与平台 GMV 成正比的需求压力。争议败诉也会触发部分销毁。该回收机制完全程序化,链上公开可查。",
 
   "wp.glossary.h": "术语表",
-  "wp.glossary.afwu.h": "总 AFWU(TrendeX 工作单位)",
-  "wp.glossary.afwu.p": "协议级指标,聚合通过 TrendeX 完成的全部工作价值。每一项完成的工作按其被接受的美元等值贡献 AFWU。AFWU 是零售日活类指标的 B2B 对应物 —— 产能吞吐的直接信号。",
+  "wp.glossary.afwu.h": "总 AFWU(Golden Connect 工作单位)",
+  "wp.glossary.afwu.p": "协议级指标,聚合通过 Golden Connect 完成的全部工作价值。每一项完成的工作按其被接受的美元等值贡献 AFWU。AFWU 是零售日活类指标的 B2B 对应物 —— 产能吞吐的直接信号。",
   "wp.glossary.job.h": "工作 (Job)",
   "wp.glossary.job.p": "由一份 JobSpec(工作规格)定义、在一位运营者下执行、以 ACCEPTED / REJECTED / DISPUTED 之一终结的单一工作单元。工作是协议的原子商业原语。",
   "wp.glossary.memo.h": "备忘录 (Memo)",

@@ -1,5 +1,5 @@
 /* ═════════════════════════════════════════════════════════════════════════
-   Trendex Cabinet v3 — Hero (Phase 2)
+   Golden Connect Cabinet v3 — Hero (Phase 2)
 
    Self-mounting hero block on the dashboard:
    - WebGL-style particle network on canvas (mouse-reactive)

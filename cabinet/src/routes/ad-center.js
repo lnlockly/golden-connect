@@ -1,4 +1,4 @@
-// Trendex Ad Center router — wraps Arsenal's ad-center.js with auth bridge.
+// Golden Connect Ad Center router — wraps Arsenal's ad-center.js with auth bridge.
 const express = require('express');
 const dbModule = require('../planner/db/database');
 const arsenalRouter = require('./ad-center-arsenal');

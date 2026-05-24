@@ -1,6 +1,6 @@
 /**
  * Formerly opened a local SQLite database. All persistence now lives in
- * the `trendex-api` service; this module just re-exports the HTTP
+ * the `golden-connect-api` service; this module just re-exports the HTTP
  * client that every repo uses.
  *
  * Kept as a shim so existing imports (`from "../db/index.js"`) continue

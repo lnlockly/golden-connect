@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var DATA_URL = '/cabinet/data/trendex-product-library.json';
+  var DATA_URL = '/cabinet/data/golden-connect-product-library.json';
   var entryMap = null;
   var loadingPromise = null;
   var observer = null;

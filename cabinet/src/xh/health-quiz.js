@@ -1,4 +1,4 @@
-// Trendex: Health quiz — 5 questions → personalized protocol recommendation.
+// Golden Connect: Health quiz — 5 questions → personalized protocol recommendation.
 // Entry: callback xh_quiz_start, command /quiz
 // Flow: question → inline buttons → next question → result with protocol + start button
 
@@ -119,7 +119,7 @@ function setupHealthQuiz(bot, storage, config) {
 async function startQuiz(ctx) {
   quizSessions.set(ctx.from.id, { step: 0, answers: {} });
   await ctx.reply(
-    '🧪 <b>Подбор протокола Trendex</b>\n\nОтветьте на 5 вопросов — и я подберу идеальный курс здоровья для вас.\n\nЭто займёт 1 минуту.',
+    '🧪 <b>Подбор протокола Golden Connect</b>\n\nОтветьте на 5 вопросов — и я подберу идеальный курс здоровья для вас.\n\nЭто займёт 1 минуту.',
     { parse_mode: 'HTML' }
   );
   await sendQuestion(ctx, 0);

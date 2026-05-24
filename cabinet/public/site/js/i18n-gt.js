@@ -1,5 +1,5 @@
-// i18n-gt.js — Google Translate fallback layer for Trendex cabinet.
-// Piggybacks on TrendexI18n (data-i18n dictionary for menu) and translates
+// i18n-gt.js — Google Translate fallback layer for Golden Connect cabinet.
+// Piggybacks on Golden ConnectI18n (data-i18n dictionary for menu) and translates
 // everything else via Google's widget. Triggered on cabinet-lang-changed.
 (function () {
   'use strict';
@@ -71,7 +71,7 @@
   }
 
   function applyCurrent() {
-    var lang = (window.TrendexI18n && window.TrendexI18n.getLang && window.TrendexI18n.getLang()) || 'ru';
+    var lang = (window.Golden ConnectI18n && window.Golden ConnectI18n.getLang && window.Golden ConnectI18n.getLang()) || 'ru';
     var target = lang === 'ru' ? '' : toGtCode(lang);
     var tries = 0;
     (function tick() {
@@ -91,12 +91,12 @@
 
   // Bootstrap if initial language is non-RU.
   function bootstrap() {
-    var lang = (window.TrendexI18n && window.TrendexI18n.getLang && window.TrendexI18n.getLang()) || 'ru';
+    var lang = (window.Golden ConnectI18n && window.Golden ConnectI18n.getLang && window.Golden ConnectI18n.getLang()) || 'ru';
     if (lang !== 'ru') loadGt();
   }
 
-  if (window.TrendexI18n && window.TrendexI18n.onReady) {
-    window.TrendexI18n.onReady(bootstrap);
+  if (window.Golden ConnectI18n && window.Golden ConnectI18n.onReady) {
+    window.Golden ConnectI18n.onReady(bootstrap);
   } else if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () { setTimeout(bootstrap, 300); });
   } else {

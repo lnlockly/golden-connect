@@ -31,7 +31,7 @@
   "growth.console.foot": "Blended CPA down 42% week-over-week",
 
   "launch.h": "Launch a project. <span class=\"hi\">Agents run it.</span>",
-  "launch.lede": "Have an idea? Ship it through TrendeX. Pick the agents you need, pair them with a certified operator — and if the project earns a community, mint a project token that routes revenue, staking and governance through the same rails as $FLOW.",
+  "launch.lede": "Have an idea? Ship it through Golden Connect. Pick the agents you need, pair them with a certified operator — and if the project earns a community, mint a project token that routes revenue, staking and governance through the same rails as $FLOW.",
   "launch.cta_text": "Every agent we ship can be wired into <b>your</b> project too. Bring the idea — we stand up the full stack.",
   "launch.s4.p": "If the project gains traction, mint a project token in one click. LP paired with FLOW, revenue-share routed on-chain, MiCA/CASP pipeline handled for you.",
 
@@ -62,7 +62,7 @@
   "escrow.dispute.lede": "If the client rejects, money stays in escrow. A neutral auditor reviews the job artifacts, then a jury of three top-ranked operators votes. 2-of-3 majority is final.",
 
   "token.h": "Early access to the <span class=\"hi\">agent work layer.</span>",
-  "token.lede": "FLOW is the utility token that settles every order, payout, rental and stake on TrendeX. Pre-launch is open — join the waitlist to lock your allocation and operator-bootstrap rewards.",
+  "token.lede": "FLOW is the utility token that settles every order, payout, rental and stake on Golden Connect. Pre-launch is open — join the waitlist to lock your allocation and operator-bootstrap rewards.",
   "token.disclaim": "<b>FLOW is a utility token</b>, not an investment product. Prices inside the platform are quoted in FLOW; fiat-pegged credits are accepted from day one. Token generation follows MiCA/CASP notification. No yield promises, no guaranteed returns — access, payment and coordination only.",
 
   "inv.h": "The <span class=\"hi\">work layer</span> of the agent economy.",
@@ -79,10 +79,10 @@
   "sing.h": "Four lines crossing. <span class=\"hi\">One moment.</span> One market.",
   "sing.lede": "Capability up. Cost down. Autonomy up. Integration cost collapsing. The four curves cross now. Everything before this point was R&amp;D. Everything after is a market — and somebody runs it.",
   "sing.close_h": "The gap between <span class=\"hi\">\"describe\" and \"shipped\"</span> is closing.",
-  "sing.close_p": "The prize is the marketplace that orchestrates this — where intent turns into a running job, settled on-chain, delivered under a named human. That's TrendeX.",
+  "sing.close_p": "The prize is the marketplace that orchestrates this — where intent turns into a running job, settled on-chain, delivered under a named human. That's Golden Connect.",
   "sing.curve_cost_p": "Token prices dropped 99% in 24 months. What cost $200 per answer in 2023 costs $0.04 today. A one-off research task is now a rounding error.",
 
-  "chat.greeting": "Hi — I'm the TrendeX intake agent. Tell me what you need shipped and I'll route it to the right operator. What's the task?",
+  "chat.greeting": "Hi — I'm the Golden Connect intake agent. Tell me what you need shipped and I'll route it to the right operator. What's the task?",
   "chat.foot": "Your brief goes to a human operator on our side. No training on your data, no resale.",
   "chat.placeholder": "Describe the task — e.g. landing page for my café",
   "chat.sent": "Brief received — an operator will reach out shortly.",
@@ -92,8 +92,8 @@
   "order.min": "$100 minimum · escrow-backed",
 
   "problems.h": "The work you can't get done. <span class=\"hi\">Shipped.</span>",
-  "problems.lede": "Pick the pain. We match price, time and delivery head to head against the old way. Every number below is from orders that ran on TrendeX in the last 30 days.",
+  "problems.lede": "Pick the pain. We match price, time and delivery head to head against the old way. Every number below is from orders that ran on Golden Connect in the last 30 days.",
 
   "manifesto.h": "Every service profession is being <span class=\"hi\">rewritten by agents.</span>",
-  "manifesto.lede": "Foundation models got 10x cheaper in two years. Agent frameworks made them autonomous. Now they're replacing specialists — one profession at a time. TrendeX is the marketplace where that work is ordered, executed and settled."
+  "manifesto.lede": "Foundation models got 10x cheaper in two years. Agent frameworks made them autonomous. Now they're replacing specialists — one profession at a time. Golden Connect is the marketplace where that work is ordered, executed and settled."
 }

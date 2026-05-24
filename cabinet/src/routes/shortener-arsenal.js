@@ -58,7 +58,7 @@ const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 function fetchUrlContent(url, timeout = 5000) {
   return new Promise((resolve, reject) => {
     const mod = url.startsWith('https') ? https : http;
-    const req = mod.get(url, { timeout, headers: { 'User-Agent': 'Trendex-LinkPreview/1.0' } }, (res) => {
+    const req = mod.get(url, { timeout, headers: { 'User-Agent': 'Golden Connect-LinkPreview/1.0' } }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         // Follow one redirect
         return fetchUrlContent(res.headers.location, timeout).then(resolve).catch(reject);
@@ -1202,7 +1202,7 @@ router.put('/bio', authRequired, (req, res) => {
 
 // ===================== BIO PAGES API (Phase 1) =====================
 
-// [bio-tariff-fix-trendex] Trendex tariffs: free/launch/boost/rocket. Old keys (starter/pro/agency) kept as aliases for safety.
+// [bio-tariff-fix-golden-connect] Golden Connect tariffs: free/launch/boost/rocket. Old keys (starter/pro/agency) kept as aliases for safety.
 const BIO_PAGE_LIMITS = { free: 1, launch: 5, boost: 15, rocket: 50, starter: 5, pro: 15, agency: 50 };
 const ALL_BG_TYPES = ['gradient','solid','dots','waves','particles','mesh','aurora','matrix','confetti','gradient-shift','bokeh','noise','custom-image','custom-video'];
 const ALL_BTN_STYLES = ['glass','pill','rounded','square','outline','filled','shadow','neon'];
@@ -1274,7 +1274,7 @@ function createPromoLinksForUser(db, userId) {
         code = require('crypto').randomBytes(4).toString('base64url').replace(/[^a-zA-Z0-9]/g, '').slice(0, 6);
         if (!db.prepare('SELECT id FROM short_links WHERE code = ?').get(code)) break;
       }
-      const refUrl = 'https://trendex.biz/?ref=' + user.ref_code + '&utm_source=promo&utm_campaign=' + svc;
+      const refUrl = 'https://golden-connect.to/?ref=' + user.ref_code + '&utm_source=promo&utm_campaign=' + svc;
       const result = db.prepare(
         "INSERT INTO short_links (user_id, code, destination_url, title, domain, utm_source, utm_campaign) VALUES (?, ?, ?, ?, 't2gift.com', 'promo', ?)"
       ).run(userId, code, refUrl, '[Promo] ' + svc, svc);
@@ -1922,7 +1922,7 @@ router.get('/bio/pages/:id/qr', authRequired, (req, res) => {
     if (!page) return res.status(404).json({ error: 'Bio page not found' });
 
     const QRCode = require('qrcode');
-    const url = 'https://trendex.biz/bio/' + page.username;
+    const url = 'https://golden-connect.to/bio/' + page.username;
     const color = req.query.color || '#000000';
     const bg = req.query.bg || '#ffffff';
     const size = Math.min(parseInt(req.query.size) || 300, 1000);
@@ -1976,7 +1976,7 @@ router.post('/bio/ai-generate', authRequired, async (req, res) => {
     const lang = ['en','ru','es','fr','de','zh','ja','ko','pt','ar','hi','tr'].includes(language) ? language : 'en';
     const styleOpt = ['professional','creative','minimal','bold'].includes(style) ? style : 'professional';
 
-    // Trendex: groq-rotator (round-robin across all configured keys)
+    // Golden Connect: groq-rotator (round-robin across all configured keys)
     const { getGroqKeys, requestGroqChatCompletion } = require('../utils/groq-rotator');
     const config = require('../config');
     const groqKeys = getGroqKeys(config);
@@ -2258,7 +2258,7 @@ router.post('/bio/pages/:id/domain', authRequired, (req, res) => {
       instructions: {
         type: 'CNAME',
         name: domain,
-        value: 'trendex.biz',
+        value: 'golden-connect.to',
         txt_name: '_bio-verify.' + domain,
         txt_value: token
       }
@@ -2293,7 +2293,7 @@ router.post('/bio/pages/:id/domain/:did/verify', authRequired, async (req, res) 
     // Method 1: Check CNAME
     try {
       const cname = await dns.resolveCname(domainRow.domain);
-      if (cname.some(c => c.includes('trendex.biz') || c.includes('81.91.177.204'))) {
+      if (cname.some(c => c.includes('golden-connect.to') || c.includes('81.91.177.204'))) {
         verified = true;
       }
     } catch(e) {
@@ -2315,7 +2315,7 @@ router.post('/bio/pages/:id/domain/:did/verify', authRequired, async (req, res) 
     if (verified) {
       db.prepare("UPDATE bio_custom_domains SET dns_status = 'verified', error_message = NULL WHERE id = ?").run(domainRow.id);
 
-      // Trendex: auto-create k8s Ingress + Certificate via cert-manager.
+      // Golden Connect: auto-create k8s Ingress + Certificate via cert-manager.
       let sslOk = false;
       let sslMsg = 'pending';
       try {
@@ -2337,7 +2337,7 @@ router.post('/bio/pages/:id/domain/:did/verify', authRequired, async (req, res) 
       res.json({ success: true, domain: updated, verified: true, ssl: sslOk });
     } else {
       db.prepare("UPDATE bio_custom_domains SET dns_status = 'pending', error_message = ? WHERE id = ?").run(errorMsg, domainRow.id);
-      res.json({ success: false, verified: false, error: errorMsg || 'DNS not pointing to trendex.biz. Add CNAME ' + domainRow.domain + ' → trendex.biz, or A record → 144.217.65.94.' });
+      res.json({ success: false, verified: false, error: errorMsg || 'DNS not pointing to golden-connect.to. Add CNAME ' + domainRow.domain + ' → golden-connect.to, or A record → 144.217.65.94.' });
     }
   } catch(e) {
     res.status(500).json({ error: e.message });

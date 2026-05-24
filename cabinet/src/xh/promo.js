@@ -1,4 +1,4 @@
-// Trendex: рекламные инструменты.
+// Golden Connect: рекламные инструменты.
 // Команды: /promo, /post, /qr, /short, /hashtags, /aipost, /banner
 // Callback: xh_promo
 //
@@ -14,48 +14,48 @@ function escapeHtml(s) {
 
 // 10 готовых промо-постов (взяты из site-content.js / cabinet.html)
 const PROMO_POSTS = [
-  { id: 'platform-overview', img: '/cabinet/img/trendex-logo.jpg', title: 'Trendex — рекламная платформа нового поколения',
-    text: 'Хочешь зарабатывать на рекламе? Trendex — экосистема с распределённой прибылью. До $25/день за активность + 10-уровневая партнёрка. Регистрация бесплатна, выплаты с первого дня: {link}',
-    tags: ['#Trendex', '#Реклама', '#Заработок'] },
-  { id: 'earn-50', img: '/cabinet/img/trendex-logo.jpg', title: 'До $25 в день за активность — без продаж и звонков',
-    text: 'Просмотры, клики, простые задания — Trendex платит за внимание. Регистрация за 1 минуту, начни зарабатывать сегодня: {link}',
-    tags: ['#Trendex', '#Заработок', '#Дополнительныйдоход'] },
-  { id: 'partner-status', img: '/cabinet/img/trendex-logo.jpg', title: 'Статус PARTNER = +10% к каждой выплате',
+  { id: 'platform-overview', img: '/cabinet/img/golden-connect-logo.jpg', title: 'Golden Connect — рекламная платформа нового поколения',
+    text: 'Хочешь зарабатывать на рекламе? Golden Connect — экосистема с распределённой прибылью. До $25/день за активность + 10-уровневая партнёрка. Регистрация бесплатна, выплаты с первого дня: {link}',
+    tags: ['#Golden Connect', '#Реклама', '#Заработок'] },
+  { id: 'earn-50', img: '/cabinet/img/golden-connect-logo.jpg', title: 'До $25 в день за активность — без продаж и звонков',
+    text: 'Просмотры, клики, простые задания — Golden Connect платит за внимание. Регистрация за 1 минуту, начни зарабатывать сегодня: {link}',
+    tags: ['#Golden Connect', '#Заработок', '#Дополнительныйдоход'] },
+  { id: 'partner-status', img: '/cabinet/img/golden-connect-logo.jpg', title: 'Статус PARTNER = +10% к каждой выплате',
     text: 'Приведи 10 человек — получишь статус PARTNER и +10% ко всем начислениям пожизненно. Можно даже на бесплатном тарифе. Старт здесь: {link}',
-    tags: ['#Trendex', '#PARTNER', '#Реферальная'] },
-  { id: 'tariff-launch', img: '/cabinet/img/trendex-logo.jpg', title: 'LAUNCH $45 — твой вход в матрицу Trendex',
+    tags: ['#Golden Connect', '#PARTNER', '#Реферальная'] },
+  { id: 'tariff-launch', img: '/cabinet/img/golden-connect-logo.jpg', title: 'LAUNCH $45 — твой вход в матрицу Golden Connect',
     text: 'Активация $45 + $15/мес. 1 бизнес-место, 12 уровней матрицы × $0.50, все 10 уровней партнёрки. Полный цикл — $4 095. Pre-launch + x2 Gift: {link}',
-    tags: ['#LAUNCH', '#Trendex', '#PreLaunch'] },
-  { id: 'tariff-boost', img: '/cabinet/img/trendex-logo.jpg', title: 'BOOST $90 — удвоенный доход с той же сети',
+    tags: ['#LAUNCH', '#Golden Connect', '#PreLaunch'] },
+  { id: 'tariff-boost', img: '/cabinet/img/golden-connect-logo.jpg', title: 'BOOST $90 — удвоенный доход с той же сети',
     text: '2 бизнес-места, 14 уровней × $0.60, все 10 линий партнёрки, $90 + $30/мес. Цикл — $19 660. Доход в 4.8× больше LAUNCH при той же сети: {link}',
-    tags: ['#BOOST', '#Trendex', '#Тариф'] },
-  { id: 'tariff-rocket', img: '/cabinet/img/trendex-logo.jpg', title: 'ROCKET $135 — Matching Bonus + максимум',
+    tags: ['#BOOST', '#Golden Connect', '#Тариф'] },
+  { id: 'tariff-rocket', img: '/cabinet/img/golden-connect-logo.jpg', title: 'ROCKET $135 — Matching Bonus + максимум',
     text: '3 места, 17 уровней × $0.70, все 10 линий партнёрки, Matching Bonus +10% от L1-L3, доступ к Лидерскому пулу, $135 + $45/мес. Цикл — $183 499: {link}',
-    tags: ['#ROCKET', '#MatchingBonus', '#Trendex'] },
-  { id: 'marketplace', img: '/cabinet/img/trendex-logo.jpg', title: '🛒 Маркетплейс Trendex — твои товары, твоя прибыль',
+    tags: ['#ROCKET', '#MatchingBonus', '#Golden Connect'] },
+  { id: 'marketplace', img: '/cabinet/img/golden-connect-logo.jpg', title: '🛒 Маркетплейс Golden Connect — твои товары, твоя прибыль',
     text: 'Продавай курсы, e-books, шаблоны и любые цифровые товары. Сплит 70% тебе / 30% в сеть (или больше — настраивается). QR-код и короткая ссылка автоматически. Магазин = твой лендинг: {link}',
-    tags: ['#Маркетплейс', '#Trendex', '#ЦифровыеТовары'] },
-  { id: 'adcenter', img: '/cabinet/img/trendex-logo.jpg', title: '📡 AdCenter — TG-автопостинг с AI-рерайтом',
-    text: 'Подключи свои Telegram-каналы → бот сам рассылает посты. Расписание, AI-рерайт каждой публикации (Groq Llama), мониторы YouTube/TikTok, Smart-очередь по лучшим часам. Внутри Trendex: {link}',
+    tags: ['#Маркетплейс', '#Golden Connect', '#ЦифровыеТовары'] },
+  { id: 'adcenter', img: '/cabinet/img/golden-connect-logo.jpg', title: '📡 AdCenter — TG-автопостинг с AI-рерайтом',
+    text: 'Подключи свои Telegram-каналы → бот сам рассылает посты. Расписание, AI-рерайт каждой публикации (Groq Llama), мониторы YouTube/TikTok, Smart-очередь по лучшим часам. Внутри Golden Connect: {link}',
     tags: ['#AdCenter', '#Telegram', '#Автопостинг'] },
-  { id: 'bio-page', img: '/cabinet/img/trendex-logo.jpg', title: '🌐 Bio-страница Trendex — Linktree с витриной',
+  { id: 'bio-page', img: '/cabinet/img/golden-connect-logo.jpg', title: '🌐 Bio-страница Golden Connect — Linktree с витриной',
     text: 'Одна ссылка — все твои каналы + товары + соцсети. Конструктор блоков, Shop Widget с твоими товарами, A/B тесты, кастомный домен. Зарегистрируйся и сделай свою за 5 минут: {link}',
-    tags: ['#Bio', '#Trendex', '#Linktree'] },
-  { id: 'ai-tools', img: '/cabinet/img/trendex-logo.jpg', title: '✨ AI-инструменты Trendex — копирайтер, captions, транскрибация',
+    tags: ['#Bio', '#Golden Connect', '#Linktree'] },
+  { id: 'ai-tools', img: '/cabinet/img/golden-connect-logo.jpg', title: '✨ AI-инструменты Golden Connect — копирайтер, captions, транскрибация',
     text: 'AI-копирайтер (5 тонов × 3 длины), AI Captions для постов, транскрибация YouTube/TikTok видео, генератор хэштегов, QR, сократитель ссылок. Всё внутри кабинета без подписок на сторонние сервисы: {link}',
-    tags: ['#AI', '#Trendex', '#Инструменты'] },
+    tags: ['#AI', '#Golden Connect', '#Инструменты'] },
 ];
 
 const HASHTAG_POOLS = {
-  антиэйдж: ['#AntiAge', '#Омоложение', '#Ревентус', '#Пептиды', '#Красота', '#Trendex'],
-  тарифы: ['#Trendex', '#Тарифы', '#LAUNCH', '#BOOST', '#ROCKET'],
-  энергия: ['#Энергия', '#Борофлавин', '#Тонус', '#ЗОЖ', '#Долголетие', '#Trendex'],
-  суставы: ['#Суставы', '#Олигохит', '#Кости', '#Движение', '#Trendex'],
-  default: ['#Trendex', '#Trendex', '#Натуральное', '#ЗОЖ', '#Долголетие'],
+  антиэйдж: ['#AntiAge', '#Омоложение', '#Ревентус', '#Пептиды', '#Красота', '#Golden Connect'],
+  тарифы: ['#Golden Connect', '#Тарифы', '#LAUNCH', '#BOOST', '#ROCKET'],
+  энергия: ['#Энергия', '#Борофлавин', '#Тонус', '#ЗОЖ', '#Долголетие', '#Golden Connect'],
+  суставы: ['#Суставы', '#Олигохит', '#Кости', '#Движение', '#Golden Connect'],
+  default: ['#Golden Connect', '#Golden Connect', '#Натуральное', '#ЗОЖ', '#Долголетие'],
 };
 
 function getSiteBase() {
-  return 'https://trendex.biz/cabinet';
+  return 'https://golden-connect.to/cabinet';
 }
 
 function buildRefSiteLink(refCode) {
@@ -63,14 +63,14 @@ function buildRefSiteLink(refCode) {
 }
 
 function buildRefBotLink(botUsername, refCode) {
-  return `https://t.me/${botUsername || 'Trendex_bizbot'}?start=ref_${encodeURIComponent(refCode)}`;
+  return `https://t.me/${botUsername || 'Golden Connect_bizbot'}?start=ref_${encodeURIComponent(refCode)}`;
 }
 
 function getUserContext(ctx, storage) {
   let webUser = null;
   try { webUser = storage.ensureWebUserFromTelegram(ctx.from); } catch (e) {}
   const refCode = (webUser && webUser.referralCode) || 'guest';
-  const botUsername = (ctx.me && ctx.me.username) || 'Trendex_bizbot';
+  const botUsername = (ctx.me && ctx.me.username) || 'Golden Connect_bizbot';
   return {
     webUser,
     refCode,
@@ -87,10 +87,10 @@ async function sendPromoMenu(ctx) {
     .text('📱 QR-код с реф-ссылкой', 'promo:qr').row()
     .text('🔗 Короткая ссылка', 'promo:short').row()
     .text('#️⃣ Хештеги', 'promo:hashtags').row()
-    .text('🤖 AI-пост про Trendex', 'promo:aipost');
+    .text('🤖 AI-пост про Golden Connect', 'promo:aipost');
 
   await ctx.reply(
-    '🎯 <b>Рекламные инструменты Trendex</b>\n\n' +
+    '🎯 <b>Рекламные инструменты Golden Connect</b>\n\n' +
     'Выберите что вам нужно:\n\n' +
     '📝 <b>Готовые посты</b> — 10 шаблонов со ссылкой на ваш реф\n' +
     '🖼 <b>С фотографией продукта</b>\n' +
@@ -163,7 +163,7 @@ async function sendShortPrompt(ctx) {
     '🔗 <b>Короткая ссылка</b>\n\n' +
     'Отправьте команду в формате:\n' +
     '<code>/short https://example.com/очень-длинная-ссылка</code>\n\n' +
-    'Я верну вам короткий URL вида <code>https://trendex.biz/cabinet/s/CODE</code>',
+    'Я верну вам короткий URL вида <code>https://golden-connect.to/cabinet/s/CODE</code>',
     { parse_mode: 'HTML' }
   );
 }
@@ -216,8 +216,8 @@ async function sendAiPost(ctx, storage, config) {
   const product = PROMO_POSTS[Math.floor(Math.random() * PROMO_POSTS.length)];
   // STRICT: AI MUST use the user's actual referral link, never invent URLs
   const prompt = [
-    'Напиши короткий продающий пост для соцсетей (до 180 слов) про рекламную платформу Trendex.',
-    'Trendex = рекламная платформа с распределённой прибылью. 4 способа заработка:',
+    'Напиши короткий продающий пост для соцсетей (до 180 слов) про рекламную платформу Golden Connect.',
+    'Golden Connect = рекламная платформа с распределённой прибылью. 4 способа заработка:',
     '1) Биржа заданий (подписки, отзывы, видео) — $0.05+ за каждое',
     '2) 10-уровневая партнёрка с мгновенными выплатами при покупке',
     '3) Запуск своих рекламных кампаний с AI-проверкой отчётов',
@@ -229,7 +229,7 @@ async function sendAiPost(ctx, storage, config) {
     '⚠️ КРИТИЧЕСКИ ВАЖНО ПРО ССЫЛКУ:',
     'Используй ТОЛЬКО эту реф-ссылку (это персональная ссылка автора поста, по ней он получит % с регистраций):',
     info.siteLink,
-    'НЕ ВЫДУМЫВАЙ другие URL. НЕ пиши cabinet.trendex.biz, не пиши другие домены.',
+    'НЕ ВЫДУМЫВАЙ другие URL. НЕ пиши cabinet.golden-connect.to, не пиши другие домены.',
     'Закончи призывом перейти по ссылке выше.',
     '',
     'В конце добавь 5 релевантных хештегов про заработок и партнёрку.',
@@ -244,12 +244,12 @@ async function sendAiPost(ctx, storage, config) {
       timeoutMs: 25000,
     });
     let result = (payload.choices && payload.choices[0] && payload.choices[0].message && payload.choices[0].message.content) || '';
-    // Post-process: replace ANY URL containing trendex.biz or cabinet.trendex.biz with the user's actual ref link
+    // Post-process: replace ANY URL containing golden-connect.to or cabinet.golden-connect.to with the user's actual ref link
     if (result && info.siteLink) {
-      // Replace any URL that looks like trendex domain (with or without ref param)
-      result = result.replace(/https?:\/\/(cabinet\.)?trendex\.biz[^\s\<\>"'\)\]]*/gi, info.siteLink);
+      // Replace any URL that looks like golden-connect domain (with or without ref param)
+      result = result.replace(/https?:\/\/(cabinet\.)?golden-connect\.biz[^\s\<\>"'\)\]]*/gi, info.siteLink);
       // Also catch any ref-code-shaped URLs that AI might invent
-      result = result.replace(/cabinet\.trendex\.biz[^\s\<\>"'\)\]]*/gi, info.siteLink);
+      result = result.replace(/cabinet\.golden-connect\.biz[^\s\<\>"'\)\]]*/gi, info.siteLink);
     }
     const text = result || 'Не удалось сгенерировать пост.';
     const kb = new InlineKeyboard()

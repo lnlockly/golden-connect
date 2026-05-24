@@ -26,8 +26,8 @@
   "inv.cta_talk": "来聊",
   "inv.cta_deck": "索取简报 →",
 
-  "chat.greeting": "嗨 —— 我是 TrendeX 的接入代理。说说你需要做什么,我把它路由给合适的操作员。任务是什么?",
-  "chat.agent_name": "TrendeX · 接入",
+  "chat.greeting": "嗨 —— 我是 Golden Connect 的接入代理。说说你需要做什么,我把它路由给合适的操作员。任务是什么?",
+  "chat.agent_name": "Golden Connect · 接入",
   "chat.online": "在线",
   "chat.placeholder": "描述任务 —— 例如:咖啡馆的落地页",
   "chat.sent": "简报已收到 —— 操作员会很快联系你。",

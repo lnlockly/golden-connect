@@ -5,12 +5,12 @@
 -- we add a direct reverse link from public.users.gift_user_id → gift_users.id.
 --
 -- This gives a clean unified view:
---   - One row in public.users per Trendex/Telegram user (canonical identity)
+--   - One row in public.users per Golden Connect/Telegram user (canonical identity)
 --   - Optional gift_user_id pointer for users with GIFT history
 --   - All gift_* tables still keyed on gift_users.id (no data movement needed)
 --   - Cabinet/API just JOIN public.users → gift_users when GIFT data is needed
 --
--- Auto-population: trigger 0103 already sets gift_users.trendex_user_id
+-- Auto-population: trigger 0103 already sets gift_users.golden-connect_user_id
 -- on signup; we keep that going and additionally maintain the reverse
 -- public.users.gift_user_id for O(1) lookup.
 -- =====================================================================
@@ -63,13 +63,13 @@ BEGIN
     LIMIT 1;
 
     IF main_gift_id IS NOT NULL THEN
-        -- Forward link: gift_users → trendex
+        -- Forward link: gift_users → golden-connect
         UPDATE public.gift_users
-        SET trendex_user_id = NEW.id
+        SET golden-connect_user_id = NEW.id
         WHERE telegram_chat_id = NEW.tg_id::text
-          AND trendex_user_id IS NULL;
+          AND golden-connect_user_id IS NULL;
 
-        -- Reverse link: trendex → gift (canonical main account)
+        -- Reverse link: golden-connect → gift (canonical main account)
         UPDATE public.users
         SET gift_user_id = main_gift_id
         WHERE id = NEW.id AND gift_user_id IS NULL;
@@ -90,12 +90,12 @@ SELECT
     u.last_name,
     u.ref_code,
     u.active_tariff_code,
-    u.gift_balance_micro AS trendex_gift_balance_micro,  -- existing field on Trendex side
+    u.gift_balance_micro AS golden-connect_gift_balance_micro,  -- existing field on Golden Connect side
     u.karma_points,
     u.partner_status,
     u.joined_at,
     u.last_seen_at,
-    -- GIFT extension (NULL for Trendex-only users)
+    -- GIFT extension (NULL for Golden Connect-only users)
     gu.id AS gift_user_id,
     gu.gc_user_id,
     gu.name AS gift_name,

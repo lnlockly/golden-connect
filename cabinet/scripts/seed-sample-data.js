@@ -1,6 +1,6 @@
 'use strict';
 
-// One-shot sample-data seed for fresh trendex-cabinet deploys.
+// One-shot sample-data seed for fresh golden-connect-cabinet deploys.
 // Wrapped in an IIFE so require() from server.js is safe — no process.exit,
 // errors are logged but never fatal.
 
@@ -21,17 +21,17 @@
     tomorrow.setUTCHours(15, 0, 0, 0); // 18:00 MSK
 
     const sample = {
-      title: 'Старт Trendex — открытая презентация',
+      title: 'Старт Golden Connect — открытая презентация',
       description:
         'Расскажем, как устроена платформа: 4 тарифа (FREE / LAUNCH / BOOST / ROCKET), бизнес-места, 10-уровневая партнёрская программа, Matching Bonus и Лидерский пул. Ответим на вопросы.',
-      speakerName: 'Команда Trendex',
-      speakers: ['Команда Trendex'],
+      speakerName: 'Команда Golden Connect',
+      speakers: ['Команда Golden Connect'],
       topic: 'Запуск',
       startsAt: tomorrow.toISOString(),
       durationMinutes: 45,
       timezone: 'Europe/Moscow',
-      joinUrl: 'https://t.me/Trendex_bizbot',
-      coverImage: '/img/trendex-logo.jpg',
+      joinUrl: 'https://t.me/Golden Connect_bizbot',
+      coverImage: '/img/golden-connect-logo.jpg',
       visibility: 'public',
       isPublished: true,
       tags: ['старт', 'демо', 'тарифы'],

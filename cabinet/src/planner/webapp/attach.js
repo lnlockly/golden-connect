@@ -26,7 +26,7 @@ function attachToApp(app, httpServer, opts) {
   const botToken = opts.botToken || process.env.BOT_TOKEN || '';
   const base = opts.basePath || '/planner';      // mount prefix for static + /api/*
   const joinPath = opts.joinPath || '/meet';      // /meet/:roomId → browser-join entrypoint
-  const ngSessionCookie = opts.sessionCookieName || 'trendex_cabinet_session';
+  const ngSessionCookie = opts.sessionCookieName || 'golden-connect_cabinet_session';
 
   // ── Socket.IO ────────────────────────────────────────────────────────
   // Attach to the SHARED httpServer. Path defaults to /socket.io which is

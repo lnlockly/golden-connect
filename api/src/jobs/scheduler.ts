@@ -25,7 +25,7 @@ export interface JobConfig {
   /** node-cron expression (5 or 6 fields). */
   schedule: string;
   handler: JobHandler;
-  /** IANA tz name. Defaults to 'Europe/Moscow' to match trendex ops. */
+  /** IANA tz name. Defaults to 'Europe/Moscow' to match golden-connect ops. */
   timezone?: string;
   /** Run the handler once immediately after `startAll()` (async, non-blocking). */
   runOnStart?: boolean;

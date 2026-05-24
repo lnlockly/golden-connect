@@ -1,4 +1,4 @@
-/* Trendex Cabinet v2 — modern dashboard, charts, themes, new pages */
+/* Golden Connect Cabinet v2 — modern dashboard, charts, themes, new pages */
 (function () {
   'use strict';
 
@@ -31,7 +31,7 @@
 
   // ────────── Theme ──────────
   function initTheme() {
-    const saved = localStorage.getItem('trendex-theme') || 'dark';
+    const saved = localStorage.getItem('golden-connect-theme') || 'dark';
     document.body.setAttribute('data-theme', saved);
     setTimeout(injectThemeToggle, 100);
   }
@@ -53,7 +53,7 @@
       const c = document.body.getAttribute('data-theme') || 'dark';
       const next = c === 'dark' ? 'light' : 'dark';
       document.body.setAttribute('data-theme', next);
-      localStorage.setItem('trendex-theme', next);
+      localStorage.setItem('golden-connect-theme', next);
       btn.innerHTML = renderThemeBtn(next);
       // Sync mobile bottom-nav theme button
       const bb = _$('v2-bnav-theme-btn');
@@ -233,7 +233,7 @@
     const me = (window.me || {});
     const name = me.firstName || me.displayName || me.email || 'Партнёр';
 
-    // Fetch real Trendex balances FIRST so hero can show the proper Working amount.
+    // Fetch real Golden Connect balances FIRST so hero can show the proper Working amount.
     let finBal = null;
     try {
       const fr = await _api('GET', '/cabinet/api/finance/balances');
@@ -813,7 +813,7 @@
       </div>
       <div class="v2-feed" style="margin-top:14px">
         <h3>🤖 AI-помощник</h3>
-        <p style="color:var(--v2-text-mut)">Задай вопрос про Trendex или попроси совет.</p>
+        <p style="color:var(--v2-text-mut)">Задай вопрос про Golden Connect или попроси совет.</p>
         <textarea id="v2-mentor-input" placeholder="Например: какой тариф мне подходит?" style="width:100%;background:var(--v2-bg-elev);color:var(--v2-text);border:1px solid var(--v2-border);border-radius:10px;padding:12px;margin:10px 0;min-height:80px;font-family:inherit"></textarea>
         <button class="v2-wallet-action" onclick="window._v2MentorAsk()">🤖 Спросить</button>
         <div id="v2-mentor-answer" style="margin-top:14px"></div>
@@ -839,7 +839,7 @@
   async function loadGroupChatV2() {
     const host = _$('groupChatContent') || _$('page-group_chat');
     if (!host) return;
-    host.innerHTML = '<h2 class="v2-section-title">💬 Чат партнёров @TRENDEX_AD</h2><div id="v2-gc-body"><div class="v2-skel" style="height:300px"></div></div>';
+    host.innerHTML = '<h2 class="v2-section-title">💬 Чат партнёров @GOLDEN_CONNECT_AD</h2><div id="v2-gc-body"><div class="v2-skel" style="height:300px"></div></div>';
     const r = await _api('GET', '/cabinet/api/group-chat/stats');
     const body = _$('v2-gc-body');
     const s = (r && r.stats) || { total: 0, active: 0, online: 0, today: 0 };
@@ -857,13 +857,13 @@
         </div>
       </div>
       <div style="text-align:center;margin-top:14px">
-        <a href="https://t.me/TRENDEX_AD" target="_blank" class="v2-wallet-action" style="display:inline-block;padding:14px 28px;text-decoration:none;color:#fff">🚀 Открыть чат @TRENDEX_AD</a>
+        <a href="https://t.me/GOLDEN_CONNECT_AD" target="_blank" class="v2-wallet-action" style="display:inline-block;padding:14px 28px;text-decoration:none;color:#fff">🚀 Открыть чат @GOLDEN_CONNECT_AD</a>
       </div>
     `;
     const top = _$('v2-gc-top');
     const topUsers = (r && r.top) || [];
     if (!topUsers.length) {
-      top.innerHTML = '<div style="padding:20px;text-align:center;color:var(--v2-text-mut)">Пока нет активности. Зайди в @TRENDEX_AD и пообщайся!</div>';
+      top.innerHTML = '<div style="padding:20px;text-align:center;color:var(--v2-text-mut)">Пока нет активности. Зайди в @GOLDEN_CONNECT_AD и пообщайся!</div>';
     } else {
       top.innerHTML = topUsers.slice(0, 10).map((u, i) => `
         <div class="v2-feed-item">
@@ -886,7 +886,7 @@
       { name: 'Кошелёк', desc: 'Балансы и транзакции', icon: '💰', go: 'wallet' },
       { name: 'AI-Mentor', desc: 'План дня', icon: '🎓', go: 'mentor' },
       { name: 'Сеть', desc: '10-уровневое дерево', icon: '🌐', go: 'network' },
-      { name: 'Чат партнёров', desc: '@TRENDEX_AD', icon: '💬', go: 'group_chat' },
+      { name: 'Чат партнёров', desc: '@GOLDEN_CONNECT_AD', icon: '💬', go: 'group_chat' },
       { name: 'Реклама', desc: 'Биржа + кампании', icon: '🎯', go: 'ads' },
       { name: 'Маркетплейс', desc: 'Товары', icon: '🛒', go: 'marketplace' },
       { name: 'Тарифы', desc: 'LAUNCH / BOOST / ROCKET', icon: '🚀', go: 'marketing' },

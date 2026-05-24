@@ -165,7 +165,7 @@ export default function AgentDetail() {
   const [err, setErr] = useState<string | null>(null);
 
   useEffect(() => {
-    document.title = `TrendeX · ${slug}`;
+    document.title = `Golden Connect · ${slug}`;
   }, [slug]);
 
   useEffect(() => {

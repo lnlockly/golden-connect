@@ -10,7 +10,7 @@ export GHCR_USER=lnlockly
 export GHCR_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 export GHCR_EMAIL=you@example.com
 
-kubectl -n trendex create secret docker-registry ghcr-pull \
+kubectl -n golden-connect create secret docker-registry ghcr-pull \
   --docker-server=ghcr.io \
   --docker-username="$GHCR_USER" \
   --docker-password="$GHCR_TOKEN" \

@@ -5,7 +5,7 @@ Placeholder slot for Monar marketing pages, to be assembled from agentflow
 via a one-shot export.
 
 **Status: dormant.** Not linked from the main landing build. The current
-`trendex-landing` Docker image does not include this directory.
+`golden-connect-landing` Docker image does not include this directory.
 
 ## Files
 
@@ -20,7 +20,7 @@ via a one-shot export.
    drops the result into `landing/monar/dist/`.
 2. Copy `dist/` into the nginx image at build time (add a `COPY` line to
    `landing/Dockerfile`).
-3. Wire either a separate host `monar.trendex.biz` (preferred) or a
+3. Wire either a separate host `monar.golden-connect.to` (preferred) or a
    subpath `/monar/*` in `landing/nginx.conf`.
 
 Until those steps run, this directory is dead weight — safe.

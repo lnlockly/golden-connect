@@ -36,7 +36,7 @@
       '<div style="font-size:48px;margin-bottom:12px">🎬</div>' +
       '<h3 style="margin:0 0 8px">Видео-промо ещё не пришло</h3>' +
       '<p style="color:var(--text-secondary);margin:0 0 14px">Бот пришлёт первое видео в течение нескольких часов после регистрации. Каждый день — новое.</p>' +
-      '<a class="cab-btn cab-btn-primary" href="https://t.me/Trendex_bizbot" target="_blank" rel="noopener">Открыть бота</a>' +
+      '<a class="cab-btn cab-btn-primary" href="https://t.me/Golden Connect_bizbot" target="_blank" rel="noopener">Открыть бота</a>' +
       '</div>';
   }
 

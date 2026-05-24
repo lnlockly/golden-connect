@@ -1,4 +1,4 @@
-# TrendeX — hosted ElizaOS infrastructure
+# Golden Connect — hosted ElizaOS infrastructure
 
 This directory owns everything between `POST /api/agent-deploy` and
 a live agent serving traffic inside our k3s cluster.
@@ -34,9 +34,9 @@ infra/deploy-queue/     infra/deploy-queue/
              ▼
   ┌────────────────────────────────────────────────────────┐
   │  k3s namespace: agent-<slug>                           │
-  │   ├─ Deployment (ghcr.io/lnlockly/trendex-agent:...) │
+  │   ├─ Deployment (ghcr.io/lnlockly/golden-connect-agent:...) │
   │   ├─ Service   (ClusterIP :80 → pod :3000)             │
-  │   ├─ Ingress   (agent-<slug>.trendex.xyz, TLS)       │
+  │   ├─ Ingress   (agent-<slug>.golden-connect.xyz, TLS)       │
   │   ├─ Secret    (agent-secrets, envFrom)                │
   │   └─ NetworkPolicy (default-deny + DNS/HTTPS egress)   │
   └────────────────────────────────────────────────────────┘
@@ -170,7 +170,7 @@ we must swap this for one of:
       assume `letsencrypt-prod` exists cluster-wide. Needs to be
       provisioned by the infra-team base chart, not here.
 - [ ] **Character-specific image build pipeline**: right now the
-      Deployment references `ghcr.io/lnlockly/trendex-agent:<tag>`,
+      Deployment references `ghcr.io/lnlockly/golden-connect-agent:<tag>`,
       a single shared image. Move to buildkit-on-k8s that bakes
       each agent's character + plugin list into its own image and
       pushes to GHCR.

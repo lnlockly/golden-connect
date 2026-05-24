@@ -2,10 +2,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: trendex-landing
-  namespace: trendex
+  name: golden-connect-landing
+  namespace: golden-connect
   labels:
-    app: trendex-landing
+    app: golden-connect-landing
 spec:
   replicas: 1
   strategy:
@@ -15,17 +15,17 @@ spec:
       maxSurge: 1
   selector:
     matchLabels:
-      app: trendex-landing
+      app: golden-connect-landing
   template:
     metadata:
       labels:
-        app: trendex-landing
+        app: golden-connect-landing
     spec:
       imagePullSecrets:
         - name: ghcr-pull
       containers:
-        - name: trendex-landing
-          image: ghcr.io/lnlockly/trendex-landing:latest
+        - name: golden-connect-landing
+          image: ghcr.io/lnlockly/golden-connect-landing:latest
           imagePullPolicy: Always
           ports:
             - name: http
@@ -48,11 +48,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: trendex-landing
-  namespace: trendex
+  name: golden-connect-landing
+  namespace: golden-connect
 spec:
   selector:
-    app: trendex-landing
+    app: golden-connect-landing
   ports:
     - name: http
       port: 80
@@ -61,8 +61,8 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: trendex-landing
-  namespace: trendex
+  name: golden-connect-landing
+  namespace: golden-connect
   annotations:
     # TLS terminated at Cloudflare edge. Origin is HTTP. Set Cloudflare
     # SSL/TLS mode to "Flexible" (or "Full" if you add an origin cert).
@@ -70,13 +70,13 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: trendex.biz
+    - host: golden-connect.to
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: trendex-landing
+                name: golden-connect-landing
                 port:
                   number: 80

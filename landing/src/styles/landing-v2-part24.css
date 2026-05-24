@@ -5,8 +5,8 @@
    ambient chat surfaces (hero input pill + PageChat dock) so they
    don't compete with the voiced narration. */
 
-/* ─── 1a. HERO inline CTA — sits right under "TRENDEX" ──
-   Owner: "take the tour кнопку сделай под надписью TrendeX".
+/* ─── 1a. HERO inline CTA — sits right under "GOLDEN_CONNECT" ──
+   Owner: "take the tour кнопку сделай под надписью Golden Connect".
    When this inline button renders, the floating FAB is hidden
    (see .hero-v2 + .tour-cta-fab rule below) so there's only
    one entry point on the home route. */

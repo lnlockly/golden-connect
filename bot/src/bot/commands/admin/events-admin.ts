@@ -59,7 +59,7 @@ function previewText(s: WizardState): string {
     minute: "2-digit",
   }) : "—";
   const lines = [
-    "📡 <b>Превью эфира TRENDEX</b>",
+    "📡 <b>Превью эфира GOLDEN_CONNECT</b>",
     "",
     `<b>Название:</b> ${s.title ?? "—"}`,
     `<b>Тема:</b> ${s.topic ?? "—"}`,
@@ -77,7 +77,7 @@ export async function onEventNew(ctx: AppContext): Promise<void> {
   if (!tgId || !isAdmin(ctx.state, tgId)) return;
   wizards.set(tgId, { step: "title" });
   await ctx.reply(
-    "🛠 <b>Создаём эфир TRENDEX</b>\n\n" +
+    "🛠 <b>Создаём эфир GOLDEN_CONNECT</b>\n\n" +
       "Шаг 1/5 — пришли <b>название</b> эфира (одной строкой).\n\n" +
       "В любой момент /cancel — отменить.",
     { parse_mode: "HTML" },
@@ -259,7 +259,7 @@ export async function onEventList(ctx: AppContext): Promise<void> {
     return `#${ev.id} · <b>${ev.title}</b> · ${when} MSK · [${ev.status}]`;
   });
   await ctx.reply(
-    ["📡 <b>Эфиры TRENDEX</b>", "", ...lines].join("\n"),
+    ["📡 <b>Эфиры GOLDEN_CONNECT</b>", "", ...lines].join("\n"),
     { parse_mode: "HTML" },
   );
 }

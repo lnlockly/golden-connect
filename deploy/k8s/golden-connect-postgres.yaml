@@ -1,0 +1,81 @@
+# Self-hosted Postgres for Golden Connect — replaces Neon (free-tier compute quota).
+# StatefulSet + PVC (local-path) + ClusterIP service.
+# DB: golden-connect, user: golden_connect_owner.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: golden-connect-postgres-data
+  namespace: golden-connect
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 20Gi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: golden-connect-postgres-secret
+  namespace: golden-connect
+type: Opaque
+stringData:
+  POSTGRES_USER: golden_connect_owner
+  POSTGRES_PASSWORD: "f055b85bb624d055f4b8d2c3439e883f5f4b7ff7e337347e"
+  POSTGRES_DB: golden-connect
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golden-connect-postgres
+  namespace: golden-connect
+  labels: { app: golden-connect-postgres }
+spec:
+  replicas: 1
+  strategy: { type: Recreate }   # single PVC — can't run two pods at once
+  selector:
+    matchLabels: { app: golden-connect-postgres }
+  template:
+    metadata:
+      labels: { app: golden-connect-postgres }
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16-alpine
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - secretRef: { name: golden-connect-postgres-secret }
+          env:
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+          resources:
+            requests: { cpu: "100m", memory: "256Mi" }
+            limits:   { cpu: "1000m", memory: "1Gi" }
+          readinessProbe:
+            exec: { command: ["pg_isready", "-U", "golden_connect_owner", "-d", "golden-connect"] }
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            exec: { command: ["pg_isready", "-U", "golden_connect_owner", "-d", "golden-connect"] }
+            initialDelaySeconds: 30
+            periodSeconds: 15
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: golden-connect-postgres-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: golden-connect-postgres
+  namespace: golden-connect
+spec:
+  selector: { app: golden-connect-postgres }
+  ports:
+    - port: 5432
+      targetPort: 5432
+  clusterIP: None    # headless — stable DNS: golden-connect-postgres.golden-connect.svc.cluster.local

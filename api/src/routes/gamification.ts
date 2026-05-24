@@ -27,7 +27,7 @@ import { levelProgress } from '../services/xp.js';
 const app = new Hono<{ Variables: AuthVars }>();
 
 // ---------------------------------------------------------------------------
-// Internal routes — bot-only, gated by x-trendex-secret.
+// Internal routes — bot-only, gated by x-golden-connect-secret.
 // ---------------------------------------------------------------------------
 
 app.use('/internal/gamification/*', requireInternalSecret);

@@ -41,5 +41,5 @@ export async function onAdminExport(ctx: AppContext): Promise<void> {
   }
   const csv = out.join("\n");
   const buf = Buffer.from(csv, "utf8");
-  await ctx.replyWithDocument(new InputFile(buf, `trendex-users-${Date.now()}.csv`));
+  await ctx.replyWithDocument(new InputFile(buf, `golden-connect-users-${Date.now()}.csv`));
 }

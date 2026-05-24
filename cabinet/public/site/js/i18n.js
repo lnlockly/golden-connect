@@ -1,4 +1,4 @@
-// Trendex Cabinet i18n runtime — Marketing v2 (2026-04).
+// Golden Connect Cabinet i18n runtime — Marketing v2 (2026-04).
 //
 // Loads a per-language dictionary from /cabinet/i18n/<lang>.json and walks the
 // DOM to replace any element tagged with data-i18n="key" (textContent) or
@@ -138,7 +138,7 @@
   }
 
   // Public API
-  window.TrendexI18n = {
+  window.Golden ConnectI18n = {
     supported: SUPPORTED,
     default: DEFAULT,
     setLang: setLang,

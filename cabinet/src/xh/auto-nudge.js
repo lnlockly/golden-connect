@@ -1,4 +1,4 @@
-// Trendex daily AI-nudge — one Groq-generated message per day, broadcast to all active users.
+// Golden Connect daily AI-nudge — one Groq-generated message per day, broadcast to all active users.
 //
 // Redesign 2026-05-09:
 //   Old: 3 stage-based static NUDGE_RULES, fired in 10:00-11:00 MSK.
@@ -46,7 +46,7 @@ async function _ensureTodaysMessage() {
 }
 
 function _buildKeyboard(botUsername) {
-  const u = botUsername || 'Trendex_bizbot';
+  const u = botUsername || 'Golden Connect_bizbot';
   return new InlineKeyboard()
     .url('🌐 Открыть кабинет', 'https://t.me/' + u + '?start=cab').row()
     .url('💎 Genesis TRDX', 'https://t.me/' + u + '?start=trdx')

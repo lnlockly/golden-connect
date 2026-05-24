@@ -10,7 +10,7 @@ const CATEGORY_META = {
     label: 'Эфиры и встречи',
     icon: 'LIVE',
     accent: 'broadcast',
-    intro: 'Видео из эфиров, встреч и живых разборов Trendex.'
+    intro: 'Видео из эфиров, встреч и живых разборов Golden Connect.'
   },
   products: {
     label: 'Презентации продуктов',
@@ -34,7 +34,7 @@ const CATEGORY_META = {
     label: 'Технологии и наука',
     icon: 'LAB',
     accent: 'science',
-    intro: 'Материалы о технологиях, исследованиях и научном подходе Trendex.'
+    intro: 'Материалы о технологиях, исследованиях и научном подходе Golden Connect.'
   },
   instructions: {
     label: 'Инструкции и применение',
@@ -52,7 +52,7 @@ const CATEGORY_META = {
     label: 'Другие видео',
     icon: 'MEDIA',
     accent: 'other',
-    intro: 'Дополнительные материалы видеотеки Trendex.'
+    intro: 'Дополнительные материалы видеотеки Golden Connect.'
   }
 };
 
@@ -200,7 +200,7 @@ function normalizeVideoCategory(rawCategory, haystack) {
 
 function humanTitle(row) {
   const raw = cleanText(row.source_title || row.original_name || row.video_file || '');
-  if (!raw) return 'Видео Trendex';
+  if (!raw) return 'Видео Golden Connect';
   return raw
     .replace(/\s+\|\s*YouTube$/i, '')
     .replace(/\s+-\s*YouTube$/i, '')
@@ -219,11 +219,11 @@ function buildPosterUrl(row, categoryId, speakers) {
 function buildPublicVideoUrl(row, config) {
   const videoFile = cleanText(row.video_file || '');
   if (!videoFile) return '';
-  const dir = cleanText(config.trendexVideoDir || '');
+  const dir = cleanText(config.golden-connectVideoDir || '');
   if (!dir) return '';
   const filePath = path.join(dir, videoFile);
   if (!fs.existsSync(filePath)) return '';
-  const base = `/${cleanText(config.trendexVideoPublicPath || '/video-library').replace(/^\/+/, '').replace(/\/+$/, '')}`;
+  const base = `/${cleanText(config.golden-connectVideoPublicPath || '/video-library').replace(/^\/+/, '').replace(/\/+$/, '')}`;
   return `${base}/${encodeURIComponent(videoFile)}`;
 }
 
@@ -254,7 +254,7 @@ function buildDescription(row, categoryMeta, products, speakers) {
   if (speakers.length) introBits.push(`спикер: ${speakers[0]}`);
   if (products.length) introBits.push(`темы: ${products.slice(0, 4).join(', ')}`);
   if (introBits.length) {
-    paragraphs.push(`Это видео Trendex относится к категории «${categoryMeta.label}»${speakers.length ? ` и помогает быстро понять, о чём говорит ${speakers[0]}` : ' и помогает быстро сориентироваться в теме'}.`);
+    paragraphs.push(`Это видео Golden Connect относится к категории «${categoryMeta.label}»${speakers.length ? ` и помогает быстро понять, о чём говорит ${speakers[0]}` : ' и помогает быстро сориентироваться в теме'}.`);
   }
 
   const transcriptExcerpt = takeSentences(row.transcript_clean || row.transcript_raw || '', 4, 900);
@@ -324,7 +324,7 @@ function buildShareText(title, summary, shareUrl) {
   const parts = [
     title,
     summary,
-    'Смотри материал Trendex и сохраняй себе в медиатеку.'
+    'Смотри материал Golden Connect и сохраняй себе в медиатеку.'
   ].filter(Boolean);
   if (shareUrl) parts.push(shareUrl);
   return parts.join('\n\n');
@@ -404,7 +404,7 @@ function makePublicItem(row, config) {
   };
 }
 
-function createTrendexVideoLibrary(config = {}) {
+function createGolden ConnectVideoLibrary(config = {}) {
   let db = null;
   let dbFailed = false;
 
@@ -438,7 +438,7 @@ function createTrendexVideoLibrary(config = {}) {
   }
 
   function listJsonlItems(limit = 300) {
-    const metadataPath = cleanText(config.trendexVideoMetadataPath || '');
+    const metadataPath = cleanText(config.golden-connectVideoMetadataPath || '');
     if (!metadataPath || !fs.existsSync(metadataPath)) return [];
     const safeLimit = Math.max(1, Math.min(1000, parseInt(limit, 10) || 300));
     const raw = fs.readFileSync(metadataPath, 'utf8');
@@ -467,7 +467,7 @@ function createTrendexVideoLibrary(config = {}) {
   function getDb() {
     if (dbFailed) return null;
     if (db) return db;
-    const dbPath = cleanText(config.trendexVideoDbPath || '');
+    const dbPath = cleanText(config.golden-connectVideoDbPath || '');
     if (!Database || !dbPath || !fs.existsSync(dbPath)) {
       dbFailed = true;
       return null;
@@ -517,7 +517,7 @@ function createTrendexVideoLibrary(config = {}) {
         tags_json,
         transcript_status,
         updated_at
-      FROM trendex_video_library
+      FROM golden-connect_video_library
       WHERE transcript_status = 'ready'
       ORDER BY
         CASE category
@@ -566,7 +566,7 @@ function createTrendexVideoLibrary(config = {}) {
           tags_json,
           transcript_status,
           updated_at
-        FROM trendex_video_library
+        FROM golden-connect_video_library
         WHERE video_external_id = ?
            OR video_file = ?
            OR video_file = ?
@@ -576,7 +576,7 @@ function createTrendexVideoLibrary(config = {}) {
       if (row) return makePublicItem(row, config);
     }
 
-    const metadataPath = cleanText(config.trendexVideoMetadataPath || '');
+    const metadataPath = cleanText(config.golden-connectVideoMetadataPath || '');
     if (!metadataPath || !fs.existsSync(metadataPath)) return null;
     const raw = fs.readFileSync(metadataPath, 'utf8');
     const lines = raw.split(/\r?\n/g).map((line) => line.trim()).filter(Boolean);
@@ -600,5 +600,5 @@ function createTrendexVideoLibrary(config = {}) {
 
 module.exports = {
   CATEGORY_META,
-  createTrendexVideoLibrary,
+  createGolden ConnectVideoLibrary,
 };

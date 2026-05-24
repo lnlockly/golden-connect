@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  IMAGE: ghcr.io/${{ github.repository_owner }}/trendex-bot
+  IMAGE: ghcr.io/${{ github.repository_owner }}/golden-connect-bot
 
 jobs:
   build-deploy:
@@ -49,11 +49,11 @@ jobs:
         env:
           SHA: ${{ github.sha }}
         run: |
-          scp k8s/deployment.yaml ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}:/tmp/trendex-bot.yaml
+          scp k8s/deployment.yaml ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}:/tmp/golden-connect-bot.yaml
           ssh ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }} "
             set -e
-            kubectl apply -f /tmp/trendex-bot.yaml
-            kubectl -n franchise-factory set image deploy/trendex-bot \
-              trendex-bot=${{ env.IMAGE }}:${SHA}
-            kubectl -n franchise-factory rollout status deploy/trendex-bot --timeout=3m
+            kubectl apply -f /tmp/golden-connect-bot.yaml
+            kubectl -n franchise-factory set image deploy/golden-connect-bot \
+              golden-connect-bot=${{ env.IMAGE }}:${SHA}
+            kubectl -n franchise-factory rollout status deploy/golden-connect-bot --timeout=3m
           "

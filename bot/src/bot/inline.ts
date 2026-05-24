@@ -1,11 +1,11 @@
 // bot/src/bot/inline.ts
-// Inline-mode handler for @TrendexTGbot. Lets the user mention the bot
+// Inline-mode handler for @Golden ConnectTGbot. Lets the user mention the bot
 // inside any chat and get a popover of matching CRM contacts they can
 // drop into the conversation (sharing the contact + an open-in-CRM button).
 //
 // Usage in any chat:
-//   @TrendexTGbot ivan
-//   @TrendexTGbot greenway moscow
+//   @Golden ConnectTGbot ivan
+//   @Golden ConnectTGbot greenway moscow
 //
 // The shared message is plain text (so it survives forwarding/copying)
 // plus an inline keyboard for the recipient to open the CRM card.
@@ -16,7 +16,7 @@ import { InlineKeyboard } from "grammy";
 import { crm, type CrmContact } from "../services/crmApi.js";
 
 const CRM_URL =
-  process.env.CRM_WEBAPP_URL || "https://trendex.biz/cabinet/crm-app.html";
+  process.env.CRM_WEBAPP_URL || "https://golden-connect.to/cabinet/crm-app.html";
 
 function safe(s?: string): string {
   return String(s || "").replace(/[*_`[\]]/g, "");

@@ -75,23 +75,23 @@ type Dict = {
 
 const en: Dict = {
   welcome_greeting: (name) =>
-    name ? `Hey ${name} 😀 — welcome to TRENDEX.` : "Welcome to TRENDEX. 😀",
+    name ? `Hey ${name} 😀 — welcome to GOLDEN_CONNECT.` : "Welcome to GOLDEN_CONNECT. 😀",
   welcome_pitch:
-    "TRENDEX is a new-generation advertising ecosystem. Businesses get real attention, users get paid for activity, partners get a share of the platform's turnover. One flow — three wins.",
+    "GOLDEN_CONNECT is a new-generation advertising ecosystem. Businesses get real attention, users get paid for activity, partners get a share of the platform's turnover. One flow — three wins.",
   welcome_launch:
     "🚀 Pre-launch is live. Every milestone and early-access drop lands here first.",
   welcome_bonus:
     "🎁 Early access = x2 advertising budget for businesses and a reserved seat in the network for everyone else. The window closes on launch day.",
   welcome_site_cta:
-    "🌐 Open the site — check how the three roles (business, users, partners) work inside TRENDEX, see built-in tools for traffic, and pick your path.",
+    "🌐 Open the site — check how the three roles (business, users, partners) work inside GOLDEN_CONNECT, see built-in tools for traffic, and pick your path.",
   welcome_ai_cta:
-    "🤖 Got questions? Just write here (voice messages too) — the assistant in the bot answers anything about TRENDEX and helps you get set up. Type /reset anytime to start over.",
+    "🤖 Got questions? Just write here (voice messages too) — the assistant in the bot answers anything about GOLDEN_CONNECT and helps you get set up. Type /reset anytime to start over.",
   welcome_token:
     "💎 Registration is free. Payouts start from the first day of activity — no obligations, no hidden fees.",
   welcome_share:
     "Share your link — every signup through you grows the network, and the network's turnover is what pays partners.",
   welcome_invited_by: (who) => `You were invited by ${who}. 🎁`,
-  inviter_founder: (handle) => `the TRENDEX founder ${handle} ✨`,
+  inviter_founder: (handle) => `the GOLDEN_CONNECT founder ${handle} ✨`,
   your_link: "Your Telegram invite link (to share with friends):",
   your_website_link: "👉 Your site link — open and register:",
   btn_stats: "📊 My stats",
@@ -104,7 +104,7 @@ const en: Dict = {
   btn_back_admin: "← Admin menu",
   btn_admin_leads: "📬 Leads",
   btn_admin_reminders: "📨 Reminders",
-  stats_title: "📊 Your TRENDEX team",
+  stats_title: "📊 Your GOLDEN_CONNECT team",
   stats_ref_code: "Ref code",
   stats_link: "Link",
   stats_direct: "Direct invites",
@@ -116,7 +116,7 @@ const en: Dict = {
   stats_level_label: (n) => `lvl ${n}`,
   help_title: "Commands",
   help_body:
-    "/start — onboarding\n/me, /stats — your referral stats\n/app — open TRENDEX cabinet\n/quests — your quests + XP\n/missions — 7-day programmes\n/quiz — pick a role / tariff\n/top — leaderboard\n/lang en|ru|zh — switch language\n/help — this message",
+    "/start — onboarding\n/me, /stats — your referral stats\n/app — open GOLDEN_CONNECT cabinet\n/quests — your quests + XP\n/missions — 7-day programmes\n/quiz — pick a role / tariff\n/top — leaderboard\n/lang en|ru|zh — switch language\n/help — this message",
   lang_set: (l) => `Language set to ${l}. ✅`,
   lang_usage: "Usage: /lang en | ru | zh",
   unknown_cmd: "Unknown command. Try /help.",
@@ -124,7 +124,7 @@ const en: Dict = {
     const levelLabel = level === 1 ? "direct" : `level ${level}`;
     return (
       `👥 <b>New referral in your network!</b>\n\n` +
-      `${who} just joined TRENDEX\n` +
+      `${who} just joined GOLDEN_CONNECT\n` +
       `Tier: ${levelLabel}\n\n` +
       `Total in your network: <b>${total}</b>`
     );
@@ -135,16 +135,16 @@ const en: Dict = {
   btn_notif_off: "🔕 Turn these notifications off",
 
   share_text: (siteUrl) =>
-    `🚀 I'm on TRENDEX — an advertising ecosystem where businesses, users and partners all win. ` +
+    `🚀 I'm on GOLDEN_CONNECT — an advertising ecosystem where businesses, users and partners all win. ` +
     `Join with my link and grab early access (x2 budget for business accounts) ✨\n\nSite: ${siteUrl}`,
   btn_share: "📤 Share to chat",
   btn_notif_on: "🔔 Notifications: on",
   btn_notif_ref_off: "🔕 Mute referral pings",
 
-  gated_title: "🔒 TRENDEX is invite-only during pre-launch",
+  gated_title: "🔒 GOLDEN_CONNECT is invite-only during pre-launch",
   gated_body:
     "Access is only via a personal referral link from an existing member. " +
-    "Ask whoever told you about TRENDEX for their link and open it again.\n\n" +
+    "Ask whoever told you about GOLDEN_CONNECT for their link and open it again.\n\n" +
     "No link yet? Follow our channels for the public launch date.",
 
   cabinet_profile_heading: "👤 Profile",
@@ -171,10 +171,10 @@ const en: Dict = {
 const ru: Dict = {
   welcome_greeting: (name) =>
     name
-      ? `Привет, ${name} 😀 — добро пожаловать в TRENDEX.`
-      : "Добро пожаловать в TRENDEX. 😀",
+      ? `Привет, ${name} 😀 — добро пожаловать в GOLDEN_CONNECT.`
+      : "Добро пожаловать в GOLDEN_CONNECT. 😀",
   welcome_pitch:
-    "TRENDEX — рекламная экосистема нового поколения. Бизнес получает внимание аудитории, пользователи — доход за активность, партнёры — долю от оборота платформы. Один поток — три выгоды.",
+    "GOLDEN_CONNECT — рекламная экосистема нового поколения. Бизнес получает внимание аудитории, пользователи — доход за активность, партнёры — долю от оборота платформы. Один поток — три выгоды.",
   welcome_launch:
     "🚀 Идёт предзапуск. Все даты и условия раннего доступа — сюда первыми.",
   welcome_bonus:
@@ -182,13 +182,13 @@ const ru: Dict = {
   welcome_site_cta:
     "🌐 Заходи на сайт — там видно, как устроены три роли (бизнес, пользователи, партнёры), какие инструменты для трафика встроены в платформу, и какую роль выбрать тебе.",
   welcome_ai_cta:
-    "🤖 Есть вопросы? Просто напиши сюда (голосовые тоже ок) — ассистент в боте ответит на любой вопрос про TRENDEX и поможет разобраться. /reset — начать заново.",
+    "🤖 Есть вопросы? Просто напиши сюда (голосовые тоже ок) — ассистент в боте ответит на любой вопрос про GOLDEN_CONNECT и поможет разобраться. /reset — начать заново.",
   welcome_token:
     "💎 Регистрация бесплатна. Выплаты начисляются с первого дня активности — без обязательств и скрытых комиссий.",
   welcome_share:
     "Делись ссылкой — каждый регистрацией ты растишь сеть, а оборот сети — это то, с чего получают партнёры.",
   welcome_invited_by: (who) => `Тебя пригласил(а) ${who}. 🎁`,
-  inviter_founder: (handle) => `основатель TRENDEX ${handle} ✨`,
+  inviter_founder: (handle) => `основатель GOLDEN_CONNECT ${handle} ✨`,
   your_link: "Твоя реферальная ссылка в Telegram (делись с друзьями):",
   your_website_link: "👉 Твоя ссылка на сайт — зайди и зарегистрируйся:",
   btn_stats: "📊 Моя команда",
@@ -201,7 +201,7 @@ const ru: Dict = {
   btn_back_admin: "← Админ-меню",
   btn_admin_leads: "📬 Заявки",
   btn_admin_reminders: "📨 Напоминания",
-  stats_title: "📊 Твоя команда TRENDEX",
+  stats_title: "📊 Твоя команда GOLDEN_CONNECT",
   stats_ref_code: "Реф-код",
   stats_link: "Ссылка",
   stats_direct: "Прямых приглашений",
@@ -213,7 +213,7 @@ const ru: Dict = {
   stats_level_label: (n) => `${n} ур.`,
   help_title: "Команды",
   help_body:
-    "/start — онбординг\n/me, /stats — твоя статистика\n/app — открыть кабинет TRENDEX\n/quests — твои квесты и XP\n/missions — 7-дневные программы\n/quiz — подбор роли / тарифа\n/top — лидерборд\n/lang en|ru|zh — сменить язык\n/help — справка",
+    "/start — онбординг\n/me, /stats — твоя статистика\n/app — открыть кабинет GOLDEN_CONNECT\n/quests — твои квесты и XP\n/missions — 7-дневные программы\n/quiz — подбор роли / тарифа\n/top — лидерборд\n/lang en|ru|zh — сменить язык\n/help — справка",
   lang_set: (l) => `Язык установлен: ${l}. ✅`,
   lang_usage: "Использование: /lang en | ru | zh",
   unknown_cmd: "Неизвестная команда. Попробуй /help.",
@@ -221,7 +221,7 @@ const ru: Dict = {
     const levelLabel = level === 1 ? "прямой" : `${level}-й уровень`;
     return (
       `👥 <b>Новый реферал в твоей сети!</b>\n\n` +
-      `${who} только что зашёл в TRENDEX\n` +
+      `${who} только что зашёл в GOLDEN_CONNECT\n` +
       `Уровень: ${levelLabel}\n\n` +
       `Всего в твоей сети: <b>${total}</b>`
     );
@@ -232,13 +232,13 @@ const ru: Dict = {
   btn_notif_off: "🔕 Выключить эти уведомления",
 
   share_text: (siteUrl) =>
-    `🚀 Я в TRENDEX — рекламной экосистеме, где выигрывают и бизнес, и пользователи, и партнёры. ` +
+    `🚀 Я в GOLDEN_CONNECT — рекламной экосистеме, где выигрывают и бизнес, и пользователи, и партнёры. ` +
     `Заходи по моей ссылке, успей взять ранний доступ (x2 рекламный бюджет для бизнеса) ✨\n\nСайт: ${siteUrl}`,
   btn_share: "📤 Поделиться в чат",
   btn_notif_on: "🔔 Уведомления: вкл",
   btn_notif_ref_off: "🔕 Не уведомлять о новых рефералах",
 
-  gated_title: "🔒 TRENDEX — закрытый доступ на время предзапуска",
+  gated_title: "🔒 GOLDEN_CONNECT — закрытый доступ на время предзапуска",
   gated_body:
     "Попасть можно только по персональной реф-ссылке от участника. " +
     "Попроси ссылку у того, кто тебя сюда позвал, и открой её ещё раз.\n\n" +
@@ -267,23 +267,23 @@ const ru: Dict = {
 
 const zh: Dict = {
   welcome_greeting: (name) =>
-    name ? `${name} 😀，欢迎来到 TRENDEX。` : "欢迎来到 TRENDEX。😀",
+    name ? `${name} 😀，欢迎来到 GOLDEN_CONNECT。` : "欢迎来到 GOLDEN_CONNECT。😀",
   welcome_pitch:
-    "TRENDEX 是新一代广告生态系统。商家获得真实的用户注意力，用户因活跃获得收入，合作伙伴分享平台流水。一条流——三方共赢。",
+    "GOLDEN_CONNECT 是新一代广告生态系统。商家获得真实的用户注意力，用户因活跃获得收入，合作伙伴分享平台流水。一条流——三方共赢。",
   welcome_launch:
     "🚀 预发布进行中。所有里程碑与早期通道开放信息将在这里率先发布。",
   welcome_bonus:
     "🎁 早期通道 = 商家广告预算 x2，其他参与者锁定网络席位。窗口将在正式上线当天关闭。",
   welcome_site_cta:
-    "🌐 去网站看看 —— 三种角色（商家、用户、合作伙伴）在 TRENDEX 里如何运作，平台自带哪些流量工具，选择适合你的方向。",
+    "🌐 去网站看看 —— 三种角色（商家、用户、合作伙伴）在 GOLDEN_CONNECT 里如何运作，平台自带哪些流量工具，选择适合你的方向。",
   welcome_ai_cta:
-    "🤖 有疑问？直接在这里发消息（语音也行）—— 机器人里的助手会回答一切关于 TRENDEX 的问题，帮你顺利上手。随时发 /reset 重新开始。",
+    "🤖 有疑问？直接在这里发消息（语音也行）—— 机器人里的助手会回答一切关于 GOLDEN_CONNECT 的问题，帮你顺利上手。随时发 /reset 重新开始。",
   welcome_token:
     "💎 注册免费。活跃的第一天起就能获得收益 —— 没有义务，没有隐藏费用。",
   welcome_share:
     "分享你的链接 —— 每一位通过你加入的人都让网络扩大，而网络的流水正是合作伙伴获得收益的来源。",
   welcome_invited_by: (who) => `你是通过 ${who} 被邀请的。🎁`,
-  inviter_founder: (handle) => `TRENDEX 创始人 ${handle} ✨`,
+  inviter_founder: (handle) => `GOLDEN_CONNECT 创始人 ${handle} ✨`,
   your_link: "你的 Telegram 邀请链接（分享给朋友）：",
   your_website_link: "👉 你的网站链接——打开并注册：",
   btn_stats: "📊 我的统计",
@@ -296,7 +296,7 @@ const zh: Dict = {
   btn_back_admin: "← 管理菜单",
   btn_admin_leads: "📬 申请",
   btn_admin_reminders: "📨 提醒",
-  stats_title: "📊 你的 TRENDEX 团队",
+  stats_title: "📊 你的 GOLDEN_CONNECT 团队",
   stats_ref_code: "推荐码",
   stats_link: "链接",
   stats_direct: "直接邀请",
@@ -308,7 +308,7 @@ const zh: Dict = {
   stats_level_label: (n) => `第 ${n} 层`,
   help_title: "命令",
   help_body:
-    "/start — 上手\n/me, /stats — 你的统计\n/app — 打开 TRENDEX 账户\n/lang en|ru|zh — 切换语言\n/help — 帮助",
+    "/start — 上手\n/me, /stats — 你的统计\n/app — 打开 GOLDEN_CONNECT 账户\n/lang en|ru|zh — 切换语言\n/help — 帮助",
   lang_set: (l) => `语言已设为 ${l}。✅`,
   lang_usage: "用法：/lang en | ru | zh",
   unknown_cmd: "未知命令。试试 /help。",
@@ -316,7 +316,7 @@ const zh: Dict = {
     const levelLabel = level === 1 ? "直接" : `第 ${level} 层`;
     return (
       `👥 <b>你的网络中有新的推荐！</b>\n\n` +
-      `${who} 刚刚加入 TRENDEX\n` +
+      `${who} 刚刚加入 GOLDEN_CONNECT\n` +
       `层级：${levelLabel}\n\n` +
       `你的网络总人数：<b>${total}</b>`
     );
@@ -327,13 +327,13 @@ const zh: Dict = {
   btn_notif_off: "🔕 关闭此类通知",
 
   share_text: (siteUrl) =>
-    `🚀 我在 TRENDEX —— 一个让商家、用户和合作伙伴共赢的广告生态。` +
+    `🚀 我在 GOLDEN_CONNECT —— 一个让商家、用户和合作伙伴共赢的广告生态。` +
     `用我的链接加入，抓住早期通道（商家账户 x2 广告预算）✨\n\n网站：${siteUrl}`,
   btn_share: "📤 分享到聊天",
   btn_notif_on: "🔔 通知：开启",
   btn_notif_ref_off: "🔕 关闭新推荐通知",
 
-  gated_title: "🔒 TRENDEX —— 预发布阶段仅限邀请",
+  gated_title: "🔒 GOLDEN_CONNECT —— 预发布阶段仅限邀请",
   gated_body:
     "只能通过现有成员的个人推荐链接加入。" +
     "请向邀请你来的人索要链接并重新打开。\n\n" +

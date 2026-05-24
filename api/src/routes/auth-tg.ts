@@ -15,7 +15,7 @@ const app = new Hono();
 const TOKEN_TTL_MS = 10 * 60 * 1000; // 10 min
 
 function botUsername(): string {
-  return process.env.TELEGRAM_BOT_USERNAME ?? 'TrendeXrobot';
+  return process.env.TELEGRAM_BOT_USERNAME ?? 'Golden Connectrobot';
 }
 
 async function gcExpired(): Promise<void> {
@@ -51,7 +51,7 @@ const verifySchema = z.object({
  * client polls /auth/tg-login-claim to swap token → JWT.
  */
 app.post('/auth/tg-link-verify', async (c) => {
-  const secret = c.req.header('x-trendex-secret') ?? '';
+  const secret = c.req.header('x-golden-connect-secret') ?? '';
   if (!env.internalSecret || !safeEqual(secret, env.internalSecret)) {
     return c.json({ ok: false, error: 'forbidden' }, 403);
   }

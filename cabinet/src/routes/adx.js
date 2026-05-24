@@ -1,8 +1,8 @@
-// Trendex ADX router (Phase A — read-only marketplace).
+// Golden Connect ADX router (Phase A — read-only marketplace).
 // Ported & adapted from banner-webapp/src/routes/adx.js.
-// Balance translation: Arsenal used users.balance_usd (REAL, $); Trendex uses
+// Balance translation: Arsenal used users.balance_usd (REAL, $); Golden Connect uses
 // users.gift_balance_cents + users.earned_balance_cents (INTEGER, cents).
-// User id: Arsenal req.user.id → Trendex req.webUser.id → map to planner.users.id via tg_id bridge.
+// User id: Arsenal req.user.id → Golden Connect req.webUser.id → map to planner.users.id via tg_id bridge.
 
 const express = require('express');
 const { getDb, ensureUser } = require('../planner/db/database');
@@ -213,7 +213,7 @@ function createAdxRouter(config, storage, requireAuth, bot) {
       }
       if (!['administrator', 'creator'].includes(botStatus)) {
         return res.status(403).json({ ok: false, reason: 'bot_not_admin',
-          detail: 'Бот @Trendex_bizbot должен быть администратором канала. Добавь его в канал и дай право публиковать сообщения.' });
+          detail: 'Бот @Golden Connect_bizbot должен быть администратором канала. Добавь его в канал и дай право публиковать сообщения.' });
       }
 
       // Step 3: verify the registering user is admin/creator of this channel
@@ -428,7 +428,7 @@ function createAdxRouter(config, storage, requireAuth, bot) {
             + 'Канал: ' + (ch.description ? ch.description.slice(0, 80) : 'Канал #' + ch.id) + '\n'
             + 'Длительность: ' + placementHours + 'ч\n'
             + 'Твой доход: <b>$' + _fromCents(publisherCents).toFixed(2) + '</b>\n\n'
-            + 'Открой заявку и подтверди публикацию: https://trendex.biz/cabinet#/ads-earn';
+            + 'Открой заявку и подтверди публикацию: https://golden-connect.to/cabinet#/ads-earn';
           bot.api.sendMessage(publisher.tg_id, msg, { parse_mode: 'HTML', disable_web_page_preview: true }).catch(() => {});
         }
       } catch (_) {}

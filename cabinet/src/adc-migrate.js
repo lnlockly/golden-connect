@@ -1,4 +1,4 @@
-// Trendex AdCenter schema bootstrap. Idempotent. SQL inlined.
+// Golden Connect AdCenter schema bootstrap. Idempotent. SQL inlined.
 const { getDb } = require('./planner/db/database');
 
 const SCHEMA_SQL = `CREATE TABLE IF NOT EXISTS tg_broadcasts (

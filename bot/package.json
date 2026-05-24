@@ -1,8 +1,8 @@
 {
-  "name": "trendex-bot",
+  "name": "golden-connect-bot",
   "version": "0.1.0",
   "private": true,
-  "description": "TRENDEX waitlist Telegram bot with infinite-depth referral tree",
+  "description": "GOLDEN_CONNECT waitlist Telegram bot with infinite-depth referral tree",
   "type": "module",
   "engines": {
     "node": ">=22"

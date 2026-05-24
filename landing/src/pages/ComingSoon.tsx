@@ -15,9 +15,9 @@ export default function ComingSoon() {
     <div className="af-account">
       <header className="af-acc-header">
         <WaveBg className="af-acc-header-wave" />
-        <Link to="/" className="af-acc-brand nav-logo" aria-label="TrendeX home">
+        <Link to="/" className="af-acc-brand nav-logo" aria-label="Golden Connect home">
           <Logo />
-          <span className="af-acc-brand-wordmark">TRENDEX</span>
+          <span className="af-acc-brand-wordmark">GOLDEN_CONNECT</span>
         </Link>
       </header>
       <div className="af-coming">

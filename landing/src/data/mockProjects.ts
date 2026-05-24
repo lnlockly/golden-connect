@@ -1,4 +1,4 @@
-// Mock projects for TrendeX Capital Market dashboard.
+// Mock projects for Golden Connect Capital Market dashboard.
 // Swap out this import with a real API later.
 
 export type ProjectStatus = 'live' | 'upcoming' | 'starting_in_hours';

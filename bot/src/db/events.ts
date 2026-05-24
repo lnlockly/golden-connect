@@ -116,7 +116,7 @@ export class EventsRepo {
       // Use the internal register-style pattern — we reuse admin
       // session-gated /admin/events when the bot can forward a cookie,
       // but for the Phase 1B wizard we use the internal shortcut that
-      // only the bot can invoke (shared x-trendex-secret).
+      // only the bot can invoke (shared x-golden-connect-secret).
       const r = await this.api.postJson<{ ok: boolean; event: EventSummary }>(
         `/internal/events/admin-create`,
         input,

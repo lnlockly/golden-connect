@@ -171,7 +171,7 @@ async function sendWebhook(payload: Record<string, unknown>): Promise<string | n
       headers: {
         'content-type': 'application/json',
         ...(process.env.TG_BOT_WEBHOOK_SECRET
-          ? { 'x-trendex-secret': process.env.TG_BOT_WEBHOOK_SECRET }
+          ? { 'x-golden-connect-secret': process.env.TG_BOT_WEBHOOK_SECRET }
           : {}),
       },
       body: JSON.stringify(payload),

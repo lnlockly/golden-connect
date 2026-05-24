@@ -1,4 +1,4 @@
-// Trendex usage limits — per-day quotas with real tariff lookup via api.
+// Golden Connect usage limits — per-day quotas with real tariff lookup via api.
 // Plans: free / launch / boost / rocket
 // Higher tier = higher daily caps. ROCKET = effectively unlimited.
 
@@ -82,7 +82,7 @@ function _getEmailForUser(userId, optEmail) {
     const db = dbModule.getDb();
     // planner.db users has tg_id but no email column — derive bot-email from tg_id
     const u = db.prepare('SELECT tg_id FROM users WHERE id=?').get(userId);
-    if (u && u.tg_id) return 'tg' + u.tg_id + '@trendex.bot';
+    if (u && u.tg_id) return 'tg' + u.tg_id + '@golden-connect.bot';
     return null;
   } catch (_) { return null; }
 }
@@ -90,13 +90,13 @@ function _getEmailForUser(userId, optEmail) {
 async function _fetchTariffFromApi(userId, optEmail) {
   const email = _getEmailForUser(userId, optEmail);
   if (!email) return 'free';
-  const apiBase = String((config && config.trendexApiBaseUrl) || 'https://api.trendex.biz').replace(/\/+$/, '');
-  const secret  = String((config && config.trendexApiInternalSecret) || '');
+  const apiBase = String((config && config.golden-connectApiBaseUrl) || 'https://api.golden-connect.to').replace(/\/+$/, '');
+  const secret  = String((config && config.golden-connectApiInternalSecret) || '');
   if (!secret) return 'free';
   try {
     const res = await fetch(apiBase + '/internal/finance/balances?email=' + encodeURIComponent(email), {
       method: 'GET',
-      headers: { 'x-trendex-secret': secret, 'Content-Type': 'application/json' },
+      headers: { 'x-golden-connect-secret': secret, 'Content-Type': 'application/json' },
     });
     if (!res.ok) return 'free';
     const data = await res.json();

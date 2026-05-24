@@ -1,4 +1,4 @@
-// Trendex Shortener + Bio routers — Phase B (full Arsenal port via shims).
+// Golden Connect Shortener + Bio routers — Phase B (full Arsenal port via shims).
 const express = require('express');
 const dbModule = require('../planner/db/database');
 const arsenalShortener = require('./shortener-arsenal');

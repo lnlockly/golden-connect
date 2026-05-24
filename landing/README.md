@@ -1,6 +1,6 @@
-# TrendeX landing
+# Golden Connect landing
 
-Marketing site and hosted-agent wizard for TrendeX.
+Marketing site and hosted-agent wizard for Golden Connect.
 
 Infra / k3s runbook lives in [`infra/README.md`](infra/README.md).
 

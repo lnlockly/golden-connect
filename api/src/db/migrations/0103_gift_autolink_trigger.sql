@@ -3,9 +3,9 @@
 -- =====================================================================
 -- When a new user is registered in public.users (via TG-login or signup),
 -- automatically link any matching gift_users row (by telegram_chat_id = tg_id).
--- This handles the "GIFT user signs up to Trendex for the first time" flow:
---   user opens @TrendexCRMBot → /start → public.users row created with tg_id
---   → trigger fires → gift_users.trendex_user_id = new user.id
+-- This handles the "GIFT user signs up to Golden Connect for the first time" flow:
+--   user opens @Golden ConnectCRMBot → /start → public.users row created with tg_id
+--   → trigger fires → gift_users.golden-connect_user_id = new user.id
 --   → next login: GIFT menu appears in cabinet, balances visible immediately
 -- =====================================================================
 
@@ -14,9 +14,9 @@ RETURNS TRIGGER AS $$
 BEGIN
     IF NEW.tg_id IS NOT NULL THEN
         UPDATE public.gift_users
-        SET trendex_user_id = NEW.id
+        SET golden-connect_user_id = NEW.id
         WHERE telegram_chat_id = NEW.tg_id::text
-          AND trendex_user_id IS NULL;
+          AND golden-connect_user_id IS NULL;
     END IF;
     RETURN NEW;
 END;
@@ -36,14 +36,14 @@ BEGIN
         -- Unlink old (if tg_id changed)
         IF OLD.tg_id IS NOT NULL THEN
             UPDATE public.gift_users
-            SET trendex_user_id = NULL
-            WHERE trendex_user_id = OLD.id AND telegram_chat_id = OLD.tg_id::text;
+            SET golden-connect_user_id = NULL
+            WHERE golden-connect_user_id = OLD.id AND telegram_chat_id = OLD.tg_id::text;
         END IF;
         -- Link new
         UPDATE public.gift_users
-        SET trendex_user_id = NEW.id
+        SET golden-connect_user_id = NEW.id
         WHERE telegram_chat_id = NEW.tg_id::text
-          AND trendex_user_id IS NULL;
+          AND golden-connect_user_id IS NULL;
     END IF;
     RETURN NEW;
 END;
@@ -56,4 +56,4 @@ CREATE TRIGGER trg_relink_gift_user_on_tg_update
     EXECUTE FUNCTION public.relink_gift_user_on_tg_update();
 
 COMMENT ON FUNCTION public.link_gift_user_on_signup IS
-'Auto-link gift_users.trendex_user_id when a new TG user is created in public.users. Part of GiftClub merge (migration 0102).';
+'Auto-link gift_users.golden-connect_user_id when a new TG user is created in public.users. Part of GiftClub merge (migration 0102).';

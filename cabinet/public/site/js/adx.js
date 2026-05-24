@@ -1,4 +1,4 @@
-/* Trendex ADX — Phase A: categories + marketplace listing (read-only).
+/* Golden Connect ADX — Phase A: categories + marketplace listing (read-only).
    Progressive enhancement: Phase B adds channel registration + order flow.
 */
 (function () {
@@ -36,9 +36,9 @@
     el.innerHTML =
       '<div class="adx-hero">' +
         '<div class="adx-hero-inner">' +
-          '<div class="adx-hero-badge">NEW · Trendex ADX</div>' +
+          '<div class="adx-hero-badge">NEW · Golden Connect ADX</div>' +
           '<h1>Биржа TG-каналов для рекламы</h1>' +
-          '<p>Размещайте посты в отобранных каналах Trendex-партнёров. Автомодерация, эскроу, рейтинги, возвраты — всё в одном месте.</p>' +
+          '<p>Размещайте посты в отобранных каналах Golden Connect-партнёров. Автомодерация, эскроу, рейтинги, возвраты — всё в одном месте.</p>' +
           '<div class="adx-hero-ctas">' +
             '<button class="adx-btn adx-btn-primary" onclick="window.Adx.goMarket()">🛒 Открыть каталог</button>' +
             '<button class="adx-btn adx-btn-ghost" onclick="window.Adx.goRegister()">📣 Добавить свой канал</button>' +
@@ -185,7 +185,7 @@
       + '<div id="adx-reg-card">'
       + '<h3>📣 Добавить канал в биржу</h3>'
       + '<div class="info">'
-      + '⚠️ <b>Важно:</b> бот <b>@Trendex_bizbot</b> должен быть админом твоего канала с правом публикации сообщений. Также ты сам должен быть указан как админ канала.'
+      + '⚠️ <b>Важно:</b> бот <b>@Golden Connect_bizbot</b> должен быть админом твоего канала с правом публикации сообщений. Также ты сам должен быть указан как админ канала.'
       + '</div>'
       + '<form id="adx-reg-form">'
       + '<label class="fld">@username канала или ссылка t.me/<input class="cab-input" name="username" required placeholder="my_awesome_channel" maxlength="64"></label>'

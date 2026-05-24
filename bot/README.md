@@ -1,6 +1,6 @@
-# TRENDEX Waitlist Bot
+# GOLDEN_CONNECT Waitlist Bot
 
-Telegram waitlist bot for TRENDEX with infinite-depth referral tree, admin panel, and broadcasts. Node 20, TypeScript, grammy, better-sqlite3.
+Telegram waitlist bot for GOLDEN_CONNECT with infinite-depth referral tree, admin panel, and broadcasts. Node 20, TypeScript, grammy, better-sqlite3.
 
 ## Setup
 
@@ -20,7 +20,7 @@ npm test           # smoke tests
 |----------------|----------|--------------------------|
 | `BOT_TOKEN`    | yes      | —                        |
 | `ADMIN_TG_ID`  | yes      | —                        |
-| `DATABASE_PATH`| no       | `./data/trendex.db`    |
+| `DATABASE_PATH`| no       | `./data/golden-connect.db`    |
 | `BOT_USERNAME` | no       | `AgentflowWaitlistBot`   |
 | `NODE_ENV`     | no       | `development`            |
 | `LOG_LEVEL`    | no       | `info`                   |
@@ -54,10 +54,10 @@ Total-descendants count uses a recursive CTE capped at depth 64.
 Container is rootless, stores SQLite in `/data` (mount a volume).
 
 ```bash
-docker build -t trendex-bot .
-docker run -d --name trendex-bot \
+docker build -t golden-connect-bot .
+docker run -d --name golden-connect-bot \
   -e BOT_TOKEN=... -e ADMIN_TG_ID=... \
-  -v trendex-data:/data trendex-bot
+  -v golden-connect-data:/data golden-connect-bot
 ```
 
 Migrate to Postgres later by swapping `src/db/index.ts` + `src/db/users.ts` implementations; the rest of the code only talks to `UsersRepo` / `BroadcastsRepo`.

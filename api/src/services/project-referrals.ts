@@ -1,6 +1,6 @@
 /**
  * Project referrals — ported from Business Network's
- * `ProjectReferralService` (NestJS/Prisma) to Trendex API
+ * `ProjectReferralService` (NestJS/Prisma) to Golden Connect API
  * (Hono + drizzle + raw SQL).
  *
  * Public surface (see exports at bottom):

@@ -72,15 +72,15 @@ function renderText(row: {
 
   const header = isRu
     ? (kind === 'live'
-        ? '🔴 <b>Эфир TRENDEX начинается прямо сейчас</b>'
+        ? '🔴 <b>Эфир GOLDEN_CONNECT начинается прямо сейчас</b>'
         : kind === '1h'
-          ? '⏰ <b>Через час в эфире TRENDEX</b>'
-          : '📅 <b>Завтра в эфире TRENDEX — не пропусти</b>')
+          ? '⏰ <b>Через час в эфире GOLDEN_CONNECT</b>'
+          : '📅 <b>Завтра в эфире GOLDEN_CONNECT — не пропусти</b>')
     : (kind === 'live'
-        ? '🔴 <b>A TRENDEX event is starting right now</b>'
+        ? '🔴 <b>A GOLDEN_CONNECT event is starting right now</b>'
         : kind === '1h'
-          ? '⏰ <b>In one hour on TRENDEX</b>'
-          : '📅 <b>Tomorrow on TRENDEX — don\'t miss it</b>');
+          ? '⏰ <b>In one hour on GOLDEN_CONNECT</b>'
+          : '📅 <b>Tomorrow on GOLDEN_CONNECT — don\'t miss it</b>');
 
   const timeLabel = isRu ? 'МСК' : 'MSK';
   const openLabel = isRu

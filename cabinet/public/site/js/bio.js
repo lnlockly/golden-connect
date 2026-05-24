@@ -1,4 +1,4 @@
-/* Trendex Cabinet — Bio constructor (Phase D minimal).
+/* Golden Connect Cabinet — Bio constructor (Phase D minimal).
    Talks to /cabinet/api/shortener/bio/* (admin endpoints already live).
 */
 (function () {

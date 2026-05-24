@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════════════
-   Trendex Portal — Glassmorphism Design System v4.0
+   Golden Connect Portal — Glassmorphism Design System v4.0
    Dark-first + Light theme, Aurora effects, Cabinet sidebar
    ══════════════════════════════════════════════════════════════ */
 
@@ -16,7 +16,7 @@
   --fs-lg: 1.35rem; --fs-xl: 1.7rem; --fs-2xl: 2.2rem; --fs-3xl: 2.8rem; --fs-hero: 3.4rem;
   --ease: cubic-bezier(.4,0,.2,1); --dur: 280ms;
 
-  /* Dark theme (default) — Trendex Marketing v2 palette */
+  /* Dark theme (default) — Golden Connect Marketing v2 palette */
   --bg: #0A0E27; --bg-alt: #111736; --bg-elevated: #161D3F;
   --surface: rgba(22,29,63,0.85); --surface-solid: #161D3F;
   --surface-hover: rgba(30,38,80,0.92); --surface-glass: rgba(22,29,63,0.6);

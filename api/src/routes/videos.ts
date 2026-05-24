@@ -263,7 +263,7 @@ app.patch('/admin/videos/:id', async (c) => {
 });
 
 /* -------------------- internal admin shortcuts (bot wizards) --------------------
- * Same rationale as promo: bot has no JWT, uses shared `x-trendex-secret`.
+ * Same rationale as promo: bot has no JWT, uses shared `x-golden-connect-secret`.
  */
 
 app.use('/internal/admin/videos*', requireInternalSecret);

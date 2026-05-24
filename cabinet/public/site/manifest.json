@@ -1,6 +1,6 @@
 {
-  "name": "Trendex CRM",
-  "short_name": "Trendex CRM",
+  "name": "Golden Connect CRM",
+  "short_name": "Golden Connect CRM",
   "description": "База MLM-лидеров с AI-генерацией пиков и автоматизацией",
   "start_url": "/cabinet/crm-app.html",
   "scope": "/cabinet/",

@@ -10,7 +10,7 @@ const { splitPurchase } = require('../services/shop-split');
 
 const CRYPTOBOT_TOKEN = process.env.CRYPTOBOT_TOKEN || '';
 const CRYPTOBOT_API = 'pay.crypt.bot';
-const BASE_URL = process.env.BASE_URL || 'https://trendex.biz/cabinet';
+const BASE_URL = process.env.BASE_URL || 'https://golden-connect.to/cabinet';
 
 const CATEGORIES = ['course', 'ebook', 'template', 'music', 'software', 'preset', 'other'];
 
@@ -25,8 +25,8 @@ function _slugifyProd(s) {
 
 async function _enrichProductMedia(db, productId) {
   // Reads current product, ensures slug + short_url + qr_url exist.
-  const PUBLIC_BASE = (process.env.PUBLIC_BASE || 'https://trendex.biz').replace(/\/$/, '');
-  const SHORT_BASE = (process.env.SHORT_BASE || 'https://trendex.biz/s/').replace(/\/$/, '');
+  const PUBLIC_BASE = (process.env.PUBLIC_BASE || 'https://golden-connect.to').replace(/\/$/, '');
+  const SHORT_BASE = (process.env.SHORT_BASE || 'https://golden-connect.to/s/').replace(/\/$/, '');
   const p = db.prepare('SELECT * FROM user_products WHERE id = ?').get(productId);
   if (!p) return;
   const updates = [];

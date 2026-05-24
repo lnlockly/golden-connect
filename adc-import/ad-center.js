@@ -1426,7 +1426,7 @@ router.post('/posts/:id/delete-from-channels', authRequired, async (req, res) =>
 
     const sent = db.prepare(query).all(...queryArgs);
     const fetch = require('node-fetch');
-    const BOT_TOKEN = process.env.TG_BOT_TOKEN || '8729355580:AAFY1MIHc3SDmMtjXnlzGBfUihTFVljoS2A';
+    const BOT_TOKEN = process.env.TG_BOT_TOKEN || '8926574454:AAGqFfourxakY5dmaJm1Wiaxu5zYQ4HCKPE';
     const TG_API = 'https://api.telegram.org/bot' + BOT_TOKEN;
 
     let deleted = 0, failed = 0;

@@ -75,7 +75,7 @@ app.post('/me/pay/cryptobot', async (c) => {
       asset: 'USDT',
       amount: amountUsdt,
       payload,
-      description: `TrendeX — ${tariff.name} tariff activation`,
+      description: `Golden Connect — ${tariff.name} tariff activation`,
     });
     return c.json({
       ok: true,

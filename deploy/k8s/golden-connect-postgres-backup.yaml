@@ -1,0 +1,79 @@
+# Postgres backup CronJob — every 6 hours.
+# Dumps golden-connect DB, gzips (~4.5MB), sends to Telegram channel via Golden Connect_bizbot,
+# and keeps last 12 dumps (3 days) on a small PVC as local fallback.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: golden-connect-pg-backups
+  namespace: golden-connect
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: golden-connect-pg-backup-secret
+  namespace: golden-connect
+type: Opaque
+stringData:
+  PGPASSWORD: "f055b85bb624d055f4b8d2c3439e883f5f4b7ff7e337347e"
+  BOT_TOKEN: "8926574454:AAGqFfourxakY5dmaJm1Wiaxu5zYQ4HCKPE"
+  CHAT_ID: "-1003992780880"
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: golden-connect-pg-backup
+  namespace: golden-connect
+spec:
+  schedule: "0 */6 * * *"     # every 6 hours
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: backup
+              image: postgres:16-alpine
+              envFrom:
+                - secretRef: { name: golden-connect-pg-backup-secret }
+              volumeMounts:
+                - name: backups
+                  mountPath: /backups
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -e
+                  apk add --no-cache curl >/dev/null 2>&1
+                  TS=$(date +%Y%m%d-%H%M%S)
+                  FILE="/backups/golden-connect-${TS}.sql.gz"
+                  echo "[backup] dumping → $FILE"
+                  pg_dump -h golden-connect-postgres.golden-connect.svc.cluster.local -U golden_connect_owner -d golden-connect \
+                    --schema=public --schema=roboai --schema=eliza_runtime --schema=drizzle \
+                    | gzip > "$FILE"
+                  SIZE=$(stat -c%s "$FILE")
+                  echo "[backup] size: $SIZE bytes"
+                  # Send to Telegram
+                  CAP="🗄 Golden Connect DB backup ${TS} ($(echo $SIZE | awk '{printf "%.1f MB", $1/1048576}'))"
+                  RESP=$(curl -sS -F "chat_id=${CHAT_ID}" -F "document=@${FILE}" -F "caption=${CAP}" \
+                    "https://api.telegram.org/bot${BOT_TOKEN}/sendDocument" || true)
+                  echo "[backup] telegram: $RESP"
+                  # Rotate: keep last 12
+                  ls -1t /backups/golden-connect-*.sql.gz | tail -n +13 | xargs -r rm -f
+                  echo "[backup] done. kept: $(ls -1 /backups/golden-connect-*.sql.gz | wc -l) dumps"
+              resources:
+                requests: { cpu: "50m", memory: "64Mi" }
+                limits:   { cpu: "500m", memory: "256Mi" }
+          volumes:
+            - name: backups
+              persistentVolumeClaim:
+                claimName: golden-connect-pg-backups

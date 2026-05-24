@@ -17,7 +17,7 @@ registerStrings({
   'scheduler.btn_open': { ru: '🚀 Открыть планировщик', en: '🚀 Open scheduler', zh: '🚀 打开调度器' },
 });
 
-const WEBAPP_BASE = process.env.WEBAPP_BASE || process.env.WEBSITE_URL || 'https://trendex.biz/cabinet';
+const WEBAPP_BASE = process.env.WEBAPP_BASE || process.env.WEBSITE_URL || 'https://golden-connect.to/cabinet';
 
 export function registerScheduler(): { onCommand: (ctx: AppContext) => Promise<void> } {
   async function onCommand(ctx: AppContext): Promise<void> {

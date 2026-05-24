@@ -96,7 +96,7 @@ const PANEL_ALIASES = {
 const AUTH_MODE_META = {
   login: {
     title: 'Войти в кабинет',
-    copy: 'Вернитесь в Trendex Workspace, чтобы продолжить работу со ссылками, лендингами, AI и партнёрским центром.',
+    copy: 'Вернитесь в Golden Connect Workspace, чтобы продолжить работу со ссылками, лендингами, AI и партнёрским центром.',
   },
   register: {
     title: 'Создать новый кабинет',
@@ -133,7 +133,7 @@ const DASHBOARD_PANEL_META = {
   tools: {
     kicker: 'Инструменты',
     heading: 'Инструменты и Arsenal',
-    copy: 'Локальные инструменты Trendex: shortener, QR, Bio Hub, Social Kit, Image Studio, Remove BG, OG, баннеры, PDF Kit и только остаточные pro-bridge из Arsenal.',
+    copy: 'Локальные инструменты Golden Connect: shortener, QR, Bio Hub, Social Kit, Image Studio, Remove BG, OG, баннеры, PDF Kit и только остаточные pro-bridge из Arsenal.',
   },
   tasks: {
     kicker: 'Задания',
@@ -158,7 +158,7 @@ const DASHBOARD_PANEL_META = {
   products: {
     kicker: 'Продукция',
     heading: 'Продукция компании',
-    copy: 'Полная продуктовая база Trendex: категории, описания, отзывы, результаты, инструкции и быстрый переход в официальный контур компании.',
+    copy: 'Полная продуктовая база Golden Connect: категории, описания, отзывы, результаты, инструкции и быстрый переход в официальный контур компании.',
   },
   partner: {
     kicker: 'Рейтинг',
@@ -882,7 +882,7 @@ function syncAuthCapabilities() {
   if (button) button.hidden = !botEnabled;
   setTelegramHint(
     botEnabled
-      ? `Быстрый вход доступен через @${botUsername || 'Trendex_bizbot'}.`
+      ? `Быстрый вход доступен через @${botUsername || 'Golden Connect_bizbot'}.`
       : 'Вход через Telegram сейчас недоступен.',
   );
 }
@@ -1142,10 +1142,10 @@ function appendUrlParams(url, params = {}) {
   }
 }
 
-function buildChannelShareLink(channel, url, text = '', subject = 'Trendex') {
+function buildChannelShareLink(channel, url, text = '', subject = 'Golden Connect') {
   const safeUrl = String(url || '').trim();
   const safeText = String(text || '').trim();
-  const safeSubject = String(subject || 'Trendex').trim();
+  const safeSubject = String(subject || 'Golden Connect').trim();
   if (!safeUrl) return '';
   if (channel === 'telegram') {
     return `https://t.me/share/url?url=${encodeURIComponent(safeUrl)}&text=${encodeURIComponent(safeText)}`;
@@ -1259,7 +1259,7 @@ function buildCampaignRuntime(campaign = {}, overrides = {}) {
   const shareLinks = safeArray(campaign.channels).map((channel) => ({
     id: channel,
     label: getShareChannelLabel(channel),
-    url: buildChannelShareLink(channel, landingUrl, truncateText(primaryText, 220), campaign.title || 'Trendex'),
+    url: buildChannelShareLink(channel, landingUrl, truncateText(primaryText, 220), campaign.title || 'Golden Connect'),
   })).filter((item) => item.url);
 
   return {
@@ -2894,11 +2894,11 @@ const PROMO_BUNDLE_COPY = {
 const PROMO_ITEM_COPY = {
   'health-message': {
     title: 'First contact message',
-    template: 'I put together a clear Trendex page about health, products and natural support. You can look through it calmly without pressure: {{landingUrl}}',
+    template: 'I put together a clear Golden Connect page about health, products and natural support. You can look through it calmly without pressure: {{landingUrl}}',
   },
   'health-post': {
     title: 'Feed / channel post',
-    template: 'If you are interested in natural solutions for health, water, immunity and everyday support, I put together a simple Trendex entry page. Here it is: {{landingUrl}}',
+    template: 'If you are interested in natural solutions for health, water, immunity and everyday support, I put together a simple Golden Connect entry page. Here it is: {{landingUrl}}',
   },
   'health-story': {
     title: 'Stories / short hook',
@@ -3669,7 +3669,7 @@ function prefillAssistantTool(kind) {
       form.elements.url.value = context.url;
     }
     if (form?.elements?.title && !String(form.elements.title.value || '').trim()) {
-      form.elements.title.value = `${context.title || 'Trendex'} PDF Kit`;
+      form.elements.title.value = `${context.title || 'Golden Connect'} PDF Kit`;
     }
     focusToolForm('pdf-kit-form');
     return;
@@ -3770,7 +3770,7 @@ function buildMimeType(format = 'png') {
 }
 
 function buildFileName(base, extension = 'png') {
-  return `${sanitizeToolSlug(base, 'trendex')}.${String(extension || 'png').trim().toLowerCase()}`;
+  return `${sanitizeToolSlug(base, 'golden-connect')}.${String(extension || 'png').trim().toLowerCase()}`;
 }
 
 function buildSvgDataUrl(svg) {
@@ -3897,7 +3897,7 @@ async function createSocialKitAssets(sourceDataUrl, fit = 'cover') {
     items.push({
       ...preset,
       dataUrl: canvas.toDataURL('image/png'),
-      fileName: buildFileName(`trendex-${preset.id}`, 'png'),
+      fileName: buildFileName(`golden-connect-${preset.id}`, 'png'),
     });
   }
   return {
@@ -3926,7 +3926,7 @@ async function createImageStudioAsset(sourceDataUrl, options = {}) {
     format,
     mimeType,
     dataUrl: canvas.toDataURL(mimeType, quality),
-    fileName: buildFileName(`trendex-${width}x${height}-${fit}`, format === 'jpg' ? 'jpeg' : format),
+    fileName: buildFileName(`golden-connect-${width}x${height}-${fit}`, format === 'jpg' ? 'jpeg' : format),
   };
 }
 
@@ -3988,16 +3988,16 @@ async function createRemoveBackgroundAsset(sourceDataUrl, threshold = 34) {
     resultDataUrl: canvas.toDataURL('image/png'),
     threshold: thresholdValue,
     background,
-    fileName: buildFileName('trendex-nobg', 'png'),
+    fileName: buildFileName('golden-connect-nobg', 'png'),
   };
 }
 
 function buildOgSvg(options = {}) {
   const width = 1200;
   const height = 630;
-  const title = escapeHtml(String(options.title || 'Trendex').trim().slice(0, 80));
+  const title = escapeHtml(String(options.title || 'Golden Connect').trim().slice(0, 80));
   const subtitle = escapeHtml(String(options.subtitle || 'Каталог, лендинги, материалы и кабинет партнёра.').trim().slice(0, 180));
-  const cta = escapeHtml(String(options.cta || 'Открыть Trendex').trim().slice(0, 42));
+  const cta = escapeHtml(String(options.cta || 'Открыть Golden Connect').trim().slice(0, 42));
   const languageName = escapeHtml(String(options.languageName || 'Русский').trim().slice(0, 32));
   const referralCode = escapeHtml(String(options.referralCode || '').trim().slice(0, 32));
   const palette = getScenarioPalette(options.landingId || 'health', options.styleId || 'aurora');
@@ -4018,7 +4018,7 @@ function buildOgSvg(options = {}) {
   <circle cx="1020" cy="120" r="220" fill="url(#orb)" opacity=".65"/>
   <circle cx="180" cy="520" r="220" fill="${palette.secondary}" opacity=".12"/>
   <rect x="58" y="58" width="230" height="54" rx="27" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.16)"/>
-  <text x="84" y="92" fill="#ffffff" font-size="24" font-weight="700" font-family="Inter,Segoe UI,Arial">Trendex OG</text>
+  <text x="84" y="92" fill="#ffffff" font-size="24" font-weight="700" font-family="Inter,Segoe UI,Arial">Golden Connect OG</text>
   <text x="78" y="198" fill="#ffffff" font-size="64" font-weight="800" font-family="Inter,Segoe UI,Arial">${title}</text>
   <foreignObject x="74" y="232" width="720" height="180">
     <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:Inter,Segoe UI,Arial;color:rgba(255,255,255,.92);font-size:28px;line-height:1.45;">
@@ -4028,20 +4028,20 @@ function buildOgSvg(options = {}) {
   <rect x="78" y="490" width="286" height="68" rx="18" fill="#ffffff"/>
   <text x="112" y="534" fill="${palette.deep}" font-size="28" font-weight="800" font-family="Inter,Segoe UI,Arial">${cta}</text>
   <text x="882" y="536" fill="#ffffff" font-size="22" font-weight="600" font-family="Inter,Segoe UI,Arial">${languageName}</text>
-  <text x="882" y="568" fill="rgba(255,255,255,.82)" font-size="20" font-weight="500" font-family="Inter,Segoe UI,Arial">${referralCode ? `ref ${referralCode}` : 'cabinet.trendex.biz'}</text>
+  <text x="882" y="568" fill="rgba(255,255,255,.82)" font-size="20" font-weight="500" font-family="Inter,Segoe UI,Arial">${referralCode ? `ref ${referralCode}` : 'cabinet.golden-connect.to'}</text>
 </svg>`.trim();
 }
 
 async function createOgGraphicAsset(options = {}) {
   const svg = buildOgSvg(options);
   return {
-    title: String(options.title || 'Trendex').trim(),
+    title: String(options.title || 'Golden Connect').trim(),
     subtitle: String(options.subtitle || '').trim(),
     cta: String(options.cta || '').trim(),
     svg,
     svgDataUrl: buildSvgDataUrl(svg),
     pngDataUrl: await rasterizeSvgToPng(svg, 1200, 630),
-    fileNameBase: sanitizeToolSlug(options.title || 'trendex-og', 'trendex-og'),
+    fileNameBase: sanitizeToolSlug(options.title || 'golden-connect-og', 'golden-connect-og'),
   };
 }
 
@@ -4049,7 +4049,7 @@ function buildBannerHtml(options = {}) {
   const palette = getScenarioPalette(options.landingId || 'health', options.styleId || 'aurora');
   const width = Math.max(120, Math.round(Number(options.width || 300)));
   const height = Math.max(50, Math.round(Number(options.height || 250)));
-  const title = escapeHtml(String(options.title || 'Trendex').trim().slice(0, 60));
+  const title = escapeHtml(String(options.title || 'Golden Connect').trim().slice(0, 60));
   const subtitle = escapeHtml(String(options.subtitle || '').trim().slice(0, 100));
   const cta = escapeHtml(String(options.cta || 'Открыть').trim().slice(0, 32));
   const href = escapeHtml(String(options.url || '#').trim());
@@ -4076,7 +4076,7 @@ function buildBannerSvg(options = {}) {
   const width = Math.max(120, Math.round(Number(options.width || 300)));
   const height = Math.max(50, Math.round(Number(options.height || 250)));
   const palette = getScenarioPalette(options.landingId || 'health', options.styleId || 'aurora');
-  const title = escapeHtml(String(options.title || 'Trendex').trim().slice(0, 60));
+  const title = escapeHtml(String(options.title || 'Golden Connect').trim().slice(0, 60));
   const subtitle = escapeHtml(String(options.subtitle || '').trim().slice(0, 110));
   const cta = escapeHtml(String(options.cta || 'Открыть').trim().slice(0, 32));
   const vertical = height >= width * 1.6;
@@ -4157,7 +4157,7 @@ async function createBannerStudioAssets(options = {}) {
         }),
         svgDataUrl: buildSvgDataUrl(svg),
         pngDataUrl: await rasterizeSvgToPng(svg, size.width, size.height),
-        fileNameBase: sanitizeToolSlug(`trendex-${size.id}-${style.id}`, `trendex-${size.id}`),
+        fileNameBase: sanitizeToolSlug(`golden-connect-${size.id}-${style.id}`, `golden-connect-${size.id}`),
       });
     }
   }
@@ -4210,7 +4210,7 @@ async function createPdfKitBundle(options = {}) {
 
   const ogImage = await createOgGraphicAsset({
     title: options.title || 'PDF Lead Kit',
-    subtitle: options.subtitle || 'Готовый набор для PDF, страницы, QR и короткой ссылки внутри Trendex.',
+    subtitle: options.subtitle || 'Готовый набор для PDF, страницы, QR и короткой ссылки внутри Golden Connect.',
     cta: options.cta || 'Открыть набор',
     landingId: options.landingId || 'health',
     languageName: options.languageName || 'Русский',
@@ -4288,17 +4288,17 @@ function syncStandaloneToolDefaults() {
   const captionCta = document.querySelector('#caption-form [name="cta"]');
   const preferredUrl = getPreferredToolUrl(context);
 
-  if (bioHeadline && !String(bioHeadline.value || '').trim()) bioHeadline.value = `${context.title} · Trendex`;
+  if (bioHeadline && !String(bioHeadline.value || '').trim()) bioHeadline.value = `${context.title} · Golden Connect`;
   if (bioSummary && !String(bioSummary.value || '').trim()) bioSummary.value = 'Один удобный вход в лендинг, кабинет, каталог и официальный контур компании.';
-  if (ogTitle && !String(ogTitle.value || '').trim()) ogTitle.value = context.title || 'Trendex';
+  if (ogTitle && !String(ogTitle.value || '').trim()) ogTitle.value = context.title || 'Golden Connect';
   if (ogSubtitle && !String(ogSubtitle.value || '').trim()) ogSubtitle.value = 'Каталог, лендинги, рекламные материалы и кабинет партнёра в одной системе.';
-  if (ogCta && !String(ogCta.value || '').trim()) ogCta.value = 'Открыть Trendex';
-  if (bannerTitle && !String(bannerTitle.value || '').trim()) bannerTitle.value = context.title || 'Trendex';
+  if (ogCta && !String(ogCta.value || '').trim()) ogCta.value = 'Открыть Golden Connect';
+  if (bannerTitle && !String(bannerTitle.value || '').trim()) bannerTitle.value = context.title || 'Golden Connect';
   if (bannerSubtitle && !String(bannerSubtitle.value || '').trim()) bannerSubtitle.value = 'Каталог, материалы, AI и партнёрский кабинет на одной ссылке.';
   if (bannerCta && !String(bannerCta.value || '').trim()) bannerCta.value = 'Открыть';
   if (captionCta && !String(captionCta.value || '').trim()) captionCta.value = `Открой ${context.title || 'страницу'} и посмотри детали`;
   if (pdfUrl && !String(pdfUrl.value || '').trim() && preferredUrl) pdfUrl.value = preferredUrl;
-  if (pdfTitle && !String(pdfTitle.value || '').trim()) pdfTitle.value = `${context.title || 'Trendex'} PDF Kit`;
+  if (pdfTitle && !String(pdfTitle.value || '').trim()) pdfTitle.value = `${context.title || 'Golden Connect'} PDF Kit`;
   if (pdfSubtitle && !String(pdfSubtitle.value || '').trim()) pdfSubtitle.value = 'Готовый набор: tracked link, QR, OG-обложка и следующий шаг для лида.';
   if (pdfCta && !String(pdfCta.value || '').trim()) pdfCta.value = 'Открыть набор';
   if (workspace && workspace.companyReferralLink) {
@@ -4407,7 +4407,7 @@ function renderWorkspaceTopbar() {
       <div class="workspace-topbar-side">
         ${topbarAsset?.imageUrl ? `
           <div class="workspace-topbar-media">
-            <img src="${escapeHtml(topbarAsset.imageUrl)}" alt="${escapeHtml(topbarAsset.title || 'Trendex visual')}" loading="lazy">
+            <img src="${escapeHtml(topbarAsset.imageUrl)}" alt="${escapeHtml(topbarAsset.title || 'Golden Connect visual')}" loading="lazy">
             <div class="workspace-topbar-media-copy">
               <strong>${escapeHtml(topbarAsset.title || currentPack?.title || 'Рабочий визуал')}</strong>
               <p>${escapeHtml(topbarAsset.description || currentPack?.summary || 'Текущий визуал для лендинга, материалов и отправки.')}</p>
@@ -4476,7 +4476,7 @@ function renderLinksPanel() {
 
   if ($('#links-routing-rules')) {
     const channelLinks = safeArray(referralCenter?.shareChannels).map((item) => {
-      const url = buildChannelShareLink(item.id, workspace.siteReferralLink, 'Посмотри мой кабинет Trendex', 'Trendex');
+      const url = buildChannelShareLink(item.id, workspace.siteReferralLink, 'Посмотри мой кабинет Golden Connect', 'Golden Connect');
       return url ? { ...item, url } : null;
     }).filter(Boolean);
     $('#links-routing-rules').innerHTML = `
@@ -5461,7 +5461,7 @@ function renderToolsPanel() {
             <img src="${escapeHtml(state.toolResults.qr.dataUrl)}" alt="QR code">
             <div class="product-card-actions">
               ${copyButtonMarkup(state.toolResults.qr.url)}
-              <a class="btn btn--ghost btn--sm" href="${escapeHtml(state.toolResults.qr.dataUrl)}" download="trendex-qr.png">Скачать PNG</a>
+              <a class="btn btn--ghost btn--sm" href="${escapeHtml(state.toolResults.qr.dataUrl)}" download="golden-connect-qr.png">Скачать PNG</a>
             </div>
           </div>
         </article>
@@ -5539,7 +5539,7 @@ function renderToolsPanel() {
             </div>
             <span class="badge badge--accent">на нашем домене</span>
           </div>
-          <p>${escapeHtml(bioHub.summary || 'Персональная мультиссылка уже собрана и ведёт в ваш рабочий контур Trendex.')}</p>
+          <p>${escapeHtml(bioHub.summary || 'Персональная мультиссылка уже собрана и ведёт в ваш рабочий контур Golden Connect.')}</p>
           <div class="referral-link-box"><div class="referral-link-text">${escapeHtml(bioHub.url || '')}</div></div>
           <div class="marketing-chip-list">
             <span class="marketing-chip">Landing: ${escapeHtml(bioHub.landingTitle || context.title)}</span>
@@ -5624,7 +5624,7 @@ function renderToolsPanel() {
             </div>
           </div>
           <div class="product-card-actions">
-            <a class="btn btn--primary btn--sm" href="${escapeHtml(removeBg.resultDataUrl || '')}" download="${escapeHtml(removeBg.fileName || 'trendex-nobg.png')}">Скачать PNG</a>
+            <a class="btn btn--primary btn--sm" href="${escapeHtml(removeBg.resultDataUrl || '')}" download="${escapeHtml(removeBg.fileName || 'golden-connect-nobg.png')}">Скачать PNG</a>
           </div>
         </article>
       `
@@ -5646,8 +5646,8 @@ function renderToolsPanel() {
             <img src="${escapeHtml(ogImage.pngDataUrl || ogImage.svgDataUrl || '')}" alt="${escapeHtml(ogImage.title || 'OG Image')}">
           </div>
           <div class="product-card-actions">
-            <a class="btn btn--primary btn--sm" href="${escapeHtml(ogImage.pngDataUrl || '')}" download="${escapeHtml(buildFileName(ogImage.fileNameBase || 'trendex-og', 'png'))}">Скачать PNG</a>
-            <a class="btn btn--ghost btn--sm" href="${escapeHtml(ogImage.svgDataUrl || '')}" download="${escapeHtml(buildFileName(ogImage.fileNameBase || 'trendex-og', 'svg'))}">Скачать SVG</a>
+            <a class="btn btn--primary btn--sm" href="${escapeHtml(ogImage.pngDataUrl || '')}" download="${escapeHtml(buildFileName(ogImage.fileNameBase || 'golden-connect-og', 'png'))}">Скачать PNG</a>
+            <a class="btn btn--ghost btn--sm" href="${escapeHtml(ogImage.svgDataUrl || '')}" download="${escapeHtml(buildFileName(ogImage.fileNameBase || 'golden-connect-og', 'svg'))}">Скачать SVG</a>
           </div>
         </article>
       `
@@ -5681,7 +5681,7 @@ function renderToolsPanel() {
               <h4>${escapeHtml(item.title || 'Banner')} · ${escapeHtml(item.styleTitle || '')}</h4>
               <p>HTML-баннер и графическая версия для быстрого запуска рекламы.</p>
               <div class="product-card-actions">
-                <a class="btn btn--primary btn--sm" href="${escapeHtml(item.pngDataUrl || '')}" download="${escapeHtml(buildFileName(item.fileNameBase || 'trendex-banner', 'png'))}">Скачать PNG</a>
+                <a class="btn btn--primary btn--sm" href="${escapeHtml(item.pngDataUrl || '')}" download="${escapeHtml(buildFileName(item.fileNameBase || 'golden-connect-banner', 'png'))}">Скачать PNG</a>
                 ${copyButtonMarkup(item.embedCode || '', 'Копировать HTML', 'share_referral')}
               </div>
             </article>
@@ -5733,8 +5733,8 @@ function renderToolsPanel() {
             ${pdfKit.shortLink?.shortUrl ? copyButtonMarkup(pdfKit.shortLink.shortUrl, 'Копировать short link', 'copy_referral') : ''}
             <button class="btn btn--ghost btn--sm tool-prefill-url-btn" type="button" data-tool-kind="short" data-tool-url="${escapeHtml(pdfKit.sourceUrl || '')}" data-tool-title="${escapeHtml(pdfKit.shortLink?.title || 'PDF Kit')}">В shortener</button>
             <button class="btn btn--ghost btn--sm tool-prefill-url-btn" type="button" data-tool-kind="qr" data-tool-url="${escapeHtml(pdfKit.shortLink?.shortUrl || pdfKit.sourceUrl || '')}" data-tool-title="${escapeHtml(pdfKit.shortLink?.title || 'PDF Kit')}">В QR</button>
-            ${pdfKit.qr?.dataUrl ? `<a class="btn btn--ghost btn--sm" href="${escapeHtml(pdfKit.qr.dataUrl)}" download="trendex-pdf-qr.png">Скачать QR</a>` : ''}
-            ${pdfKit.ogImage?.pngDataUrl ? `<a class="btn btn--ghost btn--sm" href="${escapeHtml(pdfKit.ogImage.pngDataUrl)}" download="${escapeHtml(buildFileName(pdfKit.ogImage.fileNameBase || 'trendex-pdf-kit', 'png'))}">Скачать OG</a>` : ''}
+            ${pdfKit.qr?.dataUrl ? `<a class="btn btn--ghost btn--sm" href="${escapeHtml(pdfKit.qr.dataUrl)}" download="golden-connect-pdf-qr.png">Скачать QR</a>` : ''}
+            ${pdfKit.ogImage?.pngDataUrl ? `<a class="btn btn--ghost btn--sm" href="${escapeHtml(pdfKit.ogImage.pngDataUrl)}" download="${escapeHtml(buildFileName(pdfKit.ogImage.fileNameBase || 'golden-connect-pdf-kit', 'png'))}">Скачать OG</a>` : ''}
           </div>
         </article>
       `
@@ -7030,11 +7030,11 @@ function buildProductsHeroMarkup() {
   return `
     <div class="products-hero-card">
       <div class="products-hero-card__media">
-        ${heroImage ? `<img src="${escapeHtml(heroImage)}" alt="${escapeHtml(resultsShowcase.imageAlt || company.title || 'Trendex')}" loading="lazy">` : ''}
+        ${heroImage ? `<img src="${escapeHtml(heroImage)}" alt="${escapeHtml(resultsShowcase.imageAlt || company.title || 'Golden Connect')}" loading="lazy">` : ''}
       </div>
       <div class="products-hero-card__body">
         <span class="badge badge--accent">Официальная продуктовая база</span>
-        <h3>${escapeHtml(company.title || 'Продукция Trendex')}</h3>
+        <h3>${escapeHtml(company.title || 'Продукция Golden Connect')}</h3>
         <p>${escapeHtml(company.description || company.intro || 'Собранные продукты компании, официальные инструкции, результаты и рабочие материалы для партнёра.')}</p>
         <div class="marketing-chip-list">
           ${safeArray(company.highlights).slice(0, 4).map((item) => `<span class="marketing-chip">${escapeHtml(item.title)}</span>`).join('')}
@@ -7124,7 +7124,7 @@ function buildProductsProofMarkup() {
     <div class="dashboard-stack">
       <div class="results-grid">
         <article class="results-media-card">
-          ${resultsImage ? `<img src="${escapeHtml(resultsImage)}" alt="${escapeHtml(resultsShowcase.imageAlt || 'Отзывы и результаты Trendex')}" loading="lazy">` : ''}
+          ${resultsImage ? `<img src="${escapeHtml(resultsImage)}" alt="${escapeHtml(resultsShowcase.imageAlt || 'Отзывы и результаты Golden Connect')}" loading="lazy">` : ''}
         </article>
         <div class="results-cards">
           ${safeArray(resultsShowcase.items).map((item) => `
@@ -9926,7 +9926,7 @@ function bindEvents() {
       state.toolResults.ogImage = await createOgGraphicAsset({
         title: form.get('title') || context.title,
         subtitle: form.get('subtitle') || 'Каталог, лендинги, рекламные материалы и кабинет партнёра.',
-        cta: form.get('cta') || 'Открыть Trendex',
+        cta: form.get('cta') || 'Открыть Golden Connect',
         landingId: context.landingId,
         languageName: context.languageName,
         referralCode: context.referralCode,
@@ -9982,7 +9982,7 @@ function bindEvents() {
       setStatus($('#pdf-kit-status'), 'Собираем PDF Lead Kit...');
       state.toolResults.pdfKit = await createPdfKitBundle({
         url: form.get('url') || getPreferredToolUrl(context),
-        title: form.get('title') || `${context.title || 'Trendex'} PDF Kit`,
+        title: form.get('title') || `${context.title || 'Golden Connect'} PDF Kit`,
         subtitle: form.get('subtitle') || '',
         cta: form.get('cta') || '',
         landingId: context.landingId,
@@ -11033,7 +11033,7 @@ async function loadMeet() {
 
   html += '<section class="cab-card" style="margin-bottom:16px">';
   html += '  <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">';
-  html += '    <input id="meet-new-name" class="cab-input" placeholder="Название комнаты (например: Созвон Trendex)" style="flex:1;min-width:200px">';
+  html += '    <input id="meet-new-name" class="cab-input" placeholder="Название комнаты (например: Созвон Golden Connect)" style="flex:1;min-width:200px">';
   html += '    <button id="meet-create-btn" class="cab-btn cab-btn-primary" type="button">+ Создать комнату</button>';
   html += '  </div>';
   html += '</section>';

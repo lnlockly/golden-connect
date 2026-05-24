@@ -1,4 +1,4 @@
-// Trendex: Web Push notification server module.
+// Golden Connect: Web Push notification server module.
 // Stores push subscriptions in state.json webPushSubscriptions = { endpoint: { userId, sub, createdAt } }
 // Sends push via web-push library.
 
@@ -13,7 +13,7 @@ function initVapid(config) {
   if (!webpush) return false;
   const publicKey = config.vapidPublicKey || process.env.VAPID_PUBLIC_KEY || '';
   const privateKey = config.vapidPrivateKey || process.env.VAPID_PRIVATE_KEY || '';
-  const email = config.vapidEmail || process.env.VAPID_EMAIL || 'mailto:admin@cabinet.trendex.biz';
+  const email = config.vapidEmail || process.env.VAPID_EMAIL || 'mailto:admin@cabinet.golden-connect.to';
   if (!publicKey || !privateKey) {
     console.warn('[web-push] VAPID keys not set, push disabled');
     return false;

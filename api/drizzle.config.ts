@@ -6,7 +6,7 @@ export default defineConfig({
   out: './src/db/migrations',
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DATABASE_URL ?? 'postgres://localhost/trendex',
+    url: process.env.DATABASE_URL ?? 'postgres://localhost/golden_connect',
   },
   verbose: true,
   strict: true,

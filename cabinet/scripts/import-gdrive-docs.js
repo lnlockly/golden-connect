@@ -9,7 +9,7 @@
 //   node scripts/import-gdrive-docs.js
 //
 // Or on server:
-//   cd /opt/trendex-cabinet && npm install mammoth && node scripts/import-gdrive-docs.js
+//   cd /opt/golden-connect-cabinet && npm install mammoth && node scripts/import-gdrive-docs.js
 
 'use strict';
 
@@ -245,7 +245,7 @@ function splitIntoChunks(text, productName, slug) {
 // --- MAIN --------------------------------------------------------------------
 
 async function main() {
-  console.log('=== Trendex Google Drive Docs Importer ===\n');
+  console.log('=== Golden Connect Google Drive Docs Importer ===\n');
 
   // Prepare tmp dir
   if (!fs.existsSync(TMP_DIR)) fs.mkdirSync(TMP_DIR, { recursive: true });
@@ -361,7 +361,7 @@ async function main() {
   // Cleanup tmp
   try { fs.rmSync(TMP_DIR, { recursive: true }); } catch (_) {}
 
-  console.log('\nDone. Restart trendex-cabinet to apply changes.\n');
+  console.log('\nDone. Restart golden-connect-cabinet to apply changes.\n');
 }
 
 main().catch(err => {

@@ -1,5 +1,5 @@
 /**
- * Tariff renewal cron — Trendex Phase 5.
+ * Tariff renewal cron — Golden Connect Phase 5.
  *
  * Runs daily at 09:00 MSK. For every user with an active paid tariff:
  *

@@ -32,7 +32,7 @@ export type SeoHead = {
   jsonLd?: object[];
 };
 
-const SITE_ORIGIN = 'https://trendex.website';
+const SITE_ORIGIN = 'https://golden-connect.website';
 const DEFAULT_OG = `${SITE_ORIGIN}/og.png`;
 
 const LANG_TO_OG_LOCALE: Record<Lang, string> = {
@@ -140,7 +140,7 @@ export function useHead(head: SeoHead): void {
 
     // OpenGraph
     upsertMeta('meta[property="og:type"]',         'property', 'og:type',        ogType);
-    upsertMeta('meta[property="og:site_name"]',    'property', 'og:site_name',   'TrendeX');
+    upsertMeta('meta[property="og:site_name"]',    'property', 'og:site_name',   'Golden Connect');
     upsertMeta('meta[property="og:title"]',        'property', 'og:title',       title);
     upsertMeta('meta[property="og:description"]',  'property', 'og:description', description);
     upsertMeta('meta[property="og:url"]',          'property', 'og:url',         canonical);
@@ -185,14 +185,14 @@ export function useHead(head: SeoHead): void {
 export const ORG_JSONLD = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'TrendeX',
+  name: 'Golden Connect',
   url: SITE_ORIGIN,
   logo: `${SITE_ORIGIN}/favicon.svg`,
   foundingDate: '2026',
   sameAs: [
-    'https://t.me/trendex',
-    'https://x.com/trendex',
-    'https://github.com/lnlockly/trendex-landing',
+    'https://t.me/golden-connect',
+    'https://x.com/golden-connect',
+    'https://github.com/lnlockly/golden-connect-landing',
   ],
 };
 
@@ -200,7 +200,7 @@ export const ORG_JSONLD = {
 export const WEBSITE_JSONLD = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'TrendeX',
+  name: 'Golden Connect',
   url: SITE_ORIGIN,
   potentialAction: {
     '@type': 'SearchAction',
@@ -213,7 +213,7 @@ export const WEBSITE_JSONLD = {
 export const SOFTWARE_APP_JSONLD = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
-  name: 'TrendeX',
+  name: 'Golden Connect',
   applicationCategory: 'BusinessApplication',
   operatingSystem: 'Web',
   url: SITE_ORIGIN,
