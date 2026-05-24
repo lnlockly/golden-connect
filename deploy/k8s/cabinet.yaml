@@ -150,28 +150,28 @@ spec:
                 port:
                   number: 80
           - path: /sitemap-bio.xml
-            pathType: Exact
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: golden-connect-cabinet
                 port:
                   number: 80
           - path: /trdx
-            pathType: Exact
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: golden-connect-cabinet
                 port:
                   number: 80
           - path: /faq
-            pathType: Exact
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: golden-connect-cabinet
                 port:
                   number: 80
           - path: /reviews
-            pathType: Exact
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: golden-connect-cabinet
@@ -185,7 +185,7 @@ spec:
                 port:
                   number: 80
           - path: /landings
-            pathType: Exact
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: golden-connect-cabinet
@@ -199,7 +199,7 @@ spec:
                 port:
                   number: 80
           - path: /products-library
-            pathType: Exact
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: golden-connect-cabinet
@@ -213,28 +213,28 @@ spec:
                 port:
                   number: 80
           - path: /login
-            pathType: Exact
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: golden-connect-cabinet
                 port:
                   number: 80
           - path: /register
-            pathType: Exact
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: golden-connect-cabinet
                 port:
                   number: 80
           - path: /sitemap.xml
-            pathType: Exact
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: golden-connect-cabinet
                 port:
                   number: 80
           - path: /robots.txt
-            pathType: Exact
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: golden-connect-cabinet
