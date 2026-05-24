@@ -13,7 +13,7 @@ import type { AppContext } from "../middleware.js"
 
 const CABINET_INTERNAL_URL =
 	process.env.CABINET_INTERNAL_URL ||
-	"http://golden-connect-cabinet.golden-connect.svc.cluster.local"
+	"http://goldenConnect-cabinet.goldenConnect.svc.cluster.local"
 
 export async function onPassword(ctx: AppContext): Promise<void> {
 	const tgId = ctx.from?.id
@@ -39,7 +39,7 @@ export async function onPassword(ctx: AppContext): Promise<void> {
 			const text = await r.text()
 			if (r.status === 404) {
 				await ctx.reply(
-					"Кабинет не найден. Сначала зарегистрируйся:\n\nhttps://golden-connect.to/signup",
+					"Кабинет не найден. Сначала зарегистрируйся:\n\nhttps://goldenConnect.to/signup",
 				)
 				return
 			}
@@ -58,7 +58,7 @@ export async function onPassword(ctx: AppContext): Promise<void> {
 				`<b>Логин:</b> <code>${escapeHtml(j.login || String(tgId))}</code>`,
 				`<b>Пароль:</b> <code>${escapeHtml(j.new_password)}</code>`,
 				"",
-				`<b>Кабинет:</b> ${escapeHtml(j.cabinet_url || "https://golden-connect.to/cabinet")}`,
+				`<b>Кабинет:</b> ${escapeHtml(j.cabinet_url || "https://goldenConnect.to/cabinet")}`,
 				"",
 				"⚠️ Это сообщение удалится через 5 минут — сохрани пароль или сразу зайди и поменяй его в Профиле.",
 			].join("\n"),

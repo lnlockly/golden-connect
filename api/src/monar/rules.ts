@@ -1,6 +1,6 @@
 // Monar canonical constants. Single source of truth for the whole money model.
 // Numbers taken from the 13-series marketing material — keep this file in sync
-// with `agentflow/ops/golden-connect-migration/monar-13-series-source.md`.
+// with `agentflow/ops/goldenConnect-migration/monar-13-series-source.md`.
 
 // =========================================================================
 // LOTS

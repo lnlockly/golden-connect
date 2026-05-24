@@ -660,7 +660,7 @@ const LEAD_END   = '<<</LEAD_SUBMIT>>>';
 const LEAD_TRACKS = new Set(['order', 'operator', 'agent_deploy', 'learner', 'investor']);
 
 /**
- * POST the parsed lead to golden-connect-api's internal /leads endpoint.
+ * POST the parsed lead to goldenConnect-api's internal /leads endpoint.
  * Returns `true` if the api accepted the lead so the caller can emit
  * a `lead:` SSE line and the client can flash a "заявка отправлена"
  * confirmation. Fails silent (logs only) so a backend hiccup never
@@ -704,7 +704,7 @@ async function submitLead(
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'x-golden-connect-secret': secret,
+        'x-goldenConnect-secret': secret,
       },
       body: JSON.stringify({
         track,

@@ -2,7 +2,7 @@
 // Telegram commands that drive the cabinet CRM from inside @Golden ConnectTGbot.
 //
 // Commands installed by buildBot():
-//   /crm        — open WebApp at crm.golden-connect.to cabinet
+//   /crm        — open WebApp at crm.goldenConnect.to cabinet
 //   /find <q>   — quick search → inline keyboard with contact cards
 //   /today      — daily batch: open leads + due tasks
 //   /add        — short two-step wizard to add a manual contact
@@ -17,7 +17,7 @@ import type { CommandContext, Context } from "grammy";
 import { InlineKeyboard } from "grammy";
 import { crm, type CrmContact, type CrmSnapshot, type CrmTask } from "../../services/crmApi.js";
 
-const CRM_URL = process.env.CRM_WEBAPP_URL || "https://golden-connect.to/cabinet/crm-app.html";
+const CRM_URL = process.env.CRM_WEBAPP_URL || "https://goldenConnect.to/cabinet/crm-app.html";
 
 function userId(ctx: CommandContext<Context> | Context): number | null {
   const id = ctx.from?.id;

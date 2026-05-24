@@ -127,7 +127,7 @@ function buildFollowupKb(lang: Lang, miniAppUrl: string | null, shareUrl: string
 /**
  * Short welcome — ONE-liner + a Mini App web_app button. Tap opens the
  * landing inside Telegram with `?autotour=1`, which auto-dispatches
- * `golden-connect:tour-start`. When the tour finishes the WebApp pushes
+ * `goldenConnect:tour-start`. When the tour finishes the WebApp pushes
  * `sendData('tour_done')` back to the bot — handled in
  * `onWebAppDataTourDone` below.
  */

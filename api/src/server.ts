@@ -66,7 +66,7 @@ import { assertServerEnv, env } from './services/env.js';
 import { ensureAdminUser } from './services/users.js';
 import { registerAllJobs, startAll, stopAll } from './jobs/index.js';
 
-const log = pino({ name: 'golden-connect-api' });
+const log = pino({ name: 'goldenConnect-api' });
 
 export function createApp() {
   const app = new Hono();
@@ -165,7 +165,7 @@ if (isEntry) {
       port: env.port,
     },
     (info) => {
-      log.info({ port: info.port }, 'golden-connect-api listening');
+      log.info({ port: info.port }, 'goldenConnect-api listening');
       // Boot the cron engine AFTER the HTTP server binds so any
       // "runOnStart" job that issues internal HTTP calls can reach us.
       try {

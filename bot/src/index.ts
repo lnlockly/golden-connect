@@ -28,7 +28,7 @@ async function main(): Promise<void> {
         : undefined,
   });
 
-  // All persistence is delegated to golden-connect-api over HTTP; this is the
+  // All persistence is delegated to goldenConnect-api over HTTP; this is the
   // shared client every repo uses. No local SQLite, no migrations here.
   const apiClient = openDb({
     baseUrl: config.internalApiUrl,

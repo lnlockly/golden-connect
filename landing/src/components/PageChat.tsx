@@ -127,8 +127,8 @@ export function PageChat({ intent, page, sections }: PageChatProps) {
       const ce = ev as CustomEvent<{ route?: string; scroll?: string; focus?: string }>;
       if (ce?.detail) handleNav(ce.detail);
     };
-    window.addEventListener('golden-connect:pagechat-nav', onEvt as EventListener);
-    return () => window.removeEventListener('golden-connect:pagechat-nav', onEvt as EventListener);
+    window.addEventListener('goldenConnect:pagechat-nav', onEvt as EventListener);
+    return () => window.removeEventListener('goldenConnect:pagechat-nav', onEvt as EventListener);
   }, [handleNav]);
 
   // ── Mobile drag-to-dismiss on the handle. ────────────────────

@@ -7,7 +7,7 @@
 const CABINET_BASE =
   process.env.CABINET_INTERNAL_URL ||
   process.env.CABINET_URL ||
-  "http://golden-connect-cabinet";
+  "http://goldenConnect-cabinet";
 const SECRET = process.env.INTERNAL_API_SECRET || "";
 
 function ownerHeader(tgId: number | string): string {

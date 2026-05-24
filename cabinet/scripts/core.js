@@ -79,7 +79,7 @@ const DIRECTIONS = {
 const BROADCASTS = `Еженедельные бесплатные онлайн-конференции с профессорами.
 Формат: Zoom + YouTube + Телемост (онлайн) или лично в Москве по предзаписи.
 Типичный эфир 60-90 минут, можно задать вопрос в эфире.
-Расписание в боте через /events или на сайте golden-connect.to/cabinet.`;
+Расписание в боте через /events или на сайте goldenConnect.to/cabinet.`;
 
 const BUSINESS_MODEL = `Продажа через маркетплейсы (Wildberries, Ozon, Aladdin и собственные), доли компании.
 Партнёрская программа через реферальные ссылки (партнёры получают % от покупок рефералов).
@@ -114,7 +114,7 @@ function buildCorePrompt(opts = {}) {
   lines.push('💼 БИЗНЕС-МОДЕЛЬ:');
   lines.push(BUSINESS_MODEL);
   lines.push('');
-  lines.push('=== САЙТ GOLDEN_CONNECT (golden-connect.to/cabinet) ===');
+  lines.push('=== САЙТ GOLDEN_CONNECT (goldenConnect.to/cabinet) ===');
   lines.push('На сайте есть МНОГО полезного, направляй туда пользователей:');
   lines.push('- 💊 Курсы здоровья — контроль приёма продуктов по расписанию с напоминаниями');
   lines.push('- 📡 Медиатека — видео эфиров, презентации продуктов, отзывы, инструкции');

@@ -844,14 +844,14 @@ const TEMPLATES = {
   },
 
   // ── 11b. Golden Connect Promo (preset) — Golden Connect-branded ──
-  'golden-connect-promo': {
+  'goldenConnect-promo': {
     name: 'Golden Connect Promo',
     description: 'QR + ИИ-инструменты + партнёрка Golden Connect',
     category: 'preset',
     defaults: {
       title: 'GOLDEN_CONNECT',
       subtitle: 'Зарабатывай на AI и партнёрке',
-      qr_url: 'https://golden-connect.to/cabinet/',
+      qr_url: 'https://goldenConnect.to/cabinet/',
       bot_name: '@Golden Connect_bizbot',
       services: ['🤖 AI инструменты', '💎 Партнёрка 10 уровней', '📢 Биржа подписок', '🎬 Видео-задания', '🛒 Маркетплейс товаров', '📊 Bio-страницы', '🔗 Шортнер ссылок', '📱 QR-баннеры', '💸 Авто-выплаты', '🎯 Реклама от $0.01', '⚡ Карма-репутация', '🚀 Тарифы LAUNCH/BOOST/ROCKET'],
       stats: ['10 уровней', 'AI', 'CIS', 'FREE'],
@@ -870,8 +870,8 @@ const TEMPLATES = {
     defaults: {
       title: 'Golden Connect',
       subtitle: 'Всё для digital-бизнеса',
-      qr_url: 'https://golden-connect.to',
-      bot_name: 'golden-connect.to',
+      qr_url: 'https://goldenConnect.to',
+      bot_name: 'goldenConnect.to',
       services: ['🎨 Конструктор баннеров','🔗 Сокращатель ссылок','📱 QR-генератор','🤖 AI Хештеги','🎯 Удаление фона','📐 Сжатие изображений','🌐 AI Домен Finder','📄 PDF инструменты','📊 A/B тестирование','📱 Social Media Kit','💼 Логотипы','🔍 SEO анализ'],
       stats: ['15+ сервисов','AI','FREE','PRO'],
       style: 'darkPurple',

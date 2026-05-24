@@ -95,16 +95,16 @@ app.locals.config = config;
 
 // === Subpath mount ====================================================
 // When BASE_PATH is set (e.g. "/cabinet"), the cabinet is reachable at
-//   golden-connect.to/cabinet/...   instead of  cabinet.golden-connect.to/...
+//   goldenConnect.to/cabinet/...   instead of  cabinet.goldenConnect.to/...
 // We strip the prefix from incoming req.url so existing handlers (which
 // are all written as if the app lived at root) continue to work, and we
 // wrap res.redirect so that absolute-path redirects keep the prefix on
 // the way back out to the browser. Cookies are scoped to BASE_PATH so
-// session cookies don't leak to the rest of golden-connect.to.
+// session cookies don't leak to the rest of goldenConnect.to.
 // [trailing-slash-fix] Force trailing slash on BASE_PATH bare URL.
 // When BASE_PATH=/cabinet and external URL = /cabinet (no slash), browser
 // treats 'cabinet' as a file and resolves relative paths against /,
-// landing in golden-connect-landing pod and getting HTML back for js/css → 'Unexpected token <'.
+// landing in goldenConnect-landing pod and getting HTML back for js/css → 'Unexpected token <'.
 const _RAW_BASE_PATH = (process.env.BASE_PATH || '').replace(/\/+$/, '');
 if (_RAW_BASE_PATH) {
   app.use((req, res, next) => {
@@ -225,7 +225,7 @@ function buildLandingMeta(req) {
   const defaultTitle = pickLocalizedValue(siteContent.landing && siteContent.landing.heroTitle, lang, 'Golden Connect');
   const defaultDescription = pickLocalizedValue(siteContent.landing && siteContent.landing.heroText, lang, 'Каталог, лендинги, рекламные материалы и кабинет партнёра Golden Connect.');
   const rawTitle = pickLocalizedValue(landing.heroTitle, lang, defaultTitle) || defaultTitle;
-  const title = rawTitle.toLowerCase().includes('golden-connect') ? rawTitle : `${rawTitle} | Golden Connect`;
+  const title = rawTitle.toLowerCase().includes('goldenConnect') ? rawTitle : `${rawTitle} | Golden Connect`;
   const description = pickLocalizedValue(landing.descriptions, lang, defaultDescription) || defaultDescription;
   const canonical = new URL('/', origin);
   if (landingId !== 'health') canonical.searchParams.set('landing', landingId);
@@ -486,7 +486,7 @@ app.get('/robots.txt', (req, res) => {
     'Disallow: /api/',
     'Disallow: /webhooks/',
     '',
-    'Sitemap: https://golden-connect.to/sitemap.xml',
+    'Sitemap: https://goldenConnect.to/sitemap.xml',
     ''
   ].join('\n'));
 });
@@ -499,7 +499,7 @@ app.get('/sitemap-bio.xml', (req, res) => {
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
     rows.forEach(function (r) {
       const lastmod = r.created_at ? String(r.updated_at).slice(0, 10) : new Date().toISOString().slice(0, 10);
-      xml += '<url><loc>https://golden-connect.to/bio/' + encodeURIComponent(r.username) + '</loc><lastmod>' + lastmod + '</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>\n';
+      xml += '<url><loc>https://goldenConnect.to/bio/' + encodeURIComponent(r.username) + '</loc><lastmod>' + lastmod + '</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>\n';
     });
     xml += '</urlset>';
     res.type('application/xml').send(xml);
@@ -508,7 +508,7 @@ app.get('/sitemap-bio.xml', (req, res) => {
 app.get('/sitemap.xml', (req, res) => {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
-  xml += '<sitemap><loc>https://golden-connect.to/sitemap-bio.xml</loc></sitemap>\n';
+  xml += '<sitemap><loc>https://goldenConnect.to/sitemap-bio.xml</loc></sitemap>\n';
   xml += '</sitemapindex>';
   res.type('application/xml').send(xml);
 });
@@ -516,9 +516,9 @@ app.get('/sitemap.xml', (req, res) => {
 app.get('/cabinet/*', (req, res) => res.redirect(301, '/'));  // external /cabinet/cabinet/* → /cabinet
 /* [ads-site-server-wire] */
 const _webRouter = createWebRouter(config, storage, bot);
-// crm.golden-connect.to — root → crm-app.html
+// crm.goldenConnect.to — root → crm-app.html
 app.use((req, res, next) => {
-  if (req.hostname === 'crm.golden-connect.to' && (req.path === '/' || req.path === '')) {
+  if (req.hostname === 'crm.goldenConnect.to' && (req.path === '/' || req.path === '')) {
     return res.redirect(302, '/crm-app.html');
   }
   next();
@@ -564,7 +564,7 @@ const _bioDomainCache = new Map();
 const _bioDomainCacheTtl = 60 * 1000;
 app.use((req, res, next) => {
   const host = String(req.hostname || '').toLowerCase();
-  if (!host || host === 'golden-connect.to' || host.endsWith('.golden-connect.to')) return next();
+  if (!host || host === 'goldenConnect.to' || host.endsWith('.goldenConnect.to')) return next();
   // Skip API/static/cabinet/etc. paths even if Host is custom
   const p = req.path || '';
   if (p.startsWith('/api') || p.startsWith('/cabinet') || p.startsWith('/s/') ||
@@ -649,7 +649,7 @@ app.get('/health', (req, res) => {
   const tgMonitorEvents = storage.listTelegramMonitorEvents ? storage.listTelegramMonitorEvents({ limit: 10 }) : [];
   res.json({
     ok: true,
-    service: 'golden-connect-cabinet',
+    service: 'goldenConnect-cabinet',
     db_ok,
     bot_running,
     uptimeSec: Math.floor((Date.now() - startedAt) / 1000),
@@ -808,7 +808,7 @@ const server = httpServer.listen(config.port, () => {
 });
 
 async function start() {
-  // When golden-connect-bot deployment owns the long-poller (per Golden Connect k8s split,
+  // When goldenConnect-bot deployment owns the long-poller (per Golden Connect k8s split,
   // commit 4be2fcb), cabinet should skip bot.start() to avoid 409 Conflict
   // with the bot deployment polling the same token. We still need cron jobs
   // + backup + monitoring to run, so they fire regardless.

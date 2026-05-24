@@ -47,13 +47,13 @@ export const config = {
   internalApiUrl: optional("INTERNAL_API_URL", "http://localhost:4000"),
   internalSecret: required("INTERNAL_API_SECRET"),
   // WebApp cabinet — shown as the Telegram menu button and as an inline
-  // WebApp button on /start. Falls back to the prod golden-connect.to cabinet.
-  webappUrl: optional("WEBAPP_URL", "https://golden-connect.to/cabinet"),
-  // golden-connect-api origin for login-token verification hit by /start login_<token>.
+  // WebApp button on /start. Falls back to the prod goldenConnect.to cabinet.
+  webappUrl: optional("WEBAPP_URL", "https://goldenConnect.to/cabinet"),
+  // goldenConnect-api origin for login-token verification hit by /start login_<token>.
   // Same host as INTERNAL_API_URL unless separately overridden.
   apiUrl: optional("API_URL", optional("INTERNAL_API_URL", "http://localhost:4000")),
   botUsername: optional("BOT_USERNAME", "AgentflowWaitlistBot"),
-  websiteUrl: optional("WEBSITE_URL", "https://golden-connect.website"),
+  websiteUrl: optional("WEBSITE_URL", "https://goldenConnect.website"),
   founderUsername: optional("FOUNDER_USERNAME", "avsee4"),
   emojiPackName: optional("EMOJI_PACK_NAME", "AIGolden Connect"),
   landingWebhookSecret: optional("LANDING_WEBHOOK_SECRET", ""),

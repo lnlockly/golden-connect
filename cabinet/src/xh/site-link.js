@@ -12,7 +12,7 @@ function escapeHtml(s) {
 }
 
 function setupSiteLink(bot, storage, config) {
-  const siteBase = String(config.publicBaseUrl || 'https://golden-connect.to/cabinet').replace(/\/$/, '');
+  const siteBase = String(config.publicBaseUrl || 'https://goldenConnect.to/cabinet').replace(/\/$/, '');
 
   // /cabinet command — generate magic login link
   bot.command('cabinet', async (ctx) => {

@@ -29,7 +29,7 @@ export function LaunchYourProject({ onOrder }: { onOrder: () => void }) {
         <aside className="launch-mock" aria-hidden>
           <div className="launch-mock-chrome">
             <span /><span /><span />
-            <span className="launch-mock-title">launch.golden-connect · new project</span>
+            <span className="launch-mock-title">launch.goldenConnect · new project</span>
           </div>
 
           <div className="launch-mock-body">

@@ -16,7 +16,7 @@ import { InlineKeyboard } from "grammy";
 import { crm, type CrmContact } from "../services/crmApi.js";
 
 const CRM_URL =
-  process.env.CRM_WEBAPP_URL || "https://golden-connect.to/cabinet/crm-app.html";
+  process.env.CRM_WEBAPP_URL || "https://goldenConnect.to/cabinet/crm-app.html";
 
 function safe(s?: string): string {
   return String(s || "").replace(/[*_`[\]]/g, "");

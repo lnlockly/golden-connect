@@ -143,8 +143,8 @@ export function TourPlayer() {
 
   useEffect(() => {
     const onStart = () => start();
-    window.addEventListener('golden-connect:tour-start', onStart);
-    return () => window.removeEventListener('golden-connect:tour-start', onStart);
+    window.addEventListener('goldenConnect:tour-start', onStart);
+    return () => window.removeEventListener('goldenConnect:tour-start', onStart);
   }, [start]);
 
   useEffect(() => {
@@ -379,7 +379,7 @@ export function TourPlayer() {
       } else {
         // Last step just ended — signal App to open the hero AI
         // chat so the user can drop an application right away.
-        window.dispatchEvent(new Event('golden-connect:tour-ended'));
+        window.dispatchEvent(new Event('goldenConnect:tour-ended'));
         // If we're running inside the Telegram Mini App (launched from
         // the bot's "Watch intro" webApp button), notify the bot so it
         // can mark presented_at + send the follow-up, then close the

@@ -4,7 +4,7 @@
    Handles: push, notificationclick, notificationclose, install, activate.
    ═════════════════════════════════════════════════════════════════════════ */
 
-const SW_VERSION = 'golden-connect-cabinet-sw-v1';
+const SW_VERSION = 'goldenConnect-cabinet-sw-v1';
 
 // ── Lifecycle: activate immediately, skip waiting ────────────────────────
 self.addEventListener('install', (event) => {
@@ -35,7 +35,7 @@ self.addEventListener('push', (event) => {
     icon: data.icon || '/cabinet/favicon-32x32.png',
     badge: data.badge || '/cabinet/favicon-32x32.png',
     image: data.image || undefined,
-    tag: data.tag || 'golden-connect-push',
+    tag: data.tag || 'goldenConnect-push',
     renotify: true,
     requireInteraction: !!data.requireInteraction,
     timestamp: Date.now(),

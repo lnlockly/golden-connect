@@ -5,9 +5,9 @@ import { cors } from 'hono/cors';
  * Extend via env ALLOWED_ORIGINS (comma-separated).
  */
 const defaultOrigins = [
-  'https://golden-connect.to',
-  'https://www.golden-connect.to',
-  'https://golden-connect.ai',
+  'https://goldenConnect.to',
+  'https://www.goldenConnect.to',
+  'https://goldenConnect.ai',
   'https://ai-winlab.com',
   'https://app.ai-winlab.com',
   'http://localhost:5173',
@@ -29,6 +29,6 @@ export const corsMiddleware = cors({
   },
   credentials: true,
   allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowHeaders: ['Content-Type', 'Authorization', 'x-golden-connect-secret'],
+  allowHeaders: ['Content-Type', 'Authorization', 'x-goldenConnect-secret'],
   exposeHeaders: ['Set-Cookie'],
 });

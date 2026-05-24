@@ -13,7 +13,7 @@ import type { AppContext } from "../middleware.js";
 
 const PAID = new Set(["launch", "boost", "rocket"]);
 const TARIFFS_URL =
-  (process.env.WEBAPP_URL || "https://golden-connect.to/cabinet") + "/#/marketing";
+  (process.env.WEBAPP_URL || "https://goldenConnect.to/cabinet") + "/#/marketing";
 
 interface BalancesResponse {
   ok: boolean;
@@ -56,7 +56,7 @@ export function requirePaidTariff(handler: CrmHandler): CrmHandler {
       const kb = new InlineKeyboard()
         .webApp("💎 Купить тариф (LAUNCH/BOOST/ROCKET)", TARIFFS_URL)
         .row()
-        .url("📖 Что даёт CRM", "https://golden-connect.to/#whats-new");
+        .url("📖 Что даёт CRM", "https://goldenConnect.to/#whats-new");
 
       const status = isExpired
         ? `*Подписка истекла:* ${tariff?.toUpperCase()} (${new Date(expiresAt!).toLocaleDateString("ru-RU")})`

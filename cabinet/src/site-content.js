@@ -1,6 +1,6 @@
-const OFFICIAL_SITE_URL = 'https://golden-connect.to/';
+const OFFICIAL_SITE_URL = 'https://goldenConnect.to/';
 const OFFICIAL_INSTRUCTIONS_URL = '/faq';
-const OFFICIAL_CERTIFICATION_URL = 'https://golden-connect.to/certification/';
+const OFFICIAL_CERTIFICATION_URL = 'https://goldenConnect.to/certification/';
 
 const SITE_PRODUCTS = [
   // ── 🎯 РЕКЛАМА (3 типа кампаний) ──
@@ -59,7 +59,7 @@ const SITE_PRODUCTS = [
     category: 'Инструменты', icon: '🌐',
     priceLabel: 'входит в платформу',
     shortDescription: 'Конструктор Bio-страниц как Linktree: одна ссылка — все каналы + товары + соцсети. Кастомный домен, A/B тесты.',
-    story: 'Создай свою Bio-страницу за 5 минут: блоки ссылок, заголовков, текста, картинок, разделителей. Встрой витрину товаров из Маркетплейса. Подключи свой домен или используй golden-connect.to/hub/CODE. Аналитика кликов с разбивкой по устройствам/браузерам/географии. A/B тесты двух вариантов с автоматическим выбором победителя.',
+    story: 'Создай свою Bio-страницу за 5 минут: блоки ссылок, заголовков, текста, картинок, разделителей. Встрой витрину товаров из Маркетплейса. Подключи свой домен или используй goldenConnect.to/hub/CODE. Аналитика кликов с разбивкой по устройствам/браузерам/географии. A/B тесты двух вариантов с автоматическим выбором победителя.',
     useCases: ['визитка', 'все ссылки одной страницей', 'витрина магазина'],
     features: ['Конструктор блоков', 'Кастомный домен', 'A/B тесты', 'AI-генератор контента'],
     cta: { label: 'Создать Bio', page: 'bio' },
@@ -1721,7 +1721,7 @@ function buildLearningCenter() {
 }
 
 function buildArsenalSuite(config) {
-  const baseUrl = String(config.links.arsenalApp || 'https://golden-connect.to').trim().replace(/\/$/, '');
+  const baseUrl = String(config.links.arsenalApp || 'https://goldenConnect.to').trim().replace(/\/$/, '');
   const linkOr = (value, fallback) => String(value || fallback || '').trim();
   return {
     intro: 'Большинство инструментов уже перенесены внутрь Golden Connect. Внешний Arsenal остаётся только для продвинутых PDF- и video-задач.',
@@ -2214,8 +2214,8 @@ function buildSiteContent(config) {
       companyRegistrationTemplate: config.links.companyRegistrationTemplate || '',
       companyCatalog: config.links.companyCatalog || config.links.shop || '',
       companyMain: config.links.companyMain || OFFICIAL_SITE_URL,
-      arsenalApp: config.links.arsenalApp || 'https://golden-connect.to',
-      arsenalReferral: config.links.arsenalReferral || config.links.arsenalApp || 'https://golden-connect.to',
+      arsenalApp: config.links.arsenalApp || 'https://goldenConnect.to',
+      arsenalReferral: config.links.arsenalReferral || config.links.arsenalApp || 'https://goldenConnect.to',
       officialSite: OFFICIAL_SITE_URL,
       instructions: OFFICIAL_INSTRUCTIONS_URL,
     },

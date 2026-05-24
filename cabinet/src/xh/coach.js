@@ -160,7 +160,7 @@ function pickAdvice(state) {
         '💡 Если хоть 1 из твоих 5 рефералов купит LAUNCH тоже — ты сразу +$4.5 на L1.',
       ].join('\n'),
       kb: new InlineKeyboard()
-        .url('💎 Активировать LAUNCH', 'https://golden-connect.to/cabinet#/marketing').row()
+        .url('💎 Активировать LAUNCH', 'https://goldenConnect.to/cabinet#/marketing').row()
         .text('🤔 Подумаю', 'coach_skip').text('⏸ Пауза', 'coach_pause'),
     };
   }
@@ -209,7 +209,7 @@ function pickAdvice(state) {
         '💡 Чтобы попасть в топ-15: 5+ рефералов в неделю на платных тарифах. Считается оборот = их активация + месячная.',
       ].join('\n'),
       kb: new InlineKeyboard()
-        .url('🏆 Лидерский пул', 'https://golden-connect.to/cabinet#/finance').row()
+        .url('🏆 Лидерский пул', 'https://goldenConnect.to/cabinet#/finance').row()
         .text('✅ Понял', 'coach_done').text('⏭ Пропустить', 'coach_skip'),
     };
   }

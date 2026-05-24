@@ -1,5 +1,5 @@
 // Genesis TRDX — tariff-upgrade reward service.
-// Scans webUsers with referredByUserId, fetches their current tariff from golden-connect-api,
+// Scans webUsers with referredByUserId, fetches their current tariff from goldenConnect-api,
 // and awards the inviter the diff between current tier and last-awarded tier.
 //
 // Tier values (TRDX awarded to inviter when referee reaches that tier):
@@ -18,16 +18,16 @@ function tierAmount(code) {
 
 async function _fetchTariffCode(email, telegramUserId) {
   if (!email) {
-    if (telegramUserId) email = 'tg' + telegramUserId + '@golden-connect.bot';
+    if (telegramUserId) email = 'tg' + telegramUserId + '@goldenConnect.bot';
     else return 'free';
   }
-  const apiBase = String((_config && _config.goldenConnectApiBaseUrl) || 'https://api.golden-connect.to').replace(/\/+$/, '');
+  const apiBase = String((_config && _config.goldenConnectApiBaseUrl) || 'https://api.goldenConnect.to').replace(/\/+$/, '');
   const secret = String((_config && _config.goldenConnectApiInternalSecret) || '');
   if (!secret) return 'free';
   try {
     const res = await fetch(apiBase + '/internal/finance/balances?email=' + encodeURIComponent(email), {
       method: 'GET',
-      headers: { 'x-golden-connect-secret': secret, 'Content-Type': 'application/json' },
+      headers: { 'x-goldenConnect-secret': secret, 'Content-Type': 'application/json' },
     });
     if (!res.ok) return 'free';
     const data = await res.json();

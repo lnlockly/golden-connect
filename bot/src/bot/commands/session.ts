@@ -18,7 +18,7 @@ import type { CommandContext, Context } from "grammy";
 import { InlineKeyboard } from "grammy";
 import { crm, type CrmContact } from "../../services/crmApi.js";
 
-const CRM_URL = process.env.CRM_WEBAPP_URL || "https://crm.golden-connect.to/cabinet/crm-app.html";
+const CRM_URL = process.env.CRM_WEBAPP_URL || "https://crm.goldenConnect.to/cabinet/crm-app.html";
 
 interface Session {
   active: boolean;

@@ -1,5 +1,5 @@
 /**
- * Shared pino logger for the golden-connect-api process. Server entry point
+ * Shared pino logger for the goldenConnect-api process. Server entry point
  * (`server.ts`) and all background modules (jobs, admin-notifier, etc.) should
  * import from here instead of constructing their own pino instance — keeps log
  * output and level consistent, and makes it trivial to pivot to a central
@@ -11,7 +11,7 @@
 import pino from 'pino';
 
 export const logger = pino({
-  name: 'golden-connect-api',
+  name: 'goldenConnect-api',
   level: process.env.LOG_LEVEL ?? 'info',
 });
 

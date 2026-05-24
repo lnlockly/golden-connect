@@ -18,7 +18,7 @@ import { InlineKeyboard } from "grammy";
 import { crm } from "../services/crmApi.js";
 
 const CRM_URL =
-  process.env.CRM_WEBAPP_URL || "https://golden-connect.to/cabinet/crm-app.html";
+  process.env.CRM_WEBAPP_URL || "https://goldenConnect.to/cabinet/crm-app.html";
 const GROQ_KEYS = (process.env.GROQ_KEYS || process.env.GROQ_API_KEY || "")
   .split(",")
   .map((s) => s.trim())

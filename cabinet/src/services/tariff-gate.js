@@ -1,7 +1,7 @@
 // Tariff access gate — checks user has active paid tariff (LAUNCH/BOOST/ROCKET)
 // with non-expired subscription. Used to lock premium features behind paywall.
 //
-// Source of truth: golden-connect-api /internal/finance/balances (email-keyed).
+// Source of truth: goldenConnect-api /internal/finance/balances (email-keyed).
 // Returns: tariff.code + tariff.expires_at.
 
 const dbModule = require('../planner/db/database');
@@ -17,19 +17,19 @@ function _emailFor(userId, override) {
       'SELECT email, tg_id FROM users WHERE id=?'
     ).get(userId);
     if (r && r.email) return String(r.email).trim().toLowerCase();
-    if (r && r.tg_id) return 'tg' + r.tg_id + '@golden-connect.bot';
+    if (r && r.tg_id) return 'tg' + r.tg_id + '@goldenConnect.bot';
   } catch (_) {}
   return null;
 }
 
 async function _fetchTariff(email, config) {
-  const apiBase = String((config && config.goldenConnectApiBaseUrl) || 'https://api.golden-connect.to').replace(/\/+$/, '');
+  const apiBase = String((config && config.goldenConnectApiBaseUrl) || 'https://api.goldenConnect.to').replace(/\/+$/, '');
   const secret = String((config && config.goldenConnectApiInternalSecret) || process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET || '');
   if (!email || !secret) return null;
   try {
     const r = await fetch(apiBase + '/internal/finance/balances?email=' + encodeURIComponent(email), {
       method: 'GET',
-      headers: { 'x-golden-connect-secret': secret, 'Content-Type': 'application/json' },
+      headers: { 'x-goldenConnect-secret': secret, 'Content-Type': 'application/json' },
     });
     if (!r.ok) return null;
     const data = await r.json();

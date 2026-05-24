@@ -83,16 +83,16 @@ async function createIngressForBioDomain(domain) {
       annotations: {
         'cert-manager.io/cluster-issuer': 'letsencrypt-prod',
         'nginx.ingress.kubernetes.io/proxy-body-size': '8m',
-        'app.kubernetes.io/managed-by': 'golden-connect-cabinet',
+        'app.kubernetes.io/managed-by': 'goldenConnect-cabinet',
       },
-      labels: { 'app': 'golden-connect-cabinet', 'bio-domain': safe(domain) },
+      labels: { 'app': 'goldenConnect-cabinet', 'bio-domain': safe(domain) },
     },
     spec: {
       ingressClassName: 'nginx',
       tls: [{ hosts: [domain], secretName }],
       rules: [{
         host: domain,
-        http: { paths: [{ path: '/', pathType: 'Prefix', backend: { service: { name: 'golden-connect-cabinet', port: { number: 80 } } } }] },
+        http: { paths: [{ path: '/', pathType: 'Prefix', backend: { service: { name: 'goldenConnect-cabinet', port: { number: 80 } } } }] },
       }],
     },
   };
@@ -114,7 +114,7 @@ async function createCertificateForBioDomain(domain) {
     metadata: {
       name,
       namespace: ns,
-      labels: { 'app': 'golden-connect-cabinet', 'bio-domain': safe(domain) },
+      labels: { 'app': 'goldenConnect-cabinet', 'bio-domain': safe(domain) },
     },
     spec: {
       secretName: name,

@@ -75,10 +75,10 @@ export async function onTariffs(ctx: AppContext): Promise<void> {
   const text = lang === 'ru' ? COPY_RU : COPY_EN;
   const kb = new InlineKeyboard()
     .url(lang === 'ru' ? "🚀 Активировать в кабинете" : "🚀 Activate in cabinet",
-         "https://golden-connect.to/cabinet#/marketing")
+         "https://goldenConnect.to/cabinet#/marketing")
     .row()
     .url(lang === 'ru' ? "📺 Посмотреть презентацию" : "📺 View presentation",
-         "https://golden-connect.to/presentation");
+         "https://goldenConnect.to/presentation");
   await ctx.reply(text, {
     parse_mode: "HTML",
     reply_markup: kb,

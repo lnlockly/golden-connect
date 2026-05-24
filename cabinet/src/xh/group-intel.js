@@ -16,7 +16,7 @@ const { getBalance } = require('../services/balance-bridge');
 const https = require('https');
 // ---- Karma proxy: api /internal/karma/award (fire-and-forget) ----
 function awardKarmaApi(plannerUserId, kind, sourceId, memo) {
-  const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://golden-connect-api:4001';
+  const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://goldenConnect-api:4001';
   const apiSecret = process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET;
   if (!apiSecret || !plannerUserId) return;
   const rawDb = require('../planner/db/database').getDb();
@@ -26,7 +26,7 @@ function awardKarmaApi(plannerUserId, kind, sourceId, memo) {
     if (u && u.tg_id) tgId = u.tg_id;
   } catch (_) {}
   if (!tgId) return;
-  const email = 'tg' + Math.abs(tgId) + '@golden-connect.bot';
+  const email = 'tg' + Math.abs(tgId) + '@goldenConnect.bot';
   const data = JSON.stringify({ email: email, kind: kind, source_id: sourceId || null, memo: memo || null });
   const httpMod = apiBase.startsWith('https') ? require('https') : require('http');
   try {
@@ -38,7 +38,7 @@ function awardKarmaApi(plannerUserId, kind, sourceId, memo) {
       headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(data),
-        'x-golden-connect-secret': apiSecret,
+        'x-goldenConnect-secret': apiSecret,
       },
       timeout: 5000,
     }, function (res) { res.resume(); });
@@ -411,7 +411,7 @@ function getSub(chatId) {
 async function onMemberJoined(ctx, user, storage, config, wuData, platform) {
   const sub = getSub(ctx.chat.id);
   if (!sub?.welcome_enabled && !sub) {
-    // Auto-enable welcome on first join after bot subscribed (or always for golden-connect chat)
+    // Auto-enable welcome on first join after bot subscribed (or always for goldenConnect chat)
   }
   const name = (user.first_name || 'Гость') + (user.username ? ' @' + user.username : '');
 
@@ -1172,14 +1172,14 @@ function startGroupIntelCrons(bot, storage, config) {
 // ── EVENTS broadcast to groups ──
 async function broadcastEventsToGroups(bot, config) {
   // Fetch upcoming events from API postgres via internal call
-  const apiBase = String(config?.goldenConnectApiBaseUrl || 'https://api.golden-connect.to').replace(/\/+$/, '');
+  const apiBase = String(config?.goldenConnectApiBaseUrl || 'https://api.goldenConnect.to').replace(/\/+$/, '');
   const secret = String(config?.goldenConnectApiInternalSecret || '');
   if (!secret) return;
 
   let events = [];
   try {
     const r = await fetch(apiBase + '/internal/events/upcoming?within_hours=48', {
-      headers: { 'x-golden-connect-secret': secret }
+      headers: { 'x-goldenConnect-secret': secret }
     });
     if (r.ok) events = (await r.json()).events || [];
   } catch (e) {

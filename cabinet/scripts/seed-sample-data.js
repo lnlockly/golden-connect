@@ -1,6 +1,6 @@
 'use strict';
 
-// One-shot sample-data seed for fresh golden-connect-cabinet deploys.
+// One-shot sample-data seed for fresh goldenConnect-cabinet deploys.
 // Wrapped in an IIFE so require() from server.js is safe — no process.exit,
 // errors are logged but never fatal.
 
@@ -31,7 +31,7 @@
       durationMinutes: 45,
       timezone: 'Europe/Moscow',
       joinUrl: 'https://t.me/Golden Connect_bizbot',
-      coverImage: '/img/golden-connect-logo.jpg',
+      coverImage: '/img/goldenConnect-logo.jpg',
       visibility: 'public',
       isPublished: true,
       tags: ['старт', 'демо', 'тарифы'],

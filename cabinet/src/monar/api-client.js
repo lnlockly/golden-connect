@@ -1,7 +1,7 @@
-// Thin fetch wrapper around golden-connect-api /api/monar/*.
+// Thin fetch wrapper around goldenConnect-api /api/monar/*.
 // Dormant: nothing imports this until activation.
 
-const DEFAULT_BASE = 'http://golden-connect-api/api/monar';
+const DEFAULT_BASE = 'http://goldenConnect-api/api/monar';
 
 function baseUrl() {
   return process.env.MONAR_API_BASE || DEFAULT_BASE;

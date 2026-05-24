@@ -39,7 +39,7 @@ async function sendDigest(ownerId, chatId) {
     `✅ Закрыто всего: <b>${dash.closed}</b>`,
     `📅 Созвонов на неделе: <b>${dash.week_callbacks}</b>`,
     '',
-    `<a href="https://crm.golden-connect.to">→ открыть CRM</a>`
+    `<a href="https://crm.goldenConnect.to">→ открыть CRM</a>`
   );
 
   return notify.sendTo(chatId, lines.join('\n'));

@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'golden-connect-cabinet',
+      name: 'goldenConnect-cabinet',
       cwd: __dirname,
       script: 'src/server.js',
       env: {

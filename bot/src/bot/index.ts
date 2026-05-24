@@ -384,7 +384,7 @@ export function buildBot(opts: BuildBotOpts): Bot<AppContext> {
     if (!conn) return;
     try {
       const ownerId = 'tg_' + conn.user.id;
-      await fetch(((process.env as Record<string,string>).CABINET_INTERNAL_URL || 'http://golden-connect-cabinet') + '/api/mlm/_internal/business-connection', {
+      await fetch(((process.env as Record<string,string>).CABINET_INTERNAL_URL || 'http://goldenConnect-cabinet') + '/api/mlm/_internal/business-connection', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-Internal-Secret': (process.env as Record<string,string>).INTERNAL_API_SECRET || '' },
         body: JSON.stringify({

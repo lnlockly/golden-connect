@@ -60,7 +60,7 @@ registerJob({
     }
 
     const ts = new Date().toISOString().replace(/[:.]/g, '-');
-    const outPath = path.join(backupDir, `golden-connect-${ts}.sql.gz`);
+    const outPath = path.join(backupDir, `goldenConnect-${ts}.sql.gz`);
 
     try {
       // Pipe pg_dump into gzip. Shell redirection keeps the stream off the
@@ -75,10 +75,10 @@ registerJob({
       return;
     }
 
-    // Retention: keep last KEEP_DUMPS golden-connect-*.sql.gz files.
+    // Retention: keep last KEEP_DUMPS goldenConnect-*.sql.gz files.
     try {
       const entries = await readdir(backupDir);
-      const mine = entries.filter((n) => /^golden-connect-.+\.sql\.gz$/.test(n));
+      const mine = entries.filter((n) => /^goldenConnect-.+\.sql\.gz$/.test(n));
       const withStat = await Promise.all(
         mine.map(async (n) => ({ n, st: await stat(path.join(backupDir, n)) })),
       );

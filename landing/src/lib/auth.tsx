@@ -16,7 +16,7 @@ interface AuthOkResponse {
   user?: AuthUser;
 }
 
-// Shape returned by `GET /me` on golden-connect-api. Email/password auth only —
+// Shape returned by `GET /me` on goldenConnect-api. Email/password auth only —
 // wallet fields removed. Telegram link is tracked via `tg_id` /
 // `tg_username` once the user clicks "Привязать Telegram" from the cabinet
 // or logs in via the bot directly.

@@ -143,7 +143,7 @@ function setupGolden ConnectEvents(bot, storage, config) {
       // [magic-cab] /start cab → sendMagicLink (dual-option hub: WebApp + magic URL)
       try {
         const { sendMagicLink } = require('./site-link');
-        const siteBase = String(config.publicBaseUrl || 'https://golden-connect.to/cabinet').replace(/\/+$/, '');
+        const siteBase = String(config.publicBaseUrl || 'https://goldenConnect.to/cabinet').replace(/\/+$/, '');
         await sendMagicLink(ctx, storage, siteBase);
       } catch (e) { console.warn('[magic-cab]', e && e.message); }
       return;
@@ -332,7 +332,7 @@ async function sendEventCard(ctx, ev, storage) {
   const text = formatEventCard(ev);
   const kb = new InlineKeyboard().text('🔔 Записаться на эфир', `xh_subscribe:${ev.id}`).row();
   if (ev.joinUrl) kb.url('▶️ Открыть эфир', ev.joinUrl).row();
-  kb.url('🌐 Сайт Golden Connect', 'https://cabinet.golden-connect.to/');
+  kb.url('🌐 Сайт Golden Connect', 'https://cabinet.goldenConnect.to/');
   await ctx.reply(text, { parse_mode: 'HTML', reply_markup: kb, disable_web_page_preview: true });
 }
 
@@ -340,7 +340,7 @@ async function handleEventDeepLink(ctx, parsed, storage, config) {
   const eventId = parsed.eventId;
   const ev = storage.getEvent(eventId);
   if (!ev) {
-    return ctx.reply('Эфир не найден или уже прошёл. Откройте сайт: https://cabinet.golden-connect.to/');
+    return ctx.reply('Эфир не найден или уже прошёл. Откройте сайт: https://cabinet.goldenConnect.to/');
   }
   let webUser = null;
   try { webUser = storage.ensureWebUserFromTelegram(ctx.from); }
@@ -375,7 +375,7 @@ async function handleEventDeepLink(ctx, parsed, storage, config) {
     kb.text('🔔 Записаться на эфир', `xh_subscribe:${eventId}`).row();
   }
   if (ev.joinUrl) kb.url('▶️ Открыть эфир', ev.joinUrl).row();
-  kb.url('🌐 Сайт Golden Connect', 'https://cabinet.golden-connect.to/').row();
+  kb.url('🌐 Сайт Golden Connect', 'https://cabinet.goldenConnect.to/').row();
   await ctx.reply(text, {
     parse_mode: 'HTML',
     reply_markup: kb,

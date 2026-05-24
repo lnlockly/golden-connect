@@ -1,4 +1,4 @@
-// Partner-notifications worker — polls golden-connect-api for undelivered rows in
+// Partner-notifications worker — polls goldenConnect-api for undelivered rows in
 // project_notifications_log, dispatches them to Telegram via the live bot
 // instance, then marks them delivered. Runs every 30s.
 //
@@ -66,7 +66,7 @@ function buildButtons(payload, baseUrl) {
 }
 
 function startPartnersNotifCron({ bot, config, callGolden ConnectApi }) {
-  const baseUrl = config.publicBaseUrl || 'https://golden-connect.to';
+  const baseUrl = config.publicBaseUrl || 'https://goldenConnect.to';
   let running = false;
 
   async function tick() {

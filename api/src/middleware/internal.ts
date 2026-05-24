@@ -2,7 +2,7 @@ import { timingSafeEqual } from 'node:crypto';
 import type { MiddlewareHandler } from 'hono';
 import { env } from '../services/env.js';
 
-const HEADER = 'x-golden-connect-secret';
+const HEADER = 'x-goldenConnect-secret';
 
 export function safeEqual(a: string, b: string): boolean {
   // timingSafeEqual requires equal-length inputs. Pad both to the max length
@@ -21,7 +21,7 @@ export function safeEqual(a: string, b: string): boolean {
 }
 
 /**
- * Guard for /internal/* routes. Compares the `x-golden-connect-secret` header
+ * Guard for /internal/* routes. Compares the `x-goldenConnect-secret` header
  * against `env.internalSecret` in constant time. Returns 401 on mismatch or
  * missing header. Returns 500 if the server has no secret configured, since
  * that means the deployment is misconfigured and we shouldn't accept anything.

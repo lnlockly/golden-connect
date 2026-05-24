@@ -121,7 +121,7 @@ async function sendToTgId(bot, tgId, text, ev) {
     if (ev && ev.coverImage) {
       const photoUrl = ev.coverImage.startsWith('http')
         ? ev.coverImage
-        : 'https://golden-connect.to' + ev.coverImage;
+        : 'https://goldenConnect.to' + ev.coverImage;
       // Telegram caption limit is 1024 chars; trim if needed
       const caption = text.length > 1024 ? text.slice(0, 1020) + '…' : text;
       try {

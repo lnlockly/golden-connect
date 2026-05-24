@@ -1,8 +1,8 @@
 /**
- * Thin HTTP client for the golden-connect-api `/internal/*` endpoints.
+ * Thin HTTP client for the goldenConnect-api `/internal/*` endpoints.
  *
  * All repos in src/db/* delegate to this client. Authentication is the
- * shared `x-golden-connect-secret` header; `baseUrl` is the golden-connect-api
+ * shared `x-goldenConnect-secret` header; `baseUrl` is the goldenConnect-api
  * origin (defaults to http://localhost:4000 for local dev).
  *
  * Every error — network, non-2xx, malformed JSON — is surfaced as an
@@ -98,7 +98,7 @@ export class ApiClient {
         : null;
 
     const headers: Record<string, string> = {
-      "x-golden-connect-secret": this.secret,
+      "x-goldenConnect-secret": this.secret,
       accept: "application/json",
     };
     let payload: string | undefined;
@@ -162,7 +162,7 @@ export class ApiClient {
     last_name?: string | null;
     language_code?: string | null;
   }): Promise<{ ok: true; url: string; expires_at: string } | { ok: false; reason: string }> {
-    const cabinetBase = (process.env.CABINET_BASE_URL || 'https://golden-connect.to').replace(/\/+$/, '');
+    const cabinetBase = (process.env.CABINET_BASE_URL || 'https://goldenConnect.to').replace(/\/+$/, '');
     const secret = process.env.INTERNAL_API_SECRET || process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET || '';
     if (!secret) return { ok: false, reason: 'no_secret' };
     try {
@@ -170,7 +170,7 @@ export class ApiClient {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
-          'x-golden-connect-secret': secret,
+          'x-goldenConnect-secret': secret,
         },
         body: JSON.stringify(profile),
       });

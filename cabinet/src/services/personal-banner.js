@@ -1,6 +1,6 @@
 /**
  * Personal video-banner generator (S.1 video).
- * Wraps services/video-banner.js → golden-connect-promo template → mp4.
+ * Wraps services/video-banner.js → goldenConnect-promo template → mp4.
  * Falls back to static PNG via sharp+qrcode if puppeteer/chromium unavailable.
  */
 const fs = require('fs');
@@ -9,7 +9,7 @@ const QRCode = require('qrcode');
 const sharp = require('sharp');
 
 const BANNER_DIR = '/data/banners';
-const SITE_BASE = 'https://golden-connect.to';
+const SITE_BASE = 'https://goldenConnect.to';
 
 function ensureDir() {
   try { fs.mkdirSync(BANNER_DIR, { recursive: true }); } catch (_) {}
@@ -50,7 +50,7 @@ async function generateBanner({ userId, refCode, displayName }) {
   <rect x="${(SIZE-1280)/2}" y="450" width="1280" height="1280" rx="60" fill="#ffffff"/>
   <text x="${SIZE/2}" y="1900" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="700" font-size="72" fill="#ffffff">${escSvg(name)}</text>
   <text x="${SIZE/2}" y="2000" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="600" font-size="56" fill="#ffffff">📱 Сканируй QR — стартовый бонус $1</text>
-  <text x="${SIZE/2}" y="2080" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="500" font-size="42" fill="#ffffff" opacity="0.75">golden-connect.to/?ref=${escSvg(refCode || '')}</text>
+  <text x="${SIZE/2}" y="2080" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="500" font-size="42" fill="#ffffff" opacity="0.75">goldenConnect.to/?ref=${escSvg(refCode || '')}</text>
 </svg>`;
   await sharp(Buffer.from(bgSvg))
     .composite([{ input: qrBuf, left: Math.floor((SIZE - 1100) / 2), top: 540 }])

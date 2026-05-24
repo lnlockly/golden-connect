@@ -18,7 +18,7 @@ function escapeHtml(s) {
 function fmtUsd(cents) { return '$' + (Number(cents || 0) / 100).toFixed(2); }
 
 function buildCabUrl(config, path) {
-  const base = (config && config.publicBaseUrl ? config.publicBaseUrl : 'https://golden-connect.to/cabinet').replace(/\/+$/, '');
+  const base = (config && config.publicBaseUrl ? config.publicBaseUrl : 'https://goldenConnect.to/cabinet').replace(/\/+$/, '');
   return base + path;
 }
 

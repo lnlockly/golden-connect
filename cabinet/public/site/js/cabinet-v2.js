@@ -31,7 +31,7 @@
 
   // ────────── Theme ──────────
   function initTheme() {
-    const saved = localStorage.getItem('golden-connect-theme') || 'dark';
+    const saved = localStorage.getItem('goldenConnect-theme') || 'dark';
     document.body.setAttribute('data-theme', saved);
     setTimeout(injectThemeToggle, 100);
   }
@@ -53,7 +53,7 @@
       const c = document.body.getAttribute('data-theme') || 'dark';
       const next = c === 'dark' ? 'light' : 'dark';
       document.body.setAttribute('data-theme', next);
-      localStorage.setItem('golden-connect-theme', next);
+      localStorage.setItem('goldenConnect-theme', next);
       btn.innerHTML = renderThemeBtn(next);
       // Sync mobile bottom-nav theme button
       const bb = _$('v2-bnav-theme-btn');

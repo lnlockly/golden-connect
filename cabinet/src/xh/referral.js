@@ -14,7 +14,7 @@ function buildRefLink(botUsername, refCode) {
 }
 
 function buildSiteLink(refCode) {
-  const base = 'https://golden-connect.to/';
+  const base = 'https://goldenConnect.to/';
   return refCode ? `${base}?ref=${encodeURIComponent(refCode)}` : base;
 }
 

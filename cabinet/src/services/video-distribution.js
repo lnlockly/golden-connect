@@ -67,7 +67,7 @@ function _caption(user, video) {
     handle + ', опубликуй это видео в TikTok / Reels / Shorts ' + tag + '\n' +
     'QR-баннер уже встроен и движется по диагонали — зрители его поймают.\n\n' +
     '📊 После публикации жми «📨 Отправить отчёт» → кидай ссылку → +карма + статистика.\n\n' +
-    '🔗 <a href="https://golden-connect.to/?ref=' + user.ref_code + '">Твоя реф-ссылка</a>'
+    '🔗 <a href="https://goldenConnect.to/?ref=' + user.ref_code + '">Твоя реф-ссылка</a>'
   );
 }
 

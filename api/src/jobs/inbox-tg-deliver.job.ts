@@ -58,7 +58,7 @@ function buildReplyMarkup(row: InboxRow) {
   if (!row.url) return undefined;
   const fullUrl = row.url.startsWith('http')
     ? row.url
-    : `https://golden-connect.to${row.url.startsWith('/') ? '' : '/'}${row.url}`;
+    : `https://goldenConnect.to${row.url.startsWith('/') ? '' : '/'}${row.url}`;
   return { inline_keyboard: [[{ text: 'Открыть в кабинете →', url: fullUrl }]] };
 }
 

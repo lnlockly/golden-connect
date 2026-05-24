@@ -3770,7 +3770,7 @@ function buildMimeType(format = 'png') {
 }
 
 function buildFileName(base, extension = 'png') {
-  return `${sanitizeToolSlug(base, 'golden-connect')}.${String(extension || 'png').trim().toLowerCase()}`;
+  return `${sanitizeToolSlug(base, 'goldenConnect')}.${String(extension || 'png').trim().toLowerCase()}`;
 }
 
 function buildSvgDataUrl(svg) {
@@ -3897,7 +3897,7 @@ async function createSocialKitAssets(sourceDataUrl, fit = 'cover') {
     items.push({
       ...preset,
       dataUrl: canvas.toDataURL('image/png'),
-      fileName: buildFileName(`golden-connect-${preset.id}`, 'png'),
+      fileName: buildFileName(`goldenConnect-${preset.id}`, 'png'),
     });
   }
   return {
@@ -3926,7 +3926,7 @@ async function createImageStudioAsset(sourceDataUrl, options = {}) {
     format,
     mimeType,
     dataUrl: canvas.toDataURL(mimeType, quality),
-    fileName: buildFileName(`golden-connect-${width}x${height}-${fit}`, format === 'jpg' ? 'jpeg' : format),
+    fileName: buildFileName(`goldenConnect-${width}x${height}-${fit}`, format === 'jpg' ? 'jpeg' : format),
   };
 }
 
@@ -3988,7 +3988,7 @@ async function createRemoveBackgroundAsset(sourceDataUrl, threshold = 34) {
     resultDataUrl: canvas.toDataURL('image/png'),
     threshold: thresholdValue,
     background,
-    fileName: buildFileName('golden-connect-nobg', 'png'),
+    fileName: buildFileName('goldenConnect-nobg', 'png'),
   };
 }
 
@@ -4028,7 +4028,7 @@ function buildOgSvg(options = {}) {
   <rect x="78" y="490" width="286" height="68" rx="18" fill="#ffffff"/>
   <text x="112" y="534" fill="${palette.deep}" font-size="28" font-weight="800" font-family="Inter,Segoe UI,Arial">${cta}</text>
   <text x="882" y="536" fill="#ffffff" font-size="22" font-weight="600" font-family="Inter,Segoe UI,Arial">${languageName}</text>
-  <text x="882" y="568" fill="rgba(255,255,255,.82)" font-size="20" font-weight="500" font-family="Inter,Segoe UI,Arial">${referralCode ? `ref ${referralCode}` : 'cabinet.golden-connect.to'}</text>
+  <text x="882" y="568" fill="rgba(255,255,255,.82)" font-size="20" font-weight="500" font-family="Inter,Segoe UI,Arial">${referralCode ? `ref ${referralCode}` : 'cabinet.goldenConnect.to'}</text>
 </svg>`.trim();
 }
 
@@ -4041,7 +4041,7 @@ async function createOgGraphicAsset(options = {}) {
     svg,
     svgDataUrl: buildSvgDataUrl(svg),
     pngDataUrl: await rasterizeSvgToPng(svg, 1200, 630),
-    fileNameBase: sanitizeToolSlug(options.title || 'golden-connect-og', 'golden-connect-og'),
+    fileNameBase: sanitizeToolSlug(options.title || 'goldenConnect-og', 'goldenConnect-og'),
   };
 }
 
@@ -4157,7 +4157,7 @@ async function createBannerStudioAssets(options = {}) {
         }),
         svgDataUrl: buildSvgDataUrl(svg),
         pngDataUrl: await rasterizeSvgToPng(svg, size.width, size.height),
-        fileNameBase: sanitizeToolSlug(`golden-connect-${size.id}-${style.id}`, `golden-connect-${size.id}`),
+        fileNameBase: sanitizeToolSlug(`goldenConnect-${size.id}-${style.id}`, `goldenConnect-${size.id}`),
       });
     }
   }
@@ -5461,7 +5461,7 @@ function renderToolsPanel() {
             <img src="${escapeHtml(state.toolResults.qr.dataUrl)}" alt="QR code">
             <div class="product-card-actions">
               ${copyButtonMarkup(state.toolResults.qr.url)}
-              <a class="btn btn--ghost btn--sm" href="${escapeHtml(state.toolResults.qr.dataUrl)}" download="golden-connect-qr.png">Скачать PNG</a>
+              <a class="btn btn--ghost btn--sm" href="${escapeHtml(state.toolResults.qr.dataUrl)}" download="goldenConnect-qr.png">Скачать PNG</a>
             </div>
           </div>
         </article>
@@ -5624,7 +5624,7 @@ function renderToolsPanel() {
             </div>
           </div>
           <div class="product-card-actions">
-            <a class="btn btn--primary btn--sm" href="${escapeHtml(removeBg.resultDataUrl || '')}" download="${escapeHtml(removeBg.fileName || 'golden-connect-nobg.png')}">Скачать PNG</a>
+            <a class="btn btn--primary btn--sm" href="${escapeHtml(removeBg.resultDataUrl || '')}" download="${escapeHtml(removeBg.fileName || 'goldenConnect-nobg.png')}">Скачать PNG</a>
           </div>
         </article>
       `
@@ -5646,8 +5646,8 @@ function renderToolsPanel() {
             <img src="${escapeHtml(ogImage.pngDataUrl || ogImage.svgDataUrl || '')}" alt="${escapeHtml(ogImage.title || 'OG Image')}">
           </div>
           <div class="product-card-actions">
-            <a class="btn btn--primary btn--sm" href="${escapeHtml(ogImage.pngDataUrl || '')}" download="${escapeHtml(buildFileName(ogImage.fileNameBase || 'golden-connect-og', 'png'))}">Скачать PNG</a>
-            <a class="btn btn--ghost btn--sm" href="${escapeHtml(ogImage.svgDataUrl || '')}" download="${escapeHtml(buildFileName(ogImage.fileNameBase || 'golden-connect-og', 'svg'))}">Скачать SVG</a>
+            <a class="btn btn--primary btn--sm" href="${escapeHtml(ogImage.pngDataUrl || '')}" download="${escapeHtml(buildFileName(ogImage.fileNameBase || 'goldenConnect-og', 'png'))}">Скачать PNG</a>
+            <a class="btn btn--ghost btn--sm" href="${escapeHtml(ogImage.svgDataUrl || '')}" download="${escapeHtml(buildFileName(ogImage.fileNameBase || 'goldenConnect-og', 'svg'))}">Скачать SVG</a>
           </div>
         </article>
       `
@@ -5681,7 +5681,7 @@ function renderToolsPanel() {
               <h4>${escapeHtml(item.title || 'Banner')} · ${escapeHtml(item.styleTitle || '')}</h4>
               <p>HTML-баннер и графическая версия для быстрого запуска рекламы.</p>
               <div class="product-card-actions">
-                <a class="btn btn--primary btn--sm" href="${escapeHtml(item.pngDataUrl || '')}" download="${escapeHtml(buildFileName(item.fileNameBase || 'golden-connect-banner', 'png'))}">Скачать PNG</a>
+                <a class="btn btn--primary btn--sm" href="${escapeHtml(item.pngDataUrl || '')}" download="${escapeHtml(buildFileName(item.fileNameBase || 'goldenConnect-banner', 'png'))}">Скачать PNG</a>
                 ${copyButtonMarkup(item.embedCode || '', 'Копировать HTML', 'share_referral')}
               </div>
             </article>
@@ -5733,8 +5733,8 @@ function renderToolsPanel() {
             ${pdfKit.shortLink?.shortUrl ? copyButtonMarkup(pdfKit.shortLink.shortUrl, 'Копировать short link', 'copy_referral') : ''}
             <button class="btn btn--ghost btn--sm tool-prefill-url-btn" type="button" data-tool-kind="short" data-tool-url="${escapeHtml(pdfKit.sourceUrl || '')}" data-tool-title="${escapeHtml(pdfKit.shortLink?.title || 'PDF Kit')}">В shortener</button>
             <button class="btn btn--ghost btn--sm tool-prefill-url-btn" type="button" data-tool-kind="qr" data-tool-url="${escapeHtml(pdfKit.shortLink?.shortUrl || pdfKit.sourceUrl || '')}" data-tool-title="${escapeHtml(pdfKit.shortLink?.title || 'PDF Kit')}">В QR</button>
-            ${pdfKit.qr?.dataUrl ? `<a class="btn btn--ghost btn--sm" href="${escapeHtml(pdfKit.qr.dataUrl)}" download="golden-connect-pdf-qr.png">Скачать QR</a>` : ''}
-            ${pdfKit.ogImage?.pngDataUrl ? `<a class="btn btn--ghost btn--sm" href="${escapeHtml(pdfKit.ogImage.pngDataUrl)}" download="${escapeHtml(buildFileName(pdfKit.ogImage.fileNameBase || 'golden-connect-pdf-kit', 'png'))}">Скачать OG</a>` : ''}
+            ${pdfKit.qr?.dataUrl ? `<a class="btn btn--ghost btn--sm" href="${escapeHtml(pdfKit.qr.dataUrl)}" download="goldenConnect-pdf-qr.png">Скачать QR</a>` : ''}
+            ${pdfKit.ogImage?.pngDataUrl ? `<a class="btn btn--ghost btn--sm" href="${escapeHtml(pdfKit.ogImage.pngDataUrl)}" download="${escapeHtml(buildFileName(pdfKit.ogImage.fileNameBase || 'goldenConnect-pdf-kit', 'png'))}">Скачать OG</a>` : ''}
           </div>
         </article>
       `

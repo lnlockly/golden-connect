@@ -15,7 +15,7 @@
 
 ═══ ЧТО ТАКОЕ GOLDEN_CONNECT ═══
 Golden Connect — рекламная экосистема с распределённой прибылью. Внимание аудитории напрямую оплачивается: пользователи зарабатывают за просмотры, клики, видео-промо, задания. Доля от оборота — без потолка.
-Сайт-лендинг: golden-connect.to | Кабинет: golden-connect.to/cabinet | API: api.golden-connect.to | Бот: @Golden Connect_bizbot
+Сайт-лендинг: goldenConnect.to | Кабинет: goldenConnect.to/cabinet | API: api.goldenConnect.to | Бот: @Golden Connect_bizbot
 
 ═══ 3 РОЛИ ═══
 • Рекламодатели — пополняют рекламный счёт, размещают кампании (баннеры, контекст, видео, CPA-задания, подписки на каналы), получают аналитику.
@@ -89,7 +89,7 @@ FREE: только L1 = 10%.
 + Inline-кнопки для всех заданий и кампаний
 
 ═══ РЕФЕРАЛЬНАЯ ССЫЛКА (ВАЖНО!) ═══
-Реф-ссылка на сайт: https://golden-connect.to/?ref=ТВОЙКОД (ведёт на главный лендинг → CTA → регистрация с автоподстановкой реф-кода).
+Реф-ссылка на сайт: https://goldenConnect.to/?ref=ТВОЙКОД (ведёт на главный лендинг → CTA → регистрация с автоподстановкой реф-кода).
 Реф-ссылка на бот: https://t.me/Golden Connect_bizbot?start=ref_ТВОЙКОД
 Реф-код в кабинете: раздел "Профиль" → "Реф-ссылка" или "Промо-материалы".
 
@@ -100,7 +100,7 @@ FREE: только L1 = 10%.
 
 ═══ ПРАВИЛА ОТВЕТОВ ═══
 - Если спрашивают «сколько можно заработать» — объясняй математику: цикл матрицы × ставка × 10 линий × Matching Bonus, но не обещай точных сумм.
-- Для регистрации направляй: https://golden-connect.to/cabinet/register или @Golden Connect_bizbot.
+- Для регистрации направляй: https://goldenConnect.to/cabinet/register или @Golden Connect_bizbot.
 - Для оплаты тарифа: раздел "Финансы" → "Оплата" в кабинете.
 - Для вывода: раздел "Финансы" → "Вывод".
 - Для технических багов: раздел "Поддержка" в кабинете.
@@ -134,7 +134,7 @@ FREE: только L1 = 10%.
       .replace(/\*([^*\n]+?)\*/g, '<i>$1</i>')
       .replace(/\n/g, '<br>')
       .replace(/@(\w+)/g, '<a href="https://t.me/$1" target="_blank" rel="noopener">@$1</a>')
-      .replace(/golden-connect\.biz/g, '<a href="https://golden-connect.to" target="_blank">golden-connect.to</a>');
+      .replace(/goldenConnect\.biz/g, '<a href="https://goldenConnect.to" target="_blank">goldenConnect.to</a>');
   }
 
   function buildChrome(isPanel) {

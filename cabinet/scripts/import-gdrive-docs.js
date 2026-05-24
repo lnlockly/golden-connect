@@ -9,7 +9,7 @@
 //   node scripts/import-gdrive-docs.js
 //
 // Or on server:
-//   cd /opt/golden-connect-cabinet && npm install mammoth && node scripts/import-gdrive-docs.js
+//   cd /opt/goldenConnect-cabinet && npm install mammoth && node scripts/import-gdrive-docs.js
 
 'use strict';
 
@@ -361,7 +361,7 @@ async function main() {
   // Cleanup tmp
   try { fs.rmSync(TMP_DIR, { recursive: true }); } catch (_) {}
 
-  console.log('\nDone. Restart golden-connect-cabinet to apply changes.\n');
+  console.log('\nDone. Restart goldenConnect-cabinet to apply changes.\n');
 }
 
 main().catch(err => {

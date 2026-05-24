@@ -10,7 +10,7 @@ const EXPORT_ROOT = path.join(ROOT, 'data', 'telegram-exports', 'goldenConnect_a
 const KNOWLEDGE_FILE = path.join(EXPORT_ROOT, 'text-knowledge', 'raw', 'all_useful.jsonl');
 const CHAT_META_FILE = path.join(EXPORT_ROOT, 'chat.json');
 const OUTPUT_DIR = path.join(ROOT, 'public', 'site', 'data');
-const OUTPUT_FILE = path.join(OUTPUT_DIR, 'golden-connect-product-library.json');
+const OUTPUT_FILE = path.join(OUTPUT_DIR, 'goldenConnect-product-library.json');
 
 const PRODUCT_ALIASES = {
   'live-water': ['живая вода', 'биоактиватор питьевой воды', 'биоактиватор воды', 'активатор воды', 'живаявода'],
@@ -366,8 +366,8 @@ function main() {
       home: '/',
       register: '/register',
       catalog: '/landing/catalog',
-      officialSite: siteContent.links && (siteContent.links.companyMain || siteContent.links.officialSite) || 'https://golden-connect.to/',
-      companyCatalog: siteContent.links && (siteContent.links.companyCatalog || siteContent.links.shop) || 'https://golden-connect.to/',
+      officialSite: siteContent.links && (siteContent.links.companyMain || siteContent.links.officialSite) || 'https://goldenConnect.to/',
+      companyCatalog: siteContent.links && (siteContent.links.companyCatalog || siteContent.links.shop) || 'https://goldenConnect.to/',
       bot: 'https://t.me/Golden Connect_bizbot',
     },
     summary: {

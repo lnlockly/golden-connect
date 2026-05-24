@@ -17,10 +17,10 @@ import type { AppContext } from "../bot/middleware.js"
 const ROBOAI_BASE =
 	process.env.ROBOAI_INTERNAL_URL ||
 	process.env.ROBOAI_ENGINE_URL ||
-	"http://roboai-engine.golden-connect.svc.cluster.local:3001"
+	"http://roboai-engine.goldenConnect.svc.cluster.local:3001"
 const INTERNAL_SECRET = process.env.INTERNAL_API_SECRET || ""
 const CRM_URL =
-	process.env.CRM_WEBAPP_URL || "https://crm.golden-connect.to/cabinet/crm-app.html"
+	process.env.CRM_WEBAPP_URL || "https://crm.goldenConnect.to/cabinet/crm-app.html"
 const PUSH_HOUR_UTC = Number(process.env.ROBOAI_DAILY_PUSH_HOUR_UTC) || 6 // 9:00 МСК
 
 interface RoboaiDailyDigest {

@@ -14,7 +14,7 @@ registerStrings({
   'meet.btn_team': { ru: '👥 Моя команда', en: '👥 My team', zh: '👥 我的团队' },
 });
 
-const WEBAPP_BASE = process.env.WEBAPP_BASE || process.env.WEBSITE_URL || 'https://golden-connect.to/cabinet';
+const WEBAPP_BASE = process.env.WEBAPP_BASE || process.env.WEBSITE_URL || 'https://goldenConnect.to/cabinet';
 
 export function registerMeet(): { onCommand: (ctx: AppContext) => Promise<void> } {
   async function onCommand(ctx: AppContext): Promise<void> {

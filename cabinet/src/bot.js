@@ -1,4 +1,4 @@
-// golden-connect-cabinet: тонкая обёртка. Создаёт Bot grammy, подключает:
+// goldenConnect-cabinet: тонкая обёртка. Создаёт Bot grammy, подключает:
 //   1) Golden Connect handlers (events, referral, promo) — ДО alpha onboarding
 //   2) Alpha-planner createBot(bot, webappUrl) — регистрирует онбординг, planner, AI, voice, dreams, meet
 //   3) Golden Connect cron напоминаний об эфирах + alpha cron
@@ -37,11 +37,11 @@ const { setupCoachMode } = require('./xh/coach');
 const { setupChatNudge, startChatNudgeCron } = require('./xh/chat-nudge');
 const { startTeamStageCron } = require('./xh/team-cron');
 const { startTeamTasksCron } = require('./xh/team-tasks-cron');
-// [golden-connect-rebrand] disabled: const { setupHealth } = require('./xh/health');
-// [golden-connect-rebrand] disabled: const { setupHealthAI } = require('./xh/health-ai');
-// [golden-connect-rebrand] disabled: const { startHealthCron } = require('./xh/health-cron');
+// [goldenConnect-rebrand] disabled: const { setupHealth } = require('./xh/health');
+// [goldenConnect-rebrand] disabled: const { setupHealthAI } = require('./xh/health-ai');
+// [goldenConnect-rebrand] disabled: const { startHealthCron } = require('./xh/health-cron');
 const { setupSiteLink } = require('./xh/site-link');
-// [golden-connect-rebrand] disabled: const { setupHealthQuiz } = require('./xh/health-quiz');
+// [goldenConnect-rebrand] disabled: const { setupHealthQuiz } = require('./xh/health-quiz');
 const { setupFeatures, startWeeklyDigestCron } = require('./xh/features');
 const { startDripCron } = require('./xh/welcome-drip');
 const { startNudgeCron } = require('./xh/auto-nudge');
@@ -143,7 +143,7 @@ function createBot(config, storage) {
 
   // ===== Alpha-planner bot (onboarding, planner, dreams, meet, admin-panel) =====
   try {
-    setupAlphaBot(bot, config.publicBaseUrl || 'https://golden-connect.to/cabinet');
+    setupAlphaBot(bot, config.publicBaseUrl || 'https://goldenConnect.to/cabinet');
   } catch (e) {
     console.error('[alpha_setup]', e && e.message);
   }
@@ -234,7 +234,7 @@ function createBot(config, storage) {
             const fileObj = new InputFile(banner_path.path || banner_path);
             const caption = '🎬 <b>Твой персональный баннер Golden Connect готов!</b>\n\n' +
                             '📱 QR ведёт на твою реф-ссылку — делись в соцсетях, чате, оффлайн.\n\n' +
-                            'Скачать в кабинете: golden-connect.to/cabinet → Промо-материалы.';
+                            'Скачать в кабинете: goldenConnect.to/cabinet → Промо-материалы.';
             if (banner_path && banner_path.isVideo) {
               await bot.api.sendVideo(u.tg_id, fileObj, { caption, parse_mode: 'HTML' });
             } else {
@@ -299,12 +299,12 @@ function createBot(config, storage) {
     }
     try { await ctx.answerCallbackQuery({ text: action === 'run' ? 'Zapuskaem rozygrysh...' : 'Perenosim...', show_alert: false }); } catch (_) {}
     try {
-      const apiBase = (config && config.goldenConnectApiBaseUrl) || 'https://api.golden-connect.to';
+      const apiBase = (config && config.goldenConnectApiBaseUrl) || 'https://api.goldenConnect.to';
       const secret  = (config && config.goldenConnectApiInternalSecret) || '';
       const url = apiBase.replace(/\/+\$/, '') + '/internal/karma-raffle/' + action + '/' + raffleId;
       const res = await fetch(url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'x-golden-connect-secret': secret },
+        headers: { 'Content-Type': 'application/json', 'x-goldenConnect-secret': secret },
       });
       const data = await res.json().catch(() => ({}));
       const DOLLAR = String.fromCharCode(36);
@@ -370,7 +370,7 @@ function createBot(config, storage) {
         '3️⃣ Ежеквартальный % от дохода Golden Connect',
         '4️⃣ Розыгрыши призов (чем больше TRDX — тем больше шанс)',
         '',
-        '🔗 Подробнее: https://golden-connect.to/trdx',
+        '🔗 Подробнее: https://goldenConnect.to/trdx',
       ];
       if (recent.length > 0) {
         lines.push('');
@@ -384,8 +384,8 @@ function createBot(config, storage) {
       }
       const { InlineKeyboard } = require('grammy');
       const kb = new InlineKeyboard()
-        .url('🔗 Моя реф-ссылка', 'https://golden-connect.to/?ref=' + (wu?.referralCode || '')).row()
-        .url('🌐 Подробно на сайте', 'https://golden-connect.to/trdx').row()
+        .url('🔗 Моя реф-ссылка', 'https://goldenConnect.to/?ref=' + (wu?.referralCode || '')).row()
+        .url('🌐 Подробно на сайте', 'https://goldenConnect.to/trdx').row()
         .text('🏆 Топ-100', 'trdx_top');
       await ctx.reply(lines.join('\n'), { parse_mode: 'HTML', reply_markup: kb, disable_web_page_preview: true });
     } catch (e) {
@@ -419,11 +419,11 @@ function createBot(config, storage) {
       // Balances + karma — try api proxy via internal helper
       let earned = 0, gift = 0, karma = 100, tariff = 'free';
       try {
-        const apiBase = (config.goldenConnectApiBaseUrl || 'https://api.golden-connect.to').replace(/\/+$/, '');
+        const apiBase = (config.goldenConnectApiBaseUrl || 'https://api.goldenConnect.to').replace(/\/+$/, '');
         const sec = config.goldenConnectApiInternalSecret || '';
-        const email = u.email || ('tg' + u.tg_id + '@golden-connect.bot');
+        const email = u.email || ('tg' + u.tg_id + '@goldenConnect.bot');
         const r = await fetch(apiBase + '/internal/finance/balances?email=' + encodeURIComponent(email), {
-          headers: { 'x-golden-connect-secret': sec },
+          headers: { 'x-goldenConnect-secret': sec },
         });
         if (r.ok) {
           const d = await r.json();
@@ -444,7 +444,7 @@ function createBot(config, storage) {
         activeClaims = rawDb.prepare("SELECT COUNT(*) AS c FROM ad_claims WHERE executor_user_id=? AND status IN ('claimed', 'submitted', 'rework')").get(u.id)?.c || 0;
       } catch (_) {}
       const tariffEmoji = { free: '🟢', launch: '🚀', boost: '⚡', rocket: '💎' }[tariff] || '🟢';
-      const refUrl = 'https://golden-connect.to/?ref=' + (u.ref_code || '');
+      const refUrl = 'https://goldenConnect.to/?ref=' + (u.ref_code || '');
       const txt =
         '📊 <b>Твоя сводка Golden Connect</b>\n\n' +
         '💵 Earned: <b>$' + earned.toFixed(2) + '</b>\n' +
@@ -480,7 +480,7 @@ function createBot(config, storage) {
     try { await ctx.answerCallbackQuery(); } catch (_) {}
     try {
       const { sendMagicLink } = require('./xh/site-link');
-      const siteBase = String(config.publicBaseUrl || 'https://golden-connect.to/cabinet').replace(/\/+$/, '');
+      const siteBase = String(config.publicBaseUrl || 'https://goldenConnect.to/cabinet').replace(/\/+$/, '');
       await sendMagicLink(ctx, storage, siteBase);
     } catch (e) { console.warn('[open_cabinet]', e && e.message); }
   });
@@ -500,7 +500,7 @@ function createBot(config, storage) {
   // ────────── /withdraw — request payout ──────────
   bot.command('withdraw', async (ctx) => {
     if (ctx.chat?.type !== 'private') return;
-    const url = 'https://golden-connect.to/cabinet#/finance';
+    const url = 'https://goldenConnect.to/cabinet#/finance';
     await ctx.reply(
       '💸 <b>Вывод средств</b>\n\n' +
       'Минимум: <b>$5</b>\n' +
@@ -590,7 +590,7 @@ function createBot(config, storage) {
     return ctx.reply(
       '🎯 <b>Заказать рассылку</b>\n\n' +
       'Открой кабинет — конструктор кампании, AI-промт из URL, выбор аудитории, оплата с баланса:\n\n' +
-      'https://golden-connect.to/cabinet#/roboai-order',
+      'https://goldenConnect.to/cabinet#/roboai-order',
       { parse_mode: 'HTML', disable_web_page_preview: true }
     );
   });
@@ -600,7 +600,7 @@ function createBot(config, storage) {
       '💸 <b>Зарабатывать на аккаунтах</b>\n\n' +
       'Подключи свои Telegram-аккаунты на сайте — мы прогреем и подключим к рекламным кампаниям.\n' +
       '50% с каждого сообщения. MLM 10 уровней по партнёрке Golden Connect.\n\n' +
-      'https://golden-connect.to/cabinet#/roboai-earn',
+      'https://goldenConnect.to/cabinet#/roboai-earn',
       { parse_mode: 'HTML', disable_web_page_preview: true }
     );
   });
@@ -712,7 +712,7 @@ function createBot(config, storage) {
     try { setupAlertCallbacks(bot); } catch (e) { console.error('[cron_alerts_cb]', e && e.message); }
     try { startPlannerCron(bot); } catch (e) { console.error('[cron_planner]', e && e.message); }
     try { startDreamCoachCron(bot, groqKeys); } catch (e) { console.error('[cron_dreams]', e && e.message); }
-    try { startMeetCron(bot, config.publicBaseUrl || 'https://golden-connect.to/cabinet'); } catch (e) { console.error('[cron_meet]', e && e.message); }
+    try { startMeetCron(bot, config.publicBaseUrl || 'https://goldenConnect.to/cabinet'); } catch (e) { console.error('[cron_meet]', e && e.message); }
     try { startEventRemindersCron(bot, storage); } catch (e) { console.error('[cron_xh_events]', e && e.message); }
     try { startTeamStageCron(bot, storage); } catch (e) { console.error('[cron_team_stage]', e && e.message); }
     try { startTeamTasksCron(bot, storage); } catch (e) { console.error('[cron_team_tasks]', e && e.message); }
@@ -734,11 +734,11 @@ function createBot(config, storage) {
     const helpers = require('./web-routes');
     const apiFn = (path, body) => {
       const fetch = require('node-fetch') || global.fetch;
-      const base = (process.env.GOLDEN_CONNECT_API_BASE_URL || process.env.GOLDEN_CONNECT_API_BASE || config.goldenConnectApiBaseUrl || 'https://api.golden-connect.to').replace(/\/$/, '');
+      const base = (process.env.GOLDEN_CONNECT_API_BASE_URL || process.env.GOLDEN_CONNECT_API_BASE || config.goldenConnectApiBaseUrl || 'https://api.goldenConnect.to').replace(/\/$/, '');
       const secret = process.env.INTERNAL_API_SECRET;
       const url = base + path;
       const method = body ? 'POST' : 'GET';
-      const headers = { 'x-golden-connect-secret': secret, 'content-type': 'application/json' };
+      const headers = { 'x-goldenConnect-secret': secret, 'content-type': 'application/json' };
       const init = { method, headers, signal: AbortSignal.timeout(5000) };
       if (body) init.body = JSON.stringify(body);
       return fetch(url, init).then(r => r.json());
@@ -760,7 +760,7 @@ function createBot(config, storage) {
       if (!wu || !wu.email) {
         return ctx.reply(
           '⚠️ У тебя нет привязанного аккаунта на сайте.\n\n' +
-          'Чтобы привязать — зарегистрируйся на https://golden-connect.to и войди тем же Telegram.',
+          'Чтобы привязать — зарегистрируйся на https://goldenConnect.to и войди тем же Telegram.',
           { parse_mode: 'HTML', disable_web_page_preview: true },
         );
       }
@@ -806,7 +806,7 @@ function createBot(config, storage) {
         '🔑 <b>Новый пароль</b>\n\n' +
         '<code>' + newPw + '</code>\n\n' +
         '<i>Нажми на пароль выше — скопируется.</i>\n\n' +
-        '🔗 Войти: https://golden-connect.to/cabinet/login\n' +
+        '🔗 Войти: https://goldenConnect.to/cabinet/login\n' +
         'Email: <code>' + String(wu.email).replace(/[<>&]/g, '') + '</code>\n\n' +
         '⚠️ После входа смени пароль на свой в Профиле.',
         { parse_mode: 'HTML', disable_web_page_preview: true },

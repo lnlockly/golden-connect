@@ -82,7 +82,7 @@ function _getEmailForUser(userId, optEmail) {
     const db = dbModule.getDb();
     // planner.db users has tg_id but no email column — derive bot-email from tg_id
     const u = db.prepare('SELECT tg_id FROM users WHERE id=?').get(userId);
-    if (u && u.tg_id) return 'tg' + u.tg_id + '@golden-connect.bot';
+    if (u && u.tg_id) return 'tg' + u.tg_id + '@goldenConnect.bot';
     return null;
   } catch (_) { return null; }
 }
@@ -90,13 +90,13 @@ function _getEmailForUser(userId, optEmail) {
 async function _fetchTariffFromApi(userId, optEmail) {
   const email = _getEmailForUser(userId, optEmail);
   if (!email) return 'free';
-  const apiBase = String((config && config.goldenConnectApiBaseUrl) || 'https://api.golden-connect.to').replace(/\/+$/, '');
+  const apiBase = String((config && config.goldenConnectApiBaseUrl) || 'https://api.goldenConnect.to').replace(/\/+$/, '');
   const secret  = String((config && config.goldenConnectApiInternalSecret) || '');
   if (!secret) return 'free';
   try {
     const res = await fetch(apiBase + '/internal/finance/balances?email=' + encodeURIComponent(email), {
       method: 'GET',
-      headers: { 'x-golden-connect-secret': secret, 'Content-Type': 'application/json' },
+      headers: { 'x-goldenConnect-secret': secret, 'Content-Type': 'application/json' },
     });
     if (!res.ok) return 'free';
     const data = await res.json();

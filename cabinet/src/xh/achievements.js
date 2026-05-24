@@ -54,7 +54,7 @@ function ensureSchema() {
 }
 
 // [tariff-wire] now async; populates tariff_active + tariff_days_remaining
-// via tariff-gate.js which hits golden-connect-api /internal/finance/balances (1-min cache).
+// via tariff-gate.js which hits goldenConnect-api /internal/finance/balances (1-min cache).
 async function getUserMetrics(userId, opts = {}) {
   const rawDb = db.getDb();
   const adStats = rawDb.prepare(`

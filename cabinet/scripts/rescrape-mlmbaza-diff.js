@@ -22,7 +22,7 @@ const STATE = path.join(DATA_DIR, 'mlm-rescrape-state.json');
 
 const RPS = +(process.env.RESCRAPE_RPS || 2);
 const REQ_INTERVAL_MS = Math.max(50, Math.floor(1000 / RPS));
-const UA = 'Mozilla/5.0 (compatible; Golden Connect/1.0; +https://golden-connect.to)';
+const UA = 'Mozilla/5.0 (compatible; Golden Connect/1.0; +https://goldenConnect.to)';
 
 function readJson(p, fb) { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return fb; } }
 function writeJsonAtomic(p, obj) { const t = p + '.tmp'; fs.writeFileSync(t, JSON.stringify(obj, null, 2)); fs.renameSync(t, p); }

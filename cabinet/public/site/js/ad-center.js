@@ -106,7 +106,7 @@
         '</div>' +
         '<div class="adc-field">' +
           '<label>Кнопки (опционально, по 1 на строку, формат: <code>Текст | https://url</code>)</label>' +
-          '<textarea id="adcInstantButtons" rows="2" placeholder="Купить | https://golden-connect.to/?ref=ABC&#10;Подробнее | https://t.me/example"></textarea>' +
+          '<textarea id="adcInstantButtons" rows="2" placeholder="Купить | https://goldenConnect.to/?ref=ABC&#10;Подробнее | https://t.me/example"></textarea>' +
         '</div>' +
         '<div class="adc-field">' +
           '<label>Каналы получатели</label>' +

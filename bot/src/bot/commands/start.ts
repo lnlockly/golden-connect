@@ -276,7 +276,7 @@ async function* chunkedStream(text: string): AsyncGenerator<string> {
 /**
  * Login-link handler. When the website sends a user to
  * `t.me/<bot>?start=login_<token>` the deep-link lands here. We verify
- * the token with golden-connect-api (single-use, TTL'd) and bind the session
+ * the token with goldenConnect-api (single-use, TTL'd) and bind the session
  * to the Telegram user on the api side. Returns early on any outcome —
  * we never fall through to onboarding for a login-link.
  */
@@ -292,32 +292,32 @@ async function handleLoginPayload(
   const lang = pickLang(from.language_code);
   const msgs: Record<Lang, { ok: string; gone: string; net: string }> = {
     en: {
-      ok: "✅ Successfully linked with the site. Head back to golden-connect.to — you're signed in.",
+      ok: "✅ Successfully linked with the site. Head back to goldenConnect.to — you're signed in.",
       gone: "⛔ This link is expired or not found. Generate a new one on the site.",
       net: "Connection error, please try again later.",
     },
     ru: {
-      ok: "✅ Успешно связано с сайтом. Возвращайтесь на golden-connect.to — вы залогинены.",
+      ok: "✅ Успешно связано с сайтом. Возвращайтесь на goldenConnect.to — вы залогинены.",
       gone: "⛔ Ссылка устарела или не найдена. Сгенерируйте новую на сайте.",
       net: "Ошибка связи, попробуйте позже.",
     },
     zh: {
-      ok: "✅ 已成功与网站关联。返回 golden-connect.to —— 你已登录。",
+      ok: "✅ 已成功与网站关联。返回 goldenConnect.to —— 你已登录。",
       gone: "⛔ 此链接已过期或未找到。请在网站上生成新链接。",
       net: "连接错误，请稍后再试。",
     },
     uz: {
-      ok: "✅ Sayt bilan muvaffaqiyatli bog'landi. golden-connect.to saytiga qayting — siz tizimga kirdingiz.",
+      ok: "✅ Sayt bilan muvaffaqiyatli bog'landi. goldenConnect.to saytiga qayting — siz tizimga kirdingiz.",
       gone: "⛔ Havola eskirgan yoki topilmadi. Saytda yangisini yarating.",
       net: "Ulanish xatosi, keyinroq urinib ko'ring.",
     },
     fil: {
-      ok: "✅ Matagumpay na na-link sa site. Bumalik sa golden-connect.to — naka-sign in ka na.",
+      ok: "✅ Matagumpay na na-link sa site. Bumalik sa goldenConnect.to — naka-sign in ka na.",
       gone: "⛔ Expired o hindi natagpuan ang link na ito. Mag-generate ng bago sa site.",
       net: "May error sa koneksyon, subukan ulit mamaya.",
     },
     th: {
-      ok: "✅ เชื่อมโยงกับเว็บไซต์สำเร็จ กลับไปที่ golden-connect.to — คุณเข้าสู่ระบบแล้ว",
+      ok: "✅ เชื่อมโยงกับเว็บไซต์สำเร็จ กลับไปที่ goldenConnect.to — คุณเข้าสู่ระบบแล้ว",
       gone: "⛔ ลิงก์หมดอายุหรือไม่พบ กรุณาสร้างลิงก์ใหม่บนเว็บไซต์",
       net: "เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองใหม่ภายหลัง",
     },
@@ -475,7 +475,7 @@ function _buildCrmPaywall(name: string, tariff: CrmTariffInfo, webappUrl: string
   const kb = new InlineKeyboard()
     .webApp('💎 Купить тариф', buyUrl)
     .row()
-    .url('📖 Что даёт CRM', 'https://golden-connect.to/#whats-new')
+    .url('📖 Что даёт CRM', 'https://goldenConnect.to/#whats-new')
     .row()
     .webApp('🌐 Открыть кабинет', webappUrl);
   return { text, kb };
@@ -607,7 +607,7 @@ export async function onStart(ctx: AppContext): Promise<void> {
     const _tariff = await _fetchCrmTariff(ctx, user.id);
     const _name = user.first_name ?? ctx.from?.first_name ?? 'друг';
     const _isPaid = ['launch', 'boost', 'rocket'].includes(_tariff.code) && !_tariff.isExpired;
-    const _webappUrl = (process.env.WEBAPP_URL || 'https://golden-connect.to/cabinet');
+    const _webappUrl = (process.env.WEBAPP_URL || 'https://goldenConnect.to/cabinet');
     const built = _isPaid
       ? _buildCrmMenu(_name, _tariff, _webappUrl)
       : _buildCrmPaywall(_name, _tariff, _webappUrl);

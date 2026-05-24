@@ -13,7 +13,7 @@ const _http = require('http');
 
 function _post(path, payload, timeoutMs = 5000) {
   return new Promise((resolve) => {
-    const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://golden-connect-api:4001';
+    const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://goldenConnect-api:4001';
     const secret = process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET;
     if (!secret) return resolve({ ok: false, error: 'no_secret' });
     const data = JSON.stringify(payload || {});
@@ -28,7 +28,7 @@ function _post(path, payload, timeoutMs = 5000) {
         headers: {
           'Content-Type': 'application/json',
           'Content-Length': Buffer.byteLength(data),
-          'x-golden-connect-secret': secret,
+          'x-goldenConnect-secret': secret,
         },
         timeout: timeoutMs,
       }, (r) => {
@@ -54,7 +54,7 @@ function _post(path, payload, timeoutMs = 5000) {
  * @param {Object} opts
  * @param {number} [opts.tgId] Telegram user id (preferred for bot-side)
  * @param {number} [opts.userId] api Postgres user_id (preferred when known)
- * @param {string} [opts.email] email (real or tg<id>@golden-connect.bot)
+ * @param {string} [opts.email] email (real or tg<id>@goldenConnect.bot)
  * @param {'gift'|'subscription'|'working'} opts.wallet
  * @param {number} opts.cents Amount in cents (must be > 0)
  * @param {string} opts.kind cash_ledger.kind label

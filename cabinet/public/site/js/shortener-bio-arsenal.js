@@ -2847,7 +2847,7 @@ async function _shrRenderBioManager() {
       html += '<p style="margin-bottom:10px"><b>Bio-страница</b> — это ваша персональная страница со всеми ссылками, контактами и соцсетями. Как Linktree, только <b>бесплатно</b> и с большим функционалом.</p>';
       html += '<div style="margin-bottom:12px"><b>\u{1F3AF} Что вы получаете:</b></div>';
       html += '<ul style="margin:0 0 12px 16px;padding:0">';
-      html += '<li><b>Персональный URL</b> — <span style="color:#667eea">golden-connect.to/bio/ваш-логин</span></li>';
+      html += '<li><b>Персональный URL</b> — <span style="color:#667eea">goldenConnect.to/bio/ваш-логин</span></li>';
       html += '<li><b>Красивый дизайн</b> — 14 фонов, 8 стилей кнопок, кастомные цвета</li>';
       html += '<li><b>Все ссылки</b> — добавьте любые ссылки, соцсети, контакты</li>';
       html += '<li><b>Аналитика</b> — кто заходит, откуда, с каких устройств</li>';
@@ -2858,7 +2858,7 @@ async function _shrRenderBioManager() {
       html += '<div style="margin-bottom:10px"><b>\u{1F4CB} Как создать Bio-страницу:</b></div>';
       html += '<ol style="margin:0 0 12px 16px;padding:0">';
       html += '<li>Нажмите <b>«Создать страницу»</b></li>';
-      html += '<li>Придумайте <b>логин</b> — это будет URL вашей страницы (например: <span style="color:#667eea">golden-connect.to/bio/ivan</span>)</li>';
+      html += '<li>Придумайте <b>логин</b> — это будет URL вашей страницы (например: <span style="color:#667eea">goldenConnect.to/bio/ivan</span>)</li>';
       html += '<li>Заполните <b>имя</b> и <b>описание</b> (или нажмите <b>AI</b> — ИИ сделает за вас)</li>';
       html += '<li>Добавьте <b>ссылки</b> и <b>соцсети</b></li>';
       html += '<li>Выберите <b>тему</b> и <b>фон</b></li>';
@@ -2870,7 +2870,7 @@ async function _shrRenderBioManager() {
       html += '<p style="margin-bottom:10px"><b>Bio page</b> is your personal page with all links, contacts, and social media. Like Linktree, but <b>free</b> and with more features.</p>';
       html += '<div style="margin-bottom:12px"><b>\u{1F3AF} What you get:</b></div>';
       html += '<ul style="margin:0 0 12px 16px;padding:0">';
-      html += '<li><b>Personal URL</b> — <span style="color:#667eea">golden-connect.to/bio/your-login</span></li>';
+      html += '<li><b>Personal URL</b> — <span style="color:#667eea">goldenConnect.to/bio/your-login</span></li>';
       html += '<li><b>Beautiful design</b> — 14 backgrounds, 8 button styles, custom colors</li>';
       html += '<li><b>All links</b> — add any links, socials, contacts</li>';
       html += '<li><b>Analytics</b> — who visits, from where, which devices</li>';
@@ -2881,7 +2881,7 @@ async function _shrRenderBioManager() {
       html += '<div style="margin-bottom:10px"><b>\u{1F4CB} How to create a Bio page:</b></div>';
       html += '<ol style="margin:0 0 12px 16px;padding:0">';
       html += '<li>Click <b>"Create Page"</b></li>';
-      html += '<li>Choose a <b>login</b> — this will be your page URL (e.g.: <span style="color:#667eea">golden-connect.to/bio/john</span>)</li>';
+      html += '<li>Choose a <b>login</b> — this will be your page URL (e.g.: <span style="color:#667eea">goldenConnect.to/bio/john</span>)</li>';
       html += '<li>Fill in <b>name</b> and <b>description</b> (or press <b>AI</b> — AI will do it for you)</li>';
       html += '<li>Add <b>links</b> and <b>social media</b></li>';
       html += '<li>Pick a <b>theme</b> and <b>background</b></li>';
@@ -2989,8 +2989,8 @@ window._bioCreatePage = async function() {
     '</div>' +
     '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">' +
     '<div><label>' + ((_shrT('bio_page_login') || (window.currentLang === 'ru' ? 'Логин вашей страницы' : 'Your page login'))) + '</label>' +
-    '<input type="text" id="bio-new-username" class="shr-input" placeholder="your-name" oninput="var p=document.getElementById(\x27bio-new-urlprev\x27);if(p)p.innerHTML=\x27\x1F517 golden-connect.to/bio/<b>\x27+this.value.toLowerCase().replace(/[^a-z0-9._-]/g,\x27\x27)+\x27</b>\x27" />' +
-    '<div id="bio-new-urlprev" style="font-size:12px;color:#667eea;margin-top:6px;font-weight:500;word-break:break-all">\x1F517 golden-connect.to/bio/<b>your-name</b></div></div>' +
+    '<input type="text" id="bio-new-username" class="shr-input" placeholder="your-name" oninput="var p=document.getElementById(\x27bio-new-urlprev\x27);if(p)p.innerHTML=\x27\x1F517 goldenConnect.to/bio/<b>\x27+this.value.toLowerCase().replace(/[^a-z0-9._-]/g,\x27\x27)+\x27</b>\x27" />' +
+    '<div id="bio-new-urlprev" style="font-size:12px;color:#667eea;margin-top:6px;font-weight:500;word-break:break-all">\x1F517 goldenConnect.to/bio/<b>your-name</b></div></div>' +
     '<div><label>' + (_shrT('bio_page_name') || 'Page Name') + '</label>' +
     '<input type="text" id="bio-new-pagename" class="shr-input" value="My Bio" /></div>' +
     '</div>' +
@@ -3039,15 +3039,15 @@ window._bioEditPage = async function(id) {
     html += '</div>';
 
     // URL info
-    html += '<p style="color:var(--text-secondary);margin:8px 0 16px;font-size:0.85rem">' + (_shrT('bio_url') || 'URL') + ': <a href="https://golden-connect.to/bio/' + _shrEsc(p.username) + '" target="_blank">golden-connect.to/bio/' + _shrEsc(p.username) + '</a></p>';
+    html += '<p style="color:var(--text-secondary);margin:8px 0 16px;font-size:0.85rem">' + (_shrT('bio_url') || 'URL') + ': <a href="https://goldenConnect.to/bio/' + _shrEsc(p.username) + '" target="_blank">goldenConnect.to/bio/' + _shrEsc(p.username) + '</a></p>';
 
     // === Basic Info ===
     html += '<div class="bio-editor-section">';
     html += '<h4>' + (_shrT('bio_basic_info') || 'Basic Info') + '</h4>';
     html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">';
     html += '<div><label>' + ((_shrT('bio_page_login') || (window.currentLang === 'ru' ? 'Логин вашей страницы' : 'Your page login'))) + '</label>';
-    html += '<input type="text" id="bio-ed-username" class="shr-input" value="' + _shrEsc(p.username || '') + '" oninput="var p=document.getElementById(\x27bio-ed-urlprev\x27);if(p)p.innerHTML=\x27\x1F517 golden-connect.to/bio/<b>\x27+this.value.toLowerCase().replace(/[^a-z0-9._-]/g,\x27\x27)+\x27</b>\x27" />';
-    html += '<div id="bio-ed-urlprev" style="font-size:12px;color:#667eea;margin-top:6px;font-weight:500;word-break:break-all">\x1F517 golden-connect.to/bio/<b>' + _shrEsc(p.username || '') + '</b></div></div>';
+    html += '<input type="text" id="bio-ed-username" class="shr-input" value="' + _shrEsc(p.username || '') + '" oninput="var p=document.getElementById(\x27bio-ed-urlprev\x27);if(p)p.innerHTML=\x27\x1F517 goldenConnect.to/bio/<b>\x27+this.value.toLowerCase().replace(/[^a-z0-9._-]/g,\x27\x27)+\x27</b>\x27" />';
+    html += '<div id="bio-ed-urlprev" style="font-size:12px;color:#667eea;margin-top:6px;font-weight:500;word-break:break-all">\x1F517 goldenConnect.to/bio/<b>' + _shrEsc(p.username || '') + '</b></div></div>';
     html += '<div><label>' + (_shrT('bio_page_name') || 'Page Name') + '</label>';
     html += '<input type="text" id="bio-ed-pagename" class="shr-input" value="' + _shrEsc(p.page_name || '') + '" /></div>';
     html += '</div>';

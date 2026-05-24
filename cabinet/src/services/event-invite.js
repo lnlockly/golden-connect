@@ -129,7 +129,7 @@ async function _genImage(theme, dateStr) {
   <text x="90" y="180" font-family="Helvetica,Arial,sans-serif" font-weight="700" font-size="26" fill="#ffffff" opacity="0.85">🔴 ЖИВОЙ ЭФИР · БУДЬ В ТРЕНДЕ</text>
   <text x="90" y="285" font-family="Helvetica,Arial,sans-serif" font-weight="800" font-size="52" fill="#ffffff">${_escSvg(theme.title)}</text>
   ${featSvg}
-  <text x="90" y="${H - 50}" font-family="Helvetica,Arial,sans-serif" font-weight="600" font-size="30" fill="#ffffff" opacity="0.9">golden-connect.to · регистрация бесплатно</text>
+  <text x="90" y="${H - 50}" font-family="Helvetica,Arial,sans-serif" font-weight="600" font-size="30" fill="#ffffff" opacity="0.9">goldenConnect.to · регистрация бесплатно</text>
 </svg>`;
   await sharp(Buffer.from(svg)).png({ compressionLevel: 8 }).toFile(out);
   return '/cabinet/ads-asset/event-invite/' + dateStr + '.png';

@@ -32,7 +32,7 @@ export type SeoHead = {
   jsonLd?: object[];
 };
 
-const SITE_ORIGIN = 'https://golden-connect.website';
+const SITE_ORIGIN = 'https://goldenConnect.website';
 const DEFAULT_OG = `${SITE_ORIGIN}/og.png`;
 
 const LANG_TO_OG_LOCALE: Record<Lang, string> = {
@@ -190,9 +190,9 @@ export const ORG_JSONLD = {
   logo: `${SITE_ORIGIN}/favicon.svg`,
   foundingDate: '2026',
   sameAs: [
-    'https://t.me/golden-connect',
-    'https://x.com/golden-connect',
-    'https://github.com/lnlockly/golden-connect-landing',
+    'https://t.me/goldenConnect',
+    'https://x.com/goldenConnect',
+    'https://github.com/lnlockly/goldenConnect-landing',
   ],
 };
 

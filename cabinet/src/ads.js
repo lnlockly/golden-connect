@@ -23,10 +23,10 @@ async function fetchApiBalances(plannerUser) {
   // plannerUser has tg_id from planner SQLite
   const tgId = Number(plannerUser?.tg_id || 0);
   if (!tgId) return null;
-  const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://golden-connect-api:4001';
+  const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://goldenConnect-api:4001';
   const secret = process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET;
   if (!secret) return null;
-  const email = 'tg' + tgId + '@golden-connect.bot';
+  const email = 'tg' + tgId + '@goldenConnect.bot';
   return new Promise((resolve) => {
     try {
       const url = new URL(apiBase + '/internal/finance/balances?email=' + encodeURIComponent(email));
@@ -35,7 +35,7 @@ async function fetchApiBalances(plannerUser) {
         hostname: url.hostname,
         port: url.port || 80,
         path: url.pathname + url.search,
-        headers: { 'x-golden-connect-secret': secret },
+        headers: { 'x-goldenConnect-secret': secret },
         timeout: 4000,
       }, (r) => {
         let buf = '';
@@ -86,7 +86,7 @@ const QUICK_LEAVE_SECONDS = 60;    // leaving within 60s → instant retract
 
 // Karma proxy for milestone awards (fire-and-forget)
 function _karmaAwardAds(plannerUserId, kind, sourceId, memo) {
-  const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://golden-connect-api:4001';
+  const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://goldenConnect-api:4001';
   const apiSecret = process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET;
   if (!apiSecret || !plannerUserId) return;
   // Resolve api email via tg_id
@@ -97,7 +97,7 @@ function _karmaAwardAds(plannerUserId, kind, sourceId, memo) {
     if (u && u.tg_id) tgId = u.tg_id;
   } catch (_) {}
   if (!tgId) return;
-  const email = 'tg' + Math.abs(tgId) + '@golden-connect.bot';
+  const email = 'tg' + Math.abs(tgId) + '@goldenConnect.bot';
   const data = JSON.stringify({ email: email, kind: kind, source_id: sourceId || null, memo: memo || null });
   const httpMod = apiBase.startsWith('https') ? require('https') : require('http');
   try {
@@ -109,7 +109,7 @@ function _karmaAwardAds(plannerUserId, kind, sourceId, memo) {
       headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(data),
-        'x-golden-connect-secret': apiSecret,
+        'x-goldenConnect-secret': apiSecret,
       },
       timeout: 5000,
     }, function (res) { res.resume(); });
@@ -894,7 +894,7 @@ function setupAds(bot, deps) {
 
   bot.callbackQuery('adv_topup', async (ctx) => {
     await ctx.answerCallbackQuery();
-    const siteBase = String(process.env.PUBLIC_BASE_URL || 'https://golden-connect.to/cabinet').replace(/\/$/, '');
+    const siteBase = String(process.env.PUBLIC_BASE_URL || 'https://goldenConnect.to/cabinet').replace(/\/$/, '');
     let magicUrl = siteBase + '/cabinet#/finance';
     try {
       storage.ensureWebUserFromTelegram(ctx.from);

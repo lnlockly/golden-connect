@@ -49,13 +49,13 @@ module.exports = {
   port: asInt(process.env.PORT, 3810),
   dataDir: path.resolve(process.cwd(), dataDir),
   goldenConnectVideoDbPath: path.resolve(process.cwd(), asText(process.env.GOLDEN_CONNECT_VIDEO_DB_PATH, '../data/tiktok-publisher.db')),
-  goldenConnectVideoMetadataPath: path.resolve(process.cwd(), asText(process.env.GOLDEN_CONNECT_VIDEO_METADATA_PATH, './data/golden-connect-video-library.jsonl')),
-  goldenConnectVideoDir: path.resolve(process.cwd(), asText(process.env.GOLDEN_CONNECT_VIDEO_DIR, '../golden-connect-videos')),
+  goldenConnectVideoMetadataPath: path.resolve(process.cwd(), asText(process.env.GOLDEN_CONNECT_VIDEO_METADATA_PATH, './data/goldenConnect-video-library.jsonl')),
+  goldenConnectVideoDir: path.resolve(process.cwd(), asText(process.env.GOLDEN_CONNECT_VIDEO_DIR, '../goldenConnect-videos')),
   goldenConnectVideoPublicPath: asText(process.env.GOLDEN_CONNECT_VIDEO_PUBLIC_PATH, '/video-library'),
   pointsPerReferral: asInt(process.env.POINTS_PER_REFERRAL, 100),
   publicBaseUrl: asOptionalText(process.env.PUBLIC_BASE_URL),
-  // [sso] Cross-subdomain cookie scope. Set to ".golden-connect.to" so the
-  // session cookie issued at app.golden-connect.to is also sent to crm.golden-connect.to.
+  // [sso] Cross-subdomain cookie scope. Set to ".goldenConnect.to" so the
+  // session cookie issued at app.goldenConnect.to is also sent to crm.goldenConnect.to.
   cookieDomain: asOptionalText(process.env.COOKIE_DOMAIN),
   sessionCookieName: asText(process.env.SESSION_COOKIE_NAME, 'goldenConnect_site_session'),
   sessionTtlDays: asInt(process.env.SESSION_TTL_DAYS, 30),
@@ -105,7 +105,7 @@ module.exports = {
   groqKeys,
   vapidPublicKey: asOptionalText(process.env.VAPID_PUBLIC_KEY),
   vapidPrivateKey: asOptionalText(process.env.VAPID_PRIVATE_KEY),
-  vapidEmail: asOptionalText(process.env.VAPID_EMAIL || 'mailto:admin@cabinet.golden-connect.to'),
+  vapidEmail: asOptionalText(process.env.VAPID_EMAIL || 'mailto:admin@cabinet.goldenConnect.to'),
   requiredChatEnabled: String(process.env.REQUIRED_CHAT_ENABLED || (process.env.REQUIRED_CHAT_ID ? '1' : '0')).trim() !== '0',
   requiredChatId: asOptionalText(process.env.REQUIRED_CHAT_ID),
   requiredChatTitle: asOptionalText(process.env.REQUIRED_CHAT_TITLE),
@@ -120,9 +120,9 @@ module.exports = {
   tgMonitorAiMaxItems: asInt(process.env.TG_MONITOR_AI_MAX_ITEMS, 80),
   tgMonitorDailyHourMsk: asInt(process.env.TG_MONITOR_DAILY_HOUR_MSK, 21),
   tgMonitorDailyMinuteMsk: asInt(process.env.TG_MONITOR_DAILY_MINUTE_MSK, 0),
-  // Bridge to legacy golden-connect-api (Hono + Postgres) that owns CryptoBot +
+  // Bridge to legacy goldenConnect-api (Hono + Postgres) that owns CryptoBot +
   // Platega + bookings ledger. Cabinet proxies /api/pay/* calls there via
-  // x-golden-connect-secret to avoid duplicating payment infra.
-  goldenConnectApiBaseUrl: asOptionalText(process.env.GOLDEN_CONNECT_API_BASE_URL, 'https://api.golden-connect.to'),
+  // x-goldenConnect-secret to avoid duplicating payment infra.
+  goldenConnectApiBaseUrl: asOptionalText(process.env.GOLDEN_CONNECT_API_BASE_URL, 'https://api.goldenConnect.to'),
   goldenConnectApiInternalSecret: asOptionalText(process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET)
 };

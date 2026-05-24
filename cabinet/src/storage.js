@@ -7,11 +7,11 @@ function createStorage(config = {}) {
   const statePath = path.join(dataDir, 'state.json');
 
   // Strip /cabinet from publicBaseUrl so referral links land on the
-  // marketing landing (https://golden-connect.to/?ref=X) rather than the
+  // marketing landing (https://goldenConnect.to/?ref=X) rather than the
   // cabinet login page.
   function landingBaseUrl() {
     const raw = String(config.publicBaseUrl || '').replace(/\/+$/, '');
-    return raw.replace(/\/cabinet$/, '') || 'https://golden-connect.to';
+    return raw.replace(/\/cabinet$/, '') || 'https://goldenConnect.to';
   }
 
   function nowIso() {
@@ -600,7 +600,7 @@ function createStorage(config = {}) {
 
 
   // ===== Username utilities (Phase A+B) =====
-  const RESERVED_USERNAMES = new Set(['admin','support','bot','golden-connect','system','official','help','me','user','root','volga9000']);
+  const RESERVED_USERNAMES = new Set(['admin','support','bot','goldenConnect','system','official','help','me','user','root','volga9000']);
   function sanitizeUsername(raw) {
     if (!raw) return '';
     return String(raw).toLowerCase()

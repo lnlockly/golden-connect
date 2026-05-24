@@ -3,11 +3,11 @@ import assert from "node:assert/strict";
 import { escapeHtml } from "../http/landing.js";
 
 // TODO(bot-rewrite): Everything that exercised LeadsRepo against a real
-// SQLite db has been moved to golden-connect-api. The bot only owns a thin HTTP
+// SQLite db has been moved to goldenConnect-api. The bot only owns a thin HTTP
 // client now — integration tests should either spin up the api or mock
 // fetch. Pure-function tests from the landing escapeHtml path stay here.
 
-test("migration 003 creates the leads table + indexes", { skip: "moved to golden-connect-api" }, () => {});
+test("migration 003 creates the leads table + indexes", { skip: "moved to goldenConnect-api" }, () => {});
 test("LeadsRepo: create + findById round-trip preserves payload JSON", { skip: "TODO: rewrite as api-client mock / integration" }, () => {});
 test("LeadsRepo: rate limit flags recent submissions by contact", { skip: "TODO: rewrite as api-client mock / integration" }, () => {});
 test("LeadsRepo: posted-message lookup + status transitions", { skip: "TODO: rewrite as api-client mock / integration" }, () => {});

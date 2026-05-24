@@ -6,10 +6,10 @@ import { textForLang } from "../db/reminders.js";
 // / remove / create / migration 004-005 / markAppliedByUsername) all moved
 // server-side with the data layer. The bot now just forwards these calls
 // over HTTP. Re-add as api-client mocks or integration tests against a
-// running golden-connect-api. Pure-function helper tests stay here.
+// running goldenConnect-api. Pure-function helper tests stay here.
 
-test("migration 004 adds applied_on_site + applied_at columns to users", { skip: "moved to golden-connect-api" }, () => {});
-test("migration 005 seeds exactly 3 default reminder steps in ru/en/zh", { skip: "moved to golden-connect-api" }, () => {});
+test("migration 004 adds applied_on_site + applied_at columns to users", { skip: "moved to goldenConnect-api" }, () => {});
+test("migration 005 seeds exactly 3 default reminder steps in ru/en/zh", { skip: "moved to goldenConnect-api" }, () => {});
 test("UsersRepo: markAppliedByUsername flips flag on case-insensitive match", { skip: "TODO: rewrite as api-client mock / integration" }, () => {});
 test("RemindersRepo.listDue: filters by applied flag, blocked flag, delay, and dedup", { skip: "TODO: rewrite as api-client mock / integration" }, () => {});
 test("RemindersRepo.setText / setDelay / toggle / remove / create", { skip: "TODO: rewrite as api-client mock / integration" }, () => {});

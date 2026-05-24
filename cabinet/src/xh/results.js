@@ -155,12 +155,12 @@ function setupResults(bot, storage, config) {
   // Lightweight redirects for buttons referenced from the results card
   bot.callbackQuery('open_leaderboard', async (ctx) => {
     await ctx.answerCallbackQuery();
-    const url = (config && config.publicBaseUrl ? config.publicBaseUrl.replace(/\/+$/, '') : 'https://golden-connect.to/cabinet') + '/cabinet#/leaderboard';
+    const url = (config && config.publicBaseUrl ? config.publicBaseUrl.replace(/\/+$/, '') : 'https://goldenConnect.to/cabinet') + '/cabinet#/leaderboard';
     return ctx.reply('🏆 Топ заработавших — открыть в кабинете:\n' + url);
   });
   bot.callbackQuery('open_withdraw', async (ctx) => {
     await ctx.answerCallbackQuery();
-    const url = (config && config.publicBaseUrl ? config.publicBaseUrl.replace(/\/+$/, '') : 'https://golden-connect.to/cabinet') + '/cabinet#/withdrawals';
+    const url = (config && config.publicBaseUrl ? config.publicBaseUrl.replace(/\/+$/, '') : 'https://goldenConnect.to/cabinet') + '/cabinet#/withdrawals';
     return ctx.reply('💸 Заявка на вывод (минимум $3, ручной режим):\n' + url);
   });
   bot.callbackQuery('adv_menu', async (ctx) => {

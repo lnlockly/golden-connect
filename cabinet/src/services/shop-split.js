@@ -115,7 +115,7 @@ function splitPurchase(purchaseId) {
   // Dispatch real money distribution to api (Postgres). Local product_purchase_splits
   // is kept as audit; api credits cash_ledger working balance + 80/20 subscription split.
   try {
-    const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://golden-connect-api:4001';
+    const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://goldenConnect-api:4001';
     const apiSecret = process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET;
     if (apiSecret && sellerId) {
       const priceMicro = String(BigInt(Math.round(amount * 1_000_000)));
@@ -134,7 +134,7 @@ function splitPurchase(purchaseId) {
         headers: {
           'Content-Type': 'application/json',
           'Content-Length': Buffer.byteLength(payload),
-          'x-golden-connect-secret': apiSecret,
+          'x-goldenConnect-secret': apiSecret,
         },
         timeout: 15000,
       }, (res) => {

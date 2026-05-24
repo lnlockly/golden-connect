@@ -83,7 +83,7 @@
 
   window.PayUI.recalc = function () {
     const v = Number($('pay-amount').value) || 0;
-    // Approximate RUB rate (matches PLATEGA_USD_RATE=95 baked into golden-connect-api)
+    // Approximate RUB rate (matches PLATEGA_USD_RATE=95 baked into goldenConnect-api)
     const rub = Math.round(v * 95);
     if ($('pay-rub')) $('pay-rub').textContent = rub.toLocaleString('ru-RU');
   };
@@ -107,7 +107,7 @@
         if (!r.ok || d.ok === false) throw new Error(d.reason || 'platega_failed');
         url = d.pay_url;
       } else if (method === 'cryptobot') {
-        // CryptoBot top-up via cabinet bridge → golden-connect-api creates invoice
+        // CryptoBot top-up via cabinet bridge → goldenConnect-api creates invoice
         const r = await fetch('/cabinet/api/pay/create-invoice', {
           method: 'POST', credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' },

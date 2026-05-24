@@ -26,7 +26,7 @@ const ARG = Object.fromEntries(process.argv.slice(2).map((a) => {
 const RPS = Number(ARG.rps || 1);              // requests per second
 const MAX_COMPANIES = Number(ARG['max-companies'] || 0); // 0 = no limit
 const REQ_INTERVAL_MS = Math.max(50, Math.floor(1000 / RPS));
-const USER_AGENT = 'Mozilla/5.0 (compatible; Golden Connect/1.0; +https://golden-connect.to)';
+const USER_AGENT = 'Mozilla/5.0 (compatible; Golden Connect/1.0; +https://goldenConnect.to)';
 
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 

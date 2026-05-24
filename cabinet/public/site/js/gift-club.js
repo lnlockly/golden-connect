@@ -1,5 +1,5 @@
 /* Golden Connect Cabinet — GiftClub pages (5 sub-views).
-   Reads from /cabinet/api/me/gift/* (which proxies to golden-connect-api /me/gift/*).
+   Reads from /cabinet/api/me/gift/* (which proxies to goldenConnect-api /me/gift/*).
    Imported via migration from GiftClub MySQL — see gift_* tables in Neon. */
 (function () {
   'use strict';

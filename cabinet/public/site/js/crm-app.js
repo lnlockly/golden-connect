@@ -1272,7 +1272,7 @@ window.tgShareContact = function(username) {
     } catch (_) {}
   }
   const text = buildGreetingFor(c);
-  const url = 'https://t.me/share/url?url=' + encodeURIComponent('https://golden-connect.to') + '&text=' + encodeURIComponent(text);
+  const url = 'https://t.me/share/url?url=' + encodeURIComponent('https://goldenConnect.to') + '&text=' + encodeURIComponent(text);
   window.open(url, '_blank');
 };
 

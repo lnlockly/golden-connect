@@ -1,7 +1,7 @@
 import type { ApiClient } from "../api/client.js";
 
 /**
- * Shape returned by golden-connect-api `/internal/payments`. Mirrors the row
+ * Shape returned by goldenConnect-api `/internal/payments`. Mirrors the row
  * schema one-for-one — the bot's payments admin view treats it as opaque.
  */
 export interface PaymentRow {

@@ -131,7 +131,7 @@ export const HeroArea = forwardRef<HeroAreaHandle, Props>(function HeroArea(
       <button
         type="button"
         className="hero-tour-cta"
-        onClick={() => window.dispatchEvent(new Event('golden-connect:tour-start'))}
+        onClick={() => window.dispatchEvent(new Event('goldenConnect:tour-start'))}
         aria-label={t('tour.cta_start')}
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
