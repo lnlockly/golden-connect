@@ -21,7 +21,7 @@ env:
 
 jobs:
   changes:
-    runs-on: [self-hosted, golden-connect]
+    runs-on: [self-hosted, trendex]
     outputs:
       api: ${{ steps.filter.outputs.api }}
       bot: ${{ steps.filter.outputs.bot }}
@@ -48,7 +48,7 @@ jobs:
 
   build:
     needs: changes
-    runs-on: [self-hosted, golden-connect]
+    runs-on: [self-hosted, trendex]
     permissions:
       contents: read
       packages: write
@@ -104,7 +104,7 @@ jobs:
 
   deploy:
     needs: [changes, build]
-    runs-on: [self-hosted, golden-connect]
+    runs-on: [self-hosted, trendex]
     if: always() && needs.build.result != 'failure' && needs.build.result != 'cancelled'
     steps:
       - uses: actions/checkout@v4
