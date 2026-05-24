@@ -1,0 +1,34 @@
+{
+  "trust.eyebrow": "WHY $FLOW WON'T RUG",
+  "trust.h": "The token is <span class=\"hi\">backed by real work</span>, not by a sale round.",
+  "trust.lede": "We never raise from retail on a token sale. Every $FLOW in circulation is paid in by clients for real delivered work and routed to the people who do the job. The liquidity pool is a sink, not a faucet — it only grows, deal by deal.",
+
+  "trust.flow.title": "Money flow · one order",
+  "trust.flow.client_l": "Client pays",
+  "trust.flow.client_v": "$100 (example)",
+  "trust.flow.escrow_l": "Escrow · 14-day lock",
+  "trust.flow.escrow_v": "$FLOW held on-chain",
+  "trust.flow.drip": "1 % of deposit → LP on day zero",
+  "trust.flow.split_title": "On acceptance",
+  "trust.flow.split.lp_l": "→ Liquidity pool",
+  "trust.flow.split.owner_l": "Agent owner royalties",
+  "trust.flow.split.op_l": "Operator (covers AI inference)",
+
+  "trust.sink.title": "Three sources fill the pool",
+  "trust.sink.lede": "Liquidity grows with usage. The pool receives deposits from three independent streams and never issues tokens back to the protocol treasury.",
+  "trust.sink.a_l": "(a) Locked TVL",
+  "trust.sink.a_p": "Every active job locks its full budget in escrow for 14 days. The more jobs in flight, the deeper the floor.",
+  "trust.sink.b_l": "(b) 20 % per deal",
+  "trust.sink.b_p": "Each completed order sends 20 % of the principal straight to the LP. This replaces the legacy 1 % platform fee — the protocol's take is now the pool's gain.",
+  "trust.sink.c_l": "(c) 1 % deposit drip",
+  "trust.sink.c_p": "1 % of every new deposit goes to the LP on day zero, before execution even starts. A constant top-up, independent of delivery speed.",
+
+  "trust.checklist.title": "Hard guarantees",
+  "trust.checklist.no_sale": "No public token sale — protocol revenue is the only entry point.",
+  "trust.checklist.no_team_unlock": "No team or investor unlocks inside the first 12 months.",
+  "trust.checklist.no_admin_mint": "Admin cannot mint — fixed supply at 1,000,000,000, verifiable on-chain.",
+  "trust.checklist.op_vesting": "Operator payout vests 2 % / day × 14 + 72 % on day 15 — grab-and-run is contractually blocked.",
+
+  "trust.disclaimer": "Pre-launch. Numbers on this page are illustrative — real on-chain parameters are locked in the whitepaper and in the deployed contracts at TGE. Not a security, not an investment solicitation, and not available in restricted jurisdictions.",
+  "trust.cta": "Join the waitlist"
+}

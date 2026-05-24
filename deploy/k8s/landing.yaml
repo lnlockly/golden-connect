@@ -1,0 +1,82 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trendex-landing
+  namespace: trendex
+  labels:
+    app: trendex-landing
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: trendex-landing
+  template:
+    metadata:
+      labels:
+        app: trendex-landing
+    spec:
+      imagePullSecrets:
+        - name: ghcr-pull
+      containers:
+        - name: trendex-landing
+          image: ghcr.io/lnlockly/trendex-landing:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 10
+            timeoutSeconds: 3
+          resources:
+            requests:
+              cpu: 5m
+              memory: 32Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: trendex-landing
+  namespace: trendex
+spec:
+  selector:
+    app: trendex-landing
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: trendex-landing
+  namespace: trendex
+  annotations:
+    # TLS terminated at Cloudflare edge. Origin is HTTP. Set Cloudflare
+    # SSL/TLS mode to "Flexible" (or "Full" if you add an origin cert).
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: trendex.biz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: trendex-landing
+                port:
+                  number: 80

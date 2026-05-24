@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trendex — первая конференция (предстарт) · 11 мая 2026</title>
+<meta name="description" content="Краткое содержание первой предстартовой конференции Trendex — обзор платформы, главный двигатель (AI-рассылки + аренда аккаунтов), Genesis TRDX, тарифы, маркетинг.">
+<style>
+:root {
+  --bg: #0A0E27;
+  --bg2: #111736;
+  --card: #161D3F;
+  --border: #2A3566;
+  --primary: #00D4FF;
+  --secondary: #B14AED;
+  --accent: #FF2E97;
+  --gold: #FFB800;
+  --green: #00FF94;
+  --text: #FFFFFF;
+  --muted: #A0A8D0;
+  --dim: #6E7BAF;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 100%);
+  color: var(--text);
+  font-family: 'Space Grotesk', -apple-system, system-ui, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.55;
+}
+.deck { width: 100vw; height: 100vh; position: relative; overflow: hidden; }
+.slide {
+  position: absolute; inset: 0;
+  padding: 6vh 8vw;
+  display: flex; flex-direction: column; justify-content: center;
+  opacity: 0; transform: translateX(40px);
+  transition: opacity .35s ease, transform .35s ease;
+  pointer-events: none;
+}
+.slide.active { opacity: 1; transform: translateX(0); pointer-events: auto; }
+.slide.prev   { transform: translateX(-40px); }
+
+.eyebrow {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(177,74,237,.22), rgba(0,212,255,.18));
+  border: 1px solid rgba(177,74,237,.45);
+  font-size: 13px; font-weight: 600; letter-spacing: .04em;
+  color: #dcd1ff;
+  margin-bottom: 18px;
+}
+h1 { font-size: clamp(36px, 6vw, 64px); line-height: 1.05; font-weight: 800;
+     background: linear-gradient(135deg, #fff 0%, var(--secondary) 60%, var(--primary) 110%);
+     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+     margin-bottom: 18px; }
+h2 { font-size: clamp(28px, 4vw, 44px); line-height: 1.15; font-weight: 700;
+     background: linear-gradient(135deg, #fff 0%, var(--secondary) 70%, var(--primary) 110%);
+     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+     margin-bottom: 22px; }
+.lede { font-size: clamp(17px, 1.7vw, 21px); color: var(--muted); margin-bottom: 24px; max-width: 900px; }
+ul.bullets { list-style: none; padding: 0; max-width: 920px; }
+ul.bullets li {
+  padding: 14px 0 14px 32px;
+  position: relative;
+  font-size: clamp(15.5px, 1.4vw, 18px);
+  color: #e7e9f2;
+  border-bottom: 1px solid rgba(60,70,100,.25);
+}
+ul.bullets li:last-child { border-bottom: none; }
+ul.bullets li::before {
+  content: "›";
+  position: absolute; left: 0; top: 11px;
+  color: var(--secondary);
+  font-size: 22px; font-weight: 700;
+}
+strong { color: #fff; font-weight: 700; }
+.tag {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 6px;
+  background: rgba(177,74,237,.18);
+  border: 1px solid rgba(177,74,237,.4);
+  font-size: 13px; font-weight: 600;
+  color: #dcd1ff;
+  margin-right: 4px;
+}
+.tag-gold  { background: rgba(255,184,0,.15);  border-color: rgba(255,184,0,.5);  color: var(--gold); }
+.tag-green { background: rgba(0,255,148,.12);  border-color: rgba(0,255,148,.45); color: var(--green); }
+.tag-pink  { background: rgba(255,46,151,.12); border-color: rgba(255,46,151,.45); color: var(--accent); }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1100px; margin-top: 8px; }
+.box {
+  background: linear-gradient(180deg, rgba(30,38,80,.7) 0%, rgba(22,29,63,.92) 100%);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 26px;
+}
+.box-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+.box-text  { font-size: 15px; color: var(--muted); line-height: 1.55; }
+.metric {
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--gold), var(--accent));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1; margin: 6px 0 4px;
+}
+.metric-label { font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+
+.quote {
+  border-left: 4px solid var(--secondary);
+  padding: 14px 22px;
+  font-style: italic;
+  color: #dcd1ff;
+  margin: 18px 0;
+  background: rgba(177,74,237,.08);
+  border-radius: 0 12px 12px 0;
+  max-width: 900px;
+}
+
+.controls {
+  position: fixed; bottom: 20px; left: 0; right: 0;
+  display: flex; justify-content: center; align-items: center;
+  gap: 16px;
+  z-index: 10;
+}
+.ctrl-btn {
+  width: 44px; height: 44px;
+  border-radius: 999px;
+  background: rgba(20,22,40,.7);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 20px; cursor: pointer;
+  transition: all .2s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.ctrl-btn:hover { background: rgba(177,74,237,.25); border-color: rgba(177,74,237,.6); }
+.ctrl-page {
+  padding: 0 16px; min-height: 44px;
+  display: flex; align-items: center;
+  background: rgba(20,22,40,.7);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 14px; font-weight: 600;
+  color: var(--muted);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.ctrl-page span.cur { color: #fff; }
+
+.progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--secondary), var(--primary));
+  z-index: 11; transition: width .35s ease;
+}
+
+.fab {
+  position: fixed; top: 18px; right: 18px;
+  display: flex; gap: 10px;
+  z-index: 12;
+}
+.fab a {
+  padding: 8px 14px;
+  background: rgba(20,22,40,.7);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 13px; font-weight: 600;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: all .2s ease;
+}
+.fab a:hover { background: rgba(177,74,237,.25); border-color: rgba(177,74,237,.6); }
+
+@media (max-width: 700px) {
+  .slide { padding: 5vh 6vw; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .fab a { padding: 6px 10px; font-size: 12px; }
+}
+
+@media print {
+  html, body { height: auto; overflow: visible; }
+  .deck { height: auto; }
+  .slide { position: relative; opacity: 1 !important; transform: none !important;
+    page-break-after: always; height: 100vh; }
+  .controls, .progress, .fab { display: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="fab">
+  <a href="/" target="_self">← На главную</a>
+  <a href="javascript:window.print()">🖨 Печать</a>
+</div>
+
+<div class="deck" id="deck">
+
+<!-- Slide 1: Cover -->
+<section class="slide active">
+  <div class="eyebrow">📡 Первая предстартовая конференция · 11 мая 2026</div>
+  <h1>Trendex — что мы<br>запускаем через 10 дней</h1>
+  <p class="lede">Краткое содержание конференции: единая платформа, AI-рассылки + аренда Telegram-аккаунтов (+300% в месяц), Genesis TRDX токен, тарифы, бонус-матрица и план запуска маркетинга.</p>
+  <div style="margin-top:24px">
+    <span class="tag">48 минут</span>
+    <span class="tag">~5 000 слов</span>
+    <span class="tag-gold tag">Транскрибировано Whisper</span>
+  </div>
+</section>
+
+<!-- Slide 2: Executive Summary -->
+<section class="slide">
+  <div class="eyebrow">TL;DR</div>
+  <h2>Краткое содержание за 60 секунд</h2>
+  <ul class="bullets">
+    <li><strong>Trendex</strong> — единая платформа с десятками бесплатных инструментов: сократитель, видео-баннеры, авто-постинг в Telegram, био-страница, магазин товаров.</li>
+    <li><strong>Главный двигатель</strong> — AI-рассылки в Telegram плюс модель аренды аккаунтов: до <strong>+300% в месяц</strong> на реальном продукте, не пирамида.</li>
+    <li><strong>База контактов</strong> — уже 10 000+ собранных профилей с MLM-баз, цель 20-30k и больше. AI собирает чаты, сторис, активность.</li>
+    <li><strong>Genesis TRDX</strong> — внутренний токен. Начисляется бесплатно за активность и рефералов. Будет биржа для свободной торговли.</li>
+    <li><strong>Тарифы</strong> $45 / $90 / $135 — открывают CRM, AI-промты, дорогие задания. <strong>20% любого дохода</strong> копится на автоапгрейд подписки.</li>
+    <li><strong>Старт маркетинга — через 10 дней.</strong> Расстановка в матрице фиксируется в момент запуска: кто раньше внутри, тот выше.</li>
+  </ul>
+</section>
+
+<!-- Slide 3: Platform overview -->
+<section class="slide">
+  <div class="eyebrow">⚙️ Платформа</div>
+  <h2>Что уже работает в кабинете</h2>
+  <p class="lede">Большинство инструментов — бесплатно. Бесплатник может пользоваться сервисом, давать рекламу, выполнять задания и зарабатывать без вложений.</p>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">🔗 Сократитель ссылок</div>
+      <div class="box-text">Брендированные короткие ссылки + QR + аналитика кликов. Авто-создаётся 8 промо-ссылок при регистрации.</div>
+    </div>
+    <div class="box">
+      <div class="box-title">🎨 Видео-баннеры</div>
+      <div class="box-text">Генератор рекламных банеров с разными шаблонами под TikTok / Instagram / Telegram.</div>
+    </div>
+    <div class="box">
+      <div class="box-title">📢 Авто-постинг в Telegram</div>
+      <div class="box-text">Подключаешь свои каналы — AI генерирует уникальный текст каждый раз, обходит анти-спам.</div>
+    </div>
+    <div class="box">
+      <div class="box-title">🏪 Магазин + био-страница</div>
+      <div class="box-text">Каждый получает свой магазин с электронными товарами и био-страницу с реф-ссылками.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 4: The main engine -->
+<section class="slide">
+  <div class="eyebrow">🚀 Главный двигатель</div>
+  <h2>AI-рассылки + аренда аккаунтов</h2>
+  <p class="lede">Технология, которой нет ни у кого. Любой может купить Telegram-аккаунты и сдать их в аренду — система всё делает сама.</p>
+  <ul class="bullets">
+    <li><strong>Покупаешь TG-аккаунты</strong> по ~300₽ за штуку — где угодно, формат zip.</li>
+    <li>Загружаешь в Trendex одной кнопкой → система <strong>3 дня прогревает</strong>, потом начинает рассылки и диалоги.</li>
+    <li><strong>В среднем 80 диалогов на аккаунт</strong> за месяц до блокировки (статистика).</li>
+    <li>Окупаемость аккаунта — при <strong>20 диалогах</strong>. Остальные 60 — чистая прибыль.</li>
+    <li>Никаких знаний не нужно: ни промтов, ни прогрева, ни ручной работы — система всё делает сама.</li>
+  </ul>
+</section>
+
+<!-- Slide 5: Numbers -->
+<section class="slide">
+  <div class="eyebrow">📊 Цифры</div>
+  <h2>Пример доходности</h2>
+  <p class="lede">Не пирамида — реальный заработок с реальной продажи рекламы. Заявленная доходность отдельной модели аренды:</p>
+  <div class="grid-2" style="margin-top:10px">
+    <div class="box" style="text-align:center">
+      <div class="metric-label">Вложили</div>
+      <div class="metric">30 000₽</div>
+      <div class="box-text">100 аккаунтов × 300₽</div>
+    </div>
+    <div class="box" style="text-align:center">
+      <div class="metric-label">Получили за месяц</div>
+      <div class="metric">120 000₽</div>
+      <div class="box-text">До <strong>+300% сверху</strong> при максимальной загрузке рекламы</div>
+    </div>
+  </div>
+  <div class="quote">«Сейчас пирамиды дают 30% в месяц в лучшем случае. У нас — реальный бизнес с реальной продажи рекламы.»</div>
+</section>
+
+<!-- Slide 6: Database -->
+<section class="slide">
+  <div class="eyebrow">🗂 База контактов</div>
+  <h2>10 000+ контактов уже внутри</h2>
+  <p class="lede">База собрана с открытых MLM-сайтов и пополняется по собственной системе скрейпинга. AI знает, чем занимается каждый человек.</p>
+  <ul class="bullets">
+    <li>На старте — <strong>~10 000 контактов</strong>, цель <strong>20-30k и выше</strong>.</li>
+    <li>AI собирает <strong>полную характеристику</strong>: профиль, чаты, сторис, в каких проектах был.</li>
+    <li>Сервис «узнать всё про человека» — <strong>5 центов за запрос</strong>: чаты, активность, профиль.</li>
+    <li>Рассылка по нашей базе — <strong>5 центов за диалог</strong> (1 диалог = несколько сообщений).</li>
+    <li>Можно собирать собственные списки из конкретных чатов или каналов.</li>
+  </ul>
+</section>
+
+<!-- Slide 7: TRDX Token -->
+<section class="slide">
+  <div class="eyebrow">💎 Genesis TRDX</div>
+  <h2>Внутренний токен платформы</h2>
+  <p class="lede">Бесплатно начисляется за активность. Используется для рекламы (баннеры, видео) + будет торговаться на бирже.</p>
+  <ul class="bullets">
+    <li><strong>+50 TRDX</strong> за каждого реферала.</li>
+    <li>Большой бонус TRDX за рефералов, купивших платный пакет.</li>
+    <li><strong>+7.5 TRDX</strong> бонусом при покупке тарифа $135 (максималка).</li>
+    <li><strong>Внутренняя биржа</strong> — продавай токены за любую цену (10–20$ за пачку или любую часть).</li>
+    <li>Будут дивиденды и розыгрыши призов между обладателями TRDX.</li>
+  </ul>
+</section>
+
+<!-- Slide 8: Tariffs -->
+<section class="slide">
+  <div class="eyebrow">💼 Тарифы</div>
+  <h2>$45 / $90 / $135 и автоапгрейд</h2>
+  <p class="lede">Платный тариф открывает CRM, AI-промты, дорогие задания и более мягкие лимиты. Главный приём — автоапгрейд из дохода.</p>
+  <ul class="bullets">
+    <li><strong>$45</strong> — базовый платник. Доступ к CRM (10k контактов), AI-генерация промтов.</li>
+    <li><strong>$90 / $135</strong> — расширенные лимиты + видео-реклама раз в сутки (вместо раз в 6 часов).</li>
+    <li><strong>20% от любого дохода</strong> в Trendex автоматически копится в фонд подписки.</li>
+    <li>Когда накопится $45 → автоапгрейд на платник. Дальше — апгрейды до $90 и $135.</li>
+    <li>После $135 фонд держит баланс ($45/мес автопродление), остальное идёт на вывод.</li>
+  </ul>
+</section>
+
+<!-- Slide 9: Ads inventory -->
+<section class="slide">
+  <div class="eyebrow">📺 Реклама</div>
+  <h2>Видео + баннеры + биржа каналов</h2>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">🎬 Видео force-watch</div>
+      <div class="box-text">Загружай ролики до 5 минут. Зрителям показывается с гарантией просмотра ≥10 сек. Бесплатникам — раз в 6 часов, платникам — раз в сутки.</div>
+    </div>
+    <div class="box">
+      <div class="box-title">🖼 Баннеры на сайте</div>
+      <div class="box-text">Оплата за показ TRDX-токеном. Дневной/общий бюджет. Авто-аппрув для тех, у кого email + 1+ платный реферал.</div>
+    </div>
+    <div class="box">
+      <div class="box-title">📡 Биржа TG-каналов</div>
+      <div class="box-text">Выставляй свой канал по любой цене от 1 цента/24ч. Бот контролирует размещение, оплату и сроки автоматически.</div>
+    </div>
+    <div class="box">
+      <div class="box-title">✅ Задания с отчётом</div>
+      <div class="box-text">Любые задания — регистрации, лайки, комментарии, видео-просмотры. AI сама проверяет отчёт по твоим критериям.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 10: Other features -->
+<section class="slide">
+  <div class="eyebrow">🧩 Ещё в кабинете</div>
+  <h2>CRM, Karma, бонус-матрица, AI-бот</h2>
+  <ul class="bullets">
+    <li><strong>CRM партнёра</strong> — Kanban, воронка сделок, отчёты, тепловые карты, webhooks. 10k контактов уже внутри.</li>
+    <li><strong>Karma</strong> — начисляется за активность. Еженедельные розыгрыши призов и денег.</li>
+    <li><strong>Бонус-матрица</strong> — все участники по факту регистрации, регулярные розыгрыши призов.</li>
+    <li><strong>Магазины + чужие товары</strong> — продавай свои товары или чужие (30% комиссии создателю, остальное распределяешь сам).</li>
+    <li><strong>AI-бот @Trendex_bizbot</strong> — голосовые команды, голосом ставишь задачи, бот выполняет любой каприз.</li>
+  </ul>
+</section>
+
+<!-- Slide 11: For everyone -->
+<section class="slide">
+  <div class="eyebrow">🎯 Кому подходит</div>
+  <h2>3 роли — 3 способа зарабатывать</h2>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">👤 Бесплатник</div>
+      <div class="box-text">Регистрируешься, пользуешься инструментами, выполняешь задания за деньги, даёшь свою рекламу. 20% от дохода копится в фонд подписки → автоапгрейд.</div>
+    </div>
+    <div class="box">
+      <div class="box-title">💼 Рекламодатель</div>
+      <div class="box-text">Закидываешь проект → нажимаешь «OK» → платишь → получаешь трафик. Никаких промтов, прогревов, ручной работы.</div>
+    </div>
+    <div class="box">
+      <div class="box-title">🚀 Инвестор (аренда)</div>
+      <div class="box-text">Покупаешь TG-аккаунты — отдаёшь в аренду — наблюдаешь. До +300%/мес на пассиве. Партнёр от пригласившего тоже получает свою долю.</div>
+    </div>
+    <div class="box">
+      <div class="box-title">📣 Партнёр</div>
+      <div class="box-text">Приглашаешь людей по любому из трёх сценариев — получаешь свою долю с каждого. 10-уровневая система выплат + бонус-матрица.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Slide 12: Launch -->
+<section class="slide">
+  <div class="eyebrow">⏰ Старт</div>
+  <h2>До запуска маркетинга — 10 дней</h2>
+  <p class="lede">Расстановка партнёров в матрице фиксируется в момент старта. Кто раньше внутри — тот выше. Места ограничены.</p>
+  <ul class="bullets">
+    <li><strong>Сейчас:</strong> платформа работает, регистрация открыта, можно тестировать все инструменты.</li>
+    <li><strong>2–3 дня:</strong> финальный тестовый режим — если что-то найдёте, пишите.</li>
+    <li><strong>Через 10 дней:</strong> официальный запуск маркетинга. Расстановка фиксируется.</li>
+    <li><strong>Дальше:</strong> добавляем сервисы по запросу платников — конструкторы ботов, воронки, любые инструменты, которые понравятся в интернете.</li>
+  </ul>
+  <div style="margin-top:30px">
+    <a href="https://trendex.biz/#register" style="display:inline-block;padding:14px 28px;border-radius:12px;background:linear-gradient(135deg,var(--secondary),var(--primary));color:#fff;font-weight:700;text-decoration:none;font-size:16px">Занять место до запуска →</a>
+    <a href="https://t.me/Trendex_bizbot?start=cab" target="_blank" rel="noopener" style="display:inline-block;margin-left:10px;padding:14px 24px;border-radius:12px;background:rgba(177,74,237,.1);border:1px solid rgba(177,74,237,.5);color:#fff;font-weight:600;text-decoration:none;font-size:15px">Открыть в Telegram</a>
+  </div>
+</section>
+
+</div>
+
+<div class="controls">
+  <button class="ctrl-btn" id="prev" aria-label="Назад">‹</button>
+  <div class="ctrl-page"><span class="cur" id="cur">1</span>&nbsp;/&nbsp;<span id="total">12</span></div>
+  <button class="ctrl-btn" id="next" aria-label="Вперёд">›</button>
+</div>
+
+<script>
+const slides = Array.from(document.querySelectorAll('.slide'));
+const total = slides.length;
+let idx = 0;
+const progress = document.getElementById('progress');
+const cur = document.getElementById('cur');
+document.getElementById('total').textContent = total;
+
+function show(n) {
+  n = Math.max(0, Math.min(total - 1, n));
+  slides.forEach((s, i) => {
+    s.classList.remove('active', 'prev');
+    if (i === n) s.classList.add('active');
+    else if (i < n) s.classList.add('prev');
+  });
+  idx = n;
+  cur.textContent = idx + 1;
+  progress.style.width = ((idx + 1) / total * 100) + '%';
+  try { history.replaceState(null, '', '#s' + (idx + 1)); } catch (_) {}
+}
+
+document.getElementById('prev').addEventListener('click', () => show(idx - 1));
+document.getElementById('next').addEventListener('click', () => show(idx + 1));
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); show(idx + 1); }
+  else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(idx - 1); }
+  else if (e.key === 'Home') show(0);
+  else if (e.key === 'End') show(total - 1);
+});
+
+// init progress + hash
+const m = location.hash.match(/^#s(\d+)$/);
+if (m) show(parseInt(m[1], 10) - 1);
+else show(0);
+
+// touch swipe
+let touchX = null;
+document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+document.addEventListener('touchend', e => {
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 60) show(idx + (dx < 0 ? 1 : -1));
+  touchX = null;
+}, { passive: true });
+</script>
+</body>
+</html>

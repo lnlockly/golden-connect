@@ -1,0 +1,229 @@
+/**
+ * Knowledge base styles — scoped to .kb-page / .kb-article roots so
+ * they don't leak into the rest of the landing.
+ */
+
+.kb-page,
+.kb-article {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 120px 24px 96px;
+  color: #eaeaea;
+}
+
+.kb-hero {
+  margin-bottom: 48px;
+}
+
+.kb-hero__title {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 24px;
+  color: #fff;
+}
+
+.kb-search {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 16px;
+  font-family: inherit;
+  transition: border-color 0.15s ease;
+}
+
+.kb-search:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.kb-search::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.kb-empty {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 15px;
+  padding: 24px 0;
+}
+
+.kb-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.kb-category__title {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 20px;
+}
+
+.kb-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 720px) {
+  .kb-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.kb-card {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.kb-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-1px);
+}
+
+.kb-card__link {
+  display: block;
+  padding: 24px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.kb-card__title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: #fff;
+}
+
+.kb-card__summary {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0 0 12px;
+}
+
+.kb-card__meta {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+  letter-spacing: 0.03em;
+}
+
+/* --- Article --- */
+
+.kb-article__nav {
+  margin-bottom: 32px;
+}
+
+.kb-article__back {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.kb-article__back:hover {
+  color: #fff;
+}
+
+.kb-article__header {
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.kb-article__title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+.kb-article__summary {
+  font-size: 18px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 12px;
+}
+
+.kb-article__meta {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+  letter-spacing: 0.03em;
+}
+
+.kb-article__body {
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.kb-article__body h1,
+.kb-article__body h2,
+.kb-article__body h3 {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 40px 0 16px;
+}
+
+.kb-article__body h1 { font-size: 32px; margin-top: 0; }
+.kb-article__body h2 { font-size: 24px; }
+.kb-article__body h3 { font-size: 19px; }
+
+.kb-article__body p {
+  margin: 0 0 16px;
+}
+
+.kb-article__body ul,
+.kb-article__body ol {
+  margin: 0 0 20px;
+  padding-left: 24px;
+}
+
+.kb-article__body li {
+  margin-bottom: 8px;
+}
+
+.kb-article__body strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.kb-article__body code {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-family: 'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+}
+
+.kb-article__body a {
+  color: #9ad1ff;
+  text-decoration: underline;
+  text-decoration-color: rgba(154, 209, 255, 0.35);
+  text-underline-offset: 3px;
+}
+
+.kb-article__body a:hover {
+  text-decoration-color: #9ad1ff;
+}
+
+.kb-article__loading {
+  color: rgba(255, 255, 255, 0.4);
+  padding: 40px 0;
+}

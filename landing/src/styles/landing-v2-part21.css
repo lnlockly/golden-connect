@@ -1,0 +1,418 @@
+/* ═════ CHAT UI OVERRIDES (part21 — loaded LAST) ═════
+   Single source of truth for killing the acid-green border /
+   ring / glow around the hero chat card, and tightening up
+   responsive behaviour across phone / tablet / laptop / 4K.
+   Edit here — NOT in the upstream part*.css files — so the
+   diff stays surgical and the cascade keeps winning.
+*/
+
+/* ─── 1. KILL THE ACID WRAPPER BORDER ────────────────────
+   .chat-inline ships with `border: 1px solid var(--acid)`
+   plus a yellow-tinted box-shadow, and the section /
+   embedded wrappers inherit bits of that visual language
+   through focus-within, hover, etc. Nuke all of them on
+   the WRAPPER — keyboard a11y stays on the textarea and
+   buttons, which get their own visible focus below. */
+.section-hero-chat,
+.section-hero-chat *,
+.hero-chat,
+.hero-chat *,
+.hero-chat-card,
+.hero-chat-card .chat-inline,
+.chat-inline {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.chat-inline {
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.hero-chat-card {
+  /* Let the HeroArea gradient show through when embedded;
+     neutral card surface when standalone. */
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Standalone (non-embedded) chat — transparent wrapper, no frame.
+   Owner called: "никаких бордеров вокруг чата". */
+.section-hero-chat:not(.hero-chat--embedded) .hero-chat-card,
+.section-hero-chat:not(.hero-chat--embedded) .chat-inline {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+/* Embedded-in-hero chat — fully transparent wrapper so the
+   hero waveform / gradient shows through. */
+.hero-chat--embedded .hero-chat-card,
+.hero-chat--embedded .chat-inline {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Any :focus-within acid ring the cascade might resurrect,
+   on ANY chat-related wrapper, plus the standalone hero pill. */
+.section-hero-chat:focus-within,
+.hero-chat:focus-within,
+.hero-chat-card:focus-within,
+.chat-inline:focus-within,
+.hero-chat--embedded:focus-within,
+.hero-chat--embedded .hero-chat-card:focus-within,
+.hero-chat--embedded .chat-inline:focus-within,
+.hero-input-pill,
+.hero-input-pill:focus-within,
+.hero-input-pill-field:focus,
+.hero-input-pill-field:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+/* Kill the acid textarea-focus border on the embedded input
+   — and any other focus-border additions on the input row.
+   No border at all: the pill is defined solely by its background. */
+.chat-input,
+.chat-inline-input,
+.chat-input textarea,
+.chat-inline-input textarea {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.chat-input textarea:focus,
+.chat-inline-input textarea:focus {
+  border: 0 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Restore visible keyboard focus ONLY on the actionable
+   controls (textarea / buttons), so we don't regress a11y. */
+.chat-inline-input textarea:focus-visible,
+.chat-input textarea:focus-visible,
+.chat-inline-input button:focus-visible,
+.chat-input-mic:focus-visible,
+.chat-input-voice:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.55) !important;
+  outline-offset: 2px;
+}
+
+/* ─── 2. RESPONSIVE POLISH ───────────────────────────────
+   Width caps per viewport so the chat never balloons on
+   large monitors, plus safe-area padding for iOS home
+   indicator. */
+.section-hero-chat > * {
+  max-width: min(920px, 100%);
+}
+
+/* Standalone section — tighten max-widths per the spec. */
+@media (min-width: 768px) {
+  .section-hero-chat:not(.hero-chat--embedded) > * { max-width: 560px; }
+}
+@media (min-width: 1024px) {
+  .section-hero-chat:not(.hero-chat--embedded) > * { max-width: 720px; }
+}
+@media (min-width: 1440px) {
+  .section-hero-chat:not(.hero-chat--embedded) > * { max-width: 760px; }
+}
+@media (min-width: 1920px) {
+  .section-hero-chat:not(.hero-chat--embedded) > * { max-width: 860px; }
+}
+
+/* Embedded chat — hero already owns horizontal rhythm, just
+   prevent runaway width on ultra-wide. */
+@media (min-width: 1920px) {
+  .hero-chat--embedded > * { max-width: 860px; }
+}
+
+/* ─── 3. INPUT ROW ERGONOMICS ────────────────────────────
+   16px font on mobile prevents iOS Safari auto-zoom.
+   44x44 min hit targets per Apple HIG, evenly spaced.
+   Safe-area inset keeps buttons off the home indicator. */
+.chat-inline-input,
+.chat-input {
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  align-items: center;
+}
+
+.chat-inline-input textarea,
+.chat-input textarea {
+  font-size: 16px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+@media (min-width: 768px) {
+  /* Desktop can use 15px comfortably — no auto-zoom risk. */
+  .chat-inline-input textarea,
+  .chat-input textarea {
+    font-size: 15px;
+  }
+}
+
+/* 44x44 min hit targets for the three action buttons in the
+   input row (mic, voice-mode, send) across every variant. */
+.chat-inline-input > button,
+.chat-input > button,
+.chat-input-mic,
+.chat-input-voice {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Embedded variant ships 34px pills by default; bump the
+   tap target to 40px minimum on touch devices while keeping
+   the slimmer desktop look. */
+@media (hover: none) and (pointer: coarse) {
+  .hero-chat--embedded .hero-chat-card .chat-inline-input button,
+  .hero-chat--embedded .hero-chat-card .chat-input-mic,
+  .hero-chat--embedded .hero-chat-card .chat-input-voice {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+  }
+}
+
+/* ─── 4. MESSAGE LIST ────────────────────────────────────
+   Overflow-anywhere so long URLs don't blow the card width.
+   Smooth scroll to the newest message. */
+.chat-inline-body {
+  scroll-behavior: smooth;
+}
+.chat-msg-bubble {
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-height: 1.45;
+}
+
+/* ─── 5. DYNAMIC VIEWPORT HEIGHT ─────────────────────────
+   Use 100dvh on the embedded chat container so the iOS URL
+   bar collapse doesn't shove the input off-screen. */
+@supports (height: 100dvh) {
+  .hero-chat--embedded .hero-chat-card .chat-inline-body {
+    min-height: min(46dvh, 46vh);
+  }
+}
+
+/* ─── 6. MOBILE-PORTRAIT BUDGET ──────────────────────────
+   On 320–414 wide phones the default 40px padding
+   overwhelms the card. Trim + ensure the mic never wraps
+   behind the keyboard. */
+@media (max-width: 480px) {
+  .section-hero-chat:not(.hero-chat--embedded) {
+    padding: 20px 12px 32px;
+  }
+  .chat-inline-input,
+  .chat-input {
+    gap: 6px;
+    padding: 10px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+    flex-wrap: nowrap;
+  }
+  .chat-inline-input textarea,
+  .chat-input textarea {
+    min-width: 0;
+    flex: 1 1 0;
+  }
+}
+
+/* ─── 7. VOICE-MODE INDICATOR ON AGENT BADGE ─────────────
+   Tiny white pulse next to the agent name when voice mode
+   is ON. Hooked via a data-attribute the component sets. */
+.chat-inline-head[data-voice-on="1"] .chat-inline-name::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  vertical-align: middle;
+  animation: chat-mic-pulse 1.6s ease-in-out infinite;
+}
+
+/* Kill every square corner inside any chat input. Owner:
+   "убери ебаные квадратные поля в инпуте чата". Buttons are
+   circular pills, the outer row is a fully-rounded pill. */
+.chat-input,
+.chat-inline-input,
+.hero-chat-card .chat-input,
+.hero-chat-card .chat-inline-input {
+  border-radius: 999px !important;
+}
+.chat-input-mic,
+.chat-input-voice,
+.chat-inline-input > button,
+.chat-input > button {
+  border-radius: 999px !important;
+  aspect-ratio: 1 / 1;
+}
+
+/* And kill the square / white-bordered textarea inside every
+   chat variant. Owner: "убери квадратный инпут с белым бордером
+   в чате с нейронкой". Transparent bg + no border so it blends
+   into the rounded pill wrapper; padding stays so text doesn't
+   touch the pill edge. */
+.chat-input textarea,
+.chat-inline-input textarea,
+.hero-chat-card .chat-input textarea,
+.hero-chat-card .chat-inline-input textarea,
+.pagechat-body .chat-inline-input textarea,
+.pagechat-body .chat-input textarea {
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  border-radius: 999px !important;
+}
+
+/* ─── 8. OWNER: STRIP EVERY BORDER ON INPUT PILL ────────
+   "убери нахуй лишние бордеры в инпуте". The outer rounded
+   pill around the textarea+buttons row renders a visible
+   border in multiple preset variants — nuke all of them,
+   keep the rounded shape only via background. Buttons (mic,
+   voice, send) keep their circular styling; only the wrapper
+   and textarea lose all frame. */
+.chat-inline-input,
+.chat-input,
+.hero-chat-card .chat-input,
+.hero-chat-card .chat-inline-input,
+.hero-chat--embedded .chat-input,
+.hero-chat--embedded .chat-inline-input,
+.chat-inline-input textarea,
+.chat-input textarea,
+.hero-chat-card textarea {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ─── 9. MOBILE CHAT — scroll the body, pin the input ──
+   Owner: "на мобилках текст не влезает и не листается,
+   опусти инпут вниз, WAITLIST и меню к правому боку". */
+/* Apply the mobile-nav overrides up to 860px so tablets get the
+   same clean three-in-a-row header (logo · waitlist · burger)
+   and no visible bottom-hairline. */
+@media (max-width: 860px) {
+  .nav-bar, .nav-bar.scrolled { border-bottom-color: transparent !important; }
+  .nav-burger { border: 0 !important; background: transparent !important; }
+  /* Mobile-only language switcher inside the burger drawer.
+     Owner: "нет смены языка на мобилках". Desktop-side copy
+     (in .nav-right) stays hidden by the existing part4 rule. */
+  .nav-lang--mobile { display: none !important; }
+  .nav-links.open .nav-lang--mobile {
+    display: inline-flex !important;
+    gap: 18px;
+    margin-top: 12px;
+    align-self: center;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+  }
+}
+/* Desktop always hides the mobile-only copy. */
+@media (min-width: 861px) {
+  .nav-lang--mobile { display: none !important; }
+}
+
+@media (max-width: 640px) {
+  /* The embedded hero-chat card becomes a real column that
+     fills the viewport, so the body scrolls and the input
+     sticks to the bottom — like every messenger. */
+  .hero-chat--embedded,
+  .hero-chat--embedded .hero-chat-card,
+  .hero-chat--embedded .chat-inline {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100dvh !important;
+  }
+  .hero-chat--embedded .chat-inline-body,
+  .hero-chat--embedded .chat-inline-messages {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 12px !important;
+  }
+  /* Pin the input row to the actual viewport bottom, not the
+     card's internal flex end. `sticky` respects the scroll
+     container so virtual keyboard reveal pushes it correctly. */
+  .hero-chat--embedded .chat-inline-input,
+  .hero-chat--embedded .chat-input {
+    position: sticky !important;
+    bottom: 0 !important;
+    background: var(--bg) !important;
+    padding-bottom: max(10px, env(safe-area-inset-bottom)) !important;
+    z-index: 3 !important;
+  }
+  /* Kill any horizontal clipping on message bubbles so long
+     Russian words wrap instead of getting cut off at the edge. */
+  .chat-msg,
+  .chat-msg-bubble {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    white-space: normal !important;
+  }
+  .chat-inline-body {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  /* Three-in-a-row at top on mobile: logo (left) · WAITLIST pill
+     (centre) · burger (right). All vertically centred at the same
+     viewport y. Logo rides with .nav-bar's padding; waitlist +
+     burger are fixed-positioned, so their `top` is tuned to match
+     the logo's visual centre (logo is inside 12px nav padding →
+     the pill's own padding puts its centre at roughly the same
+     line as the logo wave bars). */
+  .nav-waitlist-wrap,
+  .waitlist-float,
+  .hero-area-waitlist {
+    position: fixed !important;
+    top: 8px !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    z-index: 60 !important;
+    width: auto !important;
+    max-width: 70vw !important;
+    white-space: nowrap !important;
+    writing-mode: horizontal-tb !important;
+    flex-direction: row !important;
+  }
+  .nav-waitlist-wrap .waitlist-float {
+    white-space: nowrap !important;
+    flex-direction: row !important;
+    display: inline-flex !important;
+  }
+  .nav-burger {
+    position: fixed !important;
+    top: 10px !important;
+    right: 12px !important;
+    left: auto !important;
+    transform: none !important;
+    z-index: 61 !important;
+    border: 0 !important;
+    background: transparent !important;
+    padding: 6px !important;
+  }
+  /* Kill the scrolled-state hairline under the header on mobile
+     — owner flagged the visible border as noise. */
+  .nav-bar,
+  .nav-bar.scrolled {
+    border-bottom-color: transparent !important;
+  }
+  /* Sibling override no longer needed — waitlist lives in centre
+     and burger on the right; they don't collide. */
+  .nav-waitlist-wrap + .nav-burger,
+  .nav-waitlist-wrap ~ .nav-burger {
+    right: 12px !important;
+    left: auto !important;
+  }
+}

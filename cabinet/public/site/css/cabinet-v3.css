@@ -1,0 +1,1008 @@
+/* ═════════════════════════════════════════════════════════════════════════
+   Trendex Cabinet v3 — neo-cyberpunk design system
+   Phase 0+1: foundation + sidebar redesign
+   Activated via <body class="ui-v3"> — won't affect users without the class.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+/* ── Font imports (Geist + Inter Variable + Geist Mono via Google Fonts) ── */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&family=Inter:wght@100..900&display=swap');
+
+/* ═══════════ DESIGN TOKENS ═══════════ */
+body.ui-v3 {
+  /* ── Palette: neo-cyberpunk ── */
+  --v3-bg-void:      #050608;
+  --v3-bg-surface:   #0c0e14;
+  --v3-bg-elevated:  #14171f;
+  --v3-bg-glass:     rgba(20, 23, 31, 0.55);
+
+  --v3-text-primary:   #ededee;
+  --v3-text-secondary: #a1a4ad;
+  --v3-text-tertiary:  #6e7079;
+  --v3-text-disabled:  #494b53;
+
+  --v3-neon-violet:  #b14aff;
+  --v3-neon-cyan:    #00e0ff;
+  --v3-neon-pink:    #ff2ec4;
+  --v3-neon-lime:    #00ff94;
+  --v3-neon-gold:    #ffce4a;
+  --v3-neon-red:     #ff5577;
+
+  --v3-glow-violet:  0 0 24px rgba(177, 74, 255, 0.45);
+  --v3-glow-cyan:    0 0 24px rgba(0, 224, 255, 0.45);
+  --v3-glow-pink:    0 0 24px rgba(255, 46, 196, 0.45);
+  --v3-glow-soft:    0 0 16px rgba(177, 74, 255, 0.18);
+
+  --v3-border-faint:    rgba(255, 255, 255, 0.06);
+  --v3-border-default:  rgba(255, 255, 255, 0.10);
+  --v3-border-strong:   rgba(177, 74, 255, 0.35);
+  --v3-border-active:   rgba(177, 74, 255, 0.75);
+
+  /* ── Aurora gradient — core brand element ── */
+  --v3-aurora: conic-gradient(
+    from 180deg at 50% 50%,
+    #b14aff 0%, #00e0ff 25%, #ff2ec4 50%,
+    #00ff94 75%, #b14aff 100%
+  );
+  --v3-aurora-soft: linear-gradient(135deg,
+    rgba(177, 74, 255, 0.14) 0%,
+    rgba(0, 224, 255, 0.10) 50%,
+    rgba(255, 46, 196, 0.06) 100%
+  );
+  --v3-aurora-text: linear-gradient(135deg, #ffffff 0%, #b14aff 40%, #00e0ff 80%);
+  --v3-mesh-bg: radial-gradient(ellipse 70% 50% at 18% 22%, rgba(177, 74, 255, 0.22), transparent 60%),
+                radial-gradient(ellipse 60% 40% at 82% 78%, rgba(0, 224, 255, 0.16), transparent 60%),
+                radial-gradient(ellipse 40% 30% at 50% 100%, rgba(255, 46, 196, 0.08), transparent 60%);
+
+  /* ── Typography ── */
+  --v3-font-display: 'Geist', system-ui, -apple-system, sans-serif;
+  --v3-font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --v3-font-mono:    'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  --v3-text-xs:   11px;
+  --v3-text-sm:   12.5px;
+  --v3-text-base: 14px;
+  --v3-text-md:   15px;
+  --v3-text-lg:   17px;
+  --v3-text-xl:   22px;
+  --v3-text-2xl:  28px;
+  --v3-text-3xl:  36px;
+  --v3-text-4xl:  48px;
+
+  --v3-weight-regular:  400;
+  --v3-weight-medium:   500;
+  --v3-weight-semibold: 600;
+  --v3-weight-bold:     700;
+
+  --v3-line-tight: 1.15;
+  --v3-line-snug:  1.35;
+  --v3-line-base:  1.55;
+  --v3-line-loose: 1.75;
+
+  --v3-tracking-tight:  -0.025em;
+  --v3-tracking-normal: 0;
+  --v3-tracking-wide:   0.025em;
+  --v3-tracking-widest: 0.12em;
+
+  /* ── Motion ── */
+  --v3-ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+  --v3-ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+  --v3-ease-in-out:  cubic-bezier(0.65, 0, 0.35, 1);
+  --v3-dur-instant:  100ms;
+  --v3-dur-fast:     180ms;
+  --v3-dur-base:     280ms;
+  --v3-dur-slow:     520ms;
+  --v3-dur-slower:   820ms;
+
+  /* ── Spacing — 4pt grid ── */
+  --v3-sp-0:  0;
+  --v3-sp-1:  4px;
+  --v3-sp-2:  8px;
+  --v3-sp-3:  12px;
+  --v3-sp-4:  16px;
+  --v3-sp-5:  20px;
+  --v3-sp-6:  24px;
+  --v3-sp-7:  32px;
+  --v3-sp-8:  40px;
+  --v3-sp-9:  56px;
+  --v3-sp-10: 72px;
+
+  /* ── Radii ── */
+  --v3-r-xs: 4px;
+  --v3-r-sm: 8px;
+  --v3-r-md: 12px;
+  --v3-r-lg: 16px;
+  --v3-r-xl: 24px;
+  --v3-r-2xl: 32px;
+  --v3-r-full: 9999px;
+
+  /* ── Layout dimensions ── */
+  --v3-sidebar-w:           248px;
+  --v3-sidebar-w-collapsed: 64px;
+  --v3-topbar-h:            56px;
+  --v3-content-max-w:       1440px;
+
+  /* ── Z-indexes ── */
+  --v3-z-base:    1;
+  --v3-z-sidebar: 30;
+  --v3-z-topbar:  40;
+  --v3-z-dropdown: 60;
+  --v3-z-modal:   80;
+  --v3-z-toast:   100;
+}
+
+/* ═══════════ BASE RESETS ═══════════ */
+body.ui-v3 {
+  background: var(--v3-bg-void);
+  color: var(--v3-text-primary);
+  font-family: var(--v3-font-body);
+  font-size: var(--v3-text-base);
+  line-height: var(--v3-line-base);
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: var(--v3-mesh-bg);
+  background-attachment: fixed;
+}
+
+body.ui-v3 *,
+body.ui-v3 *::before,
+body.ui-v3 *::after {
+  box-sizing: border-box;
+}
+
+body.ui-v3 ::selection {
+  background: rgba(177, 74, 255, 0.35);
+  color: #fff;
+}
+
+body.ui-v3 ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+body.ui-v3 ::-webkit-scrollbar-track {
+  background: transparent;
+}
+body.ui-v3 ::-webkit-scrollbar-thumb {
+  background: rgba(177, 74, 255, 0.18);
+  border-radius: 4px;
+}
+body.ui-v3 ::-webkit-scrollbar-thumb:hover {
+  background: rgba(177, 74, 255, 0.35);
+}
+
+/* ═══════════ UTILITY CLASSES ═══════════ */
+body.ui-v3 .v3-glass {
+  background: var(--v3-bg-glass);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--v3-border-default);
+}
+
+body.ui-v3 .v3-aurora-text {
+  background: var(--v3-aurora-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: var(--v3-weight-bold);
+}
+
+body.ui-v3 .v3-mono {
+  font-family: var(--v3-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+body.ui-v3 .v3-neon-border {
+  position: relative;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+body.ui-v3 .v3-neon-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--v3-aurora);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  transition: opacity var(--v3-dur-base) var(--v3-ease-out);
+  pointer-events: none;
+}
+body.ui-v3 .v3-neon-border:hover::before { opacity: 1; }
+
+body.ui-v3 .v3-glow-hover {
+  transition: box-shadow var(--v3-dur-base) var(--v3-ease-out),
+              transform var(--v3-dur-base) var(--v3-ease-spring);
+}
+body.ui-v3 .v3-glow-hover:hover {
+  box-shadow: var(--v3-glow-soft);
+  transform: translateY(-2px);
+}
+
+/* ═══════════ AMBIENT BACKGROUND ANIMATION ═══════════ */
+body.ui-v3::before {
+  content: '';
+  position: fixed;
+  inset: -50% -50% -50% -50%;
+  background: var(--v3-aurora);
+  filter: blur(120px);
+  opacity: 0.08;
+  z-index: -1;
+  animation: v3-aurora-drift 24s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes v3-aurora-drift {
+  0%   { transform: rotate(0deg)   scale(1);   }
+  50%  { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1);   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.ui-v3::before { animation: none; }
+}
+
+/* ═══════════ SIDEBAR v3 ═══════════ */
+body.ui-v3 #sidebar,
+body.ui-v3 .sidebar {
+  width: var(--v3-sidebar-w);
+  background: var(--v3-bg-surface);
+  background-image: linear-gradient(180deg,
+    rgba(177, 74, 255, 0.04) 0%,
+    transparent 30%);
+  border-right: 1px solid var(--v3-border-faint);
+  padding: var(--v3-sp-4) var(--v3-sp-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--v3-sp-1);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  z-index: var(--v3-z-sidebar);
+}
+
+body.ui-v3 .sb-logo {
+  font-family: var(--v3-font-display);
+  font-size: var(--v3-text-base);
+  font-weight: var(--v3-weight-bold);
+  letter-spacing: var(--v3-tracking-widest);
+  background: var(--v3-aurora-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: var(--v3-sp-3) var(--v3-sp-3) var(--v3-sp-4);
+  text-transform: uppercase;
+}
+
+body.ui-v3 .sb-section {
+  padding: var(--v3-sp-4) var(--v3-sp-3) var(--v3-sp-2);
+}
+
+body.ui-v3 .sb-label {
+  font-family: var(--v3-font-display);
+  font-size: 10px;
+  font-weight: var(--v3-weight-semibold);
+  letter-spacing: var(--v3-tracking-widest);
+  text-transform: uppercase;
+  color: var(--v3-text-tertiary);
+}
+
+body.ui-v3 .sb-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--v3-sp-3);
+  padding: var(--v3-sp-2) var(--v3-sp-3);
+  margin: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--v3-r-md);
+  color: var(--v3-text-secondary);
+  font-family: var(--v3-font-body);
+  font-size: var(--v3-text-base);
+  font-weight: var(--v3-weight-medium);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  transition:
+    background var(--v3-dur-fast) var(--v3-ease-out),
+    color var(--v3-dur-fast) var(--v3-ease-out),
+    transform var(--v3-dur-fast) var(--v3-ease-out);
+  overflow: hidden;
+  /* Reset legacy inline-style spacing/colors */
+  text-decoration: none;
+}
+
+/* Override any inline style="..." colors from legacy sidebar buttons */
+body.ui-v3 .sb-btn[style] {
+  /* inline styles win against most rules — but we use !important sparingly */
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+body.ui-v3 .sb-btn .sb-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  color: var(--v3-text-tertiary);
+  transition: color var(--v3-dur-fast) var(--v3-ease-out);
+}
+
+body.ui-v3 .sb-btn:hover {
+  background: rgba(177, 74, 255, 0.06);
+  color: var(--v3-text-primary);
+}
+body.ui-v3 .sb-btn:hover .sb-icon {
+  color: var(--v3-neon-violet);
+}
+
+/* Active state — Linear-style 2px left strip + soft violet bg */
+body.ui-v3 .sb-btn.active {
+  background: linear-gradient(90deg,
+    rgba(177, 74, 255, 0.18) 0%,
+    rgba(177, 74, 255, 0.04) 100%);
+  color: var(--v3-text-primary);
+  font-weight: var(--v3-weight-semibold);
+}
+body.ui-v3 .sb-btn.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--v3-neon-violet), var(--v3-neon-cyan));
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 8px rgba(177, 74, 255, 0.55);
+}
+body.ui-v3 .sb-btn.active .sb-icon {
+  color: var(--v3-neon-violet);
+}
+
+/* Highlighted buttons (Мой план, Кошелёк) — subtle aurora bg */
+body.ui-v3 .sb-btn-highlight {
+  background: linear-gradient(135deg,
+    rgba(177, 74, 255, 0.10) 0%,
+    rgba(0, 224, 255, 0.06) 100%);
+}
+body.ui-v3 .sb-btn-highlight:not(.active) .sb-icon {
+  color: var(--v3-neon-cyan);
+}
+
+/* Hide all sidebar legacy NEW badges (we'll add a cleaner system later) */
+body.ui-v3 .sb-btn span[style*="background"] {
+  display: none;
+}
+
+/* Admin-only section visibility (admin role toggles class on body or section) */
+body.ui-v3 .sb-btn.admin-only,
+body.ui-v3 .sb-section.admin-only {
+  /* visibility controlled by JS — class added to body when admin */
+}
+
+/* ═══════════ TOPBAR v3 ═══════════ */
+body.ui-v3 .topbar,
+body.ui-v3 #topbar,
+body.ui-v3 header.top {
+  height: var(--v3-topbar-h);
+  background: var(--v3-bg-glass);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid var(--v3-border-faint);
+  padding: 0 var(--v3-sp-4);
+  display: flex;
+  align-items: center;
+  z-index: var(--v3-z-topbar);
+  position: sticky;
+  top: 0;
+}
+
+body.ui-v3 #page-title {
+  font-family: var(--v3-font-display);
+  font-size: var(--v3-text-lg);
+  font-weight: var(--v3-weight-semibold);
+  letter-spacing: var(--v3-tracking-tight);
+  color: var(--v3-text-primary);
+}
+
+/* ═══════════ MAIN CONTENT AREA ═══════════ */
+body.ui-v3 .main,
+body.ui-v3 #main {
+  background: transparent;
+}
+
+body.ui-v3 .page {
+  padding: var(--v3-sp-5) var(--v3-sp-6);
+}
+
+/* ═══════════ CARD SYSTEM ═══════════ */
+body.ui-v3 .cab-card {
+  background: var(--v3-bg-surface);
+  border: 1px solid var(--v3-border-faint);
+  border-radius: var(--v3-r-lg);
+  padding: var(--v3-sp-5);
+  transition: border-color var(--v3-dur-base) var(--v3-ease-out),
+              box-shadow var(--v3-dur-base) var(--v3-ease-out),
+              transform var(--v3-dur-base) var(--v3-ease-spring);
+}
+body.ui-v3 .cab-card:hover {
+  border-color: rgba(177, 74, 255, 0.25);
+  box-shadow: var(--v3-glow-soft);
+}
+
+/* ═══════════ BUTTON SYSTEM ═══════════ */
+body.ui-v3 .cab-btn,
+body.ui-v3 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--v3-sp-2);
+  padding: var(--v3-sp-2) var(--v3-sp-4);
+  background: var(--v3-bg-elevated);
+  border: 1px solid var(--v3-border-default);
+  border-radius: var(--v3-r-md);
+  color: var(--v3-text-primary);
+  font-family: var(--v3-font-body);
+  font-size: var(--v3-text-base);
+  font-weight: var(--v3-weight-semibold);
+  cursor: pointer;
+  transition:
+    background var(--v3-dur-fast) var(--v3-ease-out),
+    border-color var(--v3-dur-fast) var(--v3-ease-out),
+    box-shadow var(--v3-dur-fast) var(--v3-ease-out),
+    transform var(--v3-dur-fast) var(--v3-ease-spring);
+  text-decoration: none;
+}
+body.ui-v3 .cab-btn:hover,
+body.ui-v3 .btn:hover {
+  background: rgba(177, 74, 255, 0.10);
+  border-color: var(--v3-border-strong);
+}
+
+body.ui-v3 .cab-btn-primary,
+body.ui-v3 .btn-primary {
+  background: linear-gradient(135deg, var(--v3-neon-violet) 0%, #8a2bdb 100%);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(177, 74, 255, 0.30);
+}
+body.ui-v3 .cab-btn-primary:hover,
+body.ui-v3 .btn-primary:hover {
+  background: linear-gradient(135deg, #c25aff 0%, #9b3eef 100%);
+  box-shadow: 0 8px 20px rgba(177, 74, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+/* ═══════════ HUB TAB BAR (Phase 2 of last session) v3 polish ═══════════ */
+body.ui-v3 .hub-tab-bar {
+  background: var(--v3-bg-glass);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--v3-border-default);
+  padding: var(--v3-sp-3) var(--v3-sp-5);
+  display: flex;
+  gap: var(--v3-sp-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--v3-sp-4);
+}
+
+body.ui-v3 .hub-tab {
+  padding: var(--v3-sp-2) var(--v3-sp-4);
+  background: transparent;
+  border: 1px solid var(--v3-border-faint);
+  border-radius: var(--v3-r-md);
+  color: var(--v3-text-secondary);
+  font-family: var(--v3-font-body);
+  font-size: var(--v3-text-sm);
+  font-weight: var(--v3-weight-medium);
+  cursor: pointer;
+  transition: all var(--v3-dur-fast) var(--v3-ease-out);
+}
+body.ui-v3 .hub-tab:hover {
+  background: rgba(177, 74, 255, 0.08);
+  color: var(--v3-text-primary);
+  border-color: var(--v3-border-strong);
+}
+body.ui-v3 .hub-tab.active {
+  background: linear-gradient(135deg, var(--v3-neon-violet) 0%, #00aaff 100%);
+  color: #fff;
+  border-color: transparent;
+  font-weight: var(--v3-weight-semibold);
+  box-shadow: 0 4px 14px rgba(177, 74, 255, 0.35);
+}
+
+/* ═══════════ KPI / METRIC DISPLAY ═══════════ */
+body.ui-v3 .kpi-val,
+body.ui-v3 .v3-metric {
+  font-family: var(--v3-font-mono);
+  font-size: var(--v3-text-3xl);
+  font-weight: var(--v3-weight-bold);
+  background: var(--v3-aurora-text);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: var(--v3-tracking-tight);
+  line-height: var(--v3-line-tight);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ═══════════ HEADINGS ═══════════ */
+body.ui-v3 h1, body.ui-v3 .v3-h1 {
+  font-family: var(--v3-font-display);
+  font-size: var(--v3-text-3xl);
+  font-weight: var(--v3-weight-bold);
+  letter-spacing: var(--v3-tracking-tight);
+  line-height: var(--v3-line-tight);
+  color: var(--v3-text-primary);
+}
+body.ui-v3 h2, body.ui-v3 .v3-h2 {
+  font-family: var(--v3-font-display);
+  font-size: var(--v3-text-2xl);
+  font-weight: var(--v3-weight-bold);
+  letter-spacing: var(--v3-tracking-tight);
+  line-height: var(--v3-line-tight);
+}
+body.ui-v3 h3, body.ui-v3 .v3-h3 {
+  font-family: var(--v3-font-display);
+  font-size: var(--v3-text-xl);
+  font-weight: var(--v3-weight-semibold);
+  letter-spacing: var(--v3-tracking-tight);
+}
+body.ui-v3 h4, body.ui-v3 .v3-h4 {
+  font-family: var(--v3-font-display);
+  font-size: var(--v3-text-lg);
+  font-weight: var(--v3-weight-semibold);
+}
+
+/* ═══════════ INPUT FIELDS ═══════════ */
+body.ui-v3 .cab-input,
+body.ui-v3 input[type="text"],
+body.ui-v3 input[type="email"],
+body.ui-v3 input[type="number"],
+body.ui-v3 input[type="search"],
+body.ui-v3 textarea,
+body.ui-v3 select {
+  background: var(--v3-bg-elevated);
+  border: 1px solid var(--v3-border-default);
+  border-radius: var(--v3-r-md);
+  padding: var(--v3-sp-2) var(--v3-sp-3);
+  color: var(--v3-text-primary);
+  font-family: var(--v3-font-body);
+  font-size: var(--v3-text-base);
+  transition: border-color var(--v3-dur-fast) var(--v3-ease-out),
+              box-shadow var(--v3-dur-fast) var(--v3-ease-out);
+}
+body.ui-v3 .cab-input:focus,
+body.ui-v3 input:focus,
+body.ui-v3 textarea:focus,
+body.ui-v3 select:focus {
+  outline: none;
+  border-color: var(--v3-neon-violet);
+  box-shadow: 0 0 0 3px rgba(177, 74, 255, 0.20);
+}
+
+/* ═══════════ MODAL OVERLAY (when v3-modal class used) ═══════════ */
+body.ui-v3 .v3-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 6, 8, 0.65);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  z-index: var(--v3-z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: v3-fade-in var(--v3-dur-base) var(--v3-ease-out);
+}
+body.ui-v3 .v3-modal {
+  background: var(--v3-bg-surface);
+  border: 1px solid var(--v3-border-default);
+  border-radius: var(--v3-r-xl);
+  padding: var(--v3-sp-6);
+  max-width: 480px;
+  width: 92%;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), var(--v3-glow-soft);
+  animation: v3-modal-in var(--v3-dur-base) var(--v3-ease-spring);
+}
+
+/* ═══════════ ANIMATIONS ═══════════ */
+@keyframes v3-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes v3-modal-in {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);   }
+}
+@keyframes v3-pulse {
+  0%, 100% { opacity: 1;   transform: scale(1);    }
+  50%      { opacity: 0.6; transform: scale(0.95); }
+}
+@keyframes v3-skeleton {
+  0%   { background-position: 0% 0;   }
+  100% { background-position: 200% 0; }
+}
+
+body.ui-v3 .v3-pulse { animation: v3-pulse 1.4s ease-in-out infinite; }
+
+body.ui-v3 .v3-skeleton {
+  background: linear-gradient(90deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(177, 74, 255, 0.10) 50%,
+    rgba(255, 255, 255, 0.04) 100%);
+  background-size: 200% 100%;
+  animation: v3-skeleton 1.4s ease-in-out infinite;
+  border-radius: var(--v3-r-sm);
+}
+
+/* ═══════════ MOBILE ADJUSTMENTS ═══════════ */
+@media (max-width: 900px) {
+  body.ui-v3 #sidebar,
+  body.ui-v3 .sidebar {
+    /* mobile: sidebar becomes off-canvas slide-in */
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    transition: transform var(--v3-dur-base) var(--v3-ease-out);
+    z-index: var(--v3-z-modal);
+  }
+  body.ui-v3 #sidebar.open,
+  body.ui-v3 .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 24px 0 60px rgba(0, 0, 0, 0.65);
+  }
+
+  body.ui-v3 .page {
+    padding: var(--v3-sp-4) var(--v3-sp-4);
+  }
+
+  body.ui-v3 .kpi-val,
+  body.ui-v3 .v3-metric {
+    font-size: var(--v3-text-2xl);
+  }
+}
+
+/* ═══════════ a11y — focus ring ═══════════ */
+body.ui-v3 :focus-visible {
+  outline: 2px solid var(--v3-neon-violet);
+  outline-offset: 2px;
+  border-radius: var(--v3-r-sm);
+}
+
+/* ═══════════ Reduced motion ═══════════ */
+@media (prefers-reduced-motion: reduce) {
+  body.ui-v3 *,
+  body.ui-v3 *::before,
+  body.ui-v3 *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ═══════════ Print ═══════════ */
+@media print {
+  body.ui-v3 #sidebar,
+  body.ui-v3 .topbar {
+    display: none;
+  }
+  body.ui-v3 .page {
+    padding: 0;
+  }
+}
+
+
+/* ═══════════ [v3-polish-2026-05-12] - sidebar tighten + banner ═══════════ */
+body.ui-v3 .sb-btn {
+  font-size: 13.5px;
+  padding: 8px 12px;
+  min-height: 36px;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+}
+body.ui-v3 .sb-btn .sb-icon {
+  width: 18px; height: 18px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+body.ui-v3 .sb-btn.active .sb-icon {
+  opacity: 1;
+}
+body.ui-v3 .sb-section {
+  padding: 18px 12px 6px;
+  margin-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+body.ui-v3 .sb-section:first-of-type {
+  border-top: none;
+  margin-top: 0;
+  padding-top: 8px;
+}
+body.ui-v3 .sb-label {
+  font-size: 10px;
+  color: #6e7079;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+body.ui-v3 .sb-logo {
+  padding: 18px 12px 6px;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+}
+
+/* Account / profile row at top of sidebar (volga9000 etc.) */
+body.ui-v3 #sb-profile,
+body.ui-v3 .sb-profile,
+body.ui-v3 [data-sb-profile] {
+  margin: 4px 8px 10px;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, rgba(177,74,255,0.08), rgba(0,224,255,0.05));
+  border: 1px solid rgba(177,74,255,0.18);
+  border-radius: 12px;
+}
+
+/* Notification permission banner — top right floating capsule instead of
+   full-width yellow strip */
+body.ui-v3 #notifBanner,
+body.ui-v3 .notif-banner,
+body.ui-v3 [data-notif-banner] {
+  position: fixed !important;
+  top: 14px !important;
+  right: 14px !important;
+  left: auto !important;
+  width: auto !important;
+  max-width: 360px;
+  padding: 12px 16px;
+  background: var(--v3-bg-glass) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--v3-border-default) !important;
+  border-left: 3px solid var(--v3-neon-gold) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+  font-size: 13px;
+  z-index: 70;
+}
+
+/* Hide redundant "Балансы" card in old dashboard when v3 hero is showing */
+body.ui-v3 #page-dashboard .v3-hero ~ .cab-card #dash-balances {
+  display: none !important;
+}
+/* Кoшелёк-card duplicates */
+body.ui-v3 #page-dashboard .v3-hero + * #dash-balances {
+  display: none !important;
+}
+
+/* ═══════════ topbar polish — language pill + logout button ═══════════ */
+body.ui-v3 .top-actions,
+body.ui-v3 .topbar > * {
+  font-size: 13px;
+}
+body.ui-v3 .lang-pill,
+body.ui-v3 .lang-switcher {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--v3-border-faint);
+  color: var(--v3-text-secondary);
+}
+body.ui-v3 .lang-pill:hover {
+  background: rgba(177,74,255,0.10);
+  color: var(--v3-text-primary);
+  border-color: var(--v3-border-strong);
+}
+
+/* ═══════════ hide ALL legacy "NEW" badges in v3 (more aggressive) ═══════ */
+body.ui-v3 .sb-btn span[style*="background"]:not([style*="transparent"]),
+body.ui-v3 .sb-btn span[style*="#fbbf"],
+body.ui-v3 .sb-btn span[style*="#B14"],
+body.ui-v3 .sb-btn span[style*="#7c3"],
+body.ui-v3 .sb-btn span[style*="#10b"],
+body.ui-v3 .sb-btn span[style*="#FF2"],
+body.ui-v3 .sb-btn span[style*="#00D"] {
+  display: none !important;
+}
+
+/* ═══════════ Hero spacing tighten ═══════════ */
+body.ui-v3 .v3-hero {
+  margin: 0 0 20px;
+}
+body.ui-v3 #page-dashboard {
+  padding-top: 14px;
+}
+
+
+/* ═══════════ [v3-polish-2-2026-05-12] ═══════════ */
+/* User feedback (screen 5): numbers in KPI cards looked крив — each card
+   left-aligned, different widths, no vertical baseline shared. Fix: center
+   values, tabular-nums, fixed min-height per card so 4 KPIs line up like
+   a real metric grid. */
+
+body.ui-v3 .v3-stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-height: 110px;
+  padding: 18px 20px;
+  gap: 4px;
+}
+
+/* [kpi-spacing-2026-05-13] cleaner rendering for money values:
+ * - normal letter-spacing (no -0.03em — was kerning '.' weirdly)
+ * - proportional-nums (better than tabular here — currency values don't
+ *   need column alignment, and proportional renders '.' tighter)
+ * - keep nowrap so values don't wrap
+ * - explicit text-overflow: clip to avoid inherited ellipsis surprises
+ */
+body.ui-v3 .v3-stat-value {
+  font-size: clamp(22px, 2.5vw, 30px);
+  letter-spacing: 0;
+  font-variant-numeric: proportional-nums lining-nums;
+  font-feature-settings: 'pnum' 1, 'lnum' 1;
+  display: block;
+  width: 100%;
+  word-break: keep-all;
+  white-space: nowrap;
+  text-overflow: clip;
+  overflow: visible;
+  line-height: 1.05;
+}
+
+body.ui-v3 .v3-stat-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--v3-text-tertiary);
+  margin: 0 0 6px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body.ui-v3 .v3-stat-delta {
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-top: auto;
+  font-family: var(--v3-font-mono);
+}
+
+/* All 4 KPIs share same baseline using equal min-height + flex grow */
+body.ui-v3 .v3-hero-stat-row {
+  align-items: stretch;
+}
+body.ui-v3 .v3-hero-stat-row > .v3-stat-card { height: auto; }
+
+/* ═══════════ Notification banner — correct selector ═══════════ */
+/* The actual element is <div class="cab-card" id="dash-push-banner"> */
+body.ui-v3 #dash-push-banner {
+  position: fixed !important;
+  top: 14px !important;
+  right: 14px !important;
+  left: auto !important;
+  width: auto !important;
+  max-width: 380px;
+  padding: 14px 18px !important;
+  background: var(--v3-bg-glass) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(160%) !important;
+  backdrop-filter: blur(20px) saturate(160%) !important;
+  border: 1px solid var(--v3-border-default) !important;
+  border-left: 3px solid var(--v3-neon-gold) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45) !important;
+  font-size: 13px;
+  z-index: 70 !important;
+  margin: 0 !important;
+  animation: v3-banner-in 0.4s var(--v3-ease-spring);
+}
+@keyframes v3-banner-in {
+  from { opacity: 0; transform: translateY(-12px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+body.ui-v3 #dash-push-banner > div {
+  gap: 10px !important;
+}
+body.ui-v3 #dash-push-banner h3 {
+  font-size: 14px !important;
+  font-family: var(--v3-font-display);
+  letter-spacing: -0.01em;
+  margin: 0 0 2px !important;
+}
+body.ui-v3 #dash-push-banner p {
+  font-size: 11.5px !important;
+  line-height: 1.45 !important;
+  max-width: 220px;
+}
+body.ui-v3 #dash-push-banner button.cab-btn-primary {
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+}
+body.ui-v3 #dash-push-banner button:not(.cab-btn-primary) {
+  background: transparent !important;
+  border: none !important;
+  color: var(--v3-text-tertiary) !important;
+  font-size: 14px !important;
+  padding: 2px 6px !important;
+}
+
+/* ═══════════ Dashboard panel ("Панель управления") cards ═══════════ */
+/* Make the CTRL_PANELS grid look modern — equal-height cards with
+   subtle hover lift. */
+body.ui-v3 #page-dashboard .ctrl-panel,
+body.ui-v3 .ctrl-card,
+body.ui-v3 [data-ctrl-card] {
+  background: var(--v3-bg-surface);
+  border: 1px solid var(--v3-border-faint);
+  border-radius: 14px;
+  padding: 16px 14px;
+  text-align: center;
+  transition: all var(--v3-dur-fast) var(--v3-ease-out);
+  cursor: pointer;
+}
+body.ui-v3 #page-dashboard .ctrl-panel:hover,
+body.ui-v3 .ctrl-card:hover,
+body.ui-v3 [data-ctrl-card]:hover {
+  border-color: var(--v3-border-strong);
+  box-shadow: var(--v3-glow-soft);
+  transform: translateY(-2px);
+}
+
+/* ═══════════ The "ROCKET" delta label inside subscription card ═══════════ */
+body.ui-v3 .v3-stat-delta.pos {
+  color: var(--v3-neon-lime);
+  background: rgba(0, 255, 148, 0.08);
+  padding: 3px 8px;
+  border-radius: 999px;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+/* ═══════════ Long currency values shrink instead of wrap ═══════════ */
+body.ui-v3 .v3-stat-value.aurora {
+  background: linear-gradient(135deg, #ffffff 0%, #d2b3ff 45%, #66e4ff 90%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* If any value > 8 chars, scale down */
+@container (width < 200px) {
+  body.ui-v3 .v3-stat-value { font-size: 20px; }
+}
+
+/* Container queries on hero stat row to scale numbers down on narrow */
+body.ui-v3 .v3-hero-stat-row {
+  container-type: inline-size;
+}
+@container (max-width: 720px) {
+  body.ui-v3 .v3-stat-card { padding: 14px 14px; min-height: 90px; }
+  body.ui-v3 .v3-stat-value { font-size: 22px; }
+}
+
+/* ═══════════ Hide language toggle "ru" / logout if they're styled badly ═══ */
+body.ui-v3 .nav-logout,
+body.ui-v3 .logout-btn {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--v3-border-faint);
+  color: var(--v3-text-secondary);
+  font-size: 13px;
+}
+body.ui-v3 .nav-logout:hover,
+body.ui-v3 .logout-btn:hover {
+  background: rgba(255, 85, 119, 0.12);
+  border-color: rgba(255, 85, 119, 0.4);
+  color: var(--v3-neon-red);
+}

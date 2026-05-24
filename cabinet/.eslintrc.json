@@ -1,0 +1,13 @@
+{
+  "env": { "node": true, "es2022": true, "browser": false },
+  "parserOptions": { "ecmaVersion": 2022, "sourceType": "script" },
+  "rules": {
+    "no-undef": "error",
+    "no-unused-vars": "off"
+  },
+  "globals": {
+    "AbortController": "readonly",
+    "fetch": "readonly",
+    "BigInt": "readonly"
+  }
+}

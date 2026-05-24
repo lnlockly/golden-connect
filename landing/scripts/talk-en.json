@@ -1,0 +1,19 @@
+{
+  "nav.talk": "Talk",
+  "chat.tag": "Live · streaming",
+
+  "talk.eyebrow": "Talk to an agent",
+  "talk.h": "Describe your task. <span class=\"hi\">Get a quote in one chat.</span>",
+  "talk.lede": "This chat is the real intake agent. It asks what you need, what your budget is, and your deadline — then routes the brief to a certified operator. You get a human reply on your contact within 30 minutes.",
+
+  "talk.p1.h": "Plain-language brief",
+  "talk.p1.p": "No forms, no ticket fields. Just tell it what you want shipped.",
+  "talk.p2.h": "Budget in escrow",
+  "talk.p2.p": "$100 minimum. Budget only moves after you approve the operator's plan.",
+  "talk.p3.h": "Human reply in 30 min",
+  "talk.p3.p": "The brief goes to the top-matched operator. They reply on your contact with scope, timeline and a fixed price.",
+
+  "talk.alt_l": "Prefer a form?",
+  "talk.alt_p": "One-screen order: task, budget, deadline, contact. Same operator on the other side.",
+  "talk.alt_cta": "Use the order form →"
+}

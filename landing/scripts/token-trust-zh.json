@@ -1,0 +1,34 @@
+{
+  "trust.eyebrow": "$FLOW 为什么不会跑路",
+  "trust.h": "代币<span class=\"hi\">由真实交付背书</span>,不是靠卖币撑起来的。",
+  "trust.lede": "我们从不在零售端卖币融资。流通中的每一枚 $FLOW 都来自客户为真实交付付的款,并分给实际完成工作的人。流动性池是一个只进不出的沉池 —— 每一单都让它更深。",
+
+  "trust.flow.title": "资金流向 · 一单的示例",
+  "trust.flow.client_l": "客户支付",
+  "trust.flow.client_v": "$100(示例)",
+  "trust.flow.escrow_l": "托管 · 锁定 14 天",
+  "trust.flow.escrow_v": "$FLOW 链上锁仓",
+  "trust.flow.drip": "第 0 天:存款的 1% → LP",
+  "trust.flow.split_title": "验收之后",
+  "trust.flow.split.lp_l": "→ 进入流动性池",
+  "trust.flow.split.owner_l": "代理所有者版税",
+  "trust.flow.split.op_l": "操作员(含 AI 推理费用)",
+
+  "trust.sink.title": "三路注入、同向入池",
+  "trust.sink.lede": "流动性随使用量增长。池子由三条独立注入通道喂养,协议金库不会反向取回任何代币。",
+  "trust.sink.a_l": "(a)锁仓 TVL",
+  "trust.sink.a_p": "每一单在 14 天窗口里把全部预算锁在托管里。在途任务越多,池底越深。",
+  "trust.sink.b_l": "(b)每单 20%",
+  "trust.sink.b_p": "每笔完成的订单,本金的 20% 直接进入 LP。这取代了过去的 1% 平台费 —— 协议的抽成变成了池子的增量。",
+  "trust.sink.c_l": "(c)存款 1%",
+  "trust.sink.c_p": "每一笔新存款的 1% 在第 0 天就注入 LP,先于执行。与交付节奏无关的常态补水。",
+
+  "trust.checklist.title": "硬承诺",
+  "trust.checklist.no_sale": "没有公开售币 —— 代币流通的唯一入口就是协议的营收。",
+  "trust.checklist.no_team_unlock": "前 12 个月不对团队与投资人解锁。",
+  "trust.checklist.no_admin_mint": "管理员不能增发 —— 总供给固定为 1,000,000,000,链上可验证。",
+  "trust.checklist.op_vesting": "操作员份额进入分期:每天 2% × 14 天 + 第 15 天 72%。拿钱跑路在合约层面被锁死。",
+
+  "trust.disclaimer": "预发布阶段。页面数字为示意 —— 最终链上参数以白皮书与 TGE 部署合约为准。非证券、不构成投资要约,在受限司法辖区不开放。",
+  "trust.cta": "加入候补名单"
+}

@@ -1,0 +1,29 @@
+{
+  "sing.eyebrow": "Inside the inflection",
+  "sing.h": "Four lines crossing. <span class=\"hi\">One moment.</span> One market.",
+  "sing.lede": "Capability going up, cost going down, agent autonomy going up, integration going down. They cross now. Everything before this point was R&D. Everything after is a market — and somebody runs it.",
+
+  "sing.now_label": "NOW",
+  "sing.before_label": "Before · research",
+  "sing.after_label": "After · delivery",
+
+  "sing.curve_capability": "Capability",
+  "sing.curve_capability_p": "Benchmarks doubling every 6 months, context windows by 10× per year. Last month we crossed human performance on multi-step delivery tasks that weren't on anyone's charts a year ago.",
+  "sing.curve_cost": "Cost",
+  "sing.curve_cost_p": "Token price dropped 99% in 24 months. What cost the company $200 per answer in 2023 costs $0.04 today. A one-off research task is now a rounding error.",
+  "sing.curve_autonomy": "Autonomy",
+  "sing.curve_autonomy_p": "Agents went from 3-step chatbots to 50-step delivery workers with tool use, memory, escalation and settlement. Persistent agents now run for days without drift.",
+  "sing.curve_integration": "Integration",
+  "sing.curve_integration_p": "Setup cost collapsed. MCP makes any tool agent-ready. What used to be a 6-month vendor integration is a config file.",
+
+  "sing.hits_label": "What changed · just the last 24 months",
+  "sing.hit1": "$200/hr consultant answer → $0.04 and 90 seconds.",
+  "sing.hit2": "3-week sprint for a landing → one brief and 40 minutes.",
+  "sing.hit3": "$3k/month SMM seat → agent fleet across 6 channels, same budget.",
+  "sing.hit4": "$500 legal draft in 5 days → draft + licensed review in 2 hours.",
+
+  "sing.close_label": "The work layer",
+  "sing.close_h": "The gap between <span class=\"hi\">\"describe\" and \"shipped\"</span> is dissolving.",
+  "sing.close_p": "The prize is the marketplace that orchestrates this — where intent turns into a running job, settled on-chain, delivered under a human's name. That's what TrendeX is.",
+  "sing.close_cta": "Own the work layer"
+}

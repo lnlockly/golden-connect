@@ -1,0 +1,18 @@
+/* ═══════════════════════════════════════════════════════════
+   TRACTION SECTION (part13)
+   Trading-terminal styled proof-strip: 8 KPI cards + 7-day bars.
+   Loaded AFTER part12 so media-query overrides still win.
+═══════════════════════════════════════════════════════════ */
+/* ── Terminal shell ───────────────────────────────────── */
+/* ── KPI grid ─────────────────────────────────────────── */
+/* ── 7-day bar strip ──────────────────────────────────── */
+/* ── Footer note ──────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────── */
+/* Responsive                                             */
+/* ─────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+/* ensure penultimate row still has bottom border when 4 left */
+}
+@media (max-width: 380px) {
+/* tight: only keep day + bar */
+}

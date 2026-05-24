@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js?id=108574485","ym");
+ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108574485" style="position:absolute;left:-9999px;" alt=""/></div></noscript>
+<!-- /Yandex.Metrika counter -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" id="meta-description" content="Продукт Trendex — подробное описание, применение и дозировка">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#080a0f" id="meta-theme-color">
+  <meta property="og:type" content="product">
+  <meta property="og:site_name" content="Trendex">
+  <meta property="og:title" id="meta-og-title" content="Продукт Trendex">
+  <meta property="og:description" id="meta-og-description" content="Подробное описание продукта Trendex">
+  <meta property="og:image" id="meta-og-image" content="https://trendex.biz/media/uploads/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" id="meta-og-url" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" id="meta-twitter-title" content="Продукт Trendex">
+  <meta name="twitter:description" id="meta-twitter-desc" content="Натуральный продукт Trendex — подробное описание, применение и результаты">
+  <meta name="twitter:image" id="meta-twitter-image" content="https://trendex.biz/media/uploads/og-image.jpg">
+  <title id="page-title">Продукт | Trendex</title>
+  <link rel="icon" href="/cabinet/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/cabinet/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/cabinet/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function(){
+      var t = localStorage.getItem('xh-theme');
+      if (!t) t = 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="stylesheet" href="/cabinet/styles.css?v=5.6">
+  <style>
+    /* ===== Product page styles ===== */
+    .product-page { padding: 100px 0 60px; min-height: 100vh; }
+
+    /* Breadcrumbs */
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text-sec);
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .breadcrumbs a {
+      color: var(--text-sec);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .breadcrumbs a:hover { color: var(--accent, #25d0ff); }
+    .breadcrumbs .bc-sep { opacity: .4; }
+    .breadcrumbs .bc-current { color: var(--text); font-weight: 500; }
+
+    /* Hero grid */
+    .product-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      margin-bottom: 48px;
+    }
+
+    .product-image-wrap {
+      position: sticky;
+      top: 100px;
+    }
+    .product-image-wrap img {
+      width: 100%;
+      border-radius: var(--r-xl, 20px);
+      border: 1px solid var(--border, rgba(148,163,184,.12));
+      background: var(--surface, rgba(15,23,42,.6));
+      object-fit: cover;
+      max-height: 520px;
+      backdrop-filter: blur(16px);
+    }
+
+    .product-category-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(37,208,255,.10);
+      border: 1px solid rgba(37,208,255,.18);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--accent, #25d0ff);
+      margin-bottom: 14px;
+    }
+
+    .product-title {
+      font-family: var(--font-display, 'Orbitron', sans-serif);
+      font-size: clamp(24px, 3.5vw, 38px);
+      margin: 0 0 16px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .product-price-block {
+      margin-bottom: 20px;
+    }
+    .product-price {
+      font-family: var(--font-display, 'Orbitron', sans-serif);
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .product-price-label {
+      font-size: 13px;
+      color: var(--text-sec);
+      margin-top: 4px;
+    }
+
+    .product-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px;
+    }
+    .product-features li {
+      position: relative;
+      padding-left: 24px;
+      color: var(--text-sec);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .product-features li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent, #25d0ff);
+      box-shadow: 0 0 6px rgba(37,208,255,.4);
+    }
+
+    .product-note {
+      padding: 14px 18px;
+      border-radius: var(--r-lg, 16px);
+      background: rgba(255,209,102,.06);
+      border: 1px solid rgba(255,209,102,.15);
+      font-size: 14px;
+      color: #ffd166;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .product-hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .product-hero-actions .btn {
+      min-width: 140px;
+      text-align: center;
+    }
+
+    /* Content sections */
+    .product-content-section {
+      background: var(--surface, rgba(15,23,42,.6));
+      border: 1px solid var(--border, rgba(148,163,184,.12));
+      border-radius: var(--r-xl, 20px);
+      padding: 32px;
+      margin-bottom: 24px;
+      backdrop-filter: blur(16px);
+    }
+    .product-content-section h2 {
+      font-family: var(--font-display, 'Orbitron', sans-serif);
+      font-size: clamp(16px, 2vw, 20px);
+      margin: 0 0 16px;
+      color: var(--text);
+    }
+    .product-content-section p,
+    .product-content-section ul {
+      color: var(--text-sec);
+      font-size: 15px;
+      line-height: 1.8;
+      margin: 0;
+    }
+    .product-content-section ul {
+      padding-left: 20px;
+    }
+    .product-content-section ul li {
+      margin-bottom: 8px;
+    }
+    .product-content-section .section-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: rgba(37,208,255,.08);
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    /* Gallery */
+    .product-gallery {
+      margin-bottom: 24px;
+    }
+    .product-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .product-gallery-item {
+      border-radius: var(--r-lg, 16px);
+      overflow: hidden;
+      border: 1px solid var(--border, rgba(148,163,184,.12));
+      background: var(--surface, rgba(15,23,42,.6));
+      aspect-ratio: 1;
+    }
+    .product-gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .product-gallery-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-sec);
+      font-size: 14px;
+      opacity: .5;
+    }
+
+    /* Video section */
+    .product-video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      border-radius: var(--r-xl, 20px);
+      overflow: hidden;
+      border: 1px solid var(--border, rgba(148,163,184,.12));
+    }
+    .product-video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    /* Certification */
+    .cert-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: var(--r-lg, 16px);
+      background: rgba(122,229,130,.06);
+      border: 1px solid rgba(122,229,130,.15);
+      font-size: 14px;
+      color: #7ae582;
+      margin-bottom: 16px;
+    }
+    .cert-image {
+      max-width: 300px;
+      border-radius: var(--r-lg, 16px);
+      border: 1px solid var(--border);
+      margin-top: 16px;
+    }
+
+    /* Variants table */
+    .variants-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+    .variants-table th {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-sec);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      border-bottom: 1px solid var(--border, rgba(148,163,184,.12));
+    }
+    .variants-table td {
+      padding: 14px 16px;
+      font-size: 15px;
+      color: var(--text);
+      border-bottom: 1px solid var(--border, rgba(148,163,184,.08));
+    }
+    .variants-table tr:last-child td { border-bottom: none; }
+
+    /* CTA order block */
+    .order-cta {
+      background: linear-gradient(135deg, rgba(37,208,255,.08), rgba(122,229,130,.06));
+      border: 1px solid rgba(37,208,255,.2);
+      border-radius: var(--r-xl, 20px);
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .order-cta h2 {
+      font-family: var(--font-display, 'Orbitron', sans-serif);
+      font-size: clamp(18px, 2.5vw, 24px);
+      margin: 0 0 16px;
+      color: var(--text);
+    }
+    .order-cta p {
+      color: var(--text-sec);
+      font-size: 15px;
+      line-height: 1.7;
+      margin: 0 0 24px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .order-steps {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .order-step {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-sec);
+    }
+    .order-step-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(37,208,255,.12);
+      border: 1px solid rgba(37,208,255,.25);
+      color: var(--accent, #25d0ff);
+      font-weight: 700;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    /* Related products */
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .related-card {
+      background: var(--surface, rgba(15,23,42,.6));
+      border: 1px solid var(--border, rgba(148,163,184,.12));
+      border-radius: var(--r-xl, 20px);
+      overflow: hidden;
+      text-decoration: none;
+      transition: transform .25s, border-color .25s;
+      display: block;
+    }
+    .related-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(37,208,255,.3);
+    }
+    .related-card-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-bottom: 1px solid var(--border, rgba(148,163,184,.08));
+    }
+    .related-card-body {
+      padding: 16px;
+    }
+    .related-card-cat {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--accent, #25d0ff);
+      margin-bottom: 6px;
+    }
+    .related-card-title {
+      font-family: var(--font-display, 'Orbitron', sans-serif);
+      font-size: 14px;
+      color: var(--text);
+      margin: 0 0 6px;
+      line-height: 1.3;
+    }
+    .related-card-desc {
+      font-size: 13px;
+      color: var(--text-sec);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Use case tags */
+    .product-use-cases {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .product-use-tag {
+      display: inline-block;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(122,229,130,.08);
+      border: 1px solid rgba(122,229,130,.18);
+      font-size: 13px;
+      color: #7ae582;
+    }
+
+    /* Back to catalog link */
+    .back-to-catalog {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent, #25d0ff);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      margin-top: 16px;
+      transition: opacity .2s;
+    }
+    .back-to-catalog:hover { opacity: .75; }
+
+    /* Loading / 404 */
+    .product-loading {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--text-sec);
+      font-size: 15px;
+    }
+    .product-not-found {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .product-not-found h2 {
+      font-family: var(--font-display, 'Orbitron', sans-serif);
+      font-size: 24px;
+      margin: 0 0 12px;
+      color: var(--text);
+    }
+    .product-not-found p { color: var(--text-sec); margin: 0 0 24px; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .product-hero { grid-template-columns: 1fr; gap: 24px; }
+      .product-image-wrap { position: static; }
+      .product-page { padding: 80px 0 40px; }
+      .order-cta { padding: 28px 20px; }
+      .order-steps { flex-direction: column; align-items: center; }
+      .product-content-section { padding: 24px 20px; }
+      .product-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+<script src="/cabinet/js/bot-link.js?v=1"></script></head>
+<body>
+  <!-- Aurora effects -->
+  <div class="aurora">
+    <div class="aurora-orb aurora-orb--cyan"></div>
+    <div class="aurora-orb aurora-orb--purple"></div>
+    <div class="aurora-orb aurora-orb--gold"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="wrap">
+      <a class="nav-logo" href="/">
+        <div class="nav-logo-icon">&#10022;</div>
+        TRENDEX
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="/#company-section">О компании</a>
+        <a class="nav-link" href="/#products-section">Продукты</a>
+        <a class="nav-link" href="/#partner-section">Партнёрам</a>
+        <a class="nav-link" href="/cabinet/reviews">Отзывы</a>
+        <a class="nav-link" href="/cabinet">Кабинет</a>
+      </div>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="nav-theme-btn" type="button" aria-label="Сменить тему">
+          <span id="theme-icon">&#9728;</span>
+        </button>
+        <a href="/cabinet/login" id="nav-login-btn" class="btn btn--outline btn--nav">Войти</a>
+        <a href="/cabinet/register" id="nav-register-btn" class="btn btn--primary btn--nav">Создать аккаунт</a>
+      </div>
+      <button class="nav-burger" type="button" aria-label="Меню">&#9776;</button>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+      <a class="nav-link" href="/#company-section">О компании</a>
+      <a class="nav-link" href="/#products-section">Продукты</a>
+      <a class="nav-link" href="/#partner-section">Партнёрам</a>
+      <a class="nav-link" href="/cabinet/reviews">Отзывы</a>
+      <a class="nav-link" href="/cabinet">Кабинет</a>
+    </div>
+  </nav>
+
+  <div class="product-page">
+    <div class="wrap">
+      <div id="product-content">
+        <div class="product-loading">Загрузка продукта...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">TRENDEX</div>
+          <p class="footer-desc">Официальные материалы компании, каталог продуктов и партнёрская система Trendex в одном пространстве.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Навигация</div>
+          <div class="footer-links">
+            <a href="/#company-section">О компании</a>
+            <a href="/#products-section">Продукты</a>
+            <a href="/#partner-section">Партнёрам</a>
+            <a href="/cabinet/reviews">Отзывы</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Контакты</div>
+          <div class="footer-links">
+            <a data-bot-link href="https://t.me/Trendex_bizbot" target="_blank">&#9992; Telegram бот</a>
+            <a href="/cabinet/register">&#127760; Регистрация</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Trendex. Все права защищены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="back-top" id="backTop">&uarr;</div>
+
+  <script>
+    (function(){
+      // ===== Common UI =====
+      var bt = document.getElementById('backTop');
+      if (bt) {
+        window.addEventListener('scroll', function(){ bt.classList.toggle('is-visible', window.scrollY > 600); });
+        bt.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+      }
+      var burger = document.querySelector('.nav-burger');
+      var navMob = document.getElementById('navMobile');
+      if(burger && navMob){
+        burger.addEventListener('click', function(){ navMob.classList.toggle('is-open'); });
+        navMob.querySelectorAll('.nav-link').forEach(function(l){ l.addEventListener('click', function(){ navMob.classList.remove('is-open'); }); });
+      }
+      var themeBtn = document.getElementById('theme-toggle');
+      if(themeBtn) themeBtn.addEventListener('click', function(){
+        var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+        var next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('xh-theme', next);
+        var icon = document.getElementById('theme-icon');
+        if(icon) icon.textContent = next === 'dark' ? '\u2600' : '\u263E';
+        var meta = document.getElementById('meta-theme-color');
+        if(meta) meta.content = next === 'dark' ? '#080a0f' : '#f0f2f5';
+      });
+      fetch('/cabinet/api/auth/me',{credentials:'same-origin'}).then(function(r){return r.json()}).then(function(d){
+        if(d.user){
+          var acts = document.querySelector('.nav-actions');
+          if(acts) acts.innerHTML = '<a href="/cabinet" class="btn btn--primary btn--nav">Мой кабинет</a>';
+        }
+      }).catch(function(){});
+
+      // ===== Helpers =====
+      function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+      function nl2br(s) { return esc(s).replace(/\n/g, '<br>'); }
+
+      // ===== Product image mapping =====
+      var PRODUCT_IMAGES = {
+        'live-water': 'media/products/live-water.jpg',
+        'dihydroquercetin': 'media/products/dihydroquercetin.jpg',
+        'oligochit-iod-53': 'media/products/oligochit-iod-53.jpg',
+        'oligochit-osteo': 'media/products/oligochit-osteo.jpg',
+        'oligochit-zoo': 'media/products/oligochit-zoo.jpg',
+        'hitabs': 'media/products/hitabs.jpg',
+        'h538': 'media/products/h538.jpg',
+        'tempulis': 'media/products/tempulis.jpg',
+        'reventus': 'media/products/reventus.jpg',
+        'skaveran': 'media/products/skaveran.jpg',
+        'melaris': 'media/products/melaris.jpg',
+        'cinalis-c6': 'media/products/cinalis-c6.jpg',
+        'tuberlin-c6': 'media/products/tuberlin-c6.jpg',
+        'alfa-nektar': 'media/products/alfa-nektar.jpg',
+        'geksanidin': 'media/products/geksanidin.jpg',
+        'provitera': 'media/products/provitera.jpg',
+        'fungirex': 'media/products/fungirex.jpg',
+        'omega-3': 'media/products/omega-3.jpg',
+        'calcium': 'media/products/calcium.jpg',
+        'dna': 'media/products/dna.jpg',
+        'formidium': 'media/products/formidium.jpg',
+        'boroflavin': 'media/products/boroflavin.jpg',
+        'premium-balm': 'media/products/premium-balm.jpg',
+        'hair-balm': 'media/products/hair-balm.jpg',
+        'ambulance-balm': 'media/products/ambulance-balm.jpg',
+        'phytoshampoo': 'media/products/phytoshampoo.jpg',
+        'woman-complex': 'media/products/woman-complex.jpg'
+      };
+
+      function getProductImage(p) {
+        if (PRODUCT_IMAGES[p.slug]) return '/' + PRODUCT_IMAGES[p.slug];
+        if (p.imageUrl) return p.imageUrl;
+        if (p.image) return (p.image.startsWith('/') || p.image.startsWith('http')) ? p.image : '/' + p.image;
+        return '/cabinet/media/products/' + (p.slug || p.id) + '.jpg';
+      }
+
+      // ===== Parse story into sections =====
+      function parseStory(story) {
+        if (!story) return {};
+        var result = {};
+        var text = story;
+
+        // Try to extract known sections from the story text
+        var sections = [
+          { key: 'howItWorks', patterns: ['как работает', 'механизм действия', 'принцип работы', 'чем помогает'] },
+          { key: 'benefits', patterns: ['от чего помогает', 'показания', 'польза', 'помогает при', 'применяется при'] },
+          { key: 'dosage', patterns: ['дозировка', 'курс применения', 'способ применения', 'как принимать', 'рекомендации по приему'] },
+          { key: 'composition', patterns: ['состав', 'компоненты', 'ингредиенты', 'содержит'] }
+        ];
+
+        // If story is long enough, use it as howItWorks fallback
+        if (text.length > 100) {
+          result.howItWorks = text;
+        }
+
+        return result;
+      }
+
+      // ===== Extract features from text =====
+      function extractFeatures(p) {
+        var features = [];
+        if (p.features && Array.isArray(p.features)) return p.features;
+
+        // Build features from available data
+        if (p.format) features.push('Формат: ' + p.format);
+        if (p.category) features.push('Категория: ' + p.category);
+
+        var useCases = p.useCases || p.use_cases || [];
+        if (typeof useCases === 'string') useCases = useCases.split(',').map(function(s){return s.trim()}).filter(Boolean);
+        if (useCases.length) {
+          features.push('Применение: ' + useCases.slice(0, 4).join(', '));
+        }
+
+        if (p.shortDescription && p.shortDescription.length > 10) {
+          // Split short description into bullet points by sentence
+          var sentences = p.shortDescription.split(/[.!]\s+/).filter(function(s){return s.length > 5});
+          sentences.forEach(function(s){ if (features.length < 6) features.push(s.replace(/\.$/, '')); });
+        }
+
+        return features;
+      }
+
+      // ===== Smooth scroll =====
+      function scrollToSection(id) {
+        var el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      // ===== 404 =====
+      function show404() {
+        document.getElementById('product-content').innerHTML =
+          '<div class="product-not-found">' +
+          '<h2>Продукт не найден</h2>' +
+          '<p>Возможно, ссылка устарела или продукт был удален из каталога</p>' +
+          '<a href="/#products-section" class="btn btn--primary btn--lg">Вернуться к каталогу</a>' +
+          '</div>';
+      }
+
+      // ===== Get slug from URL =====
+      var slug = window.location.pathname.split('/cabinet/product/')[1];
+      if (slug) slug = slug.replace(/\/$/, '').replace(/[^a-zA-Z0-9_-]/g, '');
+
+      if (!slug) {
+        show404();
+      } else {
+        // Fetch product data + site config
+        Promise.all([
+          fetch('/cabinet/api/products').then(function(r){ return r.json(); }),
+          fetch('/cabinet/api/site/config').then(function(r){ return r.json(); }).catch(function(){ return {}; })
+        ]).then(function(res) {
+          var products = res[0].items || res[0].products || [];
+          var site = (res[1] && res[1].site) ? res[1].site : {};
+          var product = null;
+          for (var i = 0; i < products.length; i++) {
+            if (products[i].slug === slug || products[i].id === slug) {
+              product = products[i];
+              break;
+            }
+          }
+          if (!product) { show404(); return; }
+          renderProduct(product, products, site);
+        }).catch(function(err) {
+          console.error('Failed to load product:', err);
+          document.getElementById('product-content').innerHTML =
+            '<div class="product-loading">Не удалось загрузить данные. <a href="/" style="color:var(--accent)">На главную</a></div>';
+        });
+      }
+
+      // ===== Get ref from URL =====
+      var urlRef = (new URLSearchParams(window.location.search)).get('ref') || '';
+      var registerUrl = '/cabinet/register' + (urlRef ? '?ref=' + encodeURIComponent(urlRef) : '');
+
+      // ===== Load company referral link =====
+      function loadCompanyLink() {
+        fetch('/cabinet/api/company-link' + (urlRef ? '?ref=' + urlRef : ''), { credentials: 'same-origin' })
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            var link = data.companyLink || registerUrl;
+            document.querySelectorAll('.company-link-btn').forEach(function(a) {
+              a.href = link;
+            });
+          }).catch(function() {
+            document.querySelectorAll('.company-link-btn').forEach(function(a) {
+              a.href = registerUrl;
+            });
+          });
+      }
+
+      // ===== Main render =====
+      function renderProduct(p, allProducts, site) {
+        var name = p.title || p.name || 'Продукт';
+        var imgSrc = getProductImage(p);
+        var parsed = parseStory(p.story);
+        var features = extractFeatures(p);
+
+        // Update page meta
+        document.title = name + ' | Trendex';
+        var metaDesc = document.getElementById('meta-description');
+        if (metaDesc) metaDesc.content = p.shortDescription || p.story || name;
+        var ogTitle = document.getElementById('meta-og-title');
+        if (ogTitle) ogTitle.content = name + ' | Trendex';
+        var ogDesc = document.getElementById('meta-og-description');
+        if (ogDesc) ogDesc.content = p.shortDescription || '';
+        var ogImg = document.getElementById('meta-og-image');
+        if (ogImg) ogImg.content = imgSrc;
+
+        var html = '';
+
+        // 1. Breadcrumbs
+        html += '<nav class="breadcrumbs">';
+        html += '<a href="/">Главная</a>';
+        html += '<span class="bc-sep">/</span>';
+        html += '<a href="/#products-section">Каталог</a>';
+        html += '<span class="bc-sep">/</span>';
+        html += '<span class="bc-current">' + esc(name) + '</span>';
+        html += '</nav>';
+
+        // 2. Product Hero (two columns)
+        html += '<div class="product-hero">';
+
+        // Left: Image
+        html += '<div class="product-image-wrap">';
+        html += '<img src="' + esc(imgSrc) + '" alt="' + esc(name) + '" loading="eager" onerror="this.src=\'/cabinet/media/brand-og.jpg\'">';
+        html += '</div>';
+
+        // Right: Info
+        html += '<div>';
+        if (p.category) {
+          html += '<div class="product-category-badge">' + esc(p.category) + '</div>';
+        }
+        html += '<h1 class="product-title">' + esc(name) + '</h1>';
+
+        // Price
+        if (p.priceRub || p.price || p.priceLabel) {
+          html += '<div class="product-price-block">';
+          if (p.priceRub || p.price) {
+            html += '<div class="product-price">' + esc(p.priceRub || p.price) + '</div>';
+          }
+          if (p.priceLabel) {
+            html += '<div class="product-price-label">' + esc(p.priceLabel) + '</div>';
+          }
+          html += '</div>';
+        }
+
+        // Features
+        if (features.length) {
+          html += '<ul class="product-features">';
+          features.forEach(function(f) {
+            html += '<li>' + esc(f) + '</li>';
+          });
+          html += '</ul>';
+        }
+
+        // Use case tags
+        var useCases = p.useCases || p.use_cases || [];
+        if (typeof useCases === 'string') useCases = useCases.split(',').map(function(s){return s.trim()}).filter(Boolean);
+        if (useCases.length) {
+          html += '<div class="product-use-cases">';
+          useCases.forEach(function(u){ html += '<span class="product-use-tag">' + esc(u) + '</span>'; });
+          html += '</div>';
+        }
+
+        // Note
+        if (p.importantNote || p.note) {
+          html += '<div class="product-note">' + esc(p.importantNote || p.note) + '</div>';
+        }
+
+        // 3 action buttons
+        html += '<div class="product-hero-actions">';
+        html += '<a href="javascript:void(0)" onclick="document.getElementById(\'section-instructions\')&&document.getElementById(\'section-instructions\').scrollIntoView({behavior:\'smooth\'})" class="btn btn--outline">Инструкция</a>';
+        html += '<a href="javascript:void(0)" onclick="document.getElementById(\'section-certification\')&&document.getElementById(\'section-certification\').scrollIntoView({behavior:\'smooth\'})" class="btn btn--outline">Сертификация</a>';
+        var shopUrl = registerUrl;
+        html += '<a href="' + esc(shopUrl) + '" target="_blank" class="btn btn--primary company-link-btn">Купить</a>';
+        html += '</div>';
+
+        html += '</div>'; // end right
+        html += '</div>'; // end hero
+
+        // 3. Detailed Description sections
+        var story = p.story || p.description || '';
+
+        // How it works
+        var howItWorks = p.howItWorks || p.mechanism || parsed.howItWorks || '';
+        if (howItWorks || story) {
+          html += '<div class="product-content-section">';
+          html += '<div class="section-icon">&#128300;</div>';
+          html += '<h2>Как работает и чем помогает</h2>';
+          html += '<p>' + nl2br(howItWorks || story) + '</p>';
+          html += '</div>';
+        }
+
+        // Benefits
+        var benefits = p.benefits || parsed.benefits || '';
+        if (benefits) {
+          html += '<div class="product-content-section">';
+          html += '<div class="section-icon">&#10024;</div>';
+          html += '<h2>От чего помогает</h2>';
+          if (Array.isArray(benefits)) {
+            html += '<ul>';
+            benefits.forEach(function(b){ html += '<li>' + esc(b) + '</li>'; });
+            html += '</ul>';
+          } else {
+            html += '<p>' + nl2br(benefits) + '</p>';
+          }
+          html += '</div>';
+        }
+
+        // Dosage
+        var dosage = p.dosage || p.instructions || p.course || parsed.dosage || '';
+        if (dosage) {
+          html += '<div class="product-content-section">';
+          html += '<div class="section-icon">&#128138;</div>';
+          html += '<h2>Дозировка и курс применения</h2>';
+          html += '<p>' + nl2br(dosage) + '</p>';
+          html += '</div>';
+        }
+
+        // Composition
+        var composition = p.composition || p.ingredients || parsed.composition || '';
+        if (composition) {
+          html += '<div class="product-content-section">';
+          html += '<div class="section-icon">&#9878;</div>';
+          html += '<h2>Состав</h2>';
+          if (Array.isArray(composition)) {
+            html += '<ul>';
+            composition.forEach(function(c){ html += '<li>' + esc(c) + '</li>'; });
+            html += '</ul>';
+          } else {
+            html += '<p>' + nl2br(composition) + '</p>';
+          }
+          html += '</div>';
+        }
+
+        // 4. Product Gallery
+        html += '<div class="product-content-section product-gallery">';
+        html += '<h2>Фотографии продукта</h2>';
+        html += '<div class="product-gallery-grid">';
+        html += '<div class="product-gallery-item"><img src="' + esc(imgSrc) + '" alt="' + esc(name) + '" onerror="this.parentElement.classList.add(\'product-gallery-placeholder\');this.remove();this.parentElement.textContent=\'Фото продукта\'"></div>';
+        // Additional images from media array if available
+        var mediaImages = p.media || p.images || p.gallery || [];
+        if (Array.isArray(mediaImages)) {
+          mediaImages.forEach(function(m) {
+            var src = (typeof m === 'string') ? m : (m.url || m.src || '');
+            if (src) {
+              html += '<div class="product-gallery-item"><img src="' + esc(src) + '" alt="' + esc(name) + '" loading="lazy"></div>';
+            }
+          });
+        }
+        html += '</div>';
+        html += '</div>';
+
+        // 5. Video Section (hidden if no video)
+        var videoUrl = p.videoUrl || p.video || '';
+        if (videoUrl) {
+          html += '<div class="product-content-section" id="section-video">';
+          html += '<div class="section-icon">&#127909;</div>';
+          html += '<h2>Видео о продукции</h2>';
+          // Convert YouTube watch URL to embed
+          var embedUrl = videoUrl;
+          if (videoUrl.indexOf('youtube.com/watch') !== -1) {
+            var vid = videoUrl.split('v=')[1];
+            if (vid) { vid = vid.split('&')[0]; embedUrl = 'https://www.youtube.com/embed/' + vid; }
+          } else if (videoUrl.indexOf('youtu.be/') !== -1) {
+            var vid2 = videoUrl.split('youtu.be/')[1];
+            if (vid2) { vid2 = vid2.split('?')[0]; embedUrl = 'https://www.youtube.com/embed/' + vid2; }
+          }
+          html += '<div class="product-video-wrap">';
+          html += '<iframe src="' + esc(embedUrl) + '" allowfullscreen loading="lazy"></iframe>';
+          html += '</div>';
+          html += '</div>';
+        }
+
+        // 6. Certification
+        html += '<div class="product-content-section" id="section-certification">';
+        html += '<div class="section-icon">&#128203;</div>';
+        html += '<h2>Сертификация</h2>';
+        if (p.certification || p.certified) {
+          html += '<div class="cert-badge">&#10004; ' + esc(p.certification || 'Сертифицированный продукт') + '</div>';
+        } else {
+          html += '<div class="cert-badge">&#10004; Продукция сертифицирована и соответствует стандартам качества</div>';
+        }
+        html += '<p>Все продукты Trendex проходят обязательную сертификацию и контроль качества. Компания имеет все необходимые разрешительные документы для реализации продукции на территории РФ и стран СНГ.</p>';
+        if (p.certImage || p.certificateImage) {
+          html += '<br><img class="cert-image" src="' + esc(p.certImage || p.certificateImage) + '" alt="Сертификат ' + esc(name) + '" loading="lazy">';
+        }
+        html += '</div>';
+
+        // 7. Packaging variants
+        var variants = p.variants || p.packages || [];
+        if (variants.length) {
+          html += '<div class="product-content-section">';
+          html += '<div class="section-icon">&#128230;</div>';
+          html += '<h2>Варианты упаковки</h2>';
+          html += '<table class="variants-table">';
+          html += '<thead><tr><th>Наименование</th><th>Объём</th><th>Цена</th></tr></thead>';
+          html += '<tbody>';
+          variants.forEach(function(v) {
+            html += '<tr>';
+            html += '<td>' + esc(v.name || v.title || name) + '</td>';
+            html += '<td>' + esc(v.volume || v.size || '-') + '</td>';
+            html += '<td style="color:var(--accent);font-weight:600">' + esc(v.price || v.priceRub || '-') + '</td>';
+            html += '</tr>';
+          });
+          html += '</tbody></table>';
+          html += '</div>';
+        }
+
+        // 8. Instructions
+        html += '<div class="product-content-section" id="section-instructions">';
+        html += '<div class="section-icon">&#128196;</div>';
+        html += '<h2>Инструкция по применению</h2>';
+        var instrText = p.instructionText || p.dosage || p.instructions || '';
+        if (instrText) {
+          html += '<p>' + nl2br(instrText) + '</p>';
+        } else if (story) {
+          html += '<p>' + nl2br(story) + '</p>';
+        } else {
+          html += '<p>Подробная инструкция по применению доступна на официальном сайте.</p>';
+        }
+        var instrUrl = p.instructionsUrl || '/faq';
+        html += '<br><a href="' + esc(instrUrl) + '" target="_blank" class="btn btn--outline" style="margin-top:12px">Официальная инструкция &#8594;</a>';
+        html += '</div>';
+
+        // 9. Order CTA
+        html += '<div class="order-cta">';
+        html += '<h2>Заказать ' + esc(name) + '</h2>';
+        html += '<p>Оформите заказ через официальный сайт компании или зарегистрируйтесь на нашей платформе для полного доступа</p>';
+        html += '<div class="order-steps">';
+        html += '<div class="order-step"><span class="order-step-num">1</span>Зарегистрируйтесь на платформе</div>';
+        html += '<div class="order-step"><span class="order-step-num">2</span>Получите доступ к каталогу и эфирам</div>';
+        html += '<div class="order-step"><span class="order-step-num">3</span>Оформите заказ через компанию</div>';
+        html += '</div>';
+        html += '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">';
+        html += '<a href="' + esc(shopUrl) + '" target="_blank" class="btn btn--primary btn--lg company-link-btn">Купить</a>';
+        html += '<a href="' + esc(registerUrl) + '" class="btn btn--product-3d btn--lg" style="max-width:300px">Бесплатная регистрация</a>';
+        html += '</div>';
+        html += '</div>';
+
+        // 10. Related Products
+        var related = [];
+        for (var i = 0; i < allProducts.length; i++) {
+          var rp = allProducts[i];
+          if ((rp.slug || rp.id) !== (p.slug || p.id)) {
+            // Prefer same category
+            if (p.category && rp.category === p.category) {
+              related.unshift(rp);
+            } else {
+              related.push(rp);
+            }
+          }
+          if (related.length >= 8) break;
+        }
+        related = related.slice(0, 4);
+
+        if (related.length) {
+          html += '<div class="product-content-section">';
+          html += '<h2>Другие продукты Trendex</h2>';
+          html += '<div class="related-grid">';
+          related.forEach(function(rp) {
+            var rpSlug = rp.slug || rp.id;
+            var rpImg = getProductImage(rp);
+            var rpName = rp.title || rp.name || '';
+            html += '<a class="related-card" href="/cabinet/product/' + esc(rpSlug) + '">';
+            html += '<img class="related-card-img" src="' + esc(rpImg) + '" alt="' + esc(rpName) + '" loading="lazy" onerror="this.src=\'/cabinet/media/brand-og.jpg\'">';
+            html += '<div class="related-card-body">';
+            if (rp.category) html += '<div class="related-card-cat">' + esc(rp.category) + '</div>';
+            html += '<div class="related-card-title">' + esc(rpName) + '</div>';
+            if (rp.shortDescription) html += '<div class="related-card-desc">' + esc(rp.shortDescription) + '</div>';
+            html += '</div>';
+            html += '</a>';
+          });
+          html += '</div>';
+          html += '</div>';
+        }
+
+        // 11. Back to catalog
+        html += '<div style="text-align:center;padding:24px 0">';
+        html += '<a href="/#products-section" class="back-to-catalog">&larr; Вернуться к каталогу продуктов</a>';
+        html += '</div>';
+
+        document.getElementById('product-content').innerHTML = html;
+
+        // Load company referral link and replace placeholders
+        loadCompanyLink();
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+      }
+    })();
+  </script>
+</body>
+</html>

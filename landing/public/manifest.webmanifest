@@ -1,0 +1,16 @@
+{
+  "name": "Trendex — Рекламная экосистема",
+  "short_name": "Trendex",
+  "description": "Рекламная платформа с распределённой прибылью: до $25/день за активность + 10-уровневая партнёрка + матрица бизнес-мест.",
+  "start_url": "/cabinet/cabinet",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#0a0a1a",
+  "background_color": "#0a0a1a",
+  "lang": "ru",
+  "dir": "ltr",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

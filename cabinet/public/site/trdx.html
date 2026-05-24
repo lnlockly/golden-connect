@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Genesis TRDX — пресейл-токен Trendex</title>
+  <meta name="description" content="Genesis TRDX — пресейл-токен платформы Trendex. Получи 100 TRDX за регистрацию, до 7 500 TRDX за каждого реферала. После запуска — биржа, дивиденды, оплата AI-сервисов и розыгрыши призов.">
+  <meta property="og:title" content="Genesis TRDX — пресейл-токен Trendex">
+  <meta property="og:description" content="100 TRDX за регистрацию, до 7 500 TRDX за каждого приглашённого партнёра. Биржа, дивиденды и розыгрыши после запуска.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://trendex.biz/trdx">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://trendex.biz/media/brand-og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="https://trendex.biz/media/brand-og.jpg">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="canonical" href="https://trendex.biz/trdx">
+  <style>
+    *,*:before,*:after { box-sizing:border-box; }
+    html,body { margin:0; padding:0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #0b0d1a;
+      color: #e0e7ff;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #a78bfa; text-decoration: none; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 22px; }
+    .hero {
+      background: radial-gradient(circle at 20% 0%, #5b21b6 0%, transparent 50%),
+                  radial-gradient(circle at 80% 100%, #1d4ed8 0%, transparent 60%),
+                  linear-gradient(180deg, #0f0a2e 0%, #0b0d1a 100%);
+      padding: 70px 0 90px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-inner { position: relative; z-index: 2; text-align: center; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(167,139,250,0.15);
+      border: 1px solid rgba(167,139,250,0.4);
+      color: #c4b5fd;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 800;
+      margin: 0 0 16px;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #fff 0%, #c4b5fd 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-sub { font-size: clamp(16px, 2vw, 20px); color: #cbd5e1; margin: 0 auto 32px; max-width: 720px; }
+    .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%);
+      color: #fff;
+      padding: 16px 30px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 16px;
+      transition: transform .15s;
+      box-shadow: 0 8px 24px rgba(124,58,237,0.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-block;
+      border: 1px solid rgba(167,139,250,0.4);
+      color: #c4b5fd;
+      padding: 16px 30px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    .hero-token {
+      display: inline-block;
+      font-size: 90px;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 8px 24px rgba(167,139,250,0.5));
+    }
+    section { padding: 70px 0; }
+    section h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; margin: 0 0 14px; text-align: center; }
+    section .lead { text-align: center; color: #94a3b8; font-size: 17px; max-width: 700px; margin: 0 auto 48px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(59,130,246,0.04));
+      border: 1px solid rgba(167,139,250,0.18);
+      border-radius: 16px;
+      padding: 26px 22px;
+    }
+    .card-icon { font-size: 38px; margin-bottom: 12px; }
+    .card h3 { margin: 0 0 8px; font-size: 17px; color: #e0e7ff; }
+    .card p { margin: 0; color: #94a3b8; font-size: 14px; line-height: 1.6; }
+    .reward-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 22px;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+    .reward-label { font-size: 15px; color: #e0e7ff; }
+    .reward-amount { font-size: 22px; font-weight: 800; color: #a78bfa; white-space: nowrap; }
+    .reward-amount small { font-size: 13px; opacity: 0.7; font-weight: 500; }
+    .alt-bg { background: linear-gradient(180deg, #0b0d1a 0%, #0f0a2e 100%); }
+    .faq-item {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      padding: 18px 22px;
+    }
+    .faq-item h4 { margin: 0 0 8px; font-size: 16px; color: #e0e7ff; }
+    .faq-item p { margin: 0; color: #94a3b8; font-size: 14px; }
+    footer {
+      padding: 40px 0;
+      text-align: center;
+      color: #64748b;
+      font-size: 13px;
+      border-top: 1px solid #1e293b;
+    }
+    footer a { color: #94a3b8; }
+    .disclaimer {
+      max-width: 820px;
+      margin: 40px auto 0;
+      padding: 18px 22px;
+      background: #0b1120;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 50px 0 70px; }
+      section { padding: 50px 0; }
+      .reward-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-badge">Genesis Pre-sale</div>
+    <div class="hero-token">💎</div>
+    <h1>Genesis TRDX</h1>
+    <p class="hero-sub">
+      Пресейл-токен Trendex. Накапливай прямо сейчас — за регистрацию, рефералов и оплаченные тарифы. После запуска платформы TRDX откроет доступ к бирже, дивидендам, AI-сервисам и розыгрышам ценных призов.
+    </p>
+    <div class="cta-row">
+      <a href="https://trendex.biz/?utm_source=trdx&utm_medium=hero" class="btn-primary">Зарегаться → +100 TRDX</a>
+      <a href="https://t.me/Trendex_bizbot?start=trdx" class="btn-ghost">Открыть в боте</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>Как получить TRDX</h2>
+    <p class="lead">Никаких покупок токена сейчас. Только реальные действия в платформе — регистрация, приглашения, активация тарифов.</p>
+    <div>
+      <div class="reward-row">
+        <div><strong>🎉 Регистрация в Trendex</strong><div style="color:#94a3b8;font-size:13px;margin-top:4px">один раз каждому новому юзеру</div></div>
+        <div class="reward-amount">+100 <small>TRDX</small></div>
+      </div>
+      <div class="reward-row">
+        <div><strong>👥 Бесплатный реферал</strong><div style="color:#94a3b8;font-size:13px;margin-top:4px">за каждого, кто прошёл регистрацию по твоей ссылке</div></div>
+        <div class="reward-amount">+50 <small>TRDX</small></div>
+      </div>
+      <div class="reward-row">
+        <div><strong>🚀 Реферал оплатил LAUNCH</strong><div style="color:#94a3b8;font-size:13px;margin-top:4px">тариф $45 — старт партнёрской программы</div></div>
+        <div class="reward-amount">+1 000 <small>TRDX</small></div>
+      </div>
+      <div class="reward-row">
+        <div><strong>⚡ Реферал оплатил BOOST</strong><div style="color:#94a3b8;font-size:13px;margin-top:4px">тариф $90 — 2 бизнес-места + расширенная матрица</div></div>
+        <div class="reward-amount">+2 500 <small>TRDX</small></div>
+      </div>
+      <div class="reward-row">
+        <div><strong>🔥 Реферал оплатил ROCKET</strong><div style="color:#94a3b8;font-size:13px;margin-top:4px">тариф $135 — 3 места + Matching Bonus +10%</div></div>
+        <div class="reward-amount">+7 500 <small>TRDX</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-bg">
+  <div class="wrap">
+    <h2>Что даст TRDX после запуска</h2>
+    <p class="lead">Четыре независимых направления использования. Чем раньше начнёшь копить — тем большая позиция у тебя будет на старте.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">💱</div>
+        <h3>Биржа TRDX</h3>
+        <p>Внутренняя биржа в кабинете Trendex для продажи TRDX за USD. Ранние держатели получают самый ликвидный курс при первичном открытии торгов.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <h3>Оплата AI-сервисов</h3>
+        <p>Премиум-AI-рассылки, генерация контента, авто-постинг, transcribe-сервисы — всё это можно будет оплачивать прямо в TRDX, минуя комиссии.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💰</div>
+        <h3>Дивиденды каждый квартал</h3>
+        <p>Каждые 3 месяца Trendex распределяет процент чистой прибыли между держателями TRDX в долларах. Чем больше токенов на балансе — тем больше доля.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎁</div>
+        <h3>Розыгрыши призов</h3>
+        <p>Регулярные розыгрыши ценных призов: техника, путёвки, тарифы, подписки. Каждый TRDX = билет в розыгрыше — больше токенов, выше шанс.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="max-width:760px">
+    <h2>Частые вопросы</h2>
+    <div style="margin-top:30px">
+      <div class="faq-item">
+        <h4>TRDX — это криптовалюта?</h4>
+        <p>Нет. На пресейл-этапе TRDX — внутренний учётный токен платформы Trendex. После запуска он будет обращаться внутри экосистемы (биржа, оплата сервисов, дивиденды). Решение о выпуске на внешние блокчейны — отдельный вопрос дальше.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Можно ли купить TRDX за деньги?</h4>
+        <p>На пресейле — нет. Только заработать действиями: регистрацией, приглашениями, активацией тарифов. Это сделано чтобы ранние партнёры получили реальное преимущество.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Когда запустится биржа и дивиденды?</h4>
+        <p>После официального запуска платформы Trendex. Точная дата объявляется отдельно. До этого момента TRDX накапливается, не списывается и не уменьшается.</p>
+      </div>
+      <div class="faq-item">
+        <h4>А если я уже зарегистрирован?</h4>
+        <p>Все существующие участники получают +100 TRDX задним числом — стартовый бонус для ранних. После этого начинают начисляться все остальные награды по обычным правилам.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Где видеть свой баланс?</h4>
+        <p>В Telegram-боте — команда <code style="background:#1e293b;padding:2px 8px;border-radius:6px">/trdx</code>. В кабинете — раздел <a href="https://trendex.biz/cabinet#/trdx">«Genesis TRDX»</a>. Баланс обновляется автоматически после каждой транзакции.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Лимит на накопление есть?</h4>
+        <p>Нет. Накопление неограничено по объёму, но один реферал максимум приносит 7 500 TRDX (за тариф ROCKET). Условия начисления могут уточняться до старта биржи.</p>
+      </div>
+    </div>
+
+    <div class="disclaimer">
+      <strong style="color:#cbd5e1">Юридическая оговорка:</strong> Genesis TRDX — пресейл-программа платформы Trendex. Не является ценной бумагой, инвестиционным контрактом или предложением размещения. Все условия начисления, утилит и распределения дивидендов могут уточняться до официального запуска. Участие добровольное и не требует финансовых вложений.
+    </div>
+  </div>
+</section>
+
+<section class="alt-bg" style="padding:60px 0">
+  <div class="wrap" style="text-align:center;max-width:680px">
+    <h2 style="margin-bottom:16px">Старт — сейчас</h2>
+    <p style="color:#cbd5e1;font-size:17px;margin-bottom:30px">Зарегайся за 30 секунд, забери +100 TRDX и начинай копить за каждого партнёра.</p>
+    <div class="cta-row">
+      <a href="https://trendex.biz/?utm_source=trdx&utm_medium=cta" class="btn-primary">Получить 100 TRDX</a>
+      <a href="https://t.me/Trendex_bizbot?start=trdx" class="btn-ghost">Открыть в боте</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© <span id="y">2026</span> Trendex · <a href="https://trendex.biz">trendex.biz</a> · <a href="https://t.me/Trendex_bizbot">Telegram-бот</a></div>
+  </div>
+</footer>
+
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>

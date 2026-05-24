@@ -1,0 +1,11 @@
+{
+  "chat.mic.idle": "Голосовой ввод",
+  "chat.mic.listening": "Слушаю…",
+  "chat.mic.unsupported": "Голосовой ввод не поддерживается в этом браузере",
+  "dashboard.create_via_chat": "Собрать через чат",
+  "hero_chat.create_agent.h": "Собери агента в чате",
+  "hero_chat.create_agent.greeting": "Привет. Соберём агента прямо здесь. Как его зовут и в одном предложении — чем он занимается?",
+  "hero_chat.create_agent.agent_name": "TrendeX · сборка агента",
+  "hero_chat.create_agent.placeholder": "Имя, короткое описание, что делает…",
+  "hero_chat.create_agent.foot": "На выходе — тот же character.json, что и в мастере. Ключи хранятся запечатанными на нашем кластере."
+}

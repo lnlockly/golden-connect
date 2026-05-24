@@ -1,0 +1,112 @@
+/* ═══════════════════════════════════════════════════════════
+   HOSTED-ON-ELIZA SECTION — sits between CapitalMarketTeaser
+   and TokenPreLaunch. Three equal cards + a quiet pill row.
+═══════════════════════════════════════════════════════════ */
+
+.hosted-section {
+  padding: 96px 40px 80px;
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(0, 255, 157, 0.06), transparent 55%),
+    var(--bg);
+}
+
+.hosted-head {
+  max-width: 860px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+.hosted-h {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 10px 0 16px;
+}
+.hosted-lede {
+  color: var(--ink-2, #b8b3a5);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.hosted-cards {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.hosted-card {
+  background: var(--bg-2, #111);
+  border: 1px solid var(--line, #2a2a2a);
+  padding: 26px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.hosted-card:hover {
+  border-color: rgba(0, 255, 157, 0.4);
+  transform: translateY(-2px);
+}
+.hosted-card-h {
+  font-family: var(--f-display, 'Inter', sans-serif);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink, #f5f1e8);
+}
+.hosted-card-p {
+  color: var(--ink-2, #b8b3a5);
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0;
+}
+.hosted-card-link {
+  margin-top: auto;
+  padding-top: 8px;
+  font-family: var(--f-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--acid-2, #00ff9d);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.hosted-card-link:hover { color: var(--ink, #f5f1e8); }
+
+.hosted-pill-row {
+  margin-top: 36px;
+  display: flex;
+  justify-content: center;
+}
+.hosted-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(0, 255, 157, 0.08);
+  border: 1px solid rgba(0, 255, 157, 0.3);
+  color: var(--acid-2, #00ff9d);
+  font-family: var(--f-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.hosted-pill::before {
+  content: '●';
+  font-size: 8px;
+}
+
+@media (max-width: 960px) {
+  .hosted-cards { grid-template-columns: 1fr; }
+  .hosted-section { padding: 64px 20px 56px; }
+}
+
+@media (max-width: 480px) {
+  .hosted-section { padding: 48px 14px 40px; }
+  .hosted-head { margin-bottom: 32px; }
+  .hosted-card { padding: 22px 20px; }
+  .hosted-pill-row { margin-top: 24px; }
+  .hosted-pill { font-size: 10px; letter-spacing: 0.16em; padding: 7px 12px; }
+}

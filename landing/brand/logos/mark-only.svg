@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AGENTFLOW mark">
+  <title>AGENTFLOW</title>
+  <!--
+    Mark idiom: filled agent-disc (circle) with a forward chevron carved out.
+    Reads as: agent container + directional flow. Works at 16px.
+    Even-odd fill rule ensures the chevron path subtracts cleanly from the disc.
+  -->
+  <path fill="#d4ff00" fill-rule="evenodd"
+        d="M256 16a240 240 0 1 0 0 480 240 240 0 0 0 0-480zM168 176l36-36 120 120-120 120-36-36 84-84z"/>
+</svg>

@@ -1,0 +1,11 @@
+node_modules
+dist
+.DS_Store
+.vite
+*.local
+
+# Hosted-agent deploy queue — see infra/README.md.
+# Runtime artifacts; never commit customer secrets even sealed.
+infra/deploy-queue/*.json
+infra/deploy-queue/*.secrets.enc
+!infra/deploy-queue/.gitkeep

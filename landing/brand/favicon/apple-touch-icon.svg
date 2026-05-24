@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Apple touch icon: bg square + mark. Apple applies the rounded-corner mask itself. -->
+  <rect width="512" height="512" fill="#0a0a0a"/>
+  <g transform="translate(64 64) scale(0.75)">
+    <path fill="#d4ff00" fill-rule="evenodd"
+          d="M256 16a240 240 0 1 0 0 480 240 240 0 0 0 0-480zM168 176l36-36 120 120-120 120-36-36 84-84z"/>
+  </g>
+</svg>

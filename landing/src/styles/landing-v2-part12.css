@@ -1,0 +1,364 @@
+/* ═══════════════════════════════════════════════════════════
+   MOBILE FIXES (loaded last, wins specificity on equal rules)
+   Targets: text overflow, SVG legibility, grid/card sizing,
+   RU-longer copy, very narrow 320px viewport.
+═══════════════════════════════════════════════════════════ */
+
+/* ───────────────────────────────────────────────
+   0. Global guards — prevent horizontal overflow
+   ─────────────────────────────────────────────── */
+html, body { max-width: 100%; overflow-x: hidden; }
+
+/* Allow long words (URLs, long RU compound words) to wrap */
+.section-h, .section-lede, p, h1, h2, h3, h4, h5, li, span, div {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Keep hero brand as single line but exempt from break */
+.hero-brand { overflow-wrap: normal; word-break: keep-all; }
+
+/* ───────────────────────────────────────────────
+   1. TABLET + MOBILE (≤1024px)
+   ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  /* ── SVG diagrams — legible text, proportional ── */
+  /* Height floor ensures text stays readable. Curves preserve aspect. */
+  .accel-svg {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    max-height: 440px;
+  }
+  .sing-svg {
+    width: 100%;
+    height: auto;
+    min-height: 340px;
+    max-height: 520px;
+  }
+
+  /* Pump SVG text to px so vw scaling can't shrink below ~10px floor.
+     Using shape-rendering helps keep strokes crisp on scaled SVG. */
+  .accel-svg { shape-rendering: geometricPrecision; }
+  .sing-svg { shape-rendering: geometricPrecision; }
+
+  .accel-ms-date { font-size: 14px; }
+  .accel-now-text { font-size: 14px; letter-spacing: 0.2em; }
+  .accel-future { font-size: 14px; }
+
+  .sing-band-before,
+  .sing-band-after { font-size: 14px; }
+  .sing-now-text { font-size: 15px; }
+  .sing-curve text { font-size: 14px; }
+
+  /* Growth console — narrow cells were squeezing text */
+  .growth-console-row {
+    grid-template-columns: 36px 1fr 54px 54px;
+    gap: 6px;
+    padding: 10px 6px;
+    font-size: 10.5px;
+  }
+  .growth-console-ch { font-size: 10px; padding: 3px 4px; }
+  .growth-console-act {
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+  .growth-console-cost,
+  .growth-console-roi { font-size: 10.5px; }
+}
+
+/* ───────────────────────────────────────────────
+   2. PHONE (≤640px)
+   ─────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* ── Hero brand — safer scaling at 320px ── */
+  .hero-v2 { padding: 0 12px; }
+  .hero-brand {
+    font-size: clamp(30px, 12vw, 80px);
+    letter-spacing: -0.055em;
+    max-width: 100%;
+    /* Still nowrap but now scaled safely via 12vw */
+  }
+
+  /* ── SVG diagrams — show legend, keep SVG compact ── */
+  .accel-svg {
+    min-height: 280px;
+    max-height: 360px;
+  }
+  .sing-svg {
+    min-height: 320px;
+    max-height: 420px;
+  }
+
+  /* Legends already single-column via part11; expand a bit */
+  .accel-ms-legend li { padding: 12px 14px; }
+  .accel-ms-legend-text { font-size: 13px; line-height: 1.45; }
+  .accel-ms-legend-date { font-size: 11px; }
+
+  .sing-leg { padding: 14px; }
+  .sing-leg p { font-size: 13px; line-height: 1.55; }
+
+  /* Hide the tiny in-SVG milestone dates on very narrow screens — legend
+     below has all the info. Keep the NOW marker + future label. */
+  .accel-ms-date { display: none; }
+
+  /* Singularity: hide mobile-cramped curve labels. Legend below covers them. */
+  .sing-curve text { display: none; }
+
+  /* Before/After band arrows in sing-svg remain — bump size. */
+  .sing-band-before,
+  .sing-band-after { font-size: 12px; }
+
+  /* ── Marketplace cards — lift min-height cap so RU text doesn't cut off ── */
+  .mp-card {
+    min-height: 0;
+    padding: 16px 14px;
+  }
+  .mp-card-name { line-height: 1.3; }
+
+  /* ── Business cards — same ── */
+  .biz-card {
+    min-height: 0;
+    padding: 20px 16px;
+  }
+  .biz-body h4 { line-height: 1.25; }
+  .biz-body p { font-size: 13px; line-height: 1.5; }
+
+  /* ── How-it-works phases ── */
+  .how-phase {
+    min-height: 0;
+    padding: 28px 20px 24px;
+  }
+  .how-phase-num { font-size: 48px; }
+  .how-phase-body h4 { font-size: 20px; }
+
+  /* ── Trust cards ── */
+  .trust-card { padding: 22px 18px; }
+  .trust-card-num { font-size: 36px; margin-bottom: 12px; }
+  .trust-card h4 { font-size: 20px; line-height: 1.25; margin-bottom: 10px; }
+  .trust-card p { font-size: 14px; line-height: 1.55; }
+  .trust-card-proof { font-size: 10px; margin-top: 14px; }
+
+  /* ── Launch steps ── */
+/* Launch mock — long inputs shouldn't overflow */
+  .launch-mock-input { font-size: 12px; padding: 8px 10px; }
+  .launch-mock-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+  .launch-mock-field { min-width: 0; }
+  .launch-mock-chips { gap: 5px; }
+  .launch-mock-chip { font-size: 10px; padding: 5px 10px; }
+  .launch-mock-body { padding: 14px; gap: 12px; }
+
+  /* ── Operator leaderboard — ellipsis relax so RU names can wrap ── */
+  .op-lb-handle {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.25;
+  }
+  .op-lb-spec {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.3;
+  }
+  .op-lb-op { align-items: flex-start; }
+  .op-lb-avatar { margin-top: 2px; }
+  /* Tighter 3-column card — part8 already collapses to rank/op/rating rows */
+  .op-lb-row { column-gap: 8px; padding: 12px 12px; }
+  .op-lb-cols { display: none !important; }
+
+  /* ── Industry Manifesto waves / profs / CTA ── */
+/* ── Acceleration section ── */
+  .accel-stage { padding: 14px; }
+  .accel-chart-label { font-size: 9px; padding: 5px 8px; letter-spacing: 0.15em; }
+  .accel-counters { gap: 8px; }
+  .accel-counter { padding: 14px 12px; }
+  .accel-counter-v { font-size: 24px; }
+  .accel-counter-l { font-size: 9px; letter-spacing: 0.15em; margin-top: 6px; }
+  .accel-ticker-item { font-size: 11px; }
+  .accel-ticker-label { font-size: 9px; padding: 8px 12px; letter-spacing: 0.15em; }
+  .accel-kicker { font-size: 14px; padding: 14px 14px 14px 16px; line-height: 1.5; }
+
+  /* ── Singularity hits + close ── */
+  .sing-hits { padding: 18px 16px; }
+  .sing-hits li { font-size: 14px; padding-left: 20px; }
+  .sing-close-h { font-size: 22px; line-height: 1.15; }
+  .sing-close-p { font-size: 14px; }
+
+  /* ── Problems (pr-grid) ── */
+/* ── Growth console ── */
+  .growth-console {
+    min-height: 0;
+    padding: 12px;
+  }
+  .growth-console-row {
+    grid-template-columns: 32px 1fr 48px 50px;
+    gap: 6px;
+    padding: 8px 4px;
+    font-size: 10px;
+  }
+  .growth-console-ch { font-size: 9px; padding: 2px 3px; }
+  .growth-console-act { font-size: 10px; }
+  .growth-console-cost,
+  .growth-console-roi { font-size: 10px; }
+  .growth-console-head { font-size: 10px; padding-bottom: 10px; }
+  .growth-cap { padding: 16px; }
+  .growth-cap h4 { font-size: 16px; }
+
+  /* ── Escrow timeline / yield / vesting / dispute ── */
+  .esc-timeline { padding: 16px; }
+  .esc-timeline-label { font-size: 9px; letter-spacing: 0.2em; margin-bottom: 16px; }
+  .esc-stage-body h4 { font-size: 16px; line-height: 1.25; }
+  .esc-stage-body p { font-size: 12.5px; line-height: 1.55; }
+  .esc-yield, .esc-vesting { padding: 16px; }
+  .esc-yield-pct { font-size: 18px; }
+  .esc-yield-row { gap: 6px; }
+  .esc-yield-p { font-size: 11.5px; line-height: 1.5; }
+  .esc-platform-pct { font-size: 18px; }
+  .esc-platform-note { padding: 12px 14px; }
+
+  .esc-vesting-visual {
+    grid-template-columns: 1fr 50px;
+    height: 44px;
+    gap: 4px;
+    margin: 10px 0 16px;
+  }
+  .esc-vesting-summary { padding: 12px; }
+  .esc-vesting-summary-l { font-size: 9px; letter-spacing: 0.15em; }
+  .esc-vesting-summary-v { font-size: 20px; }
+  .esc-vesting-summary-p { font-size: 10px; }
+
+  .esc-dispute { padding: 16px; gap: 14px; }
+  .esc-dispute-step {
+    grid-template-columns: 36px 1fr;
+    padding: 12px 14px;
+    gap: 12px;
+  }
+  .esc-dispute-num { font-size: 18px; }
+  .esc-dispute-body h4 { font-size: 15px; }
+  .esc-dispute-body p { font-size: 12.5px; line-height: 1.55; }
+  .esc-jury {
+    grid-column: 1 / -1;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+  .esc-juror, .esc-admin { width: 24px; height: 24px; font-size: 9px; }
+
+  /* ── Token dist rows — 2-col template from part8 stays, polish text ── */
+  .token-dist { padding: 20px 16px; }
+  .token-dist-row { font-size: 11px; gap: 10px; }
+  .token-dist-pct { font-size: 12px; }
+  .token-use { padding: 16px; }
+  .token-use h4 { font-size: 15px; line-height: 1.25; }
+  .token-use p { font-size: 12.5px; line-height: 1.5; }
+
+  /* ── Investor ── */
+  .inv-miles { padding: 20px 16px; }
+  .inv-miles li { grid-template-columns: 36px 1fr; gap: 10px; }
+  .inv-miles-num { font-size: 18px; }
+  .inv-miles-text { font-size: 13px; line-height: 1.55; }
+  .inv-cta { padding: 22px 16px; margin-top: 28px; }
+  .inv-cta-text { font-size: 15px; line-height: 1.55; }
+
+  /* ── Marketplace callouts — now single column ── */
+  .mp-callout { padding: 18px 16px; }
+  .mp-callout-n { font-size: 34px; }
+  .mp-callout-l { font-size: 9px; letter-spacing: 0.15em; }
+
+  /* ── Biz callout — wrap title ── */
+  .biz-callout { padding: 20px 16px; gap: 14px; }
+  .biz-callout-label { flex: 0 0 auto; }
+  .biz-callout-body { font-size: 14px; }
+
+  /* ── Docs (if visible on mobile) ── */
+/* ── Live ticker — ensure KPIs don't crush ── */
+  .live-ticker {
+    padding: 12px 14px;
+    gap: 16px;
+  }
+  .live-ticker-item { padding-right: 16px; }
+  .live-ticker-item .v { font-size: 18px; }
+  .live-ticker-item .l { font-size: 9px; letter-spacing: 0.12em; }
+
+  /* ── Launch mock chrome title hide via part8 — keep. ── */
+}
+
+/* ───────────────────────────────────────────────
+   3. VERY NARROW (≤380px) — iPhone SE, Galaxy Fold outer
+   ─────────────────────────────────────────────── */
+@media (max-width: 380px) {
+  .hero-brand {
+    font-size: clamp(28px, 12vw, 58px);
+    letter-spacing: -0.06em;
+  }
+
+  .section-mp, .section-how, .section-biz, .section-growth, .section-op, .section-trust, .section-token, .section-talk, .section-launch, .section-inv, .section-accel, .section-sing, .section-escrow { padding: 40px 12px; }
+
+  .section-h { font-size: clamp(22px, 7.5vw, 34px); line-height: 1.15; }
+  .section-lede { font-size: 14px; line-height: 1.5; }
+
+  /* Counters single column at the narrowest */
+  .accel-counters { grid-template-columns: 1fr; }
+
+  /* Business vertical cards — reduce mark & tighten */
+  .biz-card { padding: 16px 14px; }
+  .biz-mark { font-size: 10px; letter-spacing: 0.2em; }
+
+  /* Operator leaderboard — collapse rating next to rank so name gets space */
+  .op-lb-row {
+    grid-template-columns: 32px 1fr;
+    grid-template-areas:
+      "rank op"
+      "rank rating"
+      "rank spec"
+      "rank earn"
+      "rank jobs";
+    padding: 10px 12px;
+    row-gap: 3px;
+  }
+  .op-lb-rank { font-size: 14px; }
+  .op-lb-rating { justify-self: start; }
+  .op-lb-earn { justify-self: start; }
+  .op-lb-avatar { width: 22px; height: 22px; font-size: 8px; flex: 0 0 22px; }
+  .op-lb-handle { font-size: 11px; }
+
+  /* Escrow dispute numbers */
+  .esc-dispute-step { grid-template-columns: 32px 1fr; padding: 10px 12px; }
+
+  /* Growth console ultra-tight — hide cost column, keep ch/act/roi */
+  .growth-console-row {
+    grid-template-columns: 30px 1fr 46px;
+    gap: 5px;
+    font-size: 9.5px;
+  }
+  .growth-console-cost { display: none; }
+
+  /* Stage SVG — bump up text further since SVG will be smaller */
+  .accel-ms-legend-text { font-size: 12.5px; }
+  .sing-leg p { font-size: 12.5px; }
+
+  /* Ticker on acceleration — more gap between items */
+  .accel-ticker-track { gap: 20px; }
+  .accel-ticker-item { font-size: 10px; }
+
+  /* Launch mock — hide noisy chrome dots when cramped */
+  .launch-mock-chrome { padding: 8px 10px; font-size: 9px; }
+  .launch-mock-chrome > span:not(.launch-mock-title) { width: 7px; height: 7px; }
+}
+
+/* ───────────────────────────────────────────────
+   4. FINAL SAFETY — never clip descending glyphs
+   ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .section-h,
+  .hero-brand,
+  h1, h2, h3, h4 { padding-bottom: 1px; }
+}

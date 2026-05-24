@@ -1,0 +1,247 @@
+/* ═════ SCROLLBAR THEME (applies everywhere, not just mobile) ═════ */
+
+/* Reserve scrollbar gutter only on pointer devices with a hover
+   state (i.e. desktop). Mobile uses overlay scrollbars that don't
+   need a reserved gutter — keeping it stable there just shifts the
+   whole page left of true center. */
+@media (hover: hover) and (pointer: fine) {
+  html { scrollbar-gutter: stable; }
+}
+
+html, body { overflow-x: hidden; }
+
+html, body {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a2a transparent;
+}
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover { background: #3a3a3a; }
+
+/* Kill scrollbars inside the modal and chat bodies — they have their own
+   overflow but we don't want the bright bar showing up. */
+.chat-inline-body, .mp-demo, .live-ticker {
+  scrollbar-width: none;
+}
+.chat-inline-body::-webkit-scrollbar, .mp-demo::-webkit-scrollbar, .live-ticker::-webkit-scrollbar { display: none; }
+
+/* ═════ MOBILE POLISH (loaded last, wins on conflict) ═════ */
+
+/* General tablet polish */
+@media (max-width: 1024px) {
+  /* Hero — a bit tighter spacing, pull-under-nav adjusted */
+  .hero-v2 { padding: 0 16px; }
+  .hero-brand {
+    font-size: clamp(42px, 12vw, 140px);
+    max-width: 94vw;
+    white-space: nowrap;
+    letter-spacing: -0.05em;
+  }
+
+  /* Nav tighter on tablet */
+  .nav-bar { padding: 12px 16px; gap: 16px; }
+  .nav-bar.scrolled { padding: 10px 16px; }
+
+  /* Shrink generic section padding everywhere */
+  .section-mp,
+  .section-how,
+  .section-biz,
+  .section-growth,
+  .section-op,
+  .section-trust,
+  .section-token,
+  .section-talk,
+  .section-launch,
+  .section-inv {
+    padding: 56px 16px;
+  }
+  .section-h { font-size: clamp(30px, 5vw, 56px); }
+  .section-lede { font-size: 16px; }
+  .section-head { margin-bottom: 32px; }
+
+  /* Marketplace demo — make search bar flexible */
+  .mp-demo-top { flex-direction: column; align-items: stretch; gap: 12px; }
+  .mp-demo-search { min-width: 0; width: 100%; }
+  .mp-demo { padding: 16px; }
+
+  /* Operator leaderboard — card-style rows on tablet */
+  .op-lb-cols { display: none; }
+  .op-lb-row {
+    grid-template-columns: 40px 1fr auto;
+    grid-template-areas:
+      "rank op    rating"
+      "rank spec  earn"
+      "rank jobs  jobs";
+    row-gap: 4px;
+    column-gap: 10px;
+    padding: 14px 16px;
+  }
+  .op-lb-rank { grid-area: rank; align-self: center; }
+  .op-lb-op { grid-area: op; min-width: 0; }
+  .op-lb-spec {
+    grid-area: spec;
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+  .op-lb-jobs {
+    grid-area: jobs;
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+  .op-lb-jobs::before { content: "Jobs · "; color: var(--ink-3); }
+  .op-lb-rating { grid-area: rating; justify-self: end; }
+  .op-lb-earn { grid-area: earn; justify-self: end; font-size: 13px; }
+  .op-lb-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .op-lb-foot { flex-direction: column; align-items: flex-start; gap: 6px; }
+
+  /* Talk / Chat inline — stack cleanly */
+  .talk-grid { grid-template-columns: 1fr; gap: 24px; }
+  .chat-inline { position: static; height: auto; min-height: 420px; max-height: none; }
+  .chat-inline-body { flex: 1 0 320px; }
+/* Launch — stack and simplify */
+  .launch-mock-body { grid-template-columns: 1fr; gap: 16px; padding: 16px; }
+  .launch-mock-row { grid-template-columns: 1fr 1fr; }
+.launch-mock-chrome { font-size: 10px; }
+  .launch-mock-title { display: none; }
+
+  /* Token — stack hero + dist; shrink ticker */
+  .token-hero-v2 { grid-template-columns: 1fr; gap: 28px; }
+  .token-ticker { font-size: clamp(72px, 22vw, 140px); text-align: center; display: block; }
+  .token-meta { text-align: center; }
+  .token-status { align-self: center; flex-wrap: wrap; justify-content: center; }
+  .token-cta-row { justify-content: center; flex-wrap: wrap; }
+  .token-dist-row { grid-template-columns: 1fr 80px; grid-template-areas: "nm pct" "bar bar"; row-gap: 6px; }
+  .token-dist-nm { grid-area: nm; }
+  .token-dist-bar { grid-area: bar; }
+  .token-dist-pct { grid-area: pct; }
+  .token-uses-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Investor */
+  .inv-grid { grid-template-columns: 1fr; gap: 20px; }
+  .inv-kpis { grid-template-columns: 1fr 1fr; }
+  .inv-cta-row { flex-direction: column; align-items: stretch; }
+  .inv-cta-row .btn-primary,
+  .inv-cta-row .btn-ghost { justify-content: center; }
+
+  /* Trust grid */
+  .trust-grid { grid-template-columns: 1fr; gap: 14px; }
+  .trust-card { padding: 24px; }
+
+  /* Business grid — stay at 2 on tablet */
+  .biz-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* How-it-works */
+  .how-flow { grid-template-columns: 1fr 1fr; }
+
+  /* Whitepaper — no sticky TOC on mobile */
+  .wp-layout { grid-template-columns: 1fr; gap: 24px; padding: 24px 16px 60px; }
+  .wp-toc { position: static; max-height: none; padding: 16px; }
+  .wp-title { font-size: clamp(32px, 6vw, 48px); }
+  .wp-lede { font-size: 16px; }
+  .wp-item h3 { font-size: 20px; }
+  .wp-item p { font-size: 15px; line-height: 1.65; }
+
+  /* Growth */
+  .growth-grid { grid-template-columns: 1fr; gap: 24px; }
+  .growth-caps { grid-template-columns: 1fr 1fr; }
+  .growth-channels-grid { grid-template-columns: repeat(3, 1fr); }
+  .growth-console { min-height: 360px; padding: 16px; }
+  .growth-console-row { grid-template-columns: 40px 1fr 60px 60px; gap: 8px; padding: 10px 8px; font-size: 11px; }
+  .growth-console-act { font-size: 11px; }
+
+  /* Waitlist pill never overlap content */
+  .hero-v2 { padding-bottom: 72px; }
+}
+
+/* Phone */
+@media (max-width: 640px) {
+  .hero-brand {
+    font-size: clamp(34px, 13vw, 92px);
+    letter-spacing: -0.05em;
+    max-width: 94vw;
+    white-space: nowrap;
+  }
+
+  .section-mp,
+  .section-how,
+  .section-biz,
+  .section-growth,
+  .section-op,
+  .section-trust,
+  .section-token,
+  .section-talk,
+  .section-launch,
+  .section-inv { padding: 48px 14px; }
+
+  .section-h { font-size: clamp(26px, 7vw, 40px); line-height: 1.15; }
+  .section-lede { font-size: 15px; }
+
+  /* Cards single column everywhere that still had 2 */
+  .biz-grid, .trust-grid, .how-flow, .growth-caps, .mp-grid, .mp-callouts, .token-uses-grid, .inv-kpis { grid-template-columns: 1fr; }
+  .launch-mock-row { grid-template-columns: 1fr; }
+  .growth-channels-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Marketplace cards a bit compacter */
+  .mp-card { min-height: 200px; padding: 16px; }
+  .mp-card-name { font-size: 15px; }
+  .mp-card-cat { font-size: 9px; }
+  .mp-demo-foot { flex-direction: column; gap: 8px; align-items: flex-start; font-size: 10px; }
+
+  /* Operator leaderboard — even tighter */
+  .op-lb-head { padding: 12px 14px; }
+  .op-lb-row { padding: 12px 14px; font-size: 11px; }
+  .op-lb-avatar { width: 24px; height: 24px; font-size: 9px; flex: 0 0 24px; }
+  .op-lb-handle { font-size: 12px; }
+  .op-lb-badge { display: none; }
+  .op-lb-rank { font-size: 15px; }
+  .op-lb-earn { font-size: 12px; }
+  .op-pillars { gap: 12px; }
+  .op-pillar { padding: 16px; }
+  .op-apply { padding: 16px; }
+
+  /* Launch mock footer stacks */
+  .launch-mock-foot { flex-direction: column; align-items: flex-start; gap: 4px; font-size: 10px; }
+
+  /* Token use cards tighter */
+  .token-use { padding: 18px; }
+  .token-use h4 { font-size: 16px; }
+
+  /* Investor kpis single column */
+  .inv-kpi { padding: 18px; }
+  .inv-kpi .v { font-size: 32px; }
+  .inv-cta { padding: 24px 18px; }
+
+  /* Chat inline smaller */
+  .chat-inline { min-height: 380px; }
+  .chat-inline-head { padding: 12px; }
+  .chat-inline-avatar { width: 32px; height: 32px; font-size: 11px; }
+  .chat-msg-bubble { font-size: 13px; padding: 9px 12px; }
+  .chat-inline-foot { font-size: 9px; }
+
+  /* Waitlist pill — tighter, narrower shadow */
+  .waitlist-float {
+    font-size: 10px;
+    padding: 12px 20px;
+    box-shadow: 0 8px 22px rgba(212, 255, 0, 0.35);
+  }
+/* Order modal full-width */
+/* Whitepaper */
+  .wp { padding-top: 60px; }
+  .wp-head { padding-bottom: 24px; margin-bottom: 28px; }
+  .wp-chapter { margin: 40px 0; padding-top: 24px; }
+  .wp-ch-head h2 { font-size: clamp(26px, 7vw, 36px); }
+
+  /* Nav CTA */
+.nav-logo-wave { height: 14px; width: 18px; }
+  .nav-bar { padding: 10px 14px; }
+}
+
+/* Very narrow — stop logo text from blowing out */
+@media (max-width: 380px) {
+.section-head { margin-bottom: 24px; }
+  .hero-brand { font-size: 13vw; }
+}

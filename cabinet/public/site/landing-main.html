@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0d0f14">
+<title>Trendex — рекламная платформа: биржа · партнёрка · кампании · маркетплейс · ИИ-рассылки TG · инвайтинг · AI-агенты · мгновенные расчёты</title>
+<meta name="description" content="Зарабатывайте на одной платформе: биржа исполнителей и заказчиков рекламы, партнёрская программа  с автоначислением, таргетированные рекламные кампании, маркетплейс товаров и услуг, ИИ-рассылки в Telegram и инвайтинг по аудиториям, AI-агенты для автоматизации рутины, личный кабинет с аналитикой, мгновенные расчёты на карту и крипту. Регистрация бесплатно.">
+<meta property="og:title" content="Trendex — рекламная платформа: биржа исполнителей · реф-программа · рекламные кампании · маркетплейс · ИИ-рассылки в Telegram · инвайтинг · AI-агенты · мгновенные расчёты">
+<meta property="og:description" content="Зарабатывайте на одной платформе: биржа исполнителей и заказчиков рекламы, партнёрская программа  с автоначислением, таргетированные рекламные кампании, маркетплейс товаров и услуг, ИИ-рассылки в Telegram и инвайтинг по аудиториям, AI-агенты для автоматизации рутины, личный кабинет с аналитикой, мгновенные расчёты на карту и крипту. Регистрация бесплатно.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://trendex.biz/">
+<meta property="og:image" content="https://trendex.biz/media/brand-og.jpg">
+<meta property="og:site_name" content="Trendex">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<style>
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0c12;
+    --bg-card: #11141c;
+    --bg-elev: #161a24;
+    --border: rgba(255,255,255,.08);
+    --text: #e8edf5;
+    --text-muted: #9ca3af;
+    --accent: #00D4FF;
+    --accent2: #B14AED;
+    --pink: #FF2E97;
+    --green: #10b981;
+    --gold: #fbbf24;
+    --r: 14px;
+  }
+  html, body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.5; min-height: 100vh; }
+  a { color: var(--accent); text-decoration: none; }
+
+  /* ────────── NAV ────────── */
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,12,18,0.85); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; gap: 24px;
+    padding: 14px 20px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; }
+  .nav-logo-mark {
+    display: inline-block; width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 8px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 900; color: #fff;
+  }
+  .nav-logo-text {
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .nav-links { display: flex; gap: 22px; flex: 1; }
+  .nav-links a { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; transition: color .15s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta { display: flex; gap: 10px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-radius: 10px;
+    font-weight: 700; font-size: 0.95rem; cursor: pointer;
+    border: none; transition: transform .12s, box-shadow .12s, background .15s;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(0,212,255,.25);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 28px rgba(0,212,255,.35); }
+  .btn-ghost { background: var(--bg-elev); color: var(--text); border: 1px solid var(--border); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.04); }
+  .nav-burger { display: none; background: none; border: none; color: var(--text); font-size: 24px; cursor: pointer; }
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+    .nav-burger { display: block; }
+  }
+
+  /* ────────── HERO ────────── */
+  .hero {
+    padding: 70px 20px 90px;
+    background:
+      radial-gradient(ellipse at 20% 0%, rgba(0,212,255,0.12), transparent 50%),
+      radial-gradient(ellipse at 80% 60%, rgba(177,74,237,0.12), transparent 50%);
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+  .hero-tag {
+    display: inline-block; padding: 6px 14px; border-radius: 20px;
+    background: rgba(0,212,255,0.1); color: var(--accent);
+    font-size: 13px; font-weight: 600;
+    border: 1px solid rgba(0,212,255,0.25);
+    margin-bottom: 22px;
+  }
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.6rem); font-weight: 900;
+    line-height: 1.1; letter-spacing: -0.03em;
+    margin-bottom: 20px;
+  }
+  .hero-title .grad {
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--pink));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: clamp(1.05rem, 2vw, 1.3rem); color: var(--text-muted);
+    max-width: 720px; margin: 0 auto 32px;
+  }
+  .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+    margin-top: 60px; max-width: 800px; margin-left: auto; margin-right: auto;
+  }
+  .hero-stat-num { font-size: 2rem; font-weight: 900;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-stat-lbl { font-size: 12px; color: var(--text-muted); }
+  @media (max-width: 600px) { .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
+
+  /* ────────── SECTIONS ────────── */
+  .sec { padding: 70px 20px; }
+  .sec-inner { max-width: 1200px; margin: 0 auto; }
+  .sec-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; text-align: center; margin-bottom: 14px; letter-spacing: -0.02em; }
+  .sec-sub { text-align: center; color: var(--text-muted); font-size: 1.05rem; margin-bottom: 50px; max-width: 640px; margin-left: auto; margin-right: auto; }
+
+  /* ────────── 4 EARN WAYS ────────── */
+  .earn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  .earn-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--r); padding: 26px;
+    transition: transform .15s, border-color .15s, box-shadow .15s;
+    position: relative; overflow: hidden;
+  }
+  .earn-card::before {
+    content: ''; position: absolute; inset: 0; opacity: 0;
+    background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(177,74,237,0.08));
+    transition: opacity .2s; pointer-events: none;
+  }
+  .earn-card:hover { transform: translateY(-4px); border-color: rgba(0,212,255,0.3); box-shadow: 0 14px 40px rgba(0,212,255,0.08); }
+  .earn-card:hover::before { opacity: 1; }
+  .earn-icon { font-size: 36px; margin-bottom: 14px; display: block; }
+  .earn-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+  .earn-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.55; }
+  .earn-bullets { margin-top: 14px; padding-left: 0; list-style: none; }
+  .earn-bullets li { font-size: 0.88rem; color: var(--text); padding: 4px 0; padding-left: 22px; position: relative; }
+  .earn-bullets li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 800; }
+
+  /* ────────── TARIFFS ────────── */
+  .tariffs { background:
+    radial-gradient(ellipse at center, rgba(255,46,151,0.06), transparent 50%);
+  }
+  .tariff-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  .tariff {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--r); padding: 28px; position: relative;
+  }
+  .tariff--popular { border-color: rgba(255,46,151,0.5); transform: scale(1.04); box-shadow: 0 14px 40px rgba(255,46,151,0.15); }
+  .tariff--popular::before {
+    content: 'Популярный'; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--pink), var(--accent2));
+    padding: 4px 14px; border-radius: 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+  }
+  .tariff-name { font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; }
+  .tariff-price { font-size: 2.2rem; font-weight: 900; margin-bottom: 4px; }
+  .tariff-monthly { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 18px; }
+  .tariff-features { list-style: none; padding: 0; margin: 18px 0; }
+  .tariff-features li { padding: 8px 0; font-size: 0.92rem; border-bottom: 1px solid var(--border); }
+  .tariff-features li:last-child { border-bottom: none; }
+  .tariff-features b { color: var(--text); }
+  .tariff-cta { width: 100%; }
+  .tariff-cycle {
+    text-align: center; padding: 14px; margin-top: 16px;
+    background: rgba(0,212,255,0.06); border-radius: 10px;
+    color: var(--accent); font-size: 0.85rem;
+  }
+  .tariff-cycle b { font-size: 1.1rem; }
+
+  /* ────────── HOW ────────── */
+  .how-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+  .how-card { text-align: center; padding: 22px; }
+  .how-step {
+    width: 56px; height: 56px; margin: 0 auto 14px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; font-weight: 900; color: #fff;
+  }
+  .how-title { font-weight: 700; margin-bottom: 6px; }
+  .how-desc { color: var(--text-muted); font-size: 0.93rem; }
+
+  /* ────────── PARTNER PROOF ────────── */
+  .proof-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px; margin-top: 24px;
+  }
+  .proof-card {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--r); padding: 20px;
+  }
+  .proof-author { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .proof-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: #fff; font-size: 16px;
+  }
+  .proof-name { font-weight: 700; font-size: 0.95rem; }
+  .proof-role { color: var(--text-muted); font-size: 0.78rem; }
+  .proof-text { font-size: 0.9rem; color: var(--text); line-height: 1.55; font-style: italic; }
+
+  /* ────────── FAQ ────────── */
+  .faq { max-width: 800px; margin: 0 auto; }
+  .faq-item {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--r); margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .faq-q {
+    padding: 18px 22px; cursor: pointer; font-weight: 600;
+    display: flex; justify-content: space-between; align-items: center;
+    user-select: none;
+  }
+  .faq-q::after { content: '+'; font-size: 24px; color: var(--accent); transition: transform .15s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    padding: 0 22px; color: var(--text-muted); font-size: 0.95rem;
+    transition: max-height .25s, padding .25s;
+  }
+  .faq-item.open .faq-a { max-height: 500px; padding: 0 22px 18px; }
+
+  /* ────────── CTA FINAL ────────── */
+  .cta-final {
+    background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(177,74,237,0.1));
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 70px 20px; text-align: center;
+  }
+  .cta-final h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin-bottom: 14px; }
+  .cta-final p { color: var(--text-muted); margin-bottom: 28px; }
+  .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  /* ────────── FOOTER ────────── */
+  .foot {
+    padding: 50px 20px 30px; background: var(--bg-elev);
+    border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.85rem;
+  }
+  .foot-inner { max-width: 1200px; margin: 0 auto; }
+  .foot-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 30px;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 720px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+  .foot-col h4 { color: var(--text); font-size: 14px; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .foot-col a { display: block; color: var(--text-muted); padding: 4px 0; font-size: 0.9rem; }
+  .foot-col a:hover { color: var(--accent); }
+  .foot-copy { padding-top: 24px; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); }
+
+  /* ────────── SCROLL ANIMATIONS ────────── */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s, transform .6s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+<!-- [services-pivot-2026-05-17] -->
+</head>
+<body>
+
+<!-- ────────── NAV ────────── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <span class="nav-logo-mark">T</span>
+      <span class="nav-logo-text">TRENDEX</span>
+    </a>
+    <div class="nav-links">
+      <a href="#earn">Заработок</a>
+      <a href="#tariffs">Тарифы</a>
+      <a href="#how">Как начать</a>
+      <a href="#proof">Партнёры</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <a href="/cabinet" class="btn btn-ghost">Войти</a>
+      <a href="https://t.me/Trendex_bizbot" target="_blank" class="btn btn-primary">🚀 Начать</a>
+    </div>
+    <button class="nav-burger" onclick="document.querySelector('.nav-links').style.display = document.querySelector('.nav-links').style.display === 'flex' ? 'none' : 'flex'">☰</button>
+  </div>
+</nav>
+
+<!-- ────────── HERO ────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="hero-tag">🚀 Pre-launch активен · бронирования принимаются</span>
+    <h1 class="hero-title">
+      <span class="grad">Trendex</span> — рекламная платформа<br>с распределённой прибылью
+    </h1>
+    <p class="hero-sub">
+      4 способа заработка: биржа заданий, 10-уровневая партнёрка с мгновенными выплатами,
+      запуск рекламных кампаний с AI-проверкой, маркетплейс с делёжкой 70/30.
+    </p>
+    <div class="hero-actions">
+      <a href="https://t.me/Trendex_bizbot" target="_blank" class="btn btn-primary">🤖 Открыть бота</a>
+      <a href="#tariffs" class="btn btn-ghost">🚀 Тарифы</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-num">4</div><div class="hero-stat-lbl">Способа заработка</div></div>
+      <div><div class="hero-stat-num">10</div><div class="hero-stat-lbl">Уровней партнёрки</div></div>
+      <div><div class="hero-stat-num">$3</div><div class="hero-stat-lbl">Минимум на вывод</div></div>
+      <div><div class="hero-stat-num">24/7</div><div class="hero-stat-lbl">AI-секретарь</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────── 4 EARN WAYS ────────── -->
+<section class="sec" id="earn">
+  <div class="sec-inner">
+    <h2 class="sec-title">Как зарабатывать на Trendex</h2>
+    <p class="sec-sub">Выбирай свой способ — или комбинируй несколько одновременно. Все деньги в одном кошельке.</p>
+    <div class="earn-grid">
+      <div class="earn-card reveal">
+        <span class="earn-icon">💰</span>
+        <h3 class="earn-title">Биржа заданий</h3>
+        <p class="earn-desc">Подписки на каналы, отчёты по ТЗ, видео-задания. AI проверяет работу автоматически.</p>
+        <ul class="earn-bullets">
+          <li>$0.05–$1 за задание</li>
+          <li>Без вложений</li>
+          <li>До 25 заявок в день</li>
+        </ul>
+      </div>
+      <div class="earn-card reveal">
+        <span class="earn-icon">👥</span>
+        <h3 class="earn-title">Партнёрка 10 уровней</h3>
+        <p class="earn-desc">Приглашаешь — получаешь % с покупок партнёров. Линейные выплаты МГНОВЕННО при оплате тарифа.</p>
+        <ul class="earn-bullets">
+          <li>L1: 10% · L2: 7% · L3: 5%</li>
+          <li>+10% TRDX-кредит (ROCKET)</li>
+          <li>TRDX-резерв: топ-15</li>
+        </ul>
+      </div>
+      <div class="earn-card reveal">
+        <span class="earn-icon">🎯</span>
+        <h3 class="earn-title">Запуск кампаний</h3>
+        <p class="earn-desc">Заказывай рекламу для своего канала или товара. Бот сам найдёт исполнителей и заплатит за тебя.</p>
+        <ul class="earn-bullets">
+          <li>$5+ за подписчика канала</li>
+          <li>AI-валидация отчётов</li>
+          <li>Антифрод + карма-система</li>
+        </ul>
+      </div>
+      <div class="earn-card reveal">
+        <span class="earn-icon">🛒</span>
+        <h3 class="earn-title">Маркетплейс</h3>
+        <p class="earn-desc">Продавай цифровые товары — курсы, гайды, шаблоны. 70%+ выручки тебе, остальное в сеть.</p>
+        <ul class="earn-bullets">
+          <li>Сплит 70/10/7.5/7.5/5</li>
+          <li>Можно отдать больше в сеть</li>
+          <li>CryptoBot + СБП оплата</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ────────── PARTNER STATUS BLOCK ────────── -->
+<section class="sec" id="partner" style="background:radial-gradient(ellipse at 70% 30%, rgba(251,191,36,0.08), transparent 60%)">
+  <div class="sec-inner">
+    <h2 class="sec-title">⭐ Статус <span class="grad" style="background:linear-gradient(90deg, var(--gold), var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">PARTNER</span></h2>
+    <p class="sec-sub">Доступен даже на FREE-тарифе — никаких вложений не нужно</p>
+    <div class="earn-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <div class="earn-card reveal" style="border-color:rgba(251,191,36,0.4)">
+        <span class="earn-icon">🎯</span>
+        <h3 class="earn-title">Условие</h3>
+        <p class="earn-desc">Привлеки <b>10 партнёров</b> на любой тариф (включая FREE) — получишь статус <b>PARTNER</b> навсегда.</p>
+      </div>
+      <div class="earn-card reveal" style="border-color:rgba(251,191,36,0.4)">
+        <span class="earn-icon">🚀</span>
+        <h3 class="earn-title">Бонус +10%</h3>
+        <p class="earn-desc">К каждой выплате на бирже заданий + к доходам с реф-партнёрки. Действует пожизненно.</p>
+      </div>
+      <div class="earn-card reveal" style="border-color:rgba(251,191,36,0.4)">
+        <span class="earn-icon">💎</span>
+        <h3 class="earn-title">Доступно всем</h3>
+        <p class="earn-desc">Работает на FREE — не обязательно покупать тариф. Заработать статус можно с нуля.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────── 10-LEVEL TABLE ────────── -->
+<section class="sec" id="partner-levels">
+  <div class="sec-inner">
+    <h2 class="sec-title">📊 10-уровневая партнёрка</h2>
+    <p class="sec-sub">Чем выше тариф — тем больше уровней открыто</p>
+    <div style="overflow-x:auto;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:18px">
+      <table style="width:100%;border-collapse:collapse;min-width:680px;color:var(--text);font-size:0.9rem">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border)">
+            <th style="text-align:left;padding:10px 8px;font-weight:700">Тариф</th>
+            <th style="padding:10px 4px">L1</th><th style="padding:10px 4px">L2</th><th style="padding:10px 4px">L3</th>
+            <th style="padding:10px 4px">L4</th><th style="padding:10px 4px">L5</th><th style="padding:10px 4px">L6</th>
+            <th style="padding:10px 4px">L7</th><th style="padding:10px 4px">L8</th><th style="padding:10px 4px">L9</th>
+            <th style="padding:10px 4px">L10</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:12px 8px"><b>🆓 FREE / PARTNER</b></td>
+            <td style="text-align:center;color:var(--green);font-weight:700">10%</td>
+            <td colspan="9" style="text-align:center;color:var(--text-muted)">— только L1</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:12px 8px"><b>🚀 LAUNCH</b></td>
+            <td style="text-align:center;color:var(--green);font-weight:700">10%</td>
+            <td style="text-align:center;color:var(--accent);font-weight:600">5%</td>
+            <td style="text-align:center;color:var(--accent);font-weight:600">5%</td>
+            <td colspan="7" style="text-align:center;color:var(--text-muted)">—</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:12px 8px"><b>⚡ BOOST</b></td>
+            <td style="text-align:center;color:var(--green);font-weight:700">10%</td>
+            <td style="text-align:center;color:var(--accent);font-weight:600">5%</td>
+            <td style="text-align:center;color:var(--accent);font-weight:600">5%</td>
+            <td style="text-align:center;color:var(--accent2);font-weight:600">3%</td>
+            <td style="text-align:center;color:var(--accent2);font-weight:600">3%</td>
+            <td colspan="5" style="text-align:center;color:var(--text-muted)">—</td>
+          </tr>
+          <tr style="background:linear-gradient(90deg, rgba(255,46,151,0.06), rgba(177,74,237,0.06))">
+            <td style="padding:12px 8px"><b>🔥 ROCKET</b><br><small style="color:var(--text-muted)">+ TRDX-кредит</small></td>
+            <td style="text-align:center;color:var(--green);font-weight:700">10%</td>
+            <td style="text-align:center;color:var(--accent);font-weight:600">5%</td>
+            <td style="text-align:center;color:var(--accent);font-weight:600">5%</td>
+            <td style="text-align:center;color:var(--accent2);font-weight:600">3%</td>
+            <td style="text-align:center;color:var(--accent2);font-weight:600">3%</td>
+            <td style="text-align:center;color:var(--pink);font-weight:600">2%</td>
+            <td style="text-align:center;color:var(--pink);font-weight:600">2%</td>
+            <td style="text-align:center;color:var(--pink);font-weight:600">1.5%</td>
+            <td style="text-align:center;color:var(--pink);font-weight:600">1.5%</td>
+            <td style="text-align:center;color:var(--pink);font-weight:700">1%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="text-align:center;color:var(--text-muted);font-size:0.88rem;margin-top:18px">
+      💎 <b>TRDX-кредит</b> (только ROCKET): +10% от L1-L3 партнёрских начислений твоих рефералов с тарифом ROCKET
+    </p>
+  </div>
+</section>
+
+<!-- ────────── INFRA / TOOLS ────────── -->
+<section class="sec" id="tools" style="background:radial-gradient(ellipse at 30% 70%, rgba(177,74,237,0.06), transparent 60%)">
+  <div class="sec-inner">
+    <h2 class="sec-title">🛠 Полный набор инструментов</h2>
+    <p class="sec-sub">Всё внутри платформы — никаких внешних сервисов</p>
+    <div class="earn-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+      <div class="earn-card reveal">
+        <span class="earn-icon">📡</span>
+        <h3 class="earn-title">AdCenter</h3>
+        <p class="earn-desc">TG-автопостинг с AI-рерайтом, расписания, мониторы YouTube/TikTok, smart-очередь по лучшим часам.</p>
+      </div>
+      <div class="earn-card reveal">
+        <span class="earn-icon">🌐</span>
+        <h3 class="earn-title">Bio-страницы</h3>
+        <p class="earn-desc">Linktree-аналог: одна ссылка — все каналы + товары + соцсети. Кастомный домен, A/B тесты, статистика кликов.</p>
+      </div>
+      <div class="earn-card reveal">
+        <span class="earn-icon">🛒</span>
+        <h3 class="earn-title">Маркетплейс</h3>
+        <p class="earn-desc">Цифровые товары: курсы, гайды, шаблоны. Сплит 70/30 по умолчанию (можно настроить до 99/1 в свою пользу).</p>
+      </div>
+      <div class="earn-card reveal">
+        <span class="earn-icon">🤖</span>
+        <h3 class="earn-title">AI Chat</h3>
+        <p class="earn-desc">Личный AI-помощник: знает всё о платформе, помогает с постами, отвечает партнёрам, проверяет отчёты.</p>
+      </div>
+      <div class="earn-card reveal">
+        <span class="earn-icon">📹</span>
+        <h3 class="earn-title">Видеоконференции</h3>
+        <p class="earn-desc">Создавай комнаты для онбординга команды. WebRTC + чат + демонстрация экрана. До 100 участников.</p>
+      </div>
+      <div class="earn-card reveal">
+        <span class="earn-icon">🎯</span>
+        <h3 class="earn-title">ADX биржа</h3>
+        <p class="earn-desc">Размещай рекламу с предсказуемой ценой за подписчика. Антифрод + AI-проверка отчётов исполнителей.</p>
+      </div>
+      <div class="earn-card reveal">
+        <span class="earn-icon">💵</span>
+        <h3 class="earn-title">Earnings Ledger</h3>
+        <p class="earn-desc">Прозрачная история каждой копейки: откуда пришло, на какой L-уровень, когда выплачено.</p>
+      </div>
+      <div class="earn-card reveal">
+        <span class="earn-icon">🔗</span>
+        <h3 class="earn-title">Magic-link auth</h3>
+        <p class="earn-desc">Вход в кабинет одним кликом из бота. Никаких паролей. Сессия 30 дней.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────── CYCLE VIZ ────────── -->
+<section class="sec" id="cycles" style="background:linear-gradient(180deg, transparent, rgba(0,212,255,0.04), transparent)">
+  <div class="sec-inner">
+    <h2 class="sec-title">🔄 Полный цикл программа</h2>
+    <p class="sec-sub">Сколько ты получишь когда вся твоя ветка программа заполнится</p>
+    <div class="earn-grid" style="grid-template-columns:repeat(3,1fr);gap:14px">
+      <div class="earn-card reveal" style="text-align:center">
+        <div style="font-size:36px">🚀</div>
+        <h3 class="earn-title">LAUNCH</h3>
+        <div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:14px">11 уровней × $0.50</div>
+        <div style="font-size:2rem;font-weight:900;background:linear-gradient(90deg, #10b981, #00D4FF);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">$2 047</div>
+        <div style="color:var(--text-muted);font-size:0.85rem;margin-top:6px">за полный цикл</div>
+      </div>
+      <div class="earn-card reveal" style="text-align:center;border-color:rgba(255,46,151,0.3)">
+        <div style="font-size:36px">⚡</div>
+        <h3 class="earn-title">BOOST</h3>
+        <div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:14px">12 уровней × $0.60</div>
+        <div style="font-size:2rem;font-weight:900;background:linear-gradient(90deg, #00D4FF, #B14AED);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">$7 370</div>
+        <div style="color:var(--text-muted);font-size:0.85rem;margin-top:6px">3.6× против LAUNCH при той же сети</div>
+      </div>
+      <div class="earn-card reveal" style="text-align:center;border-color:rgba(255,46,151,0.5);box-shadow:0 14px 40px rgba(255,46,151,0.1)">
+        <div style="font-size:36px">🔥</div>
+        <h3 class="earn-title">ROCKET</h3>
+        <div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:14px">15 уровней × $0.70 + TRDX-бонус</div>
+        <div style="font-size:2rem;font-weight:900;background:linear-gradient(90deg, #B14AED, #FF2E97);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">$91 748</div>
+        <div style="color:var(--text-muted);font-size:0.85rem;margin-top:6px">+ TRDX-кредит +10% L1-L3</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────── TARIFFS ────────── -->
+<section class="sec tariffs" id="tariffs">
+  <div class="sec-inner">
+    <h2 class="sec-title">Тарифы для матричных доходов</h2>
+    <p class="sec-sub">Без тарифа доступна только базовая программа. С тарифом открываются расширенные сервисы и TRDX-кредит.</p>
+    <div class="tariff-grid">
+
+      <div class="tariff reveal">
+        <div class="tariff-name">🆓 FREE</div>
+        <div class="tariff-price">$0</div>
+        <div class="tariff-monthly">бесплатно навсегда</div>
+        <ul class="tariff-features">
+          <li>✓ Биржа заданий</li>
+          <li>✓ Маркетплейс</li>
+          <li>✓ Партнёрка <b>L1 (10%)</b></li>
+          <li>✗ Без программа</li>
+          <li>✗ Без TRDX-кредит</li>
+        </ul>
+        <a href="https://t.me/Trendex_bizbot" target="_blank" class="btn btn-ghost tariff-cta">Зарегистрироваться</a>
+      </div>
+
+      <div class="tariff reveal">
+        <div class="tariff-name">🚀 LAUNCH</div>
+        <div class="tariff-price">$30 + $15<small style="font-size:13px;color:var(--text-muted)">/мес</small></div>
+        <div class="tariff-monthly">вход + ежемесячно</div>
+        <ul class="tariff-features">
+          <li>✓ Всё из FREE</li>
+          <li>✓ <b>1 бизнес-место</b></li>
+          <li>✓ программа 11×$0.50</li>
+          <li>✓ Партнёрка L1-L3 <b>(10/5/5%)</b></li>
+        </ul>
+        <div class="tariff-cycle">Полный цикл: <b>$2 047</b></div>
+        <a href="https://t.me/Trendex_bizbot" target="_blank" class="btn btn-primary tariff-cta">Купить</a>
+      </div>
+
+      <div class="tariff tariff--popular reveal">
+        <div class="tariff-name">⚡ BOOST</div>
+        <div class="tariff-price">$75 + $15<small style="font-size:13px;color:var(--text-muted)">/мес</small></div>
+        <div class="tariff-monthly">вход + ежемесячно</div>
+        <ul class="tariff-features">
+          <li>✓ Всё из LAUNCH</li>
+          <li>✓ <b>2 бизнес-места</b></li>
+          <li>✓ программа 12×$0.60</li>
+          <li>✓ Партнёрка L1-L5 <b>(10/5/5/3/3%)</b></li>
+        </ul>
+        <div class="tariff-cycle">Полный цикл: <b>$7 370</b></div>
+        <a href="https://t.me/Trendex_bizbot" target="_blank" class="btn btn-primary tariff-cta">Купить</a>
+      </div>
+
+      <div class="tariff reveal">
+        <div class="tariff-name">🔥 ROCKET</div>
+        <div class="tariff-price">$120 + $15<small style="font-size:13px;color:var(--text-muted)">/мес</small></div>
+        <div class="tariff-monthly">вход + ежемесячно</div>
+        <ul class="tariff-features">
+          <li>✓ Всё из BOOST</li>
+          <li>✓ <b>3 бизнес-места</b></li>
+          <li>✓ программа 15×$0.70</li>
+          <li>✓ Партнёрка <b>L1-L10 (33%)</b></li>
+          <li>✓ <b>TRDX-кредит +10%</b></li>
+          <li>✓ TRDX-резерв</li>
+        </ul>
+        <div class="tariff-cycle">Полный цикл: <b>$91 748</b></div>
+        <a href="https://t.me/Trendex_bizbot" target="_blank" class="btn btn-primary tariff-cta">Купить</a>
+      </div>
+
+    </div>
+    <p style="text-align:center;color:var(--text-muted);margin-top:30px;font-size:0.9rem">
+      💳 Оплата: карта/СБП (Platega) или USDT (CryptoBot) · 🚀 Линейные выплаты <b style="color:var(--accent)">МГНОВЕННО</b> при покупке партнёра
+    </p>
+  </div>
+</section>
+
+<!-- ────────── HOW IT WORKS ────────── -->
+<section class="sec" id="how">
+  <div class="sec-inner">
+    <h2 class="sec-title">Как начать за 3 минуты</h2>
+    <div class="how-grid">
+      <div class="how-card reveal">
+        <div class="how-step">1</div>
+        <div class="how-title">Открой бота</div>
+        <div class="how-desc">@Trendex_bizbot · /start · автоматически создаст профиль</div>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-step">2</div>
+        <div class="how-title">Возьми задание</div>
+        <div class="how-desc">/jobs → подпишись на канал → получи $0.05+ за минуту</div>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-step">3</div>
+        <div class="how-title">Получи реф-ссылку</div>
+        <div class="how-desc">/ref → раздай друзьям → линейные доходы пойдут сразу</div>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-step">4</div>
+        <div class="how-title">Активируй тариф</div>
+        <div class="how-desc">/tariffs → выбери план Start/Standard/Pro → доступны все сервисы</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────── PARTNER PROOF ────────── -->
+<section class="sec" id="proof">
+  <div class="sec-inner">
+    <h2 class="sec-title">Что говорят партнёры</h2>
+    <div class="proof-row">
+      <div class="proof-card reveal">
+        <div class="proof-author">
+          <div class="proof-avatar">А</div>
+          <div><div class="proof-name">Анастасия К.</div><div class="proof-role">PARTNER</div></div>
+        </div>
+        <p class="proof-text">«Окупила тариф Start за 4 дня — с двух прямых рефералов уже 6$ линейных. Подключаюсь к биржу и зарабатываю на чужих заданиях параллельно.»</p>
+      </div>
+      <div class="proof-card reveal">
+        <div class="proof-author">
+          <div class="proof-avatar">С</div>
+          <div><div class="proof-name">Сергей О.</div><div class="proof-role">ROCKET</div></div>
+        </div>
+        <p class="proof-text">«Купил ROCKET, через неделю TRDX-кредит уже отбил половину тарифа. Видео-задания — мой формат, AI всё проверяет за меня.»</p>
+      </div>
+      <div class="proof-card reveal">
+        <div class="proof-author">
+          <div class="proof-avatar">М</div>
+          <div><div class="proof-name">Марина Р.</div><div class="proof-role">FREE</div></div>
+        </div>
+        <p class="proof-text">«Без тарифа, на одних подписках в биржу выходит $30-50 в неделю. Карма 180/200 — рекламодатели берут меня в первую очередь.»</p>
+      </div>
+      <div class="proof-card reveal">
+        <div class="proof-author">
+          <div class="proof-avatar">Д</div>
+          <div><div class="proof-name">Дмитрий Т.</div><div class="proof-role">PARTNER</div></div>
+        </div>
+        <p class="proof-text">«Делаю кастомные задания на отзывы под мои каналы — приходит реальная аудитория. AI-чекер реально снимает 90% работы по приёму отчётов.»</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────── FAQ ────────── -->
+<section class="sec" id="faq">
+  <div class="sec-inner">
+    <h2 class="sec-title">Частые вопросы</h2>
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentNode.classList.toggle('open')">Когда стартует расстановка программа?</div>
+        <div class="faq-a">Сейчас Pre-launch — бронирования принимаются, линейные выплаты идут мгновенно. Активация программа — через ~неделю после старта. Кто купил раньше — встанет выше на платформе.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentNode.classList.toggle('open')">Можно ли заработать без тарифа?</div>
+        <div class="faq-a">Да. На FREE-тарифе доступны: биржа заданий ($0.05-$1 за задание), маркетплейс (продажа товаров), L1-партнёрка 10% с прямых рефералов. Нет только программа и TRDX-кредит.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentNode.classList.toggle('open')">Какой минимум на вывод?</div>
+        <div class="faq-a">$3 — заявка обрабатывается администратором вручную в течение 24 часов. Вывод на карту/СБП (RUB) или USDT (CryptoBot).</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentNode.classList.toggle('open')">Как работает TRDX-кредит?</div>
+        <div class="faq-a">Только для держателей тарифа ROCKET. +10% от L1-L3 партнёрских начислений твоих рефералов. Если твой реферал на ROCKET зарабатывает $100 на L1 — ты получаешь $10 бонусом.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentNode.classList.toggle('open')">Платформа честная?</div>
+        <div class="faq-a">Все балансы и транзакции прозрачны: каждое начисление видно в личном кабинете. Антифрод-система с karma-баллами защищает от накруток. AI проверяет отчёты по заданиям.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentNode.classList.toggle('open')">Что такое TRDX-резерв?</div>
+        <div class="faq-a">2 раза в месяц (1 и 15 числа) топ-15 партнёров по обороту получают распределение из общего пула. Доступно только на тарифе ROCKET.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────── CTA FINAL ────────── -->
+<section class="cta-final">
+  <h2>Начни зарабатывать сегодня</h2>
+  <p>Регистрация за 30 секунд через Telegram-бот. Никаких форм и почты — нажми /start.</p>
+  <div class="cta-actions">
+    <a href="https://t.me/Trendex_bizbot" target="_blank" class="btn btn-primary">🚀 Открыть @Trendex_bizbot</a>
+    <a href="https://t.me/TRENDEX_AD" target="_blank" class="btn btn-ghost">💬 Чат партнёров</a>
+  </div>
+</section>
+
+<!-- ────────── FOOTER ────────── -->
+<footer class="foot">
+  <div class="foot-inner">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div style="display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.2rem;margin-bottom:10px">
+          <span class="nav-logo-mark">T</span>
+          <span class="nav-logo-text">TRENDEX</span>
+        </div>
+        <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.6">
+          Рекламная платформа с распределённой прибылью.<br>
+          4 способа заработка для партнёров и рекламодателей.
+        </p>
+      </div>
+      <div class="foot-col">
+        <h4>Платформа</h4>
+        <a href="#earn">Способы заработка</a>
+        <a href="#tariffs">Тарифы</a>
+        <a href="#how">Как начать</a>
+        <a href="#proof">Партнёры</a>
+      </div>
+      <div class="foot-col">
+        <h4>Кабинет</h4>
+        <a href="/cabinet">Войти в кабинет</a>
+        <a href="https://t.me/Trendex_bizbot" target="_blank">Открыть бота</a>
+        <a href="https://t.me/TRENDEX_AD" target="_blank">Чат партнёров</a>
+      </div>
+      <div class="foot-col">
+        <h4>Поддержка</h4>
+        <a href="#faq">FAQ</a>
+        <a href="https://t.me/Trendex_bizbot" target="_blank">@Trendex_bizbot</a>
+      </div>
+    </div>
+    <div class="foot-copy">
+      © 2026 Trendex · Все права защищены
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal on scroll
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const tgt = document.querySelector(a.getAttribute('href'));
+      if (tgt) { e.preventDefault(); tgt.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+
+</body>
+</html>

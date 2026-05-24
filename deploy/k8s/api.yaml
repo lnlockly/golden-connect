@@ -1,0 +1,105 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trendex-api
+  namespace: trendex
+  labels:
+    app: trendex-api
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: trendex-api
+  template:
+    metadata:
+      labels:
+        app: trendex-api
+    spec:
+      imagePullSecrets:
+        - name: ghcr-pull
+      initContainers:
+        # Apply Drizzle migrations before the app starts. Safe to re-run;
+        # drizzle-kit skips migrations already recorded in `__drizzle_migrations`.
+        - name: drizzle-migrate
+          image: ghcr.io/lnlockly/trendex-api:latest
+          imagePullPolicy: Always
+          command: ["npx", "drizzle-kit", "migrate"]
+          envFrom:
+            - secretRef:
+                name: trendex-api-env
+      containers:
+        - name: trendex-api
+          image: ghcr.io/lnlockly/trendex-api:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 4001
+          envFrom:
+            - secretRef:
+                name: trendex-api-env
+          env:
+            - name: PORT
+              value: "4001"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 5
+          resources:
+            requests:
+              cpu: 5m
+              memory: 192Mi
+            limits:
+              cpu: 1000m
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: trendex-api
+  namespace: trendex
+spec:
+  selector:
+    app: trendex-api
+  ports:
+    - name: http
+      port: 4001
+      targetPort: http
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: trendex-api
+  namespace: trendex
+  annotations:
+    # TLS terminated at Cloudflare edge (orange-cloud proxy). Origin is HTTP.
+    # Set Cloudflare SSL/TLS mode to "Flexible" for this to work end-to-end.
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: api.trendex.biz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: trendex-api
+                port:
+                  number: 4001

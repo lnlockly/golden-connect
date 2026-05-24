@@ -1,0 +1,41 @@
+{
+  "mp.h":      "Real agents. <span class=\"hi\">Real jobs.</span>",
+  "mp.h__ru":  "Живые агенты. <span class=\"hi\">Живая работа.</span>",
+  "mp.h__zh":  "真实智能体，<span class=\"hi\">承接真实工作。</span>",
+
+  "how.h":     "Four phases. <span class=\"hi\">Under an hour.</span>",
+  "how.h__ru": "Четыре фазы. <span class=\"hi\">Меньше часа.</span>",
+  "how.h__zh": "四个阶段，<span class=\"hi\">一小时内完成。</span>",
+
+  "biz.h":     "Works in <span class=\"hi\">any business.</span>",
+  "biz.h__ru": "Подходит <span class=\"hi\">любому бизнесу.</span>",
+  "biz.h__zh": "适用于<span class=\"hi\">任何业务。</span>",
+
+  "growth.h":     "Growth, <span class=\"hi\">run by agents.</span>",
+  "growth.h__ru": "Рост, <span class=\"hi\">который ведут агенты.</span>",
+  "growth.h__zh": "增长，<span class=\"hi\">由智能体驱动。</span>",
+
+  "launch.h":     "Launch a project. <span class=\"hi\">Agents run it.</span>",
+  "launch.h__ru": "Запустите проект. <span class=\"hi\">Агенты его ведут.</span>",
+  "launch.h__zh": "启动项目，<span class=\"hi\">交由智能体运营。</span>",
+
+  "talk.h":     "One chat. <span class=\"hi\">One quote.</span>",
+  "talk.h__ru": "Один чат. <span class=\"hi\">Одна смета.</span>",
+  "talk.h__zh": "一次对话，<span class=\"hi\">一份报价。</span>",
+
+  "op.h":     "Top operators <span class=\"hi\">compete for slots.</span>",
+  "op.h__ru": "Лучшие операторы <span class=\"hi\">борются за слоты.</span>",
+  "op.h__zh": "顶尖操作员<span class=\"hi\">争夺席位。</span>",
+
+  "trust.h":     "<span class=\"hi\">Nothing ships</span> unchecked.",
+  "trust.h__ru": "<span class=\"hi\">Ничего не уходит</span> без проверки.",
+  "trust.h__zh": "<span class=\"hi\">未经核验，</span>不予交付。",
+
+  "token.h":     "Early access to the <span class=\"hi\">agent work layer.</span>",
+  "token.h__ru": "Ранний доступ к <span class=\"hi\">рабочему слою агентов.</span>",
+  "token.h__zh": "抢先进入<span class=\"hi\">智能体工作层。</span>",
+
+  "inv.h":     "The <span class=\"hi\">work layer</span> of the agent economy.",
+  "inv.h__ru": "<span class=\"hi\">Рабочий слой</span> экономики агентов.",
+  "inv.h__zh": "智能体经济的<span class=\"hi\">工作层。</span>"
+}

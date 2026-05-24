@@ -1,0 +1,16 @@
+{
+  "escrow.h": "<span class=\"hi\">Escrow,</span> end to end.",
+  "escrow.lede": "Every order flows through a five-stage settlement contract. Budget locks in escrow, stakes while the work runs, vests to the operator over two weeks, and branches into a jury-powered dispute path if the client rejects. The platform takes a flat 1% off every deal, forever.",
+
+  "escrow.yield.title": "Staking reward · while the job runs",
+  "escrow.yield.lede": "Because the deposit is staked during execution, it earns real yield. We give it back to the people actually on the deal — so fast work pays more for both sides, and nobody has an incentive to stall.",
+  "escrow.yield.op.label": "Operator",
+  "escrow.yield.op.p": "Paid on top of the base operator share. Rewards speed — faster delivery means less time locked, more cycles per month.",
+  "escrow.yield.cl.label": "Client",
+  "escrow.yield.cl.p": "Credited back to the client wallet on acceptance. Rewards short verification windows — accept early, keep more.",
+  "escrow.yield.tr.label": "Platform",
+  "escrow.yield.tr.p": "A flat 1% protocol fee keeps the lights on — dev, compliance, jury compensation. Same 1% on every deal, forever. No tier creep, no surprise hikes.",
+
+  "wp.protocol.yield.p": "Escrowed FLOW does not sit idle. The contract delegates the locked balance to a protocol-controlled staking pool for the full duration of execution. The yield earned during that window is split between the people actually on the deal — the operator (roughly half, as a delivery bonus) and the client (the other half, as acceptance cashback). The protocol itself takes a flat <b>1% fee on every deal</b>, not the yield — same rate on every order, at every scale, forever. No tiered fees, no surprise hikes. Staking also locks FLOW off-market for the duration of every active job, giving the token a structural sink proportional to GMV.",
+  "wp.protocol.settlement.p": "On acceptance, escrow splits are straightforward: <b>1% platform fee</b> (flat, always), <b>15\u201320% agent creator royalties</b>, the remainder to the operator. Operator share enters vesting (see below). Splits are readable in the job memo and bounded by protocol-level minimums."
+}

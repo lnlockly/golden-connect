@@ -1,0 +1,171 @@
+# TrendeX — per-agent k3s namespace template.
+#
+# Rendered by scripts/deploy-agent.sh. Placeholders:
+#   {{SLUG}}       — DNS-1123 label, e.g. "ada-lovelace"
+#   {{IMAGE_TAG}}  — docker tag of the runtime image, e.g. "v1"
+#   {{REPLICAS}}   — string integer, usually "1"
+#
+# One file on purpose — a single `kubectl apply -f` bootstraps the
+# agent end-to-end. Multi-doc YAML (--- separated). The Secret is
+# intentionally left empty here; the deploy script rewrites its
+# `stringData` from the decrypted .secrets.enc before apply.
+#
+# TODO(infra): replace the inline Secret with SealedSecret once
+# cert-manager + sealed-secrets-controller is wired up in prod.
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: agent-{{SLUG}}
+  labels:
+    trendex.io/slug: "{{SLUG}}"
+    trendex.io/managed-by: deploy-agent.sh
+---
+# Default-deny ingress; egress scoped to DNS + HTTPS.
+# For MVP we allow all HTTPS egress because plugins call out to
+# many different SaaS backends (OpenAI, Anthropic, Telegram,
+# Twitter, Discord, EVM RPCs, ...). Tighten once we enumerate
+# the per-plugin destinations.
+# TODO(infra): per-plugin egress allowlist (CIDR + FQDN via
+# cilium/network policies or an egress gateway).
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny
+  namespace: agent-{{SLUG}}
+spec:
+  podSelector: {}
+  policyTypes: [Ingress, Egress]
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              trendex.io/role: ingress
+      ports:
+        - protocol: TCP
+          port: 3000
+  egress:
+    - ports:
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+    - ports:
+        - protocol: TCP
+          port: 443
+---
+# Opaque secret — populated at apply-time by the deploy script
+# from infra/deploy-queue/{{SLUG}}.secrets.enc.
+apiVersion: v1
+kind: Secret
+metadata:
+  name: agent-secrets
+  namespace: agent-{{SLUG}}
+type: Opaque
+stringData: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agent
+  namespace: agent-{{SLUG}}
+  labels:
+    app: agent
+    trendex.io/slug: "{{SLUG}}"
+spec:
+  replicas: {{REPLICAS}}
+  selector:
+    matchLabels:
+      app: agent
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: agent
+        trendex.io/slug: "{{SLUG}}"
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: agent
+          image: ghcr.io/lnlockly/trendex-agent:{{IMAGE_TAG}}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: agent-secrets
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: TRENDEX_SLUG
+              value: "{{SLUG}}"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: true
+            capabilities:
+              drop: [ALL]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: agent
+  namespace: agent-{{SLUG}}
+spec:
+  type: ClusterIP
+  selector:
+    app: agent
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+---
+# Ingress — cert-manager + traefik assumed. The cert-manager
+# ClusterIssuer itself lives in infra-team's base manifest.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: agent
+  namespace: agent-{{SLUG}}
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - agent-{{SLUG}}.trendex.xyz
+      secretName: agent-{{SLUG}}-tls
+  rules:
+    - host: agent-{{SLUG}}.trendex.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: agent
+                port:
+                  number: 80

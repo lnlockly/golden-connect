@@ -1,0 +1,15 @@
+node_modules/
+.env
+.env.*
+*.db
+*.db-shm
+*.db-wal
+data/
+logs/
+tmp/
+src/tmp/
+*.bak-*
+*.bak_*
+.bak-duplicate
+src/server.js.bak-*
+public/site/cabinet.html.bak-*

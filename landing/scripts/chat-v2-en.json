@@ -1,0 +1,11 @@
+{
+  "chat.mic.idle": "Voice input",
+  "chat.mic.listening": "Listening…",
+  "chat.mic.unsupported": "Voice not supported in this browser",
+  "dashboard.create_via_chat": "Build via chat",
+  "hero_chat.create_agent.h": "Build a hosted agent by chatting",
+  "hero_chat.create_agent.greeting": "Hi — let's build your agent in chat. What's the agent's name and short tagline?",
+  "hero_chat.create_agent.agent_name": "TrendeX · agent builder",
+  "hero_chat.create_agent.placeholder": "Name, tagline, what it does…",
+  "hero_chat.create_agent.foot": "Same output as the wizard — a deployable character.json. Secrets stay sealed on our cluster."
+}

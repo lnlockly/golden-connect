@@ -1,0 +1,182 @@
+/* GiftClub pages styling — gold accent */
+.gift-loading { padding: 40px; text-align: center; color: #94a3b8; }
+.gift-empty { padding: 40px; text-align: center; background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.2); border-radius: 12px; }
+.gift-empty h3 { color: #D4AF37; margin-bottom: 8px; }
+.gift-empty p { color: #cbd5e1; }
+
+.gift-hero { padding: 24px; background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(16,185,129,0.05)); border: 1px solid rgba(212,175,55,0.3); border-radius: 16px; margin-bottom: 20px; }
+.gift-badge { display: inline-block; padding: 4px 12px; background: rgba(212,175,55,0.25); color: #FFD700; border-radius: 99px; font-size: 11px; font-weight: 700; letter-spacing: 2px; }
+.gift-hero h2 { margin: 12px 0 4px; font-size: 24px; color: #fff; }
+.gift-sub { color: #94a3b8; font-size: 13px; }
+.gift-sub code { background: rgba(212,175,55,0.1); color: #FFD700; padding: 2px 6px; border-radius: 4px; }
+
+.gift-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.gift-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; }
+.gift-card-gold { background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.06)); border-color: rgba(212,175,55,0.4); }
+.gift-card-label { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.gift-card-value { font-size: 24px; font-weight: 700; color: #FFD700; line-height: 1.1; }
+.gift-card-value-sm { font-size: 16px; color: #fff; }
+.gift-card-cur { font-size: 14px; color: #94a3b8; font-weight: 400; }
+.gift-card-sub { font-size: 11px; color: #94a3b8; margin-top: 4px; }
+
+.gift-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.gift-btn { padding: 10px 18px; background: rgba(212,175,55,0.18); color: #FFD700; border: 1px solid rgba(212,175,55,0.4); border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+.gift-btn:hover { background: rgba(212,175,55,0.3); color: #fff; }
+.gift-btn-sm { padding: 6px 12px; background: rgba(212,175,55,0.18); color: #FFD700; border: 1px solid rgba(212,175,55,0.4); border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; }
+.gift-btn-sm:hover { background: rgba(212,175,55,0.3); }
+
+.gift-info { padding: 16px; background: rgba(255,255,255,0.02); border-left: 3px solid #D4AF37; border-radius: 8px; }
+.gift-info h4 { color: #D4AF37; margin-bottom: 6px; font-size: 14px; }
+.gift-info p { font-size: 13px; color: #cbd5e1; }
+
+.gift-page-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; }
+.gift-page-head h2 { color: #fff; }
+.gift-total { color: #94a3b8; }
+.gift-total b { color: #FFD700; font-size: 18px; }
+
+.gift-table-wrap { overflow-x: auto; background: rgba(255,255,255,0.02); border: 1px solid rgba(212,175,55,0.15); border-radius: 12px; }
+.gift-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.gift-table th { background: rgba(212,175,55,0.12); color: #FFD700; padding: 12px; text-align: left; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
+.gift-table td { padding: 10px 12px; border-top: 1px solid rgba(255,255,255,0.05); color: #e2e8f0; }
+.gift-table tr:hover td { background: rgba(212,175,55,0.04); }
+.gift-bal-name { font-weight: 600; color: #fff; }
+.gift-bal-desc { font-size: 11px; color: #94a3b8; margin-top: 2px; font-weight: 400; }
+.gift-bal-amt { font-weight: 700; color: #10b981; }
+.gift-bal-lifetime { color: #94a3b8; }
+
+.gift-hint { padding: 12px 14px; margin-top: 14px; background: rgba(212,175,55,0.05); border: 1px dashed rgba(212,175,55,0.3); border-radius: 8px; font-size: 12px; color: #cbd5e1; }
+.gift-hint b { color: #FFD700; }
+
+.gift-levels { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 6px; margin-bottom: 20px; }
+.gift-level-btn { padding: 10px 6px; background: rgba(255,255,255,0.04); color: #cbd5e1; border: 1px solid rgba(212,175,55,0.15); border-radius: 8px; cursor: pointer; font-size: 11px; text-align: center; transition: 0.2s; }
+.gift-level-btn:hover { background: rgba(212,175,55,0.1); border-color: rgba(212,175,55,0.3); }
+.gift-level-btn.active { background: rgba(212,175,55,0.25); color: #FFD700; border-color: #D4AF37; }
+.gift-level-btn b { font-size: 16px; color: #FFD700; }
+
+.gift-net-list { margin-top: 16px; }
+.gift-net-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.gift-net-item { padding: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.1); border-radius: 8px; }
+.gift-net-name { font-weight: 600; color: #fff; font-size: 13px; }
+.gift-net-tg { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+.gift-net-date { font-size: 10px; color: #64748b; margin-top: 4px; }
+
+.gift-acc-list { display: flex; flex-direction: column; gap: 8px; }
+.gift-acc-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; gap: 12px; }
+.gift-acc-row.current { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.3); }
+.gift-acc-row.main { border-color: rgba(212,175,55,0.3); background: rgba(212,175,55,0.05); }
+.gift-acc-row.main.current { background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(16,185,129,0.1)); }
+.gift-acc-name { font-weight: 600; color: #fff; }
+.gift-acc-meta { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+.gift-badge-current { display: inline-block; margin-left: 8px; padding: 2px 8px; background: rgba(16,185,129,0.2); color: #10b981; border-radius: 99px; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+
+@media (max-width: 600px) {
+  .gift-page-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .gift-table { font-size: 11px; }
+  .gift-table th, .gift-table td { padding: 6px 8px; }
+}
+
+/* Partner program / Команда */
+.gift-team-modes { display: flex; gap: 8px; margin-bottom: 16px; }
+.gift-mode-btn { padding: 8px 16px; background: rgba(255,255,255,0.04); color: #cbd5e1; border: 1px solid rgba(212,175,55,0.2); border-radius: 8px; cursor: pointer; font-weight: 600; }
+.gift-mode-btn.active { background: rgba(212,175,55,0.25); color: #FFD700; border-color: #D4AF37; }
+.gift-tree-head { padding: 10px 14px; margin-bottom: 12px; background: rgba(212,175,55,0.06); border-radius: 8px; font-size: 13px; color: #cbd5e1; }
+.gift-tree-node { margin: 2px 0; }
+.gift-tree-row { display: flex; align-items: center; gap: 8px; padding: 7px 10px; background: rgba(255,255,255,0.03); border-radius: 6px; font-size: 13px; }
+.gift-tree-row.expandable { cursor: pointer; }
+.gift-tree-row.expandable:hover { background: rgba(212,175,55,0.08); }
+.gift-tree-toggle { color: #D4AF37; width: 14px; font-size: 10px; }
+.gift-tree-dot { color: #475569; width: 14px; }
+.gift-tree-name { font-weight: 600; color: #fff; }
+.gift-tree-tg { color: #94a3b8; font-size: 11px; }
+.gift-tree-badge { padding: 1px 7px; background: rgba(212,175,55,0.15); color: #FFD700; border-radius: 99px; font-size: 10px; font-weight: 700; }
+.gift-tree-meta { color: #64748b; font-size: 11px; margin-left: auto; }
+.gift-tree-bal { color: #10b981; font-weight: 700; min-width: 60px; text-align: right; }
+.gift-tree-children { margin-left: 22px; border-left: 1px dashed rgba(212,175,55,0.2); padding-left: 8px; }
+.gift-tree-empty { color: #64748b; font-size: 11px; padding: 4px 10px; }
+.gift-levels-list { display: flex; flex-direction: column; gap: 6px; }
+.gift-level-row { display: flex; align-items: center; gap: 12px; }
+.gift-level-num { width: 90px; color: #cbd5e1; font-size: 13px; }
+.gift-level-bar { flex: 1; height: 22px; background: rgba(255,255,255,0.04); border-radius: 4px; overflow: hidden; }
+.gift-level-fill { height: 100%; background: linear-gradient(90deg, #D4AF37, #FFD700); border-radius: 4px; }
+.gift-level-count { width: 60px; text-align: right; color: #FFD700; font-weight: 700; }
+.gift-team-filters { display: flex; gap: 10px; margin-bottom: 14px; }
+.gift-search { flex: 1; padding: 9px 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(212,175,55,0.2); border-radius: 8px; color: #fff; font-size: 13px; }
+.gift-sort { padding: 9px 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(212,175,55,0.2); border-radius: 8px; color: #fff; }
+.gift-t-center { text-align: center; }
+.gift-pager { display: flex; align-items: center; gap: 14px; justify-content: center; margin-top: 14px; color: #cbd5e1; }
+.gift-pager button[disabled] { opacity: 0.4; cursor: not-allowed; }
+
+/* === GIFT CLUB — Каталог проектов (gift-projects.js) === */
+.gift-page-head h2 { margin: 0 0 6px; font-size: 22px; color: #FFD700; }
+.gift-hint { color: #94a3b8; font-size: 13px; line-height: 1.55; margin: 0 0 16px; }
+.gift-empty, .gift-loading { text-align: center; color: #64748b; padding: 40px 20px; }
+.gift-empty h3 { color: #cbd5e1; margin: 0 0 8px; }
+.gp-cat { margin-bottom: 22px; border-radius: 14px; padding: 16px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); }
+.gp-cat-blue  { border-color: rgba(0,170,255,0.30); background: linear-gradient(180deg, rgba(0,170,255,0.06), transparent); }
+.gp-cat-green { border-color: rgba(34,197,94,0.30); background: linear-gradient(180deg, rgba(34,197,94,0.06), transparent); }
+.gp-cat-red   { border-color: rgba(239,68,68,0.30); background: linear-gradient(180deg, rgba(239,68,68,0.06), transparent); }
+.gp-cat-head { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 12px; }
+.gp-risk { background: rgba(239,68,68,0.10); border: 1px solid rgba(239,68,68,0.30); border-radius: 10px; padding: 10px 14px; color: #fca5a5; font-size: 12px; line-height: 1.5; margin-bottom: 14px; }
+.gp-empty-cat { color: #64748b; font-size: 13px; padding: 14px; text-align: center; }
+.gp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+.gp-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; transition: transform .15s ease, border-color .15s ease; }
+.gp-card:hover { transform: translateY(-2px); border-color: rgba(212,175,55,0.4); }
+.gp-card-icon { font-size: 30px; }
+.gp-card-title { font-size: 15px; font-weight: 700; color: #fff; }
+.gp-badge-ok { font-size: 11px; color: #22c55e; font-weight: 600; }
+.gp-card-desc { font-size: 12px; color: #94a3b8; line-height: 1.5; flex: 1; }
+.gp-card-actions { display: flex; gap: 8px; margin-top: 6px; }
+.gp-btn-go { flex: 0 0 auto; padding: 8px 12px; border-radius: 8px; background: rgba(0,170,255,0.15); border: 1px solid rgba(0,170,255,0.35); color: #7dd3fc; text-decoration: none; font-size: 12px; font-weight: 600; }
+.gp-btn-link { flex: 1; padding: 8px 12px; border-radius: 8px; background: linear-gradient(135deg,#D4AF37,#FFD700); border: none; color: #1a1a1a; font-size: 12px; font-weight: 700; cursor: pointer; }
+.gp-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 9999; align-items: center; justify-content: center; padding: 16px; }
+.gp-modal { background: #14161f; border: 1px solid rgba(212,175,55,0.3); border-radius: 16px; max-width: 440px; width: 100%; }
+.gp-modal-head { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 16px; font-weight: 700; color: #fff; }
+.gp-modal-x { cursor: pointer; color: #94a3b8; font-size: 18px; }
+.gp-modal-body { padding: 20px; }
+.gp-stat { color: #cbd5e1; font-size: 13px; margin-bottom: 10px; }
+.gp-ok  { color: #22c55e; font-size: 13px; padding: 8px 0; }
+.gp-err { color: #f87171; font-size: 13px; padding: 8px 0; }
+.gp-mono { font-family: monospace; color: #94a3b8; }
+
+/* === GIFT CLUB — 2-balance cards (Основной/Текущий) === */
+.gb-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 16px; }
+.gb-card { border-radius: 16px; padding: 20px; border: 1px solid rgba(255,255,255,0.08); }
+.gb-card-main    { background: linear-gradient(160deg, rgba(0,170,255,0.12), rgba(0,170,255,0.02)); border-color: rgba(0,170,255,0.35); }
+.gb-card-current { background: linear-gradient(160deg, rgba(34,197,94,0.12), rgba(34,197,94,0.02)); border-color: rgba(34,197,94,0.35); }
+.gb-card-label { font-size: 14px; font-weight: 700; color: #cbd5e1; margin-bottom: 8px; }
+.gb-card-amt { font-family: Orbitron, sans-serif; font-size: 30px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+.gb-cur { font-size: 14px; color: #94a3b8; font-weight: 600; }
+.gb-card-hint { font-size: 12px; color: #94a3b8; line-height: 1.5; margin-bottom: 14px; }
+.gb-card-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.gift-btn { padding: 9px 16px; border-radius: 10px; background: linear-gradient(135deg,#D4AF37,#FFD700); border: none; color: #1a1a1a; font-size: 13px; font-weight: 700; cursor: pointer; }
+.gift-btn-ghost { background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.12); }
+.gb-form { background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.25); border-radius: 14px; padding: 18px; margin-bottom: 10px; max-width: 460px; }
+.gb-form h4 { margin: 0 0 14px; color: #FFD700; font-size: 15px; }
+
+/* === GIFT CLUB — статусы Дарителя (4 tiers) === */
+.gst-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 14px; }
+.gst-card { border-radius: 14px; padding: 18px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); }
+.gst-active { border-color: #FFD700; background: linear-gradient(160deg, rgba(212,175,55,0.16), rgba(212,175,55,0.02)); box-shadow: 0 4px 18px rgba(212,175,55,0.25); }
+.gst-locked { opacity: 0.55; }
+.gst-head { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.gst-badge { font-size: 11px; color: #FFD700; font-weight: 700; }
+.gst-badge-done { font-size: 12px; color: #22c55e; }
+.gst-badge-soon { font-size: 10px; color: #94a3b8; background: rgba(255,255,255,0.08); padding: 2px 7px; border-radius: 6px; }
+.gst-pool { font-family: Orbitron, sans-serif; font-size: 26px; font-weight: 800; color: #FFD700; }
+.gst-pool-l { font-size: 12px; color: #94a3b8; font-weight: 600; font-family: inherit; }
+.gst-entry { font-size: 13px; color: #cbd5e1; margin-top: 6px; }
+
+/* === GIFT CLUB — профиль === */
+.gp-prof-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.gp-prof-card { border-radius: 14px; padding: 20px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); }
+.gp-prof-label { font-size: 13px; color: #94a3b8; font-weight: 600; margin-bottom: 8px; }
+.gp-prof-val { font-size: 18px; font-weight: 700; color: #fff; }
+.gp-prof-badge { font-size: 12px; color: #FFD700; background: rgba(212,175,55,0.15); padding: 2px 8px; border-radius: 6px; margin-left: 6px; }
+.gp-prof-sub { font-size: 12px; color: #64748b; margin-top: 8px; line-height: 1.5; }
+
+/* === GIFT CLUB — инструкции === */
+.gd-section { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 16px 18px; margin-bottom: 12px; }
+.gd-section h3 { margin: 0 0 8px; color: #FFD700; font-size: 15px; }
+.gd-section p { color: #cbd5e1; font-size: 13px; line-height: 1.6; margin: 0 0 6px; }
+.gd-section ul { margin: 6px 0; padding-left: 20px; }
+.gd-section li { color: #cbd5e1; font-size: 13px; line-height: 1.7; }

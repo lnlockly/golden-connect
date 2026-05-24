@@ -1,0 +1,12 @@
+node_modules
+dist
+.vite
+.git
+.github
+brand
+*.log
+.DS_Store
+tests
+out
+# keep nginx.conf so the landing Dockerfile can COPY it into the nginx image
+

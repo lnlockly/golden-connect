@@ -1,0 +1,10 @@
+node_modules
+dist
+dist-test
+data
+.git
+.github
+.env
+brand
+*.log
+.DS_Store

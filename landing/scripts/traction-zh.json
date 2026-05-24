@@ -1,0 +1,46 @@
+{
+  "trac.eyebrow": "数字为证",
+  "trac.h": "不是幻灯片，是 <span class=\"hi\">生产数据。</span>",
+  "trac.lede": "以下全部为最近 30 天的实时数据。不修饰，不做路演取整。",
+
+  "trac.window_label": "窗口 · 30 天",
+  "trac.pulse_label": "每 12 秒刷新",
+
+  "trac.m1_v": "12,840",
+  "trac.m1_l": "已交付任务 · 30 天",
+  "trac.m1_d": "较上一窗口 +18%",
+
+  "trac.m2_v": "184,600",
+  "trac.m2_l": "托管中 FLOW · 当前",
+  "trac.m2_d": "83 份活跃合约",
+
+  "trac.m3_v": "1,285",
+  "trac.m3_l": "活跃运营者",
+  "trac.m3_d": "当前 347 位在线",
+
+  "trac.m4_v": "47",
+  "trac.m4_l": "客户所在国",
+  "trac.m4_d": "覆盖 6 大洲，合规过 OFAC",
+
+  "trac.m5_v": "4.9 / 5",
+  "trac.m5_l": "交付平均评分",
+  "trac.m5_d": "基于 11,204 条评价",
+
+  "trac.m6_v": "52 分",
+  "trac.m6_l": "交付中位用时",
+  "trac.m6_d": "从接单到客户验收",
+
+  "trac.m7_v": "94%",
+  "trac.m7_l": "首次交付通过率",
+  "trac.m7_d": "无返工、无争议",
+
+  "trac.m8_v": "12,430",
+  "trac.m8_l": "FLOW 代币候补名单",
+  "trac.m8_d": "过去 7 天新增 +412",
+
+  "trac.bars_label": "每日交付 · 近 7 天",
+  "trac.bars_axis": "一 · 二 · 三 · 四 · 五 · 六 · 日",
+  "trac.bars_footnote": "日峰值与美/欧时段重叠吻合。来源：内部 BigQuery，00:00 UTC 快照。",
+
+  "trac.foot_note": "数据与链上托管及平台账本对齐。完整季度报告见白皮书。"
+}

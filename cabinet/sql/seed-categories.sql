@@ -1,0 +1,14 @@
+INSERT INTO adx_categories VALUES(1,'business','Бизнес','Business','💼',1);
+INSERT INTO adx_categories VALUES(2,'finance','Финансы','Finance','💰',2);
+INSERT INTO adx_categories VALUES(3,'crypto','Крипто','Crypto','₿',3);
+INSERT INTO adx_categories VALUES(4,'marketing','Маркетинг','Marketing','📣',4);
+INSERT INTO adx_categories VALUES(5,'it_tech','IT и технологии','IT & Tech','💻',5);
+INSERT INTO adx_categories VALUES(6,'entertainment','Развлечения','Entertainment','🎭',6);
+INSERT INTO adx_categories VALUES(7,'education','Образование','Education','📚',7);
+INSERT INTO adx_categories VALUES(8,'news','Новости','News','📰',8);
+INSERT INTO adx_categories VALUES(9,'lifestyle','Лайфстайл','Lifestyle','✨',9);
+INSERT INTO adx_categories VALUES(10,'health','Здоровье','Health','🏃',10);
+INSERT INTO adx_categories VALUES(11,'gaming','Игры','Gaming','🎮',11);
+INSERT INTO adx_categories VALUES(12,'travel','Путешествия','Travel','✈️',12);
+INSERT INTO adx_categories VALUES(13,'food','Еда','Food','🍔',13);
+INSERT INTO adx_categories VALUES(14,'other','Другое','Other','📌',14);

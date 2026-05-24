@@ -1,0 +1,300 @@
+/* ════════════════ #/finance page styles ════════════════ */
+.fin-wrap { max-width: 1400px; margin: 0 auto; padding: 24px 16px; }
+@media (max-width: 1023px) { .fin-wrap { max-width: 100%; padding: 16px 12px; } }
+
+/* ── Balance summary cards ── */
+.fin-balances { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 24px; }
+.fin-bal {
+  background: linear-gradient(140deg, var(--v2-bg-card, #14122a), var(--v2-bg-elev, #1a1734));
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px; padding: 18px;
+  position: relative; overflow: hidden;
+}
+.fin-bal::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--bal-color, #10b981);
+}
+.fin-bal-label {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--v2-text-mut, #94a3b8); font-weight: 700; margin-bottom: 8px;
+}
+.fin-bal-value {
+  font-family: 'Orbitron', sans-serif; font-size: 26px; font-weight: 800;
+  color: var(--v2-text, #f5f5fa); line-height: 1.1;
+}
+.fin-bal-sub {
+  font-size: 11px; color: var(--v2-text-mut, #94a3b8); margin-top: 4px;
+}
+.fin-bal.working { --bal-color: #10b981; }
+.fin-bal.gift    { --bal-color: #fbbf24; }
+.fin-bal.subscription { --bal-color: #B14AED; }
+.fin-bal.karma   { --bal-color: #FF2E97; }
+
+/* Subscription progress ring */
+.fin-sub-progress {
+  height: 6px; background: rgba(0,0,0,0.3); border-radius: 3px;
+  margin-top: 8px; overflow: hidden;
+}
+.fin-sub-progress-fill {
+  height: 100%; border-radius: 3px;
+  background: linear-gradient(90deg, #B14AED, #FF2E97);
+  transition: width 0.4s ease;
+}
+
+/* ── Active tariff banner ── */
+.fin-tariff-banner {
+  background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(177,74,237,0.08));
+  border: 1px solid rgba(0,212,255,0.2);
+  border-radius: 16px; padding: 18px; margin-bottom: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.fin-tariff-info { flex: 1; min-width: 240px; }
+.fin-tariff-code {
+  font-size: 22px; font-weight: 900;
+  background: linear-gradient(90deg, #00d4ff, #B14AED);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.fin-tariff-meta { font-size: 13px; color: #94a3b8; margin-top: 4px; }
+.fin-tariff-cta {
+  background: linear-gradient(135deg, #B14AED, #FF2E97);
+  color: white; border: none; padding: 10px 20px; border-radius: 10px;
+  font-weight: 700; cursor: pointer; font-family: inherit; font-size: 14px;
+  white-space: nowrap;
+}
+
+/* ── Tabs ── */
+.fin-tabs {
+  display: flex; gap: 4px; margin-bottom: 18px;
+  background: rgba(0,0,0,0.25); padding: 4px; border-radius: 12px;
+  flex-wrap: wrap;
+}
+.fin-tab {
+  flex: 1; min-width: 100px; padding: 10px 14px; border: none; background: transparent;
+  color: #94a3b8; font-weight: 600; font-size: 13px; cursor: pointer;
+  border-radius: 8px; transition: all 0.15s; font-family: inherit;
+}
+.fin-tab.active { background: rgba(177,74,237,0.15); color: #fff; box-shadow: 0 2px 12px rgba(177,74,237,0.2); }
+
+.fin-panel { display: none; }
+.fin-panel.active { display: block; animation: finFadeIn 0.25s ease; }
+@keyframes finFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── Forms inside panels ── */
+.fin-form { background: var(--v2-bg-card, #14122a); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 20px; }
+.fin-form h3 { margin: 0 0 14px; color: #f5f5fa; }
+.fin-input-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.fin-input-label { font-size: 12px; color: #94a3b8; font-weight: 600; }
+.fin-input, .fin-select {
+  background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px; padding: 12px 14px; color: #f5f5fa;
+  font-family: inherit; font-size: 14px; transition: border-color 0.15s;
+}
+.fin-input:focus, .fin-select:focus { outline: none; border-color: #B14AED; }
+.fin-btn {
+  background: linear-gradient(135deg, #B14AED, #FF2E97);
+  color: white; border: none; padding: 12px 20px; border-radius: 10px;
+  font-weight: 700; cursor: pointer; font-family: inherit; font-size: 14px;
+  transition: transform 0.15s; width: 100%;
+}
+.fin-btn:hover { transform: translateY(-1px); }
+.fin-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.fin-btn-secondary {
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ── Quick chips for amount/method selectors ── */
+.fin-chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.fin-chip {
+  padding: 8px 14px; border-radius: 8px; font-size: 13px;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+  color: #f5f5fa; cursor: pointer; font-family: inherit;
+}
+.fin-chip:hover { border-color: rgba(177,74,237,0.4); }
+.fin-chip.active { background: rgba(177,74,237,0.15); border-color: #B14AED; color: #fff; font-weight: 700; }
+
+/* ── Transactions list ── */
+.fin-history { background: var(--v2-bg-card, #14122a); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; overflow: hidden; }
+.fin-tx { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.fin-tx:last-child { border-bottom: none; }
+.fin-tx-icon { width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.fin-tx-icon.income { background: rgba(16,185,129,0.15); }
+.fin-tx-icon.expense { background: rgba(239,68,68,0.15); }
+.fin-tx-icon.transfer { background: rgba(177,74,237,0.15); }
+.fin-tx-icon.karma { background: rgba(255,46,151,0.15); }
+.fin-tx-body { flex: 1; min-width: 0; }
+.fin-tx-kind { color: #f5f5fa; font-size: 13px; font-weight: 600; }
+.fin-tx-memo { color: #94a3b8; font-size: 11px; margin-top: 2px; }
+.fin-tx-amount {
+  font-family: 'Orbitron', sans-serif; font-size: 14px; font-weight: 700;
+  white-space: nowrap;
+}
+.fin-tx-amount.income { color: #10b981; }
+.fin-tx-amount.expense { color: #ef4444; }
+.fin-tx-time { font-size: 11px; color: #64748b; margin-top: 2px; }
+
+/* ── Bell icon dropdown ── */
+.bell-host { position: relative; }
+.bell-btn {
+  position: relative; background: transparent; border: none;
+  font-size: 22px; cursor: pointer; color: #f5f5fa; padding: 6px; line-height: 1;
+}
+.bell-badge {
+  position: absolute; top: -2px; right: -2px;
+  background: linear-gradient(135deg, #FF2E97, #B14AED);
+  color: white; font-size: 10px; font-weight: 700; line-height: 1;
+  padding: 3px 6px; border-radius: 100px; min-width: 18px;
+  text-align: center; box-shadow: 0 2px 8px rgba(255,46,151,0.3);
+}
+.bell-dropdown {
+  position: absolute; top: 100%; right: 0; margin-top: 8px;
+  width: 360px; max-width: calc(100vw - 32px); max-height: 480px;
+  background: var(--v2-bg-card, #14122a);
+  border: 1px solid rgba(177,74,237,0.25);
+  border-radius: 14px; overflow: hidden; z-index: 1000;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  display: none; flex-direction: column;
+}
+.bell-dropdown.open { display: flex; }
+.bell-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.bell-head h4 { margin: 0; color: #f5f5fa; font-size: 14px; }
+.bell-mark-all { background: none; border: none; color: #B14AED; font-size: 12px; cursor: pointer; font-family: inherit; }
+.bell-list { overflow-y: auto; max-height: 400px; padding: 4px 0; }
+.bell-empty { padding: 32px 14px; text-align: center; color: #64748b; font-size: 13px; }
+.bell-item { padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.03); cursor: pointer; transition: background 0.15s; }
+.bell-item:hover { background: rgba(177,74,237,0.05); }
+.bell-item.unread { background: rgba(177,74,237,0.06); border-left: 3px solid #B14AED; padding-left: 11px; }
+.bell-item-title { color: #f5f5fa; font-size: 13px; font-weight: 600; line-height: 1.3; }
+.bell-item-body { color: #94a3b8; font-size: 12px; line-height: 1.4; margin-top: 4px; word-wrap: break-word; }
+.bell-item-time { color: #64748b; font-size: 11px; margin-top: 4px; }
+.bell-item.severity-success .bell-item-title::before { content: '✅ '; }
+.bell-item.severity-error .bell-item-title::before { content: '🚨 '; }
+.bell-item.severity-warning .bell-item-title::before { content: '⚠️ '; }
+.bell-item.severity-info .bell-item-title::before { content: 'ℹ️ '; }
+
+@media (max-width: 600px) {
+  .fin-balances { grid-template-columns: repeat(2, 1fr); }
+  .fin-bal-value { font-size: 22px; }
+  .fin-tabs { gap: 2px; }
+  .fin-tab { font-size: 12px; padding: 8px 10px; min-width: 90px; }
+  .bell-dropdown { width: calc(100vw - 24px); right: 12px; }
+}
+
+
+/* ── Hero card: ОСНОВНОЙ balance with 3 action buttons ── */
+.fin-hero {
+  background: linear-gradient(135deg, rgba(16,185,129,0.16) 0%, rgba(16,185,129,0.04) 50%, rgba(0,212,255,0.08) 100%);
+  border: 1px solid rgba(16,185,129,0.35);
+  border-radius: 16px;
+  padding: 28px 24px;
+  margin-bottom: 18px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.fin-hero::before {
+  content: '';
+  position: absolute;
+  top: -40%; right: -10%;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(16,185,129,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.fin-hero-label {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+.fin-hero-amount {
+  font-family: 'Orbitron', monospace;
+  font-size: 48px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #10b981, #00D4FF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+  line-height: 1.05;
+}
+.fin-hero-sub {
+  font-size: 13px;
+  color: #cbd5e1;
+  margin-bottom: 20px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.fin-hero-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(180px, 100%), 1fr));
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.fin-hero-btn {
+  padding: 14px 18px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.fin-hero-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.fin-hero-btn--topup    { background: linear-gradient(135deg, #10b981, #059669); }
+.fin-hero-btn--transfer { background: linear-gradient(135deg, #00D4FF, #B14AED); }
+.fin-hero-btn--withdraw { background: linear-gradient(135deg, #FF2E97, #B14AED); }
+
+/* ── Info-only cards for other balances (read-only) ── */
+.fin-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.fin-info-card {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 16px;
+}
+.fin-info-card--sub    { border-color: rgba(177,74,237,0.25); }
+.fin-info-card--gift   { border-color: rgba(251,191,36,0.25); }
+.fin-info-card--karma  { border-color: rgba(255,46,151,0.25); }
+.fin-info-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+.fin-info-amount {
+  font-family: 'Orbitron', monospace;
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.fin-info-hint {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-bottom: 8px;
+}
+.fin-info-source {
+  font-size: 11px;
+  color: #6b7280;
+  line-height: 1.5;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  padding-top: 8px;
+  margin-top: 4px;
+}
+
+@media (max-width: 600px) {
+  .fin-hero-amount { font-size: 38px; }
+  .fin-hero { padding: 22px 16px; }
+}

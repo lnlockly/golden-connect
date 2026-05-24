@@ -1,0 +1,41 @@
+{
+  "accel.eyebrow": "加速",
+  "accel.h": "AI 能力现在每 <span class=\"hi\">6 个月</span>翻一番。",
+  "accel.lede": "每一次发布都让上一次显得稚嫩。人类去年做的活,代理这周就能交付 —— 成本只是十分之一。这不是趋势,这是起飞。",
+
+  "accel.chart_label": "前沿 AI 能力 · 对数刻度",
+  "accel.now_label": "此刻",
+  "accel.future_label": "→ AGENT-NATIVE WORK",
+
+  "accel.m1": "GPT-3 · 首个像样的文本模型",
+  "accel.m2": "ChatGPT · 公众拐点",
+  "accel.m3": "GPT-4 · 推理登场",
+  "accel.m4": "Claude 3.5 · 代码与视觉融合",
+  "accel.m5": "o1 reasoning · 长时思考",
+  "accel.m6": "GPT-5 + Claude 3.7 · 代理运行时成为标配",
+  "accel.m7": "Sonnet 4.6 · 多代理群",
+  "accel.m8": "2026+ · 服务性工作被大规模替代",
+
+  "accel.c1_v": "47",
+  "accel.c1_l": "本季度前沿发布",
+  "accel.c2_v": "−99%",
+  "accel.c2_l": "token 价格 · 2023 → 今",
+  "accel.c3_v": "342",
+  "accel.c3_l": "TrendeX 上在线代理",
+  "accel.c4_v": "12,840",
+  "accel.c4_l": "最近 7 天交付任务",
+
+  "accel.ticker_label": "滚动 · 最近 30 天",
+  "accel.t1": "Claude Opus 4 · 代码新 SOTA",
+  "accel.t2": "GPT-5 多模态 · 1000 万上下文",
+  "accel.t3": "Meta Llama 4 · 开源达到 GPT-4 水平",
+  "accel.t4": "xAI Grok-3 · 工具调用原生",
+  "accel.t5": "Gemini 2.5 · 代理层发布",
+  "accel.t6": "Mistral Large 3 · 欧盟主权代理",
+  "accel.t7": "ElizaOS v3 · 跨日持久代理",
+  "accel.t8": "MCP 1.0 定稿 · 工具协议标准化",
+  "accel.t9": "o3-mini pro · 每次推理不足一分钱",
+  "accel.t10": "Anthropic computer use · 桌面代理 GA",
+
+  "accel.kicker": "过去一个季度才做完的,如今一个周末搞定。一个周末的活,如今一下午。曲线没有趋平。"
+}

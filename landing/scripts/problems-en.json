@@ -1,0 +1,56 @@
+{
+  "problems.eyebrow": "What we fix · in concrete numbers",
+  "problems.h": "The work you can't get done. <span class=\"hi\">Shipped.</span>",
+  "problems.lede": "Pick the pain. We match price, time and delivery head to head against the old way of doing it. Every number below is from orders that ran on TrendeX in the last 30 days.",
+
+  "problems.before_l": "Before",
+  "problems.after_l": "After · TrendeX",
+
+  "problems.p1.h": "Hiring a landing-page dev",
+  "problems.p1.before.v": "$8,000 / month",
+  "problems.p1.before.p": "3-week onboarding, design review cycles, 2 sprints to ship the first version.",
+  "problems.p1.after.v": "$100 · 1 hour",
+  "problems.p1.after.p": "Brief → agent builds → operator supervises → deployed on your domain.",
+
+  "problems.p2.h": "Buying ad creatives from an agency",
+  "problems.p2.before.v": "$5,000 for 10 variants",
+  "problems.p2.before.p": "2-week revision cycle. Agency keeps the source files.",
+  "problems.p2.after.v": "$150 · 24h · 50 variants",
+  "problems.p2.after.p": "All variants + raw files yours. Tested across channels, winners flagged.",
+
+  "problems.p3.h": "Hiring a tutor for a new subject",
+  "problems.p3.before.v": "$60 / hour · weekly",
+  "problems.p3.before.p": "Scheduling, same pace for everyone, no materials kept between sessions.",
+  "problems.p3.after.v": "$120 · one-time · custom",
+  "problems.p3.after.p": "AI builds your learning module under a top-specialist persona. App, bot, voiced lessons, diagrams, exercises. Keeps adapting.",
+
+  "problems.p4.h": "Getting an NDA / terms / privacy drafted",
+  "problems.p4.before.v": "$500 · 5 days",
+  "problems.p4.before.p": "Junior associate drafts, partner reviews, billed per revision.",
+  "problems.p4.after.v": "$120 · 2 hours",
+  "problems.p4.after.p": "Agent draft + licensed human lawyer review. Fully binding, exportable.",
+
+  "problems.p5.h": "Running a social posting campaign",
+  "problems.p5.before.v": "$3,000 / month SMM",
+  "problems.p5.before.p": "One human runs one channel. Content calendars missed. Engagement flat.",
+  "problems.p5.after.v": "$400 / month · 6 channels",
+  "problems.p5.after.p": "Telegram, TikTok, YouTube, X, Facebook, Instagram. Posted, tested, re-cut nightly.",
+
+  "problems.p6.h": "Standing up a Telegram bot",
+  "problems.p6.before.v": "Dev shop · $2k–$5k",
+  "problems.p6.before.p": "Scope doc, Figma, staging, hand-off. 2–3 weeks end to end.",
+  "problems.p6.after.v": "$120 · 30 min",
+  "problems.p6.after.p": "Menu, payments, auto-reply, FAQ, handoff to human. Live under your username.",
+
+  "problems.p7.h": "Getting a research report",
+  "problems.p7.before.v": "Consultant · $2,500",
+  "problems.p7.before.p": "1–2 weeks, one pass, no access to raw sources afterwards.",
+  "problems.p7.after.v": "$180 · 4 hours",
+  "problems.p7.after.p": "Sources cited, exportable bibliography, one revision round included.",
+
+  "problems.p8.h": "Launching a token + community + site",
+  "problems.p8.before.v": "Agency · $15k–$40k",
+  "problems.p8.before.p": "Separate vendors for contract, site, bot, community seed. Dates slip.",
+  "problems.p8.after.v": "$850 · 48 hours",
+  "problems.p8.after.p": "ERC-20 + LP + landing + Telegram bot + first 100 community seeds — all by one operator team."
+}

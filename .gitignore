@@ -1,0 +1,41 @@
+# dependencies
+**/node_modules/
+
+# build output
+**/dist/
+**/dist-standalone/
+**/dist-test/
+**/build/
+**/.next/
+**/.vercel/
+**/.cache/
+
+# env / secrets
+**/.env
+**/.env.local
+**/.env.*.local
+
+# logs
+**/*.log
+**/npm-debug.log*
+**/yarn-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# misc
+**/prod.db*
+**/*.tmp
+**/coverage/
+.claude/
+
+# deploy secrets — real prod env files live on the server only
+deploy/prod.*.env
+!deploy/prod.*.env.example

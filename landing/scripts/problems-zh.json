@@ -1,0 +1,56 @@
+{
+  "problems.eyebrow": "我们修什么 · 具体数字",
+  "problems.h": "你搞不定的那些活 —— <span class=\"hi\">我们交付。</span>",
+  "problems.lede": "挑一个痛点。在价格、时间、交付上,我们和旧方式正面对比。下面每一个数字都来自过去 30 天 TrendeX 实际跑过的订单。",
+
+  "problems.before_l": "过去",
+  "problems.after_l": "现在 · TrendeX",
+
+  "problems.p1.h": "雇人做落地页",
+  "problems.p1.before.v": "$8,000 / 月",
+  "problems.p1.before.p": "3 周入职、设计评审、2 个冲刺才出第一版。",
+  "problems.p1.after.v": "$100 · 1 小时",
+  "problems.p1.after.p": "简报 → 代理构建 → 操作员监督 → 部署到你的域名。",
+
+  "problems.p2.h": "从广告公司买创意",
+  "problems.p2.before.v": "$5,000 换 10 个变体",
+  "problems.p2.before.p": "两周改稿周期。机构自己留着源文件。",
+  "problems.p2.after.v": "$150 · 24 小时 · 50 个变体",
+  "problems.p2.after.p": "所有变体 + 源文件都归你。已跨渠道测试,赢家标注。",
+
+  "problems.p3.h": "请家教学新学科",
+  "problems.p3.before.v": "$60 / 小时 · 每周",
+  "problems.p3.before.p": "排课麻烦、进度一刀切、课后资料不留存。",
+  "problems.p3.after.v": "$120 · 一次性 · 私人定制",
+  "problems.p3.after.p": "AI 以顶级专家原型给你搭学习模块 —— 应用、机器人、有声课、图表、练习。持续适配。",
+
+  "problems.p4.h": "起草 NDA / 条款 / 隐私",
+  "problems.p4.before.v": "$500 · 5 天",
+  "problems.p4.before.p": "初级律师起草、合伙人复核、每次改稿按次计费。",
+  "problems.p4.after.v": "$120 · 2 小时",
+  "problems.p4.after.p": "代理起草 + 持牌真人律师复核。具有法律效力,可导出。",
+
+  "problems.p5.h": "跑社媒发布活动",
+  "problems.p5.before.v": "$3,000 / 月 SMM",
+  "problems.p5.before.p": "一个人只能盯一个渠道。日历常常塌方,互动平淡。",
+  "problems.p5.after.v": "$400 / 月 · 6 个渠道",
+  "problems.p5.after.p": "Telegram、TikTok、YouTube、X、Facebook、Instagram。每夜发布、测试、重剪。",
+
+  "problems.p6.h": "做一个 Telegram 机器人",
+  "problems.p6.before.v": "开发团队 · $2K–$5K",
+  "problems.p6.before.p": "需求文档、Figma、staging、交付。端到端 2–3 周。",
+  "problems.p6.after.v": "$120 · 30 分钟",
+  "problems.p6.after.p": "菜单、收款、自动回复、FAQ、转接真人。用你自己的 username 上线。",
+
+  "problems.p7.h": "要一份研究报告",
+  "problems.p7.before.v": "咨询 · $2,500",
+  "problems.p7.before.p": "1–2 周,只有一版,交付后拿不到原始资料。",
+  "problems.p7.after.v": "$180 · 4 小时",
+  "problems.p7.after.p": "带引用来源,可导出参考文献,含一次修订。",
+
+  "problems.p8.h": "发代币 + 起社区 + 建站",
+  "problems.p8.before.v": "机构 · $15K–$40K",
+  "problems.p8.before.p": "合约、网站、机器人、社区各找不同供应商。排期漂移。",
+  "problems.p8.after.v": "$850 · 48 小时",
+  "problems.p8.after.p": "ERC-20 + LP + 落地页 + Telegram 机器人 + 头 100 位社区种子 —— 一支操作员团队全包。"
+}

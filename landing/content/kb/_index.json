@@ -1,0 +1,19 @@
+{
+  "categories": [
+    {
+      "id": "protocol",
+      "title": { "en": "Protocol", "ru": "Протокол", "zh": "协议" },
+      "slugs": ["escrow", "deal-split"]
+    },
+    {
+      "id": "token",
+      "title": { "en": "$FLOW", "ru": "$FLOW", "zh": "$FLOW" },
+      "slugs": ["token-flow"]
+    }
+  ],
+  "slugs": {
+    "escrow":     { "category": "protocol", "order": 10 },
+    "deal-split": { "category": "protocol", "order": 20 },
+    "token-flow": { "category": "token",    "order": 10 }
+  }
+}

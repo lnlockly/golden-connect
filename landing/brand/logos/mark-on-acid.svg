@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AGENTFLOW mark on acid">
+  <title>AGENTFLOW — inverted stamp</title>
+  <!-- Full-bleed acid square with bg-colored mark carved out. Used for stickers / stamps. -->
+  <rect width="512" height="512" fill="#d4ff00"/>
+  <path fill="#0a0a0a" fill-rule="evenodd"
+        d="M256 56a200 200 0 1 0 0 400 200 200 0 0 0 0-400zM180 184l30-30 100 100-100 100-30-30 70-70z"/>
+</svg>

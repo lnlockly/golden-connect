@@ -1,0 +1,160 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1776546948996,
+      "tag": "0000_init",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1776568181876,
+      "tag": "0001_jazzy_apocalypse",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1776570604722,
+      "tag": "0002_perfect_sentinel",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1776605856188,
+      "tag": "0003_dashing_vapor",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1776610322105,
+      "tag": "0004_jittery_madame_masque",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1776727118529,
+      "tag": "0005_add_matrix_tariffs_accruals",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1776727221409,
+      "tag": "0006_rename_flow_to_cash_ledger",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1776727554573,
+      "tag": "0007_restore_flow_ledger_and_fresh_cash_ledger",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1776854219066,
+      "tag": "0008_add_credentials_tg_login_bookings",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1776874887844,
+      "tag": "0009_regular_eternity",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1776890223885,
+      "tag": "0010_amazing_mentor",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1776948258311,
+      "tag": "0011_signup_onboarding",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1776950471137,
+      "tag": "0012_marketing_v2",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1776950876267,
+      "tag": "0013_deactivate_legacy_tariffs",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1777275001675,
+      "tag": "0014_balances_karma_subscription",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1777298882422,
+      "tag": "0015_tariff_prices",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1777298882423,
+      "tag": "0016_rocket_145",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1777298882424,
+      "tag": "0017_rocket_135_rollback",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1777298882425,
+      "tag": "0018_matrix_multiseat",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1777298882426,
+      "tag": "0019_karma_v2_reset",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1777298882427,
+      "tag": "0020_mp_pending_matrix",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1777298882428,
+      "tag": "0021_bonus_matrix",
+      "breakpoints": true
+    }
+  ]
+}

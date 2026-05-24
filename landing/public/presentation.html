@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A0E27">
+<title>Презентация Trendex</title>
+<link rel="icon" href="/trendex-hero-logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0E27;
+  --bg-alt: #111736;
+  --card: #161D3F;
+  --card-light: #1E2650;
+  --border: #2A3566;
+  --primary: #00D4FF;
+  --secondary: #B14AED;
+  --accent: #FF2E97;
+  --gold: #FFB800;
+  --green: #00FF94;
+  --text: #FFFFFF;
+  --text-muted: #A0A8D0;
+  --text-dim: #6E7BAF;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  min-height: 100vh;
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 10% 10%, rgba(177, 74, 237, 0.25) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, rgba(0, 212, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 15%, rgba(255, 46, 151, 0.15) 0%, transparent 45%);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(42, 53, 102, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(42, 53, 102, 0.15) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─────────── Header ─────────── */
+.pres-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 16px 5%;
+  background: rgba(10, 14, 39, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.pres-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text);
+  text-decoration: none;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 18px;
+  letter-spacing: 1px;
+  flex: 1;
+}
+.pres-brand img {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+}
+.pres-badge {
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: rgba(255, 46, 151, 0.15);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.pres-counter {
+  font-family: 'Space Grotesk', monospace;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(22, 29, 63, 0.6);
+  border: 1px solid var(--border);
+}
+.pres-back {
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+  font-size: 13px;
+  font-weight: 500;
+}
+.pres-back:hover { color: var(--primary); border-color: var(--primary); }
+.pres-download {
+  padding: 8px 18px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--bg);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+  box-shadow: 0 6px 16px rgba(0, 212, 255, 0.3);
+  transition: all 0.2s;
+}
+.pres-download:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0, 212, 255, 0.45); }
+
+/* ─────────── Stage ─────────── */
+.pres-stage {
+  position: relative;
+  z-index: 1;
+  padding: 40px 5% 120px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.slide {
+  position: relative;
+  margin-bottom: 80px;
+  padding: 60px 48px;
+  min-height: 520px;
+  border-radius: 32px;
+  background: linear-gradient(145deg, rgba(22, 29, 63, 0.75), rgba(17, 23, 54, 0.6));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow: hidden;
+  box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.2,.8,.2,1);
+}
+.slide.is-visible { opacity: 1; transform: translateY(0); }
+.slide::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+}
+.slide-num {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 90px;
+  line-height: 1;
+  color: rgba(42, 53, 102, 0.4);
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+.slide-eyebrow {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 100px;
+  background: rgba(0, 212, 255, 0.12);
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.slide-title {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  max-width: 80%;
+}
+.slide-title .hl {
+  background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.slide-sub {
+  font-size: 17px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 760px;
+  margin-bottom: 28px;
+}
+.slide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 12px;
+}
+.slide-card {
+  padding: 24px;
+  border-radius: 18px;
+  background: rgba(10, 14, 39, 0.55);
+  border: 1px solid var(--border);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.slide-card:hover { border-color: rgba(0, 212, 255, 0.3); transform: translateY(-2px); }
+.slide-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.slide-card p { font-size: 14px; color: var(--text-muted); line-height: 1.55; }
+.slide-card .emoji {
+  font-size: 32px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+/* Hero slide */
+.slide--hero {
+  min-height: 620px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.slide--hero .slide-title {
+  font-size: clamp(44px, 8vw, 96px);
+  max-width: 900px;
+  margin-bottom: 28px;
+}
+.slide--hero .slide-num { display: none; }
+.hero-tagline {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  width: 100%;
+  max-width: 700px;
+}
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 36px;
+  width: 100%;
+  max-width: 700px;
+}
+@media (max-width: 640px) { .hero-stats { grid-template-columns: 1fr; } }
+.hero-stat {
+  padding: 20px;
+  border-radius: 16px;
+  background: rgba(22, 29, 63, 0.5);
+  border: 1px solid var(--border);
+}
+.hero-stat-num {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 42px;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 6px;
+}
+.hero-stat-label { color: var(--text-muted); font-size: 13px; }
+
+/* Matrix / tariff table */
+.pres-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+  font-size: 14px;
+  margin-top: 12px;
+}
+.pres-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+.pres-table td {
+  padding: 14px 16px;
+  background: rgba(10, 14, 39, 0.55);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.pres-table td:first-child { border-left: 1px solid var(--border); border-radius: 10px 0 0 10px; }
+.pres-table td:last-child  { border-right: 1px solid var(--border); border-radius: 0 10px 10px 0; }
+.pres-table .rocket { color: var(--accent); font-weight: 700; }
+.pres-table .boost { color: var(--secondary); font-weight: 700; }
+.pres-table .launch { color: var(--primary); font-weight: 700; }
+
+/* 4-tariff cards */
+.tariff-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 16px;
+}
+@media (max-width: 900px) { .tariff-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .tariff-row { grid-template-columns: 1fr; } }
+.tariff-col {
+  padding: 24px 20px;
+  border-radius: 20px;
+  background: rgba(10, 14, 39, 0.55);
+  border: 1px solid var(--border);
+  position: relative;
+}
+.tariff-col.rocket {
+  background: linear-gradient(160deg, rgba(255, 46, 151, 0.18), rgba(177, 74, 237, 0.1) 50%, rgba(10, 14, 39, 0.8));
+  border-color: rgba(255, 46, 151, 0.35);
+}
+.tariff-col .name {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 22px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 6px;
+}
+.tariff-col.rocket .name {
+  background: linear-gradient(135deg, var(--accent), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.tariff-col .price { font-size: 32px; font-weight: 700; margin-bottom: 12px; }
+.tariff-col small { display: block; font-size: 12px; color: var(--text-muted); font-weight: 400; }
+.tariff-col ul { list-style: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border); }
+.tariff-col li { padding: 4px 0; font-size: 13px; color: var(--text-muted); }
+.tariff-col li::before { content: '✓ '; color: var(--green); font-weight: 700; }
+.tariff-col .cycle {
+  margin-top: 14px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  background: rgba(0, 255, 148, 0.1);
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* line distribution */
+.lines-table td { font-family: 'Space Grotesk', monospace; }
+.lines-table .lvl { color: var(--text-dim); font-weight: 700; }
+.lines-table .pct { color: var(--text); font-weight: 600; }
+
+/* pool distribution */
+.pool-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+@media (max-width: 640px) { .pool-grid { grid-template-columns: repeat(3, 1fr); } }
+.pool-item {
+  padding: 14px 8px;
+  border-radius: 12px;
+  background: rgba(22, 29, 63, 0.65);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.pool-item .rank {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.pool-item .pct {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary);
+}
+.pool-item.gold { background: linear-gradient(160deg, rgba(255, 184, 0, 0.15), rgba(22, 29, 63, 0.6)); border-color: rgba(255, 184, 0, 0.4); }
+.pool-item.gold .rank { color: var(--gold); }
+.pool-item.silver { background: linear-gradient(160deg, rgba(160, 168, 208, 0.12), rgba(22, 29, 63, 0.6)); border-color: rgba(160, 168, 208, 0.4); }
+.pool-item.bronze { background: linear-gradient(160deg, rgba(205, 127, 50, 0.12), rgba(22, 29, 63, 0.6)); border-color: rgba(205, 127, 50, 0.4); }
+
+/* Final CTA */
+.slide--final { text-align: center; }
+.slide--final .slide-title { font-size: clamp(36px, 6vw, 72px); max-width: 100%; }
+.final-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+.final-btn {
+  padding: 16px 32px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.final-btn--primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--bg);
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.35);
+}
+.final-btn--primary:hover { transform: translateY(-2px); box-shadow: 0 15px 40px rgba(0, 212, 255, 0.55); }
+.final-btn--ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+}
+.final-btn--ghost:hover { border-color: var(--primary); color: var(--primary); }
+
+/* ──── Bullet strip ──── */
+.bullet-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 16px;
+}
+@media (max-width: 760px) { .bullet-row { grid-template-columns: 1fr; } }
+.bullet {
+  padding: 20px 16px;
+  border-radius: 14px;
+  background: rgba(22, 29, 63, 0.55);
+  border: 1px solid var(--border);
+}
+.bullet .emoji { font-size: 26px; margin-bottom: 8px; }
+.bullet strong { display: block; font-size: 16px; margin-bottom: 4px; color: var(--text); }
+.bullet span { font-size: 13px; color: var(--text-muted); }
+
+/* Responsive */
+@media (max-width: 760px) {
+  .pres-stage { padding: 20px 4% 80px; }
+  .slide { padding: 40px 24px; min-height: 440px; }
+  .slide-num { font-size: 64px; right: 18px; top: 14px; }
+  .slide-title { max-width: 100%; }
+  .pres-badge { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .slide { transition: none; opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="pres-header">
+  <a href="/" class="pres-brand">
+    <img src="/trendex-hero-logo.jpg" alt="Trendex">
+    <span>TRENDEX</span>
+    <span class="pres-badge">Презентация</span>
+  </a>
+  <span class="pres-counter" id="slide-counter">1 / 14</span>
+  <a href="/" class="pres-back">← На главную</a>
+  <a href="/Trendex_presentation.pdf" class="pres-download" target="_blank" rel="noopener">⬇ PDF (краткая, 14 слайдов)</a>
+  <a href="/Trendex_FULL_20slides.pdf" class="pres-download" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#FF2E97,#B14AED)">⬇ FULL (20 слайдов)</a>
+  <a href="/Trendex_FULL_20slides.html" class="pres-download" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#10b981,#00D4FF)">📺 HTML версия</a>
+</header>
+
+<main class="pres-stage" id="stage">
+
+  <!-- Slide 1 — Hero -->
+  <section class="slide slide--hero">
+    <span class="slide-eyebrow">TRENDEX</span>
+    <h1 class="slide-title">Реклама, которая <span class="hl">работает на всех</span></h1>
+    <p class="slide-sub">Trendex — рекламная платформа нового поколения. Внимание аудитории напрямую оплачивается: доход без потолка, доля от оборота платформы, прозрачные правила.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">$20/день</div>
+        <div class="hero-stat-label">до, за активность в сервисе</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">10 линий</div>
+        <div class="hero-stat-label">партнёрская программа</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">17 ур.</div>
+        <div class="hero-stat-label">глубина матрицы на ROCKET</div>
+      </div>
+    </div>
+    <div class="hero-tagline">Рекламная экосистема с распределённой прибылью</div>
+  </section>
+
+  <!-- Slide 2 — How it works -->
+  <section class="slide">
+    <div class="slide-num">02</div>
+    <span class="slide-eyebrow">Принцип</span>
+    <h2 class="slide-title">Как это <span class="hl">работает</span></h2>
+    <p class="slide-sub">Trendex — рекламный сервис, построенный на принципе справедливого распределения прибыли. Рекламные бюджеты направляются напрямую к тем, кто смотрит объявления и взаимодействует с ними.</p>
+    <div class="bullet-row">
+      <div class="bullet"><div class="emoji">💼</div><strong>Рекламодатели</strong><span>Пополняют рекламный счёт. Размещают кампании и получают реальное внимание живой аудитории по прозрачной цене.</span></div>
+      <div class="bullet"><div class="emoji">👥</div><strong>Пользователи</strong><span>Зарабатывают за просмотры, клики и выполненные задания. Выплаты приходят на рабочий счёт без скрытых комиссий.</span></div>
+      <div class="bullet"><div class="emoji">🔄</div><strong>Платформа</strong><span>Возвращает часть оборота обратно в сеть — каждый участник получает долю в зависимости от активности и структуры.</span></div>
+    </div>
+  </section>
+
+  <!-- Slide 3 — For advertisers -->
+  <section class="slide">
+    <div class="slide-num">03</div>
+    <span class="slide-eyebrow">Рекламодателям</span>
+    <h2 class="slide-title">Полный стек <span class="hl">digital-продвижения</span> в одном окне</h2>
+    <p class="slide-sub">Форматы: баннеры · контекст · таргет · видео-реклама · задания и CPA.</p>
+    <div class="slide-grid">
+      <div class="slide-card"><span class="emoji">💰</span><h3>Прозрачная стоимость</h3><p>Вы платите за реальные показы и действия — без скрытых наценок и посредников.</p></div>
+      <div class="slide-card"><span class="emoji">🎯</span><h3>Активная аудитория</h3><p>Пользователи финансово мотивированы взаимодействовать с объявлениями.</p></div>
+      <div class="slide-card"><span class="emoji">🔁</span><h3>Повторные контакты</h3><p>Регулярные показы формируют узнаваемость бренда в сети на долгой дистанции.</p></div>
+      <div class="slide-card"><span class="emoji">🛠</span><h3>Инструменты удержания</h3><p>Таргетинг и сегментация для работы с аудиторией вдолгую.</p></div>
+    </div>
+  </section>
+
+  <!-- Slide 4 — For users -->
+  <section class="slide">
+    <div class="slide-num">04</div>
+    <span class="slide-eyebrow">Пользователям</span>
+    <h2 class="slide-title"><span class="hl">До 20$ в день.</span> Старт за 1 минуту</h2>
+    <p class="slide-sub">Выплаты начисляются за просмотры, клики и выполненные задания. Без рекомендаций, без продаж, без вложений. Регистрация бесплатна, выплаты начинаются с первого дня.</p>
+    <div class="slide-grid">
+      <div class="slide-card"><span class="emoji">🎁</span><h3>Статус PARTNER</h3><p>Приведите 10 человек на любой тариф — включая FREE — и получите статус Partner.</p></div>
+      <div class="slide-card"><span class="emoji">⚡</span><h3>Повышенная ставка +10%</h3><p>Partner и любой платный тариф увеличивают ставку вознаграждения на 10% за каждое действие. Применяется автоматически.</p></div>
+    </div>
+  </section>
+
+  <!-- Slide 5 — Matrix -->
+  <section class="slide">
+    <div class="slide-num">05</div>
+    <span class="slide-eyebrow">Матрица</span>
+    <h2 class="slide-title">Как устроен <span class="hl">ваш доход</span> в матрице</h2>
+    <p class="slide-sub">Порог входа — 45$. Одноразовая активация 30$ + обслуживание 15$ в месяц. Место в матрице закрепляется за вами на весь период.</p>
+    <div class="slide-grid">
+      <div class="slide-card"><span class="emoji">🔄</span><h3>Автозаполнение</h3><p>Новые участники распределяются системой автоматически — сверху вниз, слева направо.</p></div>
+      <div class="slide-card"><span class="emoji">🌐</span><h3>Доход от сети</h3><p>Начисления формируются за счёт глобальной сети Trendex, без необходимости приглашать лично.</p></div>
+      <div class="slide-card"><span class="emoji">♾️</span><h3>Без лимита</h3><p>Начисления поступают за каждого нового участника в вашей структуре.</p></div>
+      <div class="slide-card"><span class="emoji">📈</span><h3>Масштабирование</h3><p>Дополнительные бизнес-места на одном аккаунте увеличивают доход пропорционально при той же структуре.</p></div>
+    </div>
+  </section>
+
+  <!-- Slide 6 — Matrix structure -->
+  <section class="slide">
+    <div class="slide-num">06</div>
+    <span class="slide-eyebrow">Матрица</span>
+    <h2 class="slide-title">Структура и <span class="hl">начисления</span></h2>
+    <table class="pres-table">
+      <thead>
+        <tr><th>Тариф</th><th>Уровней</th><th>Ставка / ур.</th><th style="text-align:right">Доход за цикл<br><small style="font-weight:400;font-size:11px;color:#94a3b8">(30 дней)</small></th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="launch">LAUNCH · $45 · 1 место</td><td>12</td><td>$0.50</td><td style="text-align:right"><b>4 095 $</b></td></tr>
+        <tr><td class="boost">BOOST · $90 · 2 места</td><td>14</td><td>$0.60</td><td style="text-align:right"><b>19 660 $</b></td></tr>
+        <tr><td class="rocket">ROCKET · $135 · 3 места</td><td>17</td><td>$0.70</td><td style="text-align:right"><b>183 499 $</b></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Slide 7 — Three tariffs -->
+  <section class="slide">
+    <div class="slide-num">07</div>
+    <span class="slide-eyebrow">Тарифы</span>
+    <h2 class="slide-title">Три тарифа — <span class="hl">одна структура</span></h2>
+    <p class="slide-sub">Дополнительные бизнес-места увеличивают начисления с той же сети. На одном аккаунте можно открыть неограниченное количество бизнес-мест.</p>
+    <div class="tariff-row">
+      <div class="tariff-col">
+        <div class="name">FREE</div>
+        <div class="price">$0<small>без вложений</small></div>
+        <ul><li>До $20/день активность</li><li>L1 рефералы 10%</li><li>Без бизнес-места</li></ul>
+      </div>
+      <div class="tariff-col">
+        <div class="name">LAUNCH</div>
+        <div class="price">$45<small>активация $30 + $15/мес</small></div>
+        <ul><li>1 бизнес-место</li><li>Матрица 12 × $0.5</li><li>10 линий рефералов</li></ul>
+        <div class="cycle">≈ $4 095 / цикл <small style="font-size:11px;color:#94a3b8">(30 дней)</small></div>
+      </div>
+      <div class="tariff-col">
+        <div class="name">BOOST</div>
+        <div class="price">$90<small>активация $75 + $15/мес</small></div>
+        <ul><li>2 бизнес-места</li><li>Матрица 14 × $0.6</li><li>×4.8 к LAUNCH</li></ul>
+        <div class="cycle">≈ $19 660 / цикл <small style="font-size:11px;color:#94a3b8">(30 дней)</small></div>
+      </div>
+      <div class="tariff-col rocket">
+        <div class="name">ROCKET</div>
+        <div class="price">$135<small>далее $45/мес</small></div>
+        <ul><li>3 бизнес-места</li><li>Матрица 17 × $0.7</li><li>+ Matching Bonus</li></ul>
+        <div class="cycle">≈ $183 499 / цикл <small style="font-size:11px;color:#94a3b8">(30 дней)</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 8 — Partner lines -->
+  <section class="slide">
+    <div class="slide-num">08</div>
+    <span class="slide-eyebrow">Партнёрская программа</span>
+    <h2 class="slide-title">Начисления по <span class="hl">10 линиям</span></h2>
+    <p class="slide-sub">Процент от дохода приглашённых партнёров на соответствующей линии. FREE / PARTNER получают только L1. Платный тариф — все 10 линий.</p>
+    <table class="pres-table lines-table">
+      <thead>
+        <tr><th>Линия</th><th>FREE / PARTNER</th><th>LAUNCH / BOOST / ROCKET</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="lvl">L1</td><td class="pct">10%</td><td class="pct">10%</td></tr>
+        <tr><td class="lvl">L2</td><td>—</td><td class="pct">7%</td></tr>
+        <tr><td class="lvl">L3</td><td>—</td><td class="pct">5%</td></tr>
+        <tr><td class="lvl">L4</td><td>—</td><td class="pct">2%</td></tr>
+        <tr><td class="lvl">L5</td><td>—</td><td class="pct">1.5%</td></tr>
+        <tr><td class="lvl">L6</td><td>—</td><td class="pct">1.3%</td></tr>
+        <tr><td class="lvl">L7</td><td>—</td><td class="pct">1.2%</td></tr>
+        <tr><td class="lvl">L8</td><td>—</td><td class="pct">1%</td></tr>
+        <tr><td class="lvl">L9</td><td>—</td><td class="pct">0.9%</td></tr>
+        <tr><td class="lvl">L10</td><td>—</td><td class="pct">0.5%</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Slide 9 — Advertiser partner -->
+  <section class="slide">
+    <div class="slide-num">09</div>
+    <span class="slide-eyebrow">Рекламодателям — партнёрка</span>
+    <h2 class="slide-title"><span class="hl">До 50%</span> прибыли сервиса<br>с каждого пополнения</h2>
+    <p class="slide-sub" style="margin-bottom:16px">Учитывается пополнение рекламного счёта партнёра. Покупка бизнес-мест в программу не входит.</p>
+    <div class="bullet-row">
+      <div class="bullet"><div class="emoji">🔄</div><strong>Долгосрочный источник</strong><span>Один раз привели клиента — получаете процент со всех его последующих пополнений.</span></div>
+      <div class="bullet"><div class="emoji">📈</div><strong>Пропорционально обороту</strong><span>Размер начислений пропорционален обороту привлечённого рекламодателя.</span></div>
+      <div class="bullet"><div class="emoji">♾️</div><strong>Без потолка</strong><span>Верхнего лимита по доходу нет — ставка сохраняется на весь срок сотрудничества.</span></div>
+    </div>
+  </section>
+
+  <!-- Slide 10 — Matching Bonus -->
+  <section class="slide">
+    <div class="slide-num">10</div>
+    <span class="slide-eyebrow">Matching Bonus · только ROCKET</span>
+    <h2 class="slide-title"><span class="hl">10%</span> до 3-й линии</h2>
+    <p class="slide-sub">Дополнительное вознаграждение — процент от партнёрских начислений ваших рефералов до 3-й линии включительно.</p>
+    <div style="margin-top:24px; padding: 28px; border-radius: 20px; background: linear-gradient(160deg, rgba(255, 46, 151, 0.15), rgba(177, 74, 237, 0.08) 50%, rgba(10, 14, 39, 0.8)); border: 1px solid rgba(255, 46, 151, 0.3); max-width: 640px;">
+      <div style="font-size:13px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px">Пример расчёта</div>
+      <div style="font-size:17px;margin-bottom:16px;color:var(--text-muted)">Рефералы 1-й линии получили партнёрских:</div>
+      <div style="font-family:'Archivo Black',sans-serif;font-size:48px;color:var(--text);margin-bottom:20px">$100</div>
+      <div style="font-size:17px;color:var(--text-muted)">↓ Matching Bonus вам:</div>
+      <div style="font-family:'Archivo Black',sans-serif;font-size:48px;color:var(--accent);margin-top:10px">$10</div>
+      <div style="font-size:13px;color:var(--text-muted);margin-top:10px">сверх всех прочих начислений</div>
+    </div>
+  </section>
+
+  <!-- Slide 11 — Leader Pool -->
+  <section class="slide">
+    <div class="slide-num">11</div>
+    <span class="slide-eyebrow">Лидерский пул</span>
+    <h2 class="slide-title">Фонд от <span class="hl">3 админ-аккаунтов</span> — топ-15 партнёрам</h2>
+    <p class="slide-sub">Доход с трёх верхних администраторских аккаунтов Trendex в матрице направляется в отдельный фонд. Распределение — дважды в месяц, 1 и 15 числа, среди топ-15 активных партнёров по обороту.</p>
+    <div class="pool-grid">
+      <div class="pool-item gold"><div class="rank">🥇 1</div><div class="pct">30%</div></div>
+      <div class="pool-item silver"><div class="rank">🥈 2</div><div class="pct">20%</div></div>
+      <div class="pool-item bronze"><div class="rank">🥉 3</div><div class="pct">10%</div></div>
+      <div class="pool-item"><div class="rank">4</div><div class="pct">6%</div></div>
+      <div class="pool-item"><div class="rank">5</div><div class="pct">5%</div></div>
+      <div class="pool-item"><div class="rank">6</div><div class="pct">5%</div></div>
+      <div class="pool-item"><div class="rank">7</div><div class="pct">4%</div></div>
+      <div class="pool-item"><div class="rank">8</div><div class="pct">4%</div></div>
+      <div class="pool-item"><div class="rank">9</div><div class="pct">3%</div></div>
+      <div class="pool-item"><div class="rank">10</div><div class="pct">3%</div></div>
+      <div class="pool-item"><div class="rank">11</div><div class="pct">3%</div></div>
+      <div class="pool-item"><div class="rank">12</div><div class="pct">2%</div></div>
+      <div class="pool-item"><div class="rank">13</div><div class="pct">2%</div></div>
+      <div class="pool-item"><div class="rank">14</div><div class="pct">2%</div></div>
+      <div class="pool-item"><div class="rank">15</div><div class="pct">1%</div></div>
+    </div>
+  </section>
+
+  <!-- Slide 12 — Tools -->
+  <section class="slide">
+    <div class="slide-num">12</div>
+    <span class="slide-eyebrow">Инфраструктура</span>
+    <h2 class="slide-title">Встроенные инструменты <span class="hl">для трафика</span></h2>
+    <p class="slide-sub">Набор сервисов для подготовки и запуска рекламных кампаний — в едином кабинете. Без подписок на сторонние сервисы.</p>
+    <div class="slide-grid">
+      <div class="slide-card"><span class="emoji">🌐</span><h3>Лендинги, воронки, боты</h3><p>Конструктор страниц и автоматических сценариев без привлечения разработчиков.</p></div>
+      <div class="slide-card"><span class="emoji">🤖</span><h3>AI-ассистенты</h3><p>Автоматизация продаж, квалификации лидов и клиентской поддержки через чат-ботов.</p></div>
+      <div class="slide-card"><span class="emoji">🔗</span><h3>Premium-сократитель</h3><p>Короткие ссылки со сменным редиректом, UTM-метками и детальной аналитикой переходов.</p></div>
+      <div class="slide-card"><span class="emoji">👤</span><h3>Bio-страницы</h3><p>Одна ссылка — все ваши каналы, ресурсы и предложения в аккуратном формате.</p></div>
+      <div class="slide-card"><span class="emoji">🎬</span><h3>Видео-баннеры</h3><p>Генератор анимированных креативов для рекламных плейсментов любых форматов.</p></div>
+      <div class="slide-card"><span class="emoji">🔄</span><h3>Обновления</h3><p>Новые модули выходят регулярно на основе запросов сообщества и данных платформы.</p></div>
+    </div>
+  </section>
+
+  <!-- Slide 13 — Pre-launch -->
+  <section class="slide">
+    <div class="slide-num">13</div>
+    <span class="slide-eyebrow">До запуска</span>
+    <h2 class="slide-title"><span class="hl">×2 рекламный бюджет</span> — для ранних участников</h2>
+    <p class="slide-sub">Trendex удваивает рекламный бюджет для тех, кто активирует бизнес-места до официального старта.</p>
+    <div class="slide-grid">
+      <div class="slide-card" style="background:linear-gradient(160deg, rgba(0, 255, 148, 0.12), rgba(10, 14, 39, 0.6));border-color:rgba(0, 255, 148, 0.3);">
+        <span class="emoji">🎁</span>
+        <div style="font-size:13px;color:var(--green);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;font-weight:700">До запуска · АКТИВНО</div>
+        <h3 style="font-size:40px;font-family:'Archivo Black',sans-serif;color:var(--green)">$10</h3>
+        <p>На Gift-счёт за каждое активированное бизнес-место.</p>
+      </div>
+      <div class="slide-card">
+        <span class="emoji">📦</span>
+        <div style="font-size:13px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;font-weight:700">После запуска</div>
+        <h3 style="font-size:40px;font-family:'Archivo Black',sans-serif;color:var(--text)">$5</h3>
+        <p>На Gift-счёт за каждое активированное бизнес-место.</p>
+      </div>
+    </div>
+    <p class="slide-sub" style="margin-top:24px;font-size:14px">Средства Gift-счёта расходуются на баннерную и контекстную рекламу внутри платформы. Условия удвоенных начислений действуют только до даты официального запуска платформы.</p>
+  </section>
+
+  <!-- Slide 14 — Final CTA -->
+  <section class="slide slide--final">
+    <span class="slide-eyebrow">Запуск состоится один раз</span>
+    <h2 class="slide-title">Ранние участники получают<br><span class="hl">преимущество на весь цикл (30 дней с регистрации)</span></h2>
+    <div class="bullet-row" style="margin-top:32px">
+      <div class="bullet"><div class="emoji">1️⃣</div><strong>Зарегистрироваться</strong><span>Бесплатно, за 1 минуту</span></div>
+      <div class="bullet"><div class="emoji">2️⃣</div><strong>Активировать место</strong><span>$45 — LAUNCH и выше</span></div>
+      <div class="bullet"><div class="emoji">3️⃣</div><strong>Построить структуру</strong><span>Реферальная программа 10×</span></div>
+    </div>
+    <div class="final-actions">
+      <a href="/cabinet/register" class="final-btn final-btn--primary">Зарегистрироваться →</a>
+      <a href="/cabinet/login" class="final-btn final-btn--ghost">Войти</a>
+    </div>
+    <div style="margin-top:48px;padding-top:24px;border-top:1px solid var(--border);color:var(--text-dim);font-size:12px;letter-spacing:3px;text-transform:uppercase">TRENDEX · Рекламная экосистема с распределённой прибылью</div>
+  </section>
+
+</main>
+
+<section class="pres-cta-section" style="padding:80px 24px;text-align:center;background:linear-gradient(180deg,#0A0E27 0%,#161D3F 100%);color:#fff">
+  <h2 style="font-family:Archivo Black,sans-serif;font-size:42px;margin:0 0 16px;letter-spacing:-0.02em">Хочу презентацию <span style="background:linear-gradient(135deg,#00D4FF,#B14AED,#FF2E97);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">на руки</span></h2>
+  <p style="font-size:18px;color:#A0A8D0;margin:0 0 32px;max-width:600px;margin-left:auto;margin-right:auto">Скачай PDF (краткая или полная версия), открой HTML-версию или свяжись с автором проекта для персональной консультации.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:16px;max-width:900px;margin:0 auto 40px">
+    <a href="/Trendex_FULL_20slides.pdf" target="_blank" style="display:block;padding:24px;background:linear-gradient(135deg,#FF2E97,#B14AED);border-radius:16px;color:#fff;text-decoration:none;font-weight:700;box-shadow:0 12px 40px rgba(177,74,237,0.35)">
+      <div style="font-size:36px;margin-bottom:8px">📕</div>
+      <div style="font-size:18px;margin-bottom:4px">FULL PDF</div>
+      <div style="font-size:13px;opacity:0.85;font-weight:500">20 слайдов · 3.6 MB</div>
+    </a>
+    <a href="/Trendex_FULL_20slides.html" target="_blank" style="display:block;padding:24px;background:linear-gradient(135deg,#10b981,#00D4FF);border-radius:16px;color:#fff;text-decoration:none;font-weight:700;box-shadow:0 12px 40px rgba(0,212,255,0.35)">
+      <div style="font-size:36px;margin-bottom:8px">📺</div>
+      <div style="font-size:18px;margin-bottom:4px">HTML версия</div>
+      <div style="font-size:13px;opacity:0.85;font-weight:500">Интерактивно в браузере</div>
+    </a>
+    <a href="/Trendex_presentation.pdf" target="_blank" style="display:block;padding:24px;background:linear-gradient(135deg,#161D3F,#1E2650);border:1px solid #2A3566;border-radius:16px;color:#fff;text-decoration:none;font-weight:700">
+      <div style="font-size:36px;margin-bottom:8px">📄</div>
+      <div style="font-size:18px;margin-bottom:4px">Краткая PDF</div>
+      <div style="font-size:13px;opacity:0.7;font-weight:500">14 слайдов · 1 MB</div>
+    </a>
+  </div>
+
+  <div style="max-width:600px;margin:0 auto;padding:32px;background:rgba(177,74,237,0.06);border:1px solid rgba(177,74,237,0.25);border-radius:20px">
+    <div style="font-size:16px;color:#A0A8D0;margin-bottom:8px">Хочешь персональную консультацию?</div>
+    <div style="font-size:24px;color:#fff;font-weight:700;margin-bottom:20px">Свяжись напрямую</div>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="https://t.me/Trendex_bizbot?start=ref_424077439" target="_blank" style="display:inline-block;padding:14px 28px;background:#0088cc;color:#fff;text-decoration:none;border-radius:10px;font-weight:600">💬 Telegram бот</a>
+      <a href="https://t.me/MLM808" target="_blank" style="display:inline-block;padding:14px 28px;background:linear-gradient(135deg,#FF2E97,#B14AED);color:#fff;text-decoration:none;border-radius:10px;font-weight:600">👤 Написать @MLM808</a>
+    </div>
+  </div>
+</section>
+
+<script>
+// Scroll-based slide reveal + counter
+(function(){
+  var slides = document.querySelectorAll('.slide');
+  var counter = document.getElementById('slide-counter');
+  var total = slides.length;
+
+  // IntersectionObserver: reveal + update counter
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          var idx = Array.prototype.indexOf.call(slides, e.target) + 1;
+          if (counter) counter.textContent = idx + ' / ' + total;
+        }
+      });
+    }, { rootMargin: '0px 0px -30% 0px', threshold: 0.1 });
+    slides.forEach(function(s){ io.observe(s); });
+  } else {
+    slides.forEach(function(s){ s.classList.add('is-visible'); });
+  }
+
+  // Keyboard navigation: PageDown / PageUp / Arrow keys scroll between slides
+  document.addEventListener('keydown', function(e){
+    var key = e.key;
+    if (key !== 'ArrowDown' && key !== 'ArrowUp' && key !== 'PageDown' && key !== 'PageUp' && key !== ' ') return;
+    e.preventDefault();
+    var y = window.scrollY + window.innerHeight / 3;
+    var current = 0;
+    slides.forEach(function(s, i){
+      if (s.offsetTop <= y) current = i;
+    });
+    var next = current;
+    if (key === 'ArrowDown' || key === 'PageDown' || key === ' ') next = Math.min(current + 1, slides.length - 1);
+    else next = Math.max(current - 1, 0);
+    slides[next].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+})();
+</script>
+</body>
+</html>

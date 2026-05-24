@@ -1,0 +1,368 @@
+/* ═════ TOUR PLAYER (part24 — loaded LAST) ═════
+   "За ручку" guided tour: spotlight, pointer, captions, controls.
+   Only the floating CTA FAB is visible until the user presses it;
+   running tour adds .tour-running to <body> which hides the two
+   ambient chat surfaces (hero input pill + PageChat dock) so they
+   don't compete with the voiced narration. */
+
+/* ─── 1a. HERO inline CTA — sits right under "TRENDEX" ──
+   Owner: "take the tour кнопку сделай под надписью TrendeX".
+   When this inline button renders, the floating FAB is hidden
+   (see .hero-v2 + .tour-cta-fab rule below) so there's only
+   one entry point on the home route. */
+.hero-tour-cta {
+  position: relative;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px auto 0;
+  padding: 10px 18px 10px 14px;
+  border: 1px solid var(--acid, #e1ff4b);
+  /* Solid-ish backdrop so the wave bars behind don't "cut through"
+     the dashed outline — owner: "перекрывается волнами". */
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(4px);
+  color: var(--acid, #e1ff4b);
+  font-family: var(--f-mono, ui-monospace, monospace);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+  box-shadow: 0 0 0 1px rgba(225, 255, 75, 0.25), 0 6px 24px rgba(0, 0, 0, 0.5);
+}
+.hero-tour-cta:hover {
+  background: rgba(225, 255, 75, 0.18);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.hero-tour-cta svg { display: block; }
+/* Center the inline CTA under the wordmark. */
+.hero-v2 .hero-tour-cta,
+.hero-area .hero-tour-cta {
+  display: flex;
+  align-self: center;
+}
+
+/* Hide the fixed FAB globally. Owner: "провести экскурсию убери
+   со сторонних страниц, там оставь только чат по странице".
+   The inline CTA under the wordmark on / is now the only entry
+   point into the tour; every sub-page keeps its PageChat and no
+   longer shows a tour trigger. */
+.tour-cta-fab { display: none !important; }
+
+/* ─── 1. CTA — floating play button ─────────────────────────── */
+.tour-cta-fab {
+  position: fixed;
+  bottom: max(18px, env(safe-area-inset-bottom));
+  right: 18px;
+  z-index: 45;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px 10px 14px;
+  border: 1px solid var(--acid, #e1ff4b);
+  background: rgba(225, 255, 75, 0.08);
+  color: var(--acid, #e1ff4b);
+  font-family: var(--f-mono, ui-monospace, monospace);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+.tour-cta-fab:hover {
+  background: rgba(225, 255, 75, 0.18);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.tour-cta-fab svg { display: block; }
+.tour-cta-fab-label { white-space: nowrap; }
+@media (max-width: 640px) {
+  .tour-cta-fab { font-size: 10px; padding: 8px 14px 8px 12px; gap: 6px; }
+  .tour-cta-fab svg { width: 16px; height: 16px; }
+}
+
+/* Hide PageChat dock + hero input pill while tour is running so
+   nothing competes with the narration. */
+body.tour-running .pagechat-dock,
+body.tour-running .hero-input-pill,
+body.tour-running .hero-area-waitlist,
+body.tour-running .nav-waitlist-wrap { pointer-events: none; }
+body.tour-running .pagechat-dock { opacity: 0; transition: opacity 0.25s ease; }
+
+/* ─── 2. Spotlight — NO dimming, just an acid glow ───────────
+   Prior iterations dimmed the whole page; owner's feedback was
+   that on sections with empty or off-viewport anchors it just
+   looked like a black screen with a dot. Dropped the dim entirely.
+   Now we render a soft acid-green glow ring around the target so
+   the eye catches it, but the page stays fully visible. */
+.tour-overlay {
+  /* Kept for React ref / a11y, no visual. */
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: transparent;
+}
+
+.tour-spotlight-cutout {
+  position: fixed;
+  border-radius: 14px;
+  background: transparent;
+  pointer-events: none;
+  /* Soft acid glow outside the element, no inner overlay. */
+  box-shadow:
+    0 0 0 2px rgba(225, 255, 75, 0.55),
+    0 0 24px 6px rgba(225, 255, 75, 0.18);
+  animation: tour-glow-breath 2.2s ease-in-out infinite;
+  transition: left 340ms cubic-bezier(0.22, 0.61, 0.36, 1),
+              top 340ms cubic-bezier(0.22, 0.61, 0.36, 1),
+              width 340ms cubic-bezier(0.22, 0.61, 0.36, 1),
+              height 340ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+@keyframes tour-glow-breath {
+  0%, 100% {
+    box-shadow:
+      0 0 0 2px rgba(225, 255, 75, 0.55),
+      0 0 24px 6px rgba(225, 255, 75, 0.18);
+  }
+  50% {
+    box-shadow:
+      0 0 0 3px rgba(225, 255, 75, 0.8),
+      0 0 40px 10px rgba(225, 255, 75, 0.28);
+  }
+}
+
+.tour-spotlight-cutout.is-secondary {
+  box-shadow: 0 0 0 2px rgba(225, 255, 75, 0.35);
+  animation: none;
+}
+
+/* ─── 3. Pointer ─── fully hidden. Owner: "водит мышку по
+   чёрному экрану, нихуя не понятно". The pointer was doing more
+   harm than good when scroll anchors were empty/off-view, so we
+   keep the element for back-compat refs but never show it. */
+.tour-pointer {
+  position: fixed;
+  left: 0; top: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+  opacity: 0 !important;
+  display: none;
+}
+.tour-pointer-dot {
+  fill: var(--acid, #e1ff4b);
+  animation: tour-dot-breath 1.6s ease-in-out infinite;
+}
+.tour-pointer-ring {
+  fill: none;
+  stroke: var(--acid, #e1ff4b);
+  stroke-width: 2;
+  opacity: 0.6;
+  animation: tour-ring-pulse 1.6s ease-out infinite;
+  transform-origin: center;
+}
+@keyframes tour-dot-breath {
+  0%,100% { transform: scale(1); }
+  50%     { transform: scale(1.18); }
+}
+@keyframes tour-ring-pulse {
+  0%   { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* ─── 4. Captions ──────────────────────────────────────────────
+   Always sit above the spotlight so the user can read them. */
+.tour-caption {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(72px + env(safe-area-inset-bottom));
+  z-index: 1002;
+  max-width: min(720px, calc(100vw - 32px));
+  padding: 12px 16px;
+  background: rgba(12, 12, 12, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  animation: tour-caption-in 260ms ease-out;
+}
+@keyframes tour-caption-in {
+  from { opacity: 0; transform: translate(-50%, 8px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+@media (max-width: 640px) {
+  /* Owner: "из-за высоких субтитров не видно текст. сделай шире
+     а не выше". On phones the caption spans the full width with
+     tight padding + smaller font so the same sentence wraps into
+     fewer, shorter lines — the box becomes a horizontal strip
+     instead of a tall overlay. */
+  .tour-caption {
+    left: 8px !important;
+    right: 8px !important;
+    transform: none !important;
+    max-width: none !important;
+    bottom: calc(96px + env(safe-area-inset-bottom));
+    font-size: 13px;
+    line-height: 1.35;
+    padding: 8px 12px;
+    border-radius: 10px;
+  }
+}
+
+/* ─── 5. Controls bar ──────────────────────────────────────── */
+.tour-controls {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: max(14px, env(safe-area-inset-bottom));
+  z-index: 1003;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  background: rgba(20, 20, 20, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  font-family: var(--f-mono, ui-monospace, monospace);
+}
+.tour-ctl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  border-radius: 999px;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.tour-ctl:hover { background: rgba(255, 255, 255, 0.08); }
+.tour-ctl:disabled { opacity: 0.35; cursor: not-allowed; }
+.tour-ctl-play { background: rgba(225, 255, 75, 0.12); color: var(--acid, #e1ff4b); }
+.tour-ctl-play:hover { background: rgba(225, 255, 75, 0.22); color: #fff; }
+.tour-ctl-exit:hover { background: rgba(255, 60, 60, 0.22); color: #fff; }
+.tour-ctl-cc {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  padding: 0 10px;
+  opacity: 0.65;
+}
+.tour-ctl-cc[aria-pressed="true"] { opacity: 1; color: var(--acid, #e1ff4b); }
+
+.tour-progress {
+  padding: 0 10px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.65);
+  min-width: 48px;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .tour-ctl { min-width: 32px; height: 32px; font-size: 14px; }
+  .tour-progress { font-size: 10px; padding: 0 6px; min-width: 40px; }
+  .tour-ctl-cc { display: none; }
+}
+
+/* ═════ THE SPLIT — real-world proof photo ═════
+   Image of a man in Shibuya holding a sign that literally reads
+   "Hired by AI". Drops into TheSplit section, clickable link
+   to rentahuman.ai. */
+.split-proof {
+  margin: 36px auto 28px;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 0 20px;
+}
+.split-proof-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #0a0a0a;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.55);
+  transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1),
+              border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.split-proof-frame:hover {
+  transform: translateY(-3px);
+  border-color: rgba(225, 255, 75, 0.55);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.65),
+              0 0 0 1px rgba(225, 255, 75, 0.25);
+}
+.split-proof-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.split-proof-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 10px;
+  background: rgba(10, 10, 10, 0.78);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(225, 255, 75, 0.5);
+  border-radius: 999px;
+  color: var(--acid, #e1ff4b);
+  font-family: var(--f-mono, ui-monospace, monospace);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.split-proof-caption {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  max-width: 560px;
+}
+.split-proof-caption b {
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+}
+@media (max-width: 640px) {
+  .split-proof { margin: 28px auto 20px; padding: 0 14px; }
+  .split-proof-caption { font-size: 12px; }
+  .split-proof-caption b { font-size: 14px; }
+  .split-proof-badge { font-size: 9px; padding: 5px 8px; }
+}
+
+/* ─── 6. Reduced-motion ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .tour-overlay,
+  .tour-spotlight-cutout,
+  .tour-spotlight-cutout::before,
+  .tour-pointer,
+  .tour-pointer-dot,
+  .tour-pointer-ring,
+  .tour-caption { animation: none !important; transition: opacity 120ms ease !important; }
+}

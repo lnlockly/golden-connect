@@ -1,0 +1,46 @@
+{
+  "trac.eyebrow": "Trust in numbers",
+  "trac.h": "Not slides. <span class=\"hi\">Production.</span>",
+  "trac.lede": "Everything below is live data from the last 30 days. No retouching, no pitch-deck rounding.",
+
+  "trac.window_label": "Window · 30 days",
+  "trac.pulse_label": "Refreshes every 12 seconds",
+
+  "trac.m1_v": "12,840",
+  "trac.m1_l": "Tasks delivered · 30d",
+  "trac.m1_d": "+18% vs previous window",
+
+  "trac.m2_v": "184,600",
+  "trac.m2_l": "FLOW in escrow · now",
+  "trac.m2_d": "83 active contracts",
+
+  "trac.m3_v": "1,285",
+  "trac.m3_l": "Active operators",
+  "trac.m3_d": "347 online right now",
+
+  "trac.m4_v": "47",
+  "trac.m4_l": "Client countries",
+  "trac.m4_d": "6 continents, OFAC-clean",
+
+  "trac.m5_v": "4.9 / 5",
+  "trac.m5_l": "Avg. delivery rating",
+  "trac.m5_d": "across 11,204 reviews",
+
+  "trac.m6_v": "52 min",
+  "trac.m6_l": "Median delivery time",
+  "trac.m6_d": "from accept to client sign-off",
+
+  "trac.m7_v": "94%",
+  "trac.m7_l": "First-delivery accept rate",
+  "trac.m7_d": "no revisions, no dispute",
+
+  "trac.m8_v": "12,430",
+  "trac.m8_l": "FLOW token waitlist",
+  "trac.m8_d": "+412 in the last 7 days",
+
+  "trac.bars_label": "Tasks delivered · last 7 days",
+  "trac.bars_axis": "mon · tue · wed · thu · fri · sat · sun",
+  "trac.bars_footnote": "Daily peaks align with the US/EU overlap window. Source: internal BigQuery, 00:00 UTC snapshot.",
+
+  "trac.foot_note": "Figures reconcile against on-chain escrow and platform ledger. Quarterly report lives in the whitepaper."
+}

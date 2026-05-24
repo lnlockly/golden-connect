@@ -1,0 +1,192 @@
+/* ═════ REFERRAL · 100 LAYERS ═════ */
+
+.section-referral {
+  padding: 80px 40px;
+  border-bottom: 1px solid var(--line);
+  contain: layout paint;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(212, 255, 0, 0.04), transparent 60%),
+    var(--bg);
+}
+.section-referral > * {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.referral-strip {
+  position: relative;
+  margin-top: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px;
+  padding: 32px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+.referral-tick {
+  flex: 1 1 auto;
+  height: 22px;
+  background: linear-gradient(180deg, var(--ink-3) 0%, transparent 100%);
+  opacity: 0.35;
+  transform-origin: bottom;
+  animation: referral-pulse 2.4s ease-in-out infinite;
+  will-change: transform;
+}
+.referral-tick:nth-child(10n)  { background: linear-gradient(180deg, var(--acid)   0%, transparent 100%); opacity: 0.7; }
+.referral-tick:nth-child(25n)  { background: linear-gradient(180deg, var(--royal)  0%, transparent 100%); opacity: 0.8; }
+.referral-tick:nth-child(50n)  { background: linear-gradient(180deg, var(--gold)   0%, transparent 100%); opacity: 0.85; }
+.referral-tick:nth-child(100n) { background: linear-gradient(180deg, #ffffff       0%, transparent 100%); opacity: 1;   height: 36px; }
+
+@keyframes referral-pulse {
+  0%, 100% { transform: scaleY(0.6); }
+  50%      { transform: scaleY(1);   }
+}
+
+.referral-strip-label {
+  position: absolute;
+  right: 8px;
+  bottom: 4px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.referral-strip-label::before {
+  content: 'levels · ';
+  margin-right: 2px;
+}
+
+@media (max-width: 720px) {
+  .section-referral { padding: 56px 18px; }
+  .referral-strip { padding: 20px 0; }
+  .referral-tick { height: 16px; }
+}
+
+/* ═════ BACK-HOME PILL + MARKETING PAGE ═════ */
+
+/* .nav-left groups logo + optional back-home icon so the NavBar
+   grid (auto 1fr auto) keeps three columns. Back-home used to be
+   a direct sibling and introduced a 4th cell, pushing waitlist /
+   langs onto a second row. */
+.nav-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-back-home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1;
+  text-decoration: none;
+  border-radius: 50%;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+.nav-back-home:hover {
+  color: var(--acid);
+  border-color: var(--acid);
+  background: rgba(225, 255, 75, 0.06);
+  transform: translateX(-1px);
+}
+@media (max-width: 720px) {
+  .nav-left { gap: 6px; }
+  .nav-back-home { width: 24px; height: 24px; font-size: 13px; }
+}
+
+/* Legacy (no longer rendered but styles kept for safety). */
+.page-back-home { display: none; }
+
+.page-marketing {
+  background: var(--bg);
+  padding-bottom: 80px;
+}
+.page-marketing-hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px 40px 24px;
+}
+.page-marketing-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--acid);
+  margin-bottom: 14px;
+}
+.page-marketing-h {
+  font-size: clamp(28px, 4.6vw, 48px);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 16px;
+  color: var(--ink);
+  max-width: 920px;
+}
+.page-marketing-lede {
+  color: var(--ink-2);
+  font-size: 16px;
+  line-height: 1.55;
+  max-width: 720px;
+}
+
+.page-marketing-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 40px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+.page-marketing-card {
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.page-marketing-num {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--ink-3);
+}
+.page-marketing-card h3 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--ink);
+}
+.page-marketing-card p {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.page-marketing-foot {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 40px 0;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+@media (max-width: 720px) {
+  .page-back-home { padding: 84px 18px 0; }
+  .page-marketing-hero { padding: 24px 18px 18px; }
+  .page-marketing-grid {
+    padding: 18px;
+    grid-template-columns: 1fr;
+  }
+  .page-marketing-foot { padding: 12px 18px 0; }
+}

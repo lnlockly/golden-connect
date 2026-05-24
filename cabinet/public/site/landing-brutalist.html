@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F5F5DC">
+<title>Trendex — Brutalist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;600&family=Archivo+Black&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F4F1EC;
+  --black: #0A0A0A;
+  --accent: #FF4000;
+  --accent-2: #4ADE80;
+  --accent-3: #38BDF8;
+  --accent-4: #FBBF24;
+  --line: #0A0A0A;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--black);
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+/* BRUTAL 3D BUTTON */
+.btn-brut {
+  display: inline-block;
+  padding: 18px 32px;
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  border: 3px solid var(--black);
+  box-shadow: 6px 6px 0 var(--accent), 12px 12px 0 var(--accent-3);
+  transition: transform 0.18s cubic-bezier(.2,.8,.2,1), box-shadow 0.18s cubic-bezier(.2,.8,.2,1);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-brut:hover { transform: translate(3px, 3px); box-shadow: 3px 3px 0 var(--accent), 6px 6px 0 var(--accent-3); }
+.btn-brut:active { transform: translate(6px, 6px); box-shadow: none; transition-duration: 0.08s; }
+.btn-brut--accent { background: var(--accent); color: var(--black); box-shadow: 6px 6px 0 var(--black), 12px 12px 0 var(--accent-3); }
+.btn-brut--accent:hover { box-shadow: 3px 3px 0 var(--black), 6px 6px 0 var(--accent-3); }
+.btn-brut--green { background: var(--accent-2); box-shadow: 6px 6px 0 var(--black), 12px 12px 0 var(--accent); }
+.btn-brut--green:hover { box-shadow: 3px 3px 0 var(--black), 6px 6px 0 var(--accent); }
+
+/* NAV */
+.brut-nav {
+  display: flex;
+  align-items: center;
+  padding: 24px 5%;
+  border-bottom: 3px solid var(--black);
+  background: var(--cream);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.brut-logo {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  flex: 1;
+}
+.brut-logo span { color: var(--accent); }
+.brut-nav-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  margin-right: 24px;
+}
+@media (max-width: 760px) { .brut-nav-links { display: none; } }
+.brut-nav-links a {
+  color: var(--black);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+.brut-nav-links a:hover { border-bottom-color: var(--accent); }
+
+/* HERO */
+.brut-hero {
+  padding: 80px 5% 100px;
+  border-bottom: 3px solid var(--black);
+  position: relative;
+  overflow: hidden;
+}
+.brut-hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 60px;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+@media (max-width: 968px) { .brut-hero-grid { grid-template-columns: 1fr; } }
+.brut-hero-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  background: var(--accent-4);
+  border: 3px solid var(--black);
+  box-shadow: 4px 4px 0 var(--black);
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  transform: rotate(-1.5deg);
+}
+.brut-hero h1 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(52px, 9vw, 160px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+.brut-hero h1 .hl {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--cream);
+  padding: 0 14px;
+  box-shadow: 8px 8px 0 var(--black);
+  transform: rotate(-1deg);
+}
+.brut-hero-sub {
+  font-size: 22px;
+  line-height: 1.5;
+  margin-bottom: 40px;
+  max-width: 540px;
+  font-weight: 500;
+}
+.brut-hero-cta {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+/* Hero side: big number stack */
+.brut-hero-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: stretch;
+}
+.brut-num-block {
+  padding: 26px 24px;
+  background: var(--cream);
+  border: 3px solid var(--black);
+  box-shadow: 8px 8px 0 var(--accent-3);
+  font-family: 'Archivo Black', sans-serif;
+  transform: rotate(1deg);
+  transition: transform 0.25s;
+}
+.brut-num-block:nth-child(2) { box-shadow: 8px 8px 0 var(--accent-2); transform: rotate(-1.5deg); }
+.brut-num-block:nth-child(3) { box-shadow: 8px 8px 0 var(--accent-4); transform: rotate(0.8deg); }
+.brut-num-block:hover { transform: rotate(0deg) translate(2px, 2px); }
+.brut-num-big {
+  font-size: clamp(56px, 7vw, 96px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.brut-num-big span { color: var(--accent); }
+.brut-num-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 6px;
+  color: #333;
+}
+
+/* SECTION */
+.brut-section {
+  padding: 120px 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-bottom: 3px solid var(--black);
+}
+.brut-section:last-of-type { border-bottom: none; }
+.brut-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  display: inline-block;
+  background: var(--accent-3);
+  border: 2px solid var(--black);
+  margin-bottom: 20px;
+}
+.brut-section h2 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(36px, 6vw, 88px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+.brut-section h2 .hl { background: var(--accent); color: var(--cream); padding: 0 12px; box-shadow: 6px 6px 0 var(--black); }
+
+/* HOW GRID */
+.brut-how {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 860px) { .brut-how { grid-template-columns: 1fr; } }
+.brut-how-card {
+  padding: 36px 28px;
+  background: var(--cream);
+  border: 3px solid var(--black);
+  box-shadow: 8px 8px 0 var(--black);
+  transition: all 0.25s;
+}
+.brut-how-card:nth-child(1) { background: var(--accent-2); }
+.brut-how-card:nth-child(2) { background: var(--accent-4); }
+.brut-how-card:nth-child(3) { background: var(--accent-3); }
+.brut-how-card:hover { transform: translate(-3px, -3px); box-shadow: 11px 11px 0 var(--black); }
+.brut-how-num {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 72px;
+  line-height: 1;
+  margin-bottom: 16px;
+  -webkit-text-stroke: 2px var(--black);
+  color: var(--cream);
+}
+.brut-how-card h3 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 28px;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.brut-how-card p { font-size: 16px; line-height: 1.5; }
+
+/* TARIFFS */
+.brut-tariffs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+@media (max-width: 968px) { .brut-tariffs { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .brut-tariffs { grid-template-columns: 1fr; } }
+.brut-tariff {
+  padding: 32px 24px;
+  background: var(--cream);
+  border: 3px solid var(--black);
+  box-shadow: 6px 6px 0 var(--black);
+  position: relative;
+  transition: all 0.25s;
+}
+.brut-tariff:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--black); }
+.brut-tariff--top {
+  background: var(--accent);
+  color: var(--cream);
+  box-shadow: 6px 6px 0 var(--black), 12px 12px 0 var(--accent-3);
+}
+.brut-tariff--top:hover { box-shadow: 9px 9px 0 var(--black), 15px 15px 0 var(--accent-3); }
+.brut-tariff--top::before {
+  content: 'TOP';
+  position: absolute;
+  top: -14px; right: -14px;
+  padding: 8px 16px;
+  background: var(--black);
+  color: var(--accent);
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  box-shadow: 4px 4px 0 var(--cream), 6px 6px 0 var(--black);
+}
+.brut-tariff-name { font-family: 'Archivo Black', sans-serif; font-size: 28px; text-transform: uppercase; margin-bottom: 6px; }
+.brut-tariff-price { font-family: 'Archivo Black', sans-serif; font-size: 48px; line-height: 1; margin-bottom: 4px; }
+.brut-tariff-price small { font-family: 'IBM Plex Mono', monospace; font-weight: 400; font-size: 12px; letter-spacing: 1px; display: block; text-transform: uppercase; opacity: 0.7; margin-top: 6px; }
+.brut-tariff ul { list-style: none; margin-top: 24px; padding-top: 20px; border-top: 2px solid currentColor; }
+.brut-tariff li { padding: 6px 0; font-size: 15px; font-weight: 500; }
+.brut-tariff li::before { content: '✦ '; font-weight: 700; }
+
+/* FEATURES BIG */
+.brut-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+@media (max-width: 860px) { .brut-features { grid-template-columns: 1fr; } }
+.brut-feature {
+  padding: 48px 32px;
+  background: var(--cream);
+  border: 3px solid var(--black);
+  box-shadow: 10px 10px 0 var(--black);
+  text-align: left;
+}
+.brut-feature-icon {
+  font-size: 56px;
+  display: inline-block;
+  padding: 14px;
+  background: var(--accent-4);
+  border: 3px solid var(--black);
+  box-shadow: 4px 4px 0 var(--black);
+  margin-bottom: 24px;
+  line-height: 1;
+}
+.brut-feature h3 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: 26px;
+  line-height: 1.1;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.brut-feature p { font-size: 16px; line-height: 1.6; }
+
+/* CTA BAND */
+.brut-cta-band {
+  background: var(--black);
+  color: var(--cream);
+  padding: 120px 5%;
+  text-align: center;
+  border-top: 3px solid var(--black);
+}
+.brut-cta-band h2 {
+  font-family: 'Archivo Black', sans-serif;
+  font-size: clamp(42px, 7vw, 110px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+}
+.brut-cta-band h2 .hl {
+  display: inline-block;
+  color: var(--black);
+  background: var(--accent-2);
+  padding: 0 14px;
+  box-shadow: 8px 8px 0 var(--cream);
+}
+.brut-cta-band p { font-size: 20px; margin-bottom: 40px; max-width: 640px; margin-left: auto; margin-right: auto; }
+
+/* FOOTER */
+.brut-foot {
+  padding: 40px 5%;
+  border-top: 3px solid var(--black);
+  background: var(--cream);
+  text-align: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+</style>
+<!-- [services-pivot-2026-05-17] -->
+</head>
+<body>
+
+<nav class="brut-nav">
+  <div class="brut-logo">TREND<span>EX</span>.</div>
+  <ul class="brut-nav-links">
+    <li><a href="#how">Как работает</a></li>
+    <li><a href="#tariffs">Тарифы</a></li>
+    <li><a href="#features">Фишки</a></li>
+  </ul>
+  <a href="/cabinet/register" class="btn-brut btn-brut--accent">Начать →</a>
+</nav>
+
+<section class="brut-hero">
+  <div class="brut-hero-grid">
+    <div>
+      <div class="brut-hero-badge">// Рекламная экосистема v2.0</div>
+      <h1>Реклама,<br>что <span class="hl">работает.</span></h1>
+      <p class="brut-hero-sub">Trendex — рекламная платформа с распределённой прибылью. Аудитория зарабатывает до $20/день. Партнёры — 10 уровней. Бизнес — реальное внимание по прозрачной цене.</p>
+      <div class="brut-hero-cta">
+        <a href="/cabinet/register" class="btn-brut btn-brut--accent">Зарегистрироваться →</a>
+        <a href="#how" class="btn-brut btn-brut--green">Как это работает</a>
+      </div>
+    </div>
+    <div class="brut-hero-stack">
+      <div class="brut-num-block">
+        <div class="brut-num-big">$20<span>/день</span></div>
+        <div class="brut-num-label">за активность на FREE</div>
+      </div>
+      <div class="brut-num-block">
+        <div class="brut-num-big">17<span>ур.</span></div>
+        <div class="brut-num-label">глубина программа ROCKET</div>
+      </div>
+      <div class="brut-num-block">
+        <div class="brut-num-big">×2<span>Gift</span></div>
+        <div class="brut-num-label">до запуска платформы</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="brut-section" id="how">
+  <span class="brut-eyebrow">// Как работает</span>
+  <h2>Один поток — <span class="hl">три роли.</span></h2>
+  <div class="brut-how">
+    <div class="brut-how-card">
+      <div class="brut-how-num">01</div>
+      <h3>Рекламодатель</h3>
+      <p>Пополняет рекламный счёт. Прозрачные бюджеты, живая аудитория, никаких агентских наценок. Форматы: баннеры, контекст, видео, задания CPA.</p>
+    </div>
+    <div class="brut-how-card">
+      <div class="brut-how-num">02</div>
+      <h3>Пользователь</h3>
+      <p>Просматривает объявления, выполняет задания, получает выплаты на рабочий счёт. До $20/день на FREE-тарифе без вложений.</p>
+    </div>
+    <div class="brut-how-card">
+      <div class="brut-how-num">03</div>
+      <h3>Партнёр</h3>
+      <p>Приглашает участников. Получает процент с 10 линий: L1 10%, L2 7%, L3 5% и далее. На ROCKET — +10% TRDX-кредит.</p>
+    </div>
+  </div>
+</section>
+
+<section class="brut-section" id="tariffs">
+  <span class="brut-eyebrow">// Тарифы</span>
+  <h2>Выбирай <span class="hl">свой старт.</span></h2>
+  <div class="brut-tariffs">
+    <div class="brut-tariff">
+      <div class="brut-tariff-name">FREE</div>
+      <div class="brut-tariff-price">$0<small>без вложений</small></div>
+      <ul>
+        <li>До $20/день за активность</li>
+        <li>L1 рефералы 10%</li>
+        <li>Без бизнес-места</li>
+        <li>PARTNER за 10 приглашённых</li>
+      </ul>
+    </div>
+    <div class="brut-tariff">
+      <div class="brut-tariff-name">LAUNCH</div>
+      <div class="brut-tariff-price">$45<small>активация $30 + $15/мес</small></div>
+      <ul>
+        <li>1 бизнес-место</li>
+        <li>программа 12 ур. × $0.5</li>
+        <li>10 линий рефералов</li>
+        <li>≈ $4 095 за цикл (30 дней)</li>
+      </ul>
+    </div>
+    <div class="brut-tariff">
+      <div class="brut-tariff-name">BOOST</div>
+      <div class="brut-tariff-price">$90<small>активация $75 + $15/мес</small></div>
+      <ul>
+        <li>2 бизнес-места</li>
+        <li>программа 14 ур. × $0.6</li>
+        <li>10 линий рефералов</li>
+        <li>≈ $19 660 за цикл (30 дней)</li>
+      </ul>
+    </div>
+    <div class="brut-tariff brut-tariff--top">
+      <div class="brut-tariff-name">ROCKET</div>
+      <div class="brut-tariff-price">$135<small>далее $45/мес</small></div>
+      <ul>
+        <li>3 бизнес-места</li>
+        <li>программа 17 ур. × $0.7</li>
+        <li>10 линий + TRDX-кредит</li>
+        <li>≈ $183 499 за цикл (30 дней)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="brut-section" id="features">
+  <span class="brut-eyebrow">// Фишки платформы</span>
+  <h2>Что внутри <span class="hl">Trendex.</span></h2>
+  <div class="brut-features">
+    <div class="brut-feature">
+      <span class="brut-feature-icon">📊</span>
+      <h3>Партнёрка 10×</h3>
+      <p>10-уровневая система начислений от дохода приглашённых. L1 10%, L10 0.5%. PARTNER-статус — +10% к ставке на всех уровнях.</p>
+    </div>
+    <div class="brut-feature">
+      <span class="brut-feature-icon">⚡</span>
+      <h3>TRDX-кредит</h3>
+      <p>Эксклюзив тарифа ROCKET. Получайте 10% от партнёрских начислений своих L1–L3 рефералов — сверх обычных выплат.</p>
+    </div>
+    <div class="brut-feature">
+      <span class="brut-feature-icon">🏆</span>
+      <h3>TRDX-резерв</h3>
+      <p>Фонд из дохода трёх верхних администраторских аккаунтов. Распределение 1 и 15 числа среди топ-15 партнёров по обороту.</p>
+    </div>
+    <div class="brut-feature">
+      <span class="brut-feature-icon">🎁</span>
+      <h3>Gift-счёт</h3>
+      <p>Рекламный бюджет при активации бизнес-места: $5 после запуска, $10 до запуска. Тратится на баннеры и контекст внутри платформы.</p>
+    </div>
+    <div class="brut-feature">
+      <span class="brut-feature-icon">🛠</span>
+      <h3>Набор инструментов</h3>
+      <p>Лендинги, боты, AI-ассистенты, сократитель ссылок, Bio-страницы, генератор видео-баннеров. Всё в одном кабинете без подписок.</p>
+    </div>
+    <div class="brut-feature">
+      <span class="brut-feature-icon">🌍</span>
+      <h3>Без потолка</h3>
+      <p>Масштабирование через дополнительные бизнес-места на одном аккаунте. Доход пропорционален количеству мест при той же сети.</p>
+    </div>
+  </div>
+</section>
+
+<section class="brut-cta-band">
+  <h2>Готов <span class="hl">зарабатывать?</span></h2>
+  <p>Ранние участники получают ×2 Gift-счёт и фиксируют место на платформе на весь жизненный цикл платформы.</p>
+  <a href="/cabinet/register" class="btn-brut btn-brut--accent">Зарегистрироваться →</a>
+</section>
+
+<footer class="brut-foot">// Trendex — рекламная экосистема с распределённой прибылью //</footer>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 180" role="img" aria-label="AGENTFLOW">
+  <title>AGENTFLOW</title>
+  <defs>
+    <!--
+      Fraunces is loaded from Google Fonts by the consumer document.
+      For standalone viewers (e.g. email previews), the fallback serif chain keeps the wordmark readable.
+      See brand/BRANDBOOK.md §Logo system for the rationale.
+    -->
+    <style>
+      .wm { font-family: 'Fraunces', 'Noto Serif SC', Georgia, serif; font-weight: 700; font-size: 120px; letter-spacing: -3.6px; }
+    </style>
+  </defs>
+
+  <!-- MARK: agent-disc with carved chevron -->
+  <g transform="translate(20 46) scale(0.172)">
+    <path fill="#d4ff00" fill-rule="evenodd"
+          d="M256 16a240 240 0 1 0 0 480 240 240 0 0 0 0-480zM168 176l36-36 120 120-120 120-36-36 84-84z"/>
+  </g>
+
+  <!-- WORDMARK -->
+  <text class="wm" x="130" y="128" fill="#f5f1e8">AGENTFLOW</text>
+</svg>

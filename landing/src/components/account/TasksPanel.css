@@ -1,0 +1,153 @@
+/* ── TasksPanel ──────────────────────────────────────── */
+
+.af-tasks {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.af-tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  min-height: 0;
+  flex: 1;
+  padding-right: 4px;
+}
+
+.af-task {
+  position: relative;
+  padding: 14px 16px;
+  border: 1px solid var(--line, #2a2a2a);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+.af-task:hover {
+  border-color: rgba(212, 255, 0, 0.3);
+  background: rgba(212, 255, 0, 0.02);
+}
+
+.af-task-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.af-task-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink, #f5f1e8);
+  line-height: 1.35;
+  flex: 1;
+  min-width: 0;
+}
+.af-task-badge {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--acid-2, #00ff9d);
+  padding: 3px 8px;
+  border: 1px solid rgba(0, 255, 157, 0.3);
+  border-radius: 100px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.af-task-sub {
+  font-size: 12px;
+  color: var(--ink-2, #b8b3a5);
+  line-height: 1.4;
+}
+.af-task-payout {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  color: var(--acid, #d4ff00);
+  letter-spacing: 0.02em;
+}
+
+.af-task-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 2px;
+}
+.af-task-progress-label {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  color: var(--ink-2, #b8b3a5);
+}
+.af-task-progress-label em {
+  color: var(--ink-3, #6b6759);
+  font-style: normal;
+}
+.af-task-bar {
+  position: relative;
+  height: 4px;
+  border-radius: 100px;
+  background: rgba(245, 241, 232, 0.06);
+  overflow: hidden;
+}
+.af-task-bar-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: linear-gradient(90deg, var(--acid, #d4ff00), var(--acid-2, #00ff9d));
+  border-radius: 100px;
+  transition: width 320ms ease;
+}
+
+.af-task-toggle-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.af-task-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.af-task-status-dot.on {
+  background: var(--acid-2, #00ff9d);
+  box-shadow: 0 0 6px currentColor;
+}
+.af-task-status-dot.off {
+  background: var(--ink-3, #6b6759);
+}
+.af-task-status-label {
+  font-size: 11px;
+  color: var(--ink-2, #b8b3a5);
+}
+
+.af-task-cta {
+  margin-top: 4px;
+  padding: 8px 14px;
+  border: 1px solid var(--line, #2a2a2a);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink, #f5f1e8);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 180ms ease;
+  align-self: flex-start;
+}
+.af-task-cta:hover:not(:disabled) {
+  border-color: var(--acid, #d4ff00);
+  color: var(--acid, #d4ff00);
+}
+.af-task-cta:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.af-tasks-foot {
+  margin: 12px 0 0;
+  font-size: 11px;
+  color: var(--ink-3, #6b6759);
+  line-height: 1.5;
+}

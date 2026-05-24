@@ -1,0 +1,4 @@
+/* ═════ TRACK CHAT MODAL (operator / learner application) ═════ */
+
+/* The modal reuses .order-backdrop for backdrop + fade-in, but the
+   body is a fresh container wrapping the chat component. */

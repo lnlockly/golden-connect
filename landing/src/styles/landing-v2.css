@@ -1,0 +1,507 @@
+/* ═══════════════════════════════════════════════════════════
+   TRENDEX — Landing v2
+   Product-first layout + AI chat + order modal.
+   Loaded AFTER globals.css so newer rules win on conflict.
+═══════════════════════════════════════════════════════════ */
+
+/* ─────── reset / layout ─────── */
+
+body { overflow-x: hidden; }
+
+main {
+  display: block;
+  padding-top: 72px; /* offset for fixed NavBar */
+}
+
+/* Hide legacy overlays no longer rendered by App v2 */
+.lang-switch:not(.nav-lang),
+.nav-dots { display: none !important; }
+
+/* Common button styles */
+.btn-primary,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  border: 1px solid transparent;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #10b981 0%, #0ea5a4 60%, #14b8a6 100%);
+  color: #05140f;
+  border-color: transparent;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 8px 22px rgba(16, 185, 129, 0.22);
+  border-radius: 10px;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.12) inset,
+    0 14px 34px rgba(16, 185, 129, 0.38);
+}
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+  border-radius: 10px;
+}
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(16, 185, 129, 0.06);
+}
+.btn-ghost.outline { border-color: var(--accent); color: var(--accent); }
+.btn-ghost.outline:hover { background: rgba(16, 185, 129, 0.08); }
+.btn-caret { font-family: var(--f-display); font-size: 14px; }
+.section-head {
+  max-width: 1280px;
+  margin: 0 auto 48px;
+}
+.section-h {
+  font-size: clamp(40px, 5.5vw, 80px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.section-lede {
+  color: var(--ink-2);
+  font-size: 18px;
+  line-height: 1.55;
+  max-width: 820px;
+  margin-top: 20px;
+}
+
+/* ─────── NAV BAR ─────── */
+
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 150;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 32px;
+  padding: 16px 40px;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s ease, background 0.25s ease, backdrop-filter 0.25s ease, padding 0.2s ease;
+}
+.nav-bar.scrolled {
+  background: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(20px);
+  border-bottom-color: var(--line);
+  padding: 12px 40px;
+}
+.nav-bar.hidden {
+  transform: translateY(-100%);
+}
+.nav-bar {
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+              background 0.25s ease,
+              backdrop-filter 0.25s ease,
+              padding 0.2s ease,
+              border-color 0.25s ease;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.nav-logo-wave {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 18px;
+  width: 22px;
+}
+.nav-logo-wave span {
+  display: block;
+  width: 3px;
+  min-height: 3px;
+  height: 100%;
+  background: var(--ink-2);
+  border-radius: 1px;
+  transform-origin: center;
+  transform: scaleY(0.3);
+  animation: logo-wave 1.4s ease-in-out infinite;
+}
+.nav-logo-wave span:nth-child(1) { animation-delay: 0s;    }
+.nav-logo-wave span:nth-child(2) { animation-delay: 0.15s; }
+.nav-logo-wave span:nth-child(3) { animation-delay: 0.3s;  }
+.nav-logo-wave span:nth-child(4) { animation-delay: 0.45s; }
+.nav-logo-wave span:nth-child(5) { animation-delay: 0.6s;  }
+@keyframes logo-wave {
+  0%, 100% { transform: scaleY(0.2); }
+  50%      { transform: scaleY(0.9); }
+}
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+}
+.nav-links a {
+  color: var(--ink-2);
+  text-decoration: none;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav-lang {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid var(--line);
+}
+.nav-lang button {
+  background: transparent;
+  color: var(--ink-3);
+  border: none;
+  padding: 6px 10px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.nav-lang button:hover { color: var(--ink); }
+.nav-lang button.active {
+  background: var(--acid);
+  color: var(--bg);
+  font-weight: 700;
+}
+.nav-burger { display: none; background: transparent; border: 1px solid var(--line); padding: 8px; gap: 4px; flex-direction: column; cursor: pointer; }
+.nav-burger span { display: block; width: 16px; height: 1px; background: var(--ink); }
+
+/* ─────── HERO V2 ─────── */
+
+.hero-v2 {
+  min-height: 100vh;
+  margin-top: -72px;           /* pull hero under the transparent nav */
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--line);
+  background: #0a0a0a;
+  position: relative;
+  overflow: hidden;
+}
+/* Massive TRENDEX wordmark — dead center, only element on first screen */
+.hero-brand {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(48px, 13vw, 200px);
+  line-height: 1;
+  letter-spacing: -0.055em;
+  color: var(--ink);
+  margin: 0 auto;
+  text-align: center;
+  white-space: nowrap;
+  width: auto;
+  max-width: 94vw;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 0 60px rgba(10, 10, 10, 0.8);
+  transition:
+    opacity   450ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* Waveform — full-hero grey background */
+.hero-wave {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-wave-bars {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7vw;
+  padding: 0 4vw;
+}
+.hero-wave-bar {
+  display: block;
+  width: 0.6vw;
+  min-width: 4px;
+  max-width: 8px;
+  min-height: 8px;
+  /* Full-height base: animate via scaleY so no layout is triggered. */
+  height: 100%;
+  background: linear-gradient(180deg, #4a4d53 0%, #2c2e33 50%, #1a1c1f 100%);
+  transform-origin: center;
+  transform: scaleY(0.45);
+  animation: wave-pulse 5.8s ease-in-out infinite;
+  opacity: 0.5;
+  will-change: transform, opacity;
+}
+@keyframes wave-pulse {
+  0%, 100% { transform: scaleY(0.45); opacity: 0.5;  }
+  25%      { transform: scaleY(0.80); opacity: 0.6;  }
+  50%      { transform: scaleY(0.55); opacity: 0.5;  }
+  75%      { transform: scaleY(0.95); opacity: 0.65; }
+}
+.hero-wave-bar:nth-child(3n)  { animation-duration: 4.0s; }
+.hero-wave-bar:nth-child(5n)  { animation-duration: 6.4s; }
+.hero-wave-bar:nth-child(7n)  { animation-duration: 4.6s; }
+.hero-wave-bar:nth-child(11n) { animation-duration: 7.2s; }
+.hero-wave-bar:nth-child(13n) { animation-duration: 3.4s; }
+.hero-wave-bar:nth-child(17n) { animation-duration: 5.2s; }
+
+/* Vignette on top/bottom so the wordmark stays legible */
+.hero-wave-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.5) 0%,
+    rgba(10, 10, 10, 0) 12%,
+    rgba(10, 10, 10, 0) 88%,
+    rgba(10, 10, 10, 0.5) 100%
+  );
+  pointer-events: none;
+  transition: opacity 450ms ease;
+}
+
+/* ─────── HERO AREA — collapsed / expanded states ─────── */
+
+.hero-area {
+  flex-direction: column;
+  gap: 36px;
+  padding-top: 96px;    /* push content below the transparent nav */
+  padding-bottom: 48px;
+}
+/* In-hero waitlist pill — top-right of the hero box. The global
+   .waitlist-float is fixed to viewport bottom; this one is absolute
+   to the hero so it sits out of the chat's way. */
+/* Waitlist pill is rendered inside NavBar's .nav-right now so it
+   travels with the navigation (which auto-hides on scroll-down and
+   reappears on scroll-up) instead of covering the lang switcher +
+   burger. Neutralise the WaitlistButton's own fixed-position rules
+   when it lives in the nav. */
+.nav-waitlist-wrap { display: inline-flex; }
+.nav-waitlist-wrap .waitlist-float {
+  position: static;
+  transform: none;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  padding: 8px 14px;
+  font-size: 10px;
+  box-shadow: 0 4px 12px rgba(212, 255, 0, 0.22);
+}
+.nav-waitlist-wrap .waitlist-float:hover { transform: translateY(-1px); }
+@media (max-width: 720px) {
+  /* On phones, collapse to a tiny pill so it doesn't crowd the
+     lang + burger column. */
+  .nav-waitlist-wrap .waitlist-float {
+    padding: 6px 10px;
+    font-size: 9px;
+  }
+}
+
+/* Keep the wordmark centred and let the pill / chat stack under it. */
+.hero-area .hero-brand { margin-top: auto; }
+
+/* Collapsed — grey input pill at the bottom of the hero. */
+.hero-area-pill-wrap {
+  position: relative;
+  z-index: 3;
+  margin-top: auto;
+  margin-bottom: 12px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  animation: hero-pill-in 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes hero-pill-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+.hero-input-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 560px;
+  padding: 6px 6px 6px 18px;
+  background: var(--bg-2, #1a1a1a);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+.hero-input-pill:focus-within {
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: none;
+}
+.hero-input-pill-field {
+  flex: 1 1 auto;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 15px;
+  padding: 10px 0;
+}
+.hero-input-pill-field::placeholder {
+  color: var(--ink-3, #6a6d73);
+  opacity: 1;
+}
+.hero-input-pill-btn {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink);
+  color: var(--bg);
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 200ms ease, transform 200ms ease;
+}
+.hero-input-pill-btn:hover { background: rgba(255, 255, 255, 0.14); transform: translateX(2px); }
+
+/* Expanded — wordmark fades, chat materialises in place. */
+.hero-v2--expanded .hero-brand {
+  opacity: 0;
+  transform: scale(0.85) translateY(-30px);
+  pointer-events: none;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  translate: -50% -50%;
+}
+.hero-v2--expanded .hero-wave,
+.hero-v2--expanded .hero-wave-fade {
+  opacity: 0.3;
+}
+
+.hero-area-chat {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 0;
+  animation: hero-chat-grow-in 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes hero-chat-grow-in {
+  from { opacity: 0; transform: scale(0.9) translateY(16px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+/* When embedded in the hero, the HeroChat strips its own page
+   chrome (background + border-bottom) — the hero already has them. */
+.section-hero-chat.hero-chat--embedded {
+  background: transparent;
+  border-bottom: 0;
+  padding: 0 40px;
+}
+@media (max-width: 860px) {
+  .section-hero-chat.hero-chat--embedded { padding: 0 16px; }
+}
+@media (max-width: 480px) {
+  .section-hero-chat.hero-chat--embedded { padding: 0 12px; }
+}
+
+/* prefers-reduced-motion — kill the scale/fade choreography. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-brand,
+  .hero-wave,
+  .hero-wave-fade,
+  .hero-area-pill-wrap,
+  .hero-area-chat {
+    transition: none;
+    animation: none;
+  }
+  .hero-v2--expanded .hero-brand {
+    transform: none;
+  }
+}
+
+/* Live ticker */
+.live-ticker {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 18px 0 18px 180px; /* left pad so waitlist pill doesn't overlap */
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+  position: relative;
+  z-index: 2;
+}
+.live-ticker::-webkit-scrollbar { display: none; }
+.live-ticker-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--blood);
+  border-radius: 50%;
+  flex: 0 0 auto;
+  animation: blink 1.4s infinite;
+}
+.live-ticker-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 0 0 auto;
+  padding-right: 32px;
+  border-right: 1px solid var(--line);
+}
+.live-ticker-item:last-child { border-right: none; padding-right: 0; }
+.live-ticker-item .v {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.live-ticker-item .l {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+}

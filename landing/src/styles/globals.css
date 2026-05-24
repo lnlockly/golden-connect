@@ -1,0 +1,445 @@
+@import "tailwindcss";
+
+/* Screen-reader-only utility — used for SEO-only <h1>s on pages whose
+   visible hero is not a heading but still need a single, indexable h1. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TRENDEX — PITCH DECK v2
+   Design: dark brutalist-premium · Fraunces display · no italic
+═══════════════════════════════════════════════════════════ */
+
+@theme {
+  --color-bg: #0d0f14;
+  --color-bg-2: #161922;
+  --color-bg-3: #1f2432;
+  --color-ink: #e4e6ea;
+  --color-ink-2: #9ca3af;
+  --color-ink-3: #6b7280;
+  --color-line: #262a36;
+  --color-accent: #10b981;
+  --color-accent-2: #f59e0b;
+  /* Deprecated aliases — kept so legacy rules keep working,
+     but re-point to the new emerald/amber palette. */
+  --color-acid: #10b981;
+  --color-acid-2: #f59e0b;
+  --color-blood: #ef4444;
+  --color-royal: #3b82f6;
+  --color-gold: #f59e0b;
+
+  --font-display: 'Space Grotesk', 'Inter', 'Noto Sans SC', sans-serif;
+  --font-body: 'Inter', 'Noto Sans SC', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Noto Sans SC', monospace;
+}
+
+:root {
+  --bg: #0d0f14;
+  --bg-2: #161922;
+  --bg-3: #1f2432;
+  --ink: #e4e6ea;
+  --ink-2: #9ca3af;
+  --ink-3: #6b7280;
+  --line: #262a36;
+  --accent: #10b981;
+  --accent-2: #f59e0b;
+  --accent-rgb: 16, 185, 129;
+  --accent-2-rgb: 245, 158, 11;
+  /* Deprecated — re-point legacy vars at the new palette. */
+  --acid: #10b981;
+  --acid-2: #f59e0b;
+  --blood: #ef4444;
+  --royal: #3b82f6;
+  --gold: #f59e0b;
+
+  --f-display: 'Space Grotesk', 'Inter', 'Noto Sans SC', sans-serif;
+  --f-body: 'Inter', 'Noto Sans SC', sans-serif;
+  --f-mono: 'JetBrains Mono', 'Noto Sans SC', monospace;
+}
+
+/* Chinese override — Noto Sans SC across the board */
+html[lang="zh"] {
+  --f-display: 'Noto Sans SC', 'Inter', sans-serif;
+  --f-body: 'Noto Sans SC', 'Inter', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  z-index: 1000;
+}
+
+/* ═════ LANGUAGE SWITCHER ═════ */
+.lang-switch {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  z-index: 200;
+  display: flex;
+  gap: 4px;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+  padding: 4px;
+  font-family: var(--f-mono);
+}
+.lang-switch button {
+  background: transparent;
+  color: var(--ink-3);
+  border: none;
+  padding: 8px 14px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+.lang-switch button:hover { color: var(--ink); }
+.lang-switch button.active {
+  background: var(--acid);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+/* ═════ NAV DOTS ═════ */
+.nav-dots {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 100;
+}
+.nav-dots a {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--ink-3);
+  background: transparent;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+.nav-dots a:hover,
+.nav-dots a.active {
+  background: var(--acid);
+  border-color: var(--acid);
+  transform: scale(1.3);
+}
+
+/* ═════ SECTION BASE ═════ */
+section {
+  min-height: 100vh;
+  padding: 80px 60px;
+  position: relative;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.slide-num {
+  position: absolute;
+  top: 24px;
+  left: 60px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+}
+.slide-label {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--acid);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--acid);
+}
+
+/* ─── Display typography: Inter sans, tight, heavy ─── */
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: -0.025em;
+}
+h1 { font-size: clamp(56px, 8vw, 140px); line-height: 0.95; font-weight: 800; letter-spacing: -0.04em; }
+h2 { font-size: clamp(36px, 5vw, 72px); line-height: 1.05; font-weight: 700; letter-spacing: -0.03em; }
+h3 { font-size: clamp(22px, 2.4vw, 32px); line-height: 1.15; font-weight: 600; }
+
+/* accent highlight — bold, not italic */
+.hi { color: var(--acid); font-weight: 700; }
+
+/* ═════ SLIDE 1: COVER ═════ */
+.logo {
+  font-family: var(--f-display);
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+}
+/* ═════ SLIDE 2: PROBLEM ═════ */
+/* ═════ SLIDE 3: WHAT WE DO (3 STEPS) ═════ */
+.step-num {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 72px;
+  line-height: 1;
+  color: var(--acid);
+  letter-spacing: -0.05em;
+}
+/* ═════ SLIDE 4: VERTICALS (10 USE CASES) ═════ */
+/* ═════ SLIDE 5: ROLES ═════ */
+/* ═════ SLIDE 6: MARKET ═════ */
+/* ═════ SLIDE 7: TOKENOMICS ═════ */
+.token-hero {
+  text-align: center;
+  margin: 40px 0 80px;
+}
+.token-hero .ticker {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(80px, 12vw, 180px);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  display: inline-block;
+  position: relative;
+}
+.token-hero .ticker::before {
+  content: "$";
+  color: var(--acid);
+  font-size: 0.6em;
+  vertical-align: super;
+  margin-right: 10px;
+  font-weight: 700;
+}
+.token-hero .sub {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  margin-top: 16px;
+}
+
+.token-disclaim {
+  margin: 24px auto 40px;
+  padding: 20px 24px;
+  max-width: 960px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.55;
+  text-align: left;
+}
+.token-disclaim b { color: var(--ink); font-weight: 600; }
+.dist-row {
+  display: grid;
+  grid-template-columns: 280px 1fr 80px;
+  gap: 20px;
+  align-items: center;
+  font-family: var(--f-mono);
+  font-size: 12px;
+}
+.dist-row .nm { color: var(--ink); letter-spacing: 0.05em; }
+.dist-row .bar {
+  height: 10px;
+  background: var(--bg-3);
+  position: relative;
+  overflow: hidden;
+}
+.dist-row .bar .fill {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  background: var(--acid);
+  animation: growBar 1.2s ease-out forwards;
+  transform-origin: left;
+  transform: scaleX(0);
+}
+@keyframes growBar { to { transform: scaleX(1); } }
+.dist-row .pct {
+  text-align: right;
+  color: var(--acid);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* ═════ SLIDE 8: BUSINESS MODEL ═════ */
+/* ═════ SLIDE 6: COMPETITORS ═════ */
+/* ═════ SLIDE 10: GTM ═════ */
+/* ═════ SLIDE 11: LAUNCH SHOW ═════ */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+/* ═════ SLIDE 12: ROADMAP ═════ */
+/* ═════ SLIDE 13: PROJECTIONS ═════ */
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 320px;
+  padding-top: 20px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+/* ═════ SLIDE 14: RISKS ═════ */
+/* ═════ SLIDE 15: TEAM ═════ */
+/* ═════ SLIDE 16: ASK / CTA ═════ */
+.cta {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: radial-gradient(ellipse at center, rgba(212, 255, 0, 0.08), transparent 60%),
+              var(--bg);
+  padding: 80px 60px;
+  position: relative;
+}
+.cta h2 {
+  font-size: clamp(60px, 10vw, 160px);
+  line-height: 0.9;
+  margin-bottom: 40px;
+  max-width: 1200px;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 32px 40px;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+}
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* ═════ HERO CTAs & WAITLIST ═════ */
+.waitlist-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 30px;
+  background: var(--acid);
+  color: var(--bg);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--acid);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.waitlist-btn:hover {
+  background: transparent;
+  color: var(--acid);
+}
+.waitlist-float {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  z-index: 120;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  background: var(--acid);
+  color: var(--bg);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 999px;
+  box-shadow: 0 10px 34px rgba(212, 255, 0, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.waitlist-float:hover { transform: translateX(-50%) translateY(-3px); }
+.waitlist-float-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--bg);
+  border-radius: 50%;
+  animation: pulse 2.5s infinite;
+}
+/* ═════ SLIDE 10: BECOME OPERATOR (TRAINING) ═════ */
+/* ═════ SLIDE 13 / 16 INLINE-STYLE REPLACEMENTS ═════ */
+/* ═════ RESPONSIVE ═════ */
+@media (max-width: 1024px) {
+  section { padding: 60px 32px; }
+.nav-dots { display: none; }
+.dist-row { grid-template-columns: 1fr; gap: 8px; text-align: left; }
+.lang-switch { top: 12px; right: 12px; }
+  .waitlist-float { bottom: 12px; }
+  .footer { padding: 28px 20px; }
+  .footer-inner { flex-direction: column; gap: 10px; }
+  .slide-label { display: none; }
+}

@@ -1,0 +1,31 @@
+{
+  "nav.launch": "Launch",
+
+  "launch.eyebrow": "Your own project · fully agent-powered",
+  "launch.h": "Launch your own project. <span class=\"hi\">Tokenize it.</span> Let agents run it.",
+  "launch.lede": "Have an idea? Ship it through TrendeX. Pick the agents you need, pair them with a certified operator, and — if your project earns a community — mint a project token that routes revenue, staking and governance through the same rails we use for $FLOW.",
+
+  "launch.s1.h": "Brief your project",
+  "launch.s1.p": "Name it, describe the idea in plain language, pick the agents you want to run it (landing, bot, parser, ad farm, token launch — any combo).",
+  "launch.s2.h": "Assemble the team",
+  "launch.s2.p": "A certified operator proposes the pipeline and timeline. You approve. Your project's budget sits in escrow until each milestone is shipped.",
+  "launch.s3.h": "Go live",
+  "launch.s3.p": "Agents build and ship. Website, bot, ad fleet, analytics — whatever you picked. The operator is accountable end to end.",
+  "launch.s4.h": "Tokenize (optional)",
+  "launch.s4.p": "If your project earns traction, mint a project token in one click. Liquidity pairs with FLOW, revenue-share routed on-chain, full MiCA/CASP pipeline handled for you.",
+
+  "launch.mock.name_l": "Project name",
+  "launch.mock.symbol_l": "Ticker",
+  "launch.mock.supply_l": "Supply",
+  "launch.mock.agents_l": "Agents in the pipeline",
+  "launch.mock.step1": "Brief approved",
+  "launch.mock.step2": "Operator assigned",
+  "launch.mock.step3": "Agents deploying",
+  "launch.mock.step4": "Token generation",
+  "launch.mock.foot_l": "ETA to first deliverable",
+  "launch.mock.foot_v": "42 min",
+
+  "launch.cta_text": "Every agent we ship can be wired into <b>your</b> project too. Bring an idea — we'll stand up the full stack.",
+  "launch.cta_primary": "Launch a project",
+  "launch.cta_docs": "Read the spec →"
+}

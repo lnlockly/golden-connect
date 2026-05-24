@@ -1,0 +1,25 @@
+{
+  "name": "Trendex CRM",
+  "short_name": "Trendex CRM",
+  "description": "База MLM-лидеров с AI-генерацией пиков и автоматизацией",
+  "start_url": "/cabinet/crm-app.html",
+  "scope": "/cabinet/",
+  "display": "standalone",
+  "background_color": "#0c0c14",
+  "theme_color": "#8b5cf6",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "/cabinet/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/cabinet/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

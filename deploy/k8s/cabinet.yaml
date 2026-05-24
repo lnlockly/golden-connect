@@ -1,0 +1,263 @@
+---
+# Persistent volume — SQLite + state.json + media uploads.
+# 5 GiB initial; expand later via PVC patch when storage class supports it.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: trendex-cabinet-data
+  namespace: trendex
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trendex-cabinet
+  namespace: trendex
+  labels:
+    app: trendex-cabinet
+spec:
+  # SQLite + RWO volume → strict 1 replica with Recreate strategy
+  # to avoid two pods opening the same file at once during rollout.
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: trendex-cabinet
+  template:
+    metadata:
+      labels:
+        app: trendex-cabinet
+    spec:
+      imagePullSecrets:
+        - name: ghcr-pull
+      containers:
+        - name: trendex-cabinet
+          image: ghcr.io/lnlockly/trendex-cabinet:latest
+          imagePullPolicy: IfNotPresent  # commit-SHA tags are immutable; skip re-pull on container restart
+          ports:
+            - name: http
+              containerPort: 3810
+          envFrom:
+            - secretRef:
+                name: trendex-cabinet-env
+          env:
+            - name: DATA_DIR
+              value: /data
+            - name: PORT
+              value: "3810"
+            - name: NODE_ENV
+              value: production
+            - name: BASE_PATH
+              value: /cabinet
+            - name: CABINET_BOT_POLL_DISABLED
+              value: "0"
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 15
+            timeoutSeconds: 8
+            failureThreshold: 5
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 6
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 1500m
+              memory: 768Mi
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: trendex-cabinet-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: trendex-cabinet
+  namespace: trendex
+spec:
+  selector:
+    app: trendex-cabinet
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+---
+# Subdomain ingress for v1. To later switch to trendex.biz/cabinet/
+# subpath: replace the host with `trendex.biz` and add
+# `nginx.ingress.kubernetes.io/rewrite-target: /$2` plus path
+# `/cabinet(/|$)(.*)` — also requires Express to mount routes
+# under /cabinet (not currently done).
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: trendex-cabinet
+  namespace: trendex
+  annotations:
+    # Match landing's Cloudflare-Flexible setup: HTTP origin, TLS at edge.
+    nginx.ingress.kubernetes.io/proxy-body-size: "32m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: trendex.biz
+      http:
+        paths:
+          - path: /cabinet
+            pathType: Prefix
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /bio
+            pathType: Prefix
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /s
+            pathType: Prefix
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /hub
+            pathType: Prefix
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /sitemap-bio.xml
+            pathType: Exact
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /trdx
+            pathType: Exact
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /faq
+            pathType: Exact
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /reviews
+            pathType: Exact
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /media
+            pathType: Prefix
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /landings
+            pathType: Exact
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /product
+            pathType: Prefix
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /products-library
+            pathType: Exact
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /landing
+            pathType: Prefix
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /login
+            pathType: Exact
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /register
+            pathType: Exact
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /sitemap.xml
+            pathType: Exact
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /robots.txt
+            pathType: Exact
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /r/banner
+            pathType: Prefix
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /ads-asset
+            pathType: Prefix
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80
+          - path: /auth/magic
+            pathType: Prefix
+            backend:
+              service:
+                name: trendex-cabinet
+                port:
+                  number: 80

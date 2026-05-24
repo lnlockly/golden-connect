@@ -1,0 +1,77 @@
+/* ═══════════════════════════════════════════════════════════
+   PART 22 — COPY AUDIT FIXES (loaded last)
+   Scope:
+   - H1/H2/H3 overflow on long RU/ZH phrases at narrow viewports.
+   - Nav-link truncation around the 1024-1100 px band where the
+     tablet burger is not yet active and the inline links
+     (especially RU "ДОКУМЕНТАЦИЯ") get clipped.
+   No component markup is touched — these are surgical rules on
+   existing classes.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1. Heading wrapping ────────────────────────────────────
+   landing-v2-part12.css already declares `overflow-wrap: anywhere`
+   globally, but RU words like "сервису" still overflow at 1024 px
+   because `letter-spacing: -0.035em` + `line-height: 1.02` on
+   `.section-h` combined with the wide clamp cap (80 px) leaves no
+   hyphenation hint. Re-assert the wrap and add `hyphens: auto` so
+   the browser can break long compound tokens. */
+h1,
+h2,
+h3,
+.section-h,
+.wp-title,
+.token-meta,
+.token-dist-title,
+.token-uses-title {
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+/* ── 2. Page-level headline caps ─────────────────────────────
+   The default `.section-h` clamp caps at 80 px. On /token,
+   /investors, /operators and /business the heading is a single
+   sentence per page, so a softer clamp prevents the word-on-the-
+   right from spilling out of the container before the burger kicks
+   in. */
+@media (max-width: 1200px) {
+  .section-token .section-h,
+  .section-inv .section-h,
+  .section-op .section-h,
+  .section-biz .section-h {
+    font-size: clamp(32px, 4.8vw, 54px);
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+  }
+}
+
+/* ── 3. Nav link fit ─────────────────────────────────────────
+   At 1024-1100 px the RU labels "ДОКУМЕНТАЦИЯ" and "ИНВЕСТОРАМ"
+   overflow the right gutter because the container uses `gap: 28px`
+   with no letter-spacing reduction. Keep links on one line and
+   allow the container to shrink-wrap evenly. */
+.nav-links a {
+  white-space: nowrap;
+}
+
+@media (max-width: 1200px) {
+  .nav-links {
+    gap: 18px;
+  }
+  .nav-links a {
+    font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+}
+
+/* ── 4. Bring the burger in earlier ─────────────────────────
+   landing-v2-part4.css hides `.nav-links` at ≤1024 px, but the
+   owner's screenshot is taken right around that cutoff and the
+   last link still clips. Collapse one breakpoint earlier so the
+   RU/ZH nav never clips. */
+@media (max-width: 1100px) {
+  .nav-links:not(.open) { display: none; }
+  .nav-burger { display: flex; }
+}

@@ -1,0 +1,340 @@
+/* ═════ PAGE CHAT — DOCKED PILL + BOTTOM SHEET (part23) ═════
+   New floating chat that rides along the bottom of every deep
+   sub-page (/how, /business, /operators, /token, /investors,
+   /marketing, /whitepaper). Collapses to a compact pill by
+   default; taps open a bottom-sheet with the full <ChatInline />
+   transcript.
+
+   Loaded LAST in main.tsx so this cascade wins over part21 /
+   part22. No !important unless a prior rule forces our hand.
+*/
+
+/* ─── 1. DOCK (shared wrapper) ─────────────────────────────
+   Fixed at the viewport bottom. z-index kept under NavBar's
+   modal stack (which sits at 60+) but over page content. */
+.pagechat-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  pointer-events: none; /* children re-enable; backdrop does too */
+  font-family: inherit;
+}
+.pagechat-dock * { box-sizing: border-box; }
+
+/* ─── 2. COLLAPSED PILL ────────────────────────────────────
+   Compact 56-px tall dark pill with hairline border. No glow,
+   consistent with part21's "kill the acid border" rule. */
+.pagechat-pill {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(640px, calc(100% - 24px));
+  margin: 0 auto 12px;
+  padding: 10px 12px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  background: var(--bg-2, #111);
+  color: var(--fg, #fff);
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.12));
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  cursor: text;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+.pagechat-pill:hover,
+.pagechat-pill:focus-within {
+  border-color: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+}
+.pagechat-pill-mark {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2a2a2a, #555);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pagechat-pill-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 15px;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.85);
+  background: transparent;
+  border: 0;
+  padding: 6px 2px;
+  outline: none;
+  cursor: text;
+}
+.pagechat-pill-input::placeholder {
+  color: rgba(255, 255, 255, 0.42);
+}
+.pagechat-pill-mic {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+.pagechat-pill-mic:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.pagechat-pill-mic:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 2px;
+}
+
+/* Mobile pill: shorter placeholder, still 44-px hit targets. */
+@media (max-width: 480px) {
+  .pagechat-pill {
+    width: calc(100% - 16px);
+    margin-bottom: 8px;
+    padding: 8px 10px;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+  }
+  .pagechat-pill-input { font-size: 16px; }
+}
+
+/* ─── 3. BACKDROP (when expanded) ──────────────────────────
+   Click-to-close scrim. Respects reduced-motion. */
+.pagechat-backdrop {
+  pointer-events: auto;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transition: opacity 220ms ease;
+  z-index: 39;
+}
+.pagechat-backdrop.open {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .pagechat-backdrop { transition: none; }
+}
+
+/* ─── 4. EXPANDED SHEET ────────────────────────────────────
+   Rises from the bottom, 60dvh on desktop, 88dvh on mobile.
+   Top corners rounded, bottom flush to safe-area. */
+.pagechat-sheet {
+  pointer-events: auto;
+  position: relative;
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  height: 60dvh;
+  max-height: 60vh;
+  background: var(--bg-2, #111);
+  color: var(--fg, #fff);
+  border: 1px solid var(--line, rgba(255, 255, 255, 0.12));
+  border-bottom: 0;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: 0 -12px 48px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(100%);
+  transition: transform 280ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.pagechat-sheet.open {
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .pagechat-sheet { transition: none; }
+}
+
+/* Mobile: taller sheet, snap flush to viewport edges. */
+@media (max-width: 768px) {
+  .pagechat-sheet {
+    max-width: 100%;
+    height: 88dvh;
+    max-height: 88vh;
+    border-left: 0;
+    border-right: 0;
+  }
+}
+
+/* Supports: dynamic viewport units fallback. */
+@supports not (height: 100dvh) {
+  .pagechat-sheet { height: 60vh; }
+  @media (max-width: 768px) {
+    .pagechat-sheet { height: 88vh; }
+  }
+}
+
+/* ─── 5. SHEET HEADER (drag-handle + close) ────────────────
+   Drag handle is a visual affordance — we only wire the
+   touch-drag on mobile. Desktop uses the close button. */
+.pagechat-sheet-head {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  user-select: none;
+}
+.pagechat-handle-wrap {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  touch-action: none;
+  cursor: grab;
+  padding: 4px 0;
+}
+.pagechat-handle-wrap:active { cursor: grabbing; }
+.pagechat-handle {
+  width: 44px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.25);
+}
+.pagechat-close {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0;
+  margin-left: 8px;
+}
+.pagechat-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+.pagechat-close:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 2px;
+}
+
+/* ─── 6. EMBEDDED CHAT BODY ────────────────────────────────
+   We reuse <ChatInline /> inside the sheet but tighten its
+   chrome so it nests cleanly. */
+.pagechat-body {
+  flex: 1 1 auto;
+  min-height: 0; /* allow inner scroll */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.pagechat-body .chat-inline {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+.pagechat-body .chat-inline-head {
+  padding: 8px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.pagechat-body .chat-inline-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 10px 14px;
+}
+.pagechat-body .chat-inline-input {
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+}
+.pagechat-body .chat-inline-foot {
+  padding: 6px 14px max(8px, env(safe-area-inset-bottom));
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ─── 7. ROUTE-SPECIFIC PADDING ────────────────────────────
+   Reserve space at the bottom of <main> on deep pages so the
+   docked pill never covers final CTAs. */
+body[data-has-pagechat="1"] main {
+  padding-bottom: 80px;
+}
+@media (max-width: 480px) {
+  body[data-has-pagechat="1"] main {
+    padding-bottom: 72px;
+  }
+}
+
+/* ─── 8. TRANSPARENT SHEET — match main landing chat ─────
+   Owner: "надо сделать прозрачным всё как в главном лендинге".
+   The main landing embedded chat hides its header ("TrendeX ·
+   приём / онлайн") and footer ("Plain text only…"), drops every
+   card frame, and paints straight onto the hero gradient. We do
+   the same inside the bottom-sheet: no dark card, no inner bars,
+   just the balloons + input floating on the scrim. */
+.pagechat-sheet,
+.pagechat-body,
+.pagechat-body .chat-inline,
+.pagechat-body .chat-inline-body,
+.pagechat-body .chat-msg,
+.pagechat-body .chat-inline-input,
+.pagechat-body .chat-input,
+.pagechat-body .chat-inline-input textarea,
+.pagechat-body .chat-input textarea {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Hide the "TrendeX · приём / онлайн" header bar and the small
+   footer caption — the main landing hides them in embedded mode
+   and the page-aware chat should mirror that chrome-free look. */
+.pagechat-body .chat-inline-head,
+.pagechat-body .chat-inline-foot {
+  display: none !important;
+}
+
+/* Nuke any lingering border the cascade reintroduces on the
+   sheet-head drag-handle row so the glass effect reads cleanly. */
+.pagechat-sheet-head {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Strengthen the backdrop so the transparent sheet is legible
+   against whatever page content is behind it. */
+.pagechat-backdrop {
+  background: rgba(0, 0, 0, 0.82);
+}
+
+/* Close button floats over the now-transparent sheet — give it
+   a faint surface so it's not lost against the scrim. */
+.pagechat-close {
+  background: rgba(255, 255, 255, 0.04) !important;
+  backdrop-filter: blur(6px);
+}

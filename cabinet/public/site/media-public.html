@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js?id=108574485","ym");
+ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108574485" style="position:absolute;left:-9999px;" alt=""/></div></noscript>
+<!-- /Yandex.Metrika counter -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Медиатека Trendex — эфиры, презентации, отзывы и инструкции. Смотрите видео, делитесь и переходите по реферальной ссылке.">
+  <meta name="theme-color" content="#080a0f">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Trendex">
+  <meta property="og:title" content="Медиатека Trendex — видео, эфиры, отзывы">
+  <meta property="og:description" content="Единая видеотека Trendex: эфиры, презентации продуктов, отзывы, эксперты и инструкции.">
+  <meta property="og:image" content="https://trendex.biz/media/uploads/og-image.jpg">
+  <meta property="og:url" content="https://trendex.biz/media">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Медиатека Trendex">
+  <meta name="twitter:description" content="Единая видеотека Trendex: эфиры, презентации, отзывы, эксперты.">
+  <link rel="canonical" href="https://trendex.biz/media" id="meta-canonical">
+  <title>Медиатека Trendex — видео, эфиры, отзывы</title>
+  <link rel="icon" href="/cabinet/favicon.ico" sizes="any">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/cabinet/vendor/plyr/plyr.css">
+  <script type="application/ld+json" id="media-structured-data"></script>
+  <style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#080a0f;--surface:#111318;--border:rgba(255,255,255,.08);--text:#e8eaed;--text2:#9ca3af;--accent:#10b981}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+a{color:var(--accent);text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+.nav{position:sticky;top:0;z-index:100;background:rgba(8,10,15,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 0}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Orbitron',sans-serif;font-weight:700;font-size:1.1rem;color:var(--accent)}
+.nav-links{display:flex;gap:16px;align-items:center}
+.nav-links a{color:var(--text2);font-size:.85rem;font-weight:500}
+.nav-btn{padding:8px 20px;border-radius:8px;background:var(--accent);color:#fff;font-weight:700;font-size:.85rem}
+.hero{padding:48px 0 20px;text-align:center}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(1.4rem,3vw,2.2rem);margin-bottom:12px;background:linear-gradient(135deg,#10b981,#67e8f9,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-size:200% auto;animation:sh 5s linear infinite}
+@keyframes sh{to{background-position:200% center}}
+.hero p{color:var(--text2);max-width:720px;margin:0 auto;font-size:.95rem}
+.sponsor-bar{text-align:center;padding:12px;font-size:13px;color:var(--text2);display:none}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px 0}
+.search{flex:1;min-width:260px}
+.search input{width:100%;padding:10px 12px;border-radius:10px;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:.85rem}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.75rem;font-weight:600;cursor:pointer}
+.filter-btn.active{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.4);color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;padding:12px 0 60px}
+.card{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:var(--surface);transition:all .3s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(16,185,129,.12);border-color:rgba(16,185,129,.25)}
+.card-thumb{position:relative;width:100%;height:170px;overflow:hidden;background:#0c111a}
+.card-thumb img{width:100%;height:100%;object-fit:cover}
+.card-thumb button{position:absolute;bottom:12px;right:12px;border:none;background:rgba(16,185,129,.9);color:#fff;border-radius:10px;padding:8px 12px;font-size:.75rem;font-weight:700;cursor:pointer}
+.card-body{padding:14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card-title{font-size:.95rem;font-weight:700}
+.card-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:.7rem;color:var(--text2)}
+.badge{padding:3px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04)}
+.card-desc{font-size:.8rem;color:var(--text2);line-height:1.5;min-height:48px}
+.card-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+.btn{flex:1;padding:8px;border-radius:10px;text-align:center;font-size:.8rem;font-weight:700;transition:all .2s;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--text)}
+.btn-primary{background:var(--accent);color:#fff;border:none}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn-soft{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--text);font-weight:600}
+.btn-icon{flex:0 0 auto;width:40px;height:40px;border-radius:12px;border:1px solid rgba(255,255,255,.12);display:inline-flex;align-items:center;justify-content:center;font-size:16px;background:rgba(255,255,255,.03);color:var(--text2);transition:all .2s}
+.btn-icon:hover{transform:translateY(-2px);border-color:var(--accent);color:var(--accent)}
+.share-row{display:flex;gap:8px;align-items:center}
+.share-label{font-size:.72rem;color:var(--text2);text-transform:uppercase;letter-spacing:.1em}
+.share-pill{display:flex;gap:8px;align-items:center;background:rgba(255,255,255,.02);border:1px solid var(--border);padding:8px 10px;border-radius:999px}
+.share-menu{position:relative;display:inline-flex;align-items:center;gap:8px}
+.share-menu-list{position:absolute;top:calc(100% + 8px);right:0;display:none;min-width:180px;z-index:20;padding:8px;background:rgba(12,14,20,.98);border:1px solid var(--border);border-radius:14px;box-shadow:0 18px 38px rgba(0,0,0,.4)}
+.share-menu-list.is-open{display:grid;gap:6px}
+.share-menu-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;color:var(--text);font-size:.82rem}
+.share-menu-item:hover{background:rgba(255,255,255,.05)}
+.share-menu-icon{width:26px;height:26px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;font-size:12px}
+.share-menu-icon svg{width:14px;height:14px;display:block;fill:currentColor}
+.s-tg{background:rgba(0,136,204,.15);color:#0088cc}
+.s-wa{background:rgba(37,211,102,.15);color:#25d366}
+.s-vk{background:rgba(74,118,168,.15);color:#4a76a8}
+.copy-link-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.copy-link-btn::before{content:'⧉';font-size:14px}
+.open-video-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.open-video-btn::before{content:'▶';font-size:12px}
+.modal{position:fixed;inset:0;display:none;z-index:999}
+.modal-backdrop{position:absolute;inset:0;background:rgba(5,8,13,.7);backdrop-filter:blur(8px)}
+.modal-panel{position:relative;z-index:1;width:min(980px,calc(100vw - 32px));max-height:calc(100vh - 32px);margin:16px auto;overflow:auto;border-radius:22px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg, rgba(9,13,22,.98), rgba(7,10,18,.98));box-shadow:0 24px 70px rgba(0,0,0,.42)}
+.modal-close{position:sticky;top:10px;margin:12px 12px 0 auto;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#fff;font-size:24px;cursor:pointer;z-index:2}
+.modal-content{padding:0 24px 24px}
+.plyr { --plyr-color-main: #10b981; }
+.modal-meta{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 14px;color:var(--text2);font-size:.8rem}
+.modal-title{font-size:1.2rem;font-weight:700;margin:10px 0}
+.modal-copy{font-size:.85rem;color:var(--text2);line-height:1.7;white-space:pre-wrap}
+.modal-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.video-detail-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;margin-top:18px}
+.video-detail-main,.video-detail-side{display:grid;gap:14px}
+.info-card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:16px;padding:14px 16px}
+.info-card-title{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);font-weight:700;margin-bottom:10px}
+.info-table{display:grid;gap:10px}
+.info-row{display:grid;grid-template-columns:140px minmax(0,1fr);gap:12px;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.08)}
+.info-row:last-child{border-bottom:0}
+.info-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text2)}
+.info-value{font-size:.82rem;color:var(--text)}
+.transcript-box{font-size:.82rem;color:var(--text);line-height:1.6;white-space:pre-wrap;max-height:220px;overflow:hidden;position:relative}
+.transcript-box.is-open{max-height:none}
+.transcript-fade{position:absolute;left:0;right:0;bottom:0;height:60px;background:linear-gradient(180deg, rgba(12,14,20,0), rgba(12,14,20,.9));pointer-events:none}
+.transcript-toggle{margin-top:10px}
+.transcript-actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.tag-list{display:flex;flex-wrap:wrap;gap:6px}
+.tag-chip{padding:4px 8px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.04);font-size:.7rem;color:var(--text)}
+.reactions{display:flex;gap:8px;flex-wrap:wrap}
+.react-btn{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text2);font-size:.8rem;cursor:pointer;transition:all .2s}
+.react-btn:hover{border-color:var(--accent);color:var(--accent)}
+.react-btn.is-active{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.5);color:var(--accent)}
+.comments{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:16px;padding:16px}
+.comments-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.comments-title{font-weight:700;font-size:.95rem}
+.comments-count{font-size:.75rem;color:var(--text2)}
+.comments-list{display:grid;gap:10px;max-height:260px;overflow:auto;padding-right:4px}
+.comment{padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.03)}
+.comment-head{display:flex;align-items:center;justify-content:space-between;font-size:.72rem;color:var(--text2);margin-bottom:6px}
+.comment-author{font-weight:600;color:var(--text)}
+.comment-body{font-size:.82rem;color:var(--text);line-height:1.5}
+.comment-form{display:grid;gap:8px;margin-top:10px}
+.comment-form textarea{width:100%;min-height:80px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.02);color:var(--text);padding:10px 12px;font-size:.82rem;resize:vertical}
+.comment-cta{margin-top:10px;font-size:.8rem;color:var(--text2)}
+.comment-cta a{color:var(--accent);font-weight:600}
+.foot{padding:24px 0;border-top:1px solid var(--border);text-align:center;color:var(--text2);font-size:.8rem}
+@media(max-width:980px){.video-detail-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.grid{grid-template-columns:1fr}.nav-links{display:none}.toolbar{flex-direction:column;align-items:stretch}}
+  </style>
+<script src="/cabinet/js/bot-link.js?v=1"></script></head>
+<body>
+<nav class="nav"><div class="wrap nav-inner">
+  <a href="/" class="nav-logo">TRENDEX</a>
+  <div class="nav-links">
+    <a href="/">Главная</a>
+    <a href="/faq">FAQ</a>
+    <a href="/cabinet/register" id="nav-reg" class="nav-btn">Стать партнёром</a>
+  </div>
+</div></nav>
+
+<section class="hero"><div class="wrap">
+  <h1>Медиатека Trendex</h1>
+  <p>Эфиры, презентации продуктов, отзывы, эксперты и инструкции. Смотрите видео, делитесь и переходите к подробностям по вашей реферальной ссылке.</p>
+</div></section>
+
+<div class="sponsor-bar" id="sponsor-bar"></div>
+
+<section style="padding:32px 0;background:linear-gradient(180deg,transparent 0%,rgba(16,185,129,0.04) 100%)">
+  <div class="wrap">
+    <h2 style="font-family:Orbitron,sans-serif;font-size:1.4rem;margin-bottom:8px;color:var(--text)">📚 Презентации проекта</h2>
+    <p style="color:var(--text2);font-size:0.9rem;margin-bottom:20px">Скачай или открой презентацию Trendex — поделись с теми, кому интересно.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:14px">
+      <a href="https://trendex.biz/Trendex_FULL_20slides.pdf" target="_blank" rel="noopener" style="display:block;padding:18px;background:linear-gradient(135deg,#FF2E97,#B14AED);border-radius:12px;color:#fff;font-weight:700">
+        <div style="font-size:28px;margin-bottom:6px">📕</div>
+        <div style="font-size:15px;margin-bottom:2px">FULL PDF</div>
+        <div style="font-size:12px;opacity:0.85;font-weight:500">20 слайдов · 3.6 MB</div>
+      </a>
+      <a href="https://trendex.biz/Trendex_FULL_20slides.html" target="_blank" rel="noopener" style="display:block;padding:18px;background:linear-gradient(135deg,#10b981,#00D4FF);border-radius:12px;color:#fff;font-weight:700">
+        <div style="font-size:28px;margin-bottom:6px">📺</div>
+        <div style="font-size:15px;margin-bottom:2px">HTML версия</div>
+        <div style="font-size:12px;opacity:0.85;font-weight:500">Интерактивно в браузере</div>
+      </a>
+      <a href="https://trendex.biz/Trendex_presentation.pdf" target="_blank" rel="noopener" style="display:block;padding:18px;background:rgba(17,19,24,0.7);border:1px solid rgba(255,255,255,0.12);border-radius:12px;color:var(--text);font-weight:700">
+        <div style="font-size:28px;margin-bottom:6px">📄</div>
+        <div style="font-size:15px;margin-bottom:2px">Краткая PDF</div>
+        <div style="font-size:12px;color:var(--text2);font-weight:500">14 слайдов · 1 MB</div>
+      </a>
+      <a href="https://trendex.biz/presentation" target="_blank" rel="noopener" style="display:block;padding:18px;background:rgba(17,19,24,0.7);border:1px solid rgba(16,185,129,0.3);border-radius:12px;color:var(--accent);font-weight:700">
+        <div style="font-size:28px;margin-bottom:6px">🎯</div>
+        <div style="font-size:15px;margin-bottom:2px">Скроллящаяся версия</div>
+        <div style="font-size:12px;color:var(--text2);font-weight:500">Полная страница на сайте</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="toolbar">
+    <div class="search"><input id="search-input" placeholder="Поиск по видео, теме, эксперту..."></div>
+    <div class="filters" id="filter-row"></div>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<div class="modal" id="video-modal">
+  <div class="modal-backdrop" onclick="closeVideo()"></div>
+  <div class="modal-panel">
+    <button class="modal-close" type="button" onclick="closeVideo()">&times;</button>
+    <div class="modal-content" id="modal-content"></div>
+  </div>
+</div>
+
+<footer class="foot"><div class="wrap">
+  <p>&copy; 2026 Trendex. Все права защищены.</p>
+  <p style="margin-top:6px"><a href="/">Главная</a> &middot; <a href="/faq">FAQ</a> &middot; <a href="/cabinet/register" id="foot-reg">Стать партнёром</a></p>
+</div></footer>
+
+<script src="/cabinet/vendor/plyr/plyr.polyfilled.min.js"></script>
+<script>
+(function(){
+  var DEFAULT_REF_CODE = 'xh160f8';
+  var params = new URLSearchParams(location.search);
+  var ref = params.get('ref') || DEFAULT_REF_CODE;
+  var videoParam = params.get('video') || '';
+  var regUrl = '/cabinet/register' + (ref ? '?ref=' + encodeURIComponent(ref) : '');
+  document.getElementById('nav-reg').href = regUrl;
+  var fr = document.getElementById('foot-reg');
+  if (fr) fr.href = regUrl;
+
+  if (ref) {
+    var sb = document.getElementById('sponsor-bar');
+    if (sb) { sb.style.display = 'block'; sb.textContent = 'Приглашение по коду: ' + ref; }
+  }
+
+  var state = { items: [], filter: 'all', query: '' };
+  var currentPlayer = null;
+  var initialVideoOpened = false;
+  var sessionState = { authenticated: false, user: null };
+  var activeVideoId = '';
+  var activeVideoItem = null;
+  var activeReaction = null;
+  var inviterProfile = null;
+  var inviterCompanyLink = '';
+
+  function esc(s){var d=document.createElement('div');d.textContent=s||'';return d.innerHTML}
+  function showToast(message){
+    var t=document.createElement('div');
+    t.style.cssText='position:fixed;top:20px;right:20px;padding:10px 18px;background:#10b981;color:#fff;border-radius:8px;font-size:13px;font-weight:600;z-index:9999;max-width:260px';
+    t.textContent=message||'Готово';
+    document.body.appendChild(t);
+    setTimeout(function(){t.remove()},2200);
+  }
+  function copyText(value, message){
+    var text = String(value || '').trim();
+    if (!text) {
+      showToast('Нечего копировать');
+      return;
+    }
+    navigator.clipboard.writeText(text).catch(function(){});
+    showToast(message || 'Скопировано!');
+  }
+  function copyUrl(url){copyText(url, 'Ссылка скопирована!');}
+
+  function buildVideoLink(item){
+    var url = new URL('/cabinet/media', location.origin);
+    if (ref) url.searchParams.set('ref', ref);
+    url.searchParams.set('src', 'video');
+    if (item && item.id) url.searchParams.set('video', String(item.id));
+    return url.toString();
+  }
+
+  function addUtm(url, source) {
+    if (!url) return '';
+    try {
+      var u = new URL(url, location.origin);
+      u.searchParams.set('utm_source', source || 'share');
+      u.searchParams.set('utm_medium', 'share');
+      u.searchParams.set('utm_campaign', 'trendex_video');
+      var vid = u.searchParams.get('video');
+      if (vid) u.searchParams.set('utm_content', vid);
+      return u.toString();
+    } catch (e) {
+      return url;
+    }
+  }
+
+  function normalizeText(value) {
+    return String(value || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function clipText(text, max) {
+    var value = String(text || '').trim();
+    if (!value) return '';
+    if (value.length <= max) return value;
+    return value.slice(0, Math.max(24, max - 1)).trim() + '…';
+  }
+
+  function buildContactLine(profile) {
+    if (!profile) return '';
+    var parts = [];
+    if (profile.name) parts.push(profile.name);
+    if (profile.contact) parts.push(profile.contact);
+    if (profile.email) parts.push(profile.email);
+    if (!parts.length) return '';
+    return 'Контакты пригласителя: ' + parts.join(' | ');
+  }
+
+  var VIDEO_SEO_TEMPLATES = {
+    broadcasts: {
+      headline: 'Эфир Trendex: {title}',
+      audience: 'тем, кто хочет понять направления здоровья и задать вопросы экспертам',
+      cta: 'Хотите разобраться глубже и получить рекомендации?'
+    },
+    products: {
+      headline: 'Презентация продукта Trendex: {title}',
+      audience: 'тем, кто выбирает продукт под свою задачу',
+      cta: 'Посмотрите и получите персональные рекомендации.'
+    },
+    reviews: {
+      headline: 'Отзывы и опыт Trendex: {title}',
+      audience: 'тем, кто хочет увидеть реальные кейсы',
+      cta: 'Хотите получить подбор под себя?'
+    },
+    company: {
+      headline: 'О компании и экспертах Trendex: {title}',
+      audience: 'тем, кто знакомится с брендом и командой',
+      cta: 'Узнать подробнее о компании и направлениях.'
+    },
+    science: {
+      headline: 'Технологии и наука Trendex: {title}',
+      audience: 'тем, кому важна научная база и подход',
+      cta: 'Смотрите и задавайте вопросы по технологиям.'
+    },
+    instructions: {
+      headline: 'Инструкции и применение: {title}',
+      audience: 'тем, кто хочет правильно использовать продукт',
+      cta: 'Узнать детали применения и получить поддержку.'
+    },
+    business: {
+      headline: 'Бизнес и партнерство Trendex: {title}',
+      audience: 'тем, кто рассматривает партнерский запуск',
+      cta: 'Получить условия и стартовый маршрут.'
+    },
+    other: {
+      headline: 'Видео Trendex: {title}',
+      audience: 'тем, кто ищет понятное объяснение по теме',
+      cta: 'Посмотрите и переходите к подробностям.'
+    }
+  };
+
+  function buildHashtags(items, maxCount) {
+    var tags = Array.isArray(items) ? items : [];
+    var normalized = tags.map(function(tag){
+      return String(tag || '').trim().replace(/[^\w\u0400-\u04FF]+/g, '_');
+    }).filter(Boolean);
+    var uniq = [];
+    normalized.forEach(function(tag){
+      if (uniq.indexOf(tag) < 0) uniq.push(tag);
+    });
+    return uniq.slice(0, maxCount || 6).map(function(tag){ return '#' + tag; }).join(' ');
+  }
+
+  function pickVideoTemplate(item) {
+    var id = String(item && (item.categoryId || item.categoryLabel || '')).trim().toLowerCase();
+    if (VIDEO_SEO_TEMPLATES[id]) return VIDEO_SEO_TEMPLATES[id];
+    if (id.includes('эфир')) return VIDEO_SEO_TEMPLATES.broadcasts;
+    if (id.includes('продукт')) return VIDEO_SEO_TEMPLATES.products;
+    if (id.includes('отзыв')) return VIDEO_SEO_TEMPLATES.reviews;
+    if (id.includes('компан')) return VIDEO_SEO_TEMPLATES.company;
+    if (id.includes('техн') || id.includes('наук')) return VIDEO_SEO_TEMPLATES.science;
+    if (id.includes('инструк')) return VIDEO_SEO_TEMPLATES.instructions;
+    if (id.includes('бизнес') || id.includes('партн')) return VIDEO_SEO_TEMPLATES.business;
+    return VIDEO_SEO_TEMPLATES.other;
+  }
+
+  function buildVideoSeoPost(item, options) {
+    var opts = options || {};
+    var includeLink = opts.includeLink !== false;
+    var maxPoints = Number(opts.maxPoints || 4) || 4;
+    var maxSummary = Number(opts.maxSummary || 320) || 320;
+    var mode = opts.mode || 'full';
+    var channel = opts.channel || 'share';
+    var referralUrl = addUtm(buildVideoLink(item), channel);
+    var title = normalizeText(item && item.title || 'Видео Trendex');
+    var category = normalizeText(item && item.categoryLabel || '');
+    var summary = normalizeText(item && (item.summary || item.text || item.transcriptPreview) || '');
+    summary = clipText(summary, maxSummary);
+    var keyPoints = Array.isArray(item && item.keyPoints) ? item.keyPoints.slice(0, maxPoints) : [];
+    var products = Array.isArray(item && item.products) ? item.products.slice(0, 4) : [];
+    var tags = Array.isArray(item && item.tags) ? item.tags.slice(0, 6) : [];
+    var template = pickVideoTemplate(item);
+
+    var lines = [];
+    var headline = (template.headline || 'Видео Trendex: {title}').replace('{title}', title);
+    lines.push(headline);
+    if (mode === 'story') lines.push('История и практический опыт от Trendex:');
+    if (summary) lines.push(summary);
+    if (mode === 'business') lines.push('Формат: деловая презентация для клиентов и партнеров.');
+    if (category && mode !== 'short') lines.push('Категория: ' + category);
+    if (template.audience && mode !== 'short') lines.push('Кому подойдет: ' + template.audience);
+    var speaker = item && (item.speaker || (Array.isArray(item.speakers) ? item.speakers.join(', ') : ''));
+    if (speaker) lines.push('Эксперт: ' + speaker);
+    if (keyPoints.length && mode !== 'short') {
+      lines.push('Что внутри:');
+      keyPoints.forEach(function(point){ lines.push('• ' + point); });
+    }
+    if (products.length) lines.push('Продукты в видео: ' + products.join(', '));
+    lines.push(template.cta || 'Узнать подробнее:');
+    if (includeLink) lines.push(referralUrl);
+    var contactLine = buildContactLine(inviterProfile);
+    if (contactLine) lines.push(contactLine);
+    if (inviterCompanyLink && mode !== 'short') {
+      var partnerLine = mode === 'business' ? 'Партнерский старт и условия: ' : 'Партнерский старт: ';
+      lines.push(partnerLine + inviterCompanyLink);
+    }
+    if (mode !== 'short') {
+      var hash = buildHashtags(products.concat(tags), 7);
+      if (hash) lines.push(hash);
+    }
+    return lines.filter(Boolean).join('\n');
+  }
+
+  function buildMediaShareText(item) {
+    var isVideo = item && (String(item.kind || '').trim().toLowerCase() === 'video' || item.videoUrl || item.url || item.sourceUrl || item.sourceExternalId);
+    if (isVideo) {
+      return buildVideoSeoPost(item, { includeLink: false, maxPoints: 2, maxSummary: 220, mode: 'short' });
+    }
+    return item && (item.shareText || item.title) || 'Trendex';
+  }
+
+  function buildShareIcon(kind) {
+    if (kind === 'tg') {
+      return '<span class="share-menu-icon s-tg"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 3.4c-.3-.3-.8-.4-1.2-.2L2.8 9.8c-.6.2-.7 1-.2 1.4l4.6 3.1 1.7 5c.2.6.9.7 1.3.3l2.6-2.4 4.7 3.5c.5.4 1.2.1 1.3-.5l3-16.4c.1-.3 0-.7-.3-.9zM9 14l8.4-6.3-6.6 7.1-.2 3.3-1.2-3.6-3-2 2.6-1z"/></svg></span>';
+    }
+    if (kind === 'wa') {
+      return '<span class="share-menu-icon s-wa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.1a8.9 8.9 0 0 0-7.7 13.3L3 21l4.7-1.2A8.9 8.9 0 1 0 12 3.1zm0 1.6a7.3 7.3 0 0 1 3.9 13.5l-.3.2-2.3-.7-.2.1a6.5 6.5 0 0 1-3.1.8 6.7 6.7 0 0 1-3.4-.9l-.2-.1-2.7.7.7-2.6-.2-.3a7.3 7.3 0 0 1 6-11.7zm-3.2 3.6c-.2 0-.4 0-.6.1-.2.1-.4.3-.5.6-.1.3-.5 1-.5 2.4 0 1.4.5 2.7 2.2 4.1 1.7 1.4 3.8 1.9 4.6 1.7.8-.2 1.3-.9 1.4-1.2.1-.3.1-.6 0-.7-.1-.1-.2-.2-.5-.3l-1.4-.7c-.3-.1-.5-.2-.7.1-.2.3-.6.7-.7.8-.1.1-.2.2-.5.1-.3-.1-1.1-.4-2-1.3-.7-.7-1.2-1.6-1.3-1.9-.1-.3 0-.4.1-.5.1-.1.3-.3.4-.4.1-.1.2-.2.3-.4.1-.2.1-.4 0-.6l-.6-1.5c-.1-.3-.3-.4-.5-.4z"/></svg></span>';
+    }
+    return '<span class="share-menu-icon s-vk"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h3l1.5 3c.6 1.2 1.1 2 1.6 2.5.5.5.8.7 1.1.7.3 0 .5-.4.5-1.3V7h3v4.5c0 2.4.4 3.4 1.1 3.4.6 0 1.4-1.2 2.6-3.6L20 7h3l-1.1 3c-1.2 3-2.8 5.4-4.9 7-1.5 1.2-2.7 1.5-3.6 1.5-2 0-2.3-1.4-3.7-1.4-1.4 0-1.7 1.4-3.4 1.4-1 0-2-.5-3-1.6-1.8-2-3.1-5-4.3-8.9z"/></svg></span>';
+  }
+
+  function buildShareMenuHtml(shareUrl, shareText) {
+    var safeUrl = shareUrl || '';
+    var text = shareText || '';
+    var tgUrl = addUtm(safeUrl, 'telegram');
+    var waUrl = addUtm(safeUrl, 'whatsapp');
+    var vkUrl = addUtm(safeUrl, 'vk');
+    var eu = encodeURIComponent(tgUrl);
+    var et = encodeURIComponent(text);
+    var wa = encodeURIComponent((text ? text + ' ' : '') + waUrl);
+    return '<div class="share-menu" data-share-menu>' +
+      '<button class="btn btn-soft" type="button" data-share-toggle>Поделиться</button>' +
+      '<div class="share-menu-list">' +
+      '<a class="share-menu-item" href="https://t.me/share/url?url=' + eu + '&text=' + et + '" target="_blank" rel="noopener">' + buildShareIcon('tg') + 'Telegram</a>' +
+      '<a class="share-menu-item" href="https://api.whatsapp.com/send?text=' + wa + '" target="_blank" rel="noopener">' + buildShareIcon('wa') + 'WhatsApp</a>' +
+      '<a class="share-menu-item" href="https://vk.com/share.php?url=' + encodeURIComponent(vkUrl) + '" target="_blank" rel="noopener">' + buildShareIcon('vk') + 'ВКонтакте</a>' +
+      '</div>' +
+      '</div>';
+  }
+
+  function buildVideoTranscriptText(item) {
+    var transcript = normalizeText(item && (item.transcript || item.transcriptFull || item.transcriptPreview) || '');
+    if (!transcript) return '';
+    var referralUrl = buildVideoLink(item);
+    var lines = [transcript, '', 'Ссылка для подробностей: ' + referralUrl];
+    var contactLine = buildContactLine(inviterProfile);
+    if (contactLine) lines.push(contactLine);
+    if (inviterCompanyLink) lines.push('Партнёрский старт: ' + inviterCompanyLink);
+    return lines.join('\n');
+  }
+
+  function isAuthenticated(){
+    return Boolean(sessionState && sessionState.authenticated);
+  }
+
+  function loadInviterProfile(){
+    if (!ref) return Promise.resolve(null);
+    return fetch('/cabinet/api/public/referral-profile?ref=' + encodeURIComponent(ref))
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if (data && data.ok) {
+          inviterProfile = data.profile || null;
+          inviterCompanyLink = data.companyLink || '';
+          if (activeVideoItem) updateTranscriptBlock(activeVideoItem);
+          if (activeVideoItem) updateModalShareMenu(activeVideoItem);
+          if (state && state.items && state.items.length) renderGrid();
+        }
+        return data;
+      })
+      .catch(function(){});
+  }
+
+  function loadSession(){
+    return fetch('/cabinet/api/site/config')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if (data && data.session && data.session.authenticated) {
+          sessionState = { authenticated: true, user: data.session.user || null };
+        } else {
+          sessionState = { authenticated: false, user: null };
+        }
+        updateCommentAuthState();
+        return sessionState;
+      })
+      .catch(function(){});
+  }
+
+  function extractYouTubeId(rawUrl) {
+    var value = String(rawUrl || '').trim();
+    if (!value) return '';
+    if (/^[A-Za-z0-9_-]{11}$/.test(value)) return value;
+    try {
+      var url = new URL(value, location.origin);
+      if (/youtu\.be$/i.test(url.hostname)) {
+        return String(url.pathname || '').replace(/^\/+/, '').slice(0, 32);
+      }
+      if (/youtube\.com$/i.test(url.hostname) || /youtube-nocookie\.com$/i.test(url.hostname) || /\.youtube\.com$/i.test(url.hostname)) {
+        if (url.searchParams.get('v')) return url.searchParams.get('v');
+        var path = String(url.pathname || '');
+        var match = path.match(/\/(embed|shorts|live)\/([A-Za-z0-9_-]{6,})/i);
+        if (match) return match[2];
+      }
+    } catch {}
+    var fallback = value.match(/(?:v=|youtu\.be\/|embed\/|shorts\/|live\/)([A-Za-z0-9_-]{6,})/i);
+    return fallback ? fallback[1] : '';
+  }
+
+  function inferVideoMimeType(rawUrl) {
+    var value = String(rawUrl || '').trim().toLowerCase();
+    if (!value) return 'video/mp4';
+    if (/\.webm(?:[?#].*)?$/.test(value)) return 'video/webm';
+    if (/\.ogg(?:[?#].*)?$/.test(value) || /\.ogv(?:[?#].*)?$/.test(value)) return 'video/ogg';
+    if (/\.mov(?:[?#].*)?$/.test(value)) return 'video/quicktime';
+    if (/\.m4v(?:[?#].*)?$/.test(value)) return 'video/mp4';
+    return 'video/mp4';
+  }
+
+  function isDirectVideoUrl(rawUrl) {
+    var value = String(rawUrl || '').trim();
+    if (!value) return false;
+    return /\.(mp4|webm|ogg|ogv|mov|m4v)(?:[?#].*)?$/i.test(value);
+  }
+
+  function getPlayableVideoSource(item) {
+    if (!item || typeof item !== 'object') return null;
+    var primary = String(item.videoUrl || '').trim();
+    if (primary) {
+      return { src: primary, type: inferVideoMimeType(primary) };
+    }
+    var candidates = [item.url, item.sourceUrl, item.shareUrl, item.sourceExternalId];
+    for (var i = 0; i < candidates.length; i += 1) {
+      var candidate = String(candidates[i] || '').trim();
+      if (candidate && isDirectVideoUrl(candidate)) {
+        return { src: candidate, type: inferVideoMimeType(candidate) };
+      }
+    }
+    return null;
+  }
+
+  function buildVideoUrlFromId(rawId) {
+    var value = String(rawId || '').trim();
+    if (!value) return '';
+    var normalized = value.replace(/^xvideo_/i, '');
+    if (/\.mp4$/i.test(normalized)) return '/video-library/' + encodeURIComponent(normalized);
+    var file = normalized.replace(/-mp4$/i, '.mp4');
+    if (!/\.mp4$/i.test(file)) {
+      if (/^[A-Za-z0-9_-]{6,}$/.test(normalized)) {
+        file = 'yt-' + normalized + '.mp4';
+      } else {
+        return '';
+      }
+    }
+    return '/video-library/' + encodeURIComponent(file);
+  }
+
+  function buildFallbackVideoItem(rawId) {
+    var videoUrl = buildVideoUrlFromId(rawId);
+    if (!videoUrl) return null;
+    var normalized = String(rawId || '').trim().replace(/^xvideo_/i, '');
+    normalized = normalized.replace(/^yt-/, '').replace(/\.mp4$/i, '').replace(/-mp4$/i, '');
+    var sourceUrl = '';
+    if (/^[A-Za-z0-9_-]{6,}$/.test(normalized)) {
+      sourceUrl = 'https://www.youtube.com/watch?v=' + normalized;
+    }
+    return {
+      id: String(rawId || ''),
+      title: 'Видео Trendex',
+      summary: 'Видео из медиатеки Trendex.',
+      videoUrl: videoUrl,
+      sourceUrl: sourceUrl || null,
+      imageUrl: '/cabinet/media/uploads/og-image.jpg',
+      categoryLabel: 'Видео'
+    };
+  }
+
+  function destroyPlayer() {
+    if (currentPlayer && typeof currentPlayer.destroy === 'function') {
+      try { currentPlayer.destroy(); } catch(e) {}
+    }
+    currentPlayer = null;
+  }
+
+  function initPlayer(item) {
+    destroyPlayer();
+    var host = document.getElementById('media-player-host');
+    if (!host || !window.Plyr) return;
+    var options = {
+      iconUrl: '/cabinet/vendor/plyr/plyr.svg',
+      ratio: '16:9',
+      controls: ['play-large', 'rewind', 'play', 'fast-forward', 'progress', 'current-time', 'mute', 'volume', 'settings', 'pip', 'airplay', 'fullscreen'],
+      settings: ['speed'],
+      speed: { selected: 1, options: [0.75, 1, 1.25, 1.5, 1.75, 2] },
+      youtube: { noCookie: true, rel: 0, modestbranding: 1, iv_load_policy: 3 }
+    };
+    var source = getPlayableVideoSource(item);
+    if (source) {
+      currentPlayer = new Plyr(host, options);
+      currentPlayer.source = { type: 'video', title: item.title || 'Trendex', poster: item.imageUrl || '', sources: [{ src: source.src, type: source.type }] };
+      return;
+    }
+    var youtubeId = extractYouTubeId(item.url || item.sourceUrl || item.shareUrl || item.sourceExternalId);
+    if (youtubeId) {
+      currentPlayer = new Plyr(host, options);
+      currentPlayer.source = { type: 'video', title: item.title || 'Trendex', sources: [{ src: youtubeId, provider: 'youtube' }] };
+    }
+  }
+
+  function formatDate(value){
+    if (!value) return '';
+    var date = new Date(value);
+    if (!date || Number.isNaN(date.getTime())) return '';
+    try {
+      return date.toLocaleString('ru-RU', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    } catch {
+      return date.toISOString().slice(0, 16).replace('T', ' ');
+    }
+  }
+
+  function buildTagList(list, limit){
+    var items = (list || []).map(function(item){ return String(item || '').trim(); }).filter(Boolean);
+    if (limit) items = items.slice(0, limit);
+    if (!items.length) return '';
+    return '<div class="tag-list">' + items.map(function(item){ return '<span class="tag-chip">' + esc(item) + '</span>'; }).join('') + '</div>';
+  }
+
+  function buildInfoRow(label, value, isHtml){
+    if (!value) return '';
+    return '<div class="info-row"><div class="info-label">' + esc(label) + '</div><div class="info-value">' + (isHtml ? value : esc(value)) + '</div></div>';
+  }
+
+  function buildInfoTableMarkup(item){
+    if (!item) return '';
+    var rows = '';
+    rows += buildInfoRow('Формат', item.categoryLabel || '');
+    var speaker = (item.speakers && item.speakers.length ? item.speakers.join(', ') : (item.speaker || '')).trim();
+    rows += buildInfoRow('Эксперт', speaker);
+    rows += buildInfoRow('Длительность', item.durationLabel || '');
+    if (item.updatedAt) rows += buildInfoRow('Дата', formatDate(item.updatedAt));
+    var products = buildTagList(item.products || [], 6);
+    if (products) rows += buildInfoRow('Продукты', products, true);
+    var topics = buildTagList(item.keyPoints || [], 6);
+    if (topics) {
+      rows += buildInfoRow('Темы', topics, true);
+    } else {
+      var tags = buildTagList(item.tags || [], 6);
+      if (tags) rows += buildInfoRow('Теги', tags, true);
+    }
+    if (item.languageId) rows += buildInfoRow('Язык', String(item.languageId).toUpperCase());
+    var sourceUrl = item.sourceUrl || item.url || '';
+    if (sourceUrl) {
+      rows += buildInfoRow('Источник', '<a href="' + esc(sourceUrl) + '" target="_blank" rel="noopener">Открыть источник</a>', true);
+    }
+    if (!rows) {
+      rows = buildInfoRow('Детали', 'Скоро добавим карточку видео.');
+    }
+    return '<div class="info-card"><div class="info-card-title">Карточка видео</div><div class="info-table">' + rows + '</div></div>';
+  }
+
+  function setMetaContent(selector, value) {
+    var node = document.querySelector(selector);
+    if (node && value) node.setAttribute('content', value);
+  }
+
+  function updateVideoMeta(item) {
+    if (!item) return;
+    var title = item.title || 'Видео Trendex';
+    var summary = normalizeText(item.summary || item.text || item.transcriptPreview || 'Видео из медиатеки Trendex.');
+    if (summary.length > 170) summary = summary.slice(0, 168).trim() + '…';
+    var fullTitle = title + ' — Trendex';
+    var shareUrl = buildVideoLink(item);
+    var ogImage = document.querySelector('meta[property="og:image"]');
+    var image = item.imageUrl || (ogImage ? ogImage.getAttribute('content') : '') || '';
+    document.title = fullTitle;
+    setMetaContent('meta[name="description"]', summary);
+    setMetaContent('meta[property="og:title"]', fullTitle);
+    setMetaContent('meta[property="og:description"]', summary);
+    setMetaContent('meta[property="og:url"]', shareUrl);
+    if (image) setMetaContent('meta[property="og:image"]', image);
+    setMetaContent('meta[name="twitter:title"]', fullTitle);
+    setMetaContent('meta[name="twitter:description"]', summary);
+    if (image) setMetaContent('meta[name="twitter:image"]', image);
+    var canonical = document.getElementById('meta-canonical');
+    if (canonical) canonical.href = shareUrl;
+  }
+
+  function isoDuration(seconds) {
+    var sec = Number(seconds || 0);
+    if (!sec || Number.isNaN(sec)) return '';
+    var h = Math.floor(sec / 3600);
+    var m = Math.floor((sec % 3600) / 60);
+    var s = Math.floor(sec % 60);
+    var out = 'PT';
+    if (h) out += h + 'H';
+    if (m) out += m + 'M';
+    if (s || (!h && !m)) out += s + 'S';
+    return out;
+  }
+
+  function updateVideoStructuredData(item) {
+    var script = document.getElementById('media-structured-data');
+    if (!script || !item) return;
+    var title = item.title || 'Видео Trendex';
+    var summary = normalizeText(item.summary || item.text || item.transcriptPreview || '');
+    var image = item.imageUrl || '';
+    var uploadDate = item.updatedAt || item.createdAt || '';
+    var duration = isoDuration(item.durationSec);
+    var playable = getPlayableVideoSource(item);
+    var youtubeId = extractYouTubeId(item.url || item.sourceUrl || item.shareUrl || item.sourceExternalId);
+    var data = {
+      '@context': 'https://schema.org',
+      '@type': 'VideoObject',
+      name: title,
+      description: summary,
+      thumbnailUrl: image ? [image] : undefined,
+      uploadDate: uploadDate || undefined,
+      duration: duration || undefined,
+      contentUrl: playable ? playable.src : undefined,
+      embedUrl: youtubeId ? ('https://www.youtube.com/embed/' + youtubeId) : undefined
+    };
+    Object.keys(data).forEach(function(key){ if (data[key] === undefined || data[key] === '') delete data[key]; });
+    script.textContent = JSON.stringify(data);
+  }
+
+  function updateTranscriptBlock(item) {
+    var box = document.getElementById('transcript-box');
+    if (!box) return;
+    var text = buildVideoTranscriptText(item);
+    box.textContent = text || 'Текст будет добавлен.';
+    var fade = document.getElementById('transcript-fade');
+    var toggle = document.getElementById('transcript-toggle');
+    if (toggle) {
+      var needsToggle = text && text.length > 420;
+      toggle.style.display = needsToggle ? 'inline-flex' : 'none';
+      if (!needsToggle) {
+        box.classList.add('is-open');
+        if (fade) fade.style.display = 'none';
+      } else {
+        box.classList.remove('is-open');
+        if (fade) fade.style.display = 'block';
+        toggle.textContent = 'Показать полностью';
+      }
+    }
+  }
+
+  function updateModalShareMenu(item) {
+    var menu = document.querySelector('#video-modal [data-share-menu]');
+    if (!menu) return;
+    var shareUrl = buildVideoLink(item);
+    var shareText = buildMediaShareText(item);
+    var links = menu.querySelectorAll('.share-menu-item');
+    var tgUrl = addUtm(shareUrl, 'telegram');
+    var waUrl = addUtm(shareUrl, 'whatsapp');
+    var vkUrl = addUtm(shareUrl, 'vk');
+    if (links[0]) links[0].href = 'https://t.me/share/url?url=' + encodeURIComponent(tgUrl) + '&text=' + encodeURIComponent(shareText);
+    if (links[1]) links[1].href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent((shareText ? shareText + ' ' : '') + waUrl);
+    if (links[2]) links[2].href = 'https://vk.com/share.php?url=' + encodeURIComponent(vkUrl);
+  }
+
+  function loadFullVideoItem(videoId) {
+    if (!videoId) return;
+    fetch('/cabinet/api/public/media-library?video=' + encodeURIComponent(videoId) + '&full=1')
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if (data && data.item) {
+          activeVideoItem = data.item;
+          updateTranscriptBlock(activeVideoItem);
+          updateVideoMeta(activeVideoItem);
+          updateVideoStructuredData(activeVideoItem);
+        }
+      })
+      .catch(function(){});
+  }
+
+  function renderComments(items){
+    var list = document.getElementById('comments-list');
+    var count = document.getElementById('comments-count');
+    if (!list) return;
+    var safeItems = Array.isArray(items) ? items : [];
+    if (count) count.textContent = safeItems.length ? (safeItems.length + ' комментариев') : 'Комментариев нет';
+    if (!safeItems.length) {
+      list.innerHTML = '<div class="comment"><div class="comment-body">Пока нет комментариев. Будьте первым.</div></div>';
+      return;
+    }
+    list.innerHTML = safeItems.map(function(item){
+      var author = item.author || 'Партнёр';
+      var createdAt = formatDate(item.createdAt);
+      return '<div class="comment">' +
+        '<div class="comment-head"><span class="comment-author">' + esc(author) + '</span><span>' + esc(createdAt) + '</span></div>' +
+        '<div class="comment-body">' + esc(item.message || '') + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function loadComments(videoId){
+    if (!videoId) return;
+    fetch('/cabinet/api/public/video-comments?video=' + encodeURIComponent(videoId))
+      .then(function(r){ return r.json(); })
+      .then(function(data){ renderComments((data && data.items) || []); })
+      .catch(function(){ renderComments([]); });
+  }
+
+  function updateCommentAuthState(){
+    var form = document.getElementById('comment-form');
+    var cta = document.getElementById('comment-cta');
+    if (isAuthenticated()) {
+      if (form) form.style.display = 'grid';
+      if (cta) cta.style.display = 'none';
+    } else {
+      if (form) form.style.display = 'none';
+      if (cta) cta.style.display = 'block';
+    }
+  }
+
+  function updateReactionUI(summary){
+    var likeBtn = document.getElementById('reaction-like');
+    var dislikeBtn = document.getElementById('reaction-dislike');
+    var likeCount = document.getElementById('reaction-like-count');
+    var dislikeCount = document.getElementById('reaction-dislike-count');
+    var likes = summary && Number(summary.likes || 0) || 0;
+    var dislikes = summary && Number(summary.dislikes || 0) || 0;
+    activeReaction = summary && summary.userReaction ? summary.userReaction : null;
+    if (likeCount) likeCount.textContent = likes;
+    if (dislikeCount) dislikeCount.textContent = dislikes;
+    if (likeBtn) likeBtn.classList.toggle('is-active', activeReaction === 'like');
+    if (dislikeBtn) dislikeBtn.classList.toggle('is-active', activeReaction === 'dislike');
+  }
+
+  function loadReactions(videoId){
+    if (!videoId) return;
+    fetch('/cabinet/api/public/video-reactions?video=' + encodeURIComponent(videoId))
+      .then(function(r){ return r.json(); })
+      .then(function(data){ if (data && data.ok) updateReactionUI(data); })
+      .catch(function(){});
+  }
+
+  function sendReaction(reaction){
+    if (!activeVideoId) return;
+    if (!isAuthenticated()) {
+      showToast('Войдите, чтобы поставить оценку.');
+      return;
+    }
+    var nextReaction = reaction;
+    if (activeReaction === reaction) nextReaction = '';
+    fetch('/cabinet/api/video-reactions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ videoId: activeVideoId, reaction: nextReaction })
+    })
+      .then(function(r){ return r.json(); })
+      .then(function(data){ if (data && data.ok) updateReactionUI(data); })
+      .catch(function(){});
+  }
+
+  function mountVideoInteractions(){
+    var form = document.getElementById('comment-form');
+    var input = document.getElementById('comment-input');
+    var likeBtn = document.getElementById('reaction-like');
+    var dislikeBtn = document.getElementById('reaction-dislike');
+    var transcriptToggle = document.getElementById('transcript-toggle');
+    var transcriptBox = document.getElementById('transcript-box');
+    var transcriptFade = document.getElementById('transcript-fade');
+    var copyTranscriptBtn = document.getElementById('copy-transcript-btn');
+
+    if (form) {
+      form.addEventListener('submit', function(event){
+        event.preventDefault();
+        if (!activeVideoId) return;
+        if (!isAuthenticated()) {
+          showToast('Войдите, чтобы комментировать.');
+          return;
+        }
+        var message = String(input && input.value || '').trim();
+        if (!message) {
+          showToast('Напишите комментарий.');
+          return;
+        }
+        fetch('/cabinet/api/video-comments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ videoId: activeVideoId, message: message })
+        })
+          .then(function(r){ return r.json(); })
+          .then(function(data){
+            if (data && data.ok) {
+              if (input) input.value = '';
+              renderComments(data.items || []);
+            }
+          })
+          .catch(function(){});
+      });
+    }
+
+    if (likeBtn) likeBtn.addEventListener('click', function(){ sendReaction('like'); });
+    if (dislikeBtn) dislikeBtn.addEventListener('click', function(){ sendReaction('dislike'); });
+    if (copyTranscriptBtn) {
+      copyTranscriptBtn.addEventListener('click', function(){
+        var text = buildVideoSeoPost(activeVideoItem, { includeLink: true, channel: 'copy' });
+        copyText(text, 'Пост скопирован!');
+      });
+    }
+    if (transcriptToggle && transcriptBox) {
+      transcriptToggle.addEventListener('click', function(){
+        var isOpen = transcriptBox.classList.toggle('is-open');
+        transcriptToggle.textContent = isOpen ? 'Свернуть' : 'Показать полностью';
+        if (transcriptFade) transcriptFade.style.display = isOpen ? 'none' : 'block';
+      });
+    }
+    updateCommentAuthState();
+    loadComments(activeVideoId);
+    loadReactions(activeVideoId);
+    updateTranscriptBlock(activeVideoItem);
+    loadFullVideoItem(activeVideoId);
+  }
+
+  function openVideoLegacy(item) {
+    if (!item) return;
+    openVideo(item);
+  }
+
+  window.closeVideo = function() {
+    destroyPlayer();
+    document.getElementById('video-modal').style.display = 'none';
+    document.getElementById('modal-content').innerHTML = '';
+    activeVideoId = '';
+    activeVideoItem = null;
+    activeReaction = null;
+  };
+
+  function openVideo(item) {
+    if (!item) return;
+    activeVideoId = String(item.id || '');
+    activeVideoItem = item;
+    var shareUrl = buildVideoLink(item);
+    var shareText = buildMediaShareText(item);
+    var isDirect = !!getPlayableVideoSource(item);
+    var loginUrl = '/cabinet/login' + (ref ? '?ref=' + encodeURIComponent(ref) : '');
+    var transcriptText = buildVideoTranscriptText(item);
+    updateVideoMeta(item);
+    updateVideoStructuredData(item);
+    var html = '';
+    html += isDirect
+      ? '<video id="media-player-host" playsinline controls></video>'
+      : '<div class="plyr__video-embed" id="media-player-host"></div>';
+    html += '<div class="modal-title">' + esc(item.title || 'Видео Trendex') + '</div>';
+    html += '<div class="modal-meta">';
+    if (item.categoryLabel) html += '<span class="badge">' + esc(item.categoryLabel) + '</span>';
+    if (item.speaker) html += '<span class="badge">' + esc(item.speaker) + '</span>';
+    if (item.durationLabel) html += '<span class="badge">' + esc(item.durationLabel) + '</span>';
+    html += '</div>';
+    html += '<div class="video-detail-grid">';
+    html += '<div class="video-detail-main">';
+    html += '<div class="info-card">';
+    html += '<div class="info-card-title">Полный текст</div>';
+    html += '<div class="transcript-box" id="transcript-box">' + esc(transcriptText || 'Текст будет добавлен.') + '<div class="transcript-fade" id="transcript-fade"></div></div>';
+    html += '<div class="transcript-actions">';
+    html += '<button class="btn btn-soft transcript-toggle" type="button" id="transcript-toggle">Показать полностью</button>';
+    html += '<button class="btn btn-soft" type="button" id="copy-transcript-btn">Скопировать пост</button>';
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="modal-actions">';
+    html += '<a class="btn btn-primary" href="' + esc(regUrl) + '" target="_blank">Стать партнёром</a>';
+    html += '<button class="btn btn-soft copy-link-btn" type="button" id="copy-share-btn">Копировать ссылку</button>';
+    html += buildShareMenuHtml(shareUrl, shareText);
+    html += '</div>';
+    html += '<div class="reactions">';
+    html += '<button class="react-btn" type="button" id="reaction-like">Нравится <span id="reaction-like-count">0</span></button>';
+    html += '<button class="react-btn" type="button" id="reaction-dislike">Не нравится <span id="reaction-dislike-count">0</span></button>';
+    html += '</div>';
+    html += '<div class="comments" id="video-comments">';
+    html += '<div class="comments-header"><div class="comments-title">Комментарии</div><div class="comments-count" id="comments-count">Загрузка...</div></div>';
+    html += '<div class="comments-list" id="comments-list"></div>';
+    html += '<form class="comment-form" id="comment-form">';
+    html += '<textarea id="comment-input" placeholder="Ваш комментарий"></textarea>';
+    html += '<button class="btn btn-primary" type="submit">Отправить</button>';
+    html += '</form>';
+    html += '<div class="comment-cta" id="comment-cta">Чтобы писать комментарии, <a href="' + esc(loginUrl) + '">войдите</a> или <a href="' + esc(regUrl) + '">зарегистрируйтесь</a>.</div>';
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="video-detail-side">';
+    html += buildInfoTableMarkup(item);
+    html += '</div>';
+    html += '</div>';
+    document.getElementById('modal-content').innerHTML = html;
+    var copyBtn = document.getElementById('copy-share-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function(){ copyUrl(addUtm(shareUrl, 'copy')); });
+    }
+    var shareToggle = document.querySelector('#video-modal [data-share-toggle]');
+    if (shareToggle) {
+      shareToggle.addEventListener('click', function(){
+        var menu = shareToggle.closest('[data-share-menu]');
+        if (!menu) return;
+        var list = menu.querySelector('.share-menu-list');
+        if (!list) return;
+        list.classList.toggle('is-open');
+      });
+    }
+    document.getElementById('video-modal').style.display = 'block';
+    mountVideoInteractions();
+    setTimeout(function(){ initPlayer(item); }, 0);
+  }
+
+  function renderFilters() {
+    var categories = ['all'];
+    state.items.forEach(function(item){
+      var label = String(item.categoryLabel || '').trim();
+      if (label && categories.indexOf(label) < 0) categories.push(label);
+    });
+    var html = categories.map(function(cat){
+      var label = cat === 'all' ? 'Все' : cat;
+      return '<button class="filter-btn' + (state.filter === cat ? ' active' : '') + '" data-filter="' + esc(cat) + '">' + esc(label) + '</button>';
+    }).join('');
+    var row = document.getElementById('filter-row');
+    row.innerHTML = html;
+    row.querySelectorAll('.filter-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var val = btn.getAttribute('data-filter') || 'all';
+        setFilter(val);
+      });
+    });
+  }
+
+  window.setFilter = function(cat) {
+    state.filter = cat;
+    renderGrid();
+  };
+
+  function renderGrid() {
+    var query = state.query.trim().toLowerCase();
+    var items = state.items.filter(function(item){
+      if (state.filter !== 'all' && String(item.categoryLabel || '') !== state.filter) return false;
+      if (!query) return true;
+      var hay = [item.title, item.summary, item.text, item.speaker, item.categoryLabel, (item.tags || []).join(' ')].join(' ').toLowerCase();
+      return hay.indexOf(query) >= 0;
+    });
+    var html = items.map(function(item){
+      var shareUrl = buildVideoLink(item);
+      var shareText = buildMediaShareText(item);
+      var copyTrackedUrl = addUtm(shareUrl, 'copy');
+      var desc = (item.summary || item.text || '').trim();
+      var chips = [];
+      if (item.products && item.products.length) chips = item.products.slice(0, 3);
+      else if (item.keyPoints && item.keyPoints.length) chips = item.keyPoints.slice(0, 3);
+      else if (item.tags && item.tags.length) chips = item.tags.slice(0, 3);
+      var chipsHtml = chips.length
+        ? '<div class="tag-list">' + chips.map(function(chip){ return '<span class="tag-chip">' + esc(chip) + '</span>'; }).join('') + '</div>'
+        : '';
+      if (desc.length > 150) desc = desc.slice(0, 150).trim() + '…';
+      return '<div class="card">' +
+        '<div class="card-thumb">' +
+        (item.imageUrl ? '<img src="' + esc(item.imageUrl) + '" alt="' + esc(item.title || '') + '" loading="lazy">' : '') +
+        '<button type="button" class="open-video-btn" data-video-id="' + esc(item.id || '') + '">Смотреть</button>' +
+        '</div>' +
+        '<div class="card-body">' +
+        '<div class="card-title">' + esc(item.title || 'Видео Trendex') + '</div>' +
+        '<div class="card-meta">' +
+        (item.categoryLabel ? '<span class="badge">' + esc(item.categoryLabel) + '</span>' : '') +
+        (item.durationLabel ? '<span class="badge">' + esc(item.durationLabel) + '</span>' : '') +
+        '</div>' +
+        '<div class="card-desc">' + esc(desc) + '</div>' +
+        chipsHtml +
+        '<div class="card-actions">' +
+        '<button class="btn btn-primary open-video-btn" type="button" data-video-id="' + esc(item.id || '') + '">Смотреть</button>' +
+        '<button class="btn btn-soft copy-link-btn" type="button" data-copy-url="' + esc(copyTrackedUrl) + '">Копировать</button>' +
+        buildShareMenuHtml(shareUrl, shareText) +
+        '</div>' +
+        '</div></div>';
+    }).join('');
+    document.getElementById('grid').innerHTML = html || '<div class="card" style="padding:18px">Видео не найдены</div>';
+  }
+
+  window.openVideoById = function(id) {
+    var item = state.items.find(function(it){ return String(it.id) === String(id); });
+    if (item) { openVideo(item); return true; }
+    return false;
+  };
+
+  var gridEl = document.getElementById('grid');
+  if (gridEl) {
+    gridEl.addEventListener('click', function(event){
+      var openBtn = event.target.closest('.open-video-btn');
+      if (openBtn) {
+        openVideoById(openBtn.getAttribute('data-video-id'));
+        return;
+      }
+      var copyBtn = event.target.closest('.copy-link-btn');
+      if (copyBtn) {
+        copyUrl(copyBtn.getAttribute('data-copy-url') || '');
+        return;
+      }
+      var shareToggle = event.target.closest('[data-share-toggle]');
+      if (shareToggle) {
+        var menu = shareToggle.closest('[data-share-menu]');
+        if (!menu) return;
+        var list = menu.querySelector('.share-menu-list');
+        if (!list) return;
+        document.querySelectorAll('.share-menu-list.is-open').forEach(function(node){
+          if (node !== list) node.classList.remove('is-open');
+        });
+        list.classList.toggle('is-open');
+        return;
+      }
+    });
+  }
+
+  document.addEventListener('click', function(event){
+    if (event.target.closest('[data-share-menu]')) return;
+    document.querySelectorAll('.share-menu-list.is-open').forEach(function(node){
+      node.classList.remove('is-open');
+    });
+  });
+
+  document.getElementById('search-input').addEventListener('input', function(e){
+    state.query = e.target.value || '';
+    renderGrid();
+  });
+
+  loadSession();
+  loadInviterProfile();
+
+  if (videoParam) {
+    var initialFallback = buildFallbackVideoItem(videoParam);
+    if (initialFallback) {
+      initialVideoOpened = true;
+      openVideo(initialFallback);
+    }
+    fetch('/cabinet/api/public/media-library?video=' + encodeURIComponent(videoParam))
+      .then(function(r){ return r.json(); })
+      .then(function(single){
+        if (single && single.item) {
+          initialVideoOpened = true;
+          state.items.unshift(single.item);
+          openVideo(single.item);
+        } else {
+          var fallback = buildFallbackVideoItem(videoParam);
+          if (fallback) { initialVideoOpened = true; openVideo(fallback); }
+        }
+      })
+      .catch(function(){
+        var fallback = buildFallbackVideoItem(videoParam);
+        if (fallback) { initialVideoOpened = true; openVideo(fallback); }
+      });
+  }
+
+  fetch('/cabinet/api/public/media-library?limit=200')
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      state.items = (data && data.items) || [];
+      renderFilters();
+      renderGrid();
+      if (videoParam && !initialVideoOpened) {
+        var opened = openVideoById(videoParam);
+        if (!opened) {
+          fetch('/cabinet/api/public/media-library?video=' + encodeURIComponent(videoParam))
+            .then(function(r){ return r.json(); })
+            .then(function(single){
+              if (single && single.item) {
+                state.items.unshift(single.item);
+                renderFilters();
+                renderGrid();
+                openVideo(single.item);
+              }
+            })
+            .catch(function(){});
+        }
+      }
+    })
+    .catch(function(){
+      document.getElementById('grid').innerHTML = '<div class="card" style="padding:18px">Не удалось загрузить видео</div>';
+    });
+})();
+</script>
+</body>
+</html>

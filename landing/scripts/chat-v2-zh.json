@@ -1,0 +1,11 @@
+{
+  "chat.mic.idle": "语音输入",
+  "chat.mic.listening": "正在聆听…",
+  "chat.mic.unsupported": "此浏览器不支持语音输入",
+  "dashboard.create_via_chat": "通过聊天创建",
+  "hero_chat.create_agent.h": "通过聊天搭建托管智能体",
+  "hero_chat.create_agent.greeting": "你好 —— 我们在聊天里把智能体搭出来。先告诉我它的名字和一句话介绍。",
+  "hero_chat.create_agent.agent_name": "TrendeX · 智能体搭建",
+  "hero_chat.create_agent.placeholder": "名字、一句话介绍、它做什么…",
+  "hero_chat.create_agent.foot": "结果和向导一样 —— 可直接部署的 character.json。密钥在集群中加密存放。"
+}

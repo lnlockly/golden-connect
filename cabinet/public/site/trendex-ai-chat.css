@@ -1,0 +1,271 @@
+/* ═══ AI Chat — Trendex Cabinet ═══
+   Inline panel inside #page-ai and floating FAB mirror on every cabinet page.
+   Adapted from navinauto ai-chat with Trendex palette (cyan + purple). */
+
+/* ─── Floating button ─────────────────────────────────────── */
+.tai-fab {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  z-index: 9990;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00D4FF, #B14AED);
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 20px;
+  box-shadow: 0 3px 12px rgba(0, 212, 255, 0.32);
+  transition: transform 0.25s, box-shadow 0.25s, opacity 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+}
+.tai-fab:hover { opacity: 1; }
+.tai-fab.tai-fab-hidden { display: none !important; }
+.tai-fab-close {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  z-index: 9991;
+}
+.tai-fab-close:hover { background: #ef4444; }
+@media (max-width: 480px) {
+  .tai-fab { width: 40px; height: 40px; bottom: 12px; right: 12px; font-size: 18px; }
+}
+.tai-fab:hover { transform: scale(1.1); box-shadow: 0 6px 32px rgba(177, 74, 237, 0.55); }
+.tai-fab .tai-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  background: #FF2E97;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: tai-pulse 2s infinite;
+}
+@keyframes tai-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+/* ─── Floating panel overlay (opens from FAB) ─────────────── */
+.tai-panel {
+  position: fixed;
+  bottom: 100px;
+  right: 28px;
+  z-index: 9991;
+  width: 380px;
+  max-width: calc(100vw - 24px);
+  max-height: min(560px, calc(100vh - 140px));
+  background: rgba(13, 17, 36, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 212, 255, 0.22);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 40px rgba(177, 74, 237, 0.15);
+  transform: translateY(20px) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.tai-panel.open {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ─── Inline wrapper (inside #page-ai) ────────────────────── */
+.tai-wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 820px;
+  margin: 0 auto;
+  height: calc(100vh - var(--nav-h, 64px) - 40px);
+  max-height: 720px;
+  border: 1px solid rgba(0, 212, 255, 0.18);
+  border-radius: 16px;
+  background: rgba(13, 17, 36, 0.7);
+  overflow: hidden;
+}
+
+/* ─── Shared inner chrome ─────────────────────────────────── */
+.tai-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.12);
+}
+.tai-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00D4FF, #B14AED);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+  flex-shrink: 0;
+}
+.tai-head-info { flex: 1; }
+.tai-head-title { color: #e8edf5; font-weight: 600; font-size: 14px; }
+.tai-head-sub { color: #8fa3b8; font-size: 11px; }
+.tai-close {
+  background: none;
+  border: none;
+  color: #8fa3b8;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+.tai-close:hover { color: #FF2E97; }
+
+.tai-msgs {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 200px;
+  scroll-behavior: smooth;
+}
+.tai-msg {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  animation: tai-slide 0.3s ease;
+}
+@keyframes tai-slide {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.tai-msg.bot {
+  align-self: flex-start;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  color: #e8edf5;
+}
+.tai-msg.user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #00D4FF, #B14AED);
+  color: #fff;
+}
+.tai-msg b { color: #00D4FF; }
+.tai-msg a { color: #00D4FF; text-decoration: underline; }
+
+.tai-typing {
+  align-self: flex-start;
+  display: flex;
+  gap: 4px;
+  padding: 12px 16px;
+}
+.tai-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00D4FF;
+  animation: tai-dot 0.8s infinite;
+}
+.tai-typing span:nth-child(2) { animation-delay: 0.15s; }
+.tai-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes tai-dot {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40%           { transform: translateY(-6px); opacity: 1; }
+}
+
+.tai-quick {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px 14px;
+  border-top: 1px solid rgba(0, 212, 255, 0.08);
+}
+.tai-quick button {
+  padding: 6px 12px;
+  border-radius: 14px;
+  font-size: 12px;
+  cursor: pointer;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  color: #00D4FF;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.tai-quick button:hover {
+  background: rgba(177, 74, 237, 0.12);
+  border-color: rgba(177, 74, 237, 0.4);
+  color: #fff;
+}
+
+.tai-input-wrap {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid rgba(0, 212, 255, 0.12);
+}
+.tai-input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  color: #e8edf5;
+  font-size: 13px;
+  outline: none;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+}
+.tai-input:focus { border-color: rgba(0, 212, 255, 0.5); }
+.tai-input::placeholder { color: #4a6070; }
+.tai-send {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #00D4FF, #B14AED);
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+.tai-send:hover { transform: scale(1.08); }
+.tai-send:disabled { opacity: 0.5; cursor: default; transform: none; }
+
+@media (max-width: 600px) {
+  .tai-panel {
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 16px 16px 0 0;
+  }
+  .tai-fab { bottom: 16px; right: 16px; width: 52px; height: 52px; font-size: 24px; }
+  .tai-wrap { height: calc(100vh - 80px); border-radius: 0; border: none; }
+}

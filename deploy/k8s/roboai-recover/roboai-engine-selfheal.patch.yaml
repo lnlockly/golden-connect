@@ -1,0 +1,17 @@
+spec:
+  template:
+    spec:
+      volumes:
+        - name: recover-sql
+          configMap:
+            name: roboai-schema-recover
+      containers:
+        - name: roboai-engine
+          command:
+            - sh
+            - -c
+            - "npx prisma db execute --schema=prisma/schema.prisma --file=/sql/recover.sql && echo '[recover] schema ensured' || echo '[recover] skipped (non-fatal)'; npx prisma migrate deploy && node dist/main.js"
+          volumeMounts:
+            - name: recover-sql
+              mountPath: /sql
+              readOnly: true

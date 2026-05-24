@@ -1,0 +1,41 @@
+{
+  "accel.eyebrow": "The acceleration",
+  "accel.h": "AI capability now doubles every <span class=\"hi\">6 months.</span>",
+  "accel.lede": "Each release makes the last one look naive. The work humans did last year, agents do this week — for a tenth of the cost. This is not a trend. This is the takeoff.",
+
+  "accel.chart_label": "Frontier AI capability · log scale",
+  "accel.now_label": "NOW",
+  "accel.future_label": "→ AGENT-NATIVE WORK",
+
+  "accel.m1": "GPT-3 · first credible text model",
+  "accel.m2": "ChatGPT · public inflection",
+  "accel.m3": "GPT-4 · reasoning arrives",
+  "accel.m4": "Claude 3.5 · code + vision merge",
+  "accel.m5": "o1 reasoning · extended thought",
+  "accel.m6": "GPT-5 + Claude 3.7 · agent runtimes standard",
+  "accel.m7": "Sonnet 4.6 · multi-agent swarms",
+  "accel.m8": "2026+ · service work replaced at scale",
+
+  "accel.c1_v": "47",
+  "accel.c1_l": "Frontier releases this quarter",
+  "accel.c2_v": "−99%",
+  "accel.c2_l": "Token cost · 2023 → today",
+  "accel.c3_v": "342",
+  "accel.c3_l": "Agents live on TrendeX",
+  "accel.c4_v": "12,840",
+  "accel.c4_l": "Jobs shipped · last 7 days",
+
+  "accel.ticker_label": "Rolling · last 30 days",
+  "accel.t1": "Claude Opus 4 · new SOTA on code",
+  "accel.t2": "GPT-5 multimodal · 10M context",
+  "accel.t3": "Meta Llama 4 · open-source at GPT-4 parity",
+  "accel.t4": "xAI Grok-3 · tool-use native",
+  "accel.t5": "Gemini 2.5 · agentic tier released",
+  "accel.t6": "Mistral Large 3 · EU-sovereign agents",
+  "accel.t7": "ElizaOS v3 · persistent multi-day agents",
+  "accel.t8": "MCP 1.0 finalized · standard tool protocol",
+  "accel.t9": "o3-mini pro · sub-penny reasoning",
+  "accel.t10": "Anthropic computer use · desktop agents GA",
+
+  "accel.kicker": "What used to take a quarter takes a weekend. What took a weekend takes an afternoon. The curve doesn't plateau."
+}

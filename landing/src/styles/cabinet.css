@@ -1,0 +1,524 @@
+/* Cabinet — mobile-first compact layout. Works from 320px to desktop. */
+
+.tx-cab {
+  min-height: 100%;
+  background: #0a0a0a;
+  color: #eaeaea;
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.tx-cab-loading {
+  padding: 40px 20px;
+  color: #9aa0a6;
+  text-align: center;
+}
+
+/* Header */
+.tx-cab-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tx-cab-brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.tx-cab-brand-name {
+  color: #d4ff00;
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+}
+
+.tx-cab-brand-sub {
+  color: #9aa0a6;
+  font-size: 12px;
+}
+
+.tx-cab-logout {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: transparent;
+  color: #eaeaea;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.tx-cab-logout:active { background: rgba(255, 255, 255, 0.05); }
+
+/* Main — tight 12px padding on mobile */
+.tx-cab-main {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 12px 12px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Identity row */
+.tx-cab-idrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tx-cab-idrow-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.tx-cab-idrow-hello {
+  font-size: 11px;
+  color: #9aa0a6;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.tx-cab-idrow-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tx-cab-tg-pill {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #3ea3e1;
+  background: rgba(34, 158, 217, 0.1);
+  border: 1px solid rgba(34, 158, 217, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Banner */
+.tx-cab-banner {
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255, 217, 102, 0.08);
+  border: 1px solid rgba(255, 217, 102, 0.3);
+  color: #ffd966;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Sections */
+.tx-cab-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tx-cab-h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Hero booking card */
+.tx-cab-hero {
+  padding: 12px 14px;
+  border-radius: 12px;
+}
+
+.tx-cab-hero--paid {
+  border: 1px solid rgba(212, 255, 0, 0.35);
+  background: linear-gradient(180deg, rgba(212, 255, 0, 0.08), rgba(212, 255, 0, 0.02));
+}
+
+.tx-cab-hero--pending {
+  border: 1px solid rgba(255, 217, 102, 0.35);
+  background: rgba(255, 217, 102, 0.05);
+}
+
+.tx-cab-hero--empty {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.tx-cab-hero-badge {
+  font-size: 11px;
+  color: #9aa0a6;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.tx-cab-hero--paid .tx-cab-hero-badge { color: #d4ff00; }
+.tx-cab-hero--pending .tx-cab-hero-badge { color: #ffd966; }
+
+.tx-cab-hero-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.tx-cab-hero-price {
+  color: #9aa0a6;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.tx-cab-hero-sub {
+  font-size: 12px;
+  color: #9aa0a6;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* Tariffs grid */
+.tx-cab-tariffs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.tx-cab-tariff-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 12px;
+  border-radius: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  color: #eaeaea;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s, transform 0.1s;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.tx-cab-tariff-card:active { transform: scale(0.98); }
+.tx-cab-tariff-card:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.tx-cab-tariff-card.is-active {
+  border-color: #d4ff00;
+  background: rgba(212, 255, 0, 0.08);
+}
+
+.tx-cab-tariff-code {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #9aa0a6;
+  text-transform: uppercase;
+}
+
+.tx-cab-tariff-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.tx-cab-tariff-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-top: 2px;
+}
+.tx-cab-tariff-card.is-active .tx-cab-tariff-price { color: #d4ff00; }
+
+/* Payment section */
+.tx-cab-pay {
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(212, 255, 0, 0.25);
+  background: rgba(212, 255, 0, 0.02);
+}
+
+.tx-cab-method-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.tx-cab-method {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.tx-cab-method:active { transform: scale(0.98); }
+
+.tx-cab-method.is-active {
+  border-color: #d4ff00;
+  background: rgba(212, 255, 0, 0.06);
+}
+
+.tx-cab-method-label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tx-cab-method-hint {
+  font-size: 11px;
+  color: #9aa0a6;
+}
+
+.tx-cab-cta {
+  display: block;
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 11px;
+  background: #d4ff00;
+  color: #0a0a0a;
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: -0.01em;
+  -webkit-tap-highlight-color: transparent;
+}
+.tx-cab-pay-hint {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #9aa0a6;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+.tx-cab-cta:active { transform: scale(0.98); }
+.tx-cab-cta:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.tx-cab-error {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(209, 67, 67, 0.12);
+  border: 1px solid rgba(209, 67, 67, 0.3);
+  color: #ff9a9a;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* Desktop: wider tariff grid */
+@media (min-width: 640px) {
+  .tx-cab-main { padding: 24px 24px 60px; gap: 18px; }
+  .tx-cab-tariffs-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .tx-cab-tariff-card { padding: 14px; }
+  .tx-cab-tariff-name { font-size: 15px; }
+  .tx-cab-tariff-price { font-size: 20px; }
+  .tx-cab-hero { padding: 22px 24px; }
+  .tx-cab-hero-title { font-size: 26px; }
+  .tx-cab-h2 { font-size: 16px; }
+}
+
+/* iOS safe areas */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .tx-cab-main {
+    padding-bottom: calc(40px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Prevent input zoom on iOS Safari */
+.tx-cab input, .tx-cab textarea {
+  font-size: 16px;
+}
+/* ═════ Cabinet shell additions (Marketing v2) ═════ */
+
+.tx-cab-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tx-cab-user-badge {
+  font-size: 13px;
+  color: #a0a8d0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(42, 53, 102, 0.35);
+  border: 1px solid rgba(42, 53, 102, 0.6);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tx-cab-menu {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: rgba(10, 14, 39, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(42, 53, 102, 0.4);
+}
+
+.tx-cab-menu-scroll {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 6px 20px;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tx-cab-menu-scroll::-webkit-scrollbar { display: none; }
+
+.tx-cab-menu-item {
+  flex: 0 0 auto;
+  padding: 12px 16px;
+  border-radius: 10px;
+  color: #a0a8d0;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color .2s, background .2s;
+  white-space: nowrap;
+  position: relative;
+}
+
+.tx-cab-menu-item:hover {
+  color: #fff;
+  background: rgba(42, 53, 102, 0.3);
+}
+
+.tx-cab-menu-item--active {
+  color: #0A0E27;
+  background: linear-gradient(135deg, #00D4FF 0%, #B14AED 100%);
+  font-weight: 700;
+}
+
+.tx-cab-menu-item--active:hover {
+  color: #0A0E27;
+  background: linear-gradient(135deg, #00D4FF 0%, #B14AED 100%);
+}
+
+.tx-cab-menu-soon {
+  margin-left: 8px;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 184, 0, 0.15);
+  color: #ffb800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+/* ═════ Cabinet page heading (sub-pages) ═════ */
+
+.tx-cab-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 20px;
+  color: #fff;
+}
+
+.tx-cab-page-head {
+  margin-bottom: 20px;
+}
+
+.tx-cab-page-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  background: linear-gradient(135deg, #00D4FF, #B14AED);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.tx-cab-page-sub {
+  font-size: 14px;
+  color: #a0a8d0;
+  margin: 0;
+}
+
+.tx-cab-soon {
+  padding: 48px 24px;
+  border-radius: 16px;
+  background: rgba(22, 29, 63, 0.6);
+  border: 1px dashed rgba(42, 53, 102, 0.8);
+  text-align: center;
+}
+
+.tx-cab-soon-emoji {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.tx-cab-soon-text {
+  color: #a0a8d0;
+  font-size: 14px;
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* Responsive: on mobile the menu scrolls horizontally, header stacks */
+@media (max-width: 640px) {
+  .tx-cab-header-right { gap: 8px; }
+  .tx-cab-user-badge { max-width: 100px; font-size: 12px; padding: 4px 8px; }
+  .tx-cab-menu-item { padding: 10px 12px; font-size: 13px; }
+  .tx-cab-page-title { font-size: 22px; }
+}
+
+/* Full-cabinet escape link in the header — visible on every cabinet page */
+.tx-cab-full-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #FFB800 0%, #FF2E97 100%);
+  color: #0a0a0f !important;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(255, 46, 151, 0.25);
+  transition: transform .15s ease, box-shadow .15s ease;
+  white-space: nowrap;
+}
+.tx-cab-full-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(255, 46, 151, 0.40);
+}
+.tx-cab-full-link:active {
+  transform: translateY(0);
+}
+@media (max-width: 640px) {
+  .tx-cab-full-link {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}

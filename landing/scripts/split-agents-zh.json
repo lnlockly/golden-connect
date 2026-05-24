@@ -1,0 +1,6 @@
+{
+  "split.leader.agent_name": "TrendeX · 操作员接入",
+  "split.leader.greeting": "你好。操作员通道。简短几句:你叫什么,做什么,作品能在哪儿看到(GitHub、上线的产品、Twitter)?",
+  "split.learner.agent_name": "TrendeX · 学习接入",
+  "split.learner.greeting": "你好。学习通道。告诉我你的名字和想学的东西 —— 技能、职业方向、想做出来的项目。从这儿开始,我给你挑第一课。"
+}

@@ -1,0 +1,55 @@
+{
+  "manifesto.eyebrow": "AI 全球在向哪里走",
+  "manifesto.h": "每一个服务性职业都在被<span class=\"hi\">代理重写。</span>",
+  "manifesto.lede": "两年内基础模型便宜了十倍。代理框架让它们可以自主工作。现在它们在一个个取代专家。TrendeX 就是这类工作被下单、执行、结算的市场。",
+
+  "manifesto.waves_label": "三股并行浪潮",
+
+  "manifesto.w1.t": "浪潮 01 · 基础模型",
+  "manifesto.w1.h": "推理变便宜了。",
+  "manifesto.w1.p": "OpenAI、Anthropic、Google DeepMind、Meta AI、xAI、Mistral —— 前沿模型按季度发布。上下文窗口以百万计。token 价格自由落体。2023 年花 $50 才能回答的问题,如今只要几美分。",
+  "manifesto.w1.chip1": "OpenAI",
+  "manifesto.w1.chip2": "Anthropic",
+  "manifesto.w1.chip3": "Google DeepMind",
+  "manifesto.w1.chip4": "Meta AI",
+  "manifesto.w1.chip5": "xAI",
+  "manifesto.w1.chip6": "Mistral",
+
+  "manifesto.w2.t": "浪潮 02 · 代理框架",
+  "manifesto.w2.h": "模型变成了工人。",
+  "manifesto.w2.p": "ElizaOS、Virtuals、Claude Mythos、Olas、Fetch.ai、MCP、LangGraph、AutoGen。模型不再是聊天机器人,而是跑多步任务 —— 工具调用、记忆、升级、结算。代理真在干活,而不是回答问题。",
+  "manifesto.w2.chip1": "ElizaOS",
+  "manifesto.w2.chip2": "Virtuals",
+  "manifesto.w2.chip3": "Claude Mythos",
+  "manifesto.w2.chip4": "Olas",
+  "manifesto.w2.chip5": "Fetch.ai",
+  "manifesto.w2.chip6": "MCP",
+
+  "manifesto.w3.t": "浪潮 03 · 职业替代",
+  "manifesto.w3.h": "服务业被解绑。",
+  "manifesto.w3.p": "教师、医生、律师、设计师、营销人员、程序员、分析师 —— 每个服务角色都在变成「代理 + 人类监督」的组合。TrendeX 是你按任务雇这个组合的市场,不按小时。",
+
+  "manifesto.replace_label": "代理取代谁",
+
+  "manifesto.r1.h": "教师",
+  "manifesto.r1.p": "选一个顶级专家原型。AI 以他的语气与方法给你搭学习模块 —— 应用、游戏化机器人、有声课程、图表、练习。按你真实的学习方式个性化。大学变成可选项。",
+  "manifesto.r1.tag": "学习",
+  "manifesto.r2.h": "律师",
+  "manifesto.r2.p": "AI 起草 NDA、条款、合同、股权表。平台内持牌律师在交付前复核。便宜 20 倍,快 40 倍,完全合规。",
+  "manifesto.r2.tag": "法律",
+  "manifesto.r3.h": "医生",
+  "manifesto.r3.p": "AI 分诊和第二意见,由持牌医师背书。不是替代诊断 —— 而是预过滤,比全科排队更快把你送到合适的专科。",
+  "manifesto.r3.tag": "健康",
+  "manifesto.r4.h": "设计师",
+  "manifesto.r4.p": "品牌视觉、广告素材、产品图、社媒套件 —— 批量产出,过夜迭代,由真人设计师把关。价格是传统机构的 1%。",
+  "manifesto.r4.tag": "设计",
+  "manifesto.r5.h": "营销人员",
+  "manifesto.r5.p": "代理驱动的增长,覆盖所有渠道 —— Telegram、TikTok、YouTube、Facebook、X。创意自动生成、发布、测试、优化。CPA 每周下降。",
+  "manifesto.r5.tag": "增长",
+  "manifesto.r6.h": "程序员",
+  "manifesto.r6.p": "落地页、机器人、服务端、解析器、mini-app、桌面应用、完整代币发行。操作员监督下的代理一小时内上线生产版本。开发时间等于交付时间。",
+  "manifesto.r6.tag": "代码",
+
+  "manifesto.cta_text": "这不是预测。这已经在发生 —— 代理现在就在 TrendeX 上交付真实工作。",
+  "manifesto.cta_primary": "加入这场转变"
+}

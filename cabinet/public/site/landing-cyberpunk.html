@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#02010a">
+<title>Trendex — Cyberpunk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=VT323&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #02010a;
+  --bg-2: #0a0419;
+  --neon-cyan: #00fff7;
+  --neon-pink: #ff2bd0;
+  --neon-purple: #b14aed;
+  --neon-green: #3cffb8;
+  --neon-yellow: #ffe34a;
+  --line: rgba(0, 255, 247, 0.22);
+  --grid-color: rgba(0, 255, 247, 0.07);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Cyberpunk animated grid floor */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 60%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 60%, #000 20%, transparent 75%);
+  animation: gridMove 20s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+@keyframes gridMove {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 48px, 48px 0; }
+}
+
+/* Scan-line overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 255, 247, 0.03) 0px,
+    rgba(0, 255, 247, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+}
+
+main { position: relative; z-index: 2; }
+
+/* NAV */
+.cp-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  padding: 20px 5%;
+  backdrop-filter: blur(8px);
+  background: rgba(2, 1, 10, 0.6);
+  border-bottom: 1px solid var(--line);
+}
+.cp-logo {
+  font-family: 'Orbitron', monospace;
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 12px var(--neon-cyan), 0 0 28px rgba(0, 255, 247, 0.3);
+  flex: 1;
+}
+.cp-cta {
+  display: inline-block;
+  padding: 10px 22px;
+  color: #000;
+  background: var(--neon-cyan);
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--neon-cyan);
+  box-shadow: 4px 4px 0 var(--neon-pink), 8px 8px 0 var(--neon-purple);
+  transition: all 0.18s;
+}
+.cp-cta:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--neon-pink), 4px 4px 0 var(--neon-purple);
+}
+
+/* HERO */
+.cp-hero {
+  min-height: calc(100vh - 70px);
+  display: grid;
+  place-items: center;
+  padding: 80px 5%;
+  position: relative;
+  text-align: center;
+}
+.cp-hero h1 {
+  font-family: 'Orbitron', monospace;
+  font-weight: 800;
+  font-size: clamp(44px, 8vw, 120px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+}
+.cp-hero h1 .glitch {
+  display: inline-block;
+  position: relative;
+  animation: glitchJump 3s steps(1) infinite;
+}
+.cp-hero h1 .glitch::before,
+.cp-hero h1 .glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  overflow: hidden;
+}
+.cp-hero h1 .glitch::before {
+  left: 2px;
+  color: var(--neon-pink);
+  mix-blend-mode: screen;
+  animation: glitchShift 2s steps(2) infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+.cp-hero h1 .glitch::after {
+  left: -2px;
+  color: var(--neon-cyan);
+  mix-blend-mode: screen;
+  animation: glitchShift 2.3s steps(2) infinite reverse;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+@keyframes glitchShift {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(1px, -1px); }
+  75% { transform: translate(-1px, 0); }
+}
+@keyframes glitchJump {
+  0%, 90%, 100% { filter: none; }
+  92% { filter: hue-rotate(40deg) brightness(1.2); transform: translateX(2px); }
+  94% { filter: hue-rotate(-40deg); transform: translateX(-2px); }
+}
+
+.cp-sub {
+  margin-top: 28px;
+  font-size: clamp(16px, 2vw, 22px);
+  max-width: 680px;
+  color: #d0e9ff;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+}
+
+.cp-hero-cta {
+  display: flex;
+  gap: 18px;
+  margin-top: 44px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.cp-btn {
+  display: inline-block;
+  padding: 18px 36px;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  background: transparent;
+  box-shadow: 4px 4px 0 var(--neon-pink), 8px 8px 0 var(--neon-purple), 12px 12px 40px rgba(255, 43, 208, 0.4);
+  transition: all 0.22s cubic-bezier(.2,.8,.2,1);
+  cursor: pointer;
+  text-shadow: 0 0 8px var(--neon-cyan);
+}
+.cp-btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--neon-pink), 4px 4px 0 var(--neon-purple); }
+.cp-btn:active { transform: translate(6px, 6px); box-shadow: none; transition: 0.08s; }
+.cp-btn--solid { color: #000; background: var(--neon-cyan); }
+.cp-btn--pink { border-color: var(--neon-pink); color: var(--neon-pink); box-shadow: 4px 4px 0 var(--neon-purple), 8px 8px 0 var(--neon-cyan), 12px 12px 40px rgba(0, 255, 247, 0.3); text-shadow: 0 0 8px var(--neon-pink); }
+
+/* Hero floating orb */
+.cp-orb {
+  position: absolute;
+  width: 420px; height: 420px;
+  top: 15%; left: 10%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--neon-pink), var(--neon-purple) 40%, transparent 70%);
+  filter: blur(50px);
+  opacity: 0.55;
+  animation: orbDrift 14s ease-in-out infinite;
+  z-index: -1;
+}
+.cp-orb--b {
+  top: auto; left: auto;
+  right: 8%; bottom: 10%;
+  background: radial-gradient(circle at 40% 40%, var(--neon-cyan), var(--neon-green) 40%, transparent 70%);
+  animation-delay: -7s;
+}
+@keyframes orbDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, -30px) scale(1.08); }
+}
+
+/* SECTIONS */
+.cp-section {
+  padding: 120px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+.cp-section h2 {
+  font-family: 'Orbitron', monospace;
+  font-weight: 800;
+  font-size: clamp(32px, 5vw, 64px);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+.cp-section h2::after {
+  content: '';
+  display: block;
+  height: 4px;
+  width: 80px;
+  margin-top: 12px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
+  box-shadow: 0 0 20px var(--neon-cyan);
+}
+.cp-eyebrow {
+  font-family: 'VT323', monospace;
+  color: var(--neon-green);
+  font-size: 20px;
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+/* TARIFFS */
+.cp-tariffs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+@media (max-width: 968px) { .cp-tariffs { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .cp-tariffs { grid-template-columns: 1fr; } }
+.cp-tariff {
+  position: relative;
+  padding: 32px 24px;
+  background: rgba(10, 4, 25, 0.6);
+  border: 2px solid var(--line);
+  transition: all 0.3s;
+  backdrop-filter: blur(6px);
+}
+.cp-tariff::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink) 50%, var(--neon-purple));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.cp-tariff:hover {
+  transform: translateY(-8px);
+  border-color: transparent;
+}
+.cp-tariff:hover::before { opacity: 1; }
+.cp-tariff-name {
+  font-family: 'Orbitron', monospace;
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--neon-cyan);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.cp-tariff-price {
+  font-family: 'Orbitron', monospace;
+  font-size: 42px;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.cp-tariff-price small { font-size: 14px; color: #888; display: block; letter-spacing: 1px; }
+.cp-tariff ul { list-style: none; margin-top: 20px; }
+.cp-tariff li {
+  padding: 6px 0;
+  font-size: 14px;
+  color: #d0e9ff;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  letter-spacing: 0.3px;
+}
+.cp-tariff--rocket {
+  border-color: var(--neon-pink);
+  background: linear-gradient(160deg, rgba(255, 43, 208, 0.15), rgba(177, 74, 237, 0.08) 50%, rgba(2, 1, 10, 0.85));
+}
+.cp-tariff--rocket .cp-tariff-name { color: var(--neon-pink); }
+.cp-tariff--rocket::after {
+  content: 'TOP';
+  position: absolute;
+  top: -10px;
+  right: 16px;
+  background: var(--neon-pink);
+  color: #000;
+  padding: 4px 10px;
+  font-family: 'Orbitron', monospace;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+/* STEP PATHWAY */
+.cp-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+@media (max-width: 860px) { .cp-steps { grid-template-columns: 1fr; } }
+.cp-step {
+  padding: 28px 24px;
+  background: rgba(10, 4, 25, 0.55);
+  border: 1px solid var(--line);
+  position: relative;
+}
+.cp-step-num {
+  font-family: 'VT323', monospace;
+  font-size: 50px;
+  line-height: 1;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 20px var(--neon-cyan);
+  margin-bottom: 10px;
+}
+.cp-step h3 {
+  font-family: 'Orbitron', monospace;
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+.cp-step p { color: #aac; line-height: 1.6; }
+
+/* FOOTER */
+.cp-foot {
+  padding: 60px 5%;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  color: #668;
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-top: 60px;
+}
+
+/* CTA section */
+.cp-cta-band {
+  margin: 80px 5% 60px;
+  padding: 80px 32px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(0, 255, 247, 0.08), rgba(255, 43, 208, 0.08));
+  border: 2px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.cp-cta-band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(45deg, transparent 0, transparent 40px, rgba(0, 255, 247, 0.03) 40px, rgba(0, 255, 247, 0.03) 41px);
+  pointer-events: none;
+}
+.cp-cta-band h2 {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(28px, 5vw, 52px);
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before, .cp-orb, .cp-hero h1 .glitch { animation: none !important; }
+}
+</style>
+<!-- [services-pivot-2026-05-17] -->
+</head>
+<body>
+<main>
+  <nav class="cp-nav">
+    <div class="cp-logo">Trendex</div>
+    <a href="#tariffs" class="cp-cta">Тарифы</a>
+  </nav>
+
+  <section class="cp-hero">
+    <div class="cp-orb"></div>
+    <div class="cp-orb cp-orb--b"></div>
+    <div>
+      <div class="cp-eyebrow">//  ACCESS GRANTED — CYBER NEON EDITION</div>
+      <h1>Реклама<br><span class="glitch" data-text="БУДУЩЕГО">БУДУЩЕГО</span></h1>
+      <p class="cp-sub">Trendex — децентрализованная рекламная сеть. Внимание аудитории напрямую оплачивается. До <b style="color:var(--neon-green)">$20/день</b>, <b style="color:var(--neon-pink)">10-уровневая</b> партнёрская программа, доход без потолка.</p>
+      <div class="cp-hero-cta">
+        <a href="/cabinet/register" class="cp-btn cp-btn--solid">Активировать →</a>
+        <a href="#how" class="cp-btn cp-btn--pink">Протокол работы</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cp-section" id="how">
+    <div class="cp-eyebrow">//  SYSTEM.EXE</div>
+    <h2>Как работает протокол</h2>
+    <div class="cp-steps">
+      <div class="cp-step">
+        <div class="cp-step-num">01</div>
+        <h3>Рекламодатель</h3>
+        <p>Пополняет рекламный счёт. Бюджет напрямую распределяется между активной аудиторией, без посредников.</p>
+      </div>
+      <div class="cp-step">
+        <div class="cp-step-num">02</div>
+        <h3>Пользователь</h3>
+        <p>Смотрит объявления, кликает, выполняет задания. Выплаты на рабочий счёт — до $20/день на FREE тарифе.</p>
+      </div>
+      <div class="cp-step">
+        <div class="cp-step-num">03</div>
+        <h3>Партнёр</h3>
+        <p>Приводит людей. Получает % с 10 линий: L1 10%, L2 7%, L3 5% и далее. +10% TRDX-кредит на ROCKET.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cp-section" id="tariffs">
+    <div class="cp-eyebrow">//  LICENSE TIERS</div>
+    <h2>Тарифы</h2>
+    <div class="cp-tariffs">
+      <div class="cp-tariff">
+        <div class="cp-tariff-name">FREE</div>
+        <div class="cp-tariff-price">$0<small>без вложений</small></div>
+        <ul>
+          <li>До $20/день за активность</li>
+          <li>L1 рефералы 10%</li>
+          <li>Без бизнес-места</li>
+          <li>Статус PARTNER за 10 приглашённых</li>
+        </ul>
+      </div>
+      <div class="cp-tariff">
+        <div class="cp-tariff-name">LAUNCH</div>
+        <div class="cp-tariff-price">$45<small>активация $30 + $15/мес</small></div>
+        <ul>
+          <li>1 бизнес-место</li>
+          <li>программа 12 уровней × $0.5</li>
+          <li>10 линий рефералов</li>
+          <li>≈ $4 095 за цикл (30 дней)</li>
+        </ul>
+      </div>
+      <div class="cp-tariff">
+        <div class="cp-tariff-name">BOOST</div>
+        <div class="cp-tariff-price">$90<small>активация $75 + $15/мес</small></div>
+        <ul>
+          <li>2 бизнес-места</li>
+          <li>программа 14 уровней × $0.6</li>
+          <li>10 линий рефералов</li>
+          <li>≈ $19 660 за цикл (30 дней)</li>
+        </ul>
+      </div>
+      <div class="cp-tariff cp-tariff--rocket">
+        <div class="cp-tariff-name">ROCKET</div>
+        <div class="cp-tariff-price">$135<small>далее $45/мес</small></div>
+        <ul>
+          <li>3 бизнес-места</li>
+          <li>программа 17 уровней × $0.7</li>
+          <li>10 линий + TRDX-кредит</li>
+          <li>≈ $183 499 за цикл (30 дней)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="cp-cta-band">
+    <h2>Готов к запуску?</h2>
+    <p style="color:#aac;font-size:18px;margin-bottom:28px">Ранние участники получают ×2 Gift-счёт и фиксируют место на платформе навсегда.</p>
+    <a href="/cabinet/register" class="cp-btn cp-btn--solid">Подключиться к сети</a>
+  </section>
+
+  <footer class="cp-foot">// Trendex Protocol v2.0 — decentralized attention economy //</footer>
+</main>
+</body>
+</html>

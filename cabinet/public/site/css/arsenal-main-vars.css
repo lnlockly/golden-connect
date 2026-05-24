@@ -1,0 +1,21 @@
+/* Trendex: vars Arsenal classes expect that are not in our :root yet.
+   Loaded BEFORE arsenal-main-scoped.css. */
+:root {
+  --bg-primary:    #0a0e16;
+  --bg-secondary:  rgba(13, 17, 36, 0.7);
+  --bg-tertiary:   rgba(0, 0, 0, 0.4);
+  --bg-accent:     linear-gradient(135deg, #00D4FF 0%, #B14AED 100%);
+  --border-color:  rgba(177, 74, 237, 0.18);
+  --border-light:  rgba(255, 255, 255, 0.08);
+  --accent-light:  rgba(0, 212, 255, 0.12);
+  --accent-primary: #00D4FF;
+  --info:          #00D4FF;
+  --success:       #10b981;
+  --warning:       #fbbf24;
+  --radius:        12px;
+  --radius-sm:     8px;
+  --header-height: 60px;
+  --sidebar-width: 260px;
+  --shadow:        0 2px 12px rgba(0,0,0,0.3);
+  --transition:    0.2s ease;
+}

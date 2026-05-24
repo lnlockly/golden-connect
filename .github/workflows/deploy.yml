@@ -1,0 +1,173 @@
+name: Build & Deploy trendex
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Build & deploy all services regardless of changed paths"
+        required: false
+        default: "false"
+
+concurrency:
+  group: deploy-trendex
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+  OWNER: lnlockly
+  NAMESPACE: trendex
+
+jobs:
+  changes:
+    runs-on: [self-hosted, trendex]
+    outputs:
+      api: ${{ steps.filter.outputs.api }}
+      bot: ${{ steps.filter.outputs.bot }}
+      landing: ${{ steps.filter.outputs.landing }}
+      cabinet: ${{ steps.filter.outputs.cabinet }}
+      infra: ${{ steps.filter.outputs.infra }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            api:
+              - 'api/**'
+            bot:
+              - 'bot/**'
+            landing:
+              - 'landing/**'
+            cabinet:
+              - 'cabinet/**'
+            infra:
+              - 'deploy/k8s/**'
+              - '.github/workflows/deploy.yml'
+
+  build:
+    needs: changes
+    runs-on: [self-hosted, trendex]
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: api
+            context: ./api
+            image: trendex-api
+            changed: ${{ needs.changes.outputs.api }}
+          - name: bot
+            context: ./bot
+            image: trendex-bot
+            changed: ${{ needs.changes.outputs.bot }}
+          - name: landing
+            context: ./landing
+            image: trendex-landing
+            changed: ${{ needs.changes.outputs.landing }}
+          - name: cabinet
+            context: ./cabinet
+            image: trendex-cabinet
+            changed: ${{ needs.changes.outputs.cabinet }}
+    steps:
+      - name: Skip (no changes)
+        if: matrix.changed != 'true' && github.event.inputs.force != 'true'
+        run: echo "No changes in ${{ matrix.name }} — skipping build."
+
+      - uses: actions/checkout@v4
+        if: matrix.changed == 'true' || github.event.inputs.force == 'true'
+
+      - uses: docker/setup-buildx-action@v3
+        if: matrix.changed == 'true' || github.event.inputs.force == 'true'
+
+      - uses: docker/login-action@v3
+        if: matrix.changed == 'true' || github.event.inputs.force == 'true'
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build & push ${{ matrix.name }}
+        if: matrix.changed == 'true' || github.event.inputs.force == 'true'
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ matrix.context }}
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ matrix.image }}:${{ github.sha }}
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ matrix.image }}:latest
+          cache-from: type=gha,scope=${{ matrix.name }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.name }}
+
+  deploy:
+    needs: [changes, build]
+    runs-on: [self-hosted, trendex]
+    if: always() && needs.build.result != 'failure' && needs.build.result != 'cancelled'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
+
+      - name: Trust deploy host
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ vars.DEPLOY_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Sync manifests
+        run: |
+          ssh ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }} "mkdir -p /tmp/trendex-k8s"
+          scp -r deploy/k8s/* ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}:/tmp/trendex-k8s/
+
+      - name: Apply manifests + roll out
+        env:
+          SHA: ${{ github.sha }}
+          API_CHANGED: ${{ needs.changes.outputs.api }}
+          BOT_CHANGED: ${{ needs.changes.outputs.bot }}
+          LANDING_CHANGED: ${{ needs.changes.outputs.landing }}
+          CABINET_CHANGED: ${{ needs.changes.outputs.cabinet }}
+          FORCE: ${{ github.event.inputs.force }}
+        run: |
+          ssh ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }} bash -s <<EOF
+            set -euo pipefail
+            NS=${{ env.NAMESPACE }}
+            REG=${{ env.REGISTRY }}/${{ env.OWNER }}
+            SHA=${SHA}
+
+            # 1. Manifests are idempotent; apply every run so infra changes land.
+            kubectl apply -f /tmp/trendex-k8s/
+
+            # 2. Pin images to this commit for whichever services changed.
+            if [ "${API_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then
+              kubectl -n \$NS set image deploy/trendex-api \
+                trendex-api=\$REG/trendex-api:\$SHA \
+                --record=false
+              kubectl -n \$NS rollout status deploy/trendex-api --timeout=3m
+            fi
+
+            if [ "${BOT_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then
+              kubectl -n \$NS set image deploy/trendex-bot \
+                trendex-bot=\$REG/trendex-bot:\$SHA \
+                --record=false
+              kubectl -n \$NS rollout status deploy/trendex-bot --timeout=3m
+            fi
+
+            if [ "${LANDING_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then
+              kubectl -n \$NS set image deploy/trendex-landing \
+                trendex-landing=\$REG/trendex-landing:\$SHA \
+                --record=false
+              kubectl -n \$NS rollout status deploy/trendex-landing --timeout=3m
+            fi
+
+            if [ "${CABINET_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then
+              kubectl -n \$NS set image deploy/trendex-cabinet \
+                trendex-cabinet=\$REG/trendex-cabinet:\$SHA \
+                --record=false
+              kubectl -n \$NS rollout status deploy/trendex-cabinet --timeout=4m
+            fi
+          EOF

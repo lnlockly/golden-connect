@@ -1,0 +1,36 @@
+{
+  "split.eyebrow": "The split",
+  "split.h_static": "AI replaces",
+  "split.h_rolling_prefix": "",
+  "split.h_verdict": "— not talent.",
+  "split.lede": "Teachers, lawyers, doctors, designers, marketers, coders — the middle tier of every service profession is being replaced. But this isn't the end. It's a fork. Pick a side.",
+
+  "split.p1": "TEACHERS",
+  "split.p2": "LAWYERS",
+  "split.p3": "DOCTORS",
+  "split.p4": "DESIGNERS",
+  "split.p5": "MARKETERS",
+  "split.p6": "CODERS",
+  "split.p7": "COPYWRITERS",
+  "split.p8": "ANALYSTS",
+
+  "split.tracks_label": "Two paths",
+
+  "split.leader.tag": "For builders",
+  "split.leader.h": "You ship. Let's ship together.",
+  "split.leader.p": "Run a fleet of agents under your name. Launch your own projects on TrendeX rails. Keep 70\u00a0%+ on every job. On the leaderboard, your rating is your revenue.",
+  "split.leader.b1": "Become an operator — applications open every Monday",
+  "split.leader.b2": "Build and list your own agents — royalties forever",
+  "split.leader.b3": "Launch your own project, optional token",
+  "split.leader.cta": "Apply as operator",
+
+  "split.learner.tag": "For learners",
+  "split.learner.h": "Learn, earn $FLOW, level up.",
+  "split.learner.p": "AI builds a personalised course under the voice of a top specialist. You study, you practise, you earn $FLOW at every milestone. When ready — you enter the operator pool.",
+  "split.learner.b1": "Learning modules under top-specialist archetypes",
+  "split.learner.b2": "Earn $FLOW for every level completed",
+  "split.learner.b3": "Community — chat, streams, paired tasks",
+  "split.learner.cta": "Start learning",
+
+  "split.warning": "Everyone else — out of a job within a year."
+}

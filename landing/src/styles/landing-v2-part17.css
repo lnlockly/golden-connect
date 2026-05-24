@@ -1,0 +1,238 @@
+/* ═════ LAUNCHPAD ACCENT + CAPITAL MARKET TEASER (part 17) ═════ */
+/* Scoped classes:
+ *   .launch-v2-*  — bigger, louder rewrite of LaunchYourProject
+ *   .cm-*         — short teaser section between launch and token
+ */
+
+/* ─── LaunchYourProject v2 ────────────────────────────────────── */
+
+.launch-v2-section {
+  /* Make it louder: slightly heavier background, more vertical breathing. */
+  padding: 120px 40px;
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(74, 91, 255, 0.10), transparent 55%),
+    radial-gradient(ellipse at 10% 100%, rgba(212, 255, 0, 0.06), transparent 55%),
+    var(--bg);
+}
+
+.launch-v2-head {
+  max-width: 960px;
+}
+.launch-v2-h {
+  font-size: clamp(38px, 6vw, 76px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin-top: 14px;
+}
+.launch-v2-lede {
+  max-width: 720px;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* What you get — three columns */
+.launch-v2-whats {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.launch-v2-what {
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.launch-v2-what::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+}
+.launch-v2-what.w-1::before { background: var(--royal); }
+.launch-v2-what.w-2::before { background: var(--acid); }
+.launch-v2-what.w-3::before { background: var(--acid-2); }
+
+.launch-v2-what-n {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.launch-v2-what-h {
+  font-family: var(--f-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.launch-v2-what-p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+/* Steps row — 4 numbered cards */
+.launch-v2-steps {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.launch-v2-step {
+  border: 1px solid var(--line);
+  background: var(--bg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+.launch-v2-step-num {
+  font-family: var(--f-mono);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--acid);
+  letter-spacing: -0.03em;
+}
+.launch-v2-step-h {
+  font-family: var(--f-display);
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--ink);
+}
+.launch-v2-step-p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  margin: 0;
+}
+
+/* Big CTA row */
+.launch-v2-cta {
+  margin-top: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+.launch-v2-cta-primary {
+  text-decoration: none;
+}
+
+/* ─── Capital Market Teaser ───────────────────────────────────── */
+
+.cm-section {
+  padding: 100px 40px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  contain: layout paint;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(212, 255, 0, 0.05), transparent 60%),
+    var(--bg);
+}
+.cm-section > * {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cm-head {
+  max-width: 880px;
+}
+.cm-h {
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-top: 14px;
+}
+.cm-lede {
+  max-width: 680px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.cm-cards {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.cm-card {
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.cm-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+}
+.cm-card-1::after { background: var(--acid); }
+.cm-card-2::after { background: var(--royal); }
+.cm-card-3::after { background: var(--acid-2); }
+.cm-cta {
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+.cm-cta-ghost {
+  text-decoration: none;
+}
+
+/* ─── Nav: Capital Market accent ──────────────────────────────── */
+
+.nav-links .nav-capital-market {
+  color: var(--acid);
+  /* Nav link base styles already cover font, size, letter-spacing, etc. */
+}
+.nav-links .nav-capital-market:hover {
+  color: var(--ink);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+
+@media (max-width: 960px) {
+  .launch-v2-section { padding: 80px 20px; }
+  .launch-v2-whats { grid-template-columns: 1fr; }
+  .launch-v2-steps { grid-template-columns: repeat(2, 1fr); }
+  .launch-v2-h { font-size: clamp(30px, 9vw, 48px); }
+
+  .cm-section { padding: 72px 20px; }
+  .cm-cards { grid-template-columns: 1fr; }
+  .cm-h { font-size: clamp(24px, 7vw, 38px); }
+}
+
+@media (max-width: 520px) {
+  .launch-v2-steps { grid-template-columns: 1fr; }
+  .launch-v2-section { padding: 64px 16px; }
+  .launch-v2-what { padding: 22px 20px; }
+  .launch-v2-step { padding: 18px; }
+  .launch-v2-cta,
+  .cm-cta { flex-direction: column; align-items: stretch; }
+  .launch-v2-cta > *,
+  .cm-cta > * { width: 100%; text-align: center; }
+  .cm-section { padding: 56px 16px; }
+  .cm-card { padding: 18px 20px; }
+}

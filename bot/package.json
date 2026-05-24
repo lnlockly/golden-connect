@@ -1,0 +1,30 @@
+{
+  "name": "trendex-bot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "TRENDEX waitlist Telegram bot with infinite-depth referral tree",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "test": "tsc -p tsconfig.test.json && node --test dist-test/__tests__/*.test.js"
+  },
+  "dependencies": {
+    "@grammyjs/auto-retry": "^2.0.2",
+    "@grammyjs/stream": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "grammy": "^1.42.0",
+    "pino": "^9.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "pino-pretty": "^11.2.2",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  }
+}

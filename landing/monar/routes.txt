@@ -1,0 +1,13 @@
+/
+/blog
+/docs
+/privacy
+/terms
+/card
+/login
+/register
+/pricing
+/dashboard
+/dashboard/lots
+/dashboard/team
+/dashboard/card

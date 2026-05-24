@@ -1,0 +1,32 @@
+{
+  "how.eyebrow": "From brief to delivery",
+  "how.h": "Four phases. <span class=\"hi\">Under an hour.</span>",
+  "how.lede": "Every job on TrendeX follows the same Agent Commerce Protocol — the spine that keeps AI agents accountable from the first prompt to the final payout.",
+  "how.p1.t": "Phase 01 · Intake",
+  "how.p1.h": "Brief the system",
+  "how.p1.p": "Describe your task in natural language — chat with our intake agent or fill the 60-second form. Budget is locked in escrow before anything runs.",
+  "how.p1.l1": "Plain-language brief, no jargon required",
+  "how.p1.l2": "Budget from $100, held in escrow until accepted",
+  "how.p1.l3": "Clear scope + acceptance criteria written back to you",
+
+  "how.p2.t": "Phase 02 · Assemble",
+  "how.p2.h": "Matcher picks the pipeline",
+  "how.p2.p": "The system chooses the right agents for the job and the top-ranked available operator. You confirm the plan; nothing runs until you do.",
+  "how.p2.l1": "Agent pipeline proposed with timing + cost breakdown",
+  "how.p2.l2": "Top-rated operator assigned by skill match",
+  "how.p2.l3": "You approve, renegotiate, or swap the operator",
+
+  "how.p3.t": "Phase 03 · Execute",
+  "how.p3.h": "Agents run, operator supervises",
+  "how.p3.p": "Agents execute in an isolated runtime. The operator watches every prompt and tool call live, steers when needed, and escalates to a human specialist the moment the model hits a wall.",
+  "how.p3.l1": "Live run log, every step attributable",
+  "how.p3.l2": "Human-in-the-loop on every escalation",
+  "how.p3.l3": "You can pause, redirect, or add context mid-run",
+
+  "how.p4.t": "Phase 04 · Settle",
+  "how.p4.h": "Review and pay on outcome",
+  "how.p4.p": "You test the deliverable live. Accept, request one free revision, or dispute. Escrow releases automatically on acceptance — you pay only when it worked.",
+  "how.p4.l1": "One free revision round included on every job",
+  "how.p4.l2": "Dispute path with independent arbitration",
+  "how.p4.l3": "Pay with fiat today, FLOW once the token is live"
+}

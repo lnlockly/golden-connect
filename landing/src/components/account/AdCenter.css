@@ -1,0 +1,111 @@
+/* ── AdCenter ───────────────────────────────────────── */
+
+.af-adcenter { display: flex; flex-direction: column; min-height: 0; }
+
+.af-adcenter-switch {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--line, #2a2a2a);
+  border-radius: 100px;
+  background: rgba(0, 0, 0, 0.3);
+  gap: 2px;
+}
+.af-adcenter-pill {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 100px;
+  background: transparent;
+  color: var(--ink-2, #b8b3a5);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+.af-adcenter-pill:hover { color: var(--ink, #f5f1e8); }
+.af-adcenter-pill.is-active {
+  background: var(--acid, #d4ff00);
+  color: var(--bg, #0a0a0a);
+}
+
+.af-adcenter-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+.af-adcenter-stat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line, #2a2a2a);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.af-adcenter-stat-label {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3, #6b6759);
+  font-weight: 600;
+}
+.af-adcenter-stat-value {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--acid, #d4ff00);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.af-adcenter-stat-value.subtle { color: var(--ink, #f5f1e8); }
+
+.af-adcenter-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.af-adcenter-btn {
+  flex: 1;
+  min-width: 140px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 180ms ease;
+  border: 1px solid transparent;
+}
+.af-adcenter-btn.primary {
+  background: var(--acid, #d4ff00);
+  color: var(--bg, #0a0a0a);
+}
+.af-adcenter-btn.primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(212, 255, 0, 0.3);
+}
+.af-adcenter-btn.ghost {
+  background: transparent;
+  color: var(--ink, #f5f1e8);
+  border-color: var(--line, #2a2a2a);
+}
+.af-adcenter-btn.ghost:hover:not(:disabled) {
+  border-color: var(--acid, #d4ff00);
+  color: var(--acid, #d4ff00);
+}
+.af-adcenter-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.af-adcenter-hint {
+  margin: auto 0 0;
+  font-size: 11px;
+  color: var(--ink-3, #6b6759);
+  line-height: 1.5;
+}

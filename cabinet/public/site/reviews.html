@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js?id=108574485","ym");
+ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108574485" style="position:absolute;left:-9999px;" alt=""/></div></noscript>
+<!-- /Yandex.Metrika counter -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Отзывы партнёров Trendex — реальные истории заработка, текстовые и видео отзывы о платформе и выплатах">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#080a0f" id="meta-theme-color">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Trendex">
+  <meta property="og:title" content="Отзывы клиентов Trendex">
+  <meta property="og:description" content="Реальные отзывы партнёров Trendex: истории заработка на бирже заданий, партнёрке, рекламных кампаниях. Кейсы и результаты.">
+  <meta property="og:image" content="https://trendex.biz/media/uploads/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://trendex.biz/reviews">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Отзывы клиентов Trendex — реальные результаты">
+  <meta name="twitter:description" content="Истории применения натуральных продуктов. Реальные отзывы и результаты клиентов Trendex.">
+  <meta name="twitter:image" content="https://trendex.biz/media/uploads/og-image.jpg">
+  <title>Отзывы клиентов | Trendex</title>
+  <link rel="icon" href="/cabinet/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/cabinet/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/cabinet/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function(){
+      var t = localStorage.getItem('xh-theme');
+      if (!t) t = 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css?v=5.6">
+  <style>
+    .reviews-page { padding: 120px 0 60px; min-height: 100vh; }
+    .reviews-hero { text-align: center; margin-bottom: 48px; }
+    .reviews-hero .s-eyebrow { display: inline-block; padding: 8px 18px; border-radius: 999px; background: rgba(37,208,255,.10); border: 1px solid rgba(37,208,255,.18); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent, #25d0ff); margin-bottom: 16px; }
+    .reviews-hero h1 { font-family: var(--font-display, 'Orbitron', sans-serif); font-size: clamp(28px, 4vw, 42px); margin: 0 0 12px; color: var(--text); }
+    .reviews-hero p { color: var(--text-sec); font-size: 16px; max-width: 560px; margin: 0 auto; line-height: 1.6; }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .review-card {
+      background: var(--surface, rgba(15,23,42,.6));
+      border: 1px solid var(--border, rgba(148,163,184,.12));
+      border-radius: var(--r-xl, 20px);
+      padding: 24px;
+      backdrop-filter: blur(16px);
+      transition: transform .2s, border-color .2s;
+    }
+    .review-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent, #25d0ff);
+    }
+
+    .review-stars { font-size: 18px; margin-bottom: 12px; letter-spacing: 2px; }
+    .review-text {
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.7;
+      margin: 0 0 16px;
+      font-style: italic;
+    }
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .review-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent, #25d0ff), #7c3aed);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .review-name { font-weight: 600; font-size: 14px; color: var(--text); }
+    .review-city { font-size: 13px; color: var(--text-sec); margin-top: 2px; }
+    .review-product {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(37,208,255,.08);
+      border: 1px solid rgba(37,208,255,.15);
+      font-size: 12px;
+      color: var(--accent, #25d0ff);
+    }
+
+    .video-reviews-section { margin-bottom: 60px; }
+    .video-reviews-section .section-header { text-align: center; margin-bottom: 32px; }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+    .video-card {
+      background: var(--surface, rgba(15,23,42,.6));
+      border: 1px solid var(--border, rgba(148,163,184,.12));
+      border-radius: var(--r-xl, 20px);
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+    }
+    .video-card iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: none;
+      display: block;
+    }
+    .video-card-info {
+      padding: 16px;
+    }
+    .video-card-info h3 { margin: 0 0 6px; font-size: 15px; color: var(--text); }
+    .video-card-info p { margin: 0; font-size: 13px; color: var(--text-sec); }
+
+    .reviews-cta {
+      text-align: center;
+      padding: 48px 0;
+    }
+    .reviews-cta h2 {
+      font-family: var(--font-display, 'Orbitron', sans-serif);
+      font-size: clamp(22px, 3vw, 32px);
+      margin: 0 0 12px;
+      color: var(--text);
+    }
+    .reviews-cta p { color: var(--text-sec); margin: 0 0 24px; font-size: 15px; }
+
+    .reviews-empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-sec);
+      font-size: 15px;
+    }
+
+    @media (max-width: 640px) {
+      .reviews-grid { grid-template-columns: 1fr; }
+      .video-grid { grid-template-columns: 1fr; }
+      .reviews-page { padding: 100px 0 40px; }
+    }
+  </style>
+<script src="/cabinet/js/bot-link.js?v=1"></script><link rel="canonical" href="https://trendex.biz/reviews">
+  </head>
+<body>
+  <!-- Aurora effects -->
+  <div class="aurora">
+    <div class="aurora-orb aurora-orb--cyan"></div>
+    <div class="aurora-orb aurora-orb--purple"></div>
+    <div class="aurora-orb aurora-orb--gold"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="wrap">
+      <a class="nav-logo" href="/">
+        <div class="nav-logo-icon">&#10022;</div>
+        TRENDEX
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" href="/#company-section">О компании</a>
+        <a class="nav-link" href="/#products-section">Продукты</a>
+        <a class="nav-link" href="/#partner-section">Партнёрам</a>
+        <a class="nav-link" href="/cabinet/reviews" class="active">Отзывы</a>
+        <a class="nav-link" href="/cabinet">Кабинет</a>
+      </div>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="nav-theme-btn" type="button" aria-label="Сменить тему">
+          <span id="theme-icon">&#9728;</span>
+        </button>
+        <a href="/cabinet/login" id="nav-login-btn" class="btn btn--outline btn--nav">Войти</a>
+        <a href="/cabinet/register" id="nav-register-btn" class="btn btn--primary btn--nav">Создать аккаунт</a>
+      </div>
+      <button class="nav-burger" type="button" aria-label="Меню">&#9776;</button>
+    </div>
+    <div class="nav-mobile" id="navMobile">
+      <a class="nav-link" href="/#company-section">О компании</a>
+      <a class="nav-link" href="/#products-section">Продукты</a>
+      <a class="nav-link" href="/#partner-section">Партнёрам</a>
+      <a class="nav-link" href="/cabinet/reviews">Отзывы</a>
+      <a class="nav-link" href="/cabinet">Кабинет</a>
+    </div>
+  </nav>
+
+  <div class="reviews-page">
+    <div class="wrap">
+      <!-- Hero mini -->
+      <div class="reviews-hero">
+        <span class="s-eyebrow">Отзывы</span>
+        <h1>Отзывы клиентов Trendex</h1>
+        <p>Реальные истории людей, которые изменили качество жизни с продуктами Trendex</p>
+      </div>
+
+      <!-- Text reviews grid -->
+      <div class="reviews-grid" id="reviews-grid">
+        <div class="reviews-empty">Загрузка отзывов...</div>
+      </div>
+
+      <!-- Video reviews -->
+      <div class="video-reviews-section" id="video-reviews-section" style="display:none">
+        <div class="section-header">
+          <p class="s-eyebrow" style="text-align:center">Видео</p>
+          <h2 class="s-title" style="text-align:center">Видео-отзывы</h2>
+          <p class="s-subtitle" style="text-align:center">Смотрите реальные видео-отзывы наших клиентов и партнёров</p>
+        </div>
+        <div class="video-grid" id="video-grid"></div>
+      </div>
+
+      <!-- CTA -->
+      <div class="reviews-cta">
+        <h2>Хотите узнать больше?</h2>
+        <p>Записывайтесь на ближайший эфир с экспертами Trendex</p>
+        <a href="/cabinet/register?from=reviews" class="btn btn--primary btn--lg">Записаться на эфир</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">TRENDEX</div>
+          <p class="footer-desc">Официальные материалы компании, каталог продуктов и партнёрская система Trendex в одном пространстве.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Навигация</div>
+          <div class="footer-links">
+            <a href="/#company-section">О компании</a>
+            <a href="/#products-section">Продукты</a>
+            <a href="/#partner-section">Партнёрам</a>
+            <a href="/cabinet/reviews">Отзывы</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Контакты</div>
+          <div class="footer-links">
+            <a data-bot-link href="https://t.me/Trendex_bizbot" target="_blank">&#9992; Telegram бот</a>
+            <a href="/cabinet/register">&#127760; Регистрация</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 Trendex. Все права защищены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="back-top" id="backTop">&uarr;</div>
+
+  <script>
+    (function(){
+      // Back to top
+      var bt = document.getElementById('backTop');
+      if (bt) {
+        window.addEventListener('scroll', function(){ bt.classList.toggle('is-visible', window.scrollY > 600); });
+        bt.addEventListener('click', function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+      }
+      // Burger
+      var burger = document.querySelector('.nav-burger');
+      var navMob = document.getElementById('navMobile');
+      if(burger && navMob){
+        burger.addEventListener('click', function(){ navMob.classList.toggle('is-open'); });
+        navMob.querySelectorAll('.nav-link').forEach(function(l){ l.addEventListener('click', function(){ navMob.classList.remove('is-open'); }); });
+      }
+      // Theme
+      var themeBtn = document.getElementById('theme-toggle');
+      if(themeBtn) themeBtn.addEventListener('click', function(){
+        var cur = document.documentElement.getAttribute('data-theme') || 'dark';
+        var next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('xh-theme', next);
+        var icon = document.getElementById('theme-icon');
+        if(icon) icon.textContent = next === 'dark' ? '\u2600' : '\u263E';
+        var meta = document.getElementById('meta-theme-color');
+        if(meta) meta.content = next === 'dark' ? '#080a0f' : '#f0f2f5';
+      });
+      // Check auth
+      fetch('/cabinet/api/auth/me',{credentials:'same-origin'}).then(function(r){return r.json()}).then(function(d){
+        if(d.user){
+          var acts = document.querySelector('.nav-actions');
+          if(acts) acts.innerHTML = '<a href="/cabinet" class="btn btn--primary btn--nav">Мой кабинет</a>';
+        }
+      }).catch(function(){});
+
+      function injectReviewSchema(reviews) {
+        if (!reviews || !reviews.length) return;
+        var items = reviews.slice(0, 6).map(function(rev, idx){
+          var rating = rev.rating || 5;
+          return {
+            "@type": "ListItem",
+            "position": idx + 1,
+            "item": {
+              "@type": "Review",
+              "reviewRating": { "@type": "Rating", "ratingValue": String(rating), "bestRating": "5" },
+              "author": { "@type": "Person", "name": rev.name || rev.author || "Клиент Trendex" },
+              "reviewBody": rev.text || rev.quote || "",
+              "itemReviewed": { "@type": "Organization", "name": "Trendex" }
+            }
+          };
+        });
+        var data = {
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          "itemListElement": items
+        };
+        var script = document.getElementById('reviews-structured-data');
+        if (!script) {
+          script = document.createElement('script');
+          script.type = 'application/ld+json';
+          script.id = 'reviews-structured-data';
+          document.head.appendChild(script);
+        }
+        script.textContent = JSON.stringify(data);
+      }
+
+      // Load reviews
+      fetch('/cabinet/api/site/config').then(function(r){ return r.json(); }).then(function(data){
+        var site = data.site || data;
+        var reviews = site.reviews || [];
+        var grid = document.getElementById('reviews-grid');
+        if (!reviews.length) {
+          grid.innerHTML = '<div class="reviews-empty">Отзывы пока не добавлены</div>';
+          return;
+        }
+        injectReviewSchema(reviews);
+        var html = '';
+        reviews.forEach(function(rev){
+          var stars = '';
+          var rating = rev.rating || 5;
+          for (var i = 0; i < rating; i++) stars += '\u2B50';
+          var initial = (rev.name || rev.author || '?').charAt(0).toUpperCase();
+          html += '<div class="review-card">';
+          html += '<div class="review-stars">' + stars + '</div>';
+          html += '<p class="review-text">\u201C' + (rev.text || rev.quote || '') + '\u201D</p>';
+          html += '<div class="review-author">';
+          html += '<div class="review-avatar">' + initial + '</div>';
+          html += '<div>';
+          html += '<div class="review-name">' + (rev.name || rev.author || '') + '</div>';
+          if (rev.city) html += '<div class="review-city">' + rev.city + '</div>';
+          html += '</div></div>';
+          if (rev.product) html += '<div class="review-product">' + rev.product + '</div>';
+          html += '</div>';
+        });
+        grid.innerHTML = html;
+
+        // Video reviews
+        var videoReviews = (site.videoReviews || []).filter(function(v){ return v.youtubeId || v.url; });
+        if (videoReviews.length) {
+          document.getElementById('video-reviews-section').style.display = '';
+          var vhtml = '';
+          videoReviews.forEach(function(v){
+            var ytId = v.youtubeId || '';
+            if (!ytId && v.url) {
+              var m = v.url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^&?/]+)/);
+              if (m) ytId = m[1];
+            }
+            vhtml += '<div class="video-card">';
+            if (ytId) {
+              vhtml += '<iframe src="https://www.youtube.com/embed/' + ytId + '" allowfullscreen loading="lazy"></iframe>';
+            }
+            vhtml += '<div class="video-card-info">';
+            vhtml += '<h3>' + (v.title || v.name || 'Видео-отзыв') + '</h3>';
+            if (v.description) vhtml += '<p>' + v.description + '</p>';
+            vhtml += '</div></div>';
+          });
+          document.getElementById('video-grid').innerHTML = vhtml;
+        }
+      }).catch(function(err){
+        console.error('Failed to load reviews:', err);
+        document.getElementById('reviews-grid').innerHTML = '<div class="reviews-empty">Не удалось загрузить отзывы</div>';
+      });
+    })();
+  </script>
+</body>
+</html>

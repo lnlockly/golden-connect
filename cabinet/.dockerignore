@@ -1,0 +1,17 @@
+node_modules
+data
+.git
+.gitignore
+.env
+.env.local
+*.md
+!README.md
+_alpha_port
+_arsenal_chat.js
+_server_snapshot
+PLAN_*.md
+TZ_*.md
+patches
+docs
+.git.embedded_backup
+xhealth_production.tar.gz

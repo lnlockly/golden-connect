@@ -1,0 +1,38 @@
+{
+  "name": "trendex-cabinet",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Trendex Telegram bot — full planner + AI + events + ads",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "web:check": "node --check src/storage.js && node --check src/web-routes.js",
+    "build:knowledge": "node scripts/build-knowledge-index.js",
+    "build:products-library": "node scripts/build-trendex-product-library.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.9.0",
+    "cheerio": "^1.2.0",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.5.1",
+    "form-data": "^4.0.5",
+    "grammy": "^1.21.1",
+    "jsonwebtoken": "^9.0.3",
+    "luxon": "^3.7.2",
+    "mammoth": "^1.12.0",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^4.2.1",
+    "node-fetch": "^2.7.0",
+    "puppeteer": "^24.42.0",
+    "qrcode": "^1.5.4",
+    "sharp": "^0.34.5",
+    "socket.io": "^4.7.5",
+    "uuid": "^9.0.1",
+    "web-push": "^3.6.7",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
+}

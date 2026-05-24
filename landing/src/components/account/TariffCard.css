@@ -1,0 +1,282 @@
+/* ── TariffCard ─────────────────────────────────────────
+ * Uses --acid / --acid-2 / --ink tokens — no new colors.
+ * Sits in a standard .af-acc-cell but owns its body grid.
+ * ───────────────────────────────────────────────────── */
+
+.af-tariff { position: relative; }
+
+.af-tariff-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+}
+
+.af-tariff-name-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--line, #2a2a2a);
+}
+.af-tariff-name {
+  font-family: var(--font-display, 'Fraunces','Noto Serif SC','Inter',serif);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink, #f5f1e8);
+  text-transform: capitalize;
+}
+.af-tariff-entry {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 13px;
+  color: var(--acid, #d4ff00);
+  font-weight: 600;
+}
+
+.af-tariff-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.af-tariff-progress-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.af-tariff-progress-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3, #6b6759);
+  font-weight: 600;
+}
+.af-tariff-progress-value {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 16px;
+  color: var(--ink, #f5f1e8);
+  font-weight: 700;
+}
+.af-tariff-progress-value em {
+  color: var(--ink-3, #6b6759);
+  font-style: normal;
+  font-weight: 500;
+}
+.af-tariff-bar {
+  position: relative;
+  height: 6px;
+  border-radius: 100px;
+  background: rgba(245, 241, 232, 0.06);
+  overflow: hidden;
+}
+.af-tariff-bar-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: linear-gradient(90deg, var(--acid, #d4ff00), var(--acid-2, #00ff9d));
+  border-radius: 100px;
+  transition: width 320ms ease;
+}
+.af-tariff-progress-foot {
+  font-size: 11px;
+  color: var(--ink-2, #b8b3a5);
+}
+
+.af-tariff-renewal {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid var(--line, #2a2a2a);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.af-tariff-renewal-label {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3, #6b6759);
+  font-weight: 600;
+}
+.af-tariff-renewal-value {
+  font-size: 13px;
+  color: var(--ink, #f5f1e8);
+  font-weight: 500;
+}
+
+.af-tariff-change {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: 1px solid var(--acid, #d4ff00);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--acid, #d4ff00);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+.af-tariff-change:hover {
+  background: var(--acid, #d4ff00);
+  color: var(--bg, #0a0a0a);
+  transform: translateY(-1px);
+}
+
+.af-tariff-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 18px;
+  border: 1px solid var(--line, #2a2a2a);
+  border-radius: 100px;
+  background: var(--bg-2, #111);
+  color: var(--ink, #f5f1e8);
+  font-size: 12px;
+  z-index: 1100;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ── modal ──────────────────────────────────────────── */
+
+.af-tariff-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.af-tariff-modal {
+  width: min(640px, 100%);
+  max-height: 88vh;
+  background: var(--bg-2, #111);
+  border: 1px solid var(--line, #2a2a2a);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+.af-tariff-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--line, #2a2a2a);
+}
+.af-tariff-modal-head h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink, #f5f1e8);
+  letter-spacing: 0.02em;
+}
+.af-tariff-modal-close {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--ink-2, #b8b3a5);
+  cursor: pointer;
+  padding: 0 4px;
+}
+.af-tariff-modal-close:hover { color: var(--ink, #f5f1e8); }
+.af-tariff-modal-sub {
+  padding: 12px 22px 0;
+  font-size: 12px;
+  color: var(--ink-2, #b8b3a5);
+  line-height: 1.5;
+}
+.af-tariff-modal-body {
+  padding: 14px 22px 22px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.af-tariff-row {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid var(--line, #2a2a2a);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  transition: border-color 150ms ease, background 150ms ease;
+}
+.af-tariff-row:hover {
+  border-color: rgba(212, 255, 0, 0.4);
+  background: rgba(212, 255, 0, 0.02);
+}
+.af-tariff-row.is-current {
+  border-color: var(--acid-2, #00ff9d);
+  background: rgba(0, 255, 157, 0.04);
+}
+.af-tariff-row-id {
+  font-family: var(--font-display, 'Fraunces','Noto Serif SC','Inter',serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink, #f5f1e8);
+  text-transform: capitalize;
+}
+.af-tariff-row-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.af-tariff-row-k {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3, #6b6759);
+}
+.af-tariff-row-v {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 13px;
+  color: var(--ink, #f5f1e8);
+  font-weight: 600;
+}
+.af-tariff-row-cta {
+  padding: 8px 14px;
+  border: 1px solid var(--acid, #d4ff00);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--acid, #d4ff00);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 180ms ease;
+  white-space: nowrap;
+}
+.af-tariff-row-cta:hover:not(:disabled) {
+  background: var(--acid, #d4ff00);
+  color: var(--bg, #0a0a0a);
+}
+.af-tariff-row-cta:disabled {
+  border-color: var(--line, #2a2a2a);
+  color: var(--ink-3, #6b6759);
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .af-tariff-row {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 10px;
+  }
+  .af-tariff-row-id { grid-column: 1 / -1; }
+  .af-tariff-row-cta { grid-column: 1 / -1; }
+}

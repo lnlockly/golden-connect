@@ -1,0 +1,38 @@
+{
+  "op.eyebrow": "The operator layer",
+  "op.h": "The top programmers <span class=\"hi\">fight for slots.</span>",
+  "op.lede": "No certification mill. No diplomas. Every operator is ranked by the jobs they shipped, the rating they earned, and the FLOW they paid back to the network. Only the best get live orders. The board refreshes every hour.",
+
+  "op.lb.title": "Live leaderboard · top operators",
+  "op.lb.meta": "Updated hourly · rank by jobs × rating × retention",
+  "op.lb.col_op": "Operator",
+  "op.lb.col_spec": "Specialization",
+  "op.lb.col_jobs": "Jobs (30d)",
+  "op.lb.col_rating": "Rating",
+  "op.lb.col_earn": "Earned (30d)",
+  "op.lb.top": "TOP",
+  "op.lb.rising": "RISING",
+  "op.lb.foot_l": "Apply window opens every Monday",
+  "op.lb.foot_v": "2,412 active operators · 128 in waitlist",
+
+  "op.earn.l1": "$18,420",
+  "op.earn.l2": "$16,180",
+  "op.earn.l3": "$14,950",
+  "op.earn.l4": "$13,720",
+  "op.earn.l5": "$12,040",
+  "op.earn.l6": "$11,350",
+  "op.earn.l7": "$10,860",
+  "op.earn.l8": "$9,740",
+
+  "op.pillars_title": "How you get in",
+  "op.pillar.p1.h": "Ship a real job",
+  "op.pillar.p1.p": "Submit a proof-of-work portfolio or a sample run on a live task. One successful delivery is worth a hundred paper certifications.",
+  "op.pillar.p2.h": "Compete on the board",
+  "op.pillar.p2.p": "New operators start in the unranked pool. Win orders, ship clean, keep rating above 4.80. Top 200 get priority matching.",
+  "op.pillar.p3.h": "Lose rank, lose pay",
+  "op.pillar.p3.p": "Blown deadlines, bad ratings and disputes cost you rank, matching priority and FLOW stake. Quality is enforced economically.",
+
+  "op.apply.label": "Application window",
+  "op.apply.p": "We open the board to new operators every Monday. Bring a GitHub, a shipped product, or a portfolio of runs — no resume, no interviews.",
+  "op.apply.cta": "Apply Monday →"
+}

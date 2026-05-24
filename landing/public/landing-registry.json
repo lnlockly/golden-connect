@@ -1,0 +1,53 @@
+[
+  {
+    "id": "main-trendex",
+    "slug": "",
+    "url": "/",
+    "title": "Главная — Trendex.biz",
+    "shortTitle": "Главная",
+    "description": "Основной лендинг проекта. Полное описание экосистемы: 4 способа заработка, тарифы LAUNCH/BOOST/ROCKET, партнёрка 10 уровней, Matching Bonus, Лидерский пул. Универсальный для любой аудитории.",
+    "accent": "#B14AED",
+    "icon": "TX",
+    "badge": "ОФИЦИАЛЬНЫЙ",
+    "traffic": "universal",
+    "funnel": "регистрация → бизнес-место",
+    "audience": "любая (RU + СНГ)",
+    "hook": "4 способа заработка в одной экосистеме. Старт от $0 — рост без потолка.",
+    "adText": "Универсальный лендинг для всех источников: TG-каналы, Reels, прогретые рассылки, оффлайн.",
+    "cta": "Открыть главный лендинг"
+  },
+  {
+    "id": "cyberpunk",
+    "slug": "cyberpunk",
+    "url": "/cabinet/landing/cyberpunk",
+    "title": "Cyberpunk Immersive",
+    "shortTitle": "Cyberpunk",
+    "description": "Неоновый cyberpunk-стиль: glitch-типографика, анимированная сетка, scan-lines, 3D-кнопки с многослойными offset-тенями. Для молодой IT-аудитории и крипто-трейдеров.",
+    "accent": "#FF2BD0",
+    "icon": "CY",
+    "badge": "NEW",
+    "traffic": "cold",
+    "funnel": "холодный трафик → wow-эффект → регистрация",
+    "audience": "18-30, IT, крипто",
+    "hook": "Реклама будущего. Заработок без правил.",
+    "adText": "Запускайте на TikTok / Reels / Telegram-каналах с молодой IT-аудиторией. CTR ×2 vs нейтральный лендинг.",
+    "cta": "Открыть Cyberpunk"
+  },
+  {
+    "id": "brutalist",
+    "slug": "brutalist",
+    "url": "/cabinet/landing/brutalist",
+    "title": "Modern Brutalist 3D",
+    "shortTitle": "Brutalist",
+    "description": "Необрутализм: крупная типографика Archivo Black, жирные чёрные рамки 3px, chunky 3D-тени в три цвета. Светлая cream-палитра с акцентами. Для серьёзной деловой аудитории.",
+    "accent": "#FF4000",
+    "icon": "BR",
+    "badge": "NEW",
+    "traffic": "premium",
+    "funnel": "deluxe воронка → бизнес-место ROCKET",
+    "audience": "30+, бизнес, премиум",
+    "hook": "Реклама, которая не просит. Реклама, которая работает.",
+    "adText": "Для премиум-аудитории: предприниматели, инвесторы, топ-партнёры. Хорошо ложится в LinkedIn, FB, рассылки.",
+    "cta": "Открыть Brutalist"
+  }
+]

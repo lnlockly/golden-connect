@@ -1,0 +1,23 @@
+{
+  "growth.eyebrow": "我们的营销引擎 —— 作为一个产品",
+  "growth.h": "一键启动<span class=\"hi\">代理驱动的增长。</span>",
+  "growth.lede": "我们用代理在所有主流社媒上做自己的用户获取。同一套栈对客户开放 —— 操作员搭建多渠道活动,代理批量出素材、按计划发帖、A/B 测试文案并自动迭代,无需等待人排队。",
+  "growth.channels_l": "覆盖渠道",
+  "growth.c1.h": "创意工厂",
+  "growth.c1.p": "图片、短视频、文案、钩子 —— 生成、测试、按简报重剪。",
+  "growth.c2.h": "发帖与排期",
+  "growth.c2.p": "跨渠道日历,按计划发布,失败自动重试。",
+  "growth.c3.h": "社区与回复",
+  "growth.c3.p": "代理处理入站 DM、发起话题,真实意图升级给人。",
+  "growth.c4.h": "归因与迭代",
+  "growth.c4.p": "按渠道 CPA、按变体提升、每周自动优化方案。",
+
+  "growth.console.live": "进行中活动",
+  "growth.console.title": "growth-console · 24 小时",
+  "growth.console.r1": "5 个变体已发,最佳被置顶",
+  "growth.console.r2": "3 条短片上线,其中 1 条突破 12 万播放",
+  "growth.console.r3": "Lookalike 刷新 + 8 条新创意",
+  "growth.console.r4": "系列话题已排期,14 篇待发",
+  "growth.console.r5": "轮播集 —— 6 个变体在测",
+  "growth.console.foot": "混合 CPA 下行 · 环比 −42%"
+}

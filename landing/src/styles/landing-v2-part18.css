@@ -1,0 +1,482 @@
+/* ═════ UNIVERSAL HERO CHAT ═════ */
+
+.section-hero-chat {
+  padding: 40px 40px 80px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  scroll-margin-top: 72px;
+}
+.section-hero-chat > * {
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-chat-head {
+  margin-bottom: 20px;
+}
+.hero-chat-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--acid);
+  margin-bottom: 10px;
+}
+.hero-chat-h {
+  font-size: clamp(22px, 3.2vw, 34px);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 10px;
+  color: var(--ink);
+}
+.hero-chat-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.hero-chat-reset:hover {
+  color: var(--acid);
+  border-color: var(--acid);
+}
+
+.hero-chat-card {
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+}
+
+/* Embedded-in-hero variant: balloon chat.
+   No card, no borders, no header, no foot.
+   Round white pills rise from the bottom of the hero and stack
+   upward; older messages fade off the top via a mask gradient.
+   The input is a minimal pill at the very bottom.
+*/
+
+.hero-chat--embedded,
+.hero-chat--embedded .hero-chat-card,
+.hero-chat--embedded .hero-chat-card .chat-inline {
+  background: transparent;
+  border: 0;
+}
+/* Hide the section's own page chrome when embedded in hero:
+   eyebrow ("ПОГОВОРИ С TRENDEX"), h2 ("С чем пришёл?"), and
+   the back-to-start pill. Input + messages are the whole UI. */
+.hero-chat--embedded .hero-chat-head,
+.hero-chat--embedded .hero-chat-eyebrow,
+.hero-chat--embedded .hero-chat-h,
+.hero-chat--embedded .hero-chat-reset {
+  display: none;
+}
+.hero-chat--embedded .hero-chat-card .chat-inline-head,
+.hero-chat--embedded .hero-chat-card .chat-inline-foot {
+  display: none;
+}
+
+/* Body = the airspace where balloons float. Flex column pinned to
+   bottom; new messages appear at the bottom, older ones are pushed
+   up and out through the masked fade. */
+.hero-chat--embedded .hero-chat-card .chat-inline-body {
+  background: transparent;
+  border: 0;
+  padding: 40px 8px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  min-height: 46vh;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.25) 10%,
+    #000 40%,
+    #000 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.25) 10%,
+    #000 40%,
+    #000 100%
+  );
+}
+
+/* Each message is a compact row; avatar hidden; the bubble is the
+   round pill. */
+.hero-chat--embedded .hero-chat-card .chat-msg {
+  gap: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.hero-chat--embedded .hero-chat-card .chat-msg.user {
+  justify-content: flex-end;
+}
+.hero-chat--embedded .hero-chat-card .chat-msg.assistant {
+  justify-content: flex-start;
+}
+.hero-chat--embedded .hero-chat-card .chat-msg-ava { display: none; }
+
+/* The balloon. Almost-transparent pill over the waveform — no
+   sharp white slab. Text is light, the surface is just enough
+   tint to read against the wave. Rises + fades on mount. */
+.hero-chat--embedded .hero-chat-card .chat-msg-bubble {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 15px;
+  line-height: 1.35;
+  max-width: min(78%, 640px);
+  box-shadow: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: hero-balloon-rise 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* Wrap on word boundaries, never on char boundaries (the previous
+     `word-break: break-word` caused «при\nвет» one-letter-per-line
+     breaks on narrow viewports). */
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  word-break: normal;
+  width: fit-content;
+}
+.hero-chat--embedded .hero-chat-card .chat-msg.user .chat-msg-bubble {
+  background: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.18);
+  font-weight: 500;
+}
+
+/* Long messages break the round pill silhouette — ease the radius so
+   multi-line pills still look like balloons, not rectangles. */
+.hero-chat--embedded .hero-chat-card .chat-msg-bubble:has(> *) {
+  border-radius: 24px;
+}
+
+@keyframes hero-balloon-rise {
+  0%   { opacity: 0; transform: translateY(60px) scale(0.85); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* Input pill anchored at the bottom of the chat card. Round, subtle,
+   lights up white on focus. The textarea text goes fully white when
+   the user is typing. */
+.hero-chat--embedded .hero-chat-card .chat-inline-input {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 6px 8px 6px 18px;
+  gap: 8px;
+  margin-top: 14px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.hero-chat--embedded .hero-chat-card .chat-inline-input:focus-within {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+}
+.hero-chat--embedded .hero-chat-card .chat-inline-input textarea {
+  background: transparent;
+  border: 0;
+  padding: 6px 0;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.72);
+  caret-color: #ffffff;
+  transition: color 0.2s ease;
+}
+.hero-chat--embedded .hero-chat-card .chat-inline-input textarea:focus {
+  color: #ffffff;
+  outline: none;
+  box-shadow: none;
+}
+.hero-chat--embedded .hero-chat-card .chat-inline-input textarea::placeholder {
+  color: transparent;
+}
+.hero-chat--embedded .hero-chat-card .chat-inline-input button {
+  background: #ffffff;
+  color: #0a0a0a;
+  border: 0;
+  border-radius: 999px;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.hero-chat--embedded .hero-chat-card .chat-inline-input button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.88);
+}
+.hero-chat--embedded .hero-chat-card .chat-input-mic {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  color: rgba(255, 255, 255, 0.85);
+}
+.hero-chat--embedded .hero-chat-card .chat-input-mic:hover:not(:disabled) {
+  color: #0a0a0a;
+  background: #ffffff;
+  border-color: #ffffff;
+}
+.hero-chat--embedded .hero-chat-card .chat-input-mic.listening {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #0a0a0a;
+}
+.hero-chat--embedded .hero-chat-card .chat-input-mic.listening .chat-input-mic-pulse {
+  background: #0a0a0a;
+  box-shadow: 0 0 10px #0a0a0a;
+}
+.hero-chat--embedded .hero-chat-card .chat-input-mic:hover:not(:disabled) {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+@media (max-width: 860px) {
+  .section-hero-chat { padding: 28px 16px 56px; }
+  /* When embedded inside <HeroArea> the hero owns the vertical
+     rhythm — collapse the chat's own padding so the card doesn't
+     double-pad the top/bottom. */
+  .section-hero-chat.hero-chat--embedded { padding: 0 16px; }
+  .hero-chat-head { margin-bottom: 14px; }
+  /* Keep the chat card flush-edge safe: textarea inside a flex row can
+     push beyond the viewport with long placeholders. Force min-width:0 so
+     flex shrinking wins, and constrain the card width explicitly. */
+  .hero-chat-card { max-width: 100%; }
+  .hero-chat-card .chat-input { padding: 10px; gap: 6px; }
+  .hero-chat-card .chat-input textarea {
+    min-width: 0;
+    width: 100%;
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+  .hero-chat-card .chat-input button {
+    padding: 0 14px;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .hero-chat-card .chat-body { padding: 12px; }
+  .hero-chat-card .chat-msg-bubble { font-size: 13px; padding: 9px 12px; }
+}
+
+@media (max-width: 480px) {
+  .section-hero-chat { padding: 22px 12px 44px; }
+  .section-hero-chat.hero-chat--embedded { padding: 0 12px; }
+  .hero-chat-h { font-size: clamp(20px, 6.5vw, 26px); }
+}
+
+/* ═════ CHAT MIC BUTTON ═════
+   Outlined icon button that sits to the left of the send arrow in
+   .chat-input (and the legacy .chat-inline-input). Idle = ghost with
+   accent hover; listening = filled accent with a pulsing dot, so the
+   user always knows the mic is still hot even when the textarea is
+   empty. Disabled when the browser's SpeechRecognition API is
+   missing — we still render it to keep the row layout stable. */
+.chat-input-mic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  min-width: 38px;
+  height: 38px;
+  padding: 0;
+  background: transparent;
+  color: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  flex-shrink: 0;
+  font-family: inherit;
+}
+.chat-input-mic:hover:not(:disabled) {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.6);
+}
+.chat-input-mic:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.chat-input-mic.listening {
+  background: #ffffff;
+  color: #0a0a0a;
+  border-color: #ffffff;
+}
+.chat-input-mic-pulse {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow: 0 0 10px var(--bg);
+  animation: chat-mic-pulse 1.2s ease-in-out infinite;
+}
+@keyframes chat-mic-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.55; }
+}
+@media (max-width: 860px) {
+  .chat-input-mic { width: 34px; min-width: 34px; }
+}
+
+/* ═════ MESSAGE SPEAKER BUTTON ═════
+   A small inline button anchored top-right of an assistant bubble.
+   Idle = ghost glyph; loading = ellipsis; playing = stop icon
+   with a subtle pulsing background. Hidden entirely when the
+   /api/tts endpoint is missing — `TTS_DISABLED_PROCESS_LEVEL`
+   flag in ChatInline.tsx flips on first 503. */
+.chat-msg-speak {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+.chat-msg-bubble { position: relative; }
+.chat-msg:hover .chat-msg-speak,
+.chat-msg-speak.ready,
+.chat-msg-speak.playing,
+.chat-msg-speak.loading { opacity: 1; }
+.chat-msg-speak:hover { color: #ffffff; border-color: #ffffff; background: rgba(255,255,255,0.08); }
+.chat-msg-speak.playing {
+  background: #ffffff;
+  color: #0a0a0a;
+  border-color: #ffffff;
+  animation: chat-mic-pulse 1.4s ease-in-out infinite;
+}
+/* In the embedded balloon mode (light-backgrounded user pills),
+   invert the speaker for contrast. */
+.hero-chat--embedded .chat-msg.user .chat-msg-bubble .chat-msg-speak {
+  display: none; /* user messages are visitor's own — no need to read them aloud */
+}
+.hero-chat--embedded .chat-msg.assistant .chat-msg-bubble .chat-msg-speak {
+  border-color: rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.75);
+}
+.hero-chat--embedded .chat-msg.assistant .chat-msg-bubble .chat-msg-speak:hover {
+  color: #ffffff;
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+.hero-chat--embedded .chat-msg.assistant .chat-msg-bubble .chat-msg-speak.playing {
+  background: #ffffff;
+  color: #0a0a0a;
+  border-color: #ffffff;
+}
+
+/* ═════ VOICE MODE TOGGLE ═════
+   Sits next to the mic. Same circular pill shape.
+   Idle = ghost; on = filled, glowing accent. State persists in
+   localStorage. When on, every assistant reply auto-plays. */
+.chat-input-voice {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  min-width: 38px;
+  height: 38px;
+  padding: 0;
+  background: transparent;
+  color: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  flex-shrink: 0;
+  font-family: inherit;
+}
+.chat-input-voice:hover { color: #ffffff; border-color: rgba(255, 255, 255, 0.6); }
+.chat-input-voice.on {
+  color: #0a0a0a;
+  background: #ffffff;
+  border-color: #ffffff;
+  box-shadow: none;
+}
+.hero-chat--embedded .hero-chat-card .chat-input-voice {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  color: rgba(255, 255, 255, 0.85);
+}
+.hero-chat--embedded .hero-chat-card .chat-input-voice:hover {
+  color: #0a0a0a;
+  background: #ffffff;
+  border-color: #ffffff;
+}
+.hero-chat--embedded .hero-chat-card .chat-input-voice.on {
+  background: #ffffff;
+  color: #0a0a0a;
+  border-color: #ffffff;
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.45);
+}
+@media (max-width: 860px) {
+  .chat-input-voice { width: 34px; min-width: 34px; }
+}
+
+/* Low-end / motion-sensitive devices: strip the two most expensive
+ * compositing passes in the embedded chat — backdrop-filter on the
+ * frosted bubble, and the mask-image fade on the scroll body. Both
+ * force an extra offscreen raster each frame; on cheap Android and
+ * Safari 14- they tank scroll fps in the hero carousel. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-chat--embedded .hero-chat-card .chat-msg-bubble {
+    animation: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .hero-chat--embedded .hero-chat-card .chat-inline-body {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+}
+
+/* Kill any browser-default green tints in the hero chat region:
+   tap-highlight colour on mobile Safari/Chrome, and the dotted
+   focus-ring that some UAs still render on <textarea> even after
+   `outline: none`. */
+.hero-area,
+.hero-area *,
+.hero-chat--embedded,
+.hero-chat--embedded * {
+  -webkit-tap-highlight-color: transparent;
+}
+.hero-chat--embedded button:focus,
+.hero-chat--embedded button:focus-visible,
+.hero-chat--embedded textarea:focus,
+.hero-chat--embedded textarea:focus-visible {
+  outline: none !important;
+  box-shadow: none;
+}
+.hero-area .hero-input-pill:focus-within {
+  outline: none;
+}

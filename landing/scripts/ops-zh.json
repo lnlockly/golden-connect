@@ -1,0 +1,38 @@
+{
+  "op.eyebrow": "操作员层",
+  "op.h": "顶级程序员<span class=\"hi\">为席位厮杀。</span>",
+  "op.lede": "没有认证流水线,没有文凭。每位操作员按交付任务、获得的评分、回馈网络的 FLOW 排名。只有最好的拿到实时订单。榜单每小时刷新。",
+
+  "op.lb.title": "实时榜单 · 顶级操作员",
+  "op.lb.meta": "每小时更新 · 按任务 × 评分 × 留存排序",
+  "op.lb.col_op": "操作员",
+  "op.lb.col_spec": "专长",
+  "op.lb.col_jobs": "任务(30 天)",
+  "op.lb.col_rating": "评分",
+  "op.lb.col_earn": "收入(30 天)",
+  "op.lb.top": "TOP",
+  "op.lb.rising": "上升",
+  "op.lb.foot_l": "申请窗口每周一开放",
+  "op.lb.foot_v": "2,412 名活跃操作员 · 128 人候补",
+
+  "op.earn.l1": "$18,420",
+  "op.earn.l2": "$16,180",
+  "op.earn.l3": "$14,950",
+  "op.earn.l4": "$13,720",
+  "op.earn.l5": "$12,040",
+  "op.earn.l6": "$11,350",
+  "op.earn.l7": "$10,860",
+  "op.earn.l8": "$9,740",
+
+  "op.pillars_title": "如何入场",
+  "op.pillar.p1.h": "交付一单真实任务",
+  "op.pillar.p1.p": "提交作品集或在实时任务上做一次示范交付。一次成功交付胜过一百张纸面认证。",
+  "op.pillar.p2.h": "在榜单上竞争",
+  "op.pillar.p2.p": "新操作员先进入未排名池。赢下订单、干净交付,保持评分 4.80 以上。前 200 名获得优先匹配。",
+  "op.pillar.p3.h": "降级即减薪",
+  "op.pillar.p3.p": "延期、差评、争议都会削掉排名、匹配优先级和 FLOW 质押。质量由经济机制强制执行。",
+
+  "op.apply.label": "申请窗口",
+  "op.apply.p": "每周一开放新操作员申请。带上 GitHub、已交付产品或任务流水线,无需简历,无需面试。",
+  "op.apply.cta": "周一申请 →"
+}

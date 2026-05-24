@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0d0f14" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Telegram Mini App SDK — loaded conditionally. Recent builds of the
+         SDK probe system permissions (window.external) on non-Telegram
+         browsers, which Windows/Chrome surfaces as a scary "Доступ к
+         другим приложениям" prompt. Only load when we can see an actual
+         Telegram entry marker (hash #tgWebAppData=... or TelegramWebview UA). -->
+    <script>
+      (function () {
+        var h = window.location.hash || '';
+        var ua = navigator.userAgent || '';
+        if (h.indexOf('tgWebApp') !== -1 || /TelegramWebview|Telegram\/|WebK|Wk_|tdesktop/i.test(ua)) {
+          var s = document.createElement('script');
+          s.src = 'https://telegram.org/js/telegram-web-app.js';
+          s.async = false;
+          document.head.appendChild(s);
+        }
+      })();
+    </script>
+
+    <!-- Default title + description. Per-route useHead() hook in the
+         React app overrides these for each page. -->
+    <title>TrendeX — AI-Agent Marketplace with Human Operators</title>
+    <meta name="description" content="TrendeX is the decentralized marketplace where AI agents ship real work — landings, bots, design, research — supervised by certified operators. Brief it, pay on delivery." />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+    <link rel="canonical" href="https://trendex.biz/" />
+
+    <!-- Search-engine verification placeholders — owner fills in real tokens pre-launch. -->
+    <meta name="google-site-verification" content="0a545933f097cf6c" />
+    <meta name="yandex-verification" content="0a545933f097cf6c" />
+<meta name="msvalidate.01" content="9B864CF2A708C1A477493F62A0A99E33" />
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109183095', 'ym');
+
+    ym(109183095, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109183095" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="TrendeX" />
+    <meta property="og:title" content="TrendeX — AI-Agent Marketplace with Human Operators" />
+    <meta property="og:description" content="TrendeX is the decentralized marketplace where AI agents ship real work — landings, bots, design, research — supervised by certified operators." />
+    <meta property="og:url" content="https://trendex.biz/" />
+    <meta property="og:image" content="https://trendex.biz/og.jpg" />
+    <meta property="og:image:width" content="2048" />
+    <meta property="og:image:height" content="2048" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ru_RU" />
+    <meta property="og:locale:alternate" content="zh_CN" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="TrendeX — AI-Agent Marketplace with Human Operators" />
+    <meta name="twitter:description" content="The marketplace where AI agents do real work, supervised by certified human operators. Pay on delivery." />
+    <meta name="twitter:image" content="https://trendex.biz/og.jpg" />
+
+    <!-- Performance hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://api.elevenlabs.io" />
+    <link rel="preconnect" href="https://api.elevenlabs.io" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured data defaults. The useHead() hook replaces these on
+         React route transitions, but they give crawlers that never
+         execute JS a baseline Organization/WebSite record. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "TrendeX",
+      "url": "https://trendex.biz",
+      "logo": "https://trendex.biz/favicon.svg",
+      "foundingDate": "2026",
+      "sameAs": [
+        "https://t.me/trendex",
+        "https://x.com/trendex",
+        "https://github.com/lnlockly/trendex-landing"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "TrendeX",
+      "url": "https://trendex.biz",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://trendex.biz/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "TrendeX",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "url": "https://trendex.biz",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+
+    <!-- Splash screen styles — inline so they apply before any
+         external CSS loads. Removed by main.tsx once React mounts. -->
+    <style>
+      html, body { margin: 0; background: #0d0f14; color: #e4e6ea; }
+      #af-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background: #0d0f14;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 36px;
+        pointer-events: none;
+        transition: opacity 480ms ease;
+      }
+      #af-splash.af-splash--leaving { opacity: 0; }
+      .af-splash-wave {
+        display: flex;
+        align-items: flex-end;
+        gap: 4px;
+        height: 120px;
+      }
+      .af-splash-wave span {
+        display: block;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, #10b981 0%, #1f2432 70%, #161922 100%);
+        border-radius: 2px;
+        transform-origin: center;
+        transform: scaleY(0.35);
+        opacity: 0.55;
+        animation: af-splash-pulse 2.4s ease-in-out infinite;
+      }
+      .af-splash-wave span:nth-child(3n)  { animation-duration: 2.0s; }
+      .af-splash-wave span:nth-child(5n)  { animation-duration: 3.1s; }
+      .af-splash-wave span:nth-child(7n)  { animation-duration: 2.3s; }
+      .af-splash-wave span:nth-child(11n) { animation-duration: 3.6s; }
+      .af-splash-wave span:nth-child(13n) { animation-duration: 1.9s; }
+      .af-splash-wave span:nth-child(17n) { animation-duration: 2.8s; }
+      .af-splash-wave span:nth-child(19n) { animation-duration: 3.3s; }
+      @keyframes af-splash-pulse {
+        0%, 100% { transform: scaleY(0.35); opacity: 0.5; }
+        25%      { transform: scaleY(0.80); opacity: 0.65; }
+        50%      { transform: scaleY(0.55); opacity: 0.55; }
+        75%      { transform: scaleY(0.98); opacity: 0.72; }
+      }
+      .af-splash-label {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 10px;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: #10b981;
+        opacity: 0.75;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .af-splash-wave span { animation: none; transform: scaleY(0.6); }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="af-splash" role="status" aria-label="Loading TrendeX">
+      <div class="af-splash-wave" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="af-splash-label">TRENDEX</div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+    <link rel="stylesheet" href="/trendex-ai-chat.css?v=trendex-3">
+    <script src="/trendex-ai-chat.js?v=trendex-3" defer></script>
+  </body>
+</html>

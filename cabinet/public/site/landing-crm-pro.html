@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- [rebrand-slogan-2026-05-15] -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Trendex — будь в тренде! · Trendex — готовая CRM-база на 7322 B2B-контакта, AI-рассылки и заработок изнутри. Запуск маркетинга 21 мая 2026.">
+<title>Trendex — CRM-база 7322 B2B-контактов + AI-рассылки · Trendex — будь в тренде!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Trendex landing — 2026 */
+:root {
+  --bg: #0a0a14;
+  --bg-2: #0f0f1f;
+  --violet: #b14aff;
+  --cyan: #00e0ff;
+  --pink: #ff4ad9;
+  --green: #4aff8a;
+  --text: #ffffff;
+  --text-dim: rgba(255,255,255,0.65);
+  --text-mute: rgba(255,255,255,0.45);
+  --border: rgba(255,255,255,0.08);
+  --border-bright: rgba(177,74,255,0.4);
+  --glass: rgba(255,255,255,0.03);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+.mono { font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+
+/* === BG === */
+.aurora { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
+.aurora::before, .aurora::after {
+  content: ''; position: absolute;
+  width: 800px; height: 800px; border-radius: 50%;
+  filter: blur(120px); opacity: 0.35;
+  animation: float 20s ease-in-out infinite;
+}
+.aurora::before { background: radial-gradient(circle, var(--violet) 0%, transparent 70%); top: -200px; left: -200px; }
+.aurora::after { background: radial-gradient(circle, var(--cyan) 0%, transparent 70%); bottom: -300px; right: -200px; animation-delay: -10s; }
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(100px, -50px) scale(1.1); }
+  66% { transform: translate(-50px, 100px) scale(0.9); }
+}
+.grid-bg {
+  position: fixed; inset: 0; z-index: -1;
+  background-image:
+    linear-gradient(rgba(177,74,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(177,74,255,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 100% 100% at 50% 0%, black 30%, transparent 80%);
+  pointer-events: none;
+}
+#particles { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+
+.container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+/* === Nav === */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 14px 24px;
+  background: rgba(10,10,20,0.65);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-weight: 800; font-size: 20px; letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 28px; }
+.nav-links a {
+  color: var(--text-dim); text-decoration: none;
+  font-size: 14px; font-weight: 500; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-cta {
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  color: var(--text); padding: 10px 20px; border-radius: 10px;
+  text-decoration: none; font-weight: 600; font-size: 14px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 20px rgba(177,74,255,0.3);
+}
+.nav-cta:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(177,74,255,0.5); }
+@media (max-width: 768px) { .nav-links { display: none; } }
+
+/* === Hero === */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 0 60px;
+  position: relative;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1.05fr 0.95fr;
+  gap: 60px; align-items: center; width: 100%;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(177,74,255,0.1);
+  border: 1px solid var(--border-bright);
+  padding: 6px 14px; border-radius: 100px;
+  font-size: 12px; font-weight: 500;
+  color: var(--violet);
+  margin-bottom: 24px;
+  animation: fadeIn 0.8s ease;
+}
+.hero-badge::before {
+  content: ''; width: 6px; height: 6px;
+  background: var(--violet); border-radius: 50%;
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 10px var(--violet);
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+.hero h1 {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 800; line-height: 1.05; letter-spacing: -0.025em;
+  margin-bottom: 24px;
+  animation: fadeUp 0.8s ease 0.1s both;
+}
+.hero h1 .grad {
+  background: linear-gradient(135deg, var(--violet) 0%, var(--cyan) 50%, var(--pink) 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero p.lead {
+  font-size: clamp(15px, 1.6vw, 18px);
+  color: var(--text-dim); max-width: 520px;
+  margin-bottom: 32px;
+  animation: fadeUp 0.8s ease 0.2s both;
+}
+.hero-cta-row {
+  display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+  margin-bottom: 24px;
+  animation: fadeUp 0.8s ease 0.3s both;
+}
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 16px 28px; border-radius: 12px;
+  font-weight: 600; font-size: 15px;
+  text-decoration: none; cursor: pointer; border: none;
+  transition: all 0.3s ease;
+  font-family: 'Inter', sans-serif;
+  position: relative; overflow: hidden;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--violet) 0%, var(--cyan) 100%);
+  color: var(--text);
+  box-shadow: 0 0 30px rgba(177,74,255,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.btn-primary::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  opacity: 0; transition: opacity 0.3s;
+}
+.btn-primary span { position: relative; z-index: 1; }
+.btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 0 50px rgba(177,74,255,0.6); }
+.btn-primary:hover::before { opacity: 1; }
+.btn-ghost {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.08); border-color: var(--border-bright); }
+.btn-big {
+  padding: 22px 44px; font-size: 17px;
+}
+
+.hero-countdown {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 13px; color: var(--text-mute);
+  animation: fadeUp 0.8s ease 0.4s both;
+}
+.countdown-pill {
+  display: inline-flex; gap: 6px; align-items: center;
+  background: var(--glass); border: 1px solid var(--border);
+  padding: 6px 12px; border-radius: 100px;
+}
+.countdown-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700; color: var(--cyan);
+  font-size: 14px;
+}
+
+/* === KPI tiles === */
+.kpi-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 12px; margin-top: 48px;
+  animation: fadeUp 0.8s ease 0.5s both;
+}
+.kpi-tile {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  position: relative; overflow: hidden;
+  transition: all 0.3s;
+  backdrop-filter: blur(10px);
+}
+.kpi-tile::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--violet), var(--cyan), transparent);
+  opacity: 0; transition: opacity 0.3s;
+}
+.kpi-tile:hover { transform: translateY(-4px); border-color: var(--border-bright); }
+.kpi-tile:hover::before { opacity: 1; }
+.kpi-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px; font-weight: 700;
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em; margin-bottom: 4px;
+}
+.kpi-label { font-size: 12px; color: var(--text-mute); }
+
+/* === Hero CRM mockup === */
+.crm-mockup {
+  position: relative;
+  perspective: 1500px;
+  animation: fadeIn 1s ease 0.3s both;
+}
+.crm-card {
+  background: linear-gradient(145deg, rgba(20,20,40,0.9), rgba(15,15,30,0.95));
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.5),
+    0 0 60px rgba(177,74,255,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  transform: rotateY(-8deg) rotateX(4deg);
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+}
+.crm-mockup:hover .crm-card { transform: rotateY(-4deg) rotateX(2deg); }
+.crm-header {
+  display: flex; align-items: center; gap: 12px;
+  padding-bottom: 14px; margin-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.crm-dot { width: 10px; height: 10px; border-radius: 50%; }
+.crm-dot.r { background: #ff5f57; }
+.crm-dot.y { background: #febc2e; }
+.crm-dot.g { background: #28c840; }
+.crm-title {
+  margin-left: auto; font-size: 12px; color: var(--text-mute);
+  font-family: 'JetBrains Mono', monospace;
+}
+.crm-search {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px; color: var(--text-mute);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.crm-search::before { content: '🔍'; font-size: 12px; }
+.crm-leads { display: flex; flex-direction: column; gap: 8px; }
+.lead-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.3s;
+}
+.lead-row:hover { background: rgba(177,74,255,0.05); border-color: var(--border-bright); }
+.lead-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+  flex-shrink: 0;
+}
+.lead-info { flex: 1; min-width: 0; }
+.lead-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+.lead-meta { font-size: 11px; color: var(--text-mute); display: flex; gap: 8px; flex-wrap: wrap; }
+.tag {
+  font-size: 10px; padding: 2px 7px; border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.tag.hot { background: rgba(255,74,217,0.15); color: var(--pink); }
+.tag.warm { background: rgba(177,74,255,0.15); color: var(--violet); }
+.tag.cold { background: rgba(0,224,255,0.15); color: var(--cyan); }
+.tag.new { background: rgba(74,255,138,0.15); color: var(--green); }
+.lead-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.lead-btn {
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; cursor: pointer;
+  transition: all 0.2s;
+}
+.lead-btn:hover { background: rgba(177,74,255,0.2); border-color: var(--border-bright); }
+
+.floating-card {
+  position: absolute;
+  background: linear-gradient(145deg, rgba(20,20,40,0.95), rgba(15,15,30,0.95));
+  border: 1px solid var(--border-bright);
+  border-radius: 14px;
+  padding: 14px 18px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 10px 40px rgba(177,74,255,0.3);
+  animation: floatY 4s ease-in-out infinite;
+}
+.floating-card.top {
+  top: -20px; right: -30px;
+  animation-delay: -1s;
+}
+.floating-card.bottom {
+  bottom: -10px; left: -40px;
+  animation-delay: -2s;
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.fc-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  font-size: 16px; margin-bottom: 8px;
+}
+.fc-num { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700; color: var(--cyan); }
+.fc-label { font-size: 11px; color: var(--text-mute); margin-top: 2px; }
+
+/* === Section common === */
+section { padding: 100px 0; position: relative; }
+.section-head {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.section-label {
+  display: inline-block;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 14px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.section-head h2 {
+  font-size: clamp(28px, 4.5vw, 48px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+.section-head h2 .grad {
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.section-head p {
+  color: var(--text-dim); font-size: 17px;
+  max-width: 600px; margin: 0 auto;
+}
+
+/* === Features grid === */
+.features-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.feature-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 32px;
+  position: relative; overflow: hidden;
+  transition: all 0.3s;
+  backdrop-filter: blur(10px);
+  transform-style: preserve-3d;
+}
+.feature-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(177,74,255,0.1), transparent 50%);
+  opacity: 0; transition: opacity 0.3s;
+  pointer-events: none;
+}
+.feature-card:hover { border-color: var(--border-bright); transform: translateY(-4px); }
+.feature-card:hover::before { opacity: 1; }
+.feature-icon {
+  width: 56px; height: 56px; border-radius: 14px;
+  background: linear-gradient(135deg, rgba(177,74,255,0.15), rgba(0,224,255,0.15));
+  border: 1px solid var(--border-bright);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 30px rgba(177,74,255,0.2);
+}
+.feature-card h3 {
+  font-size: 19px; font-weight: 700; margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.feature-card p {
+  color: var(--text-dim); font-size: 14px; line-height: 1.6;
+  margin-bottom: 16px;
+}
+.feature-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.feature-tag {
+  font-size: 11px; padding: 4px 10px; border-radius: 100px;
+  background: rgba(0,224,255,0.08); color: var(--cyan);
+  border: 1px solid rgba(0,224,255,0.15);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* === AI rassylki - 3 cols === */
+.ai-cols {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.ai-col {
+  background: linear-gradient(160deg, rgba(177,74,255,0.05), rgba(0,224,255,0.03));
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 36px 28px;
+  position: relative; overflow: hidden;
+  transition: all 0.3s;
+}
+.ai-col:hover { border-color: var(--border-bright); transform: translateY(-6px); }
+.ai-col::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--violet), var(--cyan));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.ai-col:hover::after { transform: scaleX(1); }
+.ai-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--violet);
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.ai-num::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, var(--border-bright), transparent);
+}
+.ai-col h3 {
+  font-size: 22px; font-weight: 700; margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+.ai-col p { color: var(--text-dim); font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
+.ai-bullet {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: var(--text-dim);
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+}
+.ai-bullet::before {
+  content: '◆'; color: var(--cyan); font-size: 10px;
+}
+
+/* === Earnings cards === */
+.earn-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+}
+.earn-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px 24px;
+  text-align: center;
+  position: relative; overflow: hidden;
+  transition: all 0.3s;
+  transform-style: preserve-3d;
+}
+.earn-card:hover {
+  border-color: var(--border-bright); transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(177,74,255,0.2);
+}
+.earn-icon {
+  font-size: 36px; margin-bottom: 14px;
+  display: inline-block;
+  animation: bob 3s ease-in-out infinite;
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.earn-amount {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 24px; font-weight: 700;
+  background: linear-gradient(135deg, var(--cyan), var(--green));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+.earn-card h3 {
+  font-size: 15px; font-weight: 600; margin-bottom: 8px;
+}
+.earn-card p { font-size: 13px; color: var(--text-mute); line-height: 1.5; }
+
+/* === Matrix + Karma === */
+.matrix-wrap {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  align-items: center;
+}
+.matrix-text h3 {
+  font-size: 24px; font-weight: 700; margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+.matrix-text p { color: var(--text-dim); margin-bottom: 20px; line-height: 1.7; }
+.matrix-list { list-style: none; }
+.matrix-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px; color: var(--text-dim);
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.matrix-list li strong { color: var(--text); }
+.matrix-list li::before {
+  content: '✦'; color: var(--cyan); flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.matrix-viz {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  padding: 24px;
+  background: linear-gradient(145deg, rgba(20,20,40,0.6), rgba(15,15,30,0.6));
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  perspective: 800px;
+}
+.matrix-cell {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  position: relative;
+  transition: all 0.3s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+.matrix-cell.filled {
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  color: var(--text);
+  font-weight: 700;
+  box-shadow: 0 0 20px rgba(177,74,255,0.4);
+}
+.matrix-cell.empty {
+  background: rgba(255,255,255,0.02);
+  border: 1px dashed var(--border);
+  color: var(--text-mute);
+}
+.matrix-cell:hover { transform: translateZ(20px) scale(1.1); }
+
+/* === Genesis tariffs === */
+.tariffs {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.tariff {
+  background: linear-gradient(160deg, rgba(20,20,40,0.7), rgba(15,15,30,0.9));
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 36px 28px;
+  position: relative; overflow: hidden;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+}
+.tariff:hover { transform: translateY(-8px); border-color: var(--border-bright); }
+.tariff.featured {
+  border-color: rgba(177,74,255,0.5);
+  box-shadow: 0 0 40px rgba(177,74,255,0.2);
+}
+.tariff.featured::before {
+  content: 'POPULAR';
+  position: absolute; top: 14px; right: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 700;
+  padding: 4px 10px; border-radius: 100px;
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+}
+.tariff-name {
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 16px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.tariff-price {
+  display: flex; align-items: baseline; gap: 8px;
+  margin-bottom: 8px;
+}
+.tariff-price .amount {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 42px; font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.tariff-price .bonus {
+  font-size: 14px; color: var(--green);
+  font-family: 'JetBrains Mono', monospace;
+}
+.tariff-sub {
+  font-size: 13px; color: var(--text-mute);
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.tariff-features { list-style: none; margin-bottom: 28px; }
+.tariff-features li {
+  padding: 8px 0;
+  font-size: 14px; color: var(--text-dim);
+  display: flex; gap: 10px; align-items: center;
+}
+.tariff-features li::before {
+  content: ''; width: 16px; height: 16px;
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  border-radius: 50%; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 9px; color: white;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z' fill='black'/></svg>") center / 60% no-repeat;
+          mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z' fill='black'/></svg>") center / 60% no-repeat;
+}
+.tariff-btn {
+  display: block; width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 14px; border-radius: 12px;
+  font-weight: 600; font-size: 14px;
+  text-decoration: none; text-align: center;
+  transition: all 0.3s;
+}
+.tariff.featured .tariff-btn {
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  box-shadow: 0 0 30px rgba(177,74,255,0.3);
+}
+.tariff-btn:hover { transform: translateY(-2px); border-color: var(--border-bright); }
+
+/* === AI tools grid === */
+.tools-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.tool {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 22px;
+  display: flex; gap: 16px; align-items: flex-start;
+  transition: all 0.3s;
+}
+.tool:hover { background: rgba(177,74,255,0.04); border-color: var(--border-bright); transform: translateX(4px); }
+.tool-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: linear-gradient(135deg, rgba(177,74,255,0.2), rgba(0,224,255,0.2));
+  border: 1px solid var(--border-bright);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.tool h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+.tool p { font-size: 13px; color: var(--text-mute); line-height: 1.5; }
+
+/* === Bot section === */
+.bot-section {
+  background: linear-gradient(160deg, rgba(177,74,255,0.05), rgba(0,224,255,0.05));
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 60px 48px;
+  display: grid; grid-template-columns: 1.2fr 1fr;
+  gap: 60px; align-items: center;
+  position: relative; overflow: hidden;
+}
+.bot-section::before {
+  content: ''; position: absolute;
+  top: -100px; right: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(177,74,255,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.bot-text h3 {
+  font-size: 32px; font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.bot-text .bot-handle {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--cyan); font-size: 14px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+.bot-text p { color: var(--text-dim); margin-bottom: 20px; line-height: 1.6; }
+.bot-text ul { list-style: none; margin-bottom: 28px; }
+.bot-text ul li {
+  padding: 6px 0;
+  font-size: 14px; color: var(--text-dim);
+  display: flex; gap: 10px;
+}
+.bot-text ul li::before { content: '→'; color: var(--cyan); }
+
+.bot-mockup {
+  background: linear-gradient(145deg, rgba(20,20,40,0.95), rgba(15,15,30,0.95));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  transform: perspective(800px) rotateY(-5deg);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 50px rgba(0,224,255,0.15);
+}
+.bot-keys {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+.bot-key {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 10px;
+  font-size: 12px;
+  text-align: center;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.bot-key:hover { background: rgba(177,74,255,0.1); border-color: var(--border-bright); }
+.bot-key .ico { font-size: 18px; display: block; margin-bottom: 4px; }
+
+/* === Reviews === */
+.reviews {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.review {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 28px 24px;
+  transition: all 0.3s;
+  transform-style: preserve-3d;
+}
+.review:hover { border-color: var(--border-bright); transform: translateY(-4px); }
+.review-head {
+  display: flex; gap: 14px; align-items: center;
+  margin-bottom: 16px;
+}
+.review-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--violet), var(--cyan));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 16px;
+  flex-shrink: 0;
+}
+.review-info { flex: 1; min-width: 0; }
+.review-name { font-weight: 600; font-size: 15px; margin-bottom: 2px; }
+.review-role { font-size: 12px; color: var(--text-mute); }
+.review-result {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(74,255,138,0.15), rgba(0,224,255,0.15));
+  border: 1px solid rgba(74,255,138,0.3);
+  color: var(--green);
+  padding: 4px 10px; border-radius: 8px;
+  font-size: 12px; font-weight: 600;
+  margin-bottom: 12px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.review p {
+  font-size: 14px; color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* === FAQ === */
+.faq { max-width: 800px; margin: 0 auto; }
+.faq-item {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.faq-item.open { border-color: var(--border-bright); }
+.faq-q {
+  padding: 20px 24px;
+  cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  font-weight: 600; font-size: 16px;
+  user-select: none;
+}
+.faq-q::after {
+  content: '+'; font-size: 24px; font-weight: 300;
+  color: var(--violet);
+  transition: transform 0.3s;
+}
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+.faq-a {
+  padding: 0 24px;
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  color: var(--text-dim); font-size: 15px; line-height: 1.7;
+}
+.faq-item.open .faq-a { max-height: 400px; padding: 0 24px 20px; }
+
+/* === Final CTA === */
+.final-cta {
+  text-align: center;
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.final-cta::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(177,74,255,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.final-cta h2 {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 800; letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 24px;
+}
+.final-cta p {
+  color: var(--text-dim); font-size: 18px;
+  margin-bottom: 36px;
+}
+.final-cta-meta {
+  margin-top: 20px;
+  font-size: 13px;
+  color: var(--text-mute);
+}
+.final-cta-meta strong { color: var(--cyan); }
+
+/* === Footer === */
+footer {
+  background: rgba(5,5,10,0.6);
+  border-top: 1px solid var(--border);
+  padding: 60px 0 32px;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px; margin-bottom: 40px;
+}
+.footer-brand .nav-logo { font-size: 24px; }
+.footer-brand p {
+  margin-top: 16px;
+  font-size: 13px; color: var(--text-mute);
+  max-width: 280px; line-height: 1.6;
+}
+.footer-col h4 {
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--text-mute);
+  margin-bottom: 16px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.footer-col a {
+  display: block;
+  font-size: 14px; color: var(--text-dim);
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--cyan); }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+  font-size: 12px; color: var(--text-mute);
+}
+
+/* === Animations === */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s, transform 0.8s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* === Responsive === */
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 60px; }
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .features-grid, .ai-cols, .tools-grid, .reviews { grid-template-columns: repeat(2, 1fr); }
+  .earn-grid { grid-template-columns: repeat(2, 1fr); }
+  .tariffs { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .matrix-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .bot-section { grid-template-columns: 1fr; padding: 48px 32px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .floating-card.top { right: 10px; }
+  .floating-card.bottom { left: 10px; }
+}
+@media (max-width: 768px) {
+  section { padding: 70px 0; }
+  .container { padding: 0 18px; }
+  .hero { padding: 100px 0 40px; min-height: auto; }
+  .hero h1 { font-size: clamp(32px, 8vw, 44px); }
+  .features-grid, .ai-cols, .tools-grid, .reviews { grid-template-columns: 1fr; }
+  .floating-card { display: none; }
+  .crm-card { transform: none; }
+  .bot-section { padding: 36px 24px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .kpi-row { gap: 8px; }
+  .kpi-tile { padding: 14px; }
+  .kpi-num { font-size: 22px; }
+}
+@media (max-width: 480px) {
+  .hero-cta-row { flex-direction: column; align-items: stretch; }
+  .hero-cta-row .btn { width: 100%; }
+  .bot-keys { grid-template-columns: 1fr; }
+}
+</style>
+<!-- [services-pivot-2026-05-17] -->
+</head>
+<body>
+
+<div class="aurora"></div>
+<div class="grid-bg"></div>
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">TRENDEX</a>
+    <div class="nav-links">
+      <a href="#crm">CRM</a>
+      <a href="#ai">AI-рассылки</a>
+      <a href="#earn">Заработок</a>
+      <a href="#genesis">Genesis</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="https://trendex.biz/" target="_blank" class="nav-cta">Войти</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">Старт маркетинга — 21 мая 2026</div>
+        <h1>
+          <span class="grad">7322</span> B2B-контакта<br>
+          уже ждут твоё<br>
+          сообщение
+        </h1>
+        <p class="lead">Готовая CRM-база на 7322 проверенных B2B-контакта + AI-рассылки + заработок изнутри. Тебе не нужно собирать аудиторию с нуля. Мы уже собрали. Заходи — пиши — зарабатывай.</p>
+        <div class="hero-cta-row">
+          <a href="https://trendex.biz/" target="_blank" class="btn btn-primary"><span>Получить доступ к CRM →</span></a>
+          <a href="#crm" class="btn btn-ghost">Что внутри</a>
+        </div>
+        <div class="hero-countdown">
+          <span class="countdown-pill">
+            <span class="countdown-num" id="cd-d">8</span> дней
+          </span>
+          <span>сервисы платформы</span>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi-tile">
+            <div class="kpi-num mono">7322</div>
+            <div class="kpi-label">лидов в базе</div>
+          </div>
+          <div class="kpi-tile">
+            <div class="kpi-num mono">≥35%</div>
+            <div class="kpi-label">open-rate рассылок</div>
+          </div>
+          <div class="kpi-tile">
+            <div class="kpi-num mono">+100</div>
+            <div class="kpi-label">TRDX за регистрацию</div>
+          </div>
+          <div class="kpi-tile">
+            <div class="kpi-num mono">60с</div>
+            <div class="kpi-label">до первой рассылки</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="crm-mockup" data-tilt>
+        <div class="crm-card">
+          <div class="crm-header">
+            <span class="crm-dot r"></span>
+            <span class="crm-dot y"></span>
+            <span class="crm-dot g"></span>
+            <span class="crm-title">trendex / leads</span>
+          </div>
+          <div class="crm-search">Поиск по 7322 лидам…</div>
+          <div class="crm-leads">
+            <div class="lead-row">
+              <div class="lead-avatar">АК</div>
+              <div class="lead-info">
+                <div class="lead-name">Алексей К.</div>
+                <div class="lead-meta">
+                  <span class="tag hot">HOT</span>
+                  <span>B2B · Telegram · 12K подписчиков</span>
+                </div>
+              </div>
+              <div class="lead-actions">
+                <div class="lead-btn">💬</div>
+                <div class="lead-btn">+</div>
+              </div>
+            </div>
+            <div class="lead-row">
+              <div class="lead-avatar">МЛ</div>
+              <div class="lead-info">
+                <div class="lead-name">Мария Л.</div>
+                <div class="lead-meta">
+                  <span class="tag warm">WARM</span>
+                  <span>Маркетолог · Instagram · 8K</span>
+                </div>
+              </div>
+              <div class="lead-actions">
+                <div class="lead-btn">💬</div>
+                <div class="lead-btn">+</div>
+              </div>
+            </div>
+            <div class="lead-row">
+              <div class="lead-avatar">ДВ</div>
+              <div class="lead-info">
+                <div class="lead-name">Дмитрий В.</div>
+                <div class="lead-meta">
+                  <span class="tag new">NEW</span>
+                  <span>Селлер · WhatsApp · активен 2д назад</span>
+                </div>
+              </div>
+              <div class="lead-actions">
+                <div class="lead-btn">💬</div>
+                <div class="lead-btn">+</div>
+              </div>
+            </div>
+            <div class="lead-row">
+              <div class="lead-avatar">ЕС</div>
+              <div class="lead-info">
+                <div class="lead-name">Елена С.</div>
+                <div class="lead-meta">
+                  <span class="tag cold">COLD</span>
+                  <span>B2B-контакт · VK · структура 240</span>
+                </div>
+              </div>
+              <div class="lead-actions">
+                <div class="lead-btn">💬</div>
+                <div class="lead-btn">+</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="floating-card top">
+          <div class="fc-icon">⚡</div>
+          <div class="fc-num mono">+2 847</div>
+          <div class="fc-label">TRDX за неделю</div>
+        </div>
+        <div class="floating-card bottom">
+          <div class="fc-icon">📊</div>
+          <div class="fc-num mono">42%</div>
+          <div class="fc-label">open-rate сегодня</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CRM features -->
+<section id="crm">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">🎯 Что внутри</div>
+      <h2>CRM, которая <span class="grad">уже работает</span></h2>
+      <p>Не пустая база контактов, а живая система с прогревом, диалогами и AI-сегментацией</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal" data-tilt>
+        <div class="feature-icon">📇</div>
+        <h3>База 7322 B2B-контакта</h3>
+        <p>Готовая база с фильтрами: ниша, география, активность, тёплость. Все контакты проверены и сегментированы.</p>
+        <div class="feature-tags">
+          <span class="feature-tag">фильтры</span>
+          <span class="feature-tag">сегменты</span>
+          <span class="feature-tag">проверено</span>
+        </div>
+      </div>
+      <div class="feature-card reveal" data-tilt>
+        <div class="feature-icon">🔍</div>
+        <h3>Авто-разведка контактов</h3>
+        <p>Воронка автоматически находит контакты лида: Telegram + VK + Instagram + WhatsApp + Google.</p>
+        <div class="feature-tags">
+          <span class="feature-tag">TG</span>
+          <span class="feature-tag">VK</span>
+          <span class="feature-tag">IG</span>
+          <span class="feature-tag">WA</span>
+        </div>
+      </div>
+      <div class="feature-card reveal" data-tilt>
+        <div class="feature-icon">💬</div>
+        <h3>Все диалоги в одном окне</h3>
+        <p>lead_dialogs — переписки со всех каналов в едином интерфейсе. История, теги, статусы — всё под рукой.</p>
+        <div class="feature-tags">
+          <span class="feature-tag">unified inbox</span>
+          <span class="feature-tag">история</span>
+        </div>
+      </div>
+      <div class="feature-card reveal" data-tilt>
+        <div class="feature-icon">🧠</div>
+        <h3>AI-сегментация</h3>
+        <p>Нейросеть разбивает базу на сегменты по интересам и активности. Кому что слать — решает за тебя.</p>
+        <div class="feature-tags">
+          <span class="feature-tag">ML</span>
+          <span class="feature-tag">авто-теги</span>
+        </div>
+      </div>
+      <div class="feature-card reveal" data-tilt>
+        <div class="feature-icon">🛡️</div>
+        <h3>1 прокси на аккаунт</h3>
+        <p>Каждый TG-аккаунт получает индивидуальный px6-прокси. Анти-бан система. Без блокировок.</p>
+        <div class="feature-tags">
+          <span class="feature-tag">px6</span>
+          <span class="feature-tag">anti-ban</span>
+        </div>
+      </div>
+      <div class="feature-card reveal" data-tilt>
+        <div class="feature-icon">🔥</div>
+        <h3>Day-4 = первый DM</h3>
+        <p>Готовый шаблон авто-прогрева. К 4-му дню лид уже видит твоё первое сообщение, прогретый и тёплый.</p>
+        <div class="feature-tags">
+          <span class="feature-tag">шаблон</span>
+          <span class="feature-tag">авто-прогрев</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI рассылки -->
+<section id="ai">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">🤖 TG Neuro AI</div>
+      <h2>AI-рассылки в <span class="grad">3 режимах</span></h2>
+      <p>Выбирай как удобнее: закажи рассылку под ключ, сдавай аккаунты в аренду или работай по своей базе</p>
+    </div>
+    <div class="ai-cols">
+      <div class="ai-col reveal">
+        <div class="ai-num mono">01 / ORDER</div>
+        <h3>Заказать рассылку</h3>
+        <p>Конструктор кампаний: выбери аудиторию из 7322 лидов, напиши текст или сгенерируй AI, оплати с баланса TRDX. Запуск за 60 секунд.</p>
+        <div class="ai-bullet">Сегментация одним кликом</div>
+        <div class="ai-bullet">AI-копирайтер встроен</div>
+        <div class="ai-bullet">Оплата TRDX с баланса</div>
+      </div>
+      <div class="ai-col reveal">
+        <div class="ai-num mono">02 / RENT</div>
+        <h3>Аренда TG-аккаунтов</h3>
+        <p>Сдавай свои Telegram-аккаунты в аренду платформе. Прогрев включён. +300%/мес дохода без твоего участия.</p>
+        <div class="ai-bullet">Прогрев аккаунтов автоматом</div>
+        <div class="ai-bullet">+300% к доходу в месяц</div>
+        <div class="ai-bullet">Пассивный режим</div>
+      </div>
+      <div class="ai-col reveal">
+        <div class="ai-num mono">03 / PREMIUM</div>
+        <h3>Своя рассылка</h3>
+        <p>Premium-тариф: подключи свою базу контактов, используй наши аккаунты и AI. Полный контроль над кампанией.</p>
+        <div class="ai-bullet">Своя база контактов</div>
+        <div class="ai-bullet">Наши аккаунты + прокси</div>
+        <div class="ai-bullet">Полный контроль</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Заработок -->
+<section id="earn">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">💰 Заработок</div>
+      <h2>4 способа зарабатывать <span class="grad">внутри Trendex</span></h2>
+      <p>Каждое действие приносит TRDX. Минималка вывода — 10 TRDX = $10</p>
+    </div>
+    <div class="earn-grid">
+      <div class="earn-card reveal" data-tilt>
+        <div class="earn-icon">📺</div>
+        <div class="earn-amount mono">5-50 TRDX</div>
+        <h3>Подписки на каналы</h3>
+        <p>Подписывайся на каналы и получай TRDX за каждую активную подписку</p>
+      </div>
+      <div class="earn-card reveal" data-tilt>
+        <div class="earn-icon">⚡</div>
+        <div class="earn-amount mono">10-200 TRDX</div>
+        <h3>Custom-задания</h3>
+        <p>Выполняй задания рекламодателей: репосты, регистрации, голосования</p>
+      </div>
+      <div class="earn-card reveal" data-tilt>
+        <div class="earn-icon">▶️</div>
+        <div class="earn-amount mono">0.10 TRDX</div>
+        <h3>Видео-просмотры</h3>
+        <p>Смотри ролики по 30 сек, получай TRDX за каждый просмотр. Можно фоном.</p>
+      </div>
+      <div class="earn-card reveal" data-tilt>
+        <div class="earn-icon">🔗</div>
+        <div class="earn-amount mono">+50 TRDX</div>
+        <h3>Реферальная программа</h3>
+        <p>За каждого зарегистрированного друга — +50 TRDX на твой баланс</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- программа + Karma -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">⛓️ Бонус-система</div>
+      <h2>программа 15 мест + <span class="grad">Karma</span></h2>
+      <p>Чем раньше внутри — тем выше место. Активность приносит дополнительные TRDX через лидерборд.</p>
+    </div>
+
+    <div class="matrix-wrap">
+      <div class="matrix-text reveal">
+        <h3>TRDX-программа</h3>
+        <p>Место на платформе фиксируется в момент старта маркетинга. Чем раньше зашёл — тем выше позиция, тем больше выплат.</p>
+        <ul class="matrix-list">
+          <li><strong>Раньше зашёл — выше место.</strong> Маркетинг стартует 21 мая 2026.</li>
+          <li><strong>Karma за активность.</strong> Рассылки, рефералы, выполненные задания — всё прибавляет очки.</li>
+          <li><strong>Лидерборд → доп. TRDX.</strong> Топы недели получают бонусы из общего пула.</li>
+          <li><strong>Доля от выручки сервиса.</strong> Часть оборота распределяется между участниками программа.</li>
+        </ul>
+      </div>
+
+      <div class="matrix-viz reveal">
+        <div class="matrix-cell filled">1</div>
+        <div class="matrix-cell filled">2</div>
+        <div class="matrix-cell filled">3</div>
+        <div class="matrix-cell filled">4</div>
+        <div class="matrix-cell filled">5</div>
+        <div class="matrix-cell filled">6</div>
+        <div class="matrix-cell filled">7</div>
+        <div class="matrix-cell filled">8</div>
+        <div class="matrix-cell empty">9</div>
+        <div class="matrix-cell empty">10</div>
+        <div class="matrix-cell empty">11</div>
+        <div class="matrix-cell empty">12</div>
+        <div class="matrix-cell empty">13</div>
+        <div class="matrix-cell empty">14</div>
+        <div class="matrix-cell empty">15</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Genesis TRDX -->
+<section id="genesis">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">🚀 Genesis TRDX</div>
+      <h2>Пресейл-токен <span class="grad">до запуска</span></h2>
+      <p>Доступ к CRM, баланс TRDX, место на платформе, доля от выручки. Один платёж — всё внутри.</p>
+    </div>
+    <div class="tariffs">
+      <div class="tariff reveal">
+        <div class="tariff-name">Launch</div>
+        <div class="tariff-price">
+          <span class="amount mono">$45</span>
+          <span class="bonus mono">+$15</span>
+        </div>
+        <div class="tariff-sub">Старт. Базовый доступ к CRM и программа.</div>
+        <ul class="tariff-features">
+          <li>Доступ к CRM 7322</li>
+          <li>45 TRDX на баланс + 15 бонус</li>
+          <li>Место на платформе</li>
+          <li>Доля от выручки</li>
+        </ul>
+        <a href="https://trendex.biz/" target="_blank" class="tariff-btn">Купить Launch</a>
+      </div>
+      <div class="tariff featured reveal">
+        <div class="tariff-name">Boost</div>
+        <div class="tariff-price">
+          <span class="amount mono">$90</span>
+          <span class="bonus mono">+$30</span>
+        </div>
+        <div class="tariff-sub">Оптимальный выбор. В 2× быстрее на платформе.</div>
+        <ul class="tariff-features">
+          <li>Всё из Launch</li>
+          <li>90 TRDX + 30 бонус</li>
+          <li>Приоритет на платформе ×2</li>
+          <li>AI-рассылки включены</li>
+          <li>Karma-буст</li>
+        </ul>
+        <a href="https://trendex.biz/" target="_blank" class="tariff-btn">Купить Boost</a>
+      </div>
+      <div class="tariff reveal">
+        <div class="tariff-name">Rocket</div>
+        <div class="tariff-price">
+          <span class="amount mono">$135</span>
+          <span class="bonus mono">+$45</span>
+        </div>
+        <div class="tariff-sub">Максимум. ×3 на платформе + аренда аккаунтов.</div>
+        <ul class="tariff-features">
+          <li>Всё из Boost</li>
+          <li>135 TRDX + 45 бонус</li>
+          <li>Приоритет на платформе ×3</li>
+          <li>Доступ к аренде TG-аккаунтов</li>
+          <li>Premium-рассылки</li>
+        </ul>
+        <a href="https://trendex.biz/" target="_blank" class="tariff-btn">Купить Rocket</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI tools -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">🧬 AI-инструменты</div>
+      <h2>Встроенные нейросети <span class="grad">для бизнеса</span></h2>
+      <p>6 AI-фич, которыми ты пользуешься прямо в кабинете без подписок на сторонние сервисы</p>
+    </div>
+    <div class="tools-grid">
+      <div class="tool reveal">
+        <div class="tool-icon">✍️</div>
+        <div>
+          <h4>AI-копирайтер</h4>
+          <p>Тексты для рассылок, постов и DM. Тон, длина, эмоция — настраиваются.</p>
+        </div>
+      </div>
+      <div class="tool reveal">
+        <div class="tool-icon">#️⃣</div>
+        <div>
+          <h4>Генератор хэштегов</h4>
+          <p>Подбирает релевантные теги по теме и нише за 2 секунды.</p>
+        </div>
+      </div>
+      <div class="tool reveal">
+        <div class="tool-icon">📱</div>
+        <div>
+          <h4>QR-карточки</h4>
+          <p>Создавай визитки с QR-кодами на свою ссылку, бота или канал.</p>
+        </div>
+      </div>
+      <div class="tool reveal">
+        <div class="tool-icon">🔗</div>
+        <div>
+          <h4>Сокращатель ссылок</h4>
+          <p>Короткие ссылки со статистикой кликов — встроены в кабинет.</p>
+        </div>
+      </div>
+      <div class="tool reveal">
+        <div class="tool-icon">🎬</div>
+        <div>
+          <h4>Видео-баннеры</h4>
+          <p>AI собирает короткие видео-креативы для рекламы и постов.</p>
+        </div>
+      </div>
+      <div class="tool reveal">
+        <div class="tool-icon">🖼️</div>
+        <div>
+          <h4>OG-картинки</h4>
+          <p>Превью для ссылок — генерация одним кликом по тексту.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Telegram bot -->
+<section>
+  <div class="container">
+    <div class="bot-section reveal">
+      <div class="bot-text">
+        <div class="section-label">📲 Telegram-бот</div>
+        <h3>Вся платформа в боте</h3>
+        <div class="bot-handle">@Trendex_bizbot</div>
+        <p>7-рядное меню: реклама, задания, тарифы, команда, AI, конференции, голосовые. Управляй CRM, запускай рассылки и принимай выплаты прямо из Telegram.</p>
+        <ul>
+          <li>Голосовые → Whisper → AI-ответ за 3 секунды</li>
+          <li>Создание видео-конференций прямо из бота</li>
+          <li>Управление балансом TRDX и выводом</li>
+          <li>Уведомления о новых лидах в реальном времени</li>
+        </ul>
+        <a href="https://t.me/Trendex_bizbot" target="_blank" class="btn btn-primary"><span>Открыть бота</span></a>
+      </div>
+      <div class="bot-mockup">
+        <div class="bot-keys">
+          <div class="bot-key"><span class="ico">📢</span>Реклама</div>
+          <div class="bot-key"><span class="ico">⚡</span>Задания</div>
+          <div class="bot-key"><span class="ico">💎</span>Тарифы</div>
+          <div class="bot-key"><span class="ico">👥</span>Команда</div>
+          <div class="bot-key"><span class="ico">🤖</span>AI</div>
+          <div class="bot-key"><span class="ico">🎥</span>Конференции</div>
+          <div class="bot-key"><span class="ico">🎙️</span>Голосовые</div>
+          <div class="bot-key"><span class="ico">⚙️</span>Настройки</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Эфиры -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">📡 Live</div>
+      <h2>Эфиры и <span class="grad">конференции</span></h2>
+      <p>Прямые эфиры от команды и личные видео-встречи прямо из кабинета</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal" data-tilt>
+        <div class="feature-icon">📺</div>
+        <h3>Регулярные эфиры</h3>
+        <p>Стримы в канале <strong>@TRENDEX_AD</strong> с разборами кейсов, обновлениями платформы и Q&A.</p>
+      </div>
+      <div class="feature-card reveal" data-tilt>
+        <div class="feature-icon">🎥</div>
+        <h3>Видео-конференции</h3>
+        <p>Создавай встречи прямо из кабинета. Без Zoom, без приглашений — ссылка генерируется автоматически.</p>
+      </div>
+      <div class="feature-card reveal" data-tilt>
+        <div class="feature-icon">📝</div>
+        <h3>Запись + AI-резюме</h3>
+        <p>Запись, транскрипт и краткое содержание встречи — приходят на почту через 5 минут после окончания.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Отзывы -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">⭐ Отзывы</div>
+      <h2>Уже <span class="grad">внутри</span></h2>
+      <p>Первые партнёры с пресейла делятся результатами</p>
+    </div>
+    <div class="reviews">
+      <div class="review reveal" data-tilt>
+        <div class="review-head">
+          <div class="review-avatar">АС</div>
+          <div class="review-info">
+            <div class="review-name">Артём С.</div>
+            <div class="review-role">B2B-контакт · структура 2 800</div>
+          </div>
+        </div>
+        <div class="review-result">+ $890 за 12 дней</div>
+        <p>«Запустил рассылку по горячему сегменту, 38% open-rate, 47 ответов. Вышел в плюс за 12 дней без вложений в трафик.»</p>
+      </div>
+      <div class="review reveal" data-tilt>
+        <div class="review-head">
+          <div class="review-avatar">МП</div>
+          <div class="review-info">
+            <div class="review-name">Марина П.</div>
+            <div class="review-role">Маркетолог · агентство</div>
+          </div>
+        </div>
+        <div class="review-result">+34% к LTV клиента</div>
+        <p>«Использую CRM для своих клиентов. AI-сегментация даёт выше open-rate, чем ручная разбивка. Освобождает 5 часов в неделю.»</p>
+      </div>
+      <div class="review reveal" data-tilt>
+        <div class="review-head">
+          <div class="review-avatar">ДК</div>
+          <div class="review-info">
+            <div class="review-name">Денис К.</div>
+            <div class="review-role">Селлер · Telegram-канал</div>
+          </div>
+        </div>
+        <div class="review-result">+ 410 TRDX в день</div>
+        <p>«Сдал 3 TG-аккаунта в аренду через Trendex. Пассивно капает 410 TRDX каждый день. Сам ничего не делаю.»</p>
+      </div>
+      <div class="review reveal" data-tilt>
+        <div class="review-head">
+          <div class="review-avatar">ОВ</div>
+          <div class="review-info">
+            <div class="review-name">Ольга В.</div>
+            <div class="review-role">B2B-контакт · ниша эко</div>
+          </div>
+        </div>
+        <div class="review-result">+19 рефералов за 9 дней</div>
+        <p>«Реферальная программа реально работает. Партнёры регистрируются по моей ссылке, получаю +50 TRDX за каждого + программа растёт.»</p>
+      </div>
+      <div class="review reveal" data-tilt>
+        <div class="review-head">
+          <div class="review-avatar">ИЖ</div>
+          <div class="review-info">
+            <div class="review-name">Игорь Ж.</div>
+            <div class="review-role">Владелец TG-канала · 45K</div>
+          </div>
+        </div>
+        <div class="review-result">$1 240 за 3 недели</div>
+        <p>«Premium-рассылки по своей базе — конверсия в 2.3 раза выше обычных постов. AI-копирайтер пишет лучше, чем я сам.»</p>
+      </div>
+      <div class="review reveal" data-tilt>
+        <div class="review-head">
+          <div class="review-avatar">СЛ</div>
+          <div class="review-info">
+            <div class="review-name">Светлана Л.</div>
+            <div class="review-role">B2B · структура 950</div>
+          </div>
+        </div>
+        <div class="review-result">×3 к выплатам структуры</div>
+        <p>«Подключила команду к Trendex, дала им базу и шаблоны. За месяц выплаты структуры выросли в 3 раза. Karma-буст — отдельная история.»</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">❓ FAQ</div>
+      <h2>Часто <span class="grad">спрашивают</span></h2>
+    </div>
+    <div class="faq">
+      <div class="faq-item reveal">
+        <div class="faq-q">Откуда база 7322 лида?</div>
+        <div class="faq-a">База собрана легально через парсинг публичных профилей в Telegram, VK, Instagram и через opt-in формы (пользователи сами оставляли контакты). Все контакты проверены на актуальность за последние 30 дней. Дубликаты удалены, неактивные аккаунты отсеяны.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Как платить — рубли, крипта, USDT?</div>
+        <div class="faq-a">Принимаем все три варианта: банковские карты (рубли), криптовалюты (BTC, ETH, USDT TRC20/ERC20), а также внутренний баланс TRDX. Зачисление мгновенное для крипты, до 15 минут для карт.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Что будет, если бот забанят?</div>
+        <div class="faq-a">Анти-бан система встроена с первого дня: каждому аккаунту выдаётся индивидуальный px6-прокси, рассылки идут с задержками и в человеческих паттернах. За полгода работы — 0 банов в коммерческом тесте. Если всё же блокировка — заменяем аккаунт за наш счёт.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Когда вывод денег?</div>
+        <div class="faq-a">Выплаты раз в неделю, каждый понедельник. Минимальная сумма для вывода — 10 TRDX = $10. Выводим на крипто-кошелёк, банковскую карту или внутренний баланс другого участника. Комиссия за вывод — 0%.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Что я получу за регистрацию?</div>
+        <div class="faq-a">+100 TRDX мгновенно на баланс — этого хватит на первую тестовую рассылку, выполнение заданий или участие на платформе. Никаких подписок и обязательных платежей — регистрация полностью бесплатна.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Что если я не из B2B?</div>
+        <div class="faq-a">CRM работает для любого бизнеса с продажами через личные сообщения: инфобизнес, селлеры, маркетологи, агентства, владельцы каналов. База 7322 — это люди с опытом построения структур, они хорошо реагируют на партнёрские офферы.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+  <div class="container">
+    <h2 class="reveal">Получи доступ к CRM<br><span class="grad">+ 100 TRDX в подарок</span></h2>
+    <p class="reveal">Готовая база, AI-рассылки, заработок изнутри. Регистрация бесплатная.</p>
+    <a href="https://trendex.biz/" target="_blank" class="btn btn-primary btn-big reveal"><span>Получить доступ к CRM →</span></a>
+    <div class="final-cta-meta reveal">
+      <strong id="cd-d2">8 дней</strong> до старта маркетинга. Место на платформе фиксируется в момент регистрации.
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">TRENDEX</a>
+        <p>CRM на 7322 B2B-контакта, AI-рассылки и заработок изнутри. Платформа для тех, кто строит структуры и продаёт через личные сообщения.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Платформа</h4>
+        <a href="#crm">CRM-база</a>
+        <a href="#ai">AI-рассылки</a>
+        <a href="#earn">Заработок</a>
+        <a href="#genesis">Genesis TRDX</a>
+      </div>
+      <div class="footer-col">
+        <h4>Контакты</h4>
+        <a href="https://t.me/TRENDEX_AD" target="_blank">@TRENDEX_AD</a>
+        <a href="https://t.me/Trendex_bizbot" target="_blank">@Trendex_bizbot</a>
+        <a href="mailto:support@trendex.biz">support@trendex.biz</a>
+      </div>
+      <div class="footer-col">
+        <h4>Правовое</h4>
+        <a href="https://trendex.biz/offer" target="_blank">Договор-оферта</a>
+        <a href="https://trendex.biz/privacy" target="_blank">Конфиденциальность</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Trendex. Все права защищены.</span>
+      <span class="mono">trendex.biz</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// === Particles canvas ===
+(() => {
+  const c = document.getElementById('particles');
+  const ctx = c.getContext('2d');
+  let w, h, particles = [];
+  const PCOUNT = window.innerWidth < 768 ? 30 : 70;
+
+  function resize() {
+    w = c.width = window.innerWidth;
+    h = c.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (let i = 0; i < PCOUNT; i++) {
+    particles.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 1.5 + 0.5,
+      hue: Math.random() > 0.5 ? 280 : 190
+    });
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach((p, i) => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > w) p.vx *= -1;
+      if (p.y < 0 || p.y > h) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${p.hue}, 100%, 60%, 0.4)`;
+      ctx.fill();
+      // Lines to nearby
+      for (let j = i + 1; j < particles.length; j++) {
+        const p2 = particles[j];
+        const dx = p.x - p2.x, dy = p.y - p2.y;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < 120) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = `hsla(${p.hue}, 100%, 60%, ${0.15 * (1 - d/120)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    });
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+// === Reveal on scroll ===
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// === 3D tilt on hover ===
+if (window.matchMedia('(hover: hover)').matches) {
+  document.querySelectorAll('[data-tilt]').forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const rect = el.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      const rx = (y - 0.5) * -8;
+      const ry = (x - 0.5) * 8;
+      el.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
+      el.style.setProperty('--mx', (x * 100) + '%');
+      el.style.setProperty('--my', (y * 100) + '%');
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = '';
+      el.style.transition = 'transform 0.4s ease';
+    });
+    el.addEventListener('mouseenter', () => {
+      el.style.transition = 'transform 0.1s ease';
+    });
+  });
+}
+
+// === Mouse parallax on CRM mockup ===
+const crmMock = document.querySelector('.crm-mockup');
+if (crmMock && window.matchMedia('(hover: hover)').matches) {
+  document.addEventListener('mousemove', e => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 6;
+    const y = (e.clientY / window.innerHeight - 0.5) * 6;
+    const card = crmMock.querySelector('.crm-card');
+    if (card && !crmMock.matches(':hover')) {
+      card.style.transform = `rotateY(${-8 + x}deg) rotateX(${4 - y}deg)`;
+    }
+  });
+}
+
+// === FAQ accordion ===
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// === Countdown to 21 May 2026 ===
+function updateCountdown() {
+  const target = new Date('2026-05-21T00:00:00').getTime();
+  const now = Date.now();
+  const diff = target - now;
+  if (diff > 0) {
+    const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+    const el = document.getElementById('cd-d');
+    const el2 = document.getElementById('cd-d2');
+    if (el) el.textContent = days;
+    if (el2) el2.textContent = days + ' дней';
+  }
+}
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
+// === Animate KPI numbers ===
+const kpiNums = document.querySelectorAll('.kpi-num');
+const kpiObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      kpiObs.unobserve(e.target);
+      const txt = e.target.textContent;
+      const match = txt.match(/[\d.]+/);
+      if (match) {
+        const target = parseFloat(match[0]);
+        const suffix = txt.replace(match[0], '');
+        const prefix = txt.indexOf(match[0]) > 0 ? txt.slice(0, txt.indexOf(match[0])) : '';
+        let start = 0;
+        const dur = 1500;
+        const t0 = performance.now();
+        function step(t) {
+          const p = Math.min((t - t0) / dur, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          const val = Math.round(eased * target);
+          e.target.textContent = prefix + val + suffix.replace(match[0], '');
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+    }
+  });
+}, { threshold: 0.5 });
+kpiNums.forEach(n => kpiObs.observe(n));
+</script>
+</body>
+</html>

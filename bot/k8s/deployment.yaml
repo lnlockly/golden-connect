@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: trendex-bot-data
+  namespace: franchise-factory
+spec:
+  accessModes: [ReadWriteOnce]
+  resources:
+    requests:
+      storage: 1Gi
+---
+# The Secret `trendex-bot-env` is managed out-of-band, NOT by this manifest,
+# so that a `kubectl apply` from CI doesn't overwrite a real BOT_TOKEN with a
+# placeholder. Create/update it once per environment:
+#   kubectl -n franchise-factory create secret generic trendex-bot-env \
+#     --from-literal=BOT_TOKEN='...' \
+#     --from-literal=ADMIN_TG_ID='1361064246' \
+#     --from-literal=BOT_USERNAME='AITrendeX_bot' \
+#     --from-literal=DATABASE_PATH='/data/trendex.db' \
+#     --from-literal=NODE_ENV='production' \
+#     --from-literal=LOG_LEVEL='info' \
+#     --dry-run=client -o yaml | kubectl apply -f -
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trendex-bot
+  namespace: franchise-factory
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate  # SQLite — single writer
+  selector:
+    matchLabels:
+      app: trendex-bot
+  template:
+    metadata:
+      labels:
+        app: trendex-bot
+    spec:
+      containers:
+        - name: trendex-bot
+          image: ghcr.io/lnlockly/trendex-bot:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: trendex-bot-env
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: trendex-bot-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: trendex-bot
+  namespace: franchise-factory
+spec:
+  selector:
+    app: trendex-bot
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http

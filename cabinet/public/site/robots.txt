@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /cabinet
+Disallow: /login
+Disallow: /register
+Disallow: /api/
+Disallow: /admin/
+
+Sitemap: https://trendex.biz/sitemap.xml

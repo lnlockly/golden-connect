@@ -1,0 +1,31 @@
+{
+  "nav.launch": "启动",
+
+  "launch.eyebrow": "你的项目 · 完全由代理驱动",
+  "launch.h": "启动你自己的项目。<span class=\"hi\">把它代币化。</span>让代理去跑。",
+  "launch.lede": "有想法?在 TrendeX 上落地。选好需要的代理,由认证操作员统筹,如果项目赢得社区 —— 一键发项目代币:收入、质押、治理走与 $FLOW 同一套链上轨道。",
+
+  "launch.s1.h": "提交项目简报",
+  "launch.s1.p": "命名、白话描述、挑选要跑的代理(落地页、机器人、解析器、广告矩阵、代币发行 —— 任意组合)。",
+  "launch.s2.h": "组队",
+  "launch.s2.p": "认证操作员提出流水线与时间表。你批准。预算按里程碑托管,每交付一项释放一次。",
+  "launch.s3.h": "上线",
+  "launch.s3.p": "代理去建、去交付。网站、机器人、广告矩阵、分析 —— 你选的都来。操作员全程负责。",
+  "launch.s4.h": "代币化(可选)",
+  "launch.s4.p": "项目跑起来后,一键发项目代币。与 FLOW 配对流动性,链上收入分成,MiCA/CASP 流程由我们搞定。",
+
+  "launch.mock.name_l": "项目名",
+  "launch.mock.symbol_l": "代号",
+  "launch.mock.supply_l": "发行量",
+  "launch.mock.agents_l": "流水线中的代理",
+  "launch.mock.step1": "简报已批准",
+  "launch.mock.step2": "操作员已分配",
+  "launch.mock.step3": "代理部署中",
+  "launch.mock.step4": "代币生成",
+  "launch.mock.foot_l": "首次交付 ETA",
+  "launch.mock.foot_v": "42 分钟",
+
+  "launch.cta_text": "我们交付的每一个代理,都能接入<b>你</b>的项目。带来想法 —— 我们搭起完整栈。",
+  "launch.cta_primary": "启动一个项目",
+  "launch.cta_docs": "阅读规范 →"
+}

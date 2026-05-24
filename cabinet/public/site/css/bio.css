@@ -1,0 +1,40 @@
+/* Trendex Bio constructor UI */
+#bioPageContent { max-width: 1100px; margin: 0 auto; }
+
+.bio-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; margin-bottom: 18px; padding: 22px; background: linear-gradient(135deg, rgba(0,212,255,.08), rgba(177,74,237,.08)); border: 1px solid rgba(0,212,255,.25); border-radius: 16px; }
+.bio-head-text h2 { margin: 0 0 6px; color: #fff; font-size: 22px; font-weight: 700; }
+.bio-head-text p { margin: 0; color: #9ca3af; font-size: 13px; line-height: 1.6; max-width: 640px; }
+.bio-cta { background: linear-gradient(135deg, #00D4FF, #B14AED); color: #fff; padding: 11px 22px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 14px; white-space: nowrap; }
+.bio-cta:hover { transform: translateY(-1px); }
+
+.bio-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 18px; }
+.bio-form, .bio-links { background: rgba(13,17,36,.6); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 20px; }
+.bio-form h3, .bio-links h3 { margin: 0 0 16px; color: #fff; font-size: 17px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+
+.bio-field { margin-bottom: 14px; }
+.bio-field label { display: block; color: #e8edf5; font-weight: 600; font-size: 13px; margin-bottom: 6px; }
+.bio-field input, .bio-field textarea, .bio-field select { width: 100%; background: #0a0e16; border: 1px solid rgba(255,255,255,.12); border-radius: 8px; padding: 10px 12px; color: #fff; font-size: 14px; outline: none; font-family: inherit; }
+.bio-field input[type="color"] { padding: 4px; height: 42px; cursor: pointer; }
+.bio-field input:focus, .bio-field textarea:focus, .bio-field select:focus { border-color: rgba(0,212,255,.5); }
+.bio-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+
+.bio-btn { padding: 10px 18px; border-radius: 10px; border: none; cursor: pointer; font-weight: 600; font-size: 14px; transition: opacity .15s; }
+.bio-btn-primary { background: linear-gradient(135deg, #00D4FF, #B14AED); color: #fff; width: 100%; }
+.bio-btn-add { background: rgba(0,212,255,.15); border: 1px solid rgba(0,212,255,.4); color: #00D4FF; padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; }
+.bio-btn-add:hover:not(:disabled) { background: rgba(0,212,255,.25); }
+.bio-btn-add:disabled { opacity: .4; cursor: not-allowed; }
+
+.bio-link-row { display: grid; grid-template-columns: 1fr 1.6fr auto; gap: 8px; align-items: center; padding: 10px; background: rgba(0,0,0,.25); border-radius: 8px; margin-bottom: 8px; }
+.bio-link-title, .bio-link-url { background: #0a0e16; border: 1px solid rgba(255,255,255,.1); border-radius: 6px; padding: 8px 10px; color: #fff; font-size: 13px; outline: none; }
+.bio-link-title:focus, .bio-link-url:focus { border-color: rgba(0,212,255,.5); }
+.bio-link-actions { display: flex; gap: 4px; }
+.bio-btn-icon { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); color: #e8edf5; border-radius: 6px; padding: 6px 8px; cursor: pointer; font-size: 14px; transition: background .15s; }
+.bio-btn-icon:hover { background: rgba(0,212,255,.15); }
+
+@media (max-width: 760px) {
+  .bio-head { flex-direction: column; align-items: stretch; }
+  .bio-grid { grid-template-columns: 1fr; }
+  .bio-row { grid-template-columns: 1fr; }
+  .bio-link-row { grid-template-columns: 1fr; }
+  .bio-link-actions { justify-content: flex-end; }
+}

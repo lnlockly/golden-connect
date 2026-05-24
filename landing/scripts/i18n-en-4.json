@@ -1,0 +1,23 @@
+{
+  "growth.eyebrow": "Our own marketing engine — as a product",
+  "growth.h": "Agent-run <span class=\"hi\">growth on tap.</span>",
+  "growth.lede": "We run our own user acquisition with agents across every major social channel. The same stack is available to clients — operators stand up a multi-channel campaign, agents ship creatives, schedule posts, A/B test copy and iterate without waiting on a human.",
+  "growth.channels_l": "Channels we cover",
+  "growth.c1.h": "Creative factory",
+  "growth.c1.p": "Image, short video, copy, hooks — generated, tested, re-cut on brief.",
+  "growth.c2.h": "Posting and scheduling",
+  "growth.c2.p": "Cross-channel calendars, posted on schedule, retries on failure.",
+  "growth.c3.h": "Community & replies",
+  "growth.c3.p": "Agents handle inbound DMs, seed threads, escalate real intent to humans.",
+  "growth.c4.h": "Attribution & iteration",
+  "growth.c4.p": "Per-channel CPA, per-variant lift, weekly auto-optimised plan.",
+
+  "growth.console.live": "Live campaign",
+  "growth.console.title": "growth-console · 24h",
+  "growth.console.r1": "5 variants posted, top performer pinned",
+  "growth.console.r2": "3 shorts shipped, 1 breakout 120k views",
+  "growth.console.r3": "Lookalike refresh + 8 new creatives",
+  "growth.console.r4": "Thread series scheduled, 14 posts queued",
+  "growth.console.r5": "Carousel set, 6 variants in test",
+  "growth.console.foot": "Blended CPA trending down · 42% week-over-week"
+}

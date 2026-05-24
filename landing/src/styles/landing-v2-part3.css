@@ -1,0 +1,552 @@
+/* ═════ OPERATOR SUPPLY — leaderboard ═════ */
+
+.op-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.op-leaderboard {
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--bg-2) 0%, #0d0d0d 100%);
+  overflow: hidden;
+}
+.op-lb-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(212, 255, 0, 0.04);
+}
+.op-lb-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--acid);
+}
+.op-lb-title .dot {
+  width: 8px;
+  height: 8px;
+  background: var(--acid);
+  border-radius: 50%;
+  animation: pulse 1.6s infinite;
+}
+.op-lb-meta {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+.op-lb-cols {
+  display: grid;
+  grid-template-columns: 40px 1.4fr 1.2fr 0.7fr 0.7fr 0.9fr;
+  gap: 12px;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.op-lb-rows { display: flex; flex-direction: column; }
+.op-lb-row {
+  display: grid;
+  grid-template-columns: 40px 1.4fr 1.2fr 0.7fr 0.7fr 0.9fr;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--line);
+  align-items: center;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  transition: background 0.2s;
+}
+.op-lb-row:hover { background: var(--bg); }
+.op-lb-row:last-child { border-bottom: none; }
+.op-lb-row.b-top { background: linear-gradient(90deg, rgba(212, 255, 0, 0.08), transparent); }
+.op-lb-row.b-rising { background: linear-gradient(90deg, rgba(0, 255, 157, 0.06), transparent); }
+
+.op-lb-rank {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--acid);
+  letter-spacing: -0.02em;
+}
+.op-lb-row.b-top .op-lb-rank { color: var(--gold); }
+.op-lb-op {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.op-lb-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--acid);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 10px;
+  flex: 0 0 28px;
+}
+.op-lb-handle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.op-lb-badge {
+  font-family: var(--f-mono);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  padding: 2px 5px;
+  border: 1px solid;
+  text-transform: uppercase;
+}
+.op-lb-badge.top { color: var(--gold); border-color: var(--gold); }
+.op-lb-badge.rising { color: var(--acid-2); border-color: var(--acid-2); }
+.op-lb-spec { color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.op-lb-jobs { color: var(--ink); }
+.op-lb-rating { color: var(--gold); letter-spacing: 0.02em; }
+.op-lb-earn { color: var(--acid); font-weight: 600; }
+
+.op-lb-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  border-top: 1px solid var(--line);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.02);
+}
+.op-lb-foot > span:first-child { color: var(--ink-3); }
+.op-lb-foot-v { color: var(--acid); }
+
+/* Right column — pillars + apply */
+.op-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.op-pillars-title {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--acid);
+  margin-bottom: 4px;
+}
+.op-pillar {
+  padding: 20px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.op-pillar:hover { border-color: var(--acid); transform: translateY(-2px); }
+.op-pillar-num {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--acid);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.op-pillar.p2 .op-pillar-num { color: var(--royal); }
+.op-pillar.p3 .op-pillar-num { color: var(--blood); }
+.op-pillar h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+.op-pillar p { color: var(--ink-2); font-size: 13px; line-height: 1.55; }
+
+.op-apply {
+  margin-top: 8px;
+  padding: 20px;
+  border: 1px solid var(--acid);
+  background: linear-gradient(180deg, rgba(212, 255, 0, 0.08), transparent);
+}
+.op-apply-label {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--acid);
+  margin-bottom: 8px;
+}
+.op-apply p {
+  color: var(--ink-2);
+  font-size: 13px;
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+
+/* Legacy op-console / op-ladder kept below for safety (unused) */
+/* ═════ TRUST ═════ */
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.trust-card {
+  padding: 32px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  position: relative;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.trust-card:hover { border-color: var(--acid); transform: translateY(-2px); }
+.trust-card-num {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 42px;
+  color: var(--acid);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 16px;
+}
+.trust-card.t2 .trust-card-num { color: var(--royal); }
+.trust-card.t3 .trust-card-num { color: var(--gold); }
+.trust-card.t4 .trust-card-num { color: var(--acid-2); }
+.trust-card h4 { font-size: 24px; line-height: 1.2; margin-bottom: 12px; font-weight: 600; }
+.trust-card p { color: var(--ink-2); font-size: 15px; line-height: 1.55; }
+.trust-card-proof {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--acid-2);
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+}
+
+/* ═════ TOKEN PRE-LAUNCH ═════ */
+
+.token-hero-v2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 60px;
+}
+.token-ticker {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(96px, 12vw, 180px);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  position: relative;
+  display: inline-block;
+}
+.token-ticker::before {
+  content: "$";
+  color: var(--acid);
+  font-size: 0.55em;
+  vertical-align: super;
+  margin-right: 8px;
+}
+.token-meta {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-top: 8px;
+}
+.token-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 10px 16px;
+  border: 1px solid var(--acid);
+  background: rgba(212, 255, 0, 0.06);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.token-status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--acid);
+  border-radius: 50%;
+  animation: pulse 1.8s infinite;
+}
+.token-status-label { color: var(--ink-3); }
+.token-status-value { color: var(--acid); font-weight: 700; }
+.token-disclaim-v2 {
+  margin-top: 24px;
+  padding: 20px;
+  border-left: 2px solid var(--acid);
+  background: var(--bg-2);
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.token-disclaim-v2 b { color: var(--ink); font-weight: 600; }
+.token-cta-row {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.token-dist {
+  padding: 32px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+}
+.token-dist-title {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--acid);
+  margin-bottom: 24px;
+}
+.token-dist-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 60px;
+  gap: 16px;
+  align-items: center;
+  padding: 10px 0;
+  font-family: var(--f-mono);
+  font-size: 12px;
+}
+.token-dist-nm { color: var(--ink); letter-spacing: 0.05em; }
+.token-dist-bar { height: 8px; background: var(--bg-3); overflow: hidden; position: relative; }
+.token-dist-bar .fill {
+  display: block;
+  height: 100%;
+  background: var(--acid);
+  transform-origin: left;
+  animation: growBar 1.2s ease-out forwards;
+  transform: scaleX(0);
+}
+.token-dist-pct { text-align: right; color: var(--acid); font-weight: 600; }
+
+.token-uses { padding-top: 20px; }
+.token-uses-title {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--acid);
+  margin-bottom: 20px;
+}
+.token-uses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.token-use {
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--bg-2), var(--bg));
+  transition: border-color 0.3s, transform 0.3s;
+}
+.token-use:hover { border-color: var(--acid); transform: translateY(-2px); }
+.token-use-n {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--acid);
+  margin-bottom: 12px;
+}
+.token-use h4 { font-size: 18px; line-height: 1.2; margin-bottom: 8px; font-weight: 600; color: var(--ink); }
+.token-use p { color: var(--ink-2); font-size: 13px; line-height: 1.5; }
+
+/* ═════ DOCS ═════ */
+/* ═════ FAQ ═════ */
+/* ═════ MARKET V2 ═════ */
+/* ═════ INVESTOR CAPSULE ═════ */
+
+.inv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 40px;
+}
+.inv-kpis {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.inv-kpi {
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+}
+.inv-kpi .v {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--acid);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.inv-kpi .l {
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.inv-miles {
+  padding: 32px;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+}
+.inv-miles-title {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--acid);
+  margin-bottom: 16px;
+}
+.inv-miles ol { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.inv-miles li {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--line);
+}
+.inv-miles li:last-child { border-bottom: none; padding-bottom: 0; }
+.inv-miles-num {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--acid);
+  letter-spacing: -0.02em;
+}
+.inv-miles-text {
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.inv-cta {
+  margin-top: 40px;
+  padding: 40px;
+  border: 1px solid var(--acid);
+  background: linear-gradient(180deg, rgba(212, 255, 0, 0.06), transparent);
+  text-align: center;
+}
+.inv-cta-text {
+  color: var(--ink-2);
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 780px;
+  margin: 0 auto 24px;
+}
+.inv-cta-text b { color: var(--ink); font-weight: 600; }
+.inv-cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* ═════ Mobile ═════ */
+/* Note: part4.css already collapses op-grid/market-layout-v2/token-hero-v2/
+   inv-grid/docs-grid/trust-grid/token-uses-grid to 1fr at 1024, and
+   inv-kpis/token-uses-grid to 1fr at 640. These rules handle inner grids
+   (leaderboard 6-col, token-dist 3-col, docs-toc 3-col, market-row 2-col,
+   inv-miles 2-col) that otherwise overflow on phones. */
+
+@media (max-width: 1024px) {
+  .op-leaderboard { overflow-x: auto; }
+  .op-lb-head { padding: 14px 16px; gap: 12px; }
+  .op-lb-cols,
+  .op-lb-row { padding-left: 14px; padding-right: 14px; }
+}
+
+@media (max-width: 768px) {
+  /* Leaderboard: drop rank+spec+jobs columns, keep name + rating + earn.
+     Wrapping content on a narrow grid keeps the row legible without
+     forcing horizontal scroll. */
+  .op-lb-head {
+    flex-wrap: wrap;
+    padding: 12px 14px;
+  }
+  .op-lb-cols,
+  .op-lb-row {
+    grid-template-columns: 1.4fr 0.7fr 0.9fr;
+    gap: 10px;
+    padding: 10px 14px;
+    font-size: 11px;
+  }
+  .op-lb-cols > :nth-child(1),
+  .op-lb-cols > :nth-child(3),
+  .op-lb-cols > :nth-child(4),
+  .op-lb-row > :nth-child(1),
+  .op-lb-row > :nth-child(3),
+  .op-lb-row > :nth-child(4) { display: none; }
+  .op-lb-foot { padding: 12px 14px; font-size: 10px; flex-wrap: wrap; gap: 8px; }
+
+  /* Ladder / pillars */
+/* Token distribution: stack label and value so bars never overflow */
+  .token-dist { padding: 24px 20px; }
+  .token-dist-row {
+    grid-template-columns: 1fr 56px;
+    gap: 10px;
+  }
+  .token-dist-bar { grid-column: 1 / -1; }
+
+  /* Token uses 3-col -> 1-col at phone, mirrors site-wide pattern */
+  .token-uses-grid { grid-template-columns: 1fr; gap: 14px; }
+  .token-use { padding: 20px; }
+
+  /* Market rows: label above value, no 140px fixed column */
+/* Investor milestones: numeric column shrinks */
+  .inv-miles { padding: 24px 20px; }
+  .inv-miles li { grid-template-columns: 32px 1fr; gap: 10px; }
+  .inv-miles-num { font-size: 18px; }
+  .inv-cta { padding: 28px 20px; margin-top: 28px; }
+  .inv-cta-text { font-size: 16px; }
+
+  /* Trust pillars */
+  .trust-card { padding: 24px 20px; }
+  .trust-card-num { font-size: 34px; margin-bottom: 12px; }
+  .trust-card h4 { font-size: 20px; }
+
+  /* Docs TOC + body */
+/* FAQ */
+/* Token hero + CTA row */
+  .token-ticker { font-size: clamp(72px, 18vw, 120px); }
+  .token-cta-row { flex-direction: column; align-items: stretch; }
+}
+
+@media (max-width: 480px) {
+  /* Leaderboard: keep only operator name + earnings at very narrow widths */
+  .op-lb-cols,
+  .op-lb-row {
+    grid-template-columns: 1.6fr 0.9fr;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+  .op-lb-cols > :nth-child(5),
+  .op-lb-row > :nth-child(5) { display: none; }
+  .op-lb-avatar { width: 24px; height: 24px; flex: 0 0 24px; font-size: 9px; }
+  .op-lb-badge { display: none; }
+
+  .token-dist-nm { font-size: 11px; }
+}

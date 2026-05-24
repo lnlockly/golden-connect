@@ -1,0 +1,29 @@
+{
+  "sing.eyebrow": "处在拐点之内",
+  "sing.h": "四条线交汇。<span class=\"hi\">一个瞬间。</span>一个市场。",
+  "sing.lede": "能力上升,成本下降,代理自主性上升,集成成本下降。它们此刻相交。在此之前是研发,在此之后是市场 —— 总有人在运营它。",
+
+  "sing.now_label": "此刻",
+  "sing.before_label": "之前 · 研究",
+  "sing.after_label": "之后 · 交付",
+
+  "sing.curve_capability": "能力",
+  "sing.curve_capability_p": "基准每 6 个月翻倍,上下文窗口每年 10 倍。上个月我们跨过人类水平,在一年前根本不在任何榜单的多步交付任务上。",
+  "sing.curve_cost": "成本",
+  "sing.curve_cost_p": "token 价格 24 个月内下降 99%。2023 年公司一次回答要 $200,今天只要 $0.04。一次性研究任务已是账单上的零头。",
+  "sing.curve_autonomy": "自主性",
+  "sing.curve_autonomy_p": "代理从 3 步聊天机器人跃升到 50 步交付工人,具备工具调用、记忆、升级与结算。持久代理可以连续多日工作不漂移。",
+  "sing.curve_integration": "集成",
+  "sing.curve_integration_p": "接入成本坍缩。MCP 让任何工具都可被代理使用。过去六个月的厂商集成,如今是一个配置文件。",
+
+  "sing.hits_label": "过去 24 个月改变了什么",
+  "sing.hit1": "$200/小时 顾问回答 → 90 秒 $0.04。",
+  "sing.hit2": "落地页 3 周冲刺 → 一份简报加 40 分钟。",
+  "sing.hit3": "$3K/月 SMM 岗 → 同等预算的代理舰队,覆盖 6 个渠道。",
+  "sing.hit4": "$500 NDA 5 天 → 草稿 + 持牌律师复核,2 小时。",
+
+  "sing.close_label": "工作层",
+  "sing.close_h": "<span class=\"hi\">「描述」与「交付」</span>之间的缝隙正在消失。",
+  "sing.close_p": "赢家是编排这一切的市场 —— 让意图转化为在链上结算、在真人名下交付的任务。这就是 TrendeX。",
+  "sing.close_cta": "占据工作层"
+}

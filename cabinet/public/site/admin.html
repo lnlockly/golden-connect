@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js?id=108574485","ym");
+ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108574485" style="position:absolute;left:-9999px;" alt=""/></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Админка — Trendex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,sans-serif;background:#070b14;color:#e8eaf6;min-height:100vh}
+.wrap{max-width:1000px;margin:0 auto;padding:20px}
+h1{font-size:22px;margin-bottom:20px}
+.card{background:#0d1320;border:1px solid #1e2940;border-radius:12px;padding:20px;margin-bottom:16px}
+.card h3{font-size:16px;font-weight:700;margin-bottom:12px}
+.stat{display:inline-block;padding:10px 20px;background:#111827;border:1px solid #1e2940;border-radius:10px;margin-right:10px;margin-bottom:10px}
+.stat-val{font-size:24px;font-weight:700;color:#10b981}
+.stat-label{font-size:11px;color:#6b7280}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:10px;font-size:11px;color:#6b7280;border-bottom:1px solid #1e2940}
+td{padding:10px;font-size:13px;border-bottom:1px solid rgba(30,41,64,.5)}
+tr:hover td{background:rgba(255,255,255,.02)}
+.badge{padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600}
+.badge-ok{background:rgba(0,230,118,.15);color:#00e676}
+.badge-pending{background:rgba(255,215,0,.15);color:#ffd700}
+btn{padding:8px 16px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:600}
+.btn-primary{background:#10b981;color:#000}
+.btn-danger{background:#ff4757;color:#fff}
+.btn-outline{background:none;border:1px solid #1e2940;color:#e8eaf6}
+input,select,textarea{padding:8px 12px;border-radius:8px;border:1px solid #1e2940;background:#111827;color:#e8eaf6;font-size:13px;width:100%}
+.login-box{max-width:360px;margin:100px auto;text-align:center}
+#admin-app{display:none}
+.tabs{display:flex;gap:8px;margin-bottom:16px}
+.tab{padding:8px 16px;border-radius:8px;border:1px solid #1e2940;background:none;color:#6b7280;cursor:pointer;font-size:13px}
+.tab.active{background:#10b981;color:#000;border-color:#10b981}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <!-- Login -->
+  <div id="admin-login" class="login-box">
+    <h1>Trendex Admin</h1>
+    <div class="card">
+      <p style="margin-bottom:12px;color:#6b7280">Введите пароль администратора</p>
+      <input id="admin-pass" type="password" placeholder="Пароль" style="margin-bottom:10px">
+      <button class="btn-primary" style="width:100%;padding:10px" onclick="adminLogin()">Войти</button>
+      <p id="admin-err" style="color:#ff4757;font-size:12px;margin-top:8px"></p>
+    </div>
+  </div>
+
+  <!-- Admin panel -->
+  <div id="admin-app">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+      <h1>Trendex Admin Panel</h1>
+      <button class="btn-outline" onclick="adminLogout()">Выйти</button>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="adminTab('stats',this)">📊 Статистика</button>
+      <button class="tab" onclick="adminTab('users',this)">👥 Пользователи</button>
+      <button class="tab" onclick="adminTab('broadcasts',this)">📡 Эфиры</button>
+      <button class="tab" onclick="adminTab('content',this)">📝 Контент</button>
+      <button class="tab" onclick="adminTab('system',this)">⚙ Система</button>
+    </div>
+
+    <div id="tab-stats">
+      <div id="admin-stats"></div>
+    </div>
+    <div id="tab-users" style="display:none">
+      <div id="admin-users"></div>
+    </div>
+    <div id="tab-broadcasts" style="display:none">
+      <div id="admin-broadcasts"></div>
+    </div>
+    <div id="tab-content" style="display:none">
+      <div id="admin-content"></div>
+    </div>
+    <div id="tab-system" style="display:none">
+      <div id="admin-system"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+var adminToken = localStorage.getItem('xh-admin-token') || '';
+var ADMIN_PASS = 'trendex2026admin';
+
+function adminLogin() {
+  var pass = document.getElementById('admin-pass').value;
+  if (pass === ADMIN_PASS) {
+    adminToken = btoa(pass + ':' + Date.now());
+    localStorage.setItem('xh-admin-token', adminToken);
+    document.getElementById('admin-login').style.display = 'none';
+    document.getElementById('admin-app').style.display = 'block';
+    loadAdminStats();
+  } else {
+    document.getElementById('admin-err').textContent = 'Неверный пароль';
+  }
+}
+
+function adminLogout() {
+  localStorage.removeItem('xh-admin-token');
+  location.reload();
+}
+
+if (adminToken) {
+  try { var decoded = atob(adminToken); if (decoded.includes(ADMIN_PASS)) { document.getElementById('admin-login').style.display = 'none'; document.getElementById('admin-app').style.display = 'block'; loadAdminStats(); } } catch(e) {}
+}
+
+function adminTab(name, btn) {
+  ['stats','users','broadcasts','content','system'].forEach(function(t) {
+    document.getElementById('tab-' + t).style.display = t === name ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  if (name === 'stats') loadAdminStats();
+  if (name === 'users') loadAdminUsers();
+  if (name === 'broadcasts') loadAdminBroadcasts();
+  if (name === 'content') loadAdminContent();
+  if (name === 'system') loadAdminSystem();
+}
+
+async function api(method, path, body) {
+  var opts = { method: method, credentials: 'same-origin', headers: { 'Content-Type': 'application/json' } };
+  if (body) opts.body = JSON.stringify(body);
+  var r = await fetch(path, opts);
+  return r.json();
+}
+
+function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+
+async function loadAdminStats() {
+  try {
+    var health = await api('GET', '/health');
+    var config = await api('GET', '/cabinet/api/site/config');
+    var el = document.getElementById('admin-stats');
+    el.innerHTML = '<div class="card"><h3>Общая статистика</h3>' +
+      '<div class="stat"><div class="stat-val">' + (health.webUsersCount || 0) + '</div><div class="stat-label">Пользователи</div></div>' +
+      '<div class="stat"><div class="stat-val">' + (health.telegramUsersCount || 0) + '</div><div class="stat-label">TG пользователи</div></div>' +
+      '<div class="stat"><div class="stat-val">' + Math.floor((health.uptimeSec || 0) / 3600) + 'ч</div><div class="stat-label">Uptime</div></div>' +
+      '</div>' +
+      '<div class="card"><h3>Сервер</h3><pre style="font-size:12px;color:#6b7280">' + JSON.stringify(health, null, 2) + '</pre></div>';
+  } catch(e) { document.getElementById('admin-stats').innerHTML = '<p>Ошибка загрузки</p>'; }
+}
+
+async function loadAdminUsers() {
+  var el = document.getElementById('admin-users');
+  el.innerHTML = '<p>Загрузка...</p>';
+  // We need an admin API endpoint — for now show config users
+  try {
+    // Use site/config to get session info
+    el.innerHTML = '<div class="card"><h3>Управление пользователями</h3>' +
+      '<p style="color:#6b7280;font-size:13px">Для просмотра всех пользователей создайте API endpoint /api/admin/users</p>' +
+      '<p style="margin-top:10px">Текущий функционал:</p>' +
+      '<ul style="font-size:13px;color:#6b7280;padding-left:20px;line-height:1.8">' +
+      '<li>Пользователи регистрируются через /register</li>' +
+      '<li>Данные хранятся в state.json на сервере</li>' +
+      '<li>Рефералы отслеживаются через ?ref= параметр</li>' +
+      '</ul></div>';
+  } catch(e) {}
+}
+
+function loadAdminConferences() {
+  var el = document.getElementById('admin-broadcasts');
+  el.innerHTML = '<p>Загрузка...</p>';
+  api('GET', '/cabinet/api/conferences').then(function(data) {
+    var confs = data.conferences || [];
+    var html = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><h3>Конференции (' + confs.length + ')</h3><button class="btn-primary" style="padding:8px 16px;border:none;border-radius:8px;cursor:pointer" onclick="showAddConference()">+ Добавить</button></div>';
+
+    // Add form (hidden)
+    html += '<div id="conf-form" style="display:none" class="card"><h3>Новая конференция</h3>';
+    html += '<div style="margin:10px 0"><label style="font-size:12px;color:#6b7280">Название</label><input id="cf-title" style="margin-top:4px" placeholder="Здоровье и долголетие с Trendex"></div>';
+    html += '<div style="margin:10px 0"><label style="font-size:12px;color:#6b7280">Спикер</label><input id="cf-speaker" style="margin-top:4px" placeholder="Николай Румянцев"></div>';
+    html += '<div style="margin:10px 0"><label style="font-size:12px;color:#6b7280">Роль спикера</label><input id="cf-role" style="margin-top:4px" placeholder="Врач-хирург, физиотерапевт"></div>';
+    html += '<div style="margin:10px 0"><label style="font-size:12px;color:#6b7280">Фото спикера (URL)</label><input id="cf-image" style="margin-top:4px" placeholder="/cabinet/media/uploads/rumyancev.jpg"></div>';
+    html += '<div style="margin:10px 0"><label style="font-size:12px;color:#6b7280">Дата и время (ISO)</label><input id="cf-date" type="datetime-local" style="margin-top:4px"></div>';
+    html += '<div style="margin:10px 0"><label style="font-size:12px;color:#6b7280">Описание</label><textarea id="cf-desc" rows="3" style="margin-top:4px" placeholder="Разберём натуральные методы..."></textarea></div>';
+    html += '<div style="margin:10px 0"><label style="font-size:12px;color:#6b7280">Ссылка на эфир</label><input id="cf-link" style="margin-top:4px" placeholder="https://..."></div>';
+    html += '<div style="margin:10px 0"><label style="font-size:12px;color:#6b7280">Статус</label><select id="cf-status" style="margin-top:4px"><option value="upcoming">Предстоящий</option><option value="live">Идёт сейчас</option><option value="past">Прошёл</option></select></div>';
+    html += '<div style="display:flex;gap:8px;margin-top:12px"><button class="btn-primary" style="padding:8px 16px;border:none;border-radius:8px;cursor:pointer" onclick="saveConference()">Сохранить</button><button class="btn-outline" style="padding:8px 16px;border:1px solid #1e2940;border-radius:8px;background:none;color:#e8eaf6;cursor:pointer" onclick="document.getElementById(\x27conf-form\x27).style.display=\x27none\x27">Отмена</button></div></div>';
+
+    // List
+    if (!confs.length) {
+      html += '<div class="card"><p style="color:#6b7280;text-align:center;padding:20px">Нет конференций. Добавьте первую!</p></div>';
+    } else {
+      confs.forEach(function(c) {
+        var statusBadge = c.status === 'upcoming' ? '<span class="badge badge-ok">Предстоящий</span>' : c.status === 'live' ? '<span class="badge" style="background:rgba(255,71,87,.15);color:#ff4757">LIVE</span>' : '<span class="badge badge-pending">Прошёл</span>';
+        html += '<div class="card" style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:center">';
+        html += '<div><strong>' + esc(c.title) + '</strong> ' + statusBadge;
+        html += '<div style="font-size:12px;color:#6b7280;margin-top:4px">' + esc(c.speaker || '') + ' | ' + (c.date ? new Date(c.date).toLocaleString('ru-RU') : 'Дата не указана') + '</div>';
+        html += '<div style="font-size:11px;color:#6b7280;margin-top:2px">👁 ' + (c.clicks || 0) + ' кликов | ✅ ' + (c.registrations || 0) + ' записей</div></div>';
+        html += '<div style="display:flex;gap:6px"><button style="background:none;border:1px solid #1e2940;border-radius:6px;padding:4px 10px;color:#e8eaf6;cursor:pointer;font-size:12px" onclick="editConference(' + c.id + ')">✏️</button>';
+        html += '<button style="background:none;border:1px solid #ff4757;border-radius:6px;padding:4px 10px;color:#ff4757;cursor:pointer;font-size:12px" onclick="deleteConference(' + c.id + ')">🗑</button></div>';
+        html += '</div></div>';
+      });
+    }
+    el.innerHTML = html;
+  }).catch(function() { el.innerHTML = '<p>Ошибка загрузки</p>'; });
+}
+
+window.showAddConference = function() {
+  document.getElementById('conf-form').style.display = 'block';
+  document.getElementById('conf-form').dataset.editId = '';
+};
+
+window.saveConference = async function() {
+  var editId = document.getElementById('conf-form').dataset.editId;
+  var data = {
+    title: document.getElementById('cf-title').value,
+    speaker: document.getElementById('cf-speaker').value,
+    speakerRole: document.getElementById('cf-role').value,
+    speakerImage: document.getElementById('cf-image').value,
+    date: document.getElementById('cf-date').value ? new Date(document.getElementById('cf-date').value).toISOString() : null,
+    description: document.getElementById('cf-desc').value,
+    link: document.getElementById('cf-link').value,
+    status: document.getElementById('cf-status').value,
+  };
+  try {
+    if (editId) {
+      await api('PUT', '/cabinet/api/conferences/' + editId, data);
+    } else {
+      await api('POST', '/cabinet/api/conferences', data);
+    }
+    document.getElementById('conf-form').style.display = 'none';
+    loadAdminConferences();
+    alert('Конференция сохранена!');
+  } catch(e) { alert('Ошибка: ' + e.message); }
+};
+
+window.editConference = async function(id) {
+  try {
+    var res = await api('GET', '/cabinet/api/conferences');
+    var conf = (res.conferences || []).find(function(c) { return c.id === id; });
+    if (!conf) return;
+    document.getElementById('cf-title').value = conf.title || '';
+    document.getElementById('cf-speaker').value = conf.speaker || '';
+    document.getElementById('cf-role').value = conf.speakerRole || '';
+    document.getElementById('cf-image').value = conf.speakerImage || '';
+    document.getElementById('cf-date').value = conf.date ? conf.date.substring(0, 16) : '';
+    document.getElementById('cf-desc').value = conf.description || '';
+    document.getElementById('cf-link').value = conf.link || '';
+    document.getElementById('cf-status').value = conf.status || 'upcoming';
+    document.getElementById('conf-form').style.display = 'block';
+    document.getElementById('conf-form').dataset.editId = String(id);
+  } catch(e) {}
+};
+
+window.deleteConference = async function(id) {
+  if (!confirm('Удалить конференцию?')) return;
+  try { await api('DELETE', '/cabinet/api/conferences/' + id); loadAdminConferences(); } catch(e) {}
+};
+
+function loadAdminBroadcasts() { loadAdminConferences(); }
+// OLD loadAdminBroadcasts below — kept for compatibility
+function _oldLoadAdminBroadcasts() {
+  document.getElementById('admin-broadcasts').innerHTML = '<div class="card"><h3>Управление эфирами</h3>' +
+    '<p style="color:#6b7280;font-size:13px;margin-bottom:12px">Настройка ближайшего эфира. Изменения применяются после перезапуска сервера.</p>' +
+    '<div style="margin-bottom:10px"><label style="font-size:12px;color:#6b7280">Название эфира</label><input id="bc-title" value="Здоровье и долголетие с Trendex" style="margin-top:4px"></div>' +
+    '<div style="margin-bottom:10px"><label style="font-size:12px;color:#6b7280">Спикер</label><input id="bc-speaker" value="Николай Румянцев" style="margin-top:4px"></div>' +
+    '<div style="margin-bottom:10px"><label style="font-size:12px;color:#6b7280">Дата (ISO)</label><input id="bc-date" value="2026-04-15T18:00:00+03:00" style="margin-top:4px"></div>' +
+    '<div style="margin-bottom:10px"><label style="font-size:12px;color:#6b7280">Описание</label><textarea id="bc-desc" rows="3" style="margin-top:4px">Прямой эфир с профессором о натуральных методах здоровья</textarea></div>' +
+    '<button class="btn-primary" onclick="alert(\x27Для применения обновите site-content.js на сервере\x27)">Сохранить</button></div>';
+}
+
+function loadAdminContent() {
+  document.getElementById('admin-content').innerHTML = '<div class="card"><h3>Контент</h3>' +
+    '<p style="color:#6b7280;font-size:13px">Управление контентом сайта</p>' +
+    '<ul style="font-size:13px;color:#6b7280;padding-left:20px;line-height:2">' +
+    '<li><strong>Продукты:</strong> 25 позиций (site-content.js)</li>' +
+    '<li><strong>Отзывы:</strong> 10 отзывов</li>' +
+    '<li><strong>Эксперты:</strong> 8 профессоров</li>' +
+    '<li><strong>Лендинги:</strong> 3 шт (official, youth, health)</li>' +
+    '<li><strong>Промо-посты:</strong> 10 шаблонов</li>' +
+    '</ul></div>';
+}
+
+function loadAdminSystem() {
+  document.getElementById('admin-system').innerHTML = '<div class="card"><h3>Система</h3>' +
+    '<div style="font-size:13px;color:#6b7280;line-height:2">' +
+    '<div><strong>Сервер:</strong> 81.91.177.204</div>' +
+    '<div><strong>PM2:</strong> trendex-cabinet</div>' +
+    '<div><strong>Порт:</strong> 3810</div>' +
+    '<div><strong>Домен:</strong> trendex.biz</div>' +
+    '<div><strong>Бот:</strong> @Trendex_bizbot</div>' +
+    '<div><strong>Node:</strong> v20</div>' +
+    '<div><strong>Storage:</strong> JSON (state.json)</div>' +
+    '</div></div>' +
+    '<div class="card"><h3>Быстрые действия</h3>' +
+    '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+    '<button class="btn-outline" onclick="fetch(\x27/health\x27).then(r=>r.json()).then(d=>alert(JSON.stringify(d,null,2)))">Health Check</button>' +
+    '<a href="/" target="_blank" class="btn-outline" style="text-decoration:none;padding:8px 16px;border-radius:8px;border:1px solid #1e2940;color:#e8eaf6;font-size:13px">Открыть сайт</a>' +
+    '<a href="/cabinet/cabinet" target="_blank" class="btn-outline" style="text-decoration:none;padding:8px 16px;border-radius:8px;border:1px solid #1e2940;color:#e8eaf6;font-size:13px">Открыть кабинет</a>' +
+    '</div></div>';
+}
+</script>
+</body>
+</html>

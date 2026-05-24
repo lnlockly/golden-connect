@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <meta charset="UTF-8">
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js?id=108574485","ym");
+ym(108574485,"init",{webvisor:true,clickmap:true,trackLinks:true,accurateTrackBounce:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108574485" style="position:absolute;left:-9999px;" alt=""/></div></noscript>
+<!-- /Yandex.Metrika counter -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Вход в личный кабинет Trendex">
+  <meta name="theme-color" content="#080a0f" id="meta-theme-color">
+  <title data-i18n="auth_signin_title">Вход — Trendex</title>
+  <link rel="icon" href="/cabinet/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/cabinet/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/cabinet/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (function(){
+      var t = localStorage.getItem('xh-theme');
+      if (!t) t = 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css?v=5.6">
+<script src="/cabinet/js/bot-link.js?v=1"></script><script src="js/i18n.js?v=trendex-1" defer></script>
+<title>Trendex — Вход в кабинет</title>
+<link rel="canonical" href="https://trendex.biz/login">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Trendex — Вход в кабинет">
+  <meta name="twitter:description" content="Войди в личный кабинет Trendex.">
+  <meta name="twitter:image" content="https://trendex.biz/media/brand-og.jpg">
+  <!-- [mobile-auth-fix-2026-05] -->
+<style>
+@media (max-width: 640px) {
+  .auth-card {
+    max-height: none !important;
+    overflow-y: visible !important;
+    padding: 24px 18px !important;
+  }
+  .auth-dialog {
+    max-height: none !important;
+    margin: 16px auto !important;
+  }
+  .form-group { margin-bottom: 12px !important; }
+  .form-input { font-size: 16px !important; }   /* iOS: 16px avoids zoom-on-focus */
+}
+@media (max-height: 700px) {
+  .auth-card {
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+}
+</style>
+</head>
+<body>
+  <div class="aurora">
+    <div class="aurora-orb aurora-orb--cyan"></div>
+    <div class="aurora-orb aurora-orb--purple"></div>
+    <div class="aurora-orb aurora-orb--gold"></div>
+  </div>
+
+  <nav class="navbar">
+    <div class="wrap">
+      <a class="nav-logo" href="/">
+        <div class="nav-logo-icon">✦</div>
+        TRENDEX
+      </a>
+      <div class="nav-actions" style="margin-left:auto">
+        <a href="/cabinet/register" class="btn btn--primary btn--nav">Регистрация</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:calc(var(--nav-h) + 40px) 24px 40px;position:relative;z-index:1">
+    <div style="width:100%;max-width:440px">
+      <div class="auth-card" style="background:var(--surface-solid);border:1px solid var(--border);border-radius:var(--r-xl);padding:40px 32px;box-shadow:var(--shadow-xl),var(--shadow-glow);position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent-gradient)"></div>
+
+        <div style="text-align:center;margin-bottom:28px">
+          <div class="nav-logo-icon" style="width:48px;height:48px;font-size:20px;margin:0 auto 16px;border-radius:var(--r-md)">✦</div>
+          <h1 style="font-family:var(--font-display);font-size:var(--fs-xl);font-weight:700;margin-bottom:6px">Вход в кабинет</h1>
+          <p style="color:var(--text-secondary);font-size:var(--fs-sm)">Войдите для доступа к каталогу, материалам, личным ссылкам и кабинету партнёра</p>
+        </div>
+
+        <button id="telegram-auth-btn" class="btn btn--telegram" type="button" style="width:100%;margin-bottom:20px">✈ Войти через Telegram</button>
+        <p id="telegram-auth-hint" style="text-align:center;color:var(--text-muted);font-size:var(--fs-xs);margin-bottom:16px;min-height:18px"></p>
+
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
+          <div style="flex:1;height:1px;background:var(--border)"></div>
+          <span style="color:var(--text-faint);font-size:var(--fs-xs)">или по email</span>
+          <div style="flex:1;height:1px;background:var(--border)"></div>
+        </div>
+
+        <form id="login-form" style="display:flex;flex-direction:column;gap:14px">
+          <div class="form-group">
+            <label class="form-label" data-i18n="label_email" data-i18n="label_email">Email</label>
+            <input class="form-input" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="label_password" data-i18n="label_password">Пароль</label>
+            <div class="pwd-wrap" style="position:relative">
+              <input class="form-input" id="login-pwd" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required style="padding-right:48px">
+              <button type="button" class="pwd-eye" data-target="login-pwd" aria-label="Показать пароль" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#9ca3af;font-size:18px">👁</button>
+            </div>
+          </div>
+          <div class="form-group" id="captcha-group">
+            <label class="form-label" id="captcha-label">Защита от ботов: <span id="captcha-q" style="display:inline-block;background:#0c111a;border:1px solid #00D4FF44;border-radius:6px;padding:3px 10px;margin-left:6px;font-family:monospace;font-weight:700;color:#00D4FF;letter-spacing:1px">…</span> <button type="button" id="captcha-reload" style="background:none;border:none;color:#00D4FF;cursor:pointer;font-size:13px;text-decoration:underline">обновить</button></label>
+            <input class="form-input" name="captchaAnswer" type="text" placeholder="Ответ" autocomplete="off" inputmode="numeric" required>
+            <input type="hidden" name="captchaId" value="">
+          </div>
+          <button class="btn btn--primary" type="submit" style="width:100%;margin-top:4px" data-i18n="btn_login" data-i18n="btn_login">Войти</button>
+        </form>
+
+        <p id="auth-status" style="margin-top:12px;font-size:var(--fs-xs);min-height:20px;text-align:center"></p>
+
+        <!-- [register-cta] Заметный блок приглашения к регистрации -->
+        <div style="margin-top:24px;padding:20px;border-radius:14px;background:linear-gradient(135deg,rgba(177,74,237,0.12),rgba(0,212,255,0.10));border:1px solid rgba(177,74,237,0.35);text-align:center">
+          <div style="font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px">🚀 Ещё не с нами?</div>
+          <p style="color:var(--text-muted);font-size:var(--fs-sm);margin:0 0 14px">Создай аккаунт за 30 секунд и получи доступ к рекламной экосистеме Trendex.</p>
+          <a href="/cabinet/register" class="btn btn--primary" style="display:inline-block;width:100%;padding:12px 20px;font-weight:700;text-decoration:none">Зарегистрироваться бесплатно →</a>
+          <p style="margin:10px 0 0;font-size:var(--fs-xs);color:var(--text-faint)">Уже зарегистрирован? Войди выше ↑</p>
+        </div>
+        <div style="text-align:center;margin-top:16px">
+          <a href="/" style="color:var(--text-faint);font-size:var(--fs-xs);text-decoration:none">← Вернуться на главную</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function() {
+      const form = document.getElementById('login-form');
+      const status = document.getElementById('auth-status');
+      const tgBtn = document.getElementById('telegram-auth-btn');
+      const tgHint = document.getElementById('telegram-auth-hint');
+      let botAuthRequestId = null;
+      let botAuthPollTimer = null;
+
+      function setStatus(msg, isError) {
+        status.textContent = msg;
+        status.style.color = isError ? 'var(--danger)' : 'var(--green)';
+      }
+
+      // Check if already logged in
+      fetch('/cabinet/api/auth/me', { credentials: 'same-origin' })
+        .then(r => r.json())
+        .then(data => { if (data.user) window.location.href = '/cabinet/cabinet'; })
+        .catch(() => {});
+
+      // Sync telegram capabilities
+      fetch('/cabinet/api/site/config', { credentials: 'same-origin' })
+        .then(r => r.json())
+        .then(data => {
+          if (!data.auth?.telegramBotEnabled) {
+            tgBtn.style.display = 'none';
+          }
+        })
+        .catch(() => {});
+
+      // Email login
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        setStatus('', false);
+        const fd = new FormData(form);
+        try {
+          const res = await fetch('/cabinet/api/auth/login', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: fd.get('email'),
+              password: fd.get('password'),
+              captchaId: fd.get('captchaId') || '',
+              captchaAnswer: fd.get('captchaAnswer') || '',
+              visitorId: localStorage.getItem('xh-visitor-id') || ''
+            })
+          });
+          const data = await res.json();
+          if (!res.ok) {
+            const reasonMap = {
+              captcha_failed: 'Капча решена неверно — попробуй ещё раз',
+              invalid_email: 'Введи корректный email',
+              invalid_credentials: 'Неверный email или пароль',
+              user_not_found: 'Аккаунт с таким email не найден — зарегистрируйся',
+              account_blocked: 'Аккаунт заблокирован, обратись в поддержку',
+              rate_limited: 'Слишком много попыток — подожди минуту',
+            };
+            const code = data.reason || data.error || '';
+            throw new Error(reasonMap[code] || ('Ошибка входа' + (code ? ': ' + code : '')));
+          }
+          setStatus('Успешный вход! Перенаправление...', false);
+          setTimeout(() => { window.location.href = '/cabinet/cabinet'; }, 500);
+        } catch (err) {
+          setStatus(err.message, true);
+        }
+      });
+
+      // Telegram auth
+      tgBtn.addEventListener('click', async () => {
+        try {
+          const res = await fetch('/cabinet/api/auth/bot/start', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ visitorId: localStorage.getItem('xh-visitor-id') || '' })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'Ошибка');
+          botAuthRequestId = data.requestId;
+          if (data.deepLink) window.open(data.deepLink, '_blank');
+          tgHint.textContent = 'Откройте бот и нажмите /start. Ожидаем подтверждение...';
+          pollBotAuth();
+        } catch (err) {
+          setStatus(err.message, true);
+        }
+      });
+
+      function pollBotAuth() {
+        if (botAuthPollTimer) clearInterval(botAuthPollTimer);
+        botAuthPollTimer = setInterval(async () => {
+          try {
+            const res = await fetch('/cabinet/api/auth/bot/status?requestId=' + botAuthRequestId + '&visitorId=' + (localStorage.getItem('xh-visitor-id') || ''), { credentials: 'same-origin' });
+            const data = await res.json();
+            if (data.confirmed) {
+              clearInterval(botAuthPollTimer);
+              tgHint.textContent = 'Подтверждено! Перенаправление...';
+              setTimeout(() => { window.location.href = '/cabinet/cabinet'; }, 500);
+            }
+          } catch {}
+        }, 2500);
+        setTimeout(() => { clearInterval(botAuthPollTimer); }, 900000);
+      }
+
+      // Referral code from URL
+      const ref = new URLSearchParams(window.location.search).get('ref');
+      if (ref) localStorage.setItem('xh-ref', ref);
+    })();
+  </script>
+
+<script>
+(function () {
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.pwd-eye');
+    if (!btn) return;
+    e.preventDefault();
+    var inp = document.getElementById(btn.getAttribute('data-target'));
+    if (!inp) return;
+    if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
+    else { inp.type = 'password'; btn.textContent = '👁'; }
+  });
+  async function loadCaptcha() {
+    var qEl = document.getElementById('captcha-q');
+    var idEl = document.querySelector('input[name="captchaId"]');
+    if (!qEl || !idEl) return;
+    qEl.textContent = '…';
+    try {
+      var r = await fetch('/cabinet/api/auth/captcha', { credentials: 'same-origin' });
+      var d = await r.json();
+      if (d && d.ok) { qEl.textContent = d.question + ' = ?'; idEl.value = d.id; }
+      else qEl.textContent = '? + ?';
+    } catch (_) { qEl.textContent = 'нет связи'; }
+  }
+  loadCaptcha();
+  var rl = document.getElementById('captcha-reload');
+  if (rl) rl.addEventListener('click', function (e) { e.preventDefault(); loadCaptcha(); });
+  var form = document.querySelector('form');
+  if (form) form.addEventListener('submit', function () { setTimeout(loadCaptcha, 800); });
+})();
+</script>
+
+<script id="tgWebAppAutoAuth">
+(function () {
+  try {
+    var tg = window.Telegram && window.Telegram.WebApp;
+    if (!tg || !tg.initData) return;             // not in TG WebApp
+    if (document.cookie.indexOf('trendex_cabinet_session=') !== -1) return;  // already authed
+    tg.expand && tg.expand();                    // fullscreen
+    tg.ready && tg.ready();
+    var btn = document.createElement('div');
+    btn.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#0c111a;border:1px solid #00D4FF;color:#fff;padding:20px 30px;border-radius:14px;font-family:sans-serif;z-index:99999;text-align:center;box-shadow:0 12px 40px rgba(0,212,255,.3)';
+    btn.innerHTML = '<div style="font-size:32px;margin-bottom:10px">🚀</div><div style="font-size:16px;font-weight:700;margin-bottom:6px">Trendex</div><div style="font-size:13px;color:#9ca3af">Авторизация через Telegram...</div>';
+    document.body.appendChild(btn);
+    fetch('/cabinet/api/auth/tg-webapp', {
+      method: 'POST', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ initData: tg.initData })
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      if (d && d.ok) {
+        btn.innerHTML = '<div style="font-size:32px;margin-bottom:10px">✅</div><div style="font-size:14px">Готово</div>';
+        setTimeout(function () { window.location.reload(); }, 400);
+      } else {
+        btn.innerHTML = '<div style="font-size:32px;margin-bottom:10px">⚠</div><div style="font-size:13px;color:#fca5a5">Не удалось войти: ' + (d && d.reason || 'error') + '</div><div style="font-size:11px;color:#9ca3af;margin-top:6px">Открой кнопку ниже вручную</div>';
+        setTimeout(function () { btn.remove(); }, 4000);
+      }
+    }).catch(function (e) {
+      btn.innerHTML = '<div style="font-size:13px;color:#fca5a5">Ошибка сети: ' + e.message + '</div>';
+      setTimeout(function () { btn.remove(); }, 4000);
+    });
+  } catch (e) { /* silently ignore — fall back to manual login */ }
+})();
+</script>
+</body>
+</html>

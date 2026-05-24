@@ -1,0 +1,2477 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trendex CRM — MLM База</title>
+<meta name="description" content="CRM-система Trendex с базой контактов MLM-лидеров и AI-генерацией поздравлений и предложений через Groq">
+<link rel="manifest" href="/cabinet/manifest.json">
+<meta name="theme-color" content="#8b5cf6">
+<link rel="icon" type="image/svg+xml" href="/cabinet/favicon.svg">
+<!-- Telegram Mini App SDK — exposes window.Telegram.WebApp + initData -->
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{
+  --bg:#0c0c14; --bg-2:#161825; --card:#1a1c2e; --border:#252837;
+  --text:#e7e9ee; --muted:#9ba1ad; --accent:#8b5cf6; --gold:#f97316;
+  --green:#22c55e; --red:#ef4444; --blue:#3b82f6;
+}
+*{box-sizing:border-box}
+/* [two-pane-layout-2026-05-19] two-pane app layout — desktop locks viewport, mobile scrolls page */
+html,body{height:100%}
+body{margin:0;font-family:-apple-system,Inter,Segoe UI,sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column;min-height:100vh}
+body.app-locked{overflow:hidden;height:100vh}
+header.top{flex-shrink:0}
+.scrape-bar,#dashboardBar,#funnelBar{flex-shrink:0}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;background:var(--bg-2);border-bottom:1px solid var(--border)}
+header.top h1{margin:0;font-size:18px;font-weight:700}
+header.top .subtitle{font-size:12px;color:var(--muted);margin-left:8px}
+header.top a.menu{color:var(--text);text-decoration:none;font-size:13px;padding:6px 10px;border-radius:8px;border:1px solid var(--border)}
+header.top a.menu:hover{background:var(--card)}
+/* [two-pane-layout-2026-05-19] two-pane app — independent scrolls, no page scroll on desktop */
+.layout{display:flex;flex:1 1 auto;min-height:0;gap:1px;background:var(--border);overflow:hidden}
+.col-list{background:var(--bg);overflow:hidden;display:flex;flex-direction:column;flex:1 1 auto;min-width:0}
+.col-detail{background:var(--bg-2);overflow-y:auto;flex:0 0 480px;height:100%;scroll-behavior:smooth}
+/* mobile: revert to single column with show-detail toggle, restore page scroll */
+@media (max-width:1100px){
+  body{overflow:auto !important;height:auto !important;display:block !important}
+  body.app-locked{overflow:auto !important;height:auto !important}
+  .layout{display:block;flex:none;min-height:calc(100vh - 56px);overflow:visible}
+  .col-list{flex:none;height:auto;overflow:visible}
+  .col-detail{display:none;flex:none;height:auto;overflow:visible}
+  .layout.show-detail .col-list{display:none}
+  .layout.show-detail .col-detail{display:block}
+}
+/* [compact-chrome-2026-05-19] compact toolbars */
+.toolbar{padding:6px 12px;background:var(--bg-2);border-bottom:1px solid var(--border);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.toolbar input[type=text]{padding:6px 10px}
+.toolbar select,.toolbar button{padding:5px 10px;font-size:12px}
+.toolbar .pill{padding:3px 8px;font-size:11px}
+#dashboardBar{padding:6px 12px !important}
+#dashboardBar .dash-card{padding:6px 8px !important;min-width:110px !important;font-size:11px}
+#dashboardBar .dash-card > div:nth-child(2){font-size:16px !important;line-height:1.1}
+#dashboardBar .dash-card > div:nth-child(3){font-size:10px !important}
+#funnelBar{padding:4px 12px !important;font-size:10px !important}
+/* compact detail pane width */
+@media (min-width:1101px){
+  .col-detail{flex:0 0 420px !important}
+}
+/* collapse button */
+.dash-collapse-btn{
+  position:absolute;top:4px;right:8px;
+  background:transparent;border:1px solid var(--border);color:var(--muted);
+  font-size:10px;padding:2px 6px;border-radius:5px;cursor:pointer;
+}
+.dash-collapse-btn:hover{color:var(--text);border-color:var(--accent)}
+#dashboardBar{position:relative}
+.toolbar input[type=text]{flex:1;min-width:200px;padding:8px 12px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px}
+.toolbar select,.toolbar button{padding:8px 12px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;cursor:pointer}
+.toolbar button:hover{background:var(--bg-2)}
+.toolbar .pill{padding:5px 10px;border-radius:14px;font-size:11px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted)}
+.toolbar .pill.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.scrape-bar{padding:8px 16px;background:rgba(139,92,246,0.08);border-bottom:1px solid var(--border);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+.scrape-bar .pct{color:var(--accent);font-weight:600}
+.list{flex:1;overflow-y:auto}
+.list-item{padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
+/* [card-redesign-2026-05-21] redesigned compact detailed lead card */
+.lc-card{display:flex !important;flex-direction:column;gap:5px;grid-template-columns:none !important;align-items:stretch !important;border-left:3px solid var(--stc,#3b82f6);padding:11px 14px}
+.lc-row1{display:flex;align-items:center;gap:8px}
+.lc-row1 .bulk-cb{width:16px;height:16px;flex-shrink:0;cursor:pointer;accent-color:var(--accent,#8b5cf6)}
+.lc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;box-shadow:0 0 6px var(--stc)}
+.lc-name{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.lc-spacer{flex:1}
+.lc-card .inline-status{font-size:10px;background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:3px 6px;flex-shrink:0}
+.lc-sub{font-size:12px;color:var(--muted);line-height:1.3}
+.lc-desc{font-size:11px;color:var(--text-faint,#6b7280);line-height:1.4;max-height:2.8em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.lc-row2{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:2px}
+.lc-chips{display:flex;gap:5px;flex-wrap:wrap;flex:1;min-width:0}
+.lc-chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 8px;border-radius:7px;background:var(--card);border:1px solid var(--border);color:var(--text);text-decoration:none;white-space:nowrap;cursor:default}
+a.lc-chip{cursor:pointer}
+a.lc-chip:hover{border-color:var(--accent,#8b5cf6)}
+.lc-chip.lc-tg{color:#229ED9;border-color:rgba(34,158,217,.3)}
+.lc-chip.lc-wa{color:#25D366;border-color:rgba(37,211,102,.3)}
+.lc-chip.lc-phone{color:var(--text)}
+.lc-copy{background:none;border:none;cursor:pointer;font-size:11px;padding:0 0 0 2px;opacity:.6}
+.lc-copy:hover{opacity:1}
+.list-item:hover{background:var(--bg-2)}
+.list-item.active{background:rgba(139,92,246,0.1)}
+.list-item .avatar{width:38px;height:38px;border-radius:50%;background:var(--card);background-size:cover;background-position:center;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--muted)}
+.list-item .meta{min-width:0}
+.list-item .name{font-size:14px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.list-item .sub{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px}
+.list-item .ic{display:flex;gap:4px;font-size:11px}
+.list-item .ic span{padding:2px 6px;border-radius:5px;background:var(--card)}
+.list-item .ic .tg{background:rgba(59,130,246,0.18);color:#93c5fd}
+.list-item .ic .ph{background:rgba(34,197,94,0.18);color:#86efac}
+.list-item .ic .wa{background:rgba(34,197,94,0.18);color:#4ade80}
+.list-item .ic .em{background:rgba(249,115,22,0.18);color:#fdba74}
+.list-item .ic .vk{background:rgba(76,140,210,0.2);color:#7da5d6}
+.list-item .stbadge{font-size:10px;padding:2px 6px;border-radius:4px;background:var(--card);color:var(--muted)}
+.list-item .stbadge.work{background:rgba(249,115,22,0.18);color:var(--gold)}
+.list-item .stbadge.callback{background:rgba(59,130,246,0.18);color:#93c5fd}
+.list-item .stbadge.closed{background:rgba(34,197,94,0.18);color:var(--green)}
+.list-item .stbadge.skip{background:rgba(239,68,68,0.18);color:var(--red)}
+.empty{padding:40px 20px;text-align:center;color:var(--muted)}
+.detail{padding:20px 24px}
+.detail h2{margin:0 0 4px;font-size:18px}
+.detail .company-line{color:var(--accent);margin-bottom:12px;font-size:14px}
+.detail .row{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+.detail .row label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.4px;font-weight:600}
+.detail .row .val{font-size:13px;color:var(--text)}
+.detail .row .val a{color:#93c5fd;text-decoration:none}
+.detail .row .val a:hover{text-decoration:underline}
+.detail textarea,.detail input[type=text],.detail input[type=date],.detail select{width:100%;padding:8px 10px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;font-family:inherit;resize:vertical}
+.detail textarea{min-height:64px}
+.detail .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.detail .btn{padding:9px 14px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:13px;cursor:pointer;font-weight:500}
+.detail .btn:hover{background:var(--bg-2)}
+.detail .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.detail .btn.primary:hover{filter:brightness(1.1)}
+.detail .btn.gold{background:var(--gold);border-color:var(--gold);color:#fff}
+.detail .pitch-box{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:14px;margin-top:14px;white-space:pre-wrap;font-size:13px;line-height:1.5}
+.detail .history{margin-top:14px;display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto}
+.detail .h-item{padding:8px 10px;background:var(--card);border-radius:6px;font-size:12px}
+.detail .h-item .ts{color:var(--muted);font-size:10px;margin-bottom:3px}
+.contact-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.contact-row a{display:inline-block;padding:5px 10px;background:var(--card);border-radius:6px;color:#93c5fd;text-decoration:none;font-size:12px;border:1px solid var(--border)}
+.contact-row a:hover{background:var(--bg-2)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+.modal{background:var(--bg-2);border:1px solid var(--border);border-radius:12px;max-width:720px;width:100%;max-height:80vh;overflow-y:auto;padding:24px}
+.modal h3{margin:0 0 12px}
+.modal pre{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px;overflow-x:auto;font-size:11px;color:#e7e9ee;max-height:400px}
+.modal-overlay.show{display:flex}
+@media (max-width:1100px){.layout{grid-template-columns:1fr}.col-detail{display:none}.layout.show-detail .col-list{display:none}.layout.show-detail .col-detail{display:block}#backBtn{display:inline-block !important;float:left !important;margin-bottom:10px}}
+</style>
+</head>
+<body>
+<div id="crm-paywall" style="display:none;position:fixed;inset:0;background:#0c0c14;z-index:99999;overflow:auto;padding:40px 20px;font-family:-apple-system,Segoe UI,sans-serif;color:#e7e9ee">
+  <div style="max-width:560px;margin:0 auto;background:linear-gradient(135deg,#1a1c2e,#0f0e1f);border:1px solid #252837;border-radius:18px;padding:36px 28px;text-align:center">
+    <div style="font-size:64px;margin-bottom:18px">🔒</div>
+    <h1 style="margin:0 0 12px;font-size:24px">CRM доступ — Premium</h1>
+    <p style="color:#9ba1ad;margin:0 0 24px;line-height:1.6;font-size:14px">Trendex CRM с базой MLM-лидеров доступна только при <b style="color:#e7e9ee">активном тарифе</b> и оплаченной подписке активности.</p>
+    <div id="crm-paywall-status" style="background:#0c0c14;border:1px solid #252837;border-radius:10px;padding:14px;margin-bottom:20px;font-size:13px;color:#9ba1ad;text-align:left"></div>
+    <div style="background:#0c0c14;border:1px solid #252837;border-radius:10px;padding:16px;margin-bottom:20px;text-align:left">
+      <div style="font-size:12px;color:#9ba1ad;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Тарифы Trendex</div>
+      <div style="display:grid;gap:6px;font-size:13px;line-height:1.6">
+        <div>🚀 <b>LAUNCH</b> — $45 вход + $15/мес активность</div>
+        <div>⚡ <b>BOOST</b> — $90 вход + $30/мес активность</div>
+        <div>🔥 <b>ROCKET</b> — $135 вход + $45/мес активность</div>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:#64748b;line-height:1.5">Активность даёт доступ ко всем premium-инструментам: CRM, AI-рассылки, видеореклама, расширенная биржа. Срок активности отображается в кабинете.</div>
+    </div>
+    <a href="/cabinet/#/marketing" style="display:inline-block;background:linear-gradient(135deg,#8b5cf6,#3b82f6);color:#fff;padding:14px 32px;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;margin-right:8px">🚀 Купить / Продлить</a>
+    <a href="/cabinet/" style="display:inline-block;color:#9ba1ad;padding:14px 16px;text-decoration:none;font-size:13px">← В кабинет</a>
+  </div>
+</div>
+<script>
+(async function gateCRM(){
+  try {
+    const base = location.pathname.startsWith('/cabinet/') ? '/cabinet' : '';
+    const r = await fetch(base + '/api/mlm/access-check', { credentials: 'same-origin' });
+    const j = await r.json();
+    if (j && j.ok) return; // gate passed — let app run normally
+    var paywall = document.getElementById('crm-paywall');
+    var statusBox = document.getElementById('crm-paywall-status');
+    var reason = j && j.reason;
+    var msg = '';
+    if (reason === 'no_paid_tariff') {
+      msg = '<div style="color:#fbbf24;font-weight:600;margin-bottom:6px">Текущий тариф: FREE</div>Нужно активировать любой платный тариф (LAUNCH / BOOST / ROCKET) чтобы попасть в CRM.';
+    } else if (reason === 'expired') {
+      var exp = j.expires_at ? new Date(j.expires_at).toLocaleDateString('ru-RU') : '—';
+      msg = '<div style="color:#ef4444;font-weight:600;margin-bottom:6px">Подписка на активность истекла ' + exp + '</div>Тариф <b>' + (j.tariff||'?').toUpperCase() + '</b> у тебя куплен, но активность не оплачена. Продли активность чтобы вернуть доступ к CRM.';
+    } else if (reason === 'auth') {
+      msg = '<div style="color:#ef4444;font-weight:600">Не вижу сессии — войди в кабинет.</div>';
+      setTimeout(function(){ location.href = '/cabinet/login'; }, 1500);
+    } else {
+      msg = 'Доступ закрыт: ' + (j && (j.detail || j.reason) || 'unknown');
+    }
+    statusBox.innerHTML = msg;
+    paywall.style.display = 'block';
+    // Hide actual CRM body so user does not see flicker of empty data
+    document.querySelectorAll('header.top, .layout').forEach(function(el){ el.style.display = 'none'; });
+  } catch (e) {
+    // Network error — show paywall with retry message
+    var paywall = document.getElementById('crm-paywall');
+    if (paywall) {
+      document.getElementById('crm-paywall-status').textContent = 'Не удалось проверить доступ. Обнови страницу.';
+      paywall.style.display = 'block';
+    }
+  }
+})();
+
+// [chats-mass-fix-2026-05-19] — Chats button + Mass-send UI helpers, at global scope.
+// (Previous injection was misplaced inside an else-if block by a bad anchor.)
+
+// ── Chats button entry-points ─────────────────────────────────────────
+window.crmOpenChats = function() {
+  var v = document.getElementById('txmsgView');
+  if (v) v.classList.add('active');
+  document.body.classList.add('crm-chats-mode');
+  var t1 = document.getElementById('crmTabLeads'); var t2 = document.getElementById('crmTabChats');
+  if (t1) t1.classList.remove('active'); if (t2) t2.classList.add('active');
+  // The messenger module exposes window.txmsgOpen — if present, prefer that
+  // (it handles initial list load + scroll-to-active). Otherwise just show.
+  try {
+    if (typeof window.txmsgOpen === 'function') window.txmsgOpen();
+    else if (typeof window.txmsgLoadList === 'function') window.txmsgLoadList();
+  } catch(e) { console.error('[crmOpenChats]', e && e.message); }
+};
+window.crmOpenLeads = function() {
+  var v = document.getElementById('txmsgView');
+  if (v) v.classList.remove('active');
+  document.body.classList.remove('crm-chats-mode');
+  var t1 = document.getElementById('crmTabLeads'); var t2 = document.getElementById('crmTabChats');
+  if (t1) t1.classList.add('active'); if (t2) t2.classList.remove('active');
+};
+window.crmRefreshUnread = async function() {
+  try {
+    var r = await fetch('/cabinet/api/roboai/crm/conversations/unread-count', { credentials: 'same-origin' })
+      .then(function(x){ return x.ok ? x.json() : null; })
+      .catch(function(){ return null; });
+    var unread = (r && typeof r.count === 'number') ? r.count : 0;
+    var bdg1 = document.getElementById('crmChatsUnreadBadge');
+    var bdg2 = document.getElementById('crmTabChatsBadge');
+    if (unread > 0) {
+      var v = unread > 99 ? '99+' : String(unread);
+      if (bdg1) { bdg1.textContent = v; bdg1.style.display = 'inline-flex'; }
+      if (bdg2) { bdg2.textContent = v; bdg2.style.display = 'inline-block'; }
+    } else {
+      if (bdg1) bdg1.style.display = 'none';
+      if (bdg2) bdg2.style.display = 'none';
+    }
+  } catch (e) { /* never break UI */ }
+};
+// Poll every 30s while page is visible
+setInterval(function(){ if (!document.hidden) window.crmRefreshUnread(); }, 30000);
+// Initial fetch when page loads
+setTimeout(window.crmRefreshUnread, 1500);
+
+// ── Mass-send UI ──────────────────────────────────────────────────────
+window._massSendJobId = null;
+
+window.bulkOpenMassSend = function() {
+  var sel = (window.bulkSelected instanceof Set) ? Array.from(window.bulkSelected) : [];
+  if (sel.length === 0) { alert('Сначала отметь галочками 20-100 лидов в списке.'); return; }
+  if (sel.length > 100) { alert('Не больше 100 лидов за раз (антибан). Отмечено: ' + sel.length); return; }
+  var leads = sel.map(function(u){ return { username: String(u) }; });
+
+  var html = '' +
+    '<div style="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px" id="msModal">' +
+    '<div style="background:var(--bg-2,#1a1d29);max-width:540px;width:100%;border:1px solid var(--border);border-radius:14px;padding:22px;color:var(--text);max-height:90vh;overflow-y:auto">' +
+      '<h2 style="margin:0 0 6px;font-size:20px">📨 Массовая рассылка</h2>' +
+      '<p style="color:var(--text-muted);font-size:13px;margin:0 0 16px">' +
+        'Получатели: <b style="color:var(--accent,#8b5cf6)">' + sel.length + '</b> лидов · задержка 5-15с между сообщениями.' +
+      '</p>' +
+      '<label style="display:block;font-size:12px;color:var(--text-muted);margin-bottom:4px">Первое сообщение:</label>' +
+      '<textarea id="msText" placeholder="Привет! Как тебе наш сервис?" rows="5" style="width:100%;padding:12px;background:var(--card,#0f1218);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-size:14px;line-height:1.5;resize:vertical;font-family:inherit"></textarea>' +
+      '<div id="msLinkWarn" style="display:none;margin-top:6px;font-size:12px;color:#ef4444">⚠ В тексте обнаружена ссылка. Ссылки запрещены в массовой рассылке.</div>' +
+      '<label style="display:flex;align-items:center;gap:8px;margin:12px 0;font-size:13px;cursor:pointer">' +
+        '<input type="checkbox" id="msAiVary" checked>' +
+        '<span>🤖 AI-вариации (каждому уникальный текст — антибан)</span>' +
+      '</label>' +
+      '<div id="msProgress" style="display:none;margin:14px 0;padding:14px;background:var(--card);border-radius:10px">' +
+        '<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px">' +
+          '<span id="msStage">⏳ запускаю…</span>' +
+          '<span id="msStats" style="color:var(--text-muted)"></span>' +
+        '</div>' +
+        '<div style="height:8px;background:var(--border);border-radius:4px;overflow:hidden">' +
+          '<div id="msBar" style="height:100%;width:0%;background:linear-gradient(90deg,#8b5cf6,#ec4899);transition:width .3s"></div>' +
+        '</div>' +
+        '<div id="msResultsTail" style="margin-top:10px;font-size:11px;max-height:120px;overflow-y:auto;font-family:monospace"></div>' +
+      '</div>' +
+      '<div style="display:flex;gap:8px;margin-top:14px">' +
+        '<button class="btn" id="msStartBtn" onclick="window._msStart()" style="background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff;border:none;font-weight:600;padding:10px 18px;border-radius:10px;cursor:pointer">🚀 Запустить</button>' +
+        '<button class="btn" id="msCancelBtn" onclick="window._msCancel()" style="display:none;background:#ef4444;color:#fff;border:none;padding:10px 18px;border-radius:10px;cursor:pointer">⏹ Стоп</button>' +
+        '<button class="btn" onclick="document.getElementById(\'msModal\').remove()" style="margin-left:auto;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 16px;border-radius:10px;cursor:pointer">Закрыть</button>' +
+      '</div>' +
+    '</div>' +
+    '</div>';
+  var div = document.createElement('div');
+  div.innerHTML = html;
+  document.body.appendChild(div.firstElementChild);
+
+  var ta = document.getElementById('msText');
+  ta.addEventListener('input', function(){
+    var re = /(https?:\/\/|t\.me\/|tg:\/\/|bit\.ly|tinyurl\.com|\b[a-z][a-z0-9-]*\.(com|net|org|io|ai|me|biz|info|ru|ua|kz|by|us|app|xyz|club|shop|online|tg|link|page)\b)/i;
+    document.getElementById('msLinkWarn').style.display = re.test(ta.value) ? 'block' : 'none';
+  });
+  window._massSendLeads = leads;
+};
+
+window._msStart = async function() {
+  var ta = document.getElementById('msText');
+  var text = (ta && ta.value || '').trim();
+  if (text.length < 4) { alert('Сообщение слишком короткое'); return; }
+  if (document.getElementById('msLinkWarn').style.display !== 'none') { alert('Убери ссылку из текста'); return; }
+  var aiVary = !!document.getElementById('msAiVary').checked;
+  var btn = document.getElementById('msStartBtn');
+  btn.setAttribute('disabled','true');
+  document.getElementById('msProgress').style.display = 'block';
+  document.getElementById('msCancelBtn').style.display = 'inline-block';
+  try {
+    var r = await fetch('/cabinet/api/mlm/bulk/start', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ leads: window._massSendLeads, message_template: text, ai_variation: aiVary }),
+    }).then(function(x){ return x.json(); });
+    if (!r.ok) { alert('Ошибка: ' + (r.reason || 'unknown')); btn.removeAttribute('disabled'); return; }
+    window._massSendJobId = r.jobId;
+    window._msPoll();
+  } catch (e) { alert('Ошибка сети: ' + e.message); btn.removeAttribute('disabled'); }
+};
+
+window._msPoll = async function() {
+  if (!window._massSendJobId) return;
+  try {
+    var r = await fetch('/cabinet/api/mlm/bulk/status/' + window._massSendJobId, { credentials: 'same-origin' })
+      .then(function(x){ return x.json(); });
+    if (r.ok) {
+      document.getElementById('msStage').textContent =
+        r.stage === 'running' ? '⏳ отправляю…' :
+        r.stage === 'completed' ? '✅ готово' :
+        r.stage === 'cancelled' ? '⏹ отменено' : r.stage;
+      document.getElementById('msStats').textContent =
+        r.completed + ' успешно · ' + r.failed + ' ошибок · ' + r.skipped + ' пропущено · из ' + r.total;
+      document.getElementById('msBar').style.width = r.progress_pct + '%';
+      var tail = document.getElementById('msResultsTail');
+      tail.innerHTML = (r.results || []).slice(-15).reverse().map(function(x){
+        return '<div style="color:' + (x.ok ? '#22c55e' : '#ef4444') + '">' +
+          (x.ok ? '✓' : '✗') + ' ' + (x.lead || '?') +
+          (x.reason ? ' — ' + x.reason : '') + '</div>';
+      }).join('');
+      if (r.stage === 'completed' || r.stage === 'cancelled') {
+        document.getElementById('msCancelBtn').style.display = 'none';
+        document.getElementById('msStartBtn').textContent = '✓ Готово';
+        return;
+      }
+    }
+  } catch(e) { /* ignore */ }
+  setTimeout(window._msPoll, 2000);
+};
+
+window._msCancel = async function() {
+  if (!window._massSendJobId) return;
+  await fetch('/cabinet/api/mlm/bulk/cancel/' + window._massSendJobId, { method: 'POST', credentials: 'same-origin' });
+};
+
+// [crm-right-ctx-2026-05-19] CRM-context quick-start panel (right side of messenger)
+// ─────────────────────────────────────────────────────────────────────
+window._crmCtxState = {
+  ctx: null,            // { filter, q, country, city, ts } from sessionStorage
+  leads: [],            // full fetched list
+  filtered: [],         // search-filtered subset
+  selected: new Set(),  // multi-select usernames
+  loaded: false,
+};
+
+// Snapshot current CRM-view filters → sessionStorage. Called inside txmsgOpen.
+window._crmCtxSnapshotCurrent = function() {
+  try {
+    var ctx = {
+      filter: '',
+      q: '',
+      sort: '',
+      country: '',
+      city: '',
+      category: '',
+      companyId: '',
+      status: '',
+      ts: Date.now(),
+    };
+    // Snapshot from existing CRM toolbar inputs/selects if present
+    var sInp = document.getElementById('searchInput'); if (sInp) ctx.q = sInp.value || '';
+    var sort = document.getElementById('sortSelect'); if (sort) ctx.sort = sort.value || '';
+    var cat = document.getElementById('catSelect'); if (cat) ctx.category = cat.value || '';
+    var co = document.getElementById('countrySelect'); if (co) ctx.country = co.value || '';
+    var ci = document.getElementById('citySelect'); if (ci) ctx.city = ci.value || '';
+    // Active filter pill (data-filter) — only one usually active
+    var activePill = document.querySelector('.pill.active[data-filter]');
+    if (activePill) ctx.filter = activePill.getAttribute('data-filter') || '';
+    sessionStorage.setItem('crm_to_chat_ctx', JSON.stringify(ctx));
+  } catch (e) { console.error('[crmCtx snapshot]', e); }
+};
+
+// Read snapshot (with 30-min TTL)
+function _crmCtxLoad() {
+  try {
+    var raw = sessionStorage.getItem('crm_to_chat_ctx');
+    if (!raw) return null;
+    var c = JSON.parse(raw);
+    if (!c || !c.ts || (Date.now() - c.ts) > 30 * 60 * 1000) {
+      sessionStorage.removeItem('crm_to_chat_ctx');
+      return null;
+    }
+    return c;
+  } catch (e) { return null; }
+}
+
+// Fetch leads matching the context — uses existing /api/mlm/contacts endpoint
+async function _crmCtxFetchLeads(ctx) {
+  var params = new URLSearchParams();
+  params.set('limit', '200');
+  if (ctx.q) params.set('q', ctx.q);
+  if (ctx.filter) params.set('filter', ctx.filter);
+  if (ctx.sort) params.set('sort', ctx.sort);
+  if (ctx.category) params.set('category', ctx.category);
+  if (ctx.country) params.set('country', ctx.country);
+  if (ctx.city) params.set('city', ctx.city);
+  if (ctx.companyId) params.set('company_id', ctx.companyId);
+  if (ctx.status) params.set('status', ctx.status);
+  try {
+    var r = await fetch('/cabinet/api/mlm/contacts?' + params.toString(), { credentials: 'same-origin' })
+      .then(function(x){ return x.ok ? x.json() : null; }).catch(function(){ return null; });
+    if (!r || !r.ok) return [];
+    return (r.contacts || []).filter(function(c){ return c && c.username; });
+  } catch (e) { return []; }
+}
+
+// Get usernames already in a conversation (to dedupe right panel against left)
+async function _crmCtxFetchExistingUsernames() {
+  try {
+    var r = await fetch('/cabinet/api/roboai/crm/conversations?limit=500', { credentials: 'same-origin' })
+      .then(function(x){ return x.ok ? x.json() : null; }).catch(function(){ return null; });
+    if (!r || !r.ok || !Array.isArray(r.conversations)) return new Set();
+    var set = new Set();
+    r.conversations.forEach(function(c){
+      if (c.targetTgUsername) set.add(String(c.targetTgUsername).toLowerCase().replace(/^@/, ''));
+    });
+    return set;
+  } catch (e) { return new Set(); }
+}
+
+window._crmCtxRender = async function() {
+  var slot = document.getElementById('txmsgCrmCtx');
+  if (!slot) return;
+  var ctx = _crmCtxLoad();
+  window._crmCtxState.ctx = ctx;
+  if (!ctx) {
+    // No context — just hide the section quietly
+    slot.innerHTML = '';
+    return;
+  }
+
+  // Loading state
+  var filterLabel = ctx.filter || (ctx.q ? 'поиск: "' + ctx.q.slice(0,20) + '"' : 'вся база');
+  slot.innerHTML = '<h4>📋 Из CRM <span style="color:var(--text-muted);font-weight:400;font-size:11px">(' + filterLabel + ')</span></h4>' +
+    '<div id="crmCtxLoading" style="color:var(--muted);font-size:12px;padding:8px 0">⏳ загружаю лидов из текущего фильтра…</div>';
+
+  var [leads, existing] = await Promise.all([
+    _crmCtxFetchLeads(ctx),
+    _crmCtxFetchExistingUsernames(),
+  ]);
+  // Drop leads who already have an open conversation
+  leads = leads.filter(function(l){
+    return !existing.has(String(l.username || '').toLowerCase().replace(/^@/, ''));
+  });
+  window._crmCtxState.leads = leads;
+  window._crmCtxState.filtered = leads.slice();
+  window._crmCtxState.loaded = true;
+  _crmCtxDraw();
+};
+
+function _crmCtxDraw() {
+  var slot = document.getElementById('txmsgCrmCtx');
+  if (!slot) return;
+  var st = window._crmCtxState;
+  var ctx = st.ctx || {};
+  var leads = st.filtered;
+  var filterLabel = ctx.filter || (ctx.q ? 'поиск' : 'вся база');
+  var html = '<h4 style="display:flex;align-items:center;gap:6px;margin-bottom:6px">' +
+    '📋 Из CRM <span style="color:var(--text-muted);font-weight:400;font-size:11px">(' + leads.length + ')</span>' +
+    '<span style="margin-left:auto;font-size:10px;color:var(--text-muted);font-weight:400">' + filterLabel + '</span>' +
+    '</h4>';
+  html += '<input type="text" id="crmCtxSearch" placeholder="🔍 поиск..." style="width:100%;padding:6px 10px;margin:4px 0 8px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:12px" oninput="window._crmCtxSearch(this.value)">';
+
+  if (st.selected.size > 0) {
+    html += '<div style="margin:6px 0;padding:8px;background:rgba(139,92,246,0.12);border:1px solid var(--accent);border-radius:8px;font-size:12px;display:flex;align-items:center;gap:8px">' +
+      '<span>выбрано <b>' + st.selected.size + '</b></span>' +
+      '<button onclick="window._crmCtxOpenBulk()" style="margin-left:auto;background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff;border:none;padding:5px 10px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer">📨 Рассылка</button>' +
+      '<button onclick="window._crmCtxClearSelected()" style="background:transparent;border:1px solid var(--border);color:var(--text-muted);padding:5px 8px;border-radius:6px;font-size:11px;cursor:pointer">✕</button>' +
+      '</div>';
+  }
+
+  if (leads.length === 0) {
+    html += '<div style="color:rgba(255,255,255,0.4);text-align:center;padding:20px;font-size:12px">' +
+      (st.loaded ? 'Нет лидов в этом фильтре · <a href="/cabinet/" style="color:var(--accent)">открыть CRM</a>' : '⏳ загружаю…') +
+      '</div>';
+  } else {
+    // Virtualization: render only first 80; "show more" button if more
+    var max = 80;
+    var shown = leads.slice(0, max);
+    html += '<div style="max-height:55vh;overflow-y:auto;margin:-4px -4px;padding:4px 4px">';
+    shown.forEach(function(l) {
+      var name = l.name || ('@' + l.username);
+      var letter = (name || '?').slice(0, 1).toUpperCase();
+      var sub = (l.username ? '@' + l.username : '') + (l.company ? ' · ' + l.company : '') + (l.country ? ' · ' + l.country : '');
+      var checked = st.selected.has(l.username) ? 'checked' : '';
+      html += '<div data-uname="' + escapeAttr(l.username) + '" style="display:flex;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,0.03);margin-bottom:4px;border:1px solid rgba(255,255,255,0.05);transition:background .12s"' +
+        ' onmouseover="this.style.background=\'rgba(139,92,246,0.10)\'"' +
+        ' onmouseout="this.style.background=\'rgba(255,255,255,0.03)\'">' +
+        '<input type="checkbox" ' + checked + ' onclick="event.stopPropagation();window._crmCtxToggleSelect(\'' + escapeAttr(l.username) + '\')" style="cursor:pointer;flex-shrink:0">' +
+        '<div onclick="window._crmCtxOpenLead(\'' + escapeAttr(l.username) + '\')" style="display:flex;gap:8px;align-items:center;flex:1;min-width:0">' +
+          '<div style="width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#3b82f6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:12px;flex-shrink:0">' + escapeHtml(letter) + '</div>' +
+          '<div style="flex:1;min-width:0">' +
+            '<div style="font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + escapeHtml(name) + '</div>' +
+            '<div style="font-size:10px;color:rgba(255,255,255,0.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + escapeHtml(sub) + '</div>' +
+          '</div>' +
+        '</div>' +
+        '</div>';
+    });
+    if (leads.length > max) {
+      html += '<div style="text-align:center;padding:8px;font-size:11px;color:var(--text-muted)">показано ' + max + ' из ' + leads.length + ' · <a href="/cabinet/" style="color:var(--accent)">смотреть всё в CRM</a></div>';
+    }
+    html += '</div>';
+  }
+  slot.innerHTML = html;
+}
+
+function escapeAttr(s) {
+  return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+window._crmCtxSearch = function(q) {
+  var st = window._crmCtxState;
+  var qq = String(q || '').trim().toLowerCase();
+  if (!qq) {
+    st.filtered = st.leads.slice();
+  } else {
+    st.filtered = st.leads.filter(function(l) {
+      var hay = (l.name + ' ' + l.username + ' ' + (l.company||'') + ' ' + (l.country||'') + ' ' + (l.city||'')).toLowerCase();
+      return hay.indexOf(qq) >= 0;
+    });
+  }
+  // Re-draw — preserve search input focus + value
+  var prevFocus = document.activeElement === document.getElementById('crmCtxSearch');
+  var prevValue = q;
+  _crmCtxDraw();
+  var newInp = document.getElementById('crmCtxSearch');
+  if (newInp) {
+    newInp.value = prevValue;
+    if (prevFocus) { newInp.focus(); var v = newInp.value; newInp.value = ''; newInp.value = v; }
+  }
+};
+
+window._crmCtxToggleSelect = function(username) {
+  var st = window._crmCtxState;
+  if (st.selected.has(username)) st.selected.delete(username);
+  else st.selected.add(username);
+  // Smart re-draw: only update top bar without losing scroll/focus
+  _crmCtxDraw();
+};
+
+window._crmCtxClearSelected = function() {
+  window._crmCtxState.selected.clear();
+  _crmCtxDraw();
+};
+
+window._crmCtxOpenLead = function(username) {
+  var st = window._crmCtxState;
+  var lead = st.leads.find(function(l){ return l.username === username; });
+  if (!lead) { console.warn('[crmCtx] lead not found:', username); return; }
+  // Reuse existing draft entry-point
+  if (typeof window.txmsgOpenWith === 'function') {
+    window.txmsgOpenWith({
+      person_id: lead.person_id || null,
+      tg_username: lead.username,
+      tg_id: lead.tg_id || null,
+      name: lead.name || null,
+    });
+  } else {
+    console.error('[crmCtx] txmsgOpenWith not available');
+  }
+};
+
+window._crmCtxOpenBulk = function() {
+  var st = window._crmCtxState;
+  if (st.selected.size === 0) return;
+  // Bridge into existing bulk-send modal by simulating bulkSelected
+  if (typeof window.bulkSelected === 'undefined') window.bulkSelected = new Set();
+  window.bulkSelected = new Set(st.selected);
+  if (typeof window.bulkOpenMassSend === 'function') {
+    window.bulkOpenMassSend();
+  } else {
+    alert('Массовая рассылка не загружена. Обнови страницу.');
+  }
+};
+// [crm-right-ctx-2026-05-19] end
+
+// [chats-mass-fix-2026-05-19] end
+</script>
+<header class="top">
+  <div><h1>Trendex CRM</h1><span class="subtitle">база MLM-лидеров с генерацией предложений через Groq</span></div>
+  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+    <!-- [crm-chats-button-2026-05-18] prominent Chats button with unread badge -->
+    <button id="crmChatsBtn" class="menu" onclick="window.crmOpenChats()" style="
+      background:linear-gradient(135deg, var(--accent, #8b5cf6), #7c4def);
+      color:#fff;border:none;padding:8px 16px;border-radius:18px;
+      font-weight:600;font-size:13px;
+      display:inline-flex;align-items:center;gap:6px;
+      box-shadow:0 2px 12px rgba(139,92,246,0.4);
+      transition:all .15s ease;cursor:pointer;
+    ">
+      <span style="font-size:16px">💬</span>
+      <span>Чаты</span>
+      <span id="crmChatsUnreadBadge" style="
+        display:none;background:#ef4444;color:#fff;
+        font-size:11px;font-weight:700;line-height:1;
+        min-width:18px;height:18px;border-radius:10px;
+        padding:0 5px;align-items:center;justify-content:center;
+      ">0</span>
+    </button>
+    <button id="crmBcastBtn" class="menu" onclick="window.bcastOpen()" style="background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff;border:none;padding:8px 16px;border-radius:18px;font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 12px rgba(236,72,153,0.4);cursor:pointer"><span style="font-size:16px">📨</span><span>Рассылки</span></button>
+    <button id="crmTeamBtn" class="menu" onclick="window.teamOpen()" style="background:linear-gradient(135deg,#0ea5e9,#2563eb);color:#fff;border:none;padding:8px 16px;border-radius:18px;font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 12px rgba(37,99,235,0.4);cursor:pointer"><span style="font-size:16px">👥</span><span>Команда</span></button>
+    <button class="menu" onclick="toggleKanban()">📋 kanban</button> <button class="menu" onclick="openDeals()">💰 сделки</button> <button class="menu" onclick="openReports()">📊 отчёты</button> <button class="menu" onclick="openTasks()">⏰ задачи</button> <button class="menu" onclick="openActivity()">📋 история</button> <button class="menu" onclick="openAnalytics()">📊 аналитика</button> <button class="menu" onclick="openSettings()">⚙ настройки</button> <button class="menu" onclick="openQuickAdd()">➕ добавить контакт</button> <button class="menu" onclick="openCsv()">📥 импорт CSV</button> <a href="/cabinet/" class="menu">← Кабинет</a>
+  </div>
+</header>
+
+<!-- [crm-chats-button-2026-05-18] mobile bottom tab-bar -->
+<div id="crmBottomTabs" style="display:none">
+  <button class="crm-tab" id="crmTabLeads" onclick="window.crmOpenLeads()">
+    <div style="font-size:18px">📋</div><div>Лиды</div>
+  </button>
+  <button class="crm-tab" id="crmTabChats" onclick="window.crmOpenChats()">
+    <div style="font-size:18px;position:relative;display:inline-block">
+      💬
+      <span id="crmTabChatsBadge" style="display:none;position:absolute;top:-4px;right:-8px;background:#ef4444;color:#fff;font-size:9px;font-weight:700;min-width:14px;height:14px;border-radius:8px;padding:0 3px;line-height:14px;text-align:center">0</span>
+    </div>
+    <div>Чаты</div>
+  </button>
+  <button class="crm-tab" id="crmTabTeam" onclick="window.teamOpen()">
+    <div style="font-size:18px">👥</div><div>Команда</div>
+  </button>
+  <button class="crm-tab" id="crmTabBcast" onclick="window.bcastOpen()">
+    <div style="font-size:18px">📨</div><div>Рассылки</div>
+  </button>
+</div>
+<style>
+  #crmBottomTabs {
+    position:fixed;bottom:0;left:0;right:0;z-index:90;
+    background:var(--bg-2, #1a1d29);border-top:1px solid var(--border);
+    padding:6px 0 8px;
+    box-shadow:0 -4px 14px rgba(0,0,0,0.25);
+  }
+  #crmBottomTabs .crm-tab {
+    flex:1;background:none;border:none;color:var(--text-muted);
+    font-size:11px;display:flex;flex-direction:column;align-items:center;gap:2px;
+    padding:6px 0;cursor:pointer;
+  }
+  #crmBottomTabs .crm-tab.active { color:var(--accent, #8b5cf6); }
+  @media (max-width: 768px) {
+    #crmBottomTabs { display:flex !important; }
+    .layout { padding-bottom:60px; } /* room for tab-bar */
+    #crmChatsBtn { display:none; } /* header button hidden on mobile, tab-bar covers it */
+  }
+  /* hover [crm-chats-button-2026-05-18] */
+  #crmChatsBtn:hover { transform: translateY(-1px); box-shadow: 0 4px 18px rgba(139,92,246,0.55); }
+</style>
+
+<div class="scrape-bar" id="scrapeBar">Загружаем базу… <span id="scrapePct" class="pct">0%</span></div>
+
+<div id="dashboardBar" style="display:none;padding:12px 16px;background:linear-gradient(90deg,rgba(139,92,246,0.08),rgba(249,115,22,0.05));border-bottom:1px solid var(--border);">
+  <button class="dash-collapse-btn" id="dashCollapseBtn" onclick="window._toggleDashboardBar()" title="Свернуть метрики">— свернуть</button>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+    <button class="dash-card" data-view="today" style="flex:1;min-width:160px;padding:10px;background:var(--card);border:1px solid var(--border);border-radius:8px;cursor:pointer;color:var(--text);text-align:left">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase">📅 на сегодня</div>
+      <div style="font-size:22px;font-weight:700" id="dashToday">—</div>
+      <div style="font-size:11px;color:var(--muted)" id="dashTodayHint">из дневной нормы</div>
+    </button>
+    <button class="dash-card" data-view="in-work" style="flex:1;min-width:160px;padding:10px;background:var(--card);border:1px solid var(--border);border-radius:8px;cursor:pointer;color:var(--text);text-align:left">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase">🔥 в работе</div>
+      <div style="font-size:22px;font-weight:700;color:var(--gold)" id="dashInWork">—</div>
+      <div style="font-size:11px;color:var(--muted)">с активной перепиской</div>
+    </button>
+    <button class="dash-card" data-view="calendar" style="flex:1;min-width:160px;padding:10px;background:var(--card);border:1px solid var(--border);border-radius:8px;cursor:pointer;color:var(--text);text-align:left">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase">📞 созвоны на неделе</div>
+      <div style="font-size:22px;font-weight:700;color:#3b82f6" id="dashWeek">—</div>
+      <div style="font-size:11px;color:var(--muted)" id="dashWeekHint">запланировано</div>
+    </button>
+    <button class="dash-card" data-view="closed" style="flex:1;min-width:160px;padding:10px;background:var(--card);border:1px solid var(--border);border-radius:8px;cursor:pointer;color:var(--text);text-align:left">
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase">✅ закрыто</div>
+      <div style="font-size:22px;font-weight:700;color:var(--green)" id="dashClosed">—</div>
+      <div style="font-size:11px;color:var(--muted)">продажи / партнёрки</div>
+    </button>
+  </div>
+</div>
+<div id="funnelBar" style="display:none;padding:8px 16px;background:rgba(139,92,246,0.05);border-bottom:1px solid var(--border);font-size:11px;color:var(--muted);"></div>
+<div id="kanbanView" style="display:none;padding:14px;overflow-x:auto;height:calc(100vh - 200px)">
+  <div id="kanbanCols" style="display:flex;gap:10px;min-width:max-content"></div>
+</div>
+<div class="layout" id="layout">
+
+  <div class="col-list">
+    <div class="toolbar" id="groupbyBar" style="font-size:11px;color:var(--muted);background:transparent;border-bottom:none;padding:8px 16px 0;flex-wrap:wrap;gap:6px"></div>
+    <div class="toolbar">
+      <input type="text" id="searchInput" placeholder="Поиск по имени, компании, городу, телефону…">
+      <select id="sortSelect">
+        <option value="ai">🎯 AI: под мой оффер</option>
+        <option value="fresh">сначала свежие</option>
+        <option value="last-contact">⏱ по последнему контакту</option>
+        <option value="next-call">📞 ближайший созвон</option>
+        <option value="company">по компаниям</option>
+        <option value="quality">с лучшими контактами</option>
+        <option value="region">РФ/СНГ первыми</option>
+        <option value="name">по имени</option>
+      </select> <!-- [contacted-history-2026-05-19] -->
+      <select id="catSelect"><option value="">все направления</option></select>
+      <select id="countrySelect"><option value="">все страны</option></select>
+      <select id="citySelect"><option value="">все города</option></select>
+    </div>
+    <div class="toolbar">
+      <button class="pill" data-filter="tg">✈ TG</button>
+      <button class="pill" data-filter="phone">📞 тел</button>
+      <button class="pill" data-filter="whatsapp">📱 WA</button>
+      <button class="pill" data-filter="ru">🇷🇺 РФ</button>
+      <button class="pill" data-filter="cis">СНГ</button>
+      <button class="pill" data-filter="contacted">контактировал</button>
+      <button class="pill" data-filter="uncontacted">не контактировал</button>
+      <button class="pill" data-filter="todo-callback">созвон назначен</button>
+      <button id="clearFiltersBtn">✕ очистить</button>
+      <select id="viewSelect" style="margin-left:6px"><option value="">📌 view</option></select>
+      <button class="btn" id="viewSaveBtn" style="font-size:11px;padding:4px 8px" onclick="promptSaveView()">+ сохранить</button>
+      <button id="exportBtn" style="margin-left:auto">📊 Excel</button>
+    </div>
+    <div class="toolbar" id="bulkBar" style="display:none;background:rgba(139,92,246,0.15);">
+      <span id="bulkCount" style="font-size:13px;font-weight:600">0 выбрано</span>
+      <button class="btn" onclick="bulkPitch()" style="background:var(--gold);color:#fff;border-color:var(--gold)">✨ Сгенерировать pitches</button>
+      <button class="btn" onclick="bulkOpenMassSend()" style="background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff;border:none;font-weight:600">📨 Массовая рассылка</button>
+      <button class="btn" onclick="bulkPack()">📤 Pack-bundle</button>
+      <select id="bulkStatusSel" onchange="bulkSetStatus()" style="font-size:11px;padding:4px 8px;background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text)"><option value="">📂 статус…</option><option value="new">→ новый</option><option value="in-progress">→ в работе</option><option value="callback">→ созвон</option><option value="closed">→ закрыт</option><option value="skip">→ не интересно</option></select>
+      <button class="btn" onclick="bulkAddTag()">🏷 + тег</button>
+      <button class="btn" onclick="selectAllOnPage()">☑ всё на странице</button>
+      <button class="btn" onclick="selectAllMatching()">☑ всё под фильтром</button>
+      <button class="btn" onclick="bulkClear()" style="margin-left:auto">✕ снять выбор</button>
+    </div>
+    <div id="activeViewHeader" class="active-view-header" style="display:none"></div>
+    <div class="list" id="contactList"><div class="empty">Загрузка…</div></div>
+  </div>
+
+  <div class="col-detail" id="detailCol">
+    <div class="empty" style="padding:60px 30px">← Выбери контакт слева</div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h3>📤 Pack для внешнего TG-агента</h3>
+    <p style="color:var(--muted);font-size:12px">Скопируй этот JSON и передай вместе с инструкцией нейронке/сервису который управляет твоим Telegram-аккаунтом. Содержит контакт, твою CRM-историю, рекомендации по rate-limit.</p>
+    <pre id="agentPackJson"></pre>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="btn" onclick="copyAgentPack()">📋 Копировать</button>
+      <button class="btn" onclick="closeModal()">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal-overlay" id="calOverlay">
+  <div class="modal" style="max-width:760px">
+    <h3>📅 Календарь созвонов</h3>
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+      <button class="btn cal-range on" data-range="today" onclick="loadCalendar('today',this)">сегодня</button>
+      <button class="btn cal-range" data-range="week" onclick="loadCalendar('week',this)">неделя</button>
+      <button class="btn cal-range" data-range="month" onclick="loadCalendar('month',this)">месяц</button>
+      <button class="btn cal-range" data-range="all" onclick="loadCalendar('all',this)">все</button>
+      <button class="btn" onclick="closeCal()" style="margin-left:auto">✕</button>
+    </div>
+    <div id="calBody" style="max-height:60vh;overflow-y:auto"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="quickAddOverlay">
+  <div class="modal" style="max-width:520px">
+    <h3>➕ Добавить контакт вручную</h3>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <input type="text" id="qaName" placeholder="Имя *" style="padding:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text)">
+      <input type="text" id="qaCompany" placeholder="Компания" style="padding:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text)">
+      <div style="display:flex;gap:8px">
+        <input type="text" id="qaCountry" placeholder="Страна" style="flex:1;padding:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text)">
+        <input type="text" id="qaCity" placeholder="Город" style="flex:1;padding:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text)">
+      </div>
+      <input type="text" id="qaPhone" placeholder="Телефон (+7…)" style="padding:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text)">
+      <input type="text" id="qaTelegram" placeholder="Telegram (https://t.me/username или @username)" style="padding:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text)">
+      <input type="text" id="qaEmail" placeholder="Email" style="padding:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text)">
+      <textarea id="qaDescription" placeholder="Описание / откуда / что-то для контекста" style="padding:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);min-height:60px;font-family:inherit"></textarea>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="btn primary" onclick="submitQuickAdd()">💾 Добавить</button>
+      <button class="btn" onclick="closeQuickAdd()">Отмена</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal-overlay" id="activityOverlay">
+  <div class="modal" style="max-width:820px">
+    <h3>📋 История действий</h3>
+    <div id="activityBody" style="max-height:65vh;overflow-y:auto"></div>
+    <div style="display:flex;gap:8px;margin-top:14px"><button class="btn" onclick="closeActivity()">Закрыть</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="analyticsOverlay">
+  <div class="modal" style="max-width:820px">
+    <h3>📊 Аналитика</h3>
+    <div id="analyticsBody" style="max-height:65vh;overflow-y:auto"></div>
+    <div style="display:flex;gap:8px;margin-top:14px"><button class="btn" onclick="closeAnalytics()">Закрыть</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="bizInstrOverlay">
+  <div class="modal" style="max-width:680px">
+    <h3>🤖 Подключение Trendex Business Bot</h3>
+    <div style="font-size:13px;line-height:1.6">
+      <p>Telegram Business — это <b>Premium-функция</b> Telegram ($4.99/мес). Когда ты её подключишь, наш бот <b>@Trendex_bizbot</b> сможет отправлять сообщения от твоего имени из CRM одной кнопкой.</p>
+      <p style="color:var(--muted);font-size:11px"><b>Важно:</b> Business Bot может писать только тем, кто уже писал тебе. Для холодных сообщений по списку — используй deeplink-кнопки 📱✈M (они уже работают).</p>
+      <h4 style="margin-top:18px;color:var(--accent)">Шаги</h4>
+      <ol style="padding-left:22px">
+        <li>Купи Telegram Premium (если ещё нет): <a href="https://t.me/PremiumBot" target="_blank" style="color:#93c5fd">@PremiumBot</a></li>
+        <li>В Telegram открой <b>Settings → Telegram Business → Chatbots</b></li>
+        <li>В поле «Bot Username» введи: <code style="background:var(--bg);padding:2px 6px;border-radius:4px">Trendex_bizbot</code></li>
+        <li>Включи переключатели: <b>«Read messages»</b>, <b>«Reply on my behalf»</b></li>
+        <li>В правах разрешений: <b>«All chats»</b> (или выбери конкретные)</li>
+        <li>Сохрани</li>
+      </ol>
+      <p style="color:var(--green);margin-top:14px">✓ После подключения бот автоматически зарегистрирует тебя в CRM. На дашборде появится индикатор «🤖 Business Bot подключён». В карточке каждого контакта будет кнопка <b>«🤖 отправить через бота»</b> — пишет автоматически от твоего имени.</p>
+      <p style="color:var(--muted);font-size:11px">Управлять подключением: Settings → Telegram Business → Chatbots → @Trendex_bizbot → отключить.</p>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:18px">
+      <a href="https://t.me/Trendex_bizbot" target="_blank" class="btn primary">✈ Открыть @Trendex_bizbot</a>
+      <button class="btn" onclick="closeBizInstr()">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal-overlay" id="tasksOverlay">
+  <div class="modal" style="max-width:680px">
+    <h3>⏰ Задачи</h3>
+    <div style="display:flex;gap:6px;margin-bottom:14px">
+      <input id="newTaskTitle" placeholder="что сделать (например: позвонить Ивану)" style="flex:1;padding:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text)">
+      <input id="newTaskDue" type="date" style="padding:9px;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text)">
+      <button class="btn primary" onclick="createTask()">+</button>
+    </div>
+    <div id="tasksList" style="max-height:60vh;overflow-y:auto"></div>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <label style="font-size:11px;color:var(--muted)"><input type="checkbox" id="showDoneTasks" onchange="loadTasks()"> показывать выполненные</label>
+      <button class="btn" onclick="closeTasks()" style="margin-left:auto">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="dealsOverlay">
+  <div class="modal" style="max-width:1100px;max-height:90vh">
+    <h3>💰 Сделки (sales pipeline)</h3>
+    <div id="dealsSummary" style="display:flex;gap:8px;margin-bottom:12px;font-size:12px"></div>
+    <div style="display:flex;gap:6px;margin-bottom:10px;align-items:center">
+      <input id="newDealTitle" placeholder="название сделки" style="flex:1;padding:8px;background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text)">
+      <input id="newDealAmount" type="number" placeholder="сумма $" style="width:120px;padding:8px;background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text)">
+      <input id="newDealContact" placeholder="контакт (username)" style="width:160px;padding:8px;background:var(--card);border:1px solid var(--border);border-radius:6px;color:var(--text)">
+      <button class="btn primary" onclick="createDeal()">+ создать</button>
+    </div>
+    <div id="dealsPipeline" style="display:flex;gap:8px;overflow-x:auto;max-height:60vh"></div>
+    <div style="margin-top:14px"><button class="btn" onclick="closeDeals()">Закрыть</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="reportsOverlay">
+  <div class="modal" style="max-width:860px;max-height:90vh">
+    <h3>📊 Отчёты</h3>
+    <div style="display:flex;gap:6px;margin-bottom:14px">
+      <button class="btn rep-tab on" data-rep="category" onclick="loadReport('category',this)">по направлениям</button>
+      <button class="btn rep-tab" data-rep="country" onclick="loadReport('country',this)">по странам</button>
+      <button class="btn rep-tab" data-rep="tag" onclick="loadReport('tag',this)">по тегам</button>
+      <button class="btn rep-tab" data-rep="revenue" onclick="loadReport('revenue',this)">выручка (90д)</button>
+    </div>
+    <div id="reportBody" style="max-height:60vh;overflow-y:auto"></div>
+    <div style="margin-top:12px"><button class="btn" onclick="closeReports()">Закрыть</button></div>
+  </div>
+</div>
+<script src="/cabinet/js/crm-app.js?v=fix-1778935251"></script>
+<script src="/cabinet/js/web-push.js"></script>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     TRENDEX CRM MESSENGER — TG-style 2-pane (chats | conversation | crm-info)
+     Injected into crm-app.html. Activated by "💬 Сообщения" button in topbar.
+     ═══════════════════════════════════════════════════════════════════════ -->
+
+<style id="txmsg-styles">
+#txmsgView {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+}
+#txmsgView.active { display: grid; }
+#txmsgView {
+  grid-template-columns: 72px 300px 1fr 320px;
+  grid-template-rows: 56px 1fr;
+  grid-template-areas:
+    "header header header header"
+    "folders chats chat info";
+}
+@media (max-width: 1100px) {
+  #txmsgView { grid-template-columns: 72px 260px 1fr; grid-template-areas: "header header header" "folders chats chat"; }
+  #txmsgView .txmsg-info { display: none; }
+}
+@media (max-width: 720px) {
+  #txmsgView { grid-template-columns: 1fr; grid-template-areas: "header" "chat"; }
+  #txmsgView .txmsg-folders, #txmsgView .txmsg-chats { display: none; }
+  #txmsgView.show-list .txmsg-folders { display: flex; }
+  #txmsgView.show-list .txmsg-chats { display: flex; }
+  #txmsgView.show-list .txmsg-chat { display: none; }
+}
+
+/* Folders narrow strip (left) — TG-style vertical icon bar */
+.txmsg-folders {
+  grid-area: folders;
+  background: var(--bg);
+  border-right: 1px solid rgba(255,255,255,0.05);
+  display: flex; flex-direction: column;
+  overflow-y: auto;
+  padding: 8px 0;
+  gap: 4px;
+}
+.txmsg-folder-item {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 10px 4px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin: 0 6px;
+  position: relative;
+  color: rgba(255,255,255,0.6);
+  font-size: 10px;
+  text-align: center;
+  transition: background 0.15s;
+}
+.txmsg-folder-item:hover { background: rgba(139,92,246,0.10); color: #fff; }
+.txmsg-folder-item.active { background: rgba(139,92,246,0.20); color: #fff; }
+.txmsg-folder-item .icon { font-size: 22px; line-height: 1; margin-bottom: 4px; }
+.txmsg-folder-item .lbl { font-size: 9px; opacity: 0.85; max-width: 60px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.txmsg-folder-item .badge {
+  position: absolute; top: 4px; right: 4px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 9px; font-weight: 700;
+  padding: 1px 5px; border-radius: 8px;
+  min-width: 16px; text-align: center;
+}
+.txmsg-folder-create {
+  margin-top: auto;
+  color: rgba(255,255,255,0.4);
+}
+.txmsg-folder-create:hover { color: var(--accent); }
+
+.txmsg-header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
+}
+.txmsg-header .title { font-weight: 700; font-size: 16px; }
+.txmsg-header .title small { color: var(--muted); font-weight: 400; margin-left: 8px; font-size: 12px; }
+.txmsg-header .close {
+  background: var(--card); border: 1px solid var(--border); color: var(--text);
+  padding: 8px 14px; border-radius: 8px; font-size: 13px; cursor: pointer;
+}
+.txmsg-header .close:hover { border-color: var(--accent); }
+
+/* CHATS LIST (left) */
+.txmsg-chats {
+  grid-area: chats;
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.txmsg-chats-search {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.txmsg-chats-search input {
+  width: 100%; padding: 8px 12px; background: var(--card);
+  border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 13px;
+}
+.txmsg-chats-list { flex: 1; overflow-y: auto; }
+.txmsg-chat-item {
+  display: flex; gap: 10px; padding: 12px 14px;
+  cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.04);
+  align-items: center;
+}
+.txmsg-chat-item:hover { background: rgba(139,92,246,0.06); }
+.txmsg-chat-item.active { background: rgba(139,92,246,0.14); border-left: 3px solid var(--accent); }
+.txmsg-chat-item .avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 16px;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+}
+.txmsg-chat-item .avatar .dot {
+  position: absolute; bottom: -2px; right: -2px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+}
+.txmsg-chat-item .avatar .dot.online    { background: #10b981; }
+.txmsg-chat-item .avatar .dot.recently  { background: #34d399; }
+.txmsg-chat-item .avatar .dot.last_week { background: #f59e0b; }
+.txmsg-chat-item .avatar .dot.last_month{ background: #ef4444; }
+.txmsg-chat-item .avatar .dot.hidden    { background: #6b7280; }
+.txmsg-chat-item .avatar .dot.offline   { background: #6b7280; }
+
+/* Skeleton loader (vs static "Загрузка..." text) */
+.txmsg-skel {
+  padding: 12px 14px;
+  display: flex; gap: 10px; align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.txmsg-skel .a { width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0; }
+.txmsg-skel .l1 { width: 60%; height: 12px; border-radius: 4px; margin-bottom: 6px; }
+.txmsg-skel .l2 { width: 85%; height: 10px; border-radius: 4px; }
+.txmsg-skel .meta { flex: 1; min-width: 0; }
+.txmsg-skel .a, .txmsg-skel .l1, .txmsg-skel .l2 {
+  background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.10) 50%, rgba(255,255,255,0.04) 100%);
+  background-size: 200% 100%;
+  animation: txmsgShimmer 1.4s ease-in-out infinite;
+}
+@keyframes txmsgShimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Smooth fade-in on new messages */
+@keyframes txmsgFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.txmsg-msg { animation: txmsgFadeIn 0.22s ease-out; }
+.txmsg-chat-item .meta { flex: 1; min-width: 0; }
+.txmsg-chat-item .row1 { display: flex; justify-content: space-between; align-items: baseline; }
+.txmsg-chat-item .name { font-weight: 600; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.txmsg-chat-item .time { font-size: 11px; color: var(--muted); flex-shrink: 0; margin-left: 6px; }
+.txmsg-chat-item .preview {
+  font-size: 12px; color: var(--muted); margin-top: 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.txmsg-chat-item .unread {
+  background: var(--accent); color: #fff; font-size: 10px; font-weight: 700;
+  padding: 2px 7px; border-radius: 10px; min-width: 20px; text-align: center;
+}
+
+/* CONVERSATION (center) */
+.txmsg-chat {
+  grid-area: chat;
+  background: var(--bg-2);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  min-height: 0;  /* critical for nested flex scroll */
+  height: 100%;
+}
+.txmsg-chat > * { flex-shrink: 0; }
+.txmsg-chat > .txmsg-messages { flex: 1 1 auto; min-height: 0; }
+.txmsg-chat-header {
+  padding: 14px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; gap: 14px;
+  background: var(--bg-2);
+  flex-shrink: 0;
+  min-height: 64px;
+}
+.txmsg-chat-header .avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--blue));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 17px;
+  flex-shrink: 0;
+  position: relative;
+}
+.txmsg-chat-header .avatar .online-dot {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-2);
+}
+.txmsg-chat-header .name { font-weight: 600; font-size: 15px; line-height: 1.2; }
+.txmsg-chat-header .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.txmsg-chat-header .actions { margin-left: auto; display: flex; gap: 8px; }
+.txmsg-chat-header .actions button {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text);
+  padding: 7px 12px; border-radius: 18px;
+  font-size: 12px; cursor: pointer;
+  transition: all 0.15s;
+}
+.txmsg-chat-header .actions button:hover { border-color: var(--accent); background: rgba(139,92,246,0.10); }
+
+/* Date separator chip in message stream */
+.txmsg-date-chip {
+  align-self: center;
+  background: rgba(0,0,0,0.4);
+  color: #d1d5db;
+  font-size: 11px; font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 12px;
+  margin: 12px 0 8px;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+.txmsg-empty {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  color: var(--muted); padding: 40px 20px; text-align: center;
+}
+/* Messages area — Telegram-style with subtle gradient background */
+.txmsg-messages {
+  flex: 1; overflow-y: auto;
+  padding: 24px 28px;
+  display: flex; flex-direction: column;
+  gap: 6px;
+  background: linear-gradient(180deg, #0c0e16 0%, #14172a 100%);
+  background-image:
+    radial-gradient(at 25% 30%, rgba(139,92,246,0.04) 0%, transparent 50%),
+    radial-gradient(at 75% 70%, rgba(124,77,239,0.04) 0%, transparent 50%);
+}
+.txmsg-messages::-webkit-scrollbar { width: 8px; }
+.txmsg-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+.txmsg-messages::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.18); }
+
+/* Each message row spans full width so bubble can align left or right */
+.txmsg-msg {
+  display: flex;
+  width: 100%;
+  margin: 2px 0;
+}
+.txmsg-msg.grouped { margin-top: 1px; }
+.txmsg-msg.grouped .txmsg-msg-bubble {
+  border-radius: 14px;
+}
+.txmsg-msg.grouped.out .txmsg-msg-bubble { border-bottom-right-radius: 6px; border-top-right-radius: 6px; }
+.txmsg-msg.grouped.in .txmsg-msg-bubble { border-bottom-left-radius: 6px; border-top-left-radius: 6px; }
+.txmsg-msg.out { justify-content: flex-end; }
+.txmsg-msg.in  { justify-content: flex-start; }
+.txmsg-msg > div {
+  max-width: 62%;
+  min-width: 60px;
+  display: flex; flex-direction: column;
+}
+@media (max-width: 1100px) { .txmsg-msg > div { max-width: 75%; } }
+@media (max-width: 720px) { .txmsg-msg > div { max-width: 85%; } }
+
+.txmsg-msg-bubble {
+  padding: 10px 14px 8px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.45;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+  position: relative;
+}
+.txmsg-msg.out .txmsg-msg-bubble {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c4def 100%);
+  color: #fff;
+  border-bottom-right-radius: 6px;
+}
+.txmsg-msg.in .txmsg-msg-bubble {
+  background: #1c2030;
+  color: #e7e9ee;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-bottom-left-radius: 6px;
+}
+.txmsg-msg-meta {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 3px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.txmsg-msg.out .txmsg-msg-meta { justify-content: flex-end; }
+.txmsg-msg.in .txmsg-msg-meta { justify-content: flex-start; }
+
+/* AI suggestions */
+.txmsg-ai-variants {
+  border-top: 1px solid var(--border);
+  background: rgba(139,92,246,0.06);
+  padding: 10px 16px 4px;
+}
+.txmsg-ai-variants-title {
+  font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 6px;
+}
+.txmsg-ai-variant {
+  display: block; width: 100%;
+  text-align: left; padding: 8px 12px;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--text); font-size: 12px; line-height: 1.4;
+  border-radius: 8px; margin-bottom: 6px; cursor: pointer;
+}
+.txmsg-ai-variant:hover { border-color: var(--accent); background: rgba(139,92,246,0.10); }
+.txmsg-ai-variant .style-tag {
+  display: block; font-size: 10px; color: var(--muted); margin-bottom: 2px;
+}
+
+/* Input */
+/* Input bar — bigger, comfortable, Telegram-like */
+.txmsg-input-bar {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 14px 22px 16px;
+  background: rgba(20,23,42,0.95);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.txmsg-input-tools {
+  display: flex; gap: 8px;
+  flex-wrap: wrap;
+}
+.txmsg-input-tools button {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text);
+  padding: 7px 14px; border-radius: 18px;
+  font-size: 12px; cursor: pointer;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+.txmsg-input-tools button:hover { border-color: var(--accent); background: rgba(139,92,246,0.10); }
+.txmsg-input-tools button.ai {
+  background: linear-gradient(135deg, #8b5cf6, #7c4def);
+  color: #fff; border: none;
+  box-shadow: 0 2px 8px rgba(139,92,246,0.3);
+}
+.txmsg-input-row {
+  display: flex; gap: 10px;
+  align-items: flex-end;
+}
+.txmsg-input-row textarea {
+  flex: 1;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 22px;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.45;
+  resize: none;
+  max-height: 160px;
+  min-height: 46px;
+  font-family: inherit;
+  transition: border-color 0.15s, background 0.15s;
+}
+.txmsg-input-row textarea::placeholder { color: rgba(255,255,255,0.35); }
+.txmsg-input-row textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(255,255,255,0.06);
+}
+.txmsg-input-row .send {
+  background: linear-gradient(135deg, #8b5cf6, #7c4def);
+  color: #fff; border: none;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(139,92,246,0.35);
+  transition: transform 0.1s, box-shadow 0.15s;
+}
+.txmsg-input-row .send:hover { transform: scale(1.05); box-shadow: 0 4px 16px rgba(139,92,246,0.5); }
+.txmsg-input-row .send:active { transform: scale(0.95); }
+.txmsg-input-row .send:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+.txmsg-cost-hint {
+  font-size: 11px; color: rgba(255,255,255,0.4);
+  text-align: right;
+  display: flex; align-items: center; justify-content: flex-end; gap: 4px;
+}
+
+/* INFO sidebar (right) */
+.txmsg-info {
+  grid-area: info;
+  background: var(--bg);
+  border-left: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 16px;
+}
+.txmsg-info h4 { font-size: 12px; color: var(--muted); margin: 14px 0 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+.txmsg-info .row { font-size: 12px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.txmsg-info .row .label { color: var(--muted); }
+.txmsg-info .row .value { color: var(--text); font-weight: 500; }
+.txmsg-info textarea {
+  width: 100%; min-height: 80px; padding: 8px 10px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text); font-size: 12px; resize: vertical; font-family: inherit;
+}
+.txmsg-info .spent {
+  background: linear-gradient(135deg, rgba(139,92,246,0.14), rgba(59,130,246,0.10));
+  border: 1px solid rgba(139,92,246,0.25);
+  border-radius: 10px; padding: 10px 12px; margin-top: 10px;
+}
+.txmsg-info .spent .val { font-size: 18px; font-weight: 700; color: var(--accent); }
+.txmsg-info .spent .lbl { font-size: 11px; color: var(--muted); }
+</style>
+
+<button id="txmsgOpenBtn" class="menu" style="background:linear-gradient(135deg,var(--accent),#7c4def);color:#fff;border:none;font-weight:600" onclick="window.txmsgOpen()">💬 Сообщения</button>
+
+<div id="txmsgView">
+  <div class="txmsg-header">
+    <div class="title">💬 Сообщения <small id="txmsgHeaderSub">— TG через наш аккаунт · $0.05 / сообщение</small></div>
+    <button class="close" onclick="window.txmsgClose()">✕ Закрыть</button>
+  </div>
+
+  <div class="txmsg-folders" id="txmsgFolders"></div>
+
+  <div class="txmsg-chats">
+    <div class="txmsg-chats-search">
+      <input id="txmsgSearch" type="text" placeholder="🔍 Поиск по имени или тексту…" oninput="window.txmsgFilterChats(this.value)">
+    </div>
+    <div class="txmsg-chats-list" id="txmsgChatsList">
+      <div style="padding:30px 20px;color:var(--muted);text-align:center;font-size:13px">Загрузка чатов…</div>
+    </div>
+  </div>
+
+  <div class="txmsg-chat">
+    <div id="txmsgChatBody" class="txmsg-empty" style="display:flex;flex-direction:column;width:100%;height:100%;min-height:0;overflow:hidden">
+      <div style="margin:auto;color:rgba(255,255,255,0.4);text-align:center;padding:40px 20px;font-size:14px"><div style="font-size:64px;margin-bottom:16px;opacity:0.5">💬</div>← Выбери чат слева<br><span style="font-size:12px;color:rgba(255,255,255,0.3)">или начни новый с карточки лида</span></div>
+    </div>
+  </div>
+
+  <div class="txmsg-info" id="txmsgInfo">
+    <div style="color:var(--muted);font-size:12px;text-align:center;padding:30px 0">
+      Открой чат чтобы увидеть инфо о лиде
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const CRM_BASE = '/cabinet/api/roboai';   // routes to api/crm/conversations via roboai bridge
+
+  let state = {
+    activeConvId: null,
+    conversations: [],
+    messages: [],
+    pollTimer: null,
+    suggestVariants: null,
+    aiUsedRaw: null,
+    leadInfo: null,
+    // DRAFT MODE: when a lead is opened but no conv exists yet.
+    // First send creates the conversation + binds an account.
+    draftTarget: null, // { person_id, tg_username, tg_id, name }
+  };
+
+  window.txmsgOpen = async function (preselectConvId) {
+    document.getElementById('txmsgView').classList.add('active');
+    // [crm-right-ctx-2026-05-19] Snapshot the CRM filter state we are leaving so the right
+    // pane can show the same leads as a quick-start panel.
+    try { window._crmCtxSnapshotCurrent && window._crmCtxSnapshotCurrent(); } catch(e) {}
+    showChatsSkeleton();
+    await loadFolders();
+    await loadChats();
+    if (preselectConvId) selectChat(preselectConvId);
+    else renderSuggestedContacts();
+    startPolling();
+    // Ask once per browser to enable push notifications for lead replies.
+    maybePromptPushPermission();
+  };
+
+  // One-shot prompt to enable browser push for new lead replies. Stored in
+  // localStorage so we don't nag on every open.
+  async function maybePromptPushPermission() {
+    try {
+      if (!window.XHPush || !window.XHPush.isSupported()) return;
+      const dismissed = localStorage.getItem('txmsg_push_dismissed');
+      if (dismissed === '1') return;
+      await window.XHPush.init();
+      if (window.XHPush.isSubscribed()) return;
+      // Don't show OS prompt immediately — show our soft banner first.
+      const root = document.getElementById('txmsgChatsList');
+      if (!root || document.getElementById('txmsgPushPrompt')) return;
+      const div = document.createElement('div');
+      div.id = 'txmsgPushPrompt';
+      div.style.cssText = 'margin:8px 12px;padding:10px 12px;background:rgba(139,92,246,0.10);border:1px solid rgba(139,92,246,0.3);border-radius:8px;font-size:12px;color:#c4b5fd';
+      div.innerHTML = '🔔 <strong>Уведомления о новых ответах лидов?</strong><br><span style="font-size:11px;opacity:0.8">Браузер запросит разрешение. Можно отключить потом в настройках.</span><div style="margin-top:8px;display:flex;gap:6px"><button onclick="window._txmsgEnablePush()" style="background:#7c4def;color:#fff;border:none;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer">✓ Включить</button><button onclick="window._txmsgDismissPush()" style="background:transparent;color:#94a3b8;border:1px solid rgba(255,255,255,0.1);padding:6px 12px;border-radius:6px;font-size:11px;cursor:pointer">Не сейчас</button></div>';
+      root.insertBefore(div, root.firstChild);
+    } catch (e) { /* silent */ }
+  }
+  window._txmsgEnablePush = async function () {
+    const banner = document.getElementById('txmsgPushPrompt');
+    try {
+      const r = await window.XHPush.subscribe();
+      if (r.ok) {
+        if (banner) banner.innerHTML = '✅ <strong>Push-уведомления подключены.</strong> Получишь DM в браузере когда лид ответит.';
+        setTimeout(() => banner && banner.remove(), 5000);
+      } else {
+        if (banner) banner.innerHTML = '❌ ' + (r.reason === 'denied' ? 'Разрешение отклонено. Включи в настройках браузера.' : 'Не удалось подключить: ' + r.reason);
+      }
+    } catch (e) {
+      if (banner) banner.innerHTML = '❌ Ошибка: ' + (e.message || e);
+    }
+  };
+  window._txmsgDismissPush = function () {
+    try { localStorage.setItem('txmsg_push_dismissed', '1'); } catch {}
+    const b = document.getElementById('txmsgPushPrompt'); if (b) b.remove();
+  };
+
+  // Right pane content when no chat is selected — first render CRM-context
+  // quick-start panel (if user just came from leads list), then suggested.
+  async function renderSuggestedContacts() {
+    const root = document.getElementById('txmsgInfo');
+    if (!root) return;
+    // [crm-right-ctx-2026-05-19] two sections: 📋 Из CRM (top) + 🔥 Кому стоит написать (below)
+    root.innerHTML = '<div id="txmsgCrmCtx"></div>' +
+      '<h4 style="margin-top:14px">🔥 Кому стоит написать</h4>' +
+      '<div id="txmsgSuggested" style="font-size:13px;color:var(--muted);padding:8px 0">⏳ загружаю…</div>';
+    // CRM context panel renders independently from suggested — non-blocking.
+    try { window._crmCtxRender && window._crmCtxRender(); } catch(e) { console.error('[crmCtx]', e); }
+    try {
+      const r = await fetch('/cabinet/api/roboai/crm/conversations/suggested-contacts').then(x => x.json());
+      const slot = document.getElementById('txmsgSuggested');
+      if (!slot) return;
+      if (!r.ok) { slot.innerHTML = '<span style="color:#ef4444">не удалось загрузить</span>'; return; }
+      const card = (c, kind) => {
+        const name = c.targetName || c.targetTgUsername || ('Lead #' + c.id);
+        const letter = (name || '?').slice(0, 1).toUpperCase();
+        const sub = c.targetTgUsername ? '@' + c.targetTgUsername : '—';
+        const badge = kind === 'hot' ? '<span style="background:rgba(239,68,68,0.15);color:#ef4444;font-size:10px;font-weight:700;padding:2px 6px;border-radius:8px">' + (c.unreadCount > 0 ? c.unreadCount + ' новых' : 'отвечал') + '</span>'
+          : '<span style="background:rgba(148,163,184,0.15);color:#94a3b8;font-size:10px;font-weight:700;padding:2px 6px;border-radius:8px">не писал</span>';
+        return `<div onclick="window._txmsgSelectChat(${c.id})" style="display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:8px;cursor:pointer;background:rgba(255,255,255,0.03);margin-bottom:6px;border:1px solid rgba(255,255,255,0.05)" onmouseover="this.style.background='rgba(139,92,246,0.10)'" onmouseout="this.style.background='rgba(255,255,255,0.03)'">
+          <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--blue));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px;flex-shrink:0">${escapeHtml(letter)}</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escapeHtml(name)}</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5)">${escapeHtml(sub)} · ${badge}</div>
+          </div>
+        </div>`;
+      };
+      const hot = (r.hot || []).map(c => card(c, 'hot')).join('');
+      const cold = (r.cold || []).map(c => card(c, 'cold')).join('');
+      slot.innerHTML = (hot ? '<div style="font-size:11px;color:#ef4444;font-weight:600;margin:8px 0 4px">🔥 ОТВЕТИЛИ НЕДАВНО</div>' + hot : '') +
+        (cold ? '<div style="font-size:11px;color:#94a3b8;font-weight:600;margin:12px 0 4px">❄ НЕ НАПИСАНЫ</div>' + cold : '') +
+        (!hot && !cold ? '<div style="color:rgba(255,255,255,0.4);text-align:center;padding:20px">Пусто. Открой карточку лида в CRM и напиши первое сообщение.</div>' : '');
+    } catch (e) {
+      const slot = document.getElementById('txmsgSuggested');
+      if (slot) slot.innerHTML = '<span style="color:#ef4444">сеть недоступна</span>';
+    }
+  }
+
+  // ── Folders (TG-style narrow left strip) ──
+  state.folderFilter = null; // null = all chats; number = folder id; 'unfiled' = no folder
+  state.folders = [];
+
+  async function loadFolders() {
+    try {
+      const r = await fetch('/cabinet/api/roboai/crm/folders').then(x => x.json());
+      if (!r.ok) return;
+      state.folders = r.folders || [];
+      state.foldersAllCount = r.all_count || 0;
+      state.foldersAllUnread = r.all_unread || 0;
+      state.foldersUnfiledCount = r.unfiled_count || 0;
+      renderFolders();
+    } catch (e) { console.error('folders fail', e); }
+  }
+
+  function renderFolders() {
+    const root = document.getElementById('txmsgFolders');
+    if (!root) return;
+    const item = (id, icon, lbl, count, unread, isActive) => {
+      // JSON.stringify produces 'null', '"unfiled"', '5' — safe to inline into onclick attribute.
+      const idArg = JSON.stringify(id);
+      return `<div class="txmsg-folder-item${isActive ? ' active' : ''}" onclick='window._txmsgPickFolder(${idArg})'>
+        <div class="icon">${icon}</div>
+        <div class="lbl">${escapeHtml(lbl)}</div>
+        ${unread > 0 ? '<div class="badge">' + unread + '</div>' : ''}
+      </div>`;
+    };
+    let html = item(null, '💬', 'Все', state.foldersAllCount, state.foldersAllUnread, state.folderFilter === null);
+    if (state.foldersUnfiledCount > 0) {
+      html += item('unfiled', '📂', 'Без папки', state.foldersUnfiledCount, 0, state.folderFilter === 'unfiled');
+    }
+    for (const f of state.folders) {
+      html += item(f.id, f.emoji || '📁', f.name, f.chats || 0, f.unread || 0, state.folderFilter === f.id);
+    }
+    html += `<div class="txmsg-folder-item txmsg-folder-create" onclick="window._txmsgCreateFolder()">
+      <div class="icon">➕</div>
+      <div class="lbl">Создать</div>
+    </div>`;
+    root.innerHTML = html;
+  }
+
+  window._txmsgPickFolder = async function (id) {
+    state.folderFilter = id;
+    await loadChats();
+    renderFolders();
+  };
+
+  window._txmsgCreateFolder = async function () {
+    const name = window.prompt('Название папки (например: Прогрев, Купившие, VIP):', '');
+    if (!name) return;
+    const emoji = window.prompt('Эмодзи (📁 🔥 ⭐ ❄ ✅ и т.п.):', '📁') || '📁';
+    const r = await fetch('/cabinet/api/roboai/crm/folders', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ name, emoji }),
+    }).then(x => x.json());
+    if (!r.ok) { alert('Не удалось: ' + (r.reason || 'unknown')); return; }
+    await loadFolders();
+  };
+
+  // Move conversation to folder via right-click context menu.
+  window._txmsgMoveChatToFolder = async function (convId) {
+    if (!state.folders.length) { alert('Сначала создай папку (➕ внизу слева).'); return; }
+    const opts = ['(Без папки)'].concat(state.folders.map((f, i) => (i + 1) + '. ' + (f.emoji || '📁') + ' ' + f.name));
+    const choice = window.prompt('В какую папку переместить?\n\n' + opts.join('\n') + '\n\nВведи номер (0 = без папки):', '');
+    if (choice === null) return;
+    const n = Number(choice);
+    if (!Number.isFinite(n) || n < 0 || n > state.folders.length) { alert('Неверный номер'); return; }
+    const folderId = n === 0 ? null : state.folders[n - 1].id;
+    const r = await fetch('/cabinet/api/roboai/crm/conversations/' + convId + '/folder', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ folder_id: folderId }),
+    }).then(x => x.json());
+    if (!r.ok) { alert('Не удалось: ' + (r.reason || 'unknown')); return; }
+    await loadFolders();
+    await loadChats();
+  };
+  window.txmsgClose = function () {
+    document.getElementById('txmsgView').classList.remove('active');
+    stopPolling();
+  };
+
+  function startPolling() {
+    if (state.pollTimer) return;
+    state.pollTimer = setInterval(() => {
+      loadChats(true);
+      if (state.activeConvId) loadMessages(state.activeConvId, true);
+    }, 3000);
+  }
+  function stopPolling() {
+    if (state.pollTimer) { clearInterval(state.pollTimer); state.pollTimer = null; }
+  }
+
+  async function loadChats(silent) {
+    const root = document.getElementById('txmsgChatsList');
+    try {
+      const ff = state.folderFilter;
+      const qs = ff === null || ff === undefined ? '' : ('?folder_id=' + encodeURIComponent(ff));
+      const resp = await fetch('/cabinet/api/roboai/crm/conversations' + qs);
+      const r = await resp.json().catch(() => ({ ok: false, reason: 'bad_json' }));
+      if (!r.ok) {
+        if (root && !silent) {
+          const reason = r.reason || ('HTTP ' + resp.status);
+          const isAuth = reason === 'auth_required' || resp.status === 401;
+          root.innerHTML = `<div style="padding:30px 20px;color:#ef4444;text-align:center;font-size:13px">
+            ❌ Не удалось загрузить чаты<br><br>
+            <span style="color:#94a3b8;font-size:11px">${escapeHtml(String(reason))}</span><br><br>
+            ${isAuth ? '<a href="/cabinet/login" style="color:#a78bfa">→ Войти в кабинет</a>' : '<button onclick="loadChats(false)" style="background:#7c4def;color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer">🔄 Повторить</button>'}
+          </div>`;
+        }
+        return;
+      }
+      state.conversations = r.conversations || [];
+      renderChats();
+    } catch (e) {
+      if (root && !silent) {
+        root.innerHTML = `<div style="padding:30px 20px;color:#ef4444;text-align:center;font-size:13px">
+          ❌ Сеть недоступна<br><br>
+          <span style="color:#94a3b8;font-size:11px">${escapeHtml(e.message || String(e))}</span><br><br>
+          <button onclick="loadChats(false)" style="background:#7c4def;color:#fff;border:none;padding:6px 14px;border-radius:6px;cursor:pointer">🔄 Повторить</button>
+        </div>`;
+      }
+      console.error('chats fail', e);
+    }
+  }
+  // Expose for inline-onclick retry buttons rendered by loadChats error states.
+  window.loadChats = loadChats;
+
+  // Deterministic color from name hash (Telegram-like — same lead → same color).
+  const AVATAR_PALETTE = [
+    ['#e57373','#c62828'], ['#f06292','#ad1457'], ['#ba68c8','#6a1b9a'],
+    ['#9575cd','#4527a0'], ['#7986cb','#283593'], ['#64b5f6','#1565c0'],
+    ['#4fc3f7','#0277bd'], ['#4dd0e1','#00838f'], ['#4db6ac','#00695c'],
+    ['#81c784','#2e7d32'], ['#aed581','#558b2f'], ['#dce775','#9e9d24'],
+    ['#fff176','#f9a825'], ['#ffd54f','#ff8f00'], ['#ffb74d','#ef6c00'],
+    ['#ff8a65','#d84315'], ['#a1887f','#4e342e'], ['#90a4ae','#37474f'],
+  ];
+  function avatarGradient(name) {
+    let h = 0;
+    const s = String(name || '?');
+    for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+    const idx = Math.abs(h) % AVATAR_PALETTE.length;
+    const [c1, c2] = AVATAR_PALETTE[idx];
+    return `linear-gradient(135deg, ${c1}, ${c2})`;
+  }
+
+  function renderChats() {
+    const root = document.getElementById('txmsgChatsList');
+    if (!state.conversations.length) {
+      root.innerHTML = `<div style="padding:40px 20px;color:rgba(255,255,255,0.4);text-align:center;font-size:13px;line-height:1.6">
+        <div style="font-size:56px;margin-bottom:14px;opacity:0.5">💭</div>
+        <strong style="color:rgba(255,255,255,0.6)">Пока нет чатов</strong><br>
+        <span style="font-size:11px">Открой карточку лида в CRM и нажми<br>«📨 Через наш TG» — диалог появится здесь.</span>
+      </div>`;
+      return;
+    }
+    root.innerHTML = state.conversations.map(c => {
+      const name = c.targetName || c.targetTgUsername || ('Lead #' + c.id);
+      const letter = (name || '?').slice(0, 1).toUpperCase();
+      const last = c.last_message || '';
+      const time = c.lastLeadMsgAt || c.lastUserMsgAt;
+      const t = time ? new Date(time) : null;
+      const timeStr = t ? (
+        (Date.now() - t.getTime() < 86400_000)
+          ? t.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' })
+          : t.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' })
+      ) : '';
+      const unread = Number(c.unreadCount || 0);
+      const grad = avatarGradient(name);
+      // Online dot from cached lead-status map (filled by fetchAndRenderLeadStatus).
+      const status = (state.leadStatusMap || {})[c.id];
+      const dotCls = status ? status.kind : '';
+      return `<div class="txmsg-chat-item${state.activeConvId === c.id ? ' active' : ''}" onclick="window._txmsgSelectChat(${c.id})" oncontextmenu="event.preventDefault();window._txmsgMoveChatToFolder(${c.id})" title="ПКМ — переместить в папку">
+        <div class="avatar" style="background:${grad}">${escapeHtml(letter)}${dotCls ? `<span class="dot ${dotCls}" title="${escapeHtml(status.humanRu || '')}"></span>` : ''}</div>
+        <div class="meta">
+          <div class="row1"><span class="name">${escapeHtml(name)}</span><span class="time">${timeStr}</span></div>
+          <div class="preview">${c.targetTgUnreachable ? '<span style="color:#ef4444">🚫 не в TG</span>' : escapeHtml(last.slice(0, 60))}</div>
+        </div>
+        ${unread > 0 ? '<div class="unread">' + unread + '</div>' : ''}
+      </div>`;
+    }).join('');
+  }
+
+  // Replace static "Загрузка чатов..." text with shimmer skeleton on first load.
+  function showChatsSkeleton() {
+    const root = document.getElementById('txmsgChatsList');
+    if (!root) return;
+    root.innerHTML = Array.from({ length: 6 }).map(() => `
+      <div class="txmsg-skel">
+        <div class="a"></div>
+        <div class="meta"><div class="l1"></div><div class="l2"></div></div>
+      </div>`).join('');
+  }
+
+  window._txmsgSelectChat = function (convId) { selectChat(convId); };
+
+  async function selectChat(convId) {
+    // Selecting an existing chat — clear draft mode.
+    state.draftTarget = null;
+    state.activeConvId = convId;
+    state.messages = [];
+    state.suggestVariants = null;
+    state.aiUsedRaw = null;
+    renderChats();
+    renderChatHeader();
+    await loadMessages(convId);
+    renderInfoSidebar();
+  }
+
+  function renderChatHeader() {
+    const conv = state.conversations.find(c => c.id === state.activeConvId);
+    if (!conv) return;
+    const name = conv.targetName || conv.targetTgUsername || ('Lead #' + conv.id);
+    const letter = (name || '?').slice(0, 1).toUpperCase();
+    const body = document.getElementById('txmsgChatBody');
+    body.className = '';
+    body.style.cssText = 'display:flex;flex-direction:column;width:100%;height:100%;min-height:0;overflow:hidden';
+    body.innerHTML = `
+      <div class="txmsg-chat-header">
+        <div class="avatar" id="txmsgChatHeaderAvatar">${escapeHtml(letter)}</div>
+        <div>
+          <div class="name">${escapeHtml(name)}</div>
+          <div class="sub" id="txmsgChatHeaderSub">${conv.targetTgUsername ? '@' + escapeHtml(conv.targetTgUsername) : 'через наш TG-акк'}</div>
+        </div>
+        <div class="actions">
+          <button onclick="window.txmsgArchive(${conv.id})">🗑 Закрыть чат</button>
+        </div>
+      </div>
+      <div class="txmsg-messages" id="txmsgMessages"></div>
+      <div class="txmsg-ai-variants" id="txmsgAiVariants" style="display:none"></div>
+      <div class="txmsg-input-bar">
+        <div id="txmsgLinkBanner" style="display:none;background:rgba(245,158,11,0.10);border:1px solid rgba(245,158,11,0.3);border-radius:8px;padding:8px 12px;font-size:12px;color:#fbbf24"></div>
+        <div class="txmsg-input-tools">
+          <button class="ai" onclick="window.txmsgAiSuggest()">🤖 Помощь AI ✨</button>
+        </div>
+        <div class="txmsg-input-row">
+          <textarea id="txmsgInput" placeholder="Сообщение… (Enter — отправить, Shift+Enter — новая строка)" rows="1" oninput="window._txmsgInputLive(this.value)"></textarea>
+          <button class="send" id="txmsgSendBtn" onclick="window.txmsgSend()">✈</button>
+        </div>
+        <div class="txmsg-cost-hint">⚠️ $0.05 за каждое исходящее · списывается с основного кошелька</div>
+      </div>
+    `;
+    // Enter to send
+    const ta = document.getElementById('txmsgInput');
+    ta.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); window.txmsgSend(); }
+    });
+    ta.addEventListener('input', () => { ta.style.height = 'auto'; ta.style.height = Math.min(120, ta.scrollHeight) + 'px'; });
+  }
+
+  async function loadMessages(convId, silent) {
+    try {
+      const r = await fetch('/cabinet/api/roboai/crm/conversations/' + convId + '/messages').then(x => x.json());
+      if (!r.ok) return;
+      state.messages = r.messages || [];
+      state.inboundCount = Number(r.inbound_count || 0);
+      state.linksAllowed = !!r.links_allowed;
+      state.linksThreshold = Number(r.links_threshold || 3);
+      state.targetUnreachable = !!(r.conversation && r.conversation.target_tg_unreachable);
+      state.targetUnreachableReason = r.conversation && r.conversation.target_tg_unreachable_reason || null;
+      // If this lead has been confirmed not-in-TG previously, disable the input.
+      if (state.targetUnreachable) {
+        const sendBtn = document.getElementById('txmsgSendBtn');
+        const ta = document.getElementById('txmsgInput');
+        if (sendBtn) { sendBtn.disabled = true; sendBtn.style.opacity = '0.4'; sendBtn.style.cursor = 'not-allowed'; }
+        if (ta) { ta.disabled = true; ta.placeholder = '❌ Лид не зарегистрирован в Telegram'; }
+        const banner = document.getElementById('txmsgLinkBanner');
+        if (banner) {
+          banner.style.display = '';
+          banner.style.background = 'rgba(239,68,68,0.12)';
+          banner.style.borderColor = 'rgba(239,68,68,0.3)';
+          banner.style.color = '#ef4444';
+          banner.innerHTML = '🚫 <strong>Пользователь не зарегистрирован в Telegram</strong><br><span style="font-size:11px;opacity:0.8">' + escapeHtml(state.targetUnreachableReason || 'TG не нашёл этого @username при попытке отправки.') + '</span><br><span style="font-size:11px;opacity:0.8">Пиши через whatsapp/email/другой канал.</span>';
+        }
+      }
+      renderMessages();
+      // Re-evaluate URL warning banner (in case current input has a link).
+      const ta = document.getElementById('txmsgInput');
+      if (ta) window._txmsgInputLive(ta.value);
+    } catch (e) { if (!silent) console.error('messages fail', e); }
+  }
+
+  // Detect URL in current input + show warning if anti-spam threshold not met.
+  // Re-runs on every keystroke (oninput) and after loadMessages.
+  const _TXMSG_URL_RE = /(https?:\/\/|www\.|t\.me\/|telegram\.me\/|[a-z0-9-]{2,}\.[a-z]{2,}(\/|\s|$))/i;
+  window._txmsgInputLive = function (text) {
+    const banner = document.getElementById('txmsgLinkBanner');
+    const btn = document.getElementById('txmsgSendBtn');
+    if (!banner) return;
+    const hasUrl = _TXMSG_URL_RE.test(String(text || ''));
+    const allowed = state.linksAllowed === true; // strict: undefined/false → block (draft mode = 0 replies = block)
+    const inb = state.inboundCount || 0;
+    const thr = state.linksThreshold || 3;
+    if (hasUrl && !allowed) {
+      banner.style.display = '';
+      banner.innerHTML = `🛡 <strong>Anti-spam защита:</strong> ссылки разрешены после ${thr} ответных сообщений от лида. Сейчас: ${inb}/${thr}. Убери ссылку или дождись ответов лида.`;
+      if (btn) { btn.disabled = true; btn.style.opacity = '0.5'; btn.style.cursor = 'not-allowed'; }
+    } else if (hasUrl && allowed) {
+      banner.style.display = '';
+      banner.style.background = 'rgba(16,185,129,0.10)';
+      banner.style.borderColor = 'rgba(16,185,129,0.3)';
+      banner.style.color = '#34d399';
+      banner.innerHTML = `✓ Ссылка разрешена (получено ${inb}/${thr} ответов от лида).`;
+      if (btn) { btn.disabled = false; btn.style.opacity = ''; btn.style.cursor = ''; }
+    } else {
+      banner.style.display = 'none';
+      if (btn) { btn.disabled = false; btn.style.opacity = ''; btn.style.cursor = ''; }
+    }
+  };
+
+  function dateChipLabel(d) {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    const dDay = new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+    const diffDays = (today - dDay) / 86400000;
+    if (diffDays === 0) return 'Сегодня';
+    if (diffDays === 1) return 'Вчера';
+    if (diffDays < 7) return d.toLocaleDateString('ru-RU', { weekday: 'long' });
+    return d.toLocaleDateString('ru-RU', { day: '2-digit', month: 'long', year: d.getFullYear() === now.getFullYear() ? undefined : 'numeric' });
+  }
+
+  function renderMessages() {
+    const root = document.getElementById('txmsgMessages');
+    if (!root) return;
+    let lastDateKey = '';
+    let lastDir = '';
+    let lastTime = 0;
+    const html = state.messages.map((m, idx) => {
+      const t = m.sentAt ? new Date(m.sentAt) : new Date();
+      const time = t.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+      const dateKey = t.toDateString();
+      const dateChip = dateKey !== lastDateKey ? `<div class="txmsg-date-chip">${escapeHtml(dateChipLabel(t))}</div>` : '';
+      // Group consecutive messages from same direction within 2 min — drop the time meta on non-final ones.
+      const sameGroup = (m.direction === lastDir) && (t.getTime() - lastTime < 120_000) && dateChip === '';
+      const next = state.messages[idx + 1];
+      const isLastOfGroup = !next || next.direction !== m.direction || (new Date(next.sentAt || Date.now()).getTime() - t.getTime() >= 120_000);
+      lastDateKey = dateKey;
+      lastDir = m.direction;
+      lastTime = t.getTime();
+      return dateChip + `<div class="txmsg-msg ${m.direction}${sameGroup ? ' grouped' : ''}">
+        <div>
+          <div class="txmsg-msg-bubble">${escapeHtml(m.text || '')}</div>
+          ${isLastOfGroup ? `<div class="txmsg-msg-meta">${time}${m.costCents ? ' · $' + (m.costCents/100).toFixed(2) : ''}${m.direction === 'out' ? ' ✓' : ''}</div>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+    const wasAtBottom = (root.scrollTop + root.clientHeight) >= (root.scrollHeight - 80);
+    root.innerHTML = html || '<div style="margin:auto;color:rgba(255,255,255,0.3);text-align:center;padding:40px 20px"><div style="font-size:48px;margin-bottom:12px">💬</div>Начни переписку — первое сообщение лиду</div>';
+    if (wasAtBottom || state.messages.length <= 1) root.scrollTop = root.scrollHeight;
+  }
+
+  // Translate engine reason codes (and raw TG error details) → user-friendly RU.
+  function humanizeReason(reason, detail) {
+    // First, check the raw Telegram error inside `detail` (these come back when
+    // reason === 'send_failed'). These are TG-server-side responses and matter
+    // most for "why didn't my message go through" UX.
+    const d = String(detail || '');
+    if (/CHAT_WRITE_FORBIDDEN/i.test(d)) {
+      return '❌ Этот лид запретил приём сообщений от незнакомцев (Настройки → Приватность → Кто может писать → Контакты), либо заблокировал наш аккаунт. Пиши через другой канал (whatsapp/email). $0.05 возвращены на кошелёк.';
+    }
+    if (/USERNAME_NOT_OCCUPIED|USERNAME_INVALID|No user has .* as username|PEER_ID_INVALID/i.test(d)) {
+      return '❌ Такого @username не существует в Telegram. Возможно лид удалил TG или сменил handle. $0.05 возвращены.';
+    }
+    if (/USER_PRIVACY_RESTRICTED/i.test(d)) {
+      return '❌ Настройки приватности лида не пропускают наше сообщение. Пиши через whatsapp/email. $0.05 возвращены.';
+    }
+    if (/PEER_FLOOD/i.test(d)) {
+      return '❌ Наш TG-аккаунт временно ограничен Telegram’ом (anti-spam). Попробуй через 30-60 минут. $0.05 возвращены.';
+    }
+    if (/FLOOD_WAIT_(\d+)/i.test(d)) {
+      const sec = (d.match(/FLOOD_WAIT_(\d+)/i) || [])[1];
+      return `❌ Telegram попросил подождать ${sec}с. Это анти-спам защита. $0.05 возвращены.`;
+    }
+    if (/USER_DEACTIVATED|USER_DEACTIVATED_BAN/i.test(d)) {
+      return '❌ Этот TG-аккаунт удалён или забанен. $0.05 возвращены.';
+    }
+    if (/INPUT_USER_DEACTIVATED/i.test(d)) {
+      return '❌ Лид удалил свой Telegram-аккаунт. $0.05 возвращены.';
+    }
+    const m = {
+      no_account_available: '❌ Сейчас нет свободных TG-аккаунтов для отправки. Попробуй через 10-30 мин.',
+      bound_account_session_dead: '❌ Аккаунт, привязанный к диалогу, потерял сессию TG. Подключи акк заново в «Аренда TG».',
+      all_sessions_dead: '❌ У всех TG-аккаунтов мёртвые сессии. Нужно переподключить через OTP.',
+      insufficient_main_balance: '❌ Недостаточно средств — пополни кошелёк ($0.05 за сообщение)',
+      daily_cap_owner: '❌ Лимит 20 сообщений/день исчерпан — приходи завтра',
+      daily_cap_account: '❌ Привязанный акк уже отправил 5 за сегодня — попробуй позже',
+      text_empty: '❌ Текст пустой',
+      text_too_long: '❌ Слишком длинно (максимум 4000 символов)',
+      target_required: '❌ Не задан TG лида — у этого контакта пустое поле @username',
+      link_too_early: '⚠️ ' + (detail || 'Нужно дождаться 3 ответных сообщений от лида перед отправкой ссылок (anti-spam защита аккаунта).'),
+      target_is_channel: '❌ Этот @username — публичный канал, не аккаунт пользователя. Канал нельзя написать в личку. Пиши через whatsapp/email.',
+      target_is_group: '❌ Этот @username — групповой чат, не личный аккаунт.',
+      target_is_bot: '❌ Этот @username — бот. CRM-мессенджер для людей-лидов, не ботов.',
+      target_unreachable: '❌ Telegram не нашёл такого @username (возможно лид удалил TG или сменил handle). $0.05 НЕ списаны.',
+      target_not_in_tg: '❌ Этот лид НЕ зарегистрирован в Telegram (проверено ранее). Пиши через whatsapp/email — TG-канал заблокирован для этого контакта.',
+      forbidden: '❌ Доступ запрещён',
+      conversation_archived: '❌ Чат архивный — открой через CRM-карточку лида заново',
+      send_failed: '❌ Не удалось отправить: ' + (d || 'unknown') + '\n$0.05 возвращены на кошелёк.',
+    };
+    return m[reason] || ('❌ ' + (d || reason || 'unknown'));
+  }
+
+  window.txmsgSend = async function () {
+    const ta = document.getElementById('txmsgInput');
+    const text = (ta.value || '').trim();
+    if (!text) return;
+    // Pre-send warning: lead was offline >7 days (or last_month bucket).
+    // Operator confirms once, then we proceed. $0.05 is irreversible after send.
+    if (state.leadStatus && state.leadStatus.ok && state.leadStatus.shouldWarn) {
+      const ok = window.confirm(
+        '⚠️ Лид был в сети ' + state.leadStatus.humanRu + '.\n\n' +
+        'Скорее всего он не увидит сообщение в ближайшее время. $0.05 спишется в любом случае.\n\n' +
+        'Всё равно отправить?'
+      );
+      if (!ok) return;
+    }
+    const btn = document.getElementById('txmsgSendBtn');
+    btn.disabled = true; btn.textContent = '⏳';
+    try {
+      let r;
+      if (state.draftTarget && !state.activeConvId) {
+        // DRAFT MODE — pickAccount + create conv + send in one atomic call.
+        const t = state.draftTarget;
+        r = await fetch('/cabinet/api/roboai/crm/conversations/draft-send', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            person_id: t.person_id || null,
+            target_tg_username: t.tg_username || null,
+            target_tg_id: t.tg_id || null,
+            target_phone: t.tg_phone || null,
+            target_name: t.name || null,
+            text,
+            ai_suggestion_used: !!state.aiUsedRaw,
+            ai_suggestion_raw: state.aiUsedRaw || null,
+          }),
+        }).then(x => x.json());
+        if (!r.ok) { alert(humanizeReason(r.reason, r.detail)); return; }
+        // Success — transition draft → real conv.
+        state.draftTarget = null;
+        state.activeConvId = r.conversation_id;
+        state.aiUsedRaw = null;
+        ta.value = ''; ta.style.height = 'auto';
+        hideAiVariants();
+        await loadChats();
+        await selectChat(r.conversation_id);
+      } else {
+        // EXISTING CONV — append message to bound conv.
+        r = await fetch('/cabinet/api/roboai/crm/conversations/' + state.activeConvId + '/send', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            text,
+            ai_suggestion_used: !!state.aiUsedRaw,
+            ai_suggestion_raw: state.aiUsedRaw || null,
+          }),
+        }).then(x => x.json());
+        if (!r.ok) { alert(humanizeReason(r.reason, r.detail)); return; }
+        ta.value = ''; ta.style.height = 'auto';
+        state.aiUsedRaw = null;
+        hideAiVariants();
+        await loadMessages(state.activeConvId);
+        await loadChats(true);
+      }
+    } catch (e) {
+      alert('Ошибка сети: ' + (e.message || e));
+    } finally {
+      btn.disabled = false; btn.textContent = '✈';
+    }
+  };
+
+  window.txmsgAiSuggest = async function () {
+    const block = document.getElementById('txmsgAiVariants');
+    if (!block) return;
+    block.style.display = '';
+    block.innerHTML = '<div class="txmsg-ai-variants-title">🤖 Подбираю варианты сообщения…</div>';
+    try {
+      let r;
+      if (state.draftTarget && !state.activeConvId) {
+        // DRAFT MODE — AI suggest first-message variants without conv_id.
+        const t = state.draftTarget;
+        r = await fetch('/cabinet/api/roboai/crm/conversations/draft-ai-suggest', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            person_id: t.person_id || null,
+            target_tg_username: t.tg_username || null,
+            target_name: t.name || null,
+          }),
+        }).then(x => x.json());
+      } else {
+        // EXISTING CONV — AI based on history.
+        r = await fetch('/cabinet/api/roboai/crm/conversations/' + state.activeConvId + '/ai-suggest', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+        }).then(x => x.json());
+      }
+      if (!r.ok || !r.variants || !r.variants.length) {
+        block.innerHTML = '<div style="color:#ef4444;font-size:12px">❌ Не получилось: ' + (r.reason || 'unknown') + '</div>';
+        return;
+      }
+      state.suggestVariants = r.variants;
+      const title = state.draftTarget ? '🤖 3 варианта первого сообщения' : '🤖 3 варианта ответа';
+      block.innerHTML = `<div class="txmsg-ai-variants-title">${title} · ткни чтобы вставить в инпут (платно только при отправке)</div>` +
+        r.variants.map((v, i) => `<button class="txmsg-ai-variant" onclick="window._txmsgPickVariant(${i})">
+          <span class="style-tag">${escapeHtml(v.style || '')}</span>
+          ${escapeHtml(v.text || '')}
+        </button>`).join('');
+    } catch (e) {
+      block.innerHTML = '<div style="color:#ef4444;font-size:12px">❌ Сеть: ' + (e.message || e) + '</div>';
+    }
+  };
+
+  window._txmsgPickVariant = function (i) {
+    const v = state.suggestVariants?.[i];
+    if (!v) return;
+    const ta = document.getElementById('txmsgInput');
+    ta.value = v.text;
+    ta.style.height = 'auto'; ta.style.height = Math.min(120, ta.scrollHeight) + 'px';
+    ta.focus();
+    state.aiUsedRaw = v.text;
+    hideAiVariants();
+  };
+
+  function hideAiVariants() {
+    const block = document.getElementById('txmsgAiVariants');
+    if (block) block.style.display = 'none';
+  }
+
+  window.txmsgArchive = async function (convId) {
+    if (!confirm('Закрыть чат? История останется, но переписка перестанет показываться в списке.')) return;
+    try {
+      await fetch('/cabinet/api/roboai/crm/conversations/' + convId + '/archive', { method: 'POST' });
+      state.activeConvId = null;
+      const body = document.getElementById('txmsgChatBody');
+      body.className = 'txmsg-empty';
+      body.style.cssText = '';
+      body.innerHTML = '<div>Чат закрыт. Выбери другой слева.</div>';
+      await loadChats();
+    } catch (e) { alert('Ошибка: ' + (e.message || e)); }
+  };
+
+  window.txmsgFilterChats = function (q) {
+    const lq = (q || '').toLowerCase().trim();
+    document.querySelectorAll('#txmsgChatsList .txmsg-chat-item').forEach(el => {
+      const txt = el.textContent.toLowerCase();
+      el.style.display = (!lq || txt.includes(lq)) ? '' : 'none';
+    });
+  };
+
+  function renderInfoSidebar() {
+    const conv = state.conversations.find(c => c.id === state.activeConvId);
+    if (!conv) return;
+    const root = document.getElementById('txmsgInfo');
+    root.innerHTML = `
+      <h4>👤 Лид</h4>
+      <div class="row"><span class="label">Имя:</span> <span class="value">${escapeHtml(conv.targetName || '—')}</span></div>
+      <div class="row"><span class="label">TG:</span> <span class="value">${conv.targetTgUsername ? '@' + escapeHtml(conv.targetTgUsername) : '—'}</span></div>
+
+      <h4>🟢 Был в сети</h4>
+      <div id="txmsgLeadStatus" style="font-size:13px;padding:8px 12px;background:rgba(255,255,255,0.04);border-radius:8px;border:1px solid rgba(255,255,255,0.06);color:var(--muted)">⏳ загружаю…</div>
+
+      <h4>💰 Стоимость диалога</h4>
+      <div class="spent">
+        <div class="val">$${((conv.totalSpentCents || 0)/100).toFixed(2)}</div>
+        <div class="lbl">потрачено за всё время</div>
+      </div>
+
+      <h4>📝 Заметки</h4>
+      <textarea id="txmsgNotes" placeholder="Твои заметки по этому лиду…"></textarea>
+      <button class="menu" style="margin-top:6px;width:100%" onclick="window._txmsgSaveNotes(${conv.id})">💾 Сохранить</button>
+
+      <h4>⚙️ Доп</h4>
+      <div class="row">
+        <a href="https://crm.trendex.biz/cabinet/crm-app.html" style="color:var(--accent)">→ Полная карточка в CRM</a>
+      </div>
+    `;
+    // Fetch live lead status async — show colored badge in dedicated slot.
+    fetchAndRenderLeadStatus('/cabinet/api/roboai/crm/conversations/' + conv.id + '/lead-status', null);
+  }
+
+  // Render a lead-status badge in #txmsgLeadStatus. Saves last result to
+  // state.leadStatus so txmsgSend can warn-confirm when sending to a stale lead.
+  async function fetchAndRenderLeadStatus(url, draftBody) {
+    const slot = document.getElementById('txmsgLeadStatus');
+    try {
+      const r = await fetch(url, draftBody ? { method: 'POST', headers: { 'content-type':'application/json' }, body: JSON.stringify(draftBody) } : {}).then(x => x.json());
+      state.leadStatus = r;
+      // Cache status per-conversation so chat-list avatar dots stay in sync.
+      if (state.activeConvId) {
+        state.leadStatusMap = state.leadStatusMap || {};
+        if (r.ok) state.leadStatusMap[state.activeConvId] = r;
+      }
+      if (!r.ok) {
+        if (slot) slot.innerHTML = '<span style="color:#94a3b8">— не удалось проверить (' + escapeHtml(r.reason || 'err') + ')</span>';
+        return;
+      }
+      const colors = {
+        online:     { bg: 'rgba(16,185,129,0.15)',  fg: '#10b981', dot: '🟢' },
+        offline:    { bg: 'rgba(245,158,11,0.12)',  fg: '#f59e0b', dot: '🟡' },
+        recently:   { bg: 'rgba(16,185,129,0.10)',  fg: '#34d399', dot: '🟢' },
+        last_week:  { bg: 'rgba(245,158,11,0.12)',  fg: '#f59e0b', dot: '🟡' },
+        last_month: { bg: 'rgba(239,68,68,0.12)',   fg: '#ef4444', dot: '🔴' },
+        hidden:     { bg: 'rgba(148,163,184,0.10)', fg: '#94a3b8', dot: '🔒' },
+      };
+      const c = colors[r.kind] || colors.hidden;
+      if (slot) {
+        slot.style.background = c.bg;
+        slot.style.borderColor = c.fg + '33';
+        slot.style.color = c.fg;
+        slot.innerHTML = c.dot + ' <strong>' + escapeHtml(r.humanRu) + '</strong>' +
+          (r.shouldWarn ? '<br><span style="font-size:11px;color:#fbbf24">⚠ Был давно — может не увидеть сообщение</span>' : '');
+      }
+    } catch (e) {
+      if (slot) slot.innerHTML = '<span style="color:#94a3b8">— сеть недоступна</span>';
+    }
+  }
+  window._txmsgSaveNotes = function (convId) { /* TODO: hook to CRM notes API */ alert('Заметки сохранены (заглушка — допишем backend)'); };
+
+  // Открыть чат с конкретным лидом из карточки CRM — DRAFT-режим.
+  // Никакого fetch'а сейчас не делаем: окно открывается мгновенно, аккаунт
+  // подбирается + диалог создаётся ТОЛЬКО при первом нажатии «Отправить».
+  window.txmsgOpenWith = async function (opts) {
+    document.getElementById('txmsgView').classList.add('active');
+    state.draftTarget = {
+      person_id: opts.person_id || null,
+      tg_username: opts.tg_username || null,
+      tg_id: opts.tg_id || null,
+      tg_phone: opts.tg_phone || null,
+      name: opts.name || null,
+    };
+    state.activeConvId = null; // draft = no conv yet
+    state.messages = [];
+    state.suggestVariants = null;
+    state.aiUsedRaw = null;
+    state.inboundCount = 0;
+    state.linksAllowed = false; // draft = 0 replies = block links
+    state.linksThreshold = 3;
+    // Render the chat shell + lead info immediately
+    await loadFolders();
+    renderDraftCenter();
+    renderDraftInfoSidebar();
+    // Load existing chats in left pane (so user can switch back)
+    loadChats();
+    startPolling();
+  };
+
+  // Center pane in draft mode — empty chat with target header + input bar.
+  function renderDraftCenter() {
+    const t = state.draftTarget || {};
+    const name = t.name || (t.tg_username ? '@' + t.tg_username : 'Новый чат');
+    const letter = (name || '?').slice(0, 1).toUpperCase();
+    const body = document.getElementById('txmsgChatBody');
+    body.className = '';
+    body.style.cssText = 'display:flex;flex-direction:column;width:100%;height:100%;min-height:0;overflow:hidden';
+    body.innerHTML = `
+      <div class="txmsg-chat-header">
+        <div class="avatar">${escapeHtml(letter)}</div>
+        <div>
+          <div class="name">${escapeHtml(name)}</div>
+          <div class="sub">${t.tg_username ? '@' + escapeHtml(t.tg_username) : 'через наш TG-акк'} · <span style="color:#f59e0b">черновик — отправка свяжет акк</span></div>
+        </div>
+      </div>
+      <div class="txmsg-messages" id="txmsgMessages">
+        <div style="padding:30px 20px;color:var(--muted);text-align:center;font-size:13px;line-height:1.6">
+          📝 Это первое сообщение лиду.<br>
+          Когда нажмёшь «Отправить» — мы подберём один из наших TG-аккаунтов и закрепим его<br>
+          за этим диалогом. Дальнейшие сообщения этому лиду пойдут только с этого аккаунта.<br><br>
+          $0.05 спишется только при отправке.
+        </div>
+      </div>
+      <div class="txmsg-ai-variants" id="txmsgAiVariants" style="display:none"></div>
+      <div class="txmsg-input-bar">
+        <div id="txmsgLinkBanner" style="display:none;background:rgba(245,158,11,0.10);border:1px solid rgba(245,158,11,0.3);border-radius:8px;padding:8px 12px;font-size:12px;color:#fbbf24"></div>
+        <div class="txmsg-input-tools">
+          <button class="ai" onclick="window.txmsgAiSuggest()">🤖 Помощь AI ✨</button>
+        </div>
+        <div class="txmsg-input-row">
+          <textarea id="txmsgInput" placeholder="Напиши первое сообщение лиду… (Enter — отправить, Shift+Enter — новая строка)" rows="1" oninput="window._txmsgInputLive(this.value)"></textarea>
+          <button class="send" id="txmsgSendBtn" onclick="window.txmsgSend()">✈</button>
+        </div>
+        <div class="txmsg-cost-hint">⚠️ $0.05 спишется при отправке · акк закрепится за лидом навсегда</div>
+      </div>
+    `;
+    const ta = document.getElementById('txmsgInput');
+    if (ta) {
+      ta.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); window.txmsgSend(); }
+      });
+      ta.addEventListener('input', () => { ta.style.height = 'auto'; ta.style.height = Math.min(120, ta.scrollHeight) + 'px'; });
+      ta.focus();
+    }
+  }
+
+  function renderDraftInfoSidebar() {
+    const t = state.draftTarget || {};
+    const root = document.getElementById('txmsgInfo');
+    if (!root) return;
+    root.innerHTML = `
+      <h4>👤 Лид (черновик)</h4>
+      <div class="row"><span class="label">Имя:</span> <span class="value">${escapeHtml(t.name || '—')}</span></div>
+      <div class="row"><span class="label">TG:</span> <span class="value">${t.tg_username ? '@' + escapeHtml(t.tg_username) : '—'}</span></div>
+      ${t.person_id ? `<div class="row"><span class="label">CRM id:</span> <span class="value">#${t.person_id}</span></div>` : ''}
+
+      <h4>🟢 Был в сети</h4>
+      <div id="txmsgLeadStatus" style="font-size:13px;padding:8px 12px;background:rgba(255,255,255,0.04);border-radius:8px;border:1px solid rgba(255,255,255,0.06);color:var(--muted)">⏳ загружаю…</div>
+
+      <h4>💰 Стоимость</h4>
+      <div class="spent">
+        <div class="val">$0.05</div>
+        <div class="lbl">за первое сообщение (списание при send)</div>
+      </div>
+
+      <h4>ℹ️ Как это работает</h4>
+      <div style="font-size:11px;color:var(--muted);line-height:1.6">
+        1. Жмёшь «Отправить» → один из наших TG-аккаунтов закрепляется за этим лидом<br>
+        2. Все дальнейшие сообщения идут только с этого аккаунта<br>
+        3. Лид никогда не узнает что сообщения от платформы
+      </div>
+    `;
+    // Live "last seen" probe in draft mode — same logic, different endpoint.
+    if (t.tg_username) {
+      fetchAndRenderLeadStatus('/cabinet/api/roboai/crm/conversations/lead-status-draft', { target_tg_username: t.tg_username });
+    }
+  }
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+})();
+
+// [two-pane-layout-2026-05-19] lock body to viewport on desktop, release on mobile
+(function applyAppLock(){
+  function set() {
+    var isDesktop = window.matchMedia('(min-width: 1101px)').matches;
+    document.body.classList.toggle('app-locked', isDesktop);
+  }
+  set();
+  window.addEventListener('resize', set);
+})();
+
+// [compact-chrome-2026-05-19] dashboard collapse toggle (persists in localStorage)
+window._toggleDashboardBar = function() {
+  var bar = document.getElementById('dashboardBar');
+  var btn = document.getElementById('dashCollapseBtn');
+  if (!bar) return;
+  var hidden = bar.classList.toggle('dash-hidden');
+  if (hidden) {
+    bar.style.display = 'none';
+    try { localStorage.setItem('crm_dash_hidden', '1'); } catch(e){}
+    // Show a tiny "show metrics" reopener at the header
+    if (!document.getElementById('dashReopener')) {
+      var div = document.createElement('button');
+      div.id = 'dashReopener';
+      div.textContent = '▼ показать метрики';
+      div.style.cssText = 'position:fixed;top:60px;right:12px;background:var(--card);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:4px 10px;border-radius:6px;cursor:pointer;z-index:80';
+      div.onclick = function(){ window._toggleDashboardBar(); };
+      document.body.appendChild(div);
+    }
+  } else {
+    bar.style.display = '';
+    try { localStorage.removeItem('crm_dash_hidden'); } catch(e){}
+    var r = document.getElementById('dashReopener'); if (r) r.remove();
+  }
+};
+// Apply saved preference on load (after dashboard renders)
+setTimeout(function(){
+  try {
+    if (localStorage.getItem('crm_dash_hidden') === '1') {
+      var bar = document.getElementById('dashboardBar');
+      if (bar && bar.style.display !== 'none') window._toggleDashboardBar();
+    }
+  } catch(e){}
+}, 800);
+</script>
+
+
+
+<!-- [team-ui-2026-05-20] team workspace -->
+<div id="teamView">
+  <div class="team-head">
+    <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0">
+      <strong style="font-size:16px">👥 Команда</strong>
+      <select id="teamSelect" onchange="window._teamSwitch(this.value)" style="background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:6px 10px;font-size:13px;max-width:240px"></select>
+      <button onclick="window._teamCreatePrompt()" style="background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer">+ команда</button>
+    </div>
+    <div class="team-subtabs">
+      <button class="team-subtab active" data-tab="tasks" onclick="window._teamSubtab('tasks')">📋 Задачи</button>
+      <button class="team-subtab" data-tab="members" onclick="window._teamSubtab('members')">👤 Участники</button>
+      <button class="team-subtab" data-tab="activity" onclick="window._teamSubtab('activity')">📰 Лента</button>
+    </div>
+    <button class="team-close" onclick="window.teamClose()">✕</button>
+  </div>
+  <div class="team-body">
+    <div class="team-pane" id="teamPaneTasks"></div>
+    <div class="team-pane" id="teamPaneMembers"></div>
+    <div class="team-pane" id="teamPaneActivity"></div>
+  </div>
+</div>
+<style>
+#teamView { display:none; position:fixed; inset:0; z-index:9998; background:var(--bg); flex-direction:column; }
+#teamView.active { display:flex; }
+.team-head { display:flex; align-items:center; gap:12px; padding:12px 18px; border-bottom:1px solid var(--border); background:var(--bg-2); flex-wrap:wrap; }
+.team-subtabs { display:flex; gap:6px; }
+.team-subtab { background:var(--card); border:1px solid var(--border); color:var(--text-muted); border-radius:18px; padding:6px 14px; font-size:13px; cursor:pointer; }
+.team-subtab.active { background:linear-gradient(135deg,#0ea5e9,#2563eb); color:#fff; border:none; }
+.team-close { margin-left:auto; background:var(--card); border:1px solid var(--border); color:var(--text); width:34px; height:34px; border-radius:50%; cursor:pointer; font-size:16px; }
+.team-body { flex:1; overflow:auto; padding:16px 18px; }
+.team-pane { display:none; }
+.team-pane.active { display:block; }
+/* kanban */
+.tk-board { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; align-items:start; }
+.tk-col { background:var(--bg-2); border:1px solid var(--border); border-radius:12px; padding:10px; min-height:120px; }
+.tk-col-title { font-size:12px; font-weight:700; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px; display:flex; justify-content:space-between; }
+.tk-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:10px; margin-bottom:8px; cursor:grab; }
+.tk-card:hover { border-color:var(--accent,#8b5cf6); }
+.tk-card .t { font-size:13px; font-weight:600; margin-bottom:4px; }
+.tk-card .m { font-size:11px; color:var(--text-muted); display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.tk-prio-high { border-left:3px solid #ef4444; }
+.tk-prio-normal { border-left:3px solid #3b82f6; }
+.tk-prio-low { border-left:3px solid #6b7280; }
+.team-member-row { display:flex; align-items:center; gap:10px; padding:10px; background:var(--card); border:1px solid var(--border); border-radius:10px; margin-bottom:8px; }
+.team-av { width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#0ea5e9,#2563eb); display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; flex-shrink:0; }
+@media (max-width:768px) {
+  .tk-board { grid-template-columns:1fr; }
+  #crmTeamBtn { display:none; }
+  .team-head { gap:8px; }
+  #teamSelect { max-width:140px !important; }
+}
+@media (min-width:769px) { #crmTabTeam { } }
+</style>
+<script>
+(function(){
+  var ST = { teams:[], current:null, members:[], tasks:[], sub:'tasks' };
+  function api(method, path, body){
+    var opt={method:method,credentials:'same-origin',headers:{}};
+    if(body){opt.body=JSON.stringify(body);opt.headers['Content-Type']='application/json';}
+    return fetch('/cabinet/api/mlm'+path,opt).then(function(r){return r.json().catch(function(){return{ok:false}}); });
+  }
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function ago(ts){ if(!ts)return''; var d=Date.now()-ts; var s=d/1000; if(s<60)return'только что'; if(s<3600)return Math.floor(s/60)+'м'; if(s<86400)return Math.floor(s/3600)+'ч'; return Math.floor(s/86400)+'д'; }
+
+  window.teamOpen = async function(){
+    document.getElementById('teamView').classList.add('active');
+    var r = await api('GET','/team/my');
+    ST.teams = (r&&r.teams)||[];
+    var sel = document.getElementById('teamSelect');
+    if(!ST.teams.length){
+      sel.innerHTML='<option>нет команд</option>';
+      document.getElementById('teamPaneTasks').innerHTML='<div style="text-align:center;padding:40px;color:var(--text-muted)">У тебя пока нет команд.<br><br><button onclick="window._teamCreatePrompt()" style="background:linear-gradient(135deg,#0ea5e9,#2563eb);color:#fff;border:none;padding:10px 20px;border-radius:10px;cursor:pointer;font-weight:600">+ Создать команду</button></div>';
+      window._teamSubtab('tasks');
+      return;
+    }
+    sel.innerHTML = ST.teams.map(function(t){return '<option value="'+t.id+'">'+esc(t.name)+' ('+t.member_count+')</option>';}).join('');
+    ST.current = ST.teams[0].id;
+    sel.value = ST.current;
+    window._teamSubtab('tasks');
+    _teamLoadAll();
+  };
+  window.teamClose = function(){ document.getElementById('teamView').classList.remove('active'); };
+  window._teamSwitch = function(id){ ST.current=Number(id); _teamLoadAll(); };
+  window._teamCreatePrompt = async function(){
+    var name = prompt('Название команды:');
+    if(!name) return;
+    var r = await api('POST','/team/create',{name:name});
+    if(r&&r.ok){ await window.teamOpen(); } else alert('Ошибка: '+((r&&r.reason)||'?'));
+  };
+  window._teamSubtab = function(tab){
+    ST.sub=tab;
+    ['tasks','members','activity'].forEach(function(t){
+      document.getElementById('teamPane'+t.charAt(0).toUpperCase()+t.slice(1)).classList.toggle('active', t===tab);
+    });
+    document.querySelectorAll('.team-subtab').forEach(function(b){ b.classList.toggle('active', b.dataset.tab===tab); });
+  };
+  function _teamLoadAll(){ _teamLoadTasks(); _teamLoadMembers(); _teamLoadActivity(); }
+
+  async function _teamLoadTasks(){
+    if(!ST.current) return;
+    var r = await api('GET','/team/'+ST.current+'/tasks');
+    ST.tasks=(r&&r.tasks)||[];
+    var cols={open:[],in_progress:[],done:[]};
+    ST.tasks.forEach(function(t){ (cols[t.status]||cols.open).push(t); });
+    var colTitle={open:'Открыто',in_progress:'В работе',done:'Готово'};
+    var html='<button onclick="window._teamNewTask()" style="margin-bottom:12px;background:linear-gradient(135deg,#0ea5e9,#2563eb);color:#fff;border:none;padding:8px 16px;border-radius:10px;cursor:pointer;font-weight:600">+ Задача</button>';
+    html+='<div class="tk-board">';
+    ['open','in_progress','done'].forEach(function(st){
+      html+='<div class="tk-col"><div class="tk-col-title"><span>'+colTitle[st]+'</span><span>'+cols[st].length+'</span></div>';
+      cols[st].forEach(function(t){
+        var next = st==='open'?'in_progress':st==='in_progress'?'done':'open';
+        var nextLbl = st==='open'?'→ в работу':st==='in_progress'?'✓ готово':'↩ открыть';
+        html+='<div class="tk-card tk-prio-'+t.priority+'">'+
+          '<div class="t">'+esc(t.title)+'</div>'+
+          '<div class="m">'+(t.assignee_label?'👤 '+esc(t.assignee_label):'<i>не назначена</i>')+
+          (t.due_at?' · ⏰ '+new Date(t.due_at).toLocaleDateString('ru-RU'):'')+
+          (t.comment_count?' · 💬 '+t.comment_count:'')+'</div>'+
+          '<div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">'+
+          '<button onclick="window._teamMoveTask('+t.id+',\''+next+'\')" style="font-size:11px;background:var(--bg-2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:3px 8px;cursor:pointer">'+nextLbl+'</button>'+
+          '<button onclick="window._teamTaskDetail('+t.id+')" style="font-size:11px;background:transparent;border:1px solid var(--border);color:var(--text-muted);border-radius:6px;padding:3px 8px;cursor:pointer">детали</button>'+
+          '</div></div>';
+      });
+      html+='</div>';
+    });
+    html+='</div>';
+    document.getElementById('teamPaneTasks').innerHTML=html;
+  }
+  window._teamMoveTask = async function(id,status){ await api('PATCH','/team/tasks/'+id,{status:status}); _teamLoadTasks(); _teamLoadActivity(); };
+  window._teamNewTask = async function(){
+    var title=prompt('Задача (название):'); if(!title)return;
+    var assignee='';
+    if(ST.members.length>1){
+      var opts=ST.members.map(function(m,i){return i+': '+m.label;}).join('\n');
+      var pick=prompt('Назначить на (номер, пусто = никому):\n'+opts);
+      if(pick!==null && pick!==''){ var m=ST.members[Number(pick)]; if(m)assignee=m.user_id; }
+    }
+    var r=await api('POST','/team/'+ST.current+'/tasks',{title:title,assigned_to:assignee||null});
+    if(r&&r.ok){ _teamLoadTasks(); _teamLoadActivity(); } else alert('Ошибка: '+((r&&r.reason)||'?'));
+  };
+  window._teamTaskDetail = async function(id){
+    var r=await api('GET','/team/tasks/'+id+'/comments');
+    var c=(r&&r.comments)||[];
+    var txt=c.map(function(x){return x.label+': '+x.text;}).join('\n')||'(нет комментариев)';
+    var add=prompt('Комментарии:\n\n'+txt+'\n\n— Добавить комментарий (пусто = отмена):');
+    if(add){ await api('POST','/team/tasks/'+id+'/comment',{text:add}); _teamLoadTasks(); }
+  };
+
+  async function _teamLoadMembers(){
+    if(!ST.current) return;
+    var r=await api('GET','/team/'+ST.current+'/members');
+    ST.members=(r&&r.members)||[];
+    var html='<button onclick="window._teamInvite()" style="margin-bottom:12px;background:linear-gradient(135deg,#0ea5e9,#2563eb);color:#fff;border:none;padding:8px 16px;border-radius:10px;cursor:pointer;font-weight:600">+ Пригласить по логину</button>';
+    html+=ST.members.map(function(m){
+      var letter=(m.label||'?').slice(0,1).toUpperCase();
+      var roleLbl={owner:'👑 владелец',admin:'🛡 админ',member:'участник'}[m.role]||m.role;
+      return '<div class="team-member-row"><div class="team-av">'+esc(letter)+'</div>'+
+        '<div style="flex:1;min-width:0"><div style="font-weight:600;font-size:14px">'+esc(m.label)+'</div>'+
+        '<div style="font-size:12px;color:var(--text-muted)">'+roleLbl+' · '+m.open_tasks+' задач</div></div>'+
+        (m.role!=='owner'?'<button onclick="window._teamRemove('+m.user_id+')" style="background:transparent;border:1px solid var(--border);color:#ef4444;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer">убрать</button>':'')+
+        '</div>';
+    }).join('');
+    document.getElementById('teamPaneMembers').innerHTML=html;
+  }
+  window._teamInvite = async function(){
+    var login=prompt('Логин / @username / email участника:'); if(!login)return;
+    var r=await api('POST','/team/'+ST.current+'/invite',{login:login,role:'member'});
+    if(r&&r.ok){ if(r.pending)alert('Юзер ещё не в системе — приглашение сохранено, добавится при входе.'); else alert('Добавлен!'); _teamLoadMembers(); _teamLoadActivity(); }
+    else alert('Ошибка: '+((r&&r.reason)||'?'));
+  };
+  window._teamRemove = async function(uid){ if(!confirm('Убрать участника?'))return; await api('DELETE','/team/'+ST.current+'/member/'+uid); _teamLoadMembers(); };
+
+  async function _teamLoadActivity(){
+    if(!ST.current) return;
+    var r=await api('GET','/team/'+ST.current+'/activity?limit=50');
+    var a=(r&&r.activity)||[];
+    var lblMap={team_created:'создал команду',member_added:'добавил участника',member_joined:'присоединился',member_removed:'убрал участника',invite_pending:'пригласил',role_changed:'сменил роль',task_created:'создал задачу',task_updated:'обновил задачу',task_comment:'прокомментировал задачу'};
+    document.getElementById('teamPaneActivity').innerHTML = a.length? a.map(function(x){
+      return '<div style="padding:8px 10px;border-bottom:1px solid var(--border);font-size:13px"><b>'+esc(x.label)+'</b> '+(lblMap[x.action]||x.action)+' <span style="color:var(--text-muted);font-size:11px;float:right">'+ago(x.created_at)+' назад</span></div>';
+    }).join('') : '<div style="text-align:center;color:var(--text-muted);padding:30px">Пока пусто</div>';
+  }
+})();
+</script>
+
+
+<!-- [broadcasts-section-2026-05-20] broadcasts entry — audience picker over existing mass-send -->
+<script>
+(function(){
+  window.bcastOpen = function(){
+    var sel = (window.bulkSelected instanceof Set) ? Array.from(window.bulkSelected) : [];
+    var html = '' +
+      '<div style="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:100000;display:flex;align-items:center;justify-content:center;padding:20px" id="bcastModal" data-overlay>' +
+      '<div style="background:var(--bg-2,#1a1d29);max-width:480px;width:100%;border:1px solid var(--border);border-radius:14px;padding:22px;color:var(--text)">' +
+        '<h2 style="margin:0 0 6px;font-size:20px">📨 Массовая рассылка</h2>' +
+        '<p style="color:var(--text-muted);font-size:13px;margin:0 0 16px">Кому отправляем первое сообщение? (ссылки запрещены, антибан-задержка 5-15с)</p>' +
+        '<div style="display:flex;flex-direction:column;gap:8px">' +
+          '<button class="bcast-aud" onclick="window._bcastPick(\'selected\')" '+(sel.length?'':'disabled')+' style="text-align:left;padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:'+(sel.length?'pointer':'not-allowed')+';opacity:'+(sel.length?'1':'.5')+'">☑️ Отмеченные лиды <b>('+sel.length+')</b></button>' +
+          '<button class="bcast-aud" onclick="window._bcastPick(\'filter\')" style="text-align:left;padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer">🔎 Все лиды текущего фильтра</button>' +
+          '<button class="bcast-aud" onclick="window._bcastPick(\'pool\')" style="text-align:left;padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer">🎯 Мой пул лидов (предложенные)</button>' +
+        '</div>' +
+        '<button onclick="document.getElementById(\'bcastModal\').remove()" style="margin-top:16px;width:100%;background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px;border-radius:10px;cursor:pointer">Отмена</button>' +
+      '</div></div>';
+    var d=document.createElement('div'); d.innerHTML=html; document.body.appendChild(d.firstElementChild);
+  };
+  window._bcastPick = async function(kind){
+    var modal=document.getElementById('bcastModal'); if(modal)modal.remove();
+    if(kind==='selected'){
+      if(typeof window.bulkOpenMassSend==='function') window.bulkOpenMassSend();
+      return;
+    }
+    // filter / pool → fetch usernames then feed bulkSelected + open mass-send
+    var url = kind==='pool' ? '/cabinet/api/mlm/leads/suggested?limit=100' : null;
+    var leads=[];
+    try {
+      if(kind==='pool'){
+        var r=await fetch(url,{credentials:'same-origin'}).then(function(x){return x.json();});
+        leads=((r&&r.contacts)||[]).map(function(c){return c.username;}).filter(Boolean);
+      } else {
+        // current filter — reuse STATE on the leads page via global if present
+        var params=new URLSearchParams();
+        params.set('limit','100');
+        if(window.STATE){ if(STATE.q)params.set('q',STATE.q); if(STATE.filters&&STATE.filters.size)params.set('filter',[].concat.apply([],[Array.from(STATE.filters)]).join(',')); if(STATE.country)params.set('country',STATE.country); if(STATE.city)params.set('city',STATE.city); if(STATE.category)params.set('category',STATE.category); }
+        var r2=await fetch('/cabinet/api/mlm/contacts?'+params.toString(),{credentials:'same-origin'}).then(function(x){return x.json();});
+        leads=((r2&&r2.items)||[]).map(function(c){return c.username;}).filter(Boolean);
+      }
+    } catch(e){ alert('Не удалось получить аудиторию: '+e.message); return; }
+    if(!leads.length){ alert('В этой аудитории нет лидов с username.'); return; }
+    if(leads.length>100) leads=leads.slice(0,100);
+    if(!confirm('Аудитория: '+leads.length+' лидов. Продолжить к составлению сообщения?')) return;
+    window.bulkSelected = new Set(leads);
+    if(typeof window.bulkOpenMassSend==='function') window.bulkOpenMassSend();
+    else alert('Модуль рассылки ещё грузится, попробуй ещё раз.');
+  };
+})();
+</script>
+
+</body>
+</html>

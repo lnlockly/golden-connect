@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 180" role="img" aria-label="AGENTFLOW">
+  <title>AGENTFLOW — light background variant</title>
+  <defs>
+    <style>
+      .wm { font-family: 'Fraunces', 'Noto Serif SC', Georgia, serif; font-weight: 700; font-size: 120px; letter-spacing: -3.6px; }
+    </style>
+  </defs>
+
+  <!-- MARK in bg color (reads on light surfaces) with acid ring for accent -->
+  <g transform="translate(20 46) scale(0.172)">
+    <path fill="#0a0a0a" fill-rule="evenodd"
+          d="M256 16a240 240 0 1 0 0 480 240 240 0 0 0 0-480zM168 176l36-36 120 120-120 120-36-36 84-84z"/>
+  </g>
+
+  <text class="wm" x="130" y="128" fill="#0a0a0a">AGENTFLOW</text>
+</svg>
