@@ -1,13 +1,13 @@
 // Cabinet → api proxy for "Наши партнёры" (Golden Connect Partners).
 //
 // Mounted under the cabinet web router. Every request resolves the
-// session's user → resolves their api-side email (tg<id>@golden-connect.bot
-// for TG-only users) → forwards the call to golden-connect-api via
+// session's user → resolves their api-side email (tg<id>@goldenConnect.bot
+// for TG-only users) → forwards the call to goldenConnect-api via
 // callGolden ConnectApi() so the api's own auth layer can validate.
 //
 // One quirk: api routes use Bearer auth on /api/* (the cabinet user
 // session doesn't translate directly). We rely on the fact that cabinet
-// already gets `internal/...` access via x-golden-connect-secret. So we
+// already gets `internal/...` access via x-goldenConnect-secret. So we
 // reroute through internal endpoints when possible, otherwise we
 // proxy with a one-shot internal credential.
 
@@ -22,7 +22,7 @@ function createPartnersRouter(deps) {
     if (!u) return null;
     let email = String(u.email || '').trim().toLowerCase();
     const tgId = u.telegramUserId || u.telegram_user_id;
-    if (!email && tgId) email = 'tg' + tgId + '@golden-connect.bot';
+    if (!email && tgId) email = 'tg' + tgId + '@goldenConnect.bot';
     return email || null;
   }
 

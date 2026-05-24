@@ -2,7 +2,7 @@
  * Aggregate metrics consumed by the bot's `/admin` dashboard. Single
  * round-trip so the admin panel renders fast.
  *
- * Auth: shared `x-golden-connect-secret`. Bot already verifies the caller is
+ * Auth: shared `x-goldenConnect-secret`. Bot already verifies the caller is
  * in `ADMIN_TG_IDS` before calling this — no public surface here.
  */
 import { Hono } from 'hono';

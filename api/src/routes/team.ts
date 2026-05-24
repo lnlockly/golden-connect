@@ -173,9 +173,9 @@ internal.post('/internal/team/by-email/referrals', async (c) => {
   const { db } = await import('../db/client.js');
   const { sql: drSql } = await import('drizzle-orm');
 
-  // Resolve email -> userId. Synthetic tg<id>@golden-connect.bot OR real email via credentials.
+  // Resolve email -> userId. Synthetic tg<id>@goldenConnect.bot OR real email via credentials.
   let userId: number | null = null;
-  const m = email.match(/^tg(\d+)@golden-connect\.bot$/);
+  const m = email.match(/^tg(\d+)@goldenConnect\.bot$/);
   if (m) {
     const tgId = Number(m[1]);
     const r = (await db.execute(drSql`SELECT id FROM users WHERE tg_id = ${tgId} LIMIT 1`)) as any[];
@@ -204,7 +204,7 @@ internal.post('/internal/team/by-email/overview', async (c) => {
   const { sql: drSql } = await import('drizzle-orm');
 
   let userId: number | null = null;
-  const m = email.match(/^tg(\d+)@golden-connect\.bot$/);
+  const m = email.match(/^tg(\d+)@goldenConnect\.bot$/);
   if (m) {
     const tgId = Number(m[1]);
     const r = (await db.execute(drSql`SELECT id FROM users WHERE tg_id = ${tgId} LIMIT 1`)) as any[];

@@ -75,7 +75,7 @@ function canvasScript(bg, color) {
 router.get('/', (req, res, next) => {
   try {
     const host = String(req.hostname || '').toLowerCase();
-    if (!host || host === 'golden-connect.to' || host === 'localhost' || host.endsWith('.golden-connect.to')) return next();
+    if (!host || host === 'goldenConnect.to' || host === 'localhost' || host.endsWith('.goldenConnect.to')) return next();
     const db = getDb();
     const cd = db.prepare("SELECT bio_id FROM bio_custom_domains WHERE LOWER(domain) = ? AND dns_status = 'verified'").get(host);
     if (!cd) return next();
@@ -158,14 +158,14 @@ router.get('/:username', (req, res) => {
     const displayName = profile.display_name || profile.username;
     const bioText = profile.bio || '';
     const avatarUrl = profile.avatar_url || '';
-    const baseUrl = 'https://golden-connect.to';
+    const baseUrl = 'https://goldenConnect.to';
     // Get owner's referral code for footer link
     let refCode = '';
     try {
       const owner = db.prepare('SELECT ref_code FROM users WHERE id = ?').get(profile.user_id);
       if (owner && owner.ref_code) refCode = owner.ref_code;
     } catch(e) {}
-    const footerUrl = refCode ? ('https://golden-connect.to/?ref=' + refCode) : baseUrl;
+    const footerUrl = refCode ? ('https://goldenConnect.to/?ref=' + refCode) : baseUrl;
 
     const html = `<!DOCTYPE html>
 <html lang="en">
@@ -363,7 +363,7 @@ var _abTestId=${abTestId||'null'},_abVariant='${abVariant}';
       });
     });
   </script>
-<script src="https://golden-connect.to/cabinet/js/ad-loader.js?v=1" defer></script>
+<script src="https://goldenConnect.to/cabinet/js/ad-loader.js?v=1" defer></script>
 </body>
 </html>`;
 

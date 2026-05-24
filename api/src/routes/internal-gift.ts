@@ -1,7 +1,7 @@
 /**
- * Internal GiftClub bridge — called from golden-connect-cabinet web-routes.js
+ * Internal GiftClub bridge — called from goldenConnect-cabinet web-routes.js
  *
- * Auth: x-golden-connect-secret header (INTERNAL_API_SECRET env)
+ * Auth: x-goldenConnect-secret header (INTERNAL_API_SECRET env)
  * Identification: email (canonical bridge from cabinet sessions).
  *
  * Endpoints:
@@ -51,9 +51,9 @@ function usdtToMicro(amountUsdt: number, perUsdt: bigint): bigint {
   return (micro6 * perUsdt) / 1_000_000n;
 }
 
-// Bearer-like middleware: x-golden-connect-secret
+// Bearer-like middleware: x-goldenConnect-secret
 app.use('/internal/gift/*', async (c, next) => {
-  const secret = c.req.header('x-golden-connect-secret');
+  const secret = c.req.header('x-goldenConnect-secret');
   if (!secret || secret !== env.internalSecret) {
     return c.json({ ok: false, error: 'unauthorized' }, 401);
   }
@@ -63,12 +63,12 @@ app.use('/internal/gift/*', async (c, next) => {
 // Helper: find a GIFT account for either tg_id or email.
 // Golden Connect public.users has NO email column — emails live in cabinet SQLite,
 // passed here as a hint. Match strategy:
-//   1) tg_id (preferred) → gift_users.telegram_chat_id (string) OR public.users.tg_id → golden-connect_user_id
-//   2) Synthetic email "tg{N}@golden-connect.bot" → extract N → as tg_id
+//   1) tg_id (preferred) → gift_users.telegram_chat_id (string) OR public.users.tg_id → goldenConnect_user_id
+//   2) Synthetic email "tg{N}@goldenConnect.bot" → extract N → as tg_id
 //   3) Real email → gift_users.email directly (some GIFT users registered with email)
 function extractTgIdFromSyntheticEmail(email: string | null): number | null {
   if (!email) return null;
-  const m = email.match(/^tg(\d+)@golden-connect\.bot$/);
+  const m = email.match(/^tg(\d+)@goldenConnect\.bot$/);
   return m ? Number(m[1]) : null;
 }
 
@@ -79,7 +79,7 @@ async function findPrimaryGift(email: string | null, tgId: number | null) {
     const rows = await db.execute(sql`
       SELECT gu.id, gu.gc_user_id, gu.telegram_chat_id, gu.telegram_username,
              gu.email, gu.name, gu.surname, gu.role, gu.depth, gu.lft, gu.rgt,
-             gu.main_user_id, gu.ref_id, gu.golden-connect_user_id
+             gu.main_user_id, gu.ref_id, gu.goldenConnect_user_id
       FROM gift_users gu
       WHERE gu.telegram_chat_id = ${String(tgId)}
       ORDER BY (gu.main_user_id IS NULL) DESC, gu.id
@@ -87,11 +87,11 @@ async function findPrimaryGift(email: string | null, tgId: number | null) {
     `);
     if (rows[0]) return rows[0] as any;
   }
-  if (email && !email.endsWith('@golden-connect.bot')) {
+  if (email && !email.endsWith('@goldenConnect.bot')) {
     const rows = await db.execute(sql`
       SELECT gu.id, gu.gc_user_id, gu.telegram_chat_id, gu.telegram_username,
              gu.email, gu.name, gu.surname, gu.role, gu.depth, gu.lft, gu.rgt,
-             gu.main_user_id, gu.ref_id, gu.golden-connect_user_id
+             gu.main_user_id, gu.ref_id, gu.goldenConnect_user_id
       FROM gift_users gu
       WHERE gu.email = ${email}
       ORDER BY gu.id
@@ -99,16 +99,16 @@ async function findPrimaryGift(email: string | null, tgId: number | null) {
     `);
     if (rows[0]) return rows[0] as any;
   }
-  // Post-unification fallback: every gift_user is linked to a golden-connect user
-  // (golden-connect_user_id). Resolve via users.tg_id → gift_users.golden-connect_user_id —
+  // Post-unification fallback: every gift_user is linked to a goldenConnect user
+  // (goldenConnect_user_id). Resolve via users.tg_id → gift_users.goldenConnect_user_id —
   // authoritative even when telegram_chat_id formatting differs.
   if (tgId) {
     const rows = await db.execute(sql`
       SELECT gu.id, gu.gc_user_id, gu.telegram_chat_id, gu.telegram_username,
              gu.email, gu.name, gu.surname, gu.role, gu.depth, gu.lft, gu.rgt,
-             gu.main_user_id, gu.ref_id, gu.golden-connect_user_id
+             gu.main_user_id, gu.ref_id, gu.goldenConnect_user_id
       FROM gift_users gu
-      JOIN users u ON u.id = gu.golden-connect_user_id
+      JOIN users u ON u.id = gu.goldenConnect_user_id
       WHERE u.tg_id = ${tgId} AND gu.main_user_id IS NULL
       ORDER BY gu.id
       LIMIT 1
@@ -136,7 +136,7 @@ async function resolveAccount(c: any) {
   const rows = await db.execute(sql`
     SELECT gu.id, gu.gc_user_id, gu.telegram_chat_id, gu.telegram_username,
            gu.email, gu.name, gu.surname, gu.role, gu.depth, gu.lft, gu.rgt,
-           gu.main_user_id, gu.ref_id, gu.golden-connect_user_id
+           gu.main_user_id, gu.ref_id, gu.goldenConnect_user_id
     FROM gift_users gu
     WHERE gu.id = ${accountId} AND (gu.id = ${mainId} OR gu.main_user_id = ${mainId})
     LIMIT 1
@@ -217,7 +217,7 @@ app.get('/internal/gift/balances', async (c) => {
     main_micro: (twoRows[0] as any)?.main_micro || '0',
     current_micro: (twoRows[0] as any)?.current_micro || '0',
   };
-  return c.json({ ok: true, gift_user_id: gu.id, linked_golden-connect: gu.golden-connect_user_id != null, two, balances: rows });
+  return c.json({ ok: true, gift_user_id: gu.id, linked_goldenConnect: gu.goldenConnect_user_id != null, two, balances: rows });
 });
 
 // Канонической строки баланса (после консолидации 0107 — одна на (user,type)).
@@ -241,8 +241,8 @@ app.post('/internal/gift/topup', async (c) => {
   const r = await resolveAccount(c);
   if (r.error) return c.json({ ok: false, reason: r.error }, (r.status || 400) as any);
   const gu = r.gu;
-  const golden-connectUserId = gu.golden-connect_user_id != null ? Number(gu.golden-connect_user_id) : null;
-  if (!golden-connectUserId) return c.json({ ok: false, reason: 'not_linked_to_golden-connect' }, 400);
+  const goldenConnectUserId = gu.goldenConnect_user_id != null ? Number(gu.goldenConnect_user_id) : null;
+  if (!goldenConnectUserId) return c.json({ ok: false, reason: 'not_linked_to_goldenConnect' }, 400);
   const body = await c.req.json().catch(() => ({}));
   const amountUsdt = Number(body.amount_usdt);
   let workingMicro: bigint, giftMicro: bigint;
@@ -254,17 +254,17 @@ app.post('/internal/gift/topup', async (c) => {
   try {
     await db.transaction(async (tx) => {
       // lock core user, verify working balance
-      const lock = await tx.execute(sql`SELECT id FROM users WHERE id = ${golden-connectUserId} FOR UPDATE`);
-      if (!lock[0]) throw new Error('golden-connect_user_not_found');
+      const lock = await tx.execute(sql`SELECT id FROM users WHERE id = ${goldenConnectUserId} FOR UPDATE`);
+      if (!lock[0]) throw new Error('goldenConnect_user_not_found');
       const wr = await tx.execute(sql`
-        SELECT COALESCE(SUM(amount_micro), 0)::bigint AS work FROM cash_ledger WHERE user_id = ${golden-connectUserId}
+        SELECT COALESCE(SUM(amount_micro), 0)::bigint AS work FROM cash_ledger WHERE user_id = ${goldenConnectUserId}
       `);
       const workBal = BigInt((wr[0] as any)?.work ?? 0);
       if (workBal < workingMicro) throw new Error('insufficient_working');
       // debit working
       await tx.execute(sql`
         INSERT INTO cash_ledger (user_id, kind, amount_micro, memo)
-        VALUES (${golden-connectUserId}, ${'gift_main_topup'}, ${-Number(workingMicro)}, ${'GIFT Основной пополнение'})
+        VALUES (${goldenConnectUserId}, ${'gift_main_topup'}, ${-Number(workingMicro)}, ${'GIFT Основной пополнение'})
       `);
       // credit GIFT Основной (balance + total)
       const rowId = await ensureGiftBalanceRow(tx, gu.id, BAL_MAIN);
@@ -273,8 +273,8 @@ app.post('/internal/gift/topup', async (c) => {
         WHERE id = ${rowId}
       `);
       await tx.execute(sql`
-        INSERT INTO gift_money_log (gift_user_id, golden-connect_user_id, kind, to_type, amount_micro, ref)
-        VALUES (${gu.id}, ${golden-connectUserId}, ${'topup'}, ${BAL_MAIN}, ${Number(giftMicro)}, ${'working->main'})
+        INSERT INTO gift_money_log (gift_user_id, goldenConnect_user_id, kind, to_type, amount_micro, ref)
+        VALUES (${gu.id}, ${goldenConnectUserId}, ${'topup'}, ${BAL_MAIN}, ${Number(giftMicro)}, ${'working->main'})
       `);
     });
   } catch (e: any) {
@@ -310,8 +310,8 @@ app.post('/internal/gift/transfer', async (c) => {
       const toId = await ensureGiftBalanceRow(tx, gu.id, toType);
       await tx.execute(sql`UPDATE gift_balances SET balance = balance + ${Number(giftMicro)}, updated_at = NOW() WHERE id = ${toId}`);
       await tx.execute(sql`
-        INSERT INTO gift_money_log (gift_user_id, golden-connect_user_id, kind, from_type, to_type, amount_micro, ref)
-        VALUES (${gu.id}, ${gu.golden-connect_user_id ?? null}, ${'transfer'}, ${fromType}, ${toType}, ${Number(giftMicro)}, ${direction})
+        INSERT INTO gift_money_log (gift_user_id, goldenConnect_user_id, kind, from_type, to_type, amount_micro, ref)
+        VALUES (${gu.id}, ${gu.goldenConnect_user_id ?? null}, ${'transfer'}, ${fromType}, ${toType}, ${Number(giftMicro)}, ${direction})
       `);
     });
   } catch (e: any) {
@@ -347,14 +347,14 @@ app.post('/internal/gift/withdraw', async (c) => {
       if (bal < giftMicro) throw new Error('insufficient_balance');
       await tx.execute(sql`UPDATE gift_balances SET balance = balance - ${Number(giftMicro)}, updated_at = NOW() WHERE id = ${rowId}`);
       const ins = await tx.execute(sql`
-        INSERT INTO gift_withdrawals (gift_user_id, golden-connect_user_id, amount_micro, address, network, status)
-        VALUES (${gu.id}, ${gu.golden-connect_user_id ?? null}, ${Number(giftMicro)}, ${address}, ${network}, ${'pending'})
+        INSERT INTO gift_withdrawals (gift_user_id, goldenConnect_user_id, amount_micro, address, network, status)
+        VALUES (${gu.id}, ${gu.goldenConnect_user_id ?? null}, ${Number(giftMicro)}, ${address}, ${network}, ${'pending'})
         RETURNING id
       `);
       requestId = Number((ins[0] as any).id);
       await tx.execute(sql`
-        INSERT INTO gift_money_log (gift_user_id, golden-connect_user_id, kind, from_type, amount_micro, ref)
-        VALUES (${gu.id}, ${gu.golden-connect_user_id ?? null}, ${'withdraw_hold'}, ${BAL_CURRENT}, ${Number(giftMicro)}, ${'wd#' + requestId})
+        INSERT INTO gift_money_log (gift_user_id, goldenConnect_user_id, kind, from_type, amount_micro, ref)
+        VALUES (${gu.id}, ${gu.goldenConnect_user_id ?? null}, ${'withdraw_hold'}, ${BAL_CURRENT}, ${Number(giftMicro)}, ${'wd#' + requestId})
       `);
     });
   } catch (e: any) {

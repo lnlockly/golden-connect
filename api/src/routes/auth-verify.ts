@@ -28,7 +28,7 @@ async function sendVerifyEmail(to: string, link: string): Promise<boolean> {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: env.emailFrom || 'Golden Connect <no-reply@golden-connect.to>',
+        from: env.emailFrom || 'Golden Connect <no-reply@goldenConnect.to>',
         to: [to],
         subject: 'Подтверждение email — Golden Connect',
         html:
@@ -69,7 +69,7 @@ app.post('/auth/send-verify', requireAuth, verifyLimiter, async (c) => {
     .set({ emailVerifyToken: token, emailVerifySentAt: new Date() })
     .where(eq(credentials.userId, session.id));
 
-  const base = env.appPublicUrl || 'https://api.golden-connect.to';
+  const base = env.appPublicUrl || 'https://api.goldenConnect.to';
   const link = base + '/auth/verify?token=' + encodeURIComponent(token);
   const sent = await sendVerifyEmail(cred.email, link);
 
@@ -99,7 +99,7 @@ app.get('/auth/verify', async (c) => {
     .set({ emailVerified: true, emailVerifiedAt: new Date(), emailVerifyToken: null })
     .where(eq(credentials.id, cred.id));
 
-  const landingOrigin = (env.allowedOrigins?.split(',')[0] || 'https://golden-connect.to').trim();
+  const landingOrigin = (env.allowedOrigins?.split(',')[0] || 'https://goldenConnect.to').trim();
   return c.redirect(landingOrigin + '/cabinet?verified=1', 302);
 });
 

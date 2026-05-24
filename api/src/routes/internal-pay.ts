@@ -22,7 +22,7 @@ import { env } from '../services/env.js';
  *
  * The cabinet service runs under a different stack and has its own user pool;
  * however, payment infra (CryptoBot + Platega + BSC + bookings ledger) lives
- * here in the golden-connect-api Hono service and must stay the single source of
+ * here in the goldenConnect-api Hono service and must stay the single source of
  * truth for money movements.
  *
  * This endpoint lets the cabinet create an invoice on behalf of a user by
@@ -32,7 +32,7 @@ import { env } from '../services/env.js';
  *      /me/book.
  *   3. Returns the pay_url for the cabinet to surface to the browser.
  *
- * Auth: x-golden-connect-secret header (same INTERNAL_API_SECRET as all /internal/*).
+ * Auth: x-goldenConnect-secret header (same INTERNAL_API_SECRET as all /internal/*).
  */
 
 const app = new Hono();

@@ -18,10 +18,10 @@
  *     PATCH  /api/partners/:id
  *     DELETE /api/partners/:id     (soft delete: status='REJECTED')
  *
- *   Internal (x-golden-connect-secret):
+ *   Internal (x-goldenConnect-secret):
  *     POST   /internal/partners/admin-create
  *
- * Admin gate: there's no `users.is_admin` column in golden-connect-api, so we
+ * Admin gate: there's no `users.is_admin` column in goldenConnect-api, so we
  * authorise the same way other admin routes (events.ts, monitor.ts) do
  * — by matching `ADMIN_REF_CODE` on the user OR by membership in
  * `env.adminTgIds` / `ADMIN_USER_IDS`. `ADMIN_USER_IDS` is honoured per
@@ -503,7 +503,7 @@ app.post('/internal/partners/admin-create', async (c) => {
 // ─────────────────────────────────────────────────────────────
 // [internal-mirrors-2026-05-16] internal endpoints for cabinet proxy.
 // Cabinet has the user session; api gets the user identity via
-// ?email= (synthetic tg<id>@golden-connect.bot for TG-only users) or ?user_id=.
+// ?email= (synthetic tg<id>@goldenConnect.bot for TG-only users) or ?user_id=.
 // Internal endpoints already protected by requireInternalSecret at line ~442.
 // ─────────────────────────────────────────────────────────────
 
@@ -516,7 +516,7 @@ async function resolveUserFromQuery(c: any): Promise<{ id: number } | null> {
   }
   const email = String(queryParams.email || '').trim().toLowerCase();
   if (email) {
-    const m = email.match(/^tg(\d+)@golden-connect\.bot$/);
+    const m = email.match(/^tg(\d+)@goldenConnect\.bot$/);
     if (m) {
       const r = (await db.execute(sql`SELECT id FROM users WHERE tg_id = ${Number(m[1])} LIMIT 1`)) as any[];
       if (r[0]?.id) return { id: Number(r[0].id) };
@@ -535,7 +535,7 @@ async function resolveUserFromBody(c: any): Promise<{ id: number } | null> {
   }
   const email = String(body.email || '').trim().toLowerCase();
   if (email) {
-    const m = email.match(/^tg(\d+)@golden-connect\.bot$/);
+    const m = email.match(/^tg(\d+)@goldenConnect\.bot$/);
     if (m) {
       const r = (await db.execute(sql`SELECT id FROM users WHERE tg_id = ${Number(m[1])} LIMIT 1`)) as any[];
       if (r[0]?.id) return { id: Number(r[0].id) };

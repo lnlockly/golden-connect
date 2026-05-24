@@ -18,11 +18,11 @@ const KARMA_INITIAL = 100;
 // Karma proxy: api /internal/karma/award (fire-and-forget)
 function _karmaAward(webUser, kind, sourceId, memo) {
   if (!webUser) return;
-  const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://golden-connect-api:4001';
+  const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://goldenConnect-api:4001';
   const apiSecret = process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET;
   if (!apiSecret) return;
   const tgId = webUser.telegramUserId || webUser.telegram_user_id;
-  const email = webUser.email || (tgId ? 'tg' + tgId + '@golden-connect.bot' : null);
+  const email = webUser.email || (tgId ? 'tg' + tgId + '@goldenConnect.bot' : null);
   if (!email) return;
   const data = JSON.stringify({ email: email, kind: kind, source_id: sourceId || null, memo: memo || null });
   const httpMod = apiBase.startsWith('https') ? require('https') : require('http');
@@ -35,7 +35,7 @@ function _karmaAward(webUser, kind, sourceId, memo) {
       headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(data),
-        'x-golden-connect-secret': apiSecret,
+        'x-goldenConnect-secret': apiSecret,
       },
       timeout: 5000,
     }, function (res) { res.resume(); });

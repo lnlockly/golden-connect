@@ -196,7 +196,7 @@ app.post('/me/promo/ai-post', async (c) => {
     '- Живой, дружелюбный тон\n' +
     '- Призыв к действию с реф-ссылкой (используй плейсхолдер {link} — его ' +
     'подставит кабинет)\n' +
-    '- 2-3 релевантных хэштега в конце (например #golden-connect #заработок #реклама)\n' +
+    '- 2-3 релевантных хэштега в конце (например #goldenConnect #заработок #реклама)\n' +
     '- На русском языке, если пользователь не указал иначе\n\n' +
     'Запрещено: темы здоровья, wellness, БАДов, медицины, обещания доходов в ' +
     'процентах/суммах, «гарантированный заработок», финансовые прогнозы. ' +
@@ -330,7 +330,7 @@ app.get('/admin/promo/templates', async (c) => {
 /* -------------------- internal admin shortcuts (bot wizards) --------------------
  *
  * The bot has no user JWT — it authenticates with the shared
- * `x-golden-connect-secret` header. The bot side already verifies the caller is
+ * `x-goldenConnect-secret` header. The bot side already verifies the caller is
  * in `ADMIN_TG_IDS` before invoking these, so the secret-only guard is
  * sufficient: there's no public surface for these routes.
  */

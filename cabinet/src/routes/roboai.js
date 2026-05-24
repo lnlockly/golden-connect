@@ -6,8 +6,8 @@
  * - Proxies all sub-paths to ROBOAI_ENGINE_URL (defaults to in-cluster service).
  * - JWT payload: { sub: webUser.id, scope: 'roboai',
  *                  email: webUser.email, tg_id: webUser.telegramUserId }
- *   roboai-engine resolves golden-connect-api users.id from email or tg_id (uses the
- *   same resolveUserId pattern as golden-connect-api/internal-finance.ts).
+ *   roboai-engine resolves goldenConnect-api users.id from email or tg_id (uses the
+ *   same resolveUserId pattern as goldenConnect-api/internal-finance.ts).
  */
 const express = require('express');
 const _tgMw = require('../middleware/tg-initdata');
@@ -15,7 +15,7 @@ const jwt = require('jsonwebtoken');
 
 const ROBOAI_ENGINE_URL =
   process.env.ROBOAI_ENGINE_URL ||
-  'http://roboai-engine.golden-connect.svc.cluster.local:3001';
+  'http://roboai-engine.goldenConnect.svc.cluster.local:3001';
 const ROBOAI_JWT_SECRET = process.env.ROBOAI_JWT_SECRET;
 const JWT_TTL_SECONDS = 15 * 60; // 15 min
 

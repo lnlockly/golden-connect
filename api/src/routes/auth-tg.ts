@@ -51,7 +51,7 @@ const verifySchema = z.object({
  * client polls /auth/tg-login-claim to swap token → JWT.
  */
 app.post('/auth/tg-link-verify', async (c) => {
-  const secret = c.req.header('x-golden-connect-secret') ?? '';
+  const secret = c.req.header('x-goldenConnect-secret') ?? '';
   if (!env.internalSecret || !safeEqual(secret, env.internalSecret)) {
     return c.json({ ok: false, error: 'forbidden' }, 403);
   }

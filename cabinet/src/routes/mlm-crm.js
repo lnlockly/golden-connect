@@ -429,7 +429,7 @@ router.post('/contacts/:username/send-via-bot', express.json(), async (req, res)
   if (!c?.contacts?.telegram) return res.status(400).json({ ok: false, reason: 'no_telegram_link' });
   // Forward request to bot (internal endpoint)
   try {
-    const r = await fetch('http://golden-connect-bot:3000/internal/send-business', {
+    const r = await fetch('http://goldenConnect-bot:3000/internal/send-business', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'X-Internal-Secret': process.env.INTERNAL_API_SECRET || '' },
       body: JSON.stringify({

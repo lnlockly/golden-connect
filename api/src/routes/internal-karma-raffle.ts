@@ -4,7 +4,7 @@
  *   POST /internal/karma-raffle/skip/:id  — skip current week (carry karma)
  *   GET  /internal/karma-raffle/pending   — list pending_admin raffles (for bot UI)
  *
- * Auth: x-golden-connect-secret header (cabinet → api).
+ * Auth: x-goldenConnect-secret header (cabinet → api).
  */
 
 import { Hono } from 'hono';

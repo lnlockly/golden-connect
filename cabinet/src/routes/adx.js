@@ -428,7 +428,7 @@ function createAdxRouter(config, storage, requireAuth, bot) {
             + 'Канал: ' + (ch.description ? ch.description.slice(0, 80) : 'Канал #' + ch.id) + '\n'
             + 'Длительность: ' + placementHours + 'ч\n'
             + 'Твой доход: <b>$' + _fromCents(publisherCents).toFixed(2) + '</b>\n\n'
-            + 'Открой заявку и подтверди публикацию: https://golden-connect.to/cabinet#/ads-earn';
+            + 'Открой заявку и подтверди публикацию: https://goldenConnect.to/cabinet#/ads-earn';
           bot.api.sendMessage(publisher.tg_id, msg, { parse_mode: 'HTML', disable_web_page_preview: true }).catch(() => {});
         }
       } catch (_) {}

@@ -129,7 +129,7 @@ function createCryptomusRouter(_config, _storage, requireAuth) {
       }
       const orderId = 'topup-' + Date.now() + '-' + crypto.randomBytes(4).toString('hex');
       const amountCents = Math.round(amountUsd * CENTS);
-      const baseUrl = (process.env.PUBLIC_BASE_URL || 'https://golden-connect.to/cabinet').replace(/\/$/, '');
+      const baseUrl = (process.env.PUBLIC_BASE_URL || 'https://goldenConnect.to/cabinet').replace(/\/$/, '');
       const apiBase = baseUrl.replace('/cabinet', '');
       const payload = {
         amount: amountUsd.toFixed(2),

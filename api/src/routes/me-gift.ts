@@ -5,7 +5,7 @@
  * Golden Connect as a sub-menu. All GiftClub balances, statuses, and referral
  * structure are stored in `gift_*` tables (see migration 0102_gift_club_migration.sql).
  *
- * Linking: gift_users.golden-connect_user_id → public.users.id (where TG chat_id matches).
+ * Linking: gift_users.goldenConnect_user_id → public.users.id (where TG chat_id matches).
  * For multi-accounts (Vitaliy has 20+), each gift_users row is a separate
  * "switchable account" linked via main_user_id.
  */
@@ -20,13 +20,13 @@ app.use('/me/gift/*', requireAuth);
 
 // Helper: find primary gift_users row for the authenticated user.
 // Returns null if user has no linked GIFT account.
-async function findGiftPrimary(golden-connectUserId: number) {
+async function findGiftPrimary(goldenConnectUserId: number) {
   const rows = await db.execute(sql`
     SELECT gu.id, gu.gc_user_id, gu.telegram_chat_id, gu.telegram_username,
            gu.email, gu.name, gu.surname, gu.role, gu.depth, gu.lft, gu.rgt,
            gu.main_user_id, gu.ref_id
     FROM gift_users gu
-    WHERE gu.golden-connect_user_id = ${golden-connectUserId}
+    WHERE gu.goldenConnect_user_id = ${goldenConnectUserId}
     ORDER BY gu.id
     LIMIT 1
   `);

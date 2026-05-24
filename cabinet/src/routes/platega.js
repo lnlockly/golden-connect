@@ -6,7 +6,7 @@ const dbModule = require('../planner/db/database');
 const https = require('https');
 const { invalidatePlan: _invPlan } = require('../helpers/usage-limits');
 
-const PUBLIC_BASE = (process.env.PUBLIC_BASE || 'https://golden-connect.to').replace(/\/$/, '');
+const PUBLIC_BASE = (process.env.PUBLIC_BASE || 'https://goldenConnect.to').replace(/\/$/, '');
 
 function _bridgePlannerUser(rawDb, wu) {
   if (!wu) return null;
@@ -112,12 +112,12 @@ function createPlategaRouter(_config, _storage, requireAuth) {
 
 // Webhook: verify X-MerchantId+X-Secret headers, dispatch by Payload prefix.
 // If invoice not found locally and starts with "entry:" or anything non-cabinet,
-// forward the body+headers to https://api.golden-connect.to/webhooks/platega.
+// forward the body+headers to https://api.goldenConnect.to/webhooks/platega.
 function _forwardToApi(body, headers) {
   return new Promise((resolve) => {
     const data = JSON.stringify(body);
     const req = https.request({
-      method: 'POST', hostname: 'api.golden-connect.to', path: '/webhooks/platega', port: 443,
+      method: 'POST', hostname: 'api.goldenConnect.to', path: '/webhooks/platega', port: 443,
       headers: {
         'Content-Type': 'application/json',
         'Content-Length': Buffer.byteLength(data),
@@ -159,7 +159,7 @@ function createWebhookRouter() {
       if (!inv && txId) inv = rawDb.prepare('SELECT * FROM platega_invoices WHERE invoice_id = ?').get(String(txId));
 
       if (!inv) {
-        // Not ours → forward to golden-connect-api
+        // Not ours → forward to goldenConnect-api
         const fwd = await _forwardToApi(body, headers);
         console.log('[platega-webhook] forwarded to api:', fwd.status);
         return res.json({ ok: true });

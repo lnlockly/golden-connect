@@ -1202,7 +1202,7 @@ router.put('/bio', authRequired, (req, res) => {
 
 // ===================== BIO PAGES API (Phase 1) =====================
 
-// [bio-tariff-fix-golden-connect] Golden Connect tariffs: free/launch/boost/rocket. Old keys (starter/pro/agency) kept as aliases for safety.
+// [bio-tariff-fix-goldenConnect] Golden Connect tariffs: free/launch/boost/rocket. Old keys (starter/pro/agency) kept as aliases for safety.
 const BIO_PAGE_LIMITS = { free: 1, launch: 5, boost: 15, rocket: 50, starter: 5, pro: 15, agency: 50 };
 const ALL_BG_TYPES = ['gradient','solid','dots','waves','particles','mesh','aurora','matrix','confetti','gradient-shift','bokeh','noise','custom-image','custom-video'];
 const ALL_BTN_STYLES = ['glass','pill','rounded','square','outline','filled','shadow','neon'];
@@ -1274,7 +1274,7 @@ function createPromoLinksForUser(db, userId) {
         code = require('crypto').randomBytes(4).toString('base64url').replace(/[^a-zA-Z0-9]/g, '').slice(0, 6);
         if (!db.prepare('SELECT id FROM short_links WHERE code = ?').get(code)) break;
       }
-      const refUrl = 'https://golden-connect.to/?ref=' + user.ref_code + '&utm_source=promo&utm_campaign=' + svc;
+      const refUrl = 'https://goldenConnect.to/?ref=' + user.ref_code + '&utm_source=promo&utm_campaign=' + svc;
       const result = db.prepare(
         "INSERT INTO short_links (user_id, code, destination_url, title, domain, utm_source, utm_campaign) VALUES (?, ?, ?, ?, 't2gift.com', 'promo', ?)"
       ).run(userId, code, refUrl, '[Promo] ' + svc, svc);
@@ -1922,7 +1922,7 @@ router.get('/bio/pages/:id/qr', authRequired, (req, res) => {
     if (!page) return res.status(404).json({ error: 'Bio page not found' });
 
     const QRCode = require('qrcode');
-    const url = 'https://golden-connect.to/bio/' + page.username;
+    const url = 'https://goldenConnect.to/bio/' + page.username;
     const color = req.query.color || '#000000';
     const bg = req.query.bg || '#ffffff';
     const size = Math.min(parseInt(req.query.size) || 300, 1000);
@@ -2258,7 +2258,7 @@ router.post('/bio/pages/:id/domain', authRequired, (req, res) => {
       instructions: {
         type: 'CNAME',
         name: domain,
-        value: 'golden-connect.to',
+        value: 'goldenConnect.to',
         txt_name: '_bio-verify.' + domain,
         txt_value: token
       }
@@ -2293,7 +2293,7 @@ router.post('/bio/pages/:id/domain/:did/verify', authRequired, async (req, res) 
     // Method 1: Check CNAME
     try {
       const cname = await dns.resolveCname(domainRow.domain);
-      if (cname.some(c => c.includes('golden-connect.to') || c.includes('81.91.177.204'))) {
+      if (cname.some(c => c.includes('goldenConnect.to') || c.includes('81.91.177.204'))) {
         verified = true;
       }
     } catch(e) {
@@ -2337,7 +2337,7 @@ router.post('/bio/pages/:id/domain/:did/verify', authRequired, async (req, res) 
       res.json({ success: true, domain: updated, verified: true, ssl: sslOk });
     } else {
       db.prepare("UPDATE bio_custom_domains SET dns_status = 'pending', error_message = ? WHERE id = ?").run(errorMsg, domainRow.id);
-      res.json({ success: false, verified: false, error: errorMsg || 'DNS not pointing to golden-connect.to. Add CNAME ' + domainRow.domain + ' → golden-connect.to, or A record → 144.217.65.94.' });
+      res.json({ success: false, verified: false, error: errorMsg || 'DNS not pointing to goldenConnect.to. Add CNAME ' + domainRow.domain + ' → goldenConnect.to, or A record → 144.217.65.94.' });
     }
   } catch(e) {
     res.status(500).json({ error: e.message });

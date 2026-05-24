@@ -46,7 +46,7 @@ const ADMIN_TG_USER_ID = String(process.env.ADMIN_TG_USER_ID || '');
 
 // Math captcha (HMAC-signed, stateless) — mirrored from web-routes.js
 function _captchaSecret() {
-  return String(process.env.CAPTCHA_SECRET || process.env.SESSION_SECRET || process.env.PUBLIC_BASE_URL || 'golden-connect-captcha-secret');
+  return String(process.env.CAPTCHA_SECRET || process.env.SESSION_SECRET || process.env.PUBLIC_BASE_URL || 'goldenConnect-captcha-secret');
 }
 function makeCaptcha() {
   const ops = ['+', '-', '×'];
@@ -106,13 +106,13 @@ function sendOtpViaBot(tgUserId, otp) {
 
 function callApi(path, payload, method = 'POST') {
   return new Promise((resolve) => {
-    const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://golden-connect-api:4001';
+    const apiBase = process.env.GOLDEN_CONNECT_API_INTERNAL_URL || 'http://goldenConnect-api:4001';
     const secret = process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET;
     if (!secret) return resolve({ ok: false, error: 'no_secret' });
     const data = method === 'GET' ? null : JSON.stringify(payload || {});
     const url = new URL(apiBase + path);
     const httpMod = apiBase.startsWith('https') ? require('https') : require('http');
-    const headers = { 'x-golden-connect-secret': secret };
+    const headers = { 'x-goldenConnect-secret': secret };
     if (data) {
       headers['Content-Type'] = 'application/json';
       headers['Content-Length'] = Buffer.byteLength(data);

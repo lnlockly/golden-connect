@@ -35,7 +35,7 @@ describe('POST /internal/entries (auth)', () => {
     const app = await buildApp();
     const res = await app.request('/internal/entries', {
       method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-golden-connect-secret': 'nope' },
+      headers: { 'content-type': 'application/json', 'x-goldenConnect-secret': 'nope' },
       body: JSON.stringify({ user_id: 1, tariff_id: 1 }),
     });
     expect(res.status).toBe(401);
@@ -45,7 +45,7 @@ describe('POST /internal/entries (auth)', () => {
     const app = await buildApp();
     const res = await app.request('/internal/entries', {
       method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-golden-connect-secret': SECRET },
+      headers: { 'content-type': 'application/json', 'x-goldenConnect-secret': SECRET },
       body: '{not-json',
     });
     expect(res.status).toBe(400);
@@ -55,7 +55,7 @@ describe('POST /internal/entries (auth)', () => {
     const app = await buildApp();
     const res = await app.request('/internal/entries', {
       method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-golden-connect-secret': SECRET },
+      headers: { 'content-type': 'application/json', 'x-goldenConnect-secret': SECRET },
       body: JSON.stringify({ tariff_id: 1 }),
     });
     expect(res.status).toBe(400);
@@ -108,7 +108,7 @@ describe.skipIf(!TEST_URL)('POST /internal/entries (integration)', () => {
     const app = await buildApp();
     const res = await app.request('/internal/entries', {
       method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-golden-connect-secret': SECRET },
+      headers: { 'content-type': 'application/json', 'x-goldenConnect-secret': SECRET },
       body: JSON.stringify({
         user_id: payer!.id,
         tariff_id: tariff!.id,
@@ -138,7 +138,7 @@ describe.skipIf(!TEST_URL)('POST /internal/entries (integration)', () => {
     const app = await buildApp();
     const res = await app.request('/internal/entries', {
       method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-golden-connect-secret': SECRET },
+      headers: { 'content-type': 'application/json', 'x-goldenConnect-secret': SECRET },
       body: JSON.stringify({ user_id: user!.id, tariff_id: 999_999 }),
     });
     expect(res.status).toBe(500);
