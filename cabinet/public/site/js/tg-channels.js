@@ -49,7 +49,7 @@
       html += '<div style="background:rgba(13,17,36,.6);border:1px dashed rgba(255,255,255,.15);border-radius:14px;padding:50px 24px;text-align:center;color:#9ca3af">' +
         '<div style="font-size:56px;margin-bottom:14px">📡</div>' +
         '<h3 style="color:#e8edf5;margin:0 0 10px">Каналов пока нет</h3>' +
-        '<p style="max-width:480px;margin:0 auto 20px;line-height:1.6;font-size:14px">Подключи свой Telegram-канал — он сразу станет доступен во всех инструментах. Добавь нашего бота <a href="https://t.me/Golden Connect_bizbot" target="_blank" style="color:#00D4FF">@Golden Connect_bizbot</a> в админы канала, потом нажми кнопку ниже.</p>' +
+        '<p style="max-width:480px;margin:0 auto 20px;line-height:1.6;font-size:14px">Подключи свой Telegram-канал — он сразу станет доступен во всех инструментах. Добавь нашего бота <a href="https://t.me/GoldenConnect_bizbot" target="_blank" style="color:#00D4FF">@GoldenConnect_bizbot</a> в админы канала, потом нажми кнопку ниже.</p>' +
         '<button class="cab-btn cab-btn-primary" onclick="window.TgCh.openAdd()">+ Подключить канал</button>' +
       '</div>';
       host.innerHTML = html;
@@ -114,7 +114,7 @@
       '<ol style="font-size:13px;color:var(--text-secondary,#9ca3af);line-height:1.8;padding-left:18px;margin:0 0 14px">' +
         '<li>Открой свой канал в Telegram</li>' +
         '<li>Зайди в настройки → Администраторы → Добавить администратора</li>' +
-        '<li>Найди бота <a href="https://t.me/Golden Connect_bizbot" target="_blank" style="color:#00D4FF">@Golden Connect_bizbot</a> и сделай его админом (право «Публиковать сообщения»)</li>' +
+        '<li>Найди бота <a href="https://t.me/GoldenConnect_bizbot" target="_blank" style="color:#00D4FF">@GoldenConnect_bizbot</a> и сделай его админом (право «Публиковать сообщения»)</li>' +
         '<li>Скопируй сюда @username канала или ID (вид <code style="color:#00D4FF">-100xxxxxx</code>)</li>' +
       '</ol>' +
       '<div class="form-row"><label class="cab-label">@username канала или ID</label><input class="cab-input" id="tgch-input" placeholder="@my_channel  или  -1001234567890"></div>' +

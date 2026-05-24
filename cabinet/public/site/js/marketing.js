@@ -322,7 +322,7 @@
       // [tariff-opts-no-tg] User registered email-only, no Telegram link → no api account yet.
       // Show a friendly prompt instead of trying to render an empty options grid.
       if (opts.user_state === 'no_api_account') {
-        toast(opts.hint || 'Привяжи Telegram чтобы открыть кошелёк и тарифы — /start у @Golden Connect_bizbot', true);
+        toast(opts.hint || 'Привяжи Telegram чтобы открыть кошелёк и тарифы — /start у @GoldenConnect_bizbot', true);
         return;
       }
     } catch (e) {

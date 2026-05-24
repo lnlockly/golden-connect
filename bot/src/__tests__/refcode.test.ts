@@ -44,8 +44,8 @@ test("refcode: parseStartPayload accepts ref_ prefix and raw digits", () => {
 test("refcode: invite + website links embed the tg_id-derived ref_code", () => {
   const code = refCodeForTgId(1361064246);
   assert.equal(
-    buildInviteLink("AIGolden Connect_bot", code),
-    "https://t.me/AIGolden Connect_bot?start=ref_1361064246",
+    buildInviteLink("AIGoldenConnect_bot", code),
+    "https://t.me/AIGoldenConnect_bot?start=ref_1361064246",
   );
   assert.equal(
     buildWebsiteLink("https://goldenConnect.website", code),

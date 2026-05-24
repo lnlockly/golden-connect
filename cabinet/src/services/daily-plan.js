@@ -113,7 +113,7 @@ async function generateDailyPlan({ profile, answers, day }) {
 Контекст Golden Connect:
 - Команды бота: /jobs (биржа подписок/задач/видео), /ref (реф-ссылка x2), /promo (готовые посты + AI), /tariffs, /balance, /coach
 - Тарифы: FREE / LAUNCH $45 (1 место, 12 уровней) / BOOST $90 (2 места) / ROCKET $135 (3 места + Matching Bonus)
-- Реф-ссылка на сайт: https://goldenConnect.to/?ref=КОД, на бот: https://t.me/Golden Connect_bizbot?start=ref_КОД
+- Реф-ссылка на сайт: https://goldenConnect.to/?ref=КОД, на бот: https://t.me/GoldenConnect_bizbot?start=ref_КОД
 
 Сгенерируй план на сегодня по правилам выше.`;
 
@@ -171,7 +171,7 @@ function _staticPlan(answers, profile) {
   const stage = _stage(answers, profile);
   if (stage === 'newbie') {
     return [
-      { title: 'Изучить главное меню бота за 10 мин', description: 'Открой @Golden Connect_bizbot → попробуй /tariffs, /jobs, /ref, /promo. Записывай что не понятно — спрошу AI-куратор. ПОЧЕМУ: ты должен знать инструменты прежде чем продавать.', time_min: 10, category: 'learning', priority: 1, suggested_time: '09:30' },
+      { title: 'Изучить главное меню бота за 10 мин', description: 'Открой @GoldenConnect_bizbot → попробуй /tariffs, /jobs, /ref, /promo. Записывай что не понятно — спрошу AI-куратор. ПОЧЕМУ: ты должен знать инструменты прежде чем продавать.', time_min: 10, category: 'learning', priority: 1, suggested_time: '09:30' },
       { title: 'Сделать 1 задание на бирже', description: '/jobs → "Подписки на каналы" → возьми любое задание $0.05. Поймёшь как платят и как работает биржа. ПОЧЕМУ: первый дофамин = первая мотивация.', time_min: 10, category: 'growth', priority: 1, suggested_time: '11:00' },
       { title: 'Скопировать 2 реф-ссылки', description: '/ref → сохрани обе: на сайт (https://goldenConnect.to/?ref=КОД) и на бота. На сайт лучше для тёплых, на бот — для холодных. ПОЧЕМУ: разные аудитории заходят разными путями.', time_min: 5, category: 'outreach', priority: 1, suggested_time: '13:00' },
       { title: 'DM 5 знакомым: "тестирую сервис, нужно мнение"', description: 'Личное сообщение 5 друзьям/коллегам. НЕ "регистрируйся", а "тестирую X, мне интересно твоё мнение, посмотришь?" ПОЧЕМУ: фрейм просьбы вместо продажи даёт x5 конверсию.', time_min: 25, category: 'outreach', priority: 2, suggested_time: '14:00' },

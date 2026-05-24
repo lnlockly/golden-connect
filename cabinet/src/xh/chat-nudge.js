@@ -51,7 +51,7 @@ const NUDGE_TEXTS = {
     '',
     'В <b>' + TARGET_CHAT + '</b> сейчас:',
     '• Топ-партнёры делятся работающими тактиками',
-    '• Бот ' + (process.env.BOT_USERNAME ? '@' + process.env.BOT_USERNAME : '@Golden Connect_bizbot') + ' там тоже работает: /summary, /poll, /remind',
+    '• Бот ' + (process.env.BOT_USERNAME ? '@' + process.env.BOT_USERNAME : '@GoldenConnect_bizbot') + ' там тоже работает: /summary, /poll, /remind',
     '• Анонимная поддержка — можно писать от имени группы',
     '',
     'Если не зайдёшь сейчас — буду напоминать раз в 2 недели мягко 😉',

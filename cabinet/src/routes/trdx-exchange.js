@@ -13,7 +13,7 @@
 const express = require('express');
 
 function createTrdxExchangeRoutes(deps) {
-  const { storage, callGolden ConnectApi, requireAuth, dbModule } = deps;
+  const { storage, callGoldenConnectApi, requireAuth, dbModule } = deps;
   const router = express.Router();
   const db = dbModule.getDb();
 
@@ -146,7 +146,7 @@ function createTrdxExchangeRoutes(deps) {
   async function getUsdWorking(email) {
     if (!email) return 0;
     try {
-      const d = await callGolden ConnectApi('/internal/finance/balances?email=' + encodeURIComponent(email));
+      const d = await callGoldenConnectApi('/internal/finance/balances?email=' + encodeURIComponent(email));
       return Number((d && d.balances && d.balances.working && d.balances.working.usd) || 0);
     } catch (_) { return 0; }
   }
@@ -323,7 +323,7 @@ function createTrdxExchangeRoutes(deps) {
       }
 
       try {
-        const apiRes = await callGolden ConnectApi('/internal/finance/exchange-execute', {
+        const apiRes = await callGoldenConnectApi('/internal/finance/exchange-execute', {
           buyer_email: buyerEmail,
           seller_email: sellerEmail,
           total_micro: Math.round(totalUsd * 1_000_000),

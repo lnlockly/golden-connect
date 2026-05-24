@@ -78,7 +78,7 @@ export async function askGroq(opts: GroqAiOpts): Promise<GroqAiResult> {
     return { error: "auth", status: 401, message: "no GROQ_KEYS configured" };
   }
 
-  const system = `${SYSTEM_BASE}\n\nUser language: ${opts.lang}. Min budget: $${opts.minBudget ?? 100}.\n\nYou are embedded inside the @Golden Connect_bizbot Telegram bot. Keep replies SHORT (1–3 sentences), plain text, no markdown glyphs.`;
+  const system = `${SYSTEM_BASE}\n\nUser language: ${opts.lang}. Min budget: $${opts.minBudget ?? 100}.\n\nYou are embedded inside the @GoldenConnect_bizbot Telegram bot. Keep replies SHORT (1–3 sentences), plain text, no markdown glyphs.`;
 
   const trimmed = opts.messages
     .filter(m => m.role === "user" || m.role === "assistant")

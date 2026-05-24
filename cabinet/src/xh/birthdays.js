@@ -452,14 +452,14 @@ function setupBirthdays(bot, storage, config) {
       lang: `Congratulation language: <b>${lang.toUpperCase()}</b> (auto from your TG language)`,
       biz: has
         ? '✅ Business Bot connected — congratulations can be sent from your account automatically.'
-        : '⚠️ Business Bot not connected.\nTo enable auto-sending: Settings → Telegram Business → Chatbots → @' + (ctx.me.username || 'Golden Connect_bizbot'),
+        : '⚠️ Business Bot not connected.\nTo enable auto-sending: Settings → Telegram Business → Chatbots → @' + (ctx.me.username || 'GoldenConnect_bizbot'),
       time: 'Morning ping: 09:00 MSK',
     } : {
       head: '⚙️ <b>Настройки</b>',
       lang: `Язык поздравлений: <b>${lang.toUpperCase()}</b> (автоматически по языку TG)`,
       biz: has
         ? '✅ Business Bot подключён — могу отправлять поздравления от твоего имени.'
-        : '⚠️ Business Bot не подключён.\nЧтобы включить авто-отправку: Настройки TG → Telegram Business → Чат-боты → @' + (ctx.me.username || 'Golden Connect_bizbot'),
+        : '⚠️ Business Bot не подключён.\nЧтобы включить авто-отправку: Настройки TG → Telegram Business → Чат-боты → @' + (ctx.me.username || 'GoldenConnect_bizbot'),
       time: 'Утренний пинг: 09:00 MSK',
     };
     await ctx.reply([T.head, '', T.lang, T.biz, T.time].join('\n'), { parse_mode: 'HTML' });

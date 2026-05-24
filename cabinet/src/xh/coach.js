@@ -89,7 +89,7 @@ function pickAdvice(state) {
         'Загляни в /cabinet — посмотришь что нового. На FREE доход <b>до $25/день</b>.',
       ].join('\n'),
       kb: new InlineKeyboard()
-        .url('🚀 Открыть кабинет', 'https://t.me/Golden Connect_bizbot?start=cab').row()
+        .url('🚀 Открыть кабинет', 'https://t.me/GoldenConnect_bizbot?start=cab').row()
         .text('✅ Сделал', 'coach_done').text('⏸ Пауза 30д', 'coach_pause'),
     };
   }

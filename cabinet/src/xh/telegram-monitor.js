@@ -449,7 +449,7 @@ function createTelegramMonitor({ bot, storage, config }) {
       '',
       'Сейчас бот может быть ограничен privacy mode. Для полноценного чтения всех сообщений в группе лучше отключить privacy через BotFather:',
       '1. Открыть BotFather',
-      '2. Выбрать @Golden Connect_bizbot',
+      '2. Выбрать @GoldenConnect_bizbot',
       '3. Команда /setprivacy',
       '4. Выключить privacy mode',
       '',

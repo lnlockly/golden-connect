@@ -267,7 +267,7 @@ export function buildBot(opts: BuildBotOpts): Bot<AppContext> {
     await onSessionCallback(fake as unknown as AppContext);
   });
 
-  // Inline mode — @Golden ConnectTGbot <query> in any chat surfaces matching
+  // Inline mode — @GoldenConnectTGbot <query> in any chat surfaces matching
   // contacts as inline-query results that can be shared into a chat.
   bot.on("inline_query", onCrmInlineQuery);
 

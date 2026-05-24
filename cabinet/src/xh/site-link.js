@@ -3,7 +3,7 @@
 // 1. /cabinet command + "🌐 Кабинет" reply button → magic auto-login link
 // 2. /start link_TOKEN → complete TG link from site
 //
-// Deep link format: t.me/Golden Connect_bizbot?start=link_<TOKEN>
+// Deep link format: t.me/GoldenConnect_bizbot?start=link_<TOKEN>
 
 const { InlineKeyboard } = require('grammy');
 

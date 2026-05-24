@@ -138,7 +138,7 @@
   }
 
   // Public API
-  window.Golden ConnectI18n = {
+  window.GoldenConnectI18n = {
     supported: SUPPORTED,
     default: DEFAULT,
     setLang: setLang,

@@ -882,7 +882,7 @@ function syncAuthCapabilities() {
   if (button) button.hidden = !botEnabled;
   setTelegramHint(
     botEnabled
-      ? `Быстрый вход доступен через @${botUsername || 'Golden Connect_bizbot'}.`
+      ? `Быстрый вход доступен через @${botUsername || 'GoldenConnect_bizbot'}.`
       : 'Вход через Telegram сейчас недоступен.',
   );
 }

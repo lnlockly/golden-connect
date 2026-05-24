@@ -792,7 +792,7 @@ function setupAds(bot, deps) {
     await ctx.reply(
       `📝 <b>Новая кампания: задание с отчётом</b>\n\n` +
       `Шаг 1/6 — Опиши <b>что нужно сделать</b> исполнителю:\n\n` +
-      `<i>Например: «Оставь комментарий под нашим постом про здоровье в @Golden ConnectNews и поставь 🔥»</i>`,
+      `<i>Например: «Оставь комментарий под нашим постом про здоровье в @GoldenConnectNews и поставь 🔥»</i>`,
       { parse_mode: 'HTML', reply_markup: new InlineKeyboard().text('❌ Отмена', 'adv_sub_cancel') }
     );
   });

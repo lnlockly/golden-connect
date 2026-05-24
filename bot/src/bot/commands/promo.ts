@@ -177,12 +177,12 @@ export function registerPromo(promoRepo: PromoRepo): {
       } catch { /* ignore */ }
     } else if (action === 'qr') {
       const refCode = (ctx as { refCode?: string }).refCode || '';
-      const link = buildInviteLink(process.env.BOT_USERNAME || 'Golden Connect_bizbot', refCode);
+      const link = buildInviteLink(process.env.BOT_USERNAME || 'GoldenConnect_bizbot', refCode);
       await ctx.answerCallbackQuery({ text: 'QR: ' + link, show_alert: true });
       return;
     } else if (action === 'ref') {
       const refCode = (ctx as { refCode?: string }).refCode || '';
-      const link = buildInviteLink(process.env.BOT_USERNAME || 'Golden Connect_bizbot', refCode);
+      const link = buildInviteLink(process.env.BOT_USERNAME || 'GoldenConnect_bizbot', refCode);
       const site = buildWebsiteLink(process.env.WEBSITE_URL || 'https://goldenConnect.to', refCode);
       const txt = '🔗 <b>Твоя реф-ссылка</b>\n\n<b>Бот:</b> <code>' + link + '</code>\n<b>Сайт:</b> <code>' + site + '</code>\n\n<i>Делись — получай 10% L1 + до 33% по 10 уровням (зависит от тарифа).</i>';
       await ctx.editMessageText(txt, { parse_mode: 'HTML', reply_markup: new InlineKeyboard().text(ts('reklama.btn_back', lang), 'reklama:promo') });

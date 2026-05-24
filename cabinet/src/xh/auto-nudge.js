@@ -46,7 +46,7 @@ async function _ensureTodaysMessage() {
 }
 
 function _buildKeyboard(botUsername) {
-  const u = botUsername || 'Golden Connect_bizbot';
+  const u = botUsername || 'GoldenConnect_bizbot';
   return new InlineKeyboard()
     .url('🌐 Открыть кабинет', 'https://t.me/' + u + '?start=cab').row()
     .url('💎 Genesis TRDX', 'https://t.me/' + u + '?start=trdx')

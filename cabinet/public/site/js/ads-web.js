@@ -184,7 +184,7 @@
               '<div class="ads-market-reward">' + usd(c.reward_cents) + '</div>' +
             '</div>' +
             '<div class="ads-market-meta">📊 ' + remaining + ' / ' + c.target_count + ' мест</div>' +
-            '<a class="ads-btn ads-btn-primary ads-market-cta" href="https://t.me/Golden Connect_bizbot?start=task_' + c.id + '" target="_blank">📝 Взять в боте</a>' +
+            '<a class="ads-btn ads-btn-primary ads-market-cta" href="https://t.me/GoldenConnect_bizbot?start=task_' + c.id + '" target="_blank">📝 Взять в боте</a>' +
           '</div>'
         );
       }
@@ -201,7 +201,7 @@
               '<div class="ads-market-reward">' + usd(c.reward_cents) + '</div>' +
             '</div>' +
             '<div class="ads-market-meta">📊 ' + remaining + ' / ' + c.target_count + ' просмотров</div>' +
-            '<a class="ads-btn ads-btn-primary ads-market-cta" href="https://t.me/Golden Connect_bizbot?start=video_' + c.id + '" target="_blank">🎬 Смотреть в боте</a>' +
+            '<a class="ads-btn ads-btn-primary ads-market-cta" href="https://t.me/GoldenConnect_bizbot?start=video_' + c.id + '" target="_blank">🎬 Смотреть в боте</a>' +
           '</div>'
         );
       }
@@ -218,7 +218,7 @@
           '</div>' +
           '<div class="ads-market-meta">📊 ' + remaining + ' / ' + c.target_count + ' мест осталось</div>' +
           '<a class="ads-btn ads-btn-primary ads-market-cta" target="_blank" rel="noopener" href="' + esc(c.invite_link || ('https://t.me/' + String(c.channel_username || '').replace(/^@/,''))) + '">🔗 Подписаться через бота</a>' +
-          '<div class="ads-market-hint">Возьми задание в @Golden Connect_bizbot — там автозачисление награды через 1-2 сек после подписки.</div>' +
+          '<div class="ads-market-hint">Возьми задание в @GoldenConnect_bizbot — там автозачисление награды через 1-2 сек после подписки.</div>' +
         '</div>'
       );
     }).join('');
@@ -279,7 +279,7 @@
           '<div class="ads-field">' +
             '<label>1. Канал</label>' +
             '<input name="channel" placeholder="@my_channel или ID канала (-100…)" required autocomplete="off">' +
-            '<div class="ads-hint">Перед запуском <b>добавь @<span id="adsBotUser">Golden Connect_bizbot</span> админом</b> в канал (право «Управление сообщениями»).</div>' +
+            '<div class="ads-hint">Перед запуском <b>добавь @<span id="adsBotUser">GoldenConnect_bizbot</span> админом</b> в канал (право «Управление сообщениями»).</div>' +
             '<button type="button" class="ads-btn ads-btn-ghost" id="adsPreviewBtn" style="margin-top:8px">🔍 Проверить канал</button>' +
             '<div id="adsPreviewBox" style="margin-top:10px"></div>' +
           '</div>' +
@@ -345,7 +345,7 @@
     try {
       const d = await api('POST', '/channel-preview', { channel: ch });
       const ok = d.is_admin;
-      $('adsBotUser').textContent = d.bot_username || 'Golden Connect_bizbot';
+      $('adsBotUser').textContent = d.bot_username || 'GoldenConnect_bizbot';
       box.innerHTML =
         '<div class="ads-preview ' + (ok ? 'ads-preview--ok' : 'ads-preview--bad') + '">' +
           '<div><b>' + esc(d.title) + '</b>' + (d.username ? ' · @' + esc(d.username) : '') + '</div>' +
@@ -1026,7 +1026,7 @@
             ? '<a class="ads-btn ads-btn-ghost ads-earn-card-cta" href="#/ads-order">⚙️ Управлять</a>'
             : ((c.min_karma || 0) > (STATE.balances && STATE.balances.karma || 0))
             ? '<button class="ads-btn ads-btn-ghost ads-earn-card-cta" disabled style="opacity:.55;cursor:not-allowed">🔒 Карма ниже ' + c.min_karma + '</button>'
-            : '<a class="ads-btn ads-btn-primary ads-earn-card-cta" href="https://t.me/Golden Connect_bizbot?start=task_' + c.id + '" target="_blank">📝 Взять в боте</a>') +
+            : '<a class="ads-btn ads-btn-primary ads-earn-card-cta" href="https://t.me/GoldenConnect_bizbot?start=task_' + c.id + '" target="_blank">📝 Взять в боте</a>') +
         '</div>'
       );
     }
@@ -1042,11 +1042,11 @@
             ? '<a class="ads-btn ads-btn-ghost ads-earn-card-cta" href="#/ads-order">⚙️ Управлять</a>'
             : ((c.min_karma || 0) > (STATE.balances && STATE.balances.karma || 0))
             ? '<button class="ads-btn ads-btn-ghost ads-earn-card-cta" disabled style="opacity:.55;cursor:not-allowed">🔒 Карма ниже ' + c.min_karma + '</button>'
-            : '<a class="ads-btn ads-btn-primary ads-earn-card-cta" href="https://t.me/Golden Connect_bizbot?start=video_' + c.id + '" target="_blank">▶️ Смотреть в боте</a>') +
+            : '<a class="ads-btn ads-btn-primary ads-earn-card-cta" href="https://t.me/GoldenConnect_bizbot?start=video_' + c.id + '" target="_blank">▶️ Смотреть в боте</a>') +
         '</div>'
       );
     }
-    var subLink = c.invite_link || (c.channel_username ? 'https://t.me/' + String(c.channel_username).replace(/^@/, '') : 'https://t.me/Golden Connect_bizbot');
+    var subLink = c.invite_link || (c.channel_username ? 'https://t.me/' + String(c.channel_username).replace(/^@/, '') : 'https://t.me/GoldenConnect_bizbot');
     return (
       '<div class="ads-earn-card ads-earn-card--sub">' +
         '<div class="ads-earn-card-tag">📢 Канал' + karmaBadgeSub + '</div>' +
@@ -1054,7 +1054,7 @@
         '<div class="ads-earn-card-meta">' + (c.channel_username ? esc(c.channel_username) : '&nbsp;') + '</div>' +
         '<div class="ads-earn-card-row"><span class="ads-earn-card-reward">' + usd(c.reward_cents) + '</span><span class="ads-earn-card-left">' + remaining + ' мест</span></div>' +
         '<button class="ads-btn ads-btn-primary ads-earn-card-cta" data-sub-id="' + c.id + '" data-sub-link="' + esc(subLink) + '" onclick="window.AdsWeb.subscribeOnSite(' + c.id + ', this)">📢 Подписаться</button>' +
-        '<div style="font-size:11px;color:rgba(255,255,255,.50);margin-top:6px;text-align:center">Возьми задание в @Golden Connect_bizbot — авто-зачёт через 1-2 сек.</div>' +
+        '<div style="font-size:11px;color:rgba(255,255,255,.50);margin-top:6px;text-align:center">Возьми задание в @GoldenConnect_bizbot — авто-зачёт через 1-2 сек.</div>' +
       '</div>'
     );
   }

@@ -127,7 +127,7 @@ function createRoboaiRouter(_config, _storage, requireAuth) {
   });
 
   // Accept TG WebApp initData OR internal impersonation BEFORE requireAuth, so users
-  // opening cabinet from @Golden ConnectCRMBot don't need a cabinet session cookie.
+  // opening cabinet from @GoldenConnectCRMBot don't need a cabinet session cookie.
   router.use(_tgMw.tgInitData);
   router.use(_tgMw.internalImpersonate);
   // All /api/roboai/* requests require cabinet session OR TG initData OR internal secret.

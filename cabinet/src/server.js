@@ -693,11 +693,11 @@ app.get('/register', (req, res) => sendNoStoreFile(res, path.join(siteRoot, 'reg
 app.get('/auth/magic', (req, res) => {
   const token = String(req.query.token || '').trim();
   if (!token) {
-    return res.status(400).type('html').send('<!doctype html><title>Ошибка</title><body style="background:#080a0f;color:#e8eaed;font-family:sans-serif;text-align:center;padding:60px"><h1>Ссылка недействительна</h1><p>Откройте бот <a href="https://t.me/Golden Connect_bizbot" style="color:#10b981">@Golden Connect_bizbot</a> и нажмите "🌐 Кабинет".</p></body>');
+    return res.status(400).type('html').send('<!doctype html><title>Ошибка</title><body style="background:#080a0f;color:#e8eaed;font-family:sans-serif;text-align:center;padding:60px"><h1>Ссылка недействительна</h1><p>Откройте бот <a href="https://t.me/GoldenConnect_bizbot" style="color:#10b981">@GoldenConnect_bizbot</a> и нажмите "🌐 Кабинет".</p></body>');
   }
   const user = storage.verifyMagicLoginToken(token);
   if (!user) {
-    return res.status(401).type('html').send('<!doctype html><title>Ссылка истекла</title><body style="background:#080a0f;color:#e8eaed;font-family:sans-serif;text-align:center;padding:60px"><h1>Ссылка истекла или уже использована</h1><p>Откройте бот <a href="https://t.me/Golden Connect_bizbot" style="color:#10b981">@Golden Connect_bizbot</a> и нажмите "🌐 Кабинет" для новой ссылки.</p></body>');
+    return res.status(401).type('html').send('<!doctype html><title>Ссылка истекла</title><body style="background:#080a0f;color:#e8eaed;font-family:sans-serif;text-align:center;padding:60px"><h1>Ссылка истекла или уже использована</h1><p>Откройте бот <a href="https://t.me/GoldenConnect_bizbot" style="color:#10b981">@GoldenConnect_bizbot</a> и нажмите "🌐 Кабинет" для новой ссылки.</p></body>');
   }
   // Create session
   const rawToken = require('crypto').randomBytes(32).toString('base64url');

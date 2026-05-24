@@ -72,7 +72,7 @@ async function sendTeamOverview(ctx, storage) {
   const nextActions = storage.getNextActions(inviter.id).slice(0, 3);
   const { newBadges } = storage.syncBadges(inviter.id);
 
-  const botUsername = (ctx.me && ctx.me.username) || 'Golden Connect_bizbot';
+  const botUsername = (ctx.me && ctx.me.username) || 'GoldenConnect_bizbot';
   const refLink = `https://t.me/${botUsername}?start=ref_${inviter.referralCode || ''}`;
 
   const lines = ['👥 <b>Моя команда Golden Connect</b>', ''];

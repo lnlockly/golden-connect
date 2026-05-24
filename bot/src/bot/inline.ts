@@ -1,11 +1,11 @@
 // bot/src/bot/inline.ts
-// Inline-mode handler for @Golden ConnectTGbot. Lets the user mention the bot
+// Inline-mode handler for @GoldenConnectTGbot. Lets the user mention the bot
 // inside any chat and get a popover of matching CRM contacts they can
 // drop into the conversation (sharing the contact + an open-in-CRM button).
 //
 // Usage in any chat:
-//   @Golden ConnectTGbot ivan
-//   @Golden ConnectTGbot greenway moscow
+//   @GoldenConnectTGbot ivan
+//   @GoldenConnectTGbot greenway moscow
 //
 // The shared message is plain text (so it survives forwarding/copying)
 // plus an inline keyboard for the recipient to open the CRM card.

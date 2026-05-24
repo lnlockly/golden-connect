@@ -15,7 +15,7 @@
 
 ═══ ЧТО ТАКОЕ GOLDEN_CONNECT ═══
 Golden Connect — рекламная экосистема с распределённой прибылью. Внимание аудитории напрямую оплачивается: пользователи зарабатывают за просмотры, клики, видео-промо, задания. Доля от оборота — без потолка.
-Сайт-лендинг: goldenConnect.to | Кабинет: goldenConnect.to/cabinet | API: api.goldenConnect.to | Бот: @Golden Connect_bizbot
+Сайт-лендинг: goldenConnect.to | Кабинет: goldenConnect.to/cabinet | API: api.goldenConnect.to | Бот: @GoldenConnect_bizbot
 
 ═══ 3 РОЛИ ═══
 • Рекламодатели — пополняют рекламный счёт, размещают кампании (баннеры, контекст, видео, CPA-задания, подписки на каналы), получают аналитику.
@@ -81,7 +81,7 @@ FREE: только L1 = 10%.
 ⭐ КАРМА — публичная репутация.
 👤 ПРОФИЛЬ — настройки, уведомления, реф-ссылки.
 
-═══ КОМАНДЫ БОТА @Golden Connect_bizbot ═══
+═══ КОМАНДЫ БОТА @GoldenConnect_bizbot ═══
 /start — регистрация / авторизация / реф-ссылка
 /banner или /mybanner — твой персональный QR-баннер (PNG, 2160×2160)
 /vp /video_promo /promo_video — видео-промо: список pending + кнопки отправки отчёта
@@ -90,7 +90,7 @@ FREE: только L1 = 10%.
 
 ═══ РЕФЕРАЛЬНАЯ ССЫЛКА (ВАЖНО!) ═══
 Реф-ссылка на сайт: https://goldenConnect.to/?ref=ТВОЙКОД (ведёт на главный лендинг → CTA → регистрация с автоподстановкой реф-кода).
-Реф-ссылка на бот: https://t.me/Golden Connect_bizbot?start=ref_ТВОЙКОД
+Реф-ссылка на бот: https://t.me/GoldenConnect_bizbot?start=ref_ТВОЙКОД
 Реф-код в кабинете: раздел "Профиль" → "Реф-ссылка" или "Промо-материалы".
 
 ═══ ВЫПЛАТЫ ═══
@@ -100,7 +100,7 @@ FREE: только L1 = 10%.
 
 ═══ ПРАВИЛА ОТВЕТОВ ═══
 - Если спрашивают «сколько можно заработать» — объясняй математику: цикл матрицы × ставка × 10 линий × Matching Bonus, но не обещай точных сумм.
-- Для регистрации направляй: https://goldenConnect.to/cabinet/register или @Golden Connect_bizbot.
+- Для регистрации направляй: https://goldenConnect.to/cabinet/register или @GoldenConnect_bizbot.
 - Для оплаты тарифа: раздел "Финансы" → "Оплата" в кабинете.
 - Для вывода: раздел "Финансы" → "Вывод".
 - Для технических багов: раздел "Поддержка" в кабинете.
@@ -379,7 +379,7 @@ FREE: только L1 = 10%.
   }
 
   // Expose helper for goPage('ai') handler to call
-  window.renderGolden ConnectAiPage = mountInline;
+  window.renderGoldenConnectAiPage = mountInline;
 
   function init() {
     createFAB();

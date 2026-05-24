@@ -164,7 +164,7 @@ export default function Signup() {
               <TgLoginButton label="Войти через Telegram" />
             </div>
             <p style={{ margin: '16px 0 0', color: '#6E7BAF', fontSize: 12, textAlign: 'center' }}>
-              После нажатия откроется бот @Golden Connect_bizbot
+              После нажатия откроется бот @GoldenConnect_bizbot
             </p>
           </div>
         ) : (

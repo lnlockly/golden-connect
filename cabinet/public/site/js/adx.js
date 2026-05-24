@@ -185,7 +185,7 @@
       + '<div id="adx-reg-card">'
       + '<h3>📣 Добавить канал в биржу</h3>'
       + '<div class="info">'
-      + '⚠️ <b>Важно:</b> бот <b>@Golden Connect_bizbot</b> должен быть админом твоего канала с правом публикации сообщений. Также ты сам должен быть указан как админ канала.'
+      + '⚠️ <b>Важно:</b> бот <b>@GoldenConnect_bizbot</b> должен быть админом твоего канала с правом публикации сообщений. Также ты сам должен быть указан как админ канала.'
       + '</div>'
       + '<form id="adx-reg-form">'
       + '<label class="fld">@username канала или ссылка t.me/<input class="cab-input" name="username" required placeholder="my_awesome_channel" maxlength="64"></label>'

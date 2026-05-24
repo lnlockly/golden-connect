@@ -87,7 +87,7 @@
       body.innerHTML = '<div class="adc-empty">' +
         '<div style="font-size:48px">📺</div>' +
         '<h3>Нет подключённых каналов</h3>' +
-        '<p>Сначала подключи хотя бы один Telegram-канал — добавь @Golden Connect_bizbot админом и нажми «+ Добавить канал».</p>' +
+        '<p>Сначала подключи хотя бы один Telegram-канал — добавь @GoldenConnect_bizbot админом и нажми «+ Добавить канал».</p>' +
         '<button class="adc-btn adc-btn-primary" onclick="window.AdC.openAddSource()">+ Добавить канал</button>' +
       '</div>';
       return;
@@ -337,7 +337,7 @@ window.AdC.showLimitUpgrade = function (opts) {
           '<div style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);padding:14px;border-radius:10px;margin-bottom:14px;font-size:13px;line-height:1.6">' +
             '<b>3 шага:</b><br>' +
             '1. Открой свой TG-канал → Управление → Администраторы<br>' +
-            '2. Добавь <b>@Golden Connect_bizbot</b> с правами «Публикация сообщений»<br>' +
+            '2. Добавь <b>@GoldenConnect_bizbot</b> с правами «Публикация сообщений»<br>' +
             '3. Введи @username канала ниже и нажми «Подключить»' +
           '</div>' +
           '<div class="adc-field">' +

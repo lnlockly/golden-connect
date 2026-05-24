@@ -365,7 +365,7 @@
         <span><b>Авто-пополнение</b> — когда баланс падает до $1, автоматически списывать ещё $5 с основного кошелька</span>
       </label>
       <div style="font-size:11px;color:var(--text-muted);margin-bottom:14px;line-height:1.4">
-        💡 Без авто-топапа кампания встанет на паузу когда баланс закончится, придёт уведомление в @Golden ConnectCRMBot.<br>
+        💡 Без авто-топапа кампания встанет на паузу когда баланс закончится, придёт уведомление в @GoldenConnectCRMBot.<br>
         💡 С авто-топапом кампания работает непрерывно пока на основном кошельке есть деньги.
       </div>
       <label style="display:block;font-size:12px;color:var(--text-muted);margin-bottom:4px">Целевое количество диалогов (для ориентировки)</label>
@@ -1274,7 +1274,7 @@
       </div>
       <div style="background:rgba(0,212,255,0.08);border:1px solid var(--accent,#00d4ff);border-radius:8px;padding:12px;margin-bottom:12px;font-size:12px">
         🔔 <b>Чтобы получать уведомления</b> (стадии прогрева, заработок, лимиты) — открой
-        <a href="https://t.me/Golden ConnectTGbot" target="_blank" style="color:var(--accent);font-weight:bold">@Golden ConnectTGbot</a>
+        <a href="https://t.me/GoldenConnectTGbot" target="_blank" style="color:var(--accent);font-weight:bold">@GoldenConnectTGbot</a>
         и нажми <b>/start</b>. Это нужно сделать ОДИН раз.
       </div>
       <div class="ra-row">

@@ -825,7 +825,7 @@ function fireWebhooks(ownerId, eventType, payload) {
         hostname: url.hostname,
         port: url.port,
         path: url.pathname + url.search,
-        headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body), 'User-Agent': 'Golden ConnectCRM/1.0' },
+        headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body), 'User-Agent': 'GoldenConnectCRM/1.0' },
         timeout: 5000,
       }, () => {});
       req.on('error', () => {});

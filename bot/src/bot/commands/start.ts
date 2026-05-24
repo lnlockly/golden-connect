@@ -135,7 +135,7 @@ function buildWelcomePayload(
   // Section separators in italic so they read as dividers, not noise.
   addEntityAll(entities, text, SECTION_RULE, "italic");
 
-  // Swap fallback Unicode emoji that the @AIGolden Connect pack provides with
+  // Swap fallback Unicode emoji that the @AIGoldenConnect pack provides with
   // animated custom_emoji entities. Graceful no-op when pack empty or
   // entity gets dropped server-side (non-Premium owner).
   const emojiMap = ctx.state.customEmoji;

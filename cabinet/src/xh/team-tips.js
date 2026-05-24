@@ -22,7 +22,7 @@ function buildPrompt(inviter, refs, stats, nextActions) {
     '⚠️ dormant — 7+ дней тишины',
     '⚫ lost — 30+ дней тишины',
     '',
-    '=== ИНСТРУМЕНТЫ В БОТЕ @Golden Connect_bizbot ===',
+    '=== ИНСТРУМЕНТЫ В БОТЕ @GoldenConnect_bizbot ===',
     '/ref — личная реф-ссылка партнёра + короткая t2gift.com/{code} + статистика по 10 уровням',
     '/promo — меню рекламных материалов:',
     '  /post — готовый пост под кампанию + реф-ссылка',

@@ -303,12 +303,12 @@ export async function readBalances(userId: number): Promise<UserBalances> {
 export type NotifSeverity = 'info' | 'success' | 'warning' | 'error';
 
 /**
- * UNIFIED notification — appears BOTH in cabinet bell-dropdown AND in @Golden Connect_bizbot.
+ * UNIFIED notification — appears BOTH in cabinet bell-dropdown AND in @GoldenConnect_bizbot.
  *
  * Single source of truth: notifications_inbox row.
  *  - Site reads via /api/notifications (filters by user_id, sorts by created_at)
  *  - TG worker (api/src/jobs/inbox-tg-deliver.job.ts) polls delivered_tg=false
- *    and pushes to @Golden Connect_bizbot every minute. Sets delivered_tg=true after success.
+ *    and pushes to @GoldenConnect_bizbot every minute. Sets delivered_tg=true after success.
  *  - skipBot=true → notification only in cabinet (no TG push). Useful for
  *    low-priority info that would spam the bot.
  *

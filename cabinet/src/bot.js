@@ -19,7 +19,7 @@ const { startPlannerCron } = require('./planner/bot/planner');
 const { startDreamCoachCron } = require('./planner/bot/dreams');
 
 // Golden Connect specific modules
-const { setupGolden ConnectEvents } = require('./xh/events');
+const { setupGoldenConnectEvents } = require('./xh/events');
 const { setupReferral } = require('./xh/referral');
 const { setupPromo } = require('./xh/promo');
 const { startEventRemindersCron } = require('./xh/events-cron');
@@ -111,7 +111,7 @@ function createBot(config, storage) {
   }
 
   // ===== Golden Connect handlers FIRST (intercept deep links before alpha /start) =====
-  try { setupGolden ConnectEvents(bot, storage, config); } catch (e) { console.error('[xh_events_setup]', e && e.message); }
+  try { setupGoldenConnectEvents(bot, storage, config); } catch (e) { console.error('[xh_events_setup]', e && e.message); }
   try { setupReferral(bot, storage, config); } catch (e) { console.error('[xh_referral_setup]', e && e.message); }
   try { setupPromo(bot, storage, config); } catch (e) { console.error('[xh_promo_setup]', e && e.message); }
   try { setupTeam(bot, storage, config); } catch (e) { console.error('[xh_team_setup]', e && e.message); }
@@ -332,7 +332,7 @@ function createBot(config, storage) {
   // [trdx-cmd] Genesis TRDX — balance, utilities, recent ledger
   bot.command('trdx', async (ctx) => {
     if (ctx.chat?.type !== 'private') {
-      const u = ctx.me?.username || 'Golden Connect_bizbot';
+      const u = ctx.me?.username || 'GoldenConnect_bizbot';
       try { await ctx.reply('💎 TRDX — открой бота в личке: https://t.me/' + u + '?start=trdx', { parse_mode: 'HTML' }); } catch (_) {}
       return;
     }
@@ -578,7 +578,7 @@ function createBot(config, storage) {
           inline_keyboard: [
             [{ text: '💸 Зарабатывать (подключить аккаунты)', callback_data: 'roboai_earn' }],
             [{ text: '🎯 Заказать рассылку', callback_data: 'roboai_order' }],
-            [{ text: '🧠 Самостоятельная рассылка (Premium)', url: 'https://t.me/Golden ConnectTGbot' }],
+            [{ text: '🧠 Самостоятельная рассылка (Premium)', url: 'https://t.me/GoldenConnectTGbot' }],
             [{ text: '📚 Что это? (FAQ)', callback_data: 'roboai_faq' }],
           ],
         },
@@ -610,7 +610,7 @@ function createBot(config, storage) {
       '📚 <b>TG Neuro AI — три режима</b>\n\n' +
       '<b>1) Зарабатывать</b> — отдай нам свои TG-аккаунты, мы прогреваем и используем в рекламных кампаниях. 50% с каждого сообщения. Сам ничем не управляешь, только смотришь статистику.\n\n' +
       '<b>2) Заказать рассылку</b> — закажи рекламу через сайт, AI напишет промт из URL, мы рассылаем через прогретые аккаунты. От $0.05 за сообщение.\n\n' +
-      '<b>3) Premium-режим в @Golden ConnectTGbot</b> — самостоятельная рассылка через бот (только на тарифах LAUNCH/BOOST/ROCKET). Полный контроль над кампаниями, аккаунтами и аудиторией.\n\n' +
+      '<b>3) Premium-режим в @GoldenConnectTGbot</b> — самостоятельная рассылка через бот (только на тарифах LAUNCH/BOOST/ROCKET). Полный контроль над кампаниями, аккаунтами и аудиторией.\n\n' +
       'Прокси покупаются автоматически (резидент). Один на каждый аккаунт.',
       { parse_mode: 'HTML' }
     );
@@ -730,7 +730,7 @@ function createBot(config, storage) {
     try { require('./services/trx').startTrxScanCron(storage, config); require('./services/trx').runRegistrationBackfill(storage); /* [trx-cron] */ } catch (e) { console.error('[trx]', e && e.message); }
     try {
     const { startPartnersNotifCron } = require('./cron/partners-notif-cron');
-    // Use the same callGolden ConnectApi from web-routes (closure-bound to config)
+    // Use the same callGoldenConnectApi from web-routes (closure-bound to config)
     const helpers = require('./web-routes');
     const apiFn = (path, body) => {
       const fetch = require('node-fetch') || global.fetch;
@@ -743,7 +743,7 @@ function createBot(config, storage) {
       if (body) init.body = JSON.stringify(body);
       return fetch(url, init).then(r => r.json());
     };
-    startPartnersNotifCron({ bot, config, callGolden ConnectApi: apiFn });
+    startPartnersNotifCron({ bot, config, callGoldenConnectApi: apiFn });
   } catch (e) { console.error('[partners-notif-cron]', e && e.message); }
 
   console.log('[bot] All crons: reminders, alerts, planner, dreams, meet, events, team, health, drip, nudge, weekly');

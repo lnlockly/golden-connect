@@ -9,7 +9,7 @@ function escapeHtml(s) {
 }
 
 function buildRefLink(botUsername, refCode) {
-  const base = `https://t.me/${botUsername || 'Golden Connect_bizbot'}`;
+  const base = `https://t.me/${botUsername || 'GoldenConnect_bizbot'}`;
   return refCode ? `${base}?start=ref_${refCode}` : base;
 }
 
@@ -22,7 +22,7 @@ function getReferralInfo(ctx, storage) {
   let webUser = null;
   try { webUser = storage.ensureWebUserFromTelegram(ctx.from); }
   catch (e) { console.error('[xh_ref_ensure]', e && e.message); }
-  const botUsername = (ctx.me && ctx.me.username) || 'Golden Connect_bizbot';
+  const botUsername = (ctx.me && ctx.me.username) || 'GoldenConnect_bizbot';
   const refCode = (webUser && webUser.referralCode) || '';
   const refLink = buildRefLink(botUsername, refCode);
   const siteLink = buildSiteLink(refCode);

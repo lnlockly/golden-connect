@@ -471,7 +471,7 @@ async function onMemberJoined(ctx, user, storage, config, wuData, platform) {
 
   const kb = new InlineKeyboard();
   if (!wuData?.wu) {
-    kb.url('🚀 Открыть бота в личке', `https://t.me/${ctx.me?.username || 'Golden Connect_bizbot'}?start=hi_from_group`).row();
+    kb.url('🚀 Открыть бота в личке', `https://t.me/${ctx.me?.username || 'GoldenConnect_bizbot'}?start=hi_from_group`).row();
   }
   kb.text('💡 Что делать?', 'gi_help_new');
 
@@ -490,7 +490,7 @@ async function onMemberJoined(ctx, user, storage, config, wuData, platform) {
       if (welcomeText) {
         // [ai-welcome-public-kb] Inline URL-buttons that deep-link to bot functions.
         // Same buttons for everyone — taps open private chat with the right /start payload.
-        const _u = (ctx.me && ctx.me.username) || 'Golden Connect_bizbot';
+        const _u = (ctx.me && ctx.me.username) || 'GoldenConnect_bizbot';
         const kb = new InlineKeyboard()
           .url('🚀 Открыть бота', `https://t.me/${_u}?start=hi`).row()
           .url('💰 Биржа заданий', `https://t.me/${_u}?start=jobs`)
@@ -784,7 +784,7 @@ function registerCommands(bot, storage, config) {
   // ── /events in group / subscribe ──
   bot.command('events', async (ctx) => {
     if (isGroup(ctx)) return ctx.reply('🔴 Список эфиров — открой в личке у бота: /events', {
-      reply_markup: new InlineKeyboard().url('Открыть', `https://t.me/${ctx.me?.username || 'Golden Connect_bizbot'}?start=events`)
+      reply_markup: new InlineKeyboard().url('Открыть', `https://t.me/${ctx.me?.username || 'GoldenConnect_bizbot'}?start=events`)
     });
   });
 
@@ -978,7 +978,7 @@ function registerCommands(bot, storage, config) {
     try { await ctx.answerCallbackQuery(); } catch {}
     // Send DM-only deep-link via answerCallbackQuery url? grammY does not support url here for callback.
     // Instead just answer with a toast and do nothing public.
-    try { await ctx.answerCallbackQuery({ text: 'Открой бота в личке: t.me/' + (ctx.me?.username || 'Golden Connect_bizbot'), show_alert: false }); } catch {}
+    try { await ctx.answerCallbackQuery({ text: 'Открой бота в личке: t.me/' + (ctx.me?.username || 'GoldenConnect_bizbot'), show_alert: false }); } catch {}
   });
 }
 

@@ -1,5 +1,5 @@
 // bot/src/bot/commands/crm.ts
-// Telegram commands that drive the cabinet CRM from inside @Golden ConnectTGbot.
+// Telegram commands that drive the cabinet CRM from inside @GoldenConnectTGbot.
 //
 // Commands installed by buildBot():
 //   /crm        — open WebApp at crm.goldenConnect.to cabinet

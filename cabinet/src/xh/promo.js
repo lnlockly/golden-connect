@@ -63,14 +63,14 @@ function buildRefSiteLink(refCode) {
 }
 
 function buildRefBotLink(botUsername, refCode) {
-  return `https://t.me/${botUsername || 'Golden Connect_bizbot'}?start=ref_${encodeURIComponent(refCode)}`;
+  return `https://t.me/${botUsername || 'GoldenConnect_bizbot'}?start=ref_${encodeURIComponent(refCode)}`;
 }
 
 function getUserContext(ctx, storage) {
   let webUser = null;
   try { webUser = storage.ensureWebUserFromTelegram(ctx.from); } catch (e) {}
   const refCode = (webUser && webUser.referralCode) || 'guest';
-  const botUsername = (ctx.me && ctx.me.username) || 'Golden Connect_bizbot';
+  const botUsername = (ctx.me && ctx.me.username) || 'GoldenConnect_bizbot';
   return {
     webUser,
     refCode,

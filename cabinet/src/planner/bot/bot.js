@@ -1688,7 +1688,7 @@ function createBot(tokenOrBot, webappUrl) {
         `🔑 ID: <code>${roomId}</code>\n` +
         `👥 Участники (${count}): ${names.join(', ')}\n\n` +
         `🌐 ${webappUrl}/?conf=${roomId}\n` +
-        `📱 https://t.me/${ctx.me?.username || 'Golden Connect_bizbot'}?start=conf_${roomId}`,
+        `📱 https://t.me/${ctx.me?.username || 'GoldenConnect_bizbot'}?start=conf_${roomId}`,
         { parse_mode: 'HTML', reply_markup: kb }
       );
     } catch {}
@@ -1796,7 +1796,7 @@ function createBot(tokenOrBot, webappUrl) {
           `/meet 15:00 Планёрка — <i>запланировать на время</i>\n\n` +
           `⚙️ /gs_settings — <i>настройки чата</i>\n\n` +
           `💡 <b>Совет:</b> напишите мне в личку — там личные задачи, привычки и AI-секретарь. Личное и групповое не смешивается!`,
-          { parse_mode: 'HTML', reply_markup: new InlineKeyboard().url('💬 Написать в личку', 'https://t.me/Golden Connect_bizbot') }
+          { parse_mode: 'HTML', reply_markup: new InlineKeyboard().url('💬 Написать в личку', 'https://t.me/GoldenConnect_bizbot') }
         );
       }
 

@@ -1,5 +1,5 @@
 // bot/src/bot/commands/session.ts
-// "AI Sales Session" — guided cold-outreach workflow inside @Golden ConnectCRMBot.
+// "AI Sales Session" — guided cold-outreach workflow inside @GoldenConnectCRMBot.
 //
 // Goal: drive the user to schedule a 15-min call with each lead.
 // Flow:

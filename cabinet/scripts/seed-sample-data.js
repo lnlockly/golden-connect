@@ -30,7 +30,7 @@
       startsAt: tomorrow.toISOString(),
       durationMinutes: 45,
       timezone: 'Europe/Moscow',
-      joinUrl: 'https://t.me/Golden Connect_bizbot',
+      joinUrl: 'https://t.me/GoldenConnect_bizbot',
       coverImage: '/img/goldenConnect-logo.jpg',
       visibility: 'public',
       isPublished: true,

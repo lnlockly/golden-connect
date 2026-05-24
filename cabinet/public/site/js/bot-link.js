@@ -2,8 +2,8 @@
 // Auto-rewrites all <a data-bot-link>, <button data-bot-link> elements on DOMContentLoaded.
 //
 // Usage:
-//   <a href="#" data-bot-link>Открыть бот</a>            → t.me/Golden Connect_bizbot?start=ref_<code>
-//   <a href="#" data-bot-link="remind:ev_001">Напомнить</a> → t.me/Golden Connect_bizbot?start=remind_ev_001_ref_<code>
+//   <a href="#" data-bot-link>Открыть бот</a>            → t.me/GoldenConnect_bizbot?start=ref_<code>
+//   <a href="#" data-bot-link="remind:ev_001">Напомнить</a> → t.me/GoldenConnect_bizbot?start=remind_ev_001_ref_<code>
 //
 // Or programmatically:
 //   XHBot.url()              → ref-only link
@@ -19,7 +19,7 @@
 (function(){
   'use strict';
 
-  var BOT_USERNAME = 'Golden Connect_bizbot';
+  var BOT_USERNAME = 'GoldenConnect_bizbot';
   var BOT_BASE = 'https://t.me/' + BOT_USERNAME;
 
   function readRefFromUrl() {

@@ -164,7 +164,7 @@ function setupGroupHandlers(bot, groqConfig) {
       `/meet 15:00 Планёрка — <i>запланировать на время</i>\n\n` +
       `⚙️ /gs_settings — <i>настройки чата</i>\n\n` +
       `💡 <b>Совет:</b> напишите мне в личку — там личные задачи, привычки и AI-секретарь. Личное и групповое не смешивается!`,
-      { parse_mode: 'HTML', reply_markup: new InlineKeyboard().url('💬 Написать мне в личку', 'https://t.me/Golden Connect_bizbot') }
+      { parse_mode: 'HTML', reply_markup: new InlineKeyboard().url('💬 Написать мне в личку', 'https://t.me/GoldenConnect_bizbot') }
     );
   });
 

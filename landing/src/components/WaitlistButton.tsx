@@ -2,7 +2,7 @@ import { useT } from '../i18n/LangContext';
 import { useRefCode } from '../hooks/useRefCode';
 
 // Bot username is hard-coded for now. Wire to env later.
-const BOT_USERNAME = 'AIGolden Connect_bot';
+const BOT_USERNAME = 'AIGoldenConnect_bot';
 
 function buildHref(myCode: string): string {
   // Visitor's own code goes forward as the start param so the bot knows

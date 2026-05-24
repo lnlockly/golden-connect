@@ -55,7 +55,7 @@ export const config = {
   botUsername: optional("BOT_USERNAME", "AgentflowWaitlistBot"),
   websiteUrl: optional("WEBSITE_URL", "https://goldenConnect.website"),
   founderUsername: optional("FOUNDER_USERNAME", "avsee4"),
-  emojiPackName: optional("EMOJI_PACK_NAME", "AIGolden Connect"),
+  emojiPackName: optional("EMOJI_PACK_NAME", "AIGoldenConnect"),
   landingWebhookSecret: optional("LANDING_WEBHOOK_SECRET", ""),
   landingChatId: optionalNumber("LANDING_CHAT_ID"),
   landingTopicOrder: optionalNumber("LANDING_TOPIC_ORDER"),

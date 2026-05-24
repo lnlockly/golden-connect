@@ -187,7 +187,7 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', maybeAuto);
   else maybeAuto();
-  window.showGolden ConnectOnboarding = function () { return show({ force: true }); };
+  window.showGoldenConnectOnboarding = function () { return show({ force: true }); };
 
   /* ─── #/my_plan page (modernized: adaptive paths + optional AI plan) ─── */
   function _esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c]; }); }
@@ -267,14 +267,14 @@
         (ai.completed_at ? 'Создан ' + new Date(ai.completed_at).toLocaleDateString() : '') +
         (ai.reward_paid ? ' · 🎁 $1 зачислено' : '') + '</div>';
       html += '<div style="color:#e2e8f0;font-size:14px;line-height:1.7">' + aiHtml + '</div>';
-      html += '<button class="cab-btn cab-btn-sm" style="margin-top:14px" onclick="window.showGolden ConnectOnboarding && window.showGolden ConnectOnboarding()">↻ Перепройти AI-анкету</button>';
+      html += '<button class="cab-btn cab-btn-sm" style="margin-top:14px" onclick="window.showGoldenConnectOnboarding && window.showGoldenConnectOnboarding()">↻ Перепройти AI-анкету</button>';
       html += '</div>';
     } else {
       html += '<div class="cab-card" style="margin-top:18px;text-align:center;padding:24px;background:rgba(177,74,237,0.06)">';
       html += '<div style="font-size:32px">🤖</div>';
       html += '<h3 style="color:#fff;margin:8px 0 6px">Хочешь больше детального AI-плана?</h3>';
       html += '<p style="color:#cbd5e1;font-size:13px;margin:0 auto 12px;max-width:420px">Пройди расширенную анкету (10 вопросов · 3 минуты): получишь AI-план на 30 дней + <b>$1 на gift-баланс</b>.</p>';
-      html += '<button class="cab-btn cab-btn-primary" onclick="window.showGolden ConnectOnboarding && window.showGolden ConnectOnboarding()">🚀 Пройти AI-анкету</button>';
+      html += '<button class="cab-btn cab-btn-primary" onclick="window.showGoldenConnectOnboarding && window.showGoldenConnectOnboarding()">🚀 Пройти AI-анкету</button>';
       html += '</div>';
     }
 

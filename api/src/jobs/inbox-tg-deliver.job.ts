@@ -2,7 +2,7 @@
  * Inbox → Telegram delivery worker.
  *
  * Polls notifications_inbox for rows where delivered_tg=false and pushes
- * them to the user's Telegram via @Golden Connect_bizbot. After successful send
+ * them to the user's Telegram via @GoldenConnect_bizbot. After successful send
  * (or blocked-by-user), marks delivered_tg=true so we don't resend.
  *
  * Runs every minute. Batches 50 rows per tick to keep the worker bounded.

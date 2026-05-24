@@ -368,7 +368,7 @@ function main() {
       catalog: '/landing/catalog',
       officialSite: siteContent.links && (siteContent.links.companyMain || siteContent.links.officialSite) || 'https://goldenConnect.to/',
       companyCatalog: siteContent.links && (siteContent.links.companyCatalog || siteContent.links.shop) || 'https://goldenConnect.to/',
-      bot: 'https://t.me/Golden Connect_bizbot',
+      bot: 'https://t.me/GoldenConnect_bizbot',
     },
     summary: {
       productCount: productPayloads.length,

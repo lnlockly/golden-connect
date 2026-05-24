@@ -175,7 +175,7 @@ function buildGreetingFor(c) {
 }
 
 // ─── Telegram WebApp integration ──────────────────────────────
-// When CRM is opened from @Golden ConnectTGbot menu button, TG injects
+// When CRM is opened from @GoldenConnectTGbot menu button, TG injects
 // `window.Telegram.WebApp` with `initData` (signed payload). We attach it
 // to every API request so the cabinet middleware can authenticate the
 // user without cookies — the same TG account always gets the same ownerId.
@@ -1258,7 +1258,7 @@ window.openMsgr = function(kind, username) {
 
 // ─── Native "Share to TG chat" — uses Telegram inline-mode picker ────────
 // Inside the Telegram WebApp, this opens the chat list to pick recipients,
-// pre-filling the inline query so @Golden ConnectTGbot returns the matching
+// pre-filling the inline query so @GoldenConnectTGbot returns the matching
 // contact card. Outside TG, falls back to the legacy t.me/share URL.
 window.tgShareContact = function(username) {
   const c = STATE.loadedItems.find(x => x.username === username) || window._lastContact;

@@ -65,7 +65,7 @@ function buildButtons(payload, baseUrl) {
   return new InlineKeyboard().url('🤝 Открыть партнёра', detailUrl);
 }
 
-function startPartnersNotifCron({ bot, config, callGolden ConnectApi }) {
+function startPartnersNotifCron({ bot, config, callGoldenConnectApi }) {
   const baseUrl = config.publicBaseUrl || 'https://goldenConnect.to';
   let running = false;
 
@@ -73,7 +73,7 @@ function startPartnersNotifCron({ bot, config, callGolden ConnectApi }) {
     if (running) return;
     running = true;
     try {
-      const data = await callGolden ConnectApi(
+      const data = await callGoldenConnectApi(
         `/internal/partners/pending-notifications?limit=${BATCH_LIMIT}`,
       );
       const items = (data && data.notifications) || [];
@@ -115,7 +115,7 @@ function startPartnersNotifCron({ bot, config, callGolden ConnectApi }) {
 
       if (delivered.length) {
         try {
-          await callGolden ConnectApi('/internal/partners/mark-delivered', { ids: delivered });
+          await callGoldenConnectApi('/internal/partners/mark-delivered', { ids: delivered });
         } catch (err) {
           console.error('[partners-notif] mark-delivered failed:', err && err.message);
         }

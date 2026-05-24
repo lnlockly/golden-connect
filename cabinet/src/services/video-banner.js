@@ -852,7 +852,7 @@ const TEMPLATES = {
       title: 'GOLDEN_CONNECT',
       subtitle: 'Зарабатывай на AI и партнёрке',
       qr_url: 'https://goldenConnect.to/cabinet/',
-      bot_name: '@Golden Connect_bizbot',
+      bot_name: '@GoldenConnect_bizbot',
       services: ['🤖 AI инструменты', '💎 Партнёрка 10 уровней', '📢 Биржа подписок', '🎬 Видео-задания', '🛒 Маркетплейс товаров', '📊 Bio-страницы', '🔗 Шортнер ссылок', '📱 QR-баннеры', '💸 Авто-выплаты', '🎯 Реклама от $0.01', '⚡ Карма-репутация', '🚀 Тарифы LAUNCH/BOOST/ROCKET'],
       stats: ['10 уровней', 'AI', 'CIS', 'FREE'],
       style: 'darkPurple',

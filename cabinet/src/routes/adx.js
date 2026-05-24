@@ -213,7 +213,7 @@ function createAdxRouter(config, storage, requireAuth, bot) {
       }
       if (!['administrator', 'creator'].includes(botStatus)) {
         return res.status(403).json({ ok: false, reason: 'bot_not_admin',
-          detail: 'Бот @Golden Connect_bizbot должен быть администратором канала. Добавь его в канал и дай право публиковать сообщения.' });
+          detail: 'Бот @GoldenConnect_bizbot должен быть администратором канала. Добавь его в канал и дай право публиковать сообщения.' });
       }
 
       // Step 3: verify the registering user is admin/creator of this channel

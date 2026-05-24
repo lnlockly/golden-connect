@@ -15,7 +15,7 @@ const app = new Hono();
 const TOKEN_TTL_MS = 10 * 60 * 1000; // 10 min
 
 function botUsername(): string {
-  return process.env.TELEGRAM_BOT_USERNAME ?? 'Golden Connectrobot';
+  return process.env.TELEGRAM_BOT_USERNAME ?? 'GoldenConnectrobot';
 }
 
 async function gcExpired(): Promise<void> {

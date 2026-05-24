@@ -6,7 +6,7 @@ const path = require('path');
 const QRCode = require('qrcode');
 const { buildSiteContent } = require('./site-content');
 const { getBalance } = require('./services/balance-bridge');
-const { createGolden ConnectVideoLibrary } = require('./video-library');
+const { createGoldenConnectVideoLibrary } = require('./video-library');
 const { createRateLimiter } = require('./rate-limit');
 const { hasGroqKeys, requestGroqChatCompletion } = require('./utils/groq-rotator');
 const { createAdxRouter } = require('./routes/adx');
@@ -142,7 +142,7 @@ function createWebRouter(config, storage, bot) {
   try { applyPlategaSchema(); } catch (e) { console.error('[platega-migrate_failed]', e && e.message); }
   try { adcTick.start(); } catch (e) { console.error('[adc-tick_failed]', e && e.message); }
   try { applyShrBioSchema(); } catch (e) { console.error('[shrbio-migrate_failed]', e && e.message); }
-  const goldenConnectVideoLibrary = createGolden ConnectVideoLibrary(config);
+  const goldenConnectVideoLibrary = createGoldenConnectVideoLibrary(config);
   const protocolTemplates = Array.isArray(siteContent.memberPortal && siteContent.memberPortal.protocolTemplates)
     ? siteContent.memberPortal.protocolTemplates
     : Array.isArray(siteContent.protocols)
@@ -545,7 +545,7 @@ function createWebRouter(config, storage, bot) {
   // Proxies to api /internal/admin/metrics-summary, no auth required.
   router.get('/api/public/stats', async (req, res) => {
     try {
-      const data = await callGolden ConnectApi('/internal/admin/metrics-summary');
+      const data = await callGoldenConnectApi('/internal/admin/metrics-summary');
       const m = (data && data.metrics) || {};
       res.json({
         ok: true,
@@ -586,7 +586,7 @@ function createWebRouter(config, storage, bot) {
       const tgId = u.telegramUserId || u.telegram_user_id;
       const email = u.email || (tgId ? 'tg' + tgId + '@goldenConnect.bot' : null);
       if (!email) return res.status(400).json({ ok: false, reason: 'no_email' });
-      const data = await callGolden ConnectApi('/internal/bonus-matrix/me', { email: email });
+      const data = await callGoldenConnectApi('/internal/bonus-matrix/me', { email: email });
       res.json(data);
     } catch (e) { res.status(502).json({ ok: false, reason: e.message }); }
   });
@@ -606,7 +606,7 @@ function createWebRouter(config, storage, bot) {
       } else {
         path += '&email=' + encodeURIComponent(email);
       }
-      const data = await callGolden ConnectApi(path);
+      const data = await callGoldenConnectApi(path);
       res.json(data);
     } catch (e) { res.status(502).json({ ok: false, reason: e.message }); }
   });
@@ -626,7 +626,7 @@ function createWebRouter(config, storage, bot) {
       } else {
         path += '&email=' + encodeURIComponent(email);
       }
-      const data = await callGolden ConnectApi(path);
+      const data = await callGoldenConnectApi(path);
       res.json(data);
     } catch (e) { res.status(502).json({ ok: false, reason: e.message }); }
   });
@@ -634,7 +634,7 @@ function createWebRouter(config, storage, bot) {
   router.get('/api/bonus-matrix/global', publicLimiter, async (req, res) => {
     try {
       const limit = Math.min(parseInt(req.query.limit, 10) || 50, 200);
-      const data = await callGolden ConnectApi('/internal/bonus-matrix/global?limit=' + limit);
+      const data = await callGoldenConnectApi('/internal/bonus-matrix/global?limit=' + limit);
       res.json(data);
     } catch (e) { res.status(502).json({ ok: false, reason: e.message }); }
   });
@@ -642,7 +642,7 @@ function createWebRouter(config, storage, bot) {
   router.get('/api/karma/leaderboard', publicLimiter, async (req, res) => {
     try {
       const limit = Math.min(parseInt(req.query.limit, 10) || 50, 200);
-      const data = await callGolden ConnectApi('/internal/karma/leaderboard?limit=' + limit);
+      const data = await callGoldenConnectApi('/internal/karma/leaderboard?limit=' + limit);
       res.json(data);
     } catch (e) { res.status(502).json({ ok: false, reason: e.message }); }
   });
@@ -654,7 +654,7 @@ function createWebRouter(config, storage, bot) {
       const tgId = u.telegramUserId || u.telegram_user_id;
       const email = u.email || (tgId ? 'tg' + tgId + '@goldenConnect.bot' : null);
       if (!email) return res.status(400).json({ ok: false, reason: 'no_email' });
-      const data = await callGolden ConnectApi('/internal/karma/me', { email: email });
+      const data = await callGoldenConnectApi('/internal/karma/me', { email: email });
       res.json(data);
     } catch (e) { res.status(502).json({ ok: false, reason: e.message }); }
   });
@@ -707,7 +707,7 @@ function createWebRouter(config, storage, bot) {
 
     router.get('/api/karma/rules', publicLimiter, async (req, res) => {
     try {
-      const data = await callGolden ConnectApi('/internal/karma/rules');
+      const data = await callGoldenConnectApi('/internal/karma/rules');
       res.json(data);
     } catch (e) { res.status(502).json({ ok: false, reason: e.message }); }
   });
@@ -866,9 +866,9 @@ function createWebRouter(config, storage, bot) {
   }
 
   function getBotUsername() {
-    return String(config.botUsername || siteContent.brand.botUsername || 'Golden Connect_bizbot')
+    return String(config.botUsername || siteContent.brand.botUsername || 'GoldenConnect_bizbot')
       .trim()
-      .replace(/^@+/, '') || 'Golden Connect_bizbot';
+      .replace(/^@+/, '') || 'GoldenConnect_bizbot';
   }
 
   function buildBotReferralUrl(userOrCode) {
@@ -1862,7 +1862,7 @@ function createWebRouter(config, storage, bot) {
   });
 
     router.get('/api/profile', requireAuth, (req, res) => {
-    try { awardKarmaGolden Connect(req, 'login', null, new Date().toISOString().slice(0, 10)); } catch (_) {}
+    try { awardKarmaGoldenConnect(req, 'login', null, new Date().toISOString().slice(0, 10)); } catch (_) {}
     return res.json({
       ok: true,
       user: storage.getPublicWebUserById(req.webUser.id),
@@ -2556,7 +2556,7 @@ function createWebRouter(config, storage, bot) {
         items: storage.getShortLinks(req.webUser.id, 100),
       });
       // Karma: tool_use + link_create (capped server-side)
-      try { awardKarmaGolden Connect(req, 'tool_use', null, 'shortener'); awardKarmaGolden Connect(req, 'link_create', null, link && link.code); } catch (_) {}
+      try { awardKarmaGoldenConnect(req, 'tool_use', null, 'shortener'); awardKarmaGoldenConnect(req, 'link_create', null, link && link.code); } catch (_) {}
     } catch (error) {
       const message = String(error && error.message ? error.message : error);
       if (message === 'Invalid short link url') {
@@ -2588,7 +2588,7 @@ function createWebRouter(config, storage, bot) {
             || ''
           ).trim();
           if (dataUrl) {
-            return (function(){ try { awardKarmaGolden Connect(req, 'tool_use', null, 'qr'); } catch (_) {} })(); res.json({
+            return (function(){ try { awardKarmaGoldenConnect(req, 'tool_use', null, 'qr'); } catch (_) {} })(); res.json({
               ok: true,
               qr: {
                 url,
@@ -2646,7 +2646,7 @@ function createWebRouter(config, storage, bot) {
             .map((item) => (typeof item === 'string' ? item : item && item.tag ? item.tag : ''))
             .filter(Boolean);
           if (hashtags.length) {
-            return (function(){ try { awardKarmaGolden Connect(req, 'tool_use', null, 'hashtags'); } catch (_) {} })(); res.json({
+            return (function(){ try { awardKarmaGoldenConnect(req, 'tool_use', null, 'hashtags'); } catch (_) {} })(); res.json({
               ok: true,
               provider: 'arsenal',
               hashtags,
@@ -2694,7 +2694,7 @@ function createWebRouter(config, storage, bot) {
             return { caption: String(item && (item.caption || item.text || item.value) || '').trim() };
           }).filter((item) => item.caption);
           if (items.length) {
-            return (function(){ try { awardKarmaGolden Connect(req, 'tool_use', null, 'caption'); } catch (_) {} })(); res.json({
+            return (function(){ try { awardKarmaGoldenConnect(req, 'tool_use', null, 'caption'); } catch (_) {} })(); res.json({
               ok: true,
               provider: 'arsenal',
               items,
@@ -4147,7 +4147,7 @@ function createWebRouter(config, storage, bot) {
     try {
       const result = storage.createTelegramLinkToken(req.webUser.id);
       if (!result) return res.status(500).json({ ok: false, reason: 'token_failed' });
-      const botUsername = String(config.botUsername || 'Golden Connect_bizbot').trim();
+      const botUsername = String(config.botUsername || 'GoldenConnect_bizbot').trim();
       const botLink = `https://t.me/${botUsername}?start=link_${result.token}`;
       return res.json({ ok: true, token: result.token, botLink, expiresAt: result.expiresAt });
     } catch (e) {
@@ -4208,7 +4208,7 @@ function createWebRouter(config, storage, bot) {
         const tgId = u.telegramUserId || u.telegram_user_id;
         const email = u.email || (tgId ? 'tg' + tgId + '@goldenConnect.bot' : null);
         if (email) {
-          const apiRes = await callGolden ConnectApi('/internal/team/by-email/referrals', { email });
+          const apiRes = await callGoldenConnectApi('/internal/team/by-email/referrals', { email });
           if (apiRes && Array.isArray(apiRes.rows)) {
             apiRefs = apiRes.rows.map((r) => ({
               id: r.invitee_id,
@@ -4487,7 +4487,7 @@ function createWebRouter(config, storage, bot) {
   const PAY_API_BASE = String(config.goldenConnectApiBaseUrl || '').replace(/\/+$/, '');
   const PAY_INTERNAL_SECRET = String(config.goldenConnectApiInternalSecret || '');
 
-  async function callGolden ConnectApi(path, body) {
+  async function callGoldenConnectApi(path, body) {
     // [callgoldenConnectapi-retry-2026-05-21] timeout + retry for transient ingress/rollout failures
     if (!PAY_INTERNAL_SECRET) {
       const err = new Error('pay_bridge_not_configured');
@@ -4540,14 +4540,14 @@ function createWebRouter(config, storage, bot) {
   }
 
   // Award karma via api proxy (fire-and-forget).
-  function awardKarmaGolden Connect(req, kind, sourceId, memo) {
+  function awardKarmaGoldenConnect(req, kind, sourceId, memo) {
     try {
       const u = req.webUser || (req.session && storage.findWebUserById(req.session.userId));
       if (!u) return;
       const tgId = u.telegramUserId || u.telegram_user_id;
       const email = u.email || (tgId ? 'tg' + tgId + '@goldenConnect.bot' : null);
       if (!email) return;
-      callGolden ConnectApi('/internal/karma/award', {
+      callGoldenConnectApi('/internal/karma/award', {
         email: email, kind: kind,
         source_id: sourceId || null, memo: memo || null,
       }).catch(function () {});
@@ -4556,7 +4556,7 @@ function createWebRouter(config, storage, bot) {
 
 /**
  * Patch: append cabinet → api proxy routes for /api/finance/* and /api/notifications/*
- * Mounted in cabinet/src/web-routes.js right after callGolden ConnectApi definition.
+ * Mounted in cabinet/src/web-routes.js right after callGoldenConnectApi definition.
  *
  * Each route resolves the cabinet user's email → api-side user_id, then
  * proxies through INTERNAL_API_SECRET to /internal/finance/* or /internal/notifications/*.
@@ -4583,7 +4583,7 @@ function createWebRouter(config, storage, bot) {
         ['level','account_id','parent_gift_id','search','page','sort','status'].forEach(function(k){
           if (req.query[k] !== undefined && req.query[k] !== '') qs.set(k, String(req.query[k]));
         });
-        const data = await callGolden ConnectApi('/internal/gift/' + path + '?' + qs.toString());
+        const data = await callGoldenConnectApi('/internal/gift/' + path + '?' + qs.toString());
         res.json(data);
       } catch (e) {
         // Gracefully degrade: if user has no gift link, return empty success
@@ -4616,7 +4616,7 @@ function createWebRouter(config, storage, bot) {
         const qs = new URLSearchParams();
         if (ident.email) qs.set('email', ident.email);
         if (ident.tgId) qs.set('tg_id', String(ident.tgId));
-        const data = await callGolden ConnectApi('/internal/gift/' + path + '?' + qs.toString(), req.body || {});
+        const data = await callGoldenConnectApi('/internal/gift/' + path + '?' + qs.toString(), req.body || {});
         res.json(data);
       } catch (e) {
         res.status((e && e.status) || 502).json({ ok: false, reason: (e && (e.data && e.data.reason)) || (e && e.message) || 'gift_bridge_error' });
@@ -4632,7 +4632,7 @@ function createWebRouter(config, storage, bot) {
       const ident = _giftIdentity(req);
       if (!ident || (!ident.email && !ident.tgId)) return res.status(400).json({ ok: false, reason: 'no_identity' });
       const body = Object.assign({}, ident.email ? { email: ident.email } : {}, ident.tgId ? { tg_id: ident.tgId } : {}, req.body || {});
-      const data = await callGolden ConnectApi('/internal/gift/switch-account', { method: 'POST', body });
+      const data = await callGoldenConnectApi('/internal/gift/switch-account', { method: 'POST', body });
       res.json(data);
     } catch (e) {
       res.status((e && e.status) || 502).json({ ok: false, reason: (e && e.message) || 'gift_switch_error' });
@@ -4662,7 +4662,7 @@ function createWebRouter(config, storage, bot) {
       if (!email && tgId) email = 'tg' + String(tgId) + '@goldenConnect.bot';
       if (!email) return res.status(400).json({ ok: false, reason: 'no_email' });
       try {
-        const data = await callGolden ConnectApi('/internal/finance/balances?email=' + encodeURIComponent(email));
+        const data = await callGoldenConnectApi('/internal/finance/balances?email=' + encodeURIComponent(email));
         res.json(data);
       } catch (apiErr) {
         // 404 from api side = api-side user does not exist yet (cabinet email
@@ -4699,7 +4699,7 @@ function createWebRouter(config, storage, bot) {
       if (!email && tgId) email = 'tg' + tgId + '@goldenConnect.bot';
       if (!email) return res.status(400).json({ ok: false, reason: 'no_email' });
       try {
-        const data = await callGolden ConnectApi('/internal/finance/tariff-options?email=' + encodeURIComponent(email));
+        const data = await callGoldenConnectApi('/internal/finance/tariff-options?email=' + encodeURIComponent(email));
         res.json(data);
       } catch (apiErr) {
         // [tariff-opts-404] cabinet user has no api account yet (email-only, no TG link).
@@ -4710,7 +4710,7 @@ function createWebRouter(config, storage, bot) {
             ok: true,
             options: [],
             user_state: 'no_api_account',
-            hint: 'Привяжи Telegram через /start у @Golden Connect_bizbot чтобы открыть кошелёк и тарифы.',
+            hint: 'Привяжи Telegram через /start у @GoldenConnect_bizbot чтобы открыть кошелёк и тарифы.',
             _bridge: 'pending_api_user',
           });
         }
@@ -4728,7 +4728,7 @@ function createWebRouter(config, storage, bot) {
         source_policy: String((req.body && req.body.source_policy) || 'subscription_first'),
       });
       if (!payload) return res.status(401).json({ ok: false, reason: 'no_email' });
-      const data = await callGolden ConnectApi('/internal/finance/buy-tariff', payload);
+      const data = await callGoldenConnectApi('/internal/finance/buy-tariff', payload);
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message, details: e.data });
@@ -4742,7 +4742,7 @@ function createWebRouter(config, storage, bot) {
         source_policy: String((req.body && req.body.source_policy) || 'subscription_first'),
       });
       if (!payload) return res.status(401).json({ ok: false, reason: 'no_email' });
-      const data = await callGolden ConnectApi('/internal/finance/upgrade-tariff', payload);
+      const data = await callGoldenConnectApi('/internal/finance/upgrade-tariff', payload);
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message, details: e.data });
@@ -4757,7 +4757,7 @@ function createWebRouter(config, storage, bot) {
         amount_micro: Number((req.body && req.body.amount_micro) || 0),
       });
       if (!payload) return res.status(401).json({ ok: false });
-      const data = await callGolden ConnectApi('/internal/finance/transfer', payload);
+      const data = await callGoldenConnectApi('/internal/finance/transfer', payload);
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -4802,7 +4802,7 @@ function createWebRouter(config, storage, bot) {
       } catch (e) { /* non-fatal */ }
 
       const displayName = [u.firstName, u.lastName].filter(Boolean).join(' ').trim() || u.displayName || u.name || null;
-      const data = await callGolden ConnectApi('/internal/pay/create-topup-invoice', {
+      const data = await callGoldenConnectApi('/internal/pay/create-topup-invoice', {
         email,
         amount_usd: amountUsd,
         method,
@@ -4825,7 +4825,7 @@ function createWebRouter(config, storage, bot) {
         address: String((req.body && req.body.address) || ''),
       });
       if (!payload) return res.status(401).json({ ok: false });
-      const data = await callGolden ConnectApi('/internal/finance/withdraw', payload);
+      const data = await callGoldenConnectApi('/internal/finance/withdraw', payload);
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -4840,7 +4840,7 @@ function createWebRouter(config, storage, bot) {
       const tgId = u.telegramUserId || u.telegram_user_id;
       if (!email && tgId) email = 'tg' + tgId + '@goldenConnect.bot';
       const limit = Math.min(parseInt(req.query.limit, 10) || 50, 200);
-      const data = await callGolden ConnectApi('/internal/finance/transactions?email='
+      const data = await callGoldenConnectApi('/internal/finance/transactions?email='
         + encodeURIComponent(email) + '&limit=' + limit);
       res.json(data);
     } catch (e) {
@@ -4857,7 +4857,7 @@ function createWebRouter(config, storage, bot) {
       if (!email && tgId) email = 'tg' + tgId + '@goldenConnect.bot';
       const limit = Math.min(parseInt(req.query.limit, 10) || 50, 200);
       const unread = req.query.unread === '1' ? '&unread=1' : '';
-      const data = await callGolden ConnectApi('/internal/notifications?email='
+      const data = await callGoldenConnectApi('/internal/notifications?email='
         + encodeURIComponent(email) + '&limit=' + limit + unread);
       res.json(data);
     } catch (e) {
@@ -4874,7 +4874,7 @@ function createWebRouter(config, storage, bot) {
       let email = String(u.email || '').trim().toLowerCase();
       if (!email && tgId) email = 'tg' + String(tgId) + '@goldenConnect.bot';
       if (!email) return res.status(400).json({ ok: false, reason: 'no_email' });
-      const data = await callGolden ConnectApi('/internal/finance/test-placement?email=' + encodeURIComponent(email));
+      const data = await callGoldenConnectApi('/internal/finance/test-placement?email=' + encodeURIComponent(email));
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -4888,7 +4888,7 @@ function createWebRouter(config, storage, bot) {
       let email = String(u.email || '').trim().toLowerCase();
       const tgId = u.telegramUserId || u.telegram_user_id;
       if (!email && tgId) email = 'tg' + tgId + '@goldenConnect.bot';
-      const data = await callGolden ConnectApi('/internal/finance/karma?email=' + encodeURIComponent(email));
+      const data = await callGoldenConnectApi('/internal/finance/karma?email=' + encodeURIComponent(email));
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -4901,7 +4901,7 @@ function createWebRouter(config, storage, bot) {
       let email = String(u.email || '').trim().toLowerCase();
       const tgId = u.telegramUserId || u.telegram_user_id;
       if (!email && tgId) email = 'tg' + tgId + '@goldenConnect.bot';
-      const data = await callGolden ConnectApi('/internal/notifications/unread-count?email='
+      const data = await callGoldenConnectApi('/internal/notifications/unread-count?email='
         + encodeURIComponent(email));
       res.json(data);
     } catch (e) {
@@ -4913,7 +4913,7 @@ function createWebRouter(config, storage, bot) {
     try {
       const payload = _financeBuildPayload(req, {});
       if (!payload) return res.status(401).json({ ok: false });
-      const data = await callGolden ConnectApi('/internal/notifications/'
+      const data = await callGoldenConnectApi('/internal/notifications/'
         + encodeURIComponent(req.params.id) + '/read', payload);
       res.json(data);
     } catch (e) {
@@ -4925,7 +4925,7 @@ function createWebRouter(config, storage, bot) {
     try {
       const payload = _financeBuildPayload(req, {});
       if (!payload) return res.status(401).json({ ok: false });
-      const data = await callGolden ConnectApi('/internal/notifications/read-all', payload);
+      const data = await callGoldenConnectApi('/internal/notifications/read-all', payload);
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -4953,7 +4953,7 @@ function createWebRouter(config, storage, bot) {
   router.get('/api/admin/stats', requireAuth, async (req, res) => {
     if (!_adminCheckSession(req)) return res.status(403).json({ ok: false, reason: 'not_admin' });
     try {
-      const data = await callGolden ConnectApi('/internal/admin/stats');
+      const data = await callGoldenConnectApi('/internal/admin/stats');
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -4964,7 +4964,7 @@ function createWebRouter(config, storage, bot) {
     if (!_adminCheckSession(req)) return res.status(403).json({ ok: false });
     try {
       const status = String(req.query.status || 'pending');
-      const data = await callGolden ConnectApi('/internal/admin/withdrawals?status=' + encodeURIComponent(status));
+      const data = await callGoldenConnectApi('/internal/admin/withdrawals?status=' + encodeURIComponent(status));
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -4974,7 +4974,7 @@ function createWebRouter(config, storage, bot) {
   router.post('/api/admin/withdrawals/:id/approve', requireAuth, async (req, res) => {
     if (!_adminCheckSession(req)) return res.status(403).json({ ok: false });
     try {
-      const data = await callGolden ConnectApi('/internal/admin/withdrawals/'
+      const data = await callGoldenConnectApi('/internal/admin/withdrawals/'
         + encodeURIComponent(req.params.id) + '/approve', {});
       res.json(data);
     } catch (e) {
@@ -4985,7 +4985,7 @@ function createWebRouter(config, storage, bot) {
   router.post('/api/admin/withdrawals/:id/reject', requireAuth, async (req, res) => {
     if (!_adminCheckSession(req)) return res.status(403).json({ ok: false });
     try {
-      const data = await callGolden ConnectApi('/internal/admin/withdrawals/'
+      const data = await callGoldenConnectApi('/internal/admin/withdrawals/'
         + encodeURIComponent(req.params.id) + '/reject',
         { reason: String((req.body && req.body.reason) || '') });
       res.json(data);
@@ -4997,7 +4997,7 @@ function createWebRouter(config, storage, bot) {
   router.post('/api/admin/matrix/launch', requireAuth, async (req, res) => {
     if (!_adminCheckSession(req)) return res.status(403).json({ ok: false });
     try {
-      const data = await callGolden ConnectApi('/internal/admin/matrix/launch', { confirm: true });
+      const data = await callGoldenConnectApi('/internal/admin/matrix/launch', { confirm: true });
       res.json(data);
     } catch (e) {
       res.status(e && e.status || 502).json({ ok: false, reason: e.message });
@@ -5155,7 +5155,7 @@ function createWebRouter(config, storage, bot) {
           description: 'Golden Connect Ads Gift top-up',
           payload,
           paid_btn_name: 'openBot',
-          paid_btn_url: 'https://t.me/Golden Connect_bizbot',
+          paid_btn_url: 'https://t.me/GoldenConnect_bizbot',
           allow_anonymous: false,
         }),
       };
@@ -5386,7 +5386,7 @@ function createWebRouter(config, storage, bot) {
           if (inviter && inviter.referralCode) inviterRefCode = inviter.referralCode;
         }
       } catch (e) {}
-      const data = await callGolden ConnectApi('/internal/pay/create-invoice', {
+      const data = await callGoldenConnectApi('/internal/pay/create-invoice', {
         email,
         tariff_code: 'launch',
         method,
@@ -5453,7 +5453,7 @@ function createWebRouter(config, storage, bot) {
       } catch (e) {
         console.error('[pay] inviter lookup failed', e && e.message);
       }
-      const data = await callGolden ConnectApi('/internal/pay/create-invoice', {
+      const data = await callGoldenConnectApi('/internal/pay/create-invoice', {
         email,
         tariff_code,
         method,
@@ -5482,7 +5482,7 @@ function createWebRouter(config, storage, bot) {
     }
     if (!email) return res.json({ ok: true, bookings: [] });
     try {
-      const data = await callGolden ConnectApi('/internal/pay/bookings?email=' + encodeURIComponent(email));
+      const data = await callGoldenConnectApi('/internal/pay/bookings?email=' + encodeURIComponent(email));
       res.json(data);
     } catch (e) {
       console.error('[pay] bookings bridge failed', e && e.message);
@@ -5623,7 +5623,7 @@ function createWebRouter(config, storage, bot) {
       try {
         const email = String(u.email || '').trim().toLowerCase();
         if (email) {
-          const apiRes = await callGolden ConnectApi('/internal/team/by-email/referrals', { email });
+          const apiRes = await callGoldenConnectApi('/internal/team/by-email/referrals', { email });
           const list = (apiRes && Array.isArray(apiRes.referrals)) ? apiRes.referrals : null;
           if (list) {
             const root = { id: u.id, ref_code: u.referralCode || '' };
@@ -6181,13 +6181,13 @@ function createWebRouter(config, storage, bot) {
   // [trdx-exchange-2026-05-14] mount the P2P TRDX/USD exchange sub-router
   try {
     const dbModule = require('./planner/db/database');
-    const trdxRouter = createTrdxExchangeRoutes({ storage, callGolden ConnectApi, requireAuth, dbModule });
+    const trdxRouter = createTrdxExchangeRoutes({ storage, callGoldenConnectApi, requireAuth, dbModule });
     router.use(trdxRouter);
   } catch (e) { console.error('[trdx-exchange-mount]', e && e.message); }
 
   // [partners-2026-05-16] mount /api/partners proxy → goldenConnect-api internal endpoints
   try {
-    const partnersRouter = createPartnersRouter({ storage, callGolden ConnectApi, requireAuth });
+    const partnersRouter = createPartnersRouter({ storage, callGoldenConnectApi, requireAuth });
     router.use(partnersRouter);
   } catch (e) { console.error('[partners-mount]', e && e.message); }
 

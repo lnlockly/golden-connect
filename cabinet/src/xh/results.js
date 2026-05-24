@@ -71,7 +71,7 @@ async function sendResults(ctx, storage) {
   try { webUser = storage.ensureWebUserFromTelegram(tgUser); } catch (e) {}
   const refStats = (webUser && storage.getTeamStats) ? storage.getTeamStats(webUser.id) : null;
   const refLink = (webUser && webUser.referralCode)
-    ? 'https://t.me/' + ((ctx.me && ctx.me.username) || 'Golden Connect_bizbot') + '?start=ref_' + webUser.referralCode
+    ? 'https://t.me/' + ((ctx.me && ctx.me.username) || 'GoldenConnect_bizbot') + '?start=ref_' + webUser.referralCode
     : null;
 
   // Karma indicator

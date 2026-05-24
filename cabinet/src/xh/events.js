@@ -118,7 +118,7 @@ async function safeSend(ctx, text, opts) {
   }
 }
 
-function setupGolden ConnectEvents(bot, storage, config) {
+function setupGoldenConnectEvents(bot, storage, config) {
   // Intercept /start with payload BEFORE alpha's /start handler.
   // We use bot.use() middleware that checks /start message, and if it's our payload, handles it
   // and stops propagation. Otherwise calls next().
@@ -401,4 +401,4 @@ async function maybeAttributeReferral(ctx, refCode, storage, bot) {
   } catch (e) {}
 }
 
-module.exports = { setupGolden ConnectEvents, parseStartPayload };
+module.exports = { setupGoldenConnectEvents, parseStartPayload };

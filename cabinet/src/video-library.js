@@ -404,7 +404,7 @@ function makePublicItem(row, config) {
   };
 }
 
-function createGolden ConnectVideoLibrary(config = {}) {
+function createGoldenConnectVideoLibrary(config = {}) {
   let db = null;
   let dbFailed = false;
 
@@ -600,5 +600,5 @@ function createGolden ConnectVideoLibrary(config = {}) {
 
 module.exports = {
   CATEGORY_META,
-  createGolden ConnectVideoLibrary,
+  createGoldenConnectVideoLibrary,
 };

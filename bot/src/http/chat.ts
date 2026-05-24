@@ -37,7 +37,7 @@ const MIN_BUDGET = 100;
 const TOKEN_BUDGET = Number(process.env.CHAT_TOKEN_BUDGET ?? 40_000);
 const RATE_WINDOW_MS = Number(process.env.CHAT_RATE_WINDOW_MS ?? 24 * 60 * 60 * 1000);
 const TG_OPERATOR_URL =
-  process.env.TG_OPERATOR_URL ?? "https://t.me/AIGolden Connect_bot?start=operator";
+  process.env.TG_OPERATOR_URL ?? "https://t.me/AIGoldenConnect_bot?start=operator";
 
 interface InMsg { role: "user" | "assistant"; content: string }
 interface Bucket { tokens: number; firstAt: number }
@@ -152,7 +152,7 @@ nav: {"focus":"input"}
 - Если просят сравнить с конкурентами / другими MLM / биржами — отвечай честно без лжи, выделяй сильные стороны Golden Connect (реальная выручка с рекламы + маркетплейс, не "пирамида в воздухе").
 - Если шутят / троллят — отвечай с лёгкой иронией, не теряй лицо.
 - Если просят коротко — давай коротко (1 фраза). Если просят подробно — давай структурированно.
-- Сайт: goldenConnect.to · Кабинет: goldenConnect.to/cabinet · Маркетплейс: goldenConnect.to/marketplace · Бот: @Golden Connect_bizbot · Поддержка: @mlm808`;
+- Сайт: goldenConnect.to · Кабинет: goldenConnect.to/cabinet · Маркетплейс: goldenConnect.to/marketplace · Бот: @GoldenConnect_bizbot · Поддержка: @mlm808`;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 // Widened bot type — accepts both the real grammy Bot and the structural

@@ -175,7 +175,7 @@ export async function handleBillingAlert(
 /**
  * POST /internal/notify/crm-inbound — called by roboai-engine CrmInboundCron
  * when a lead replies in a CRM manual-send conversation. DMs the operator
- * (conversation owner) via @Golden ConnectCRMBot with preview + Open-in-CRM button.
+ * (conversation owner) via @GoldenConnectCRMBot with preview + Open-in-CRM button.
  */
 export async function handleCrmInbound(
 	req: IncomingMessage,

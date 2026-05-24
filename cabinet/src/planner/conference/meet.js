@@ -160,7 +160,7 @@ function setupMeetHandlers(bot, webappUrl) {
     const room = db.getConfRoom(roomId);
     if (!room) return;
 
-    const botUsername = ctx.me?.username || 'Golden Connect_bizbot';
+    const botUsername = ctx.me?.username || 'GoldenConnect_bizbot';
     const tgLink = `https://t.me/${botUsername}?start=conf_${roomId}`;
     const browserLink = webappUrl ? `${webappUrl}meet?conf=${roomId}` : '';
 
