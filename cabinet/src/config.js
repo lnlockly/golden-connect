@@ -48,16 +48,16 @@ module.exports = {
   botUsername: asOptionalText(process.env.BOT_USERNAME),
   port: asInt(process.env.PORT, 3810),
   dataDir: path.resolve(process.cwd(), dataDir),
-  golden-connectVideoDbPath: path.resolve(process.cwd(), asText(process.env.GOLDEN_CONNECT_VIDEO_DB_PATH, '../data/tiktok-publisher.db')),
-  golden-connectVideoMetadataPath: path.resolve(process.cwd(), asText(process.env.GOLDEN_CONNECT_VIDEO_METADATA_PATH, './data/golden-connect-video-library.jsonl')),
-  golden-connectVideoDir: path.resolve(process.cwd(), asText(process.env.GOLDEN_CONNECT_VIDEO_DIR, '../golden-connect-videos')),
-  golden-connectVideoPublicPath: asText(process.env.GOLDEN_CONNECT_VIDEO_PUBLIC_PATH, '/video-library'),
+  goldenConnectVideoDbPath: path.resolve(process.cwd(), asText(process.env.GOLDEN_CONNECT_VIDEO_DB_PATH, '../data/tiktok-publisher.db')),
+  goldenConnectVideoMetadataPath: path.resolve(process.cwd(), asText(process.env.GOLDEN_CONNECT_VIDEO_METADATA_PATH, './data/golden-connect-video-library.jsonl')),
+  goldenConnectVideoDir: path.resolve(process.cwd(), asText(process.env.GOLDEN_CONNECT_VIDEO_DIR, '../golden-connect-videos')),
+  goldenConnectVideoPublicPath: asText(process.env.GOLDEN_CONNECT_VIDEO_PUBLIC_PATH, '/video-library'),
   pointsPerReferral: asInt(process.env.POINTS_PER_REFERRAL, 100),
   publicBaseUrl: asOptionalText(process.env.PUBLIC_BASE_URL),
   // [sso] Cross-subdomain cookie scope. Set to ".golden-connect.to" so the
   // session cookie issued at app.golden-connect.to is also sent to crm.golden-connect.to.
   cookieDomain: asOptionalText(process.env.COOKIE_DOMAIN),
-  sessionCookieName: asText(process.env.SESSION_COOKIE_NAME, 'golden-connect_site_session'),
+  sessionCookieName: asText(process.env.SESSION_COOKIE_NAME, 'goldenConnect_site_session'),
   sessionTtlDays: asInt(process.env.SESSION_TTL_DAYS, 30),
   links: {
     mainChat: asOptionalText(process.env.WELCOME_MAIN_CHAT_URL),
@@ -123,6 +123,6 @@ module.exports = {
   // Bridge to legacy golden-connect-api (Hono + Postgres) that owns CryptoBot +
   // Platega + bookings ledger. Cabinet proxies /api/pay/* calls there via
   // x-golden-connect-secret to avoid duplicating payment infra.
-  golden-connectApiBaseUrl: asOptionalText(process.env.GOLDEN_CONNECT_API_BASE_URL, 'https://api.golden-connect.to'),
-  golden-connectApiInternalSecret: asOptionalText(process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET)
+  goldenConnectApiBaseUrl: asOptionalText(process.env.GOLDEN_CONNECT_API_BASE_URL, 'https://api.golden-connect.to'),
+  goldenConnectApiInternalSecret: asOptionalText(process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET)
 };

@@ -85,9 +85,9 @@ FREE: только L1 = 10%.
 Партнёр может добавить @Golden Connect_bizbot в свою Telegram-группу для трекинга участников (кто пришёл/ушёл, кто молчит, кто активный). По умолчанию бот в тихом режиме — только трекер, без автопромо.
 Команды в группе:
 /members — список участников | /quiet — кто молчит >7д | /active7d — топ активных | /today_active — кто писал сегодня | /who @user — карточка | /sync — синхронизировать (админ)
-/golden-connect_active — админ группы включает анонсы Golden Connect (эфиры, digest, бонусы)
-/golden-connect_silent — админ возвращает в тихий режим
-/golden-connect_status — текущий режим
+/goldenConnect_active — админ группы включает анонсы Golden Connect (эфиры, digest, бонусы)
+/goldenConnect_silent — админ возвращает в тихий режим
+/goldenConnect_status — текущий режим
 
 ═══ КОМАНДЫ БОТА @Golden Connect_bizbot ═══
 /start — регистрация / авторизация / реф-ссылка
@@ -130,8 +130,8 @@ FREE: только L1 = 10%.
 
   let chatOpen = false;
   /* [ai-chat-history-v1] */
-  let messages = (function(){ try { var raw = localStorage.getItem("golden-connect_ai_chat_history"); if (raw) { var arr = JSON.parse(raw); if (Array.isArray(arr) && arr.length < 50) return arr; } } catch(_){} return []; })();
-  function _saveHistory(){ try { localStorage.setItem("golden-connect_ai_chat_history", JSON.stringify(messages.slice(-30))); } catch(_){} }
+  let messages = (function(){ try { var raw = localStorage.getItem("goldenConnect_ai_chat_history"); if (raw) { var arr = JSON.parse(raw); if (Array.isArray(arr) && arr.length < 50) return arr; } } catch(_){} return []; })();
+  function _saveHistory(){ try { localStorage.setItem("goldenConnect_ai_chat_history", JSON.stringify(messages.slice(-30))); } catch(_){} }
   let isTyping = false;
   let inlineMountId = 'tai-inline-mount';
 

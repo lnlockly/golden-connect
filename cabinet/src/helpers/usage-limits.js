@@ -90,8 +90,8 @@ function _getEmailForUser(userId, optEmail) {
 async function _fetchTariffFromApi(userId, optEmail) {
   const email = _getEmailForUser(userId, optEmail);
   if (!email) return 'free';
-  const apiBase = String((config && config.golden-connectApiBaseUrl) || 'https://api.golden-connect.to').replace(/\/+$/, '');
-  const secret  = String((config && config.golden-connectApiInternalSecret) || '');
+  const apiBase = String((config && config.goldenConnectApiBaseUrl) || 'https://api.golden-connect.to').replace(/\/+$/, '');
+  const secret  = String((config && config.goldenConnectApiInternalSecret) || '');
   if (!secret) return 'free';
   try {
     const res = await fetch(apiBase + '/internal/finance/balances?email=' + encodeURIComponent(email), {

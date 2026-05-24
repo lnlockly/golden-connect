@@ -227,7 +227,7 @@
       const map = {
         insufficient_working: 'Недостаточно средств на личном кошельке Golden Connect',
         insufficient_balance: 'Недостаточно средств на балансе',
-        not_linked_to_golden-connect: 'Ваш GIFT-аккаунт не связан с кошельком Golden Connect',
+        not_linked_to_goldenConnect: 'Ваш GIFT-аккаунт не связан с кошельком Golden Connect',
         min_10_usdt: 'Минимальная сумма вывода — 10 USDT',
         address_required: 'Укажите адрес кошелька',
         bad_amount: 'Некорректная сумма',

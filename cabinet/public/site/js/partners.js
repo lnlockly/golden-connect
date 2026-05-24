@@ -309,7 +309,7 @@
         +     '<input id="prtnr-input-link" type="url" class="cab-input" placeholder="https://..." style="width:100%;padding:10px 12px;background:rgba(0,0,0,.30);border:1px solid rgba(255,255,255,.10);border-radius:8px;color:#fff;font-size:13px;font-family:monospace;box-sizing:border-box" />'
         +   '</label>'
         +   '<label style="display:block;margin-bottom:14px"><div style="font-size:10.5px;color:#9ca3af;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-weight:700">Username в проекте (необязательно)</div>'
-        +     '<input id="prtnr-input-uname" type="text" class="cab-input" placeholder="например golden-connectpro" maxlength="64" style="width:100%;padding:10px 12px;background:rgba(0,0,0,.30);border:1px solid rgba(255,255,255,.10);border-radius:8px;color:#fff;font-size:13px;box-sizing:border-box" />'
+        +     '<input id="prtnr-input-uname" type="text" class="cab-input" placeholder="например goldenConnectpro" maxlength="64" style="width:100%;padding:10px 12px;background:rgba(0,0,0,.30);border:1px solid rgba(255,255,255,.10);border-radius:8px;color:#fff;font-size:13px;box-sizing:border-box" />'
         +   '</label>'
         +   '<button id="prtnr-submit-btn" onclick="window.trdxPartnersSubmit(\'' + esc(id) + '\')" style="padding:12px 24px;background:linear-gradient(135deg,#b14aff 0%,#00e0ff 100%);color:#0a0a1a;border:none;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer">Добавить и получить инвайтера →</button>'
         + '</div>';

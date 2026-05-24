@@ -33,7 +33,7 @@ app.use((req, res, next) => {
     const raw = String((req.query && req.query.ref) || '').trim().toLowerCase();
     if (raw && /^xh[a-z0-9]{1,32}$/.test(raw)) {
       const cookieDomain = process.env.COOKIE_DOMAIN || undefined;
-      res.cookie('golden-connect_ref', raw, {
+      res.cookie('goldenConnect_ref', raw, {
         path: '/',
         domain: cookieDomain,
         maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -604,8 +604,8 @@ try {
   console.error('[http] webapp attach failed', err && err.message);
 }
 
-if (config.golden-connectVideoDir && fs.existsSync(config.golden-connectVideoDir)) {
-  app.use(config.golden-connectVideoPublicPath, express.static(config.golden-connectVideoDir, {
+if (config.goldenConnectVideoDir && fs.existsSync(config.goldenConnectVideoDir)) {
+  app.use(config.goldenConnectVideoPublicPath, express.static(config.goldenConnectVideoDir, {
     maxAge: '7d',
     index: false,
     fallthrough: true,
@@ -710,7 +710,7 @@ app.get('/auth/magic', (req, res) => {
     userAgent: req.headers['user-agent'] || '',
   });
   const secureCookies = /^https:\/\//i.test(String(config.publicBaseUrl || ''));
-  const cookieName = String(config.sessionCookieName || 'golden-connect_site_session').trim();
+  const cookieName = String(config.sessionCookieName || 'goldenConnect_site_session').trim();
   const parts = [`${encodeURIComponent(cookieName)}=${encodeURIComponent(rawToken)}`];
   parts.push(`Max-Age=${sessionTtlDays * 24 * 60 * 60}`);
   parts.push('Path=/');

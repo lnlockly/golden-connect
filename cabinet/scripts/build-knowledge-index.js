@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Build knowledge index from telegram exports.
-// Reads: data/telegram-exports/golden-connect_and_beauty/text-knowledge/*.md
+// Reads: data/telegram-exports/goldenConnect_and_beauty/text-knowledge/*.md
 // Writes: src/planner/bot/knowledge/chunks.json
 //
 // Usage: npm run build:knowledge
@@ -14,7 +14,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const KNOWLEDGE_DIR = path.join(__dirname, '..', 'data', 'telegram-exports', 'golden-connect_and_beauty', 'text-knowledge');
+const KNOWLEDGE_DIR = path.join(__dirname, '..', 'data', 'telegram-exports', 'goldenConnect_and_beauty', 'text-knowledge');
 const OUTPUT_DIR = path.join(__dirname, '..', 'src', 'planner', 'bot', 'knowledge');
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'chunks.json');
 

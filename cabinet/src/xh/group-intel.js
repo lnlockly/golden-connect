@@ -84,7 +84,7 @@ function ensureSchema() {
       invited_by_tg_id INTEGER,
       web_user_id INTEGER,           -- link to cabinet webUsers
       tariff_code TEXT,
-      golden-connect_status TEXT,
+      goldenConnect_status TEXT,
       first_seen_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       UNIQUE(chat_id, tg_user_id)
     );
@@ -478,7 +478,7 @@ async function onMemberJoined(ctx, user, storage, config, wuData, platform) {
   // [ai-welcome-public] AI-generated welcome posted PUBLICLY in the group.
   // Each new member triggers a fresh Groq call → different services + different angle every time.
   // Visible to all chat members (including old ones) so each greeting is interesting.
-  // Skip if the chat is silenced via /golden-connect_silent.
+  // Skip if the chat is silenced via /goldenConnect_silent.
   try {
     if (!_gsIsSilenced(ctx.chat.id)) {
       const { generateWelcome } = require('../services/ai-welcome');
@@ -949,7 +949,7 @@ function registerCommands(bot, storage, config) {
 
   // Inline callback for help-new — silent in groups (bot is invisible there) /* [no-gi-help-new] */
   // [admin-help] Admin-only command list reveal in group
-  bot.command('golden-connect_help', async (ctx) => {
+  bot.command('goldenConnect_help', async (ctx) => {
     if (!ctx.chat || ctx.chat.type === 'private') return; // private uses bot menu
     if (!await isChatAdmin(ctx)) return; // silent for non-admins
     const lines = [
@@ -965,10 +965,10 @@ function registerCommands(bot, storage, config) {
       '• /menu — главное меню',
       '',
       '<b>В группе (для админов)</b>:',
-      '• /golden-connect_active — включить полный режим',
-      '• /golden-connect_silent — тихий режим (трекер + анонсы)',
-      '• /golden-connect_status — текущий режим',
-      '• /golden-connect_help — этот справочник',
+      '• /goldenConnect_active — включить полный режим',
+      '• /goldenConnect_silent — тихий режим (трекер + анонсы)',
+      '• /goldenConnect_status — текущий режим',
+      '• /goldenConnect_help — этот справочник',
       '• /members /quiet /active7d /who @user — статистика',
     ];
     return ctx.reply(lines.join('\n'), { parse_mode: 'HTML' });
@@ -1172,8 +1172,8 @@ function startGroupIntelCrons(bot, storage, config) {
 // ── EVENTS broadcast to groups ──
 async function broadcastEventsToGroups(bot, config) {
   // Fetch upcoming events from API postgres via internal call
-  const apiBase = String(config?.golden-connectApiBaseUrl || 'https://api.golden-connect.to').replace(/\/+$/, '');
-  const secret = String(config?.golden-connectApiInternalSecret || '');
+  const apiBase = String(config?.goldenConnectApiBaseUrl || 'https://api.golden-connect.to').replace(/\/+$/, '');
+  const secret = String(config?.goldenConnectApiInternalSecret || '');
   if (!secret) return;
 
   let events = [];

@@ -6,7 +6,7 @@ const { buildSiteContent } = require('../src/site-content');
 const config = require('../src/config');
 
 const ROOT = path.join(__dirname, '..');
-const EXPORT_ROOT = path.join(ROOT, 'data', 'telegram-exports', 'golden-connect_and_beauty');
+const EXPORT_ROOT = path.join(ROOT, 'data', 'telegram-exports', 'goldenConnect_and_beauty');
 const KNOWLEDGE_FILE = path.join(EXPORT_ROOT, 'text-knowledge', 'raw', 'all_useful.jsonl');
 const CHAT_META_FILE = path.join(EXPORT_ROOT, 'chat.json');
 const OUTPUT_DIR = path.join(ROOT, 'public', 'site', 'data');

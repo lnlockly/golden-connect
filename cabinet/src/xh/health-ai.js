@@ -27,7 +27,7 @@ async function callGroq(messages, opts = {}) {
 
 // Takes a user question (ANY topic around Golden Connect growth) and returns
 // tactical advice — which commands to run, what to say, how to handle it.
-async function golden-connectAdvice(question, config) {
+async function goldenConnectAdvice(question, config) {
   const groqKeys = getGroqKeys(config);
   if (!groqKeys.length) {
     return 'AI временно недоступен. Пока — открой /promo или /ref и сделай первые действия вручную.';
@@ -99,7 +99,7 @@ function setupHealthAI(bot, storage, config) {
       );
     }
     try { await ctx.replyWithChatAction('typing'); } catch (e) {}
-    const advice = await golden-connectAdvice(text, config);
+    const advice = await goldenConnectAdvice(text, config);
     await ctx.reply(escapeHtml(advice), { disable_web_page_preview: true });
   });
 
@@ -117,9 +117,9 @@ function setupHealthAI(bot, storage, config) {
       );
     }
     try { await ctx.replyWithChatAction('typing'); } catch (e) {}
-    const advice = await golden-connectAdvice(text, config);
+    const advice = await goldenConnectAdvice(text, config);
     await ctx.reply(escapeHtml(advice), { disable_web_page_preview: true });
   });
 }
 
-module.exports = { setupHealthAI, golden-connectAdvice };
+module.exports = { setupHealthAI, goldenConnectAdvice };

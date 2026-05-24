@@ -23,8 +23,8 @@ function _emailFor(userId, override) {
 }
 
 async function _fetchTariff(email, config) {
-  const apiBase = String((config && config.golden-connectApiBaseUrl) || 'https://api.golden-connect.to').replace(/\/+$/, '');
-  const secret = String((config && config.golden-connectApiInternalSecret) || process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET || '');
+  const apiBase = String((config && config.goldenConnectApiBaseUrl) || 'https://api.golden-connect.to').replace(/\/+$/, '');
+  const secret = String((config && config.goldenConnectApiInternalSecret) || process.env.GOLDEN_CONNECT_API_INTERNAL_SECRET || '');
   if (!email || !secret) return null;
   try {
     const r = await fetch(apiBase + '/internal/finance/balances?email=' + encodeURIComponent(email), {

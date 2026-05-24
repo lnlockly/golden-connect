@@ -5,11 +5,11 @@ import { useEffect, useState } from 'react';
  *
  * Semantics:
  *   - `myCode` is THIS visitor's own referral code. Generated once on first
- *     visit, persisted in localStorage under `golden-connect_ref_code`.
+ *     visit, persisted in localStorage under `goldenConnect_ref_code`.
  *     When this visitor shares their link, their own code travels forward.
  *   - `invitedBy` is the code of whoever invited the current visitor,
  *     taken from the URL query string `?ref=XXXX` on first arrival.
- *     Also persisted (once) in localStorage under `golden-connect_invited_by`
+ *     Also persisted (once) in localStorage under `goldenConnect_invited_by`
  *     so subsequent visits keep attribution.
  */
 export function useRefCode(): { myCode: string; invitedBy: string | null } {
@@ -25,14 +25,14 @@ export function useRefCode(): { myCode: string; invitedBy: string | null } {
     // --- my own code ---
     let myCode = '';
     try {
-      myCode = localStorage.getItem('golden-connect_ref_code') || '';
+      myCode = localStorage.getItem('goldenConnect_ref_code') || '';
     } catch {
       /* ignore */
     }
     if (!myCode) {
       myCode = generateCode();
       try {
-        localStorage.setItem('golden-connect_ref_code', myCode);
+        localStorage.setItem('goldenConnect_ref_code', myCode);
       } catch {
         /* ignore */
       }
@@ -45,9 +45,9 @@ export function useRefCode(): { myCode: string; invitedBy: string | null } {
       const urlRef = params.get('ref');
       if (urlRef && /^[A-Za-z0-9_-]{1,32}$/.test(urlRef)) {
         invitedBy = urlRef;
-        localStorage.setItem('golden-connect_invited_by', urlRef);
+        localStorage.setItem('goldenConnect_invited_by', urlRef);
       } else {
-        invitedBy = localStorage.getItem('golden-connect_invited_by');
+        invitedBy = localStorage.getItem('goldenConnect_invited_by');
       }
     } catch {
       /* ignore */

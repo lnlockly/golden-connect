@@ -21,7 +21,7 @@
   function fmt$(cents) { return '$' + ((cents || 0) / 100).toFixed(2); }
 
   // Cabinet cookie path = /cabinet → fetches MUST go through /cabinet prefix
-  // so the browser includes golden-connect_cabinet_session cookie in the request.
+  // so the browser includes goldenConnect_cabinet_session cookie in the request.
   // Cabinet middleware strips /cabinet then matches our router on /api/roboai.
   async function callRoboai(method, path, body) {
     const init = {

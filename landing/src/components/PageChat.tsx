@@ -42,7 +42,7 @@ export function PageChat({ intent, page, sections }: PageChatProps) {
 
   // Per-pathname open state — survives soft navigations within a
   // single route but doesn't leak across routes. Keyed by pathname.
-  const storageKey = `golden-connect_pagechat_open_${page}`;
+  const storageKey = `goldenConnect_pagechat_open_${page}`;
   const [open, setOpen] = useState<boolean>(() => {
     try {
       return sessionStorage.getItem(storageKey) === '1';
@@ -254,7 +254,7 @@ export function PageChat({ intent, page, sections }: PageChatProps) {
  * window-level slot so ChatInline's /api/chat request body can
  * pick them up without a new prop. This keeps ChatInline
  * unmodified except for a single optional merge — see notes in
- * ChatInline.tsx (we read window.__golden-connectPageCtx in the send
+ * ChatInline.tsx (we read window.__goldenConnectPageCtx in the send
  * path). Safe to run multiple times; last-write-wins.
  */
 function PageChatContextBridge({
@@ -267,16 +267,16 @@ function PageChatContextBridge({
   sections: PageSection[];
 }) {
   useEffect(() => {
-    (window as unknown as { __golden-connectPageCtx?: unknown }).__golden-connectPageCtx = {
+    (window as unknown as { __goldenConnectPageCtx?: unknown }).__goldenConnectPageCtx = {
       intent,
       page,
       sections,
     };
     return () => {
-      const cur = (window as unknown as { __golden-connectPageCtx?: { page?: string } })
-        .__golden-connectPageCtx;
+      const cur = (window as unknown as { __goldenConnectPageCtx?: { page?: string } })
+        .__goldenConnectPageCtx;
       if (cur && cur.page === page) {
-        (window as unknown as { __golden-connectPageCtx?: unknown }).__golden-connectPageCtx = undefined;
+        (window as unknown as { __goldenConnectPageCtx?: unknown }).__goldenConnectPageCtx = undefined;
       }
     };
   }, [intent, page, sections]);

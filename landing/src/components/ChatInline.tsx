@@ -640,17 +640,17 @@ export function ChatInline({
     // (rate limit / network blip / Claude 529) recovers within a few s.
     //
     // When <PageChat> mounted us inside a deep sub-page, it parks
-    // { intent, page, sections } on window.__golden-connectPageCtx so the
+    // { intent, page, sections } on window.__goldenConnectPageCtx so the
     // backend can tailor the system prompt and answer/nav about that
     // page. Merge it into the request body here — unaffected when
     // the hero chat or dashboard chat calls us (ctx is absent).
     const pageCtx = (window as unknown as {
-      __golden-connectPageCtx?: {
+      __goldenConnectPageCtx?: {
         intent?: string;
         page?: string;
         sections?: { id: string; label: string }[];
       };
-    }).__golden-connectPageCtx;
+    }).__goldenConnectPageCtx;
     const chatIntent = pageCtx?.intent || intent;
 
     let resp: Response | null = null;

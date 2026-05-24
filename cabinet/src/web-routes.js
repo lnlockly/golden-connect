@@ -142,7 +142,7 @@ function createWebRouter(config, storage, bot) {
   try { applyPlategaSchema(); } catch (e) { console.error('[platega-migrate_failed]', e && e.message); }
   try { adcTick.start(); } catch (e) { console.error('[adc-tick_failed]', e && e.message); }
   try { applyShrBioSchema(); } catch (e) { console.error('[shrbio-migrate_failed]', e && e.message); }
-  const golden-connectVideoLibrary = createGolden ConnectVideoLibrary(config);
+  const goldenConnectVideoLibrary = createGolden ConnectVideoLibrary(config);
   const protocolTemplates = Array.isArray(siteContent.memberPortal && siteContent.memberPortal.protocolTemplates)
     ? siteContent.memberPortal.protocolTemplates
     : Array.isArray(siteContent.protocols)
@@ -154,7 +154,7 @@ function createWebRouter(config, storage, bot) {
   const supportCategories = Array.isArray(siteContent.memberPortal && siteContent.memberPortal.supportCategories)
     ? siteContent.memberPortal.supportCategories
     : [];
-  const cookieName = String(config.sessionCookieName || 'golden-connect_site_session').trim();
+  const cookieName = String(config.sessionCookieName || 'goldenConnect_site_session').trim();
   const sessionTtlDays = Math.max(1, Math.min(180, Number(config.sessionTtlDays || 30)));
   const secureCookies = /^https:\/\//i.test(String(config.publicBaseUrl || ''));
   const contentAdminEmails = new Set(
@@ -495,7 +495,7 @@ function createWebRouter(config, storage, bot) {
     const manualItems = typeof storage.listMediaLibraryEntries === 'function'
       ? storage.listMediaLibraryEntries(safeLimit)
       : [];
-    const videoItems = golden-connectVideoLibrary.listVideoItems(safeLimit);
+    const videoItems = goldenConnectVideoLibrary.listVideoItems(safeLimit);
     const combined = videoItems.concat(manualItems);
     const seen = new Set();
     const deduped = [];
@@ -561,7 +561,7 @@ function createWebRouter(config, storage, bot) {
   router.get('/api/public/media-library', (req, res) => {
     const rawId = String((req.query && (req.query.video || req.query.id)) || '').trim();
     if (rawId) {
-      const item = golden-connectVideoLibrary.getVideoItemById(rawId);
+      const item = goldenConnectVideoLibrary.getVideoItemById(rawId);
       if (!item) {
         return res.status(404).json({ ok: false, reason: 'not_found' });
       }
@@ -569,7 +569,7 @@ function createWebRouter(config, storage, bot) {
       return res.json({ ok: true, item: compactPublicMediaItem(item, { includeTranscript }) });
     }
     const safeLimit = parseLimit(req.query && req.query.limit, 200, 600);
-    const items = golden-connectVideoLibrary.listVideoItems(safeLimit).map(compactPublicMediaItem);
+    const items = goldenConnectVideoLibrary.listVideoItems(safeLimit).map(compactPublicMediaItem);
     return res.json({
       ok: true,
       items,
@@ -741,7 +741,7 @@ function createWebRouter(config, storage, bot) {
     })();
     const name = (publicUser && (publicUser.displayName || publicUser.email)) || 'Команда Golden Connect';
     const email = (publicUser && publicUser.email) || '';
-    const companyLink = (publicUser && publicUser.golden-connectRefLink)
+    const companyLink = (publicUser && publicUser.goldenConnectRefLink)
       || buildBotReferralUrl(publicUser)
       || buildBotReferralUrl('xh160f8');
     return res.json({
@@ -767,7 +767,7 @@ function createWebRouter(config, storage, bot) {
     })();
     const name = (publicInviter && (publicInviter.displayName || publicInviter.email)) || 'Команда Golden Connect';
     const email = (publicInviter && publicInviter.email) || '';
-    const companyLink = (publicInviter && publicInviter.golden-connectRefLink)
+    const companyLink = (publicInviter && publicInviter.goldenConnectRefLink)
       || buildBotReferralUrl(publicInviter || inviter || 'xh160f8');
 
     return res.json({
@@ -1522,7 +1522,7 @@ function createWebRouter(config, storage, bot) {
 
   // ── Magic-link issuance (called by bot via shared INTERNAL_API_SECRET)
   router.post('/api/bot/issue-magic-link', (req, res) => {
-    const expected = String(config.golden-connectApiInternalSecret || '').trim();
+    const expected = String(config.goldenConnectApiInternalSecret || '').trim();
     const got = String(req.headers['x-golden-connect-secret'] || '').trim();
     if (!expected || got !== expected) {
       return res.status(401).json({ ok: false, reason: 'unauthorized' });
@@ -3578,7 +3578,7 @@ function createWebRouter(config, storage, bot) {
         pub.experienceLevel, pub.goalsSummary,
         prof.phone, prof.city, prof.country, prof.birthDate,
         onboarding.primaryGoal, (onboarding.focusAreas && onboarding.focusAreas.length ? '1' : ''),
-        pub.golden-connectRefLink,
+        pub.goldenConnectRefLink,
         // Extended Golden Connect fields (stored in profile.notes JSON or separate)
         prof.niche, prof.trafficSource, prof.monthlyBudget, prof.workSchedule,
         prof.socialTelegram, prof.socialInstagram, prof.socialYoutube, prof.socialTiktok,
@@ -4195,7 +4195,7 @@ function createWebRouter(config, storage, bot) {
         lastAction: r.lastAction,
         createdAt: r.createdAt,
         onboardingCompletedAt: r.onboardingCompletedAt,
-        golden-connectRefLink: r.golden-connectRefLink,
+        goldenConnectRefLink: r.goldenConnectRefLink,
         note: (r.inviterNotes && r.inviterNotes[String(req.webUser.id)]) || '',
         snoozedUntil: (r.inviterSnoozeUntil && r.inviterSnoozeUntil[String(req.webUser.id)]) || null,
         contactedAt: (r.inviterContactedAt && r.inviterContactedAt[String(req.webUser.id)]) || null,
@@ -4222,7 +4222,7 @@ function createWebRouter(config, storage, bot) {
               lastAction: r.source ? ('source: ' + r.source) : '',
               createdAt: r.created_at,
               onboardingCompletedAt: null,
-              golden-connectRefLink: null,
+              goldenConnectRefLink: null,
               note: '',
               snoozedUntil: null,
               contactedAt: r.last_contact_at,
@@ -4484,11 +4484,11 @@ function createWebRouter(config, storage, bot) {
   // Platega + bookings ledger) lives in the legacy golden-connect-api service;
   // this section proxies cabinet → /internal/pay/* on that service using
   // the shared INTERNAL_API_SECRET.
-  const PAY_API_BASE = String(config.golden-connectApiBaseUrl || '').replace(/\/+$/, '');
-  const PAY_INTERNAL_SECRET = String(config.golden-connectApiInternalSecret || '');
+  const PAY_API_BASE = String(config.goldenConnectApiBaseUrl || '').replace(/\/+$/, '');
+  const PAY_INTERNAL_SECRET = String(config.goldenConnectApiInternalSecret || '');
 
   async function callGolden ConnectApi(path, body) {
-    // [callgolden-connectapi-retry-2026-05-21] timeout + retry for transient ingress/rollout failures
+    // [callgoldenConnectapi-retry-2026-05-21] timeout + retry for transient ingress/rollout failures
     if (!PAY_INTERNAL_SECRET) {
       const err = new Error('pay_bridge_not_configured');
       err.status = 503;

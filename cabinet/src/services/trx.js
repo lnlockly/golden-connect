@@ -21,8 +21,8 @@ async function _fetchTariffCode(email, telegramUserId) {
     if (telegramUserId) email = 'tg' + telegramUserId + '@golden-connect.bot';
     else return 'free';
   }
-  const apiBase = String((_config && _config.golden-connectApiBaseUrl) || 'https://api.golden-connect.to').replace(/\/+$/, '');
-  const secret = String((_config && _config.golden-connectApiInternalSecret) || '');
+  const apiBase = String((_config && _config.goldenConnectApiBaseUrl) || 'https://api.golden-connect.to').replace(/\/+$/, '');
+  const secret = String((_config && _config.goldenConnectApiInternalSecret) || '');
   if (!secret) return 'free';
   try {
     const res = await fetch(apiBase + '/internal/finance/balances?email=' + encodeURIComponent(email), {

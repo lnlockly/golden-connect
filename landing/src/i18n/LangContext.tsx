@@ -44,7 +44,7 @@ function detectInitialLang(): Lang {
     /* ignore */
   }
   try {
-    const saved = localStorage.getItem('golden-connect_lang');
+    const saved = localStorage.getItem('goldenConnect_lang');
     if (isLang(saved)) return saved;
   } catch {
     /* ignore */
@@ -68,7 +68,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.lang = lang;
-    try { localStorage.setItem('golden-connect_lang', lang); } catch { /* ignore */ }
+    try { localStorage.setItem('goldenConnect_lang', lang); } catch { /* ignore */ }
   }, [lang]);
 
   const value = useMemo<LangCtx>(() => ({

@@ -219,11 +219,11 @@ function buildPosterUrl(row, categoryId, speakers) {
 function buildPublicVideoUrl(row, config) {
   const videoFile = cleanText(row.video_file || '');
   if (!videoFile) return '';
-  const dir = cleanText(config.golden-connectVideoDir || '');
+  const dir = cleanText(config.goldenConnectVideoDir || '');
   if (!dir) return '';
   const filePath = path.join(dir, videoFile);
   if (!fs.existsSync(filePath)) return '';
-  const base = `/${cleanText(config.golden-connectVideoPublicPath || '/video-library').replace(/^\/+/, '').replace(/\/+$/, '')}`;
+  const base = `/${cleanText(config.goldenConnectVideoPublicPath || '/video-library').replace(/^\/+/, '').replace(/\/+$/, '')}`;
   return `${base}/${encodeURIComponent(videoFile)}`;
 }
 
@@ -438,7 +438,7 @@ function createGolden ConnectVideoLibrary(config = {}) {
   }
 
   function listJsonlItems(limit = 300) {
-    const metadataPath = cleanText(config.golden-connectVideoMetadataPath || '');
+    const metadataPath = cleanText(config.goldenConnectVideoMetadataPath || '');
     if (!metadataPath || !fs.existsSync(metadataPath)) return [];
     const safeLimit = Math.max(1, Math.min(1000, parseInt(limit, 10) || 300));
     const raw = fs.readFileSync(metadataPath, 'utf8');
@@ -467,7 +467,7 @@ function createGolden ConnectVideoLibrary(config = {}) {
   function getDb() {
     if (dbFailed) return null;
     if (db) return db;
-    const dbPath = cleanText(config.golden-connectVideoDbPath || '');
+    const dbPath = cleanText(config.goldenConnectVideoDbPath || '');
     if (!Database || !dbPath || !fs.existsSync(dbPath)) {
       dbFailed = true;
       return null;
@@ -517,7 +517,7 @@ function createGolden ConnectVideoLibrary(config = {}) {
         tags_json,
         transcript_status,
         updated_at
-      FROM golden-connect_video_library
+      FROM goldenConnect_video_library
       WHERE transcript_status = 'ready'
       ORDER BY
         CASE category
@@ -566,7 +566,7 @@ function createGolden ConnectVideoLibrary(config = {}) {
           tags_json,
           transcript_status,
           updated_at
-        FROM golden-connect_video_library
+        FROM goldenConnect_video_library
         WHERE video_external_id = ?
            OR video_file = ?
            OR video_file = ?
@@ -576,7 +576,7 @@ function createGolden ConnectVideoLibrary(config = {}) {
       if (row) return makePublicItem(row, config);
     }
 
-    const metadataPath = cleanText(config.golden-connectVideoMetadataPath || '');
+    const metadataPath = cleanText(config.goldenConnectVideoMetadataPath || '');
     if (!metadataPath || !fs.existsSync(metadataPath)) return null;
     const raw = fs.readFileSync(metadataPath, 'utf8');
     const lines = raw.split(/\r?\n/g).map((line) => line.trim()).filter(Boolean);

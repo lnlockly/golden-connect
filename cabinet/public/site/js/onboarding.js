@@ -1,8 +1,8 @@
 
 /* ════════════════ ONBOARDING WIZARD — 10 шагов, $1 reward ════════════════ */
 (function() {
-  if (window._golden-connectOnbWired) return;
-  window._golden-connectOnbWired = true;
+  if (window._goldenConnectOnbWired) return;
+  window._goldenConnectOnbWired = true;
 
   const QUESTIONS = [
     { n: 1, key: 'name', text: 'Как тебя называть?', sub: 'Просто имя — будем обращаться лично', type: 'text', icon: '👋' },
@@ -31,7 +31,7 @@
     { n: 10, key: 'bonus', text: 'Получить бонус $1 + персональный план?', sub: '', type: 'choice', icon: '🎁',
       options: [['🚀','Получить план и $1','yes'],['🤔','Пока без плана','no_plan']] },
   ];
-  const ONB_KEY = 'golden-connect_onb_seen';
+  const ONB_KEY = 'goldenConnect_onb_seen';
 
   function api(method, url, body) {
     return fetch(url, {

@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import { TgLoginButton } from '../components/cabinet/TgLoginButton';
 
-const REF_STORAGE_KEY = 'golden-connect_invited_by';
+const REF_STORAGE_KEY = 'goldenConnect_invited_by';
 
 type Tab = 'tg' | 'email';
 

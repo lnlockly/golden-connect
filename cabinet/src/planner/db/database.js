@@ -399,10 +399,10 @@ function initSchema() {
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
-    CREATE INDEX IF NOT EXISTS idgolden-connect_courses_user ON health_courses(user_id, status);
-    CREATE INDEX IF NOT EXISTS idgolden-connect_log_course ON health_course_log(course_id, scheduled_date);
-    CREATE INDEX IF NOT EXISTS idgolden-connect_log_pending ON health_course_log(user_id, status, scheduled_date);
-    CREATE INDEX IF NOT EXISTS idgolden-connect_metrics_user ON health_metrics(user_id, date);
+    CREATE INDEX IF NOT EXISTS idgoldenConnect_courses_user ON health_courses(user_id, status);
+    CREATE INDEX IF NOT EXISTS idgoldenConnect_log_course ON health_course_log(course_id, scheduled_date);
+    CREATE INDEX IF NOT EXISTS idgoldenConnect_log_pending ON health_course_log(user_id, status, scheduled_date);
+    CREATE INDEX IF NOT EXISTS idgoldenConnect_metrics_user ON health_metrics(user_id, date);
     CREATE INDEX IF NOT EXISTS idx_plan_reminders_fire ON plan_reminders(fire_at, sent);
     CREATE INDEX IF NOT EXISTS idx_period_plans_user ON period_plans(user_id, status);
     CREATE INDEX IF NOT EXISTS idx_daily_routines_user ON daily_routines(user_id, is_active);

@@ -675,9 +675,9 @@ function createStorage(config = {}) {
       updatedAt: row.updatedAt || null,
       lastLoginAt: row.lastLoginAt || null,
       status: row.status || 'active',
-      golden-connectRefLink: row.golden-connectRefLink || null,
+      goldenConnectRefLink: row.goldenConnectRefLink || null,
       // Team/CRM fields
-      golden-connectRefLinkSetAt: row.golden-connectRefLinkSetAt || null,
+      goldenConnectRefLinkSetAt: row.goldenConnectRefLinkSetAt || null,
       lastActivityAt: row.lastActivityAt || null,
       lastAction: row.lastAction || null,
       activityLog: Array.isArray(row.activityLog) ? row.activityLog.slice(-30) : [],
@@ -2042,7 +2042,7 @@ function createStorage(config = {}) {
   function computeReferralStage(user) {
     if (!user) return TEAM_STAGES.INVITED;
     // CONVERTED: company link set
-    if (user.golden-connectRefLink && String(user.golden-connectRefLink).trim()) {
+    if (user.goldenConnectRefLink && String(user.goldenConnectRefLink).trim()) {
       return TEAM_STAGES.CONVERTED;
     }
     // If no telegram and no activity — invited (not yet interacted)
@@ -2092,8 +2092,8 @@ function createStorage(config = {}) {
     if (!Array.isArray(user.referralStageHistory)) user.referralStageHistory = [];
     user.referralStageHistory.push({ stage: newStage, at: nowIso(), from: oldStage });
     if (user.referralStageHistory.length > 50) user.referralStageHistory = user.referralStageHistory.slice(-50);
-    if (newStage === TEAM_STAGES.CONVERTED && !user.golden-connectRefLinkSetAt) {
-      user.golden-connectRefLinkSetAt = nowIso();
+    if (newStage === TEAM_STAGES.CONVERTED && !user.goldenConnectRefLinkSetAt) {
+      user.goldenConnectRefLinkSetAt = nowIso();
     }
     user.updatedAt = nowIso();
     writeState(state);
@@ -3006,7 +3006,7 @@ function createStorage(config = {}) {
     row.savedProductIds = nextMeta.savedProductIds;
     row.savedContentIds = nextMeta.savedContentIds;
     row.notificationSettings = nextMeta.notificationSettings;
-    if (data.golden-connectRefLink !== undefined) row.golden-connectRefLink = String(data.golden-connectRefLink || '').trim() || null;
+    if (data.goldenConnectRefLink !== undefined) row.goldenConnectRefLink = String(data.goldenConnectRefLink || '').trim() || null;
     row.profile = nextMeta.profile;
     row.preferences = nextMeta.preferences;
     row.onboarding = {

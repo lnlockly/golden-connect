@@ -119,7 +119,7 @@ function createBot(config, storage) {
   try { setupBirthdays(bot, birthdayStorage, config); } catch (e) { console.error('[xh_birthdays_setup]', e && e.message); }
   try { setupResults(bot, storage, config); } catch (e) { console.error('[xh_results_setup]', e && e.message); }
   // [silence-gate-early] Install group-silence middleware BEFORE any chat handlers.
-  // In groups not in tg_group_active, all messages are dropped except /golden-connect_active|silent|status.
+  // In groups not in tg_group_active, all messages are dropped except /goldenConnect_active|silent|status.
   try {
     const { setupSilenceGate } = require('./xh/group-silence');
     setupSilenceGate(bot);
@@ -299,8 +299,8 @@ function createBot(config, storage) {
     }
     try { await ctx.answerCallbackQuery({ text: action === 'run' ? 'Zapuskaem rozygrysh...' : 'Perenosim...', show_alert: false }); } catch (_) {}
     try {
-      const apiBase = (config && config.golden-connectApiBaseUrl) || 'https://api.golden-connect.to';
-      const secret  = (config && config.golden-connectApiInternalSecret) || '';
+      const apiBase = (config && config.goldenConnectApiBaseUrl) || 'https://api.golden-connect.to';
+      const secret  = (config && config.goldenConnectApiInternalSecret) || '';
       const url = apiBase.replace(/\/+\$/, '') + '/internal/karma-raffle/' + action + '/' + raffleId;
       const res = await fetch(url, {
         method: 'POST',
@@ -419,8 +419,8 @@ function createBot(config, storage) {
       // Balances + karma — try api proxy via internal helper
       let earned = 0, gift = 0, karma = 100, tariff = 'free';
       try {
-        const apiBase = (config.golden-connectApiBaseUrl || 'https://api.golden-connect.to').replace(/\/+$/, '');
-        const sec = config.golden-connectApiInternalSecret || '';
+        const apiBase = (config.goldenConnectApiBaseUrl || 'https://api.golden-connect.to').replace(/\/+$/, '');
+        const sec = config.goldenConnectApiInternalSecret || '';
         const email = u.email || ('tg' + u.tg_id + '@golden-connect.bot');
         const r = await fetch(apiBase + '/internal/finance/balances?email=' + encodeURIComponent(email), {
           headers: { 'x-golden-connect-secret': sec },
@@ -734,7 +734,7 @@ function createBot(config, storage) {
     const helpers = require('./web-routes');
     const apiFn = (path, body) => {
       const fetch = require('node-fetch') || global.fetch;
-      const base = (process.env.GOLDEN_CONNECT_API_BASE_URL || process.env.GOLDEN_CONNECT_API_BASE || config.golden-connectApiBaseUrl || 'https://api.golden-connect.to').replace(/\/$/, '');
+      const base = (process.env.GOLDEN_CONNECT_API_BASE_URL || process.env.GOLDEN_CONNECT_API_BASE || config.goldenConnectApiBaseUrl || 'https://api.golden-connect.to').replace(/\/$/, '');
       const secret = process.env.INTERNAL_API_SECRET;
       const url = base + path;
       const method = body ? 'POST' : 'GET';

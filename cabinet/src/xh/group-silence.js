@@ -2,7 +2,7 @@
 // SEMANTICS: groups are SILENT BY DEFAULT. Bot only does technical work
 // (ADX channel-membership checks, autoposting). To enable chat features
 // (member tracking commands, AI replies, welcome messages, digests, drip)
-// admin must run /golden-connect_active inside the group.
+// admin must run /goldenConnect_active inside the group.
 //
 // Storage: tg_group_active(chat_id PRIMARY KEY, activated_by, activated_at).
 // Absence of row => silent. Legacy table tg_group_silenced kept but unused.
@@ -69,8 +69,8 @@ async function isChatAdmin(ctx) {
 }
 
 function setupCommands(bot) {
-  // /golden-connect_active — admin: enable chat features in this group
-  bot.command('golden-connect_active', async (ctx) => {
+  // /goldenConnect_active — admin: enable chat features in this group
+  bot.command('goldenConnect_active', async (ctx) => {
     if (!ctx.chat || ctx.chat.type === 'private') return ctx.reply('Эта команда работает только в группе.');
     if (!await isChatAdmin(ctx)) return ctx.reply('⛔ Только админ группы может это включить.');
     setActive(ctx.chat.id, ctx.from.id);
@@ -83,13 +83,13 @@ function setupCommands(bot) {
       '• Присылать утренний/вечерний digest активности\n' +
       '• Drip-сообщения новичкам в личку\n\n' +
       'Технические функции (ADX-проверка подписок, автопостинг) работают всегда независимо от этого режима.\n\n' +
-      'Чтобы вернуть тишину — /golden-connect_silent',
+      'Чтобы вернуть тишину — /goldenConnect_silent',
       { parse_mode: 'HTML' }
     );
   });
 
-  // /golden-connect_silent — admin: disable chat features (back to default)
-  bot.command('golden-connect_silent', async (ctx) => {
+  // /goldenConnect_silent — admin: disable chat features (back to default)
+  bot.command('goldenConnect_silent', async (ctx) => {
     if (!ctx.chat || ctx.chat.type === 'private') return ctx.reply('Эта команда работает только в группе.');
     if (!await isChatAdmin(ctx)) return ctx.reply('⛔ Только админ группы может это переключить.');
     setSilenced(ctx.chat.id, ctx.from.id);
@@ -99,19 +99,19 @@ function setupCommands(bot) {
       '• ADX-проверка подписок на каналы\n' +
       '• Автопостинг по расписанию (если настроен)\n' +
       '• Учёт join/leave (silent)\n\n' +
-      'Чтобы включить чат-режим — /golden-connect_active',
+      'Чтобы включить чат-режим — /goldenConnect_active',
       { parse_mode: 'HTML' }
     );
   });
 
-  // /golden-connect_status — show current mode
-  bot.command('golden-connect_status', async (ctx) => {
+  // /goldenConnect_status — show current mode
+  bot.command('goldenConnect_status', async (ctx) => {
     if (!ctx.chat || ctx.chat.type === 'private') return ctx.reply('Эта команда работает только в группе.');
     const active = isActive(ctx.chat.id);
     return ctx.reply(
       active
-        ? '✅ Режим: <b>Чат-режим включён</b>.\n\nБот реагирует на команды, упоминания, шлёт digest. /golden-connect_silent чтобы выключить.'
-        : '🤫 Режим: <b>Тихий (по умолчанию)</b>.\n\nБот молчит в чате, делает только тех. работу (ADX, автопостинг). /golden-connect_active чтобы включить чат-функции.',
+        ? '✅ Режим: <b>Чат-режим включён</b>.\n\nБот реагирует на команды, упоминания, шлёт digest. /goldenConnect_silent чтобы выключить.'
+        : '🤫 Режим: <b>Тихий (по умолчанию)</b>.\n\nБот молчит в чате, делает только тех. работу (ADX, автопостинг). /goldenConnect_active чтобы включить чат-функции.',
       { parse_mode: 'HTML' }
     );
   });
@@ -128,7 +128,7 @@ function setupCommands(bot) {
       const becameMember = ['member', 'administrator'].includes(newStatus) &&
                            !['member', 'administrator'].includes(oldStatus);
       if (!becameMember) return;
-      // Default = silent. No welcome message. Admin sees status via /golden-connect_status.
+      // Default = silent. No welcome message. Admin sees status via /goldenConnect_status.
     } catch (e) { console.warn('[group-silence] my_chat_member', e && e.message); }
   });
 }
@@ -144,7 +144,7 @@ function setupSilenceGate(bot) {
       if (isActive(c.id)) return next();
       // Group is silent (default). Allow only admin mode-toggle commands.
       const txt = (ctx.message && ctx.message.text) || '';
-      if (/^\/(golden-connect_active|golden-connect_silent|golden-connect_status)(@|\b)/.test(txt)) return next();
+      if (/^\/(goldenConnect_active|goldenConnect_silent|goldenConnect_status)(@|\b)/.test(txt)) return next();
       // Otherwise: drop. Bot stays silent in chat.
       return; // do not call next() — no further handlers fire
     } catch (_) { return next(); }
