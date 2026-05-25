@@ -1,10 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Monar">
   <defs>
-    <linearGradient id="trendex-bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#00D4FF"/>
-      <stop offset="100%" stop-color="#B14AED"/>
+    <linearGradient id="monar-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1206"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="monar-gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f4d36a"/>
+      <stop offset="50%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#8a6d1a"/>
     </linearGradient>
   </defs>
-  <rect width="64" height="64" rx="14" fill="url(#trendex-bg)"/>
-  <text x="32" y="44" text-anchor="middle" font-family="'Inter','Helvetica',sans-serif" font-weight="800" font-size="38" fill="#0A0E27">T</text>
+  <rect width="64" height="64" rx="14" fill="url(#monar-bg)"/>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="url(#monar-gold)" stroke-width="1.2" opacity="0.7"/>
+  <text x="32" y="46" text-anchor="middle" font-family="'Space Grotesk','Inter',sans-serif" font-weight="800" font-size="40" fill="url(#monar-gold)" letter-spacing="-1">M</text>
 </svg>
