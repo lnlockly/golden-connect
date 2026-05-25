@@ -1,7 +1,7 @@
 {
   "name": "Golden Connect CRM",
   "short_name": "Golden Connect CRM",
-  "description": "База MLM-лидеров с AI-генерацией пиков и автоматизацией",
+  "description": "Golden Connect CRM — база партнёров с AI-генерацией питчей и автоматизацией",
   "start_url": "/cabinet/crm-app.html",
   "scope": "/cabinet/",
   "display": "standalone",

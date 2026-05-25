@@ -10935,13 +10935,13 @@ async function loadPay() {
     const isRocket = t.code === 'rocket';
     const totalUsd = t.price_usd + (t.monthly_fee_usd || 0);
     html += '<article class="pay-card' + (isRocket ? ' pay-card--rocket' : '') + '" data-tariff="' + escapeAttr(t.code) + '">' +
-      (isRocket ? '<span class="pay-badge">⚡ Matching Bonus</span>' : '') +
+      (isRocket ? '<span class="pay-badge">🌍 Мировой Пул</span>' : '') +
       '<div class="pay-card-name">' + escapeHtml(t.name) + '</div>' +
       '<div class="pay-card-price">$' + totalUsd + '<small>активация $' + t.price_usd + ' + сервис $' + t.monthly_fee_usd + '/мес</small></div>' +
       '<ul class="pay-card-meta">' +
-        '<li>' + t.seats + ' бизнес-мест</li>' +
-        '<li>Матрица ' + t.matrix_depth + ' × $' + t.matrix_rate_usd + '</li>' +
-        '<li>10 уровней рефералов' + (t.has_matching_bonus ? ' + Matching' : '') + '</li>' +
+        '<li>' + t.seats + ' бизнес-мест в очереди</li>' +
+        '<li>Круг ' + t.matrix_depth + ' × $' + t.matrix_rate_usd + '</li>' +
+        '<li>5 уровней рефералов' + (t.has_matching_bonus ? ' + Мировой Пул' : '') + '</li>' +
       '</ul>' +
       '<div class="pay-card-cycle">≈ $' + (t.cycle_income_usd || 0).toLocaleString('en-US') + ' / цикл</div>' +
       '<div class="pay-methods">' +

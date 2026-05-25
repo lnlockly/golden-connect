@@ -80,8 +80,8 @@ export async function onCrmInlineQuery(ctx: Context): Promise<void> {
       title: lang === "ru" ? "📋 Открыть мою CRM" : "📋 Open my CRM",
       description:
         lang === "ru"
-          ? "База ~6 700 MLM-контактов, питчи, задачи, сделки"
-          : "~6 700 MLM contacts, pitches, tasks, deals",
+          ? "База ~6 700 партнёрских контактов, питчи, задачи, сделки"
+          : "~6 700 partner contacts, pitches, tasks, deals",
       input_message_content: {
         message_text:
           lang === "ru"

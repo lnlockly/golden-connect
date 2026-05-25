@@ -54,7 +54,7 @@ export function requirePaidTariff(handler: CrmHandler): CrmHandler {
 
     if (!tariff || !PAID.has(tariff) || isExpired) {
       const kb = new InlineKeyboard()
-        .webApp("💎 Купить тариф (LAUNCH/BOOST/ROCKET)", TARIFFS_URL)
+        .webApp("💎 Активировать лот Monar", TARIFFS_URL)
         .row()
         .url("📖 Что даёт CRM", "https://goldenConnect.to/#whats-new");
 
@@ -64,13 +64,13 @@ export function requirePaidTariff(handler: CrmHandler): CrmHandler {
 
       await ctx.reply(
         "🔒 *CRM — premium-фича Golden Connect*\n\n" +
-          "База 7 322 MLM-лидеров, AI-питчи, воронка, задачи, отчёты — " +
-          "доступны на платных тарифах:\n\n" +
-          "• *LAUNCH* — $45 (одноразово) + $15/мес\n" +
-          "• *BOOST* — $90 + $30/мес\n" +
-          "• *ROCKET* — $135 + $45/мес\n\n" +
+          "База 7 322 партнёров и лидеров, AI-питчи, воронка, задачи, отчёты — " +
+          "открываются с любым активным лотом Monar:\n\n" +
+          "• *$50* — 2 бизнес-места, ×2 за ~90 дней\n" +
+          "• *$300* — 9 мест + вход в Мировой Пул\n" +
+          "• *$1000* — 32 места, все 8 пулов + VIP\n\n" +
           status +
-          "\n\nНажми кнопку ниже чтобы купить.",
+          "\n\nНажми кнопку ниже чтобы активировать.",
         { parse_mode: "Markdown", reply_markup: kb },
       );
       return;
