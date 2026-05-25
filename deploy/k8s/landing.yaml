@@ -57,6 +57,10 @@ spec:
     port: 80
     targetPort: http
 ---
+# Landing ingress: pure / pass-through to nginx, NO rewrite-target
+# (rewrite-target would apply to every path in this ingress and turn
+# /favicon.svg, /og.jpg, /golden-connect-hero-logo.svg, etc into / →
+# SPA index.html. /api lives in a separate ingress below.)
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -64,6 +68,28 @@ metadata:
   namespace: golden-connect
   annotations:
     nginx.ingress.kubernetes.io/from-to-www-redirect: 'true'
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: golden-connect.top
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: golden-connect-landing
+            port:
+              number: 80
+---
+# Separate API ingress with regex rewrite — only this one gets the
+# rewrite-target annotation so it doesn't leak onto static asset paths.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: golden-connect-api-path
+  namespace: golden-connect
+  annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
@@ -79,10 +105,3 @@ spec:
             name: golden-connect-api
             port:
               number: 4001
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: golden-connect-landing
-            port:
-              number: 80
