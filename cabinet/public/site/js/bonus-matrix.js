@@ -317,7 +317,7 @@
     if (!root) return;
     injectStyles();
     if (!root.dataset.initialLoadDone) {
-      root.innerHTML = '<div style="padding:40px;text-align:center;color:#94a3b8">⚡ Загружаю Bonus Matrix...</div>';
+      root.innerHTML = '<div style="padding:40px;text-align:center;color:#94a3b8">⚡ Загружаю карту сообщества...</div>';
     }
 
     var depthOpt = DEPTH_OPTIONS.find(o => o.key === currentDepth) || DEPTH_OPTIONS[1];
@@ -347,7 +347,7 @@
       '<div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:18px">' +
         '<div style="font-size:64px;line-height:1;filter:drop-shadow(0 8px 20px rgba(255,46,151,0.4))">🎁</div>' +
         '<div style="flex:1;min-width:220px">' +
-          '<div style="font-size:11px;color:#94a3b8;letter-spacing:.12em;text-transform:uppercase;font-weight:600">Bonus Matrix</div>' +
+          '<div style="font-size:11px;color:#94a3b8;letter-spacing:.12em;text-transform:uppercase;font-weight:600">Карта сообщества</div>' +
           '<div style="font-family:Orbitron,monospace;font-size:32px;font-weight:900;background:linear-gradient(135deg,#00D4FF,#FF2E97);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1">Карта сообщества</div>' +
           (me
             ? '<div style="font-size:14px;color:#cbd5e1;margin-top:6px">Твоя позиция <strong style="color:#FF2E97">#' + me.position + '</strong> · под тобой <strong style="color:#10b981">' + me.downline_total + '</strong> человек</div>'
@@ -361,7 +361,7 @@
         (me ? '<div class="bm-stat-tile"><div style="font-size:11px;color:#94a3b8;text-transform:uppercase">Твоя поз.</div><div style="font-family:Orbitron,monospace;font-size:24px;font-weight:800;color:#FF2E97">#' + me.position + '</div></div>' : '') +
       '</div>' +
       '<div style="font-size:13px;color:#cbd5e1;line-height:1.6;padding:12px 14px;background:rgba(0,0,0,0.25);border-radius:10px">' +
-        '🎁 <strong>Bonus Matrix</strong> — все участники автоматом по факту регистрации, без покупки тарифа. Бинарная (ширина 2), привязка по реф-коду. Кликай по карточкам — проваливайся в сеть любого юзера. Никаких выплат — это карта сообщества.' +
+        '🌐 <strong>Карта сообщества</strong> — все участники Monar по факту регистрации. Привязка по реф-коду. Кликай по карточкам — проваливайся в сеть любого юзера. Никаких выплат — это карта сообщества, не очередь и не пирамида.' +
       '</div>' +
     '</div>';
 
