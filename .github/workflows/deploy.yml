@@ -21,7 +21,7 @@ env:
 
 jobs:
   changes:
-    runs-on: [self-hosted, trendex]
+    runs-on: [self-hosted, golden-connect]
     outputs:
       api: ${{ steps.filter.outputs.api }}
       bot: ${{ steps.filter.outputs.bot }}
@@ -48,7 +48,7 @@ jobs:
 
   build:
     needs: changes
-    runs-on: [self-hosted, trendex]
+    runs-on: [self-hosted, golden-connect]
     permissions:
       contents: read
       packages: write
@@ -104,25 +104,10 @@ jobs:
 
   deploy:
     needs: [changes, build]
-    runs-on: [self-hosted, trendex]
+    runs-on: [self-hosted, golden-connect]
     if: always() && needs.build.result != 'failure' && needs.build.result != 'cancelled'
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup SSH agent
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
-
-      - name: Trust deploy host
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ vars.DEPLOY_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
-
-      - name: Sync manifests
-        run: |
-          ssh ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }} "mkdir -p /tmp/golden-connect-k8s"
-          scp -r deploy/k8s/* ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }}:/tmp/golden-connect-k8s/
 
       - name: Apply manifests + roll out
         env:
@@ -132,42 +117,24 @@ jobs:
           LANDING_CHANGED: ${{ needs.changes.outputs.landing }}
           CABINET_CHANGED: ${{ needs.changes.outputs.cabinet }}
           FORCE: ${{ github.event.inputs.force }}
+          NS: ${{ env.NAMESPACE }}
         run: |
-          ssh ${{ vars.DEPLOY_USER }}@${{ vars.DEPLOY_HOST }} bash -s <<EOF
-            set -euo pipefail
-            NS=${{ env.NAMESPACE }}
-            REG=${{ env.REGISTRY }}/${{ env.OWNER }}
-            SHA=${SHA}
+          set -euo pipefail
+          REG="${REGISTRY}/${OWNER}"
 
-            # 1. Manifests are idempotent; apply every run so infra changes land.
-            kubectl apply -f /tmp/golden-connect-k8s/
+          # 1. Manifests are idempotent; apply every run so infra changes land.
+          kubectl apply -f deploy/k8s/
 
-            # 2. Pin images to this commit for whichever services changed.
-            if [ "${API_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then
-              kubectl -n \$NS set image deploy/golden-connect-api \
-                golden-connect-api=\$REG/golden-connect-api:\$SHA \
-                --record=false
-              kubectl -n \$NS rollout status deploy/golden-connect-api --timeout=3m
-            fi
+          # 2. Pin images to this commit for whichever services changed.
+          roll() {
+            local svc="$1"
+            kubectl -n "$NS" set image "deploy/golden-connect-${svc}" \
+              "golden-connect-${svc}=${REG}/golden-connect-${svc}:${SHA}" \
+              --record=false
+            kubectl -n "$NS" rollout status "deploy/golden-connect-${svc}" --timeout=4m
+          }
 
-            if [ "${BOT_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then
-              kubectl -n \$NS set image deploy/golden-connect-bot \
-                golden-connect-bot=\$REG/golden-connect-bot:\$SHA \
-                --record=false
-              kubectl -n \$NS rollout status deploy/golden-connect-bot --timeout=3m
-            fi
-
-            if [ "${LANDING_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then
-              kubectl -n \$NS set image deploy/golden-connect-landing \
-                golden-connect-landing=\$REG/golden-connect-landing:\$SHA \
-                --record=false
-              kubectl -n \$NS rollout status deploy/golden-connect-landing --timeout=3m
-            fi
-
-            if [ "${CABINET_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then
-              kubectl -n \$NS set image deploy/golden-connect-cabinet \
-                golden-connect-cabinet=\$REG/golden-connect-cabinet:\$SHA \
-                --record=false
-              kubectl -n \$NS rollout status deploy/golden-connect-cabinet --timeout=4m
-            fi
-          EOF
+          if [ "${API_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then roll api; fi
+          if [ "${BOT_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then roll bot; fi
+          if [ "${LANDING_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then roll landing; fi
+          if [ "${CABINET_CHANGED}" = "true" ] || [ "${FORCE}" = "true" ]; then roll cabinet; fi
