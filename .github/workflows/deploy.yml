@@ -122,6 +122,12 @@ jobs:
           set -euo pipefail
           REG="${REGISTRY}/${OWNER}"
 
+          # 0. Drop stale ingresses left over from earlier manifests that now
+          #    collide with the consolidated landing ingress (path /api on
+          #    golden-connect.top). Idempotent: --ignore-not-found.
+          kubectl -n "$NS" delete ingress golden-connect-api-path --ignore-not-found
+          kubectl -n "$NS" delete ingress golden-connect-api --ignore-not-found
+
           # 1. Manifests are idempotent; apply every run so infra changes land.
           kubectl apply -f deploy/k8s/
 
