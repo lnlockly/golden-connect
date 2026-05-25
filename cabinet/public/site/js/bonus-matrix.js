@@ -361,7 +361,7 @@
         (me ? '<div class="bm-stat-tile"><div style="font-size:11px;color:#94a3b8;text-transform:uppercase">Твоя поз.</div><div style="font-family:Orbitron,monospace;font-size:24px;font-weight:800;color:#FF2E97">#' + me.position + '</div></div>' : '') +
       '</div>' +
       '<div style="font-size:13px;color:#cbd5e1;line-height:1.6;padding:12px 14px;background:rgba(0,0,0,0.25);border-radius:10px">' +
-        '🌐 <strong>Карта сообщества</strong> — все участники Monar по факту регистрации. Привязка по реф-коду. Кликай по карточкам — проваливайся в сеть любого юзера. Никаких выплат — это карта сообщества, не очередь и не пирамида.' +
+        '🌐 <strong>Карта сообщества</strong> — все участники Monar по факту регистрации. Привязка по реф-коду. Кликай по карточкам — проваливайся в сеть любого юзера. Никаких выплат — это карта сообщества с открытыми правилами.' +
       '</div>' +
     '</div>';
 
