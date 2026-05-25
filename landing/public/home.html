@@ -1956,6 +1956,23 @@ footer a:hover { color: var(--primary); }
   transition: all 0.2s;
 }
 .lang-toggle:hover { border-color: var(--primary); }
+/* Override aggressive global button rules from _golden-theme.css */
+button.lang-toggle, .lang-toggle {
+  background: rgba(22, 29, 63, 0.6) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 100px !important;
+  padding: 8px 14px !important;
+  font-size: 13px !important;
+  box-shadow: none !important;
+  font-weight: 600 !important;
+}
+button.lang-toggle:hover, .lang-toggle:hover {
+  background: rgba(22, 29, 63, 0.85) !important;
+  border-color: var(--primary) !important;
+  color: var(--text) !important;
+}
+.lang-toggle #lang-flag, .lang-toggle #lang-code { color: var(--text) !important; }
 .lang-caret { font-size: 10px; color: var(--text-muted); transition: transform 0.2s; }
 .lang-switch.is-open .lang-caret { transform: rotate(180deg); }
 .lang-menu {
@@ -2471,7 +2488,7 @@ body { top: 0 !important; }
         <div class="hero-3d-ring hero-3d-ring--a"></div>
         <div class="hero-3d-ring hero-3d-ring--b"></div>
         <div class="hero-3d-ring hero-3d-ring--c"></div>
-        <img class="hero-logo hero-logo--3d" src="/golden-connect-hero-logo.jpg" alt="Monar / Golden Connect">
+        <img class="hero-logo hero-logo--3d" src="/golden-connect-hero-logo.svg?v=monar-1" alt="Monar / Golden Connect">
         <div class="hero-slogan" style="text-align:center;margin:8px 0 18px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(15px,2.4vw,22px);letter-spacing:0.04em;background:linear-gradient(135deg,#b14aff 0%,#00e0ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;">— честный круг, не пирамида —</div>
       </div>
       <div class="floating-card card-1">
