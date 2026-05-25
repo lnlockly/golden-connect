@@ -101,8 +101,8 @@ spec:
       port: 80
       targetPort: http
 ---
-# Subdomain ingress for v1. To later switch to golden-connect.to/cabinet/
-# subpath: replace the host with `golden-connect.to` and add
+# Subdomain ingress for v1. To later switch to golden-connect.top/cabinet/
+# subpath: replace the host with `golden-connect.top` and add
 # `nginx.ingress.kubernetes.io/rewrite-target: /$2` plus path
 # `/cabinet(/|$)(.*)` — also requires Express to mount routes
 # under /cabinet (not currently done).
@@ -118,7 +118,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: golden-connect.to
+    - host: golden-connect.top
       http:
         paths:
           - path: /cabinet
