@@ -6,7 +6,7 @@
 
 const BASE_URL =
   (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/+$/, '') ||
-  'http://localhost:4000';
+  '';
 
 // Fallback session token for hostile cookie environments (Telegram WebView
 // on iOS blocks cross-site cookies even on same-site sub-requests in some
