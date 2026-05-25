@@ -49,6 +49,12 @@ app.use((req, res, next) => {
 });
 app.locals.storage = storage;
 
+// Unified tools page — iOS-style icon grid for all admin tools
+app.get(['/tools', '/cabinet/tools'], (req, res) => {
+  res.sendFile(require('path').join(__dirname, '..', 'public', 'tools.html'));
+});
+
+
 // [lead-pool-2026-05-19] Personal lead pool: per-user reservations on top of mlm-contacts.json.
 // Two CRM operators no longer see the same 9,839 leads — each gets a private
 // 50-lead reservation that recycles after 72h. Prerequisite for mass-send.

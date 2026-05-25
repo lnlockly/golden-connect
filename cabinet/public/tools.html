@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Инструменты — Golden Connect</title>
+<link rel="stylesheet" href="/_golden-theme.css">
+<style>
+  /* page-level layout */
+  .gc-top {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(12px);
+    background: rgba(0,0,0,0.7);
+    border-bottom: 1px solid var(--gc-border);
+    padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .gc-top .left { display:flex; align-items:center; gap: 12px; font-weight: 700; }
+  .gc-top .left .dot { width: 10px; height: 10px; background: var(--gc-gold-500); border-radius: 50%; box-shadow: 0 0 8px var(--gc-gold-glow); }
+  .gc-top a { color: var(--gc-text-mute); margin-left: 18px; font-size: 14px; }
+  .gc-top a:hover { color: var(--gc-text); }
+  .search-input {
+    background: var(--gc-bg-1);
+    border: 1px solid var(--gc-border);
+    border-radius: 10px;
+    color: var(--gc-text);
+    padding: 8px 14px;
+    width: 280px;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="gc-top">
+  <div class="left">
+    <span class="dot"></span>
+    <span class="gc-brand-text">Golden Connect</span>
+    <span style="color: var(--gc-text-dim); font-weight: 500;">/ Инструменты</span>
+  </div>
+  <div>
+    <input class="search-input" placeholder="Поиск инструмента..." id="gc-search" />
+  </div>
+</div>
+
+<main class="gc-tools-page">
+
+  <div class="gc-tools-hero">
+    <h1>Все инструменты</h1>
+    <p>Один экран — весь стек. Кликни иконку — откроется нужный инструмент. iOS-стиль, как в твоём айфоне.</p>
+  </div>
+
+  <!-- ═══ ФИНАНСЫ ═══ -->
+  <section class="gc-tools-category" data-category="Финансы">
+    <div class="gc-tools-category-header">
+      <h2>💰 Финансы</h2>
+      <span class="count">7 инструментов</span>
+    </div>
+    <div class="gc-tools-grid">
+      <a class="gc-tool-icon color-gold" href="/admin#dashboard"><div class="icon-square">📊</div><span class="label">Dashboard</span></a>
+      <a class="gc-tool-icon color-gold" href="/admin#ledger"><div class="icon-square">📒</div><span class="label">Касса</span></a>
+      <a class="gc-tool-icon color-gold" href="/admin#matrix"><div class="icon-square">🎯</div><span class="label">Бонус-матрица</span></a>
+      <a class="gc-tool-icon color-gold" href="/admin#tariffs"><div class="icon-square">💎</div><span class="label">Тарифы</span></a>
+      <a class="gc-tool-icon color-gold" href="/admin#withdrawals"><div class="icon-square">💸</div><span class="label">Выводы</span></a>
+      <a class="gc-tool-icon color-gold" href="/admin#partners"><div class="icon-square">🤝</div><span class="label">Партнёры</span></a>
+      <a class="gc-tool-icon color-gold" href="/admin#payments"><div class="icon-square">💳</div><span class="label">Платежи</span></a>
+    </div>
+  </section>
+
+  <!-- ═══ MONAR ═══ -->
+  <section class="gc-tools-category" data-category="Monar">
+    <div class="gc-tools-category-header">
+      <h2>🔄 Monar Engine</h2>
+      <span class="count">6 инструментов</span>
+    </div>
+    <div class="gc-tools-grid">
+      <a class="gc-tool-icon color-gold" href="/cabinet/monar/lots"><div class="icon-square">🎰</div><span class="label">Лоты</span></a>
+      <a class="gc-tool-icon color-gold" href="/cabinet/monar/queue"><div class="icon-square">⏳</div><span class="label">Очередь</span></a>
+      <a class="gc-tool-icon color-gold" href="/cabinet/monar/world-pool"><div class="icon-square">🌍</div><span class="label">Мировой Пул</span></a>
+      <a class="gc-tool-icon color-gold" href="/cabinet/monar/referrals"><div class="icon-square">🌳</div><span class="label">Реф. дерево</span></a>
+      <a class="gc-tool-icon color-gold" href="/cabinet/monar/reinvest"><div class="icon-square">♻️</div><span class="label">Реинвест</span></a>
+      <a class="gc-tool-icon color-gold" href="/cabinet/monar/abonentka"><div class="icon-square">📅</div><span class="label">Аббонентка</span></a>
+    </div>
+  </section>
+
+  <!-- ═══ РЕКЛАМА ═══ -->
+  <section class="gc-tools-category" data-category="Реклама">
+    <div class="gc-tools-category-header">
+      <h2>📣 Реклама</h2>
+      <span class="count">5 инструментов</span>
+    </div>
+    <div class="gc-tools-grid">
+      <a class="gc-tool-icon color-orange" href="/ad-center"><div class="icon-square">🎯</div><span class="label">Ad Center</span></a>
+      <a class="gc-tool-icon color-orange" href="/adx"><div class="icon-square">🔁</div><span class="label">ADX Exchange</span></a>
+      <a class="gc-tool-icon color-orange" href="/ads-web"><div class="icon-square">🌐</div><span class="label">ADS Web</span></a>
+      <a class="gc-tool-icon color-orange" href="/ads-site"><div class="icon-square">📰</div><span class="label">ADS Site</span></a>
+      <a class="gc-tool-icon color-orange" href="/cabinet/auto-ads"><div class="icon-square">🤖</div><span class="label">Авто-реклама</span></a>
+    </div>
+  </section>
+
+  <!-- ═══ ПРОДУКТЫ ═══ -->
+  <section class="gc-tools-category" data-category="Продукты">
+    <div class="gc-tools-category-header">
+      <h2>🛍 Продукты</h2>
+      <span class="count">4 инструмента</span>
+    </div>
+    <div class="gc-tools-grid">
+      <a class="gc-tool-icon color-pink" href="/products-arsenal"><div class="icon-square">🧰</div><span class="label">Products Arsenal</span></a>
+      <a class="gc-tool-icon color-pink" href="/shrbio"><div class="icon-square">🧬</div><span class="label">SHR.bio</span></a>
+      <a class="gc-tool-icon color-pink" href="/trdx-exchange"><div class="icon-square">💱</div><span class="label">TRDX Exchange</span></a>
+      <a class="gc-tool-icon color-pink" href="/cabinet/library"><div class="icon-square">📚</div><span class="label">Библиотека</span></a>
+    </div>
+  </section>
+
+  <!-- ═══ ПОЛЬЗОВАТЕЛИ ═══ -->
+  <section class="gc-tools-category" data-category="Пользователи">
+    <div class="gc-tools-category-header">
+      <h2>👥 Пользователи</h2>
+      <span class="count">4 инструмента</span>
+    </div>
+    <div class="gc-tools-grid">
+      <a class="gc-tool-icon color-blue" href="/admin#users"><div class="icon-square">👤</div><span class="label">Пользователи</span></a>
+      <a class="gc-tool-icon color-blue" href="/mlm-crm"><div class="icon-square">📇</div><span class="label">MLM CRM</span></a>
+      <a class="gc-tool-icon color-blue" href="/cabinet/leads"><div class="icon-square">🧲</div><span class="label">Лиды</span></a>
+      <a class="gc-tool-icon color-blue" href="/cabinet/team"><div class="icon-square">🌐</div><span class="label">Команда</span></a>
+    </div>
+  </section>
+
+  <!-- ═══ СЕРВИСЫ ═══ -->
+  <section class="gc-tools-category" data-category="Сервисы">
+    <div class="gc-tools-category-header">
+      <h2>🔧 Сервисы</h2>
+      <span class="count">5 инструментов</span>
+    </div>
+    <div class="gc-tools-grid">
+      <a class="gc-tool-icon color-purple" href="/shortener-arsenal"><div class="icon-square">🔗</div><span class="label">Shortener</span></a>
+      <a class="gc-tool-icon color-purple" href="/roboai"><div class="icon-square">🤖</div><span class="label">ROBOAI</span></a>
+      <a class="gc-tool-icon color-purple" href="/bio-public-arsenal"><div class="icon-square">🪪</div><span class="label">Bio Pages</span></a>
+      <a class="gc-tool-icon color-purple" href="/cabinet/card"><div class="icon-square">💼</div><span class="label">Электр. визитка</span></a>
+      <a class="gc-tool-icon color-purple" href="/cabinet/api-keys"><div class="icon-square">🔑</div><span class="label">API ключи</span></a>
+    </div>
+  </section>
+
+  <!-- ═══ TG БОТ ═══ -->
+  <section class="gc-tools-category" data-category="TG Бот">
+    <div class="gc-tools-category-header">
+      <h2>✈️ Telegram Бот</h2>
+      <span class="count">4 инструмента</span>
+    </div>
+    <div class="gc-tools-grid">
+      <a class="gc-tool-icon color-teal" href="/cabinet/bot/commands"><div class="icon-square">⚙️</div><span class="label">Команды</span></a>
+      <a class="gc-tool-icon color-teal" href="/cabinet/bot/broadcasts"><div class="icon-square">📢</div><span class="label">Рассылки</span></a>
+      <a class="gc-tool-icon color-teal" href="/cabinet/bot/auto-reply"><div class="icon-square">💬</div><span class="label">Авто-ответы</span></a>
+      <a class="gc-tool-icon color-teal" href="/cabinet/bot/users"><div class="icon-square">🧑‍💼</div><span class="label">Подписчики</span></a>
+    </div>
+  </section>
+
+  <!-- ═══ КОНТЕНТ ═══ -->
+  <section class="gc-tools-category" data-category="Контент">
+    <div class="gc-tools-category-header">
+      <h2>📝 Контент</h2>
+      <span class="count">4 инструмента</span>
+    </div>
+    <div class="gc-tools-grid">
+      <a class="gc-tool-icon color-green" href="/cabinet/posts"><div class="icon-square">✏️</div><span class="label">Посты</span></a>
+      <a class="gc-tool-icon color-green" href="/cabinet/media"><div class="icon-square">🖼️</div><span class="label">Медиа</span></a>
+      <a class="gc-tool-icon color-green" href="/cabinet/landings"><div class="icon-square">📄</div><span class="label">Лендинги</span></a>
+      <a class="gc-tool-icon color-green" href="/cabinet/video-library"><div class="icon-square">🎬</div><span class="label">Video Library</span></a>
+    </div>
+  </section>
+
+  <!-- ═══ АНАЛИТИКА ═══ -->
+  <section class="gc-tools-category" data-category="Аналитика">
+    <div class="gc-tools-category-header">
+      <h2>📈 Аналитика</h2>
+      <span class="count">4 инструмента</span>
+    </div>
+    <div class="gc-tools-grid">
+      <a class="gc-tool-icon color-red" href="/cabinet/stats"><div class="icon-square">📊</div><span class="label">Stats</span></a>
+      <a class="gc-tool-icon color-red" href="/cabinet/funnel"><div class="icon-square">🪣</div><span class="label">Воронка</span></a>
+      <a class="gc-tool-icon color-red" href="/cabinet/cohorts"><div class="icon-square">📅</div><span class="label">Когорты</span></a>
+      <a class="gc-tool-icon color-red" href="/cabinet/reports"><div class="icon-square">📑</div><span class="label">Отчёты</span></a>
+    </div>
+  </section>
+
+  <!-- ═══ СИСТЕМА ═══ -->
+  <section class="gc-tools-category" data-category="Система">
+    <div class="gc-tools-category-header">
+      <h2>⚙️ Система</h2>
+      <span class="count">5 инструментов</span>
+    </div>
+    <div class="gc-tools-grid">
+      <a class="gc-tool-icon color-graphite" href="/cabinet/settings"><div class="icon-square">⚙️</div><span class="label">Настройки</span></a>
+      <a class="gc-tool-icon color-graphite" href="/cabinet/logs"><div class="icon-square">📜</div><span class="label">Логи</span></a>
+      <a class="gc-tool-icon color-graphite" href="/cabinet/backups"><div class="icon-square">💾</div><span class="label">Бэкапы</span></a>
+      <a class="gc-tool-icon color-graphite" href="/cabinet/webhooks"><div class="icon-square">🪝</div><span class="label">Webhooks</span></a>
+      <a class="gc-tool-icon color-graphite" href="/cabinet/integrations"><div class="icon-square">🔌</div><span class="label">Интеграции</span></a>
+    </div>
+  </section>
+
+  <footer style="margin-top: 80px; padding: 32px 0; border-top: 1px solid var(--gc-border); color: var(--gc-text-dim); text-align: center; font-size: 13px;">
+    Golden Connect • <span class="gc-brand-text">Tools</span> • iOS-стиль интерфейс
+  </footer>
+</main>
+
+<script>
+// Search filter — hide tool icons that don't match query.
+(function(){
+  const input = document.getElementById('gc-search');
+  if (!input) return;
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    document.querySelectorAll('.gc-tool-icon').forEach(el => {
+      const label = el.querySelector('.label')?.textContent?.toLowerCase() || '';
+      el.style.display = !q || label.includes(q) ? '' : 'none';
+    });
+    document.querySelectorAll('.gc-tools-category').forEach(cat => {
+      const cardsVisible = Array.from(cat.querySelectorAll('.gc-tool-icon')).some(el => el.style.display !== 'none');
+      cat.style.display = cardsVisible ? '' : 'none';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
