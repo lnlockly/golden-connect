@@ -19,7 +19,7 @@
 <!-- /Yandex.Metrika counter -->
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5">
-<meta name="theme-color" content="#0A0E27">
+<meta name="theme-color" content="#000000">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
@@ -51,19 +51,19 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #0A0E27;
-  --bg-alt: #111736;
-  --card: #161D3F;
-  --card-light: #1E2650;
-  --border: #2A3566;
-  --primary: #00D4FF;
-  --secondary: #B14AED;
-  --accent: #FF2E97;
-  --gold: #FFB800;
-  --green: #00FF94;
+  --bg: #000000;
+  --bg-alt: #0a0a0a;
+  --card: #0e0e0e;
+  --card-light: #161616;
+  --border: #1f1f1f;
+  --primary: #d4af37;
+  --secondary: #a8862a;
+  --accent: #f4d36a;
+  --gold: #d4af37;
+  --green: #a8862a;
   --text: #FFFFFF;
-  --text-muted: #A0A8D0;
-  --text-dim: #6E7BAF;
+  --text-muted: #8a8a8a;
+  --text-dim: #5a5a5a;
 }
 
 html { scroll-behavior: smooth; }
@@ -97,9 +97,9 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse at 10% 10%, rgba(177, 74, 237, 0.25) 0%, transparent 50%),
-    radial-gradient(ellipse at 90% 90%, rgba(0, 212, 255, 0.2) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 15%, rgba(255, 46, 151, 0.15) 0%, transparent 45%);
+    radial-gradient(ellipse at 10% 10%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 90%, rgba(212, 175, 55, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 15%, rgba(244, 211, 106, 0.04) 0%, transparent 45%);
   pointer-events: none;
   z-index: 0;
 }
@@ -109,8 +109,8 @@ body::after {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(42, 53, 102, 0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(42, 53, 102, 0.15) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
   z-index: 0;
@@ -128,10 +128,10 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(10, 14, 39, 0.7);
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(42, 53, 102, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .logo {
@@ -370,9 +370,8 @@ nav {
   border-radius: 28px;
   object-fit: cover;
   box-shadow:
-    0 0 80px rgba(0, 212, 255, 0.35),
-    0 0 160px rgba(177, 74, 237, 0.28),
-    0 0 60px rgba(0, 255, 148, 0.18);
+    0 0 80px rgba(212, 175, 55, 0.25),
+    0 0 160px rgba(212, 175, 55, 0.15);
   animation: orbFloat 8s ease-in-out infinite;
 }
 .hero-logo::before {
@@ -381,7 +380,7 @@ nav {
   position: absolute;
   inset: -40px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(0,212,255,.45), rgba(177,74,237,.35) 50%, rgba(255,46,151,.2) 100%);
+  background: radial-gradient(circle at 30% 30%, rgba(212,175,55,.35), rgba(168,134,42,.2) 50%, transparent 100%);
   filter: blur(60px);
   opacity: 0.6;
   z-index: -1;
@@ -2152,9 +2151,8 @@ body { top: 0 !important; }
   border-radius: 28px;
   object-fit: cover;
   box-shadow:
-    0 0 80px rgba(0, 212, 255, 0.35),
-    0 0 160px rgba(177, 74, 237, 0.28),
-    0 0 60px rgba(0, 255, 148, 0.18);
+    0 0 80px rgba(212, 175, 55, 0.25),
+    0 0 160px rgba(212, 175, 55, 0.15);
   animation: logoSpin3D 16s linear infinite;
   transform-style: preserve-3d;
   backface-visibility: visible;
@@ -2489,7 +2487,7 @@ body { top: 0 !important; }
         <div class="hero-3d-ring hero-3d-ring--b"></div>
         <div class="hero-3d-ring hero-3d-ring--c"></div>
         <img class="hero-logo hero-logo--3d" src="/golden-connect-hero-logo.svg?v=monar-1" alt="Monar / Golden Connect">
-        <div class="hero-slogan" style="text-align:center;margin:8px 0 18px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(15px,2.4vw,22px);letter-spacing:0.04em;background:linear-gradient(135deg,#b14aff 0%,#00e0ff 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;">— честный круг, не пирамида —</div>
+        <div class="hero-slogan" style="text-align:center;margin:8px 0 18px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(15px,2.4vw,22px);letter-spacing:0.04em;background:linear-gradient(135deg,#d4af37 0%,#f4d36a 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;">— честный круг, прозрачные правила —</div>
       </div>
       <div class="floating-card card-1">
         <div class="fc-icon">💰</div>
@@ -2509,7 +2507,7 @@ body { top: 0 !important; }
         <div class="fc-icon">📡</div>
         <div>
           <div class="fc-label">Авто-реклама</div>
-          <div class="fc-value">9 мессенджеров</div>
+          <div class="fc-value">9 мессенджеров и соцсетей</div>
         </div>
       </div>
     </div>
@@ -2552,7 +2550,7 @@ body { top: 0 !important; }
       <div class="tool-card reveal" data-c="5">
         <div class="tool-icon-wrap">📣</div>
         <h4>Авто-реклама</h4>
-        <p>9 мессенджеров, 46 языков. Каждый твой лот сам себя раскручивает.</p>
+        <p>9 мессенджеров и соцсетей, 46 языков. Каждый твой лот сам себя раскручивает.</p>
         <span class="tool-tag">до 10 постов/нед</span>
       </div>
     </div>
@@ -2747,7 +2745,7 @@ body { top: 0 !important; }
     <div class="section-header reveal">
       <span class="section-eyebrow">Рекламный пакет</span>
       <h2 class="section-title">Каждый лот сам себя <span class="highlight">раскручивает</span></h2>
-      <p class="section-sub">Система постит за тебя в 9 мессенджеров. До 1000 симв, до 5 картинок, любые ссылки, автоперевод на 46 языков.</p>
+      <p class="section-sub">Система постит за тебя в 9 мессенджеров и соцсетей. До 1000 симв, до 5 картинок, любые ссылки, автоперевод на 46 языков.</p>
     </div>
     <div class="tools-grid" style="grid-template-columns:repeat(5,1fr);">
       <div class="tool-card reveal" data-c="1">
@@ -2788,8 +2786,8 @@ body { top: 0 !important; }
     </div>
     <div class="faq-list">
       <div class="faq-item">
-        <div class="faq-q">Это пирамида? Где подвох?</div>
-        <div class="faq-a"><div class="faq-a-inner">Нет матрицы. Лот = очередь из 15 мест. Каждое место обрабатывает $10 дважды по чёткой формуле 60/40. Никаких «приведи 3-х», никаких ожиданий, никакой бинарной структуры.</div></div>
+        <div class="faq-q">Где подвох? Это очередь, а не схема?</div>
+        <div class="faq-a"><div class="faq-a-inner">Нет матрицы и нет «приведи 3-х». Лот — это очередь из бизнес-мест ($50 = 2 места, $1000 = 32). Каждое место обрабатывает $10 дважды по формуле 60/40. Доход появляется когда место обрабатывает $10, а не когда ты привёл реферала.</div></div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Что я получу при регистрации без вложений?</div>
@@ -3166,13 +3164,11 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     var ctx = canvas.getContext('2d');
     var DPR = Math.min(window.devicePixelRatio || 1, 2);
     var COLORS = [
-      'rgba(0, 212, 255, 0.85)',   // cyan
-      'rgba(177, 74, 237, 0.85)',  // purple
-      'rgba(255, 46, 151, 0.85)',  // pink
-      'rgba(255, 184, 0, 0.85)',   // gold
-      'rgba(0, 255, 148, 0.75)',   // green (rare)
+      'rgba(212, 175, 55, 0.55)',  // gold
+      'rgba(244, 211, 106, 0.45)', // light gold
+      'rgba(168, 134, 42, 0.4)',   // dark gold
     ];
-    var CHARS = ['01', '10', 'AI', 'TG', 'IO', '>>', '~', '+', '•', '★']; var CHAR = CHARS[0];
+    var CHARS = ['$', 'M', '◯', '◇', '+', '•']; var CHAR = CHARS[0];
     var columns = [];
     var width = 0, height = 0;
 
