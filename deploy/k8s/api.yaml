@@ -1,4 +1,3 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,51 +21,52 @@ spec:
         app: golden-connect-api
     spec:
       imagePullSecrets:
-        - name: ghcr-pull
+      - name: ghcr-pull
       initContainers:
-        # Apply Drizzle migrations before the app starts. Safe to re-run;
-        # drizzle-kit skips migrations already recorded in `__drizzle_migrations`.
-        - name: drizzle-migrate
-          image: ghcr.io/lnlockly/golden-connect-api:latest
-          imagePullPolicy: Always
-          command: ["npx", "drizzle-kit", "migrate"]
-          envFrom:
-            - secretRef:
-                name: golden-connect-api-env
+      - name: drizzle-migrate
+        image: ghcr.io/lnlockly/golden-connect-api:latest
+        imagePullPolicy: Always
+        command:
+        - npx
+        - drizzle-kit
+        - migrate
+        envFrom:
+        - secretRef:
+            name: golden-connect-api-env
       containers:
-        - name: golden-connect-api
-          image: ghcr.io/lnlockly/golden-connect-api:latest
-          imagePullPolicy: Always
-          ports:
-            - name: http
-              containerPort: 4001
-          envFrom:
-            - secretRef:
-                name: golden-connect-api-env
-          env:
-            - name: PORT
-              value: "4001"
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: http
-            initialDelaySeconds: 5
-            periodSeconds: 10
-            timeoutSeconds: 3
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: http
-            initialDelaySeconds: 30
-            periodSeconds: 30
-            timeoutSeconds: 5
-          resources:
-            requests:
-              cpu: 5m
-              memory: 192Mi
-            limits:
-              cpu: 1000m
-              memory: 512Mi
+      - name: golden-connect-api
+        image: ghcr.io/lnlockly/golden-connect-api:latest
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 4001
+        envFrom:
+        - secretRef:
+            name: golden-connect-api-env
+        env:
+        - name: PORT
+          value: '4001'
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 3
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 5
+        resources:
+          requests:
+            cpu: 5m
+            memory: 192Mi
+          limits:
+            cpu: 1000m
+            memory: 512Mi
 ---
 apiVersion: v1
 kind: Service
@@ -77,9 +77,9 @@ spec:
   selector:
     app: golden-connect-api
   ports:
-    - name: http
-      port: 4001
-      targetPort: http
+  - name: http
+    port: 4001
+    targetPort: http
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -87,19 +87,19 @@ metadata:
   name: golden-connect-api
   namespace: golden-connect
   annotations:
-    # TLS terminated at Cloudflare edge (orange-cloud proxy). Origin is HTTP.
-    # Set Cloudflare SSL/TLS mode to "Flexible" for this to work end-to-end.
-    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    nginx.ingress.kubernetes.io/proxy-body-size: 10m
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
   ingressClassName: nginx
   rules:
-    - host: api.golden-connect.top
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: golden-connect-api
-                port:
-                  number: 4001
+  - host: golden-connect.top
+    http:
+      paths:
+      - path: /api(/|$)(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: golden-connect-api
+            port:
+              number: 4001

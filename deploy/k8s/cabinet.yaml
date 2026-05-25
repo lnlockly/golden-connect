@@ -1,6 +1,3 @@
----
-# Persistent volume — SQLite + state.json + media uploads.
-# 5 GiB initial; expand later via PVC patch when storage class supports it.
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -8,7 +5,7 @@ metadata:
   namespace: golden-connect
 spec:
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   resources:
     requests:
       storage: 5Gi
@@ -21,8 +18,6 @@ metadata:
   labels:
     app: golden-connect-cabinet
 spec:
-  # SQLite + RWO volume → strict 1 replica with Recreate strategy
-  # to avoid two pods opening the same file at once during rollout.
   replicas: 1
   strategy:
     type: Recreate
@@ -35,58 +30,58 @@ spec:
         app: golden-connect-cabinet
     spec:
       imagePullSecrets:
-        - name: ghcr-pull
+      - name: ghcr-pull
       containers:
-        - name: golden-connect-cabinet
-          image: ghcr.io/lnlockly/golden-connect-cabinet:latest
-          imagePullPolicy: IfNotPresent  # commit-SHA tags are immutable; skip re-pull on container restart
-          ports:
-            - name: http
-              containerPort: 3810
-          envFrom:
-            - secretRef:
-                name: golden-connect-cabinet-env
-          env:
-            - name: DATA_DIR
-              value: /data
-            - name: PORT
-              value: "3810"
-            - name: NODE_ENV
-              value: production
-            - name: BASE_PATH
-              value: /cabinet
-            - name: CABINET_BOT_POLL_DISABLED
-              value: "0"
-          volumeMounts:
-            - name: data
-              mountPath: /data
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: http
-            initialDelaySeconds: 10
-            periodSeconds: 15
-            timeoutSeconds: 8
-            failureThreshold: 5
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: http
-            initialDelaySeconds: 60
-            periodSeconds: 30
-            timeoutSeconds: 10
-            failureThreshold: 6
-          resources:
-            requests:
-              cpu: 200m
-              memory: 256Mi
-            limits:
-              cpu: 1500m
-              memory: 768Mi
-      volumes:
+      - name: golden-connect-cabinet
+        image: ghcr.io/lnlockly/golden-connect-cabinet:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 3810
+        envFrom:
+        - secretRef:
+            name: golden-connect-cabinet-env
+        env:
+        - name: DATA_DIR
+          value: /data
+        - name: PORT
+          value: '3810'
+        - name: NODE_ENV
+          value: production
+        - name: BASE_PATH
+          value: /cabinet
+        - name: CABINET_BOT_POLL_DISABLED
+          value: '0'
+        volumeMounts:
         - name: data
-          persistentVolumeClaim:
-            claimName: golden-connect-cabinet-data
+          mountPath: /data
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 15
+          timeoutSeconds: 8
+          failureThreshold: 5
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 6
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 1500m
+            memory: 768Mi
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: golden-connect-cabinet-data
 ---
 apiVersion: v1
 kind: Service
@@ -97,167 +92,175 @@ spec:
   selector:
     app: golden-connect-cabinet
   ports:
-    - name: http
-      port: 80
-      targetPort: http
+  - name: http
+    port: 80
+    targetPort: http
 ---
-# Subdomain ingress for v1. To later switch to golden-connect.top/cabinet/
-# subpath: replace the host with `golden-connect.top` and add
-# `nginx.ingress.kubernetes.io/rewrite-target: /$2` plus path
-# `/cabinet(/|$)(.*)` — also requires Express to mount routes
-# under /cabinet (not currently done).
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: golden-connect-cabinet
   namespace: golden-connect
   annotations:
-    # Match landing's Cloudflare-Flexible setup: HTTP origin, TLS at edge.
-    nginx.ingress.kubernetes.io/proxy-body-size: "32m"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "60"
+    nginx.ingress.kubernetes.io/proxy-body-size: 32m
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '60'
 spec:
   ingressClassName: nginx
   rules:
-    - host: golden-connect.top
-      http:
-        paths:
-          - path: /cabinet
-            pathType: Prefix
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /bio
-            pathType: Prefix
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /s
-            pathType: Prefix
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /hub
-            pathType: Prefix
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /sitemap-bio.xml
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /trdx
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /faq
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /reviews
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /media
-            pathType: Prefix
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /landings
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /product
-            pathType: Prefix
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /products-library
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /landing
-            pathType: Prefix
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /login
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /register
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /sitemap.xml
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /robots.txt
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /r/banner
-            pathType: Prefix
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /ads-asset
-            pathType: Prefix
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
-          - path: /auth/magic
-            pathType: Prefix
-            backend:
-              service:
-                name: golden-connect-cabinet
-                port:
-                  number: 80
+  - host: golden-connect.top
+    http:
+      paths:
+      - path: /cabinet
+        pathType: Prefix
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /bio
+        pathType: Prefix
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /s
+        pathType: Prefix
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /hub
+        pathType: Prefix
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /sitemap-bio.xml
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /trdx
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /faq
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /reviews
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /media
+        pathType: Prefix
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /landings
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /product
+        pathType: Prefix
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /products-library
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /landing
+        pathType: Prefix
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /login
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /register
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /sitemap.xml
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /robots.txt
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /r/banner
+        pathType: Prefix
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /ads-asset
+        pathType: Prefix
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /auth/magic
+        pathType: Prefix
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /tools
+        pathType: Prefix
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
+      - path: /crm
+        pathType: Prefix
+        backend:
+          service:
+            name: golden-connect-cabinet
+            port:
+              number: 80
