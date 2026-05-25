@@ -70,9 +70,9 @@ createRoot(document.getElementById('root')!).render(
               <Route path="/cabinet" element={<Cabinet />}>
                 <Route index element={<CabinetOverview />} />
                 <Route path="panel" element={<CabinetPanel />} />
-                <Route path="refs" element={<CabinetPlaceholder title="Рефералы" subtitle="10-уровневая партнёрская программа" />} />
-                <Route path="seats" element={<CabinetPlaceholder title="Мои места" subtitle="Активные бизнес-места и платежи" />} />
-                <Route path="earn" element={<CabinetPlaceholder title="Доход" subtitle="Матрица, Matching Bonus, Gift-счёт, Лидерский пул" />} />
+                <Route path="refs" element={<CabinetPlaceholder title="Рефералы" subtitle="5-уровневая программа Monar — постоянный доход с каждого круга" />} />
+                <Route path="seats" element={<CabinetPlaceholder title="Мои места" subtitle="Активные бизнес-места в цепочке Monar" />} />
+                <Route path="earn" element={<CabinetPlaceholder title="Доход" subtitle="5 потоков: основной +100%, рефералы, Мировой Пул, нетворкинг, авто-реклама" />} />
               </Route>
             </Routes>
           </Suspense>
