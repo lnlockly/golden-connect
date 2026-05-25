@@ -80,26 +80,9 @@ spec:
   - name: http
     port: 4001
     targetPort: http
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: golden-connect-api
-  namespace: golden-connect
-  annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: 10m
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/use-regex: 'true'
-spec:
-  ingressClassName: nginx
-  rules:
-  - host: golden-connect.top
-    http:
-      paths:
-      - path: /api(/|$)(.*)
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: golden-connect-api
-            port:
-              number: 4001
+# Ingress for /api(/|$)(.*) lives on the golden-connect-landing Ingress
+# (deploy/k8s/landing.yaml) as part of the path-prefix consolidation done in
+# 6e693a9. Defining it here too caused the nginx admission webhook to reject
+# the apply with "host and path is already defined in ingress
+# golden-connect-api-path".
+
