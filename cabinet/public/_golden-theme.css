@@ -1,216 +1,428 @@
 /*
-  Golden Connect — premium black + gold theme (Vercel-inspired).
-  Loaded LAST in main.tsx so it overrides all other styles.
+  Golden Connect — Vercel-grade black + gold theme.
+  AGGRESSIVE override, loaded last in main.tsx and injected into every
+  static HTML in cabinet/public + landing/public.
 */
 
+@import url("https://rsms.me/inter/inter.css");
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap");
+
 :root {
-  /* Core palette */
-  --gc-bg-0:        #000000;
-  --gc-bg-1:        #0a0a0a;
-  --gc-bg-2:        #111111;
-  --gc-bg-elev:     #181818;
-  --gc-border:      #262626;
-  --gc-border-strong:#3f3f3f;
-  --gc-text:        #fafafa;
-  --gc-text-mute:   #a3a3a3;
-  --gc-text-dim:    #6b6b6b;
+  /* Pure Vercel palette */
+  --gc-bg-0:         #000000;
+  --gc-bg-1:         #0a0a0a;
+  --gc-bg-2:         #111111;
+  --gc-bg-3:         #161616;
+  --gc-bg-elev:      #1a1a1a;
+  --gc-border:       #232323;
+  --gc-border-2:     #2e2e2e;
+  --gc-border-3:     #404040;
+  --gc-text:         #ffffff;
+  --gc-text-2:       #ededed;
+  --gc-text-mute:    #a1a1a1;
+  --gc-text-dim:     #707070;
 
-  /* Gold accents */
-  --gc-gold-50:     #fff8e1;
-  --gc-gold-200:    #f5d36a;
-  --gc-gold-500:    #d4af37;
-  --gc-gold-600:    #c89a2a;
-  --gc-gold-700:    #a8801f;
-  --gc-gold-line:   rgba(212,175,55,0.35);
+  /* Gold accent (single token, single accent — Vercel principle) */
+  --gc-gold-50:      #fff8e1;
+  --gc-gold-100:     #ffeec0;
+  --gc-gold-200:     #f5d36a;
+  --gc-gold-400:     #e6b730;
+  --gc-gold-500:     #d4af37;
+  --gc-gold-600:     #c89a2a;
+  --gc-gold-700:     #a8801f;
+  --gc-gold-glow:    rgba(212, 175, 55, 0.18);
 
-  /* Status */
-  --gc-success: #22c55e;
-  --gc-warning: #eab308;
-  --gc-error:   #ef4444;
+  --gc-success:      #50e3c2;
+  --gc-warning:      #f5a623;
+  --gc-error:        #ff5252;
 
-  /* Shadows / glows */
-  --gc-shadow-sm: 0 1px 0 rgba(255,255,255,0.04), 0 1px 2px rgba(0,0,0,0.6);
-  --gc-shadow-md: 0 4px 16px rgba(0,0,0,0.5), 0 0 0 1px var(--gc-border);
-  --gc-glow:      0 0 24px rgba(212,175,55,0.18);
-
-  --gc-radius:    12px;
-  --gc-radius-lg: 18px;
+  --gc-radius-sm:    8px;
+  --gc-radius:       12px;
+  --gc-radius-lg:    16px;
+  --gc-radius-xl:    24px;
+  --gc-radius-2xl:   32px;
 }
 
-/* ============================================================
-   Global tone — overrides Trendex-era light theme.
-   ============================================================ */
+* { box-sizing: border-box; }
 
-html, body, #root, #app {
+html, body, #root, #app, .app, .App {
   background: var(--gc-bg-0) !important;
   color: var(--gc-text) !important;
+  font-family: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-feature-settings: 'cv02','cv03','cv04','cv11','ss01';
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  margin: 0;
 }
 
+/* Background — subtle dotted grid (Vercel hero) */
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-feature-settings: 'cv02','cv03','cv04','cv11';
+  background-color: var(--gc-bg-0) !important;
+  background-image:
+    radial-gradient(circle at 50% -10%, rgba(212,175,55,0.10), transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(212,175,55,0.05), transparent 50%);
 }
-
-/* Hero / page backgrounds */
-section, header, footer, main, .page, .container, .wrap {
-  background-color: var(--gc-bg-0);
-  color: var(--gc-text);
-}
-
-/* Subtle radial glow at top, gold-tinted */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background:
-    radial-gradient(80% 40% at 50% -10%, rgba(212,175,55,0.10), transparent 70%),
-    radial-gradient(40% 30% at 100% 0%, rgba(212,175,55,0.06), transparent 60%);
+  background-image:
+    radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
   z-index: 0;
+  opacity: 0.4;
+  mask-image: linear-gradient(180deg, transparent, #000 25%, #000 75%, transparent);
 }
-#root, #app, main { position: relative; z-index: 1; }
 
-/* Headings */
-h1, h2, h3, h4, h5 {
+#root, #app, main, .app { position: relative; z-index: 1; }
+
+/* Common dark surface override (kills ALL leftover white/gray Trendex-era surfaces) */
+section, header, footer, main, article, aside, nav,
+.page, .container, .wrapper, .wrap, .layout, .root,
+[class*="container"], [class*="wrapper"],
+.bg-white, .bg-gray-50, .bg-gray-100, .bg-gray-200, .bg-slate-50, .bg-slate-100,
+.bg-zinc-50, .bg-zinc-100, .bg-neutral-50, .bg-neutral-100,
+.bg-stone-50, .bg-stone-100 {
+  background-color: transparent !important;
+  color: var(--gc-text) !important;
+}
+
+/* Text */
+.text-black, .text-gray-900, .text-slate-900, .text-zinc-900, .text-neutral-900 { color: var(--gc-text) !important; }
+.text-gray-700, .text-gray-800, .text-slate-700, .text-slate-800 { color: var(--gc-text-2) !important; }
+.text-gray-500, .text-gray-600, .text-slate-500, .text-slate-600 { color: var(--gc-text-mute) !important; }
+.text-gray-400, .text-slate-400 { color: var(--gc-text-dim) !important; }
+.text-blue-500, .text-blue-600, .text-indigo-500, .text-indigo-600, .text-cyan-500 { color: var(--gc-gold-500) !important; }
+
+h1, h2, h3, h4, h5, h6 {
   color: var(--gc-text);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   font-weight: 700;
+  font-family: 'Geist', 'Inter', sans-serif;
 }
-h1 { letter-spacing: -0.04em; font-weight: 800; }
+h1 { letter-spacing: -0.05em; font-weight: 800; font-size: clamp(2.4rem, 6vw, 4.8rem); line-height: 1; }
+h2 { letter-spacing: -0.04em; font-weight: 700; font-size: clamp(1.6rem, 4vw, 2.6rem); }
+h3 { font-weight: 600; font-size: 1.2rem; }
 
-/* Links — gold */
+p, span, li, label { color: var(--gc-text-2); }
+
+/* Links — Vercel underline-on-hover */
 a {
-  color: var(--gc-gold-500);
+  color: var(--gc-text);
   text-decoration: none;
-  transition: color 0.18s ease;
+  transition: color 120ms ease, opacity 120ms ease;
+  position: relative;
 }
 a:hover { color: var(--gc-gold-200); }
+a.link-gold, .link-gold a { color: var(--gc-gold-500); }
 
-/* Inputs */
+/* Inputs — Vercel-style */
 input, select, textarea {
-  background: var(--gc-bg-elev) !important;
+  background: var(--gc-bg-1) !important;
   color: var(--gc-text) !important;
   border: 1px solid var(--gc-border) !important;
   border-radius: var(--gc-radius) !important;
-  padding: 10px 14px;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  padding: 10px 14px !important;
+  font-size: 14px !important;
+  font-family: inherit;
+  transition: all 150ms ease;
 }
+input:hover, select:hover, textarea:hover { border-color: var(--gc-border-2) !important; }
 input:focus, select:focus, textarea:focus {
   outline: none !important;
   border-color: var(--gc-gold-500) !important;
-  box-shadow: 0 0 0 3px rgba(212,175,55,0.18) !important;
+  box-shadow: 0 0 0 3px var(--gc-gold-glow) !important;
 }
+input::placeholder, textarea::placeholder { color: var(--gc-text-dim); }
 
-/* Buttons */
-button, .btn, [role="button"] {
-  background: var(--gc-bg-elev);
-  color: var(--gc-text);
-  border: 1px solid var(--gc-border-strong);
-  border-radius: var(--gc-radius);
-  padding: 10px 18px;
-  font-weight: 600;
-  font-size: 14px;
-  transition: all 0.18s ease;
+/* Buttons — Vercel-strict */
+button, .btn, [role="button"], input[type="submit"], input[type="button"], .cta,
+a.button, .button, a.btn {
+  background: var(--gc-text) !important;
+  color: var(--gc-bg-0) !important;
+  border: 1px solid var(--gc-text) !important;
+  border-radius: var(--gc-radius) !important;
+  padding: 10px 18px !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  font-family: inherit;
   cursor: pointer;
+  transition: all 150ms ease;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none !important;
 }
-button:hover, .btn:hover {
-  border-color: var(--gc-gold-500);
-  background: #1f1f1f;
-  box-shadow: var(--gc-glow);
+button:hover, .btn:hover, [role="button"]:hover, .cta:hover,
+a.button:hover, .button:hover, a.btn:hover {
+  background: var(--gc-text-2) !important;
+  border-color: var(--gc-text-2) !important;
+  transform: translateY(-1px);
 }
 
-/* Primary button = gold gradient */
-button.primary, .btn.primary, .btn-primary,
-.cta, button[type="submit"]:not([class*="secondary"]) {
-  background: linear-gradient(135deg, var(--gc-gold-500), var(--gc-gold-700)) !important;
+/* Secondary button — outlined */
+button.secondary, .btn.secondary, .btn-secondary, .btn-outline,
+button.outline, .button-outline {
+  background: transparent !important;
+  color: var(--gc-text) !important;
+  border: 1px solid var(--gc-border-2) !important;
+}
+button.secondary:hover, .btn.secondary:hover { background: var(--gc-bg-2) !important; border-color: var(--gc-border-3) !important; }
+
+/* Primary GOLD button (single accent) */
+button.primary, .btn.primary, .btn-primary, .btn-gold,
+button[type="submit"]:not([class*="secondary"]):not([class*="outline"]),
+.gc-gold-btn {
+  background: linear-gradient(135deg, var(--gc-gold-400), var(--gc-gold-600)) !important;
   color: #000 !important;
   border: 1px solid var(--gc-gold-500) !important;
   font-weight: 700 !important;
-  box-shadow: 0 4px 14px rgba(212,175,55,0.35) !important;
+  box-shadow: 0 6px 20px var(--gc-gold-glow) !important;
 }
-button.primary:hover, .btn.primary:hover, .btn-primary:hover, .cta:hover {
+button.primary:hover, .btn.primary:hover, .btn-primary:hover, .gc-gold-btn:hover {
   background: linear-gradient(135deg, var(--gc-gold-200), var(--gc-gold-500)) !important;
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(212,175,55,0.5) !important;
+  box-shadow: 0 10px 30px rgba(212,175,55,0.4) !important;
 }
 
+/* Ghost button */
+button.ghost, .btn.ghost, .btn-ghost {
+  background: transparent !important;
+  color: var(--gc-text-2) !important;
+  border: 1px solid transparent !important;
+}
+button.ghost:hover, .btn.ghost:hover { background: var(--gc-bg-2) !important; color: var(--gc-text) !important; }
+
 /* Cards / panels */
-.card, .panel, .box, [class*="card"], [class*="panel"] {
+.card, .panel, .box,
+[class*="card"]:not([class*="card-title"]):not([class*="card-body"]):not([class*="card-text"]),
+[class*="panel"]:not([class*="panel-title"]):not([class*="panel-body"]) {
   background: var(--gc-bg-1) !important;
   color: var(--gc-text) !important;
   border: 1px solid var(--gc-border) !important;
   border-radius: var(--gc-radius-lg) !important;
-  box-shadow: var(--gc-shadow-md);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04), 0 10px 30px rgba(0,0,0,0.5) !important;
+  transition: border-color 200ms ease, transform 200ms ease;
 }
+.card:hover, .panel:hover { border-color: var(--gc-border-2) !important; }
 
-/* Tables */
+/* Tables — Vercel datatable look */
 table {
-  background: var(--gc-bg-1);
-  color: var(--gc-text);
-  border-radius: var(--gc-radius);
+  width: 100%;
+  background: var(--gc-bg-1) !important;
+  color: var(--gc-text) !important;
+  border-radius: var(--gc-radius-lg);
+  border-collapse: separate;
+  border-spacing: 0;
   overflow: hidden;
-  border: 1px solid var(--gc-border);
+  border: 1px solid var(--gc-border) !important;
 }
 th {
-  background: #1a1a1a;
-  color: var(--gc-gold-200);
-  font-weight: 700;
+  background: var(--gc-bg-2) !important;
+  color: var(--gc-text-mute) !important;
+  font-weight: 600 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: 12px;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--gc-border);
+  padding: 12px 16px !important;
+  border-bottom: 1px solid var(--gc-border) !important;
+  text-align: left;
 }
 td {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--gc-border);
-  color: var(--gc-text);
+  background: transparent !important;
+  color: var(--gc-text) !important;
+  padding: 14px 16px !important;
+  border-bottom: 1px solid var(--gc-border) !important;
 }
-tr:hover td { background: rgba(212,175,55,0.04); }
+tr:last-child td { border-bottom: none !important; }
+tr:hover td { background: var(--gc-bg-2) !important; }
 
 /* Scrollbars */
+* { scrollbar-color: var(--gc-border-3) var(--gc-bg-0); scrollbar-width: thin; }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: var(--gc-bg-1); }
-::-webkit-scrollbar-thumb {
-  background: var(--gc-border-strong);
-  border-radius: 8px;
-}
+::-webkit-scrollbar-track { background: var(--gc-bg-0); }
+::-webkit-scrollbar-thumb { background: var(--gc-border-3); border-radius: 8px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--gc-gold-700); }
 
 /* Selection */
 ::selection { background: var(--gc-gold-500); color: #000; }
+::-moz-selection { background: var(--gc-gold-500); color: #000; }
 
-/* Common Tailwind colour overrides (in case landing uses them inline) */
-.bg-white, .bg-gray-50, .bg-gray-100, .bg-slate-50 { background: var(--gc-bg-1) !important; color: var(--gc-text) !important; }
-.text-black, .text-gray-900, .text-slate-900 { color: var(--gc-text) !important; }
-.text-gray-700, .text-gray-800 { color: var(--gc-text-mute) !important; }
-.text-blue-500, .text-blue-600, .text-indigo-600 { color: var(--gc-gold-500) !important; }
-.bg-blue-500, .bg-blue-600, .bg-indigo-600 { background: var(--gc-gold-500) !important; color: #000 !important; }
-.border-gray-200, .border-gray-300 { border-color: var(--gc-border) !important; }
-
-/* Code blocks */
-code, pre {
-  background: var(--gc-bg-elev);
+/* Code / pre — monospace */
+code, kbd, samp {
+  font-family: 'Geist Mono', 'JetBrains Mono', 'SF Mono', Menlo, monospace !important;
+  background: var(--gc-bg-2);
   color: var(--gc-gold-200);
   border: 1px solid var(--gc-border);
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 2px 8px;
-  font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
-  font-size: 0.92em;
+  font-size: 0.9em;
 }
-pre { padding: 16px; overflow-x: auto; }
+pre {
+  background: var(--gc-bg-2);
+  color: var(--gc-text);
+  border: 1px solid var(--gc-border);
+  border-radius: var(--gc-radius-lg);
+  padding: 20px;
+  overflow-x: auto;
+}
+pre code { background: transparent; border: none; padding: 0; color: inherit; }
 
-/* Logo / brand tweaks */
-.logo, .brand, [class*="logo"], [class*="brand"] {
-  color: var(--gc-gold-500) !important;
+/* Tailwind borders */
+.border-gray-200, .border-gray-300, .border-slate-200, .border-zinc-200, .border-neutral-200 {
+  border-color: var(--gc-border) !important;
 }
 
-/* "Golden Connect" word — gold gradient text */
-.gc-brand-text {
+/* Logo / brand */
+.logo, .brand, [class*="brand"]:not(.brand-content),
+[class*="logo"]:not(.logo-content), [class*="Logo"] {
+  color: var(--gc-text) !important;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+.logo svg, .brand svg, [class*="logo"] svg { color: var(--gc-gold-500); }
+
+/* Gold gradient text utility for the brand */
+.gc-brand-text, .brand-text-gradient {
   background: linear-gradient(135deg, var(--gc-gold-200), var(--gc-gold-500), var(--gc-gold-700));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   font-weight: 800;
+}
+
+/* "Glow" border for hero CTAs */
+.gc-glow {
+  position: relative;
+}
+.gc-glow::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--gc-gold-200), var(--gc-gold-500), var(--gc-gold-700));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Force dark on common "white-ish" Trendex-era classes */
+[style*="background: white"],
+[style*="background:#fff"],
+[style*="background: #fff"],
+[style*="background-color: white"],
+[style*="background-color:#fff"] {
+  background-color: var(--gc-bg-1) !important;
+}
+[style*="color: black"],
+[style*="color:#000"],
+[style*="color: #000"] {
+  color: var(--gc-text) !important;
+}
+
+/* iOS-style tool icon grid (used by /cabinet/tools page) */
+.gc-tools-page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 64px 24px;
+  position: relative;
+  z-index: 2;
+}
+.gc-tools-hero {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.gc-tools-hero h1 {
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  margin-bottom: 16px;
+  background: linear-gradient(180deg, #fff, #999);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gc-tools-hero p {
+  color: var(--gc-text-mute);
+  font-size: 18px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.gc-tools-category {
+  margin: 56px 0;
+}
+.gc-tools-category-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gc-border);
+}
+.gc-tools-category-header h2 {
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--gc-text);
+}
+.gc-tools-category-header .count {
+  color: var(--gc-text-dim);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.gc-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 20px;
+}
+.gc-tool-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  text-decoration: none !important;
+  color: var(--gc-text);
+  transition: transform 200ms ease;
+  cursor: pointer;
+}
+.gc-tool-icon:hover {
+  transform: translateY(-4px) scale(1.04);
+}
+.gc-tool-icon:hover .icon-square {
+  box-shadow: 0 12px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.1);
+}
+.gc-tool-icon .icon-square {
+  width: 76px;
+  height: 76px;
+  border-radius: 22px;  /* iOS app-icon radius */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  background: linear-gradient(135deg, #1f1f1f, #0c0c0c);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06);
+  transition: all 200ms ease;
+}
+/* Coloured iOS icon backgrounds — one per category accent */
+.gc-tool-icon.color-gold .icon-square { background: linear-gradient(135deg, #d4af37, #8a6b1a); color: #000; }
+.gc-tool-icon.color-blue .icon-square { background: linear-gradient(135deg, #4f9eff, #1a4d99); }
+.gc-tool-icon.color-green .icon-square { background: linear-gradient(135deg, #34d399, #066b4f); }
+.gc-tool-icon.color-pink .icon-square { background: linear-gradient(135deg, #ec4899, #831b53); }
+.gc-tool-icon.color-purple .icon-square { background: linear-gradient(135deg, #a78bfa, #4c1d95); }
+.gc-tool-icon.color-orange .icon-square { background: linear-gradient(135deg, #fb923c, #9a3412); }
+.gc-tool-icon.color-red .icon-square { background: linear-gradient(135deg, #ef4444, #7f1d1d); }
+.gc-tool-icon.color-teal .icon-square { background: linear-gradient(135deg, #2dd4bf, #115e59); }
+.gc-tool-icon.color-graphite .icon-square { background: linear-gradient(135deg, #4b5563, #1f2937); }
+.gc-tool-icon .label {
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+  color: var(--gc-text-2);
 }
