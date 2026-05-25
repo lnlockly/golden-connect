@@ -2,23 +2,33 @@ import { useT } from '../../i18n/LangContext';
 import './IncomeStreams.css';
 
 /**
- * IncomeStreams — four tiles, one per income stream. Each shows today's
- * income plus a 7-day sparkline (tiny SVG built from mock numbers).
- * Wire to /me/income/streams later.
+ * IncomeStreams — five tiles, one per Monar income stream. Each tile
+ * shows today's earnings + a 7-day sparkline (tiny SVG from mock
+ * numbers). Wire to /me/income/streams later.
+ *
+ * Source: ops/trendex-migration/monar-13-series-source.md § "5 потоков дохода".
+ *   1. main      — +100% к лоту (основной)
+ *   2. referrals — 5 уровней (постоянный доход с каждого круга реферала)
+ *   3. worldPool — Мировой Пул, 8 бакетов, раздача в конце месяца, от $300
+ *   4. network   — Нетворкинг (за выступления)
+ *   5. ads       — Авто-реклама (9 мессенджеров, 46 языков)
  */
 
 interface Stream {
-  id: 'matrix' | 'referrals' | 'tasks' | 'ads';
+  id: 'main' | 'referrals' | 'worldPool' | 'network' | 'ads';
   today: number;
   spark: number[]; // last 7 days
   accentVar: '--acid' | '--acid-2';
+  /** Inline label fallback (used when i18n key is missing). */
+  fallbackLabel: string;
 }
 
 const MOCK_STREAMS: Stream[] = [
-  { id: 'matrix',    today:  0.00, spark: [0, 0, 0, 0, 0, 0, 0],              accentVar: '--acid'   },
-  { id: 'referrals', today: 12.40, spark: [2, 0, 3, 4, 2, 1, 12.4],           accentVar: '--acid-2' },
-  { id: 'tasks',     today:  7.00, spark: [3, 5, 8, 4, 6, 9, 7],              accentVar: '--acid'   },
-  { id: 'ads',       today:  1.20, spark: [0.8, 1.1, 0.9, 1.0, 1.4, 1.2, 1.2],accentVar: '--acid-2' },
+  { id: 'main',      today: 18.00, spark: [6, 12, 10, 14, 16, 18, 18],          accentVar: '--acid',   fallbackLabel: 'Основной (+100% лота)' },
+  { id: 'referrals', today: 12.40, spark: [2, 0, 3, 4, 2, 1, 12.4],             accentVar: '--acid-2', fallbackLabel: 'Рефералка (5 уровней)' },
+  { id: 'worldPool', today:  0.00, spark: [0, 0, 0, 0, 0, 0, 0],                accentVar: '--acid',   fallbackLabel: 'Мировой Пул (раз/мес)' },
+  { id: 'network',   today:  4.50, spark: [0, 0, 6, 0, 3, 0, 4.5],              accentVar: '--acid-2', fallbackLabel: 'Нетворкинг (выступления)' },
+  { id: 'ads',       today:  1.20, spark: [0.8, 1.1, 0.9, 1.0, 1.4, 1.2, 1.2], accentVar: '--acid',   fallbackLabel: 'Авто-реклама (9 мессенджеров)' },
 ];
 
 export function IncomeStreams() {
@@ -29,11 +39,18 @@ export function IncomeStreams() {
     <section className="af-streams">
       <div className="af-streams-head">
         <div>
-          <h2 className="af-acc-section-title">{t('dash.streams_title')}</h2>
-          <p className="af-streams-sub">{t('dash.streams_sub')}</p>
+          <h2 className="af-acc-section-title">
+            {t('dash.streams_title') || '5 потоков Monar'}
+          </h2>
+          <p className="af-streams-sub">
+            {t('dash.streams_sub') ||
+              'Каждый поток работает параллельно — все деньги стекаются на баланс дохода'}
+          </p>
         </div>
         <div className="af-streams-total">
-          <span className="af-streams-total-label">{t('dash.streams_total_today')}</span>
+          <span className="af-streams-total-label">
+            {t('dash.streams_total_today') || 'Сегодня всего'}
+          </span>
           <strong>${totalToday.toFixed(2)}</strong>
         </div>
       </div>
@@ -48,11 +65,12 @@ export function IncomeStreams() {
 }
 
 function StreamTile({ stream, t }: { stream: Stream; t: (k: string) => string }) {
+  const label = t('dash.streams_' + stream.id) || stream.fallbackLabel;
   return (
     <div className="af-stream" style={{ ['--stream-accent' as string]: `var(${stream.accentVar})` }}>
-      <div className="af-stream-label">{t('dash.streams_' + stream.id)}</div>
+      <div className="af-stream-label">{label}</div>
       <div className="af-stream-value">${stream.today.toFixed(2)}</div>
-      <div className="af-stream-hint">{t('dash.streams_today')}</div>
+      <div className="af-stream-hint">{t('dash.streams_today') || 'сегодня'}</div>
       <Sparkline values={stream.spark} />
     </div>
   );
